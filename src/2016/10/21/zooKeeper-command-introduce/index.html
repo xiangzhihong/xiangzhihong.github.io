@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="向志洪" />
+
+
+
+<meta name="description" content="zooKeeper常用命令介绍 | Chenjh Code
+
+
+
+
+
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isH">
+<meta property="og:type" content="website">
+<meta property="og:title" content="向志洪">
+<meta property="og:url" content="http://code.youmeek.com/src/2016/10/21/zooKeeper-command-introduce/index.html">
+<meta property="og:site_name" content="向志洪">
+<meta property="og:description" content="zooKeeper常用命令介绍 | Chenjh Code
+
+
+
+
+
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isH">
+<meta property="og:image" content="http://code.youmeek.com/img/avatar.png">
+<meta property="og:image" content="http://code.youmeek.com/img/avatar.png">
+<meta property="og:updated_time" content="2016-11-08T21:50:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="向志洪">
+<meta name="twitter:description" content="zooKeeper常用命令介绍 | Chenjh Code
+
+
+
+
+
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isH">
+<meta name="twitter:image" content="http://code.youmeek.com/img/avatar.png">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="向志洪" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>向志洪</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: false,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">向志洪</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">这里只有代码相关，要了解更多 &gt;&gt;&gt;向志洪</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">向志洪</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">向志洪</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">这里只有代码相关，要了解更多 &gt;&gt;&gt;向志洪</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="page-undefined" class="article article-type-page" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/src/2016/10/21/zooKeeper-command-introduce/index.html" class="article-date">
+      <time datetime="2016-11-25T02:53:09.649Z" itemprop="datePublished">2016-11-25</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <style>
+    .article-meta { display: none; }
+    #container .article .article-title { padding-right: 0; }
+    .article-header {
+        padding: 0;
+        padding-top: 26px;
+        border-left: none;
+        text-align: center;
+    }
+    .article-header:hover { border-left: none; }
+    .article-title { font-size: 1.6em }
+    .article-entry hr { margin: 0;}
+    .article-meta,
+    #container .article-info-post.article-info { display: none;}
+    #container .article .article-title { padding: 0; }
+</style>
+
+
+          
+        <!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="Chenjh">
+
+
+
+<meta name="description" content="&amp;#x524D;&amp;#x8A00;zooKeeper&amp;#x5E38;&amp;#x7528;&amp;#x547D;&amp;#x4EE4;&amp;#x4ECB;&amp;#x7ECD;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="zooKeeper常用命令介绍">
+<meta property="og:url" content="http://code.skyheng.com/2016/10/21/zooKeeper-command-introduce/index.html">
+<meta property="og:site_name" content="Chenjh Code">
+<meta property="og:description" content="&amp;#x524D;&amp;#x8A00;zooKeeper&amp;#x5E38;&amp;#x7528;&amp;#x547D;&amp;#x4EE4;&amp;#x4ECB;&amp;#x7ECD;">
+<meta property="og:updated_time" content="2016-11-07T15:21:16.652Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="zooKeeper常用命令介绍">
+<meta name="twitter:description" content="&amp;#x524D;&amp;#x8A00;zooKeeper&amp;#x5E38;&amp;#x7528;&amp;#x547D;&amp;#x4EE4;&amp;#x4ECB;&amp;#x7ECD;">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="Chenjh Code" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>zooKeeper常用命令介绍 | Chenjh Code</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?d195b745077c1dbc09dacf43876b8f07";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">Chenjh</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">这里只有代码相关，要了解更多 &gt;&gt;&gt; www.skyheng.com</p>
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="false">
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class="no-result">No results found <i class="fa fa-spinner fa-pulse"></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>Menu</li>
+                        <li>Tags</li>
+                        
+                        <li>Friends</li>
+                        
+                        
+                        <li>About Me</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/toolbox/">工具箱</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:chenjh0611@163.com" title="Email" target="_blank" rel="external"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/chenjh0611" title="GitHub" target="_blank" rel="external"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa CSDN" href="http://blog.csdn.net/skychenjh" title="CSDN" target="_blank" rel="external"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CI/">CI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS3/">CSS3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/">CentOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Excel/">Excel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github/">Github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA/">JAVA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JDK/">JDK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JRebel/">JRebel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/">Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/">Mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nexus/">Nexus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SVN/">SVN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Table/">Table</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/">Tomcat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ajax/">ajax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dubbo/">dubbo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eclipse/">eclipse</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jquery/">jquery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/plugin/">plugin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rect/">rect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/win10/">win10</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zooKeeper/">zooKeeper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zookeeper/">zookeeper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分布式/">分布式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/刷卡支付/">刷卡支付</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习方法/">学习方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开发工具/">开发工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微信支付/">微信支付</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/版本管理/">版本管理</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://www.skyheng.com/" target="_blank" rel="external">MyBlog</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/" target="_blank" rel="external">GitHub</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于技术,专注于开发</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Chenjh</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Chenjh</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">这里只有代码相关，要了解更多 &gt;&gt;&gt; www.skyheng.com</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/toolbox/">工具箱</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:chenjh0611@163.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/chenjh0611" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa CSDN" target="_blank" href="http://blog.csdn.net/skychenjh" title="CSDN"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="Tags" friends="Friends" about="About Me">
+</nav>
+      <div class="body-wrap"><article id="post-zooKeeper-command-introduce" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/10/21/zooKeeper-command-introduce/" class="article-date">
+      <time datetime="2016-10-21T06:32:39.000Z" itemprop="datePublished">2016-10-21</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      zooKeeper常用命令介绍
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/zooKeeper/">zooKeeper</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/zooKeeper/">zooKeeper</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p></p><h2 id="intro">&#x524D;&#x8A00;</h2>zooKeeper&#x5E38;&#x7528;&#x547D;&#x4EE4;&#x4ECB;&#x7ECD;<p></p>
+<a id="more"></a>
+<p>ZooKeeper&#x7684;&#x5BA2;&#x6237;&#x7AEF;&#x5305;&#x62EC;Java&#x7248;&#x672C;&#x548C;C&#x8BED;&#x8A00;&#x7248;&#x672C;&#x3002;&#x4F7F;&#x7528;Java&#x7248;&#x672C;&#x8FDE;&#x63A5;zk&#x7684;&#x547D;&#x4EE4;&#x4EE5;&#x4E0B;&#xFF1A;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bin/zkCli.sh -server ip:port</div></pre></td></tr></table></figure>
+<p>&#x6267;&#x884C;&#x6B64;&#x547D;&#x4EE4;&#xFF0C;&#x5BA2;&#x6237;&#x7AEF;&#x6210;&#x529F;&#x8FDE;&#x63A5;&#x4E0A;zk&#xFF0C;&#x4F1A;&#x6709;&#x7C7B;&#x4F3C;&#x4EE5;&#x4E0B;&#x7684;&#x8F93;&#x51FA;&#xFF0C;&#x5176;&#x4E2D;&#xFF0C;&#x5305;&#x62EC;&#x201C;Welcome to ZooKeeper!&#x201D;&#x7684;&#x6B22;&#x8FCE;&#x8BED;&#xFF0C;&#x4EE5;&#x53CA;&#x5176;&#x4ED6;&#x4E00;&#x4E9B;&#x8FDE;&#x63A5;&#x7684;&#x4FE1;&#x606F;&#x7B49;&#x3002;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">lihaodeMacBook-Pro:bin lihao$ ./zkCli.sh -server 127.0.0.1:2182</div><div class="line">Connecting to 127.0.0.1:2182</div><div class="line">2016-06-29 07:51:39,679 [myid:] - INFO  [main:Environment@100] - Client environment:zookeeper.version=3.4.8--1, built on 02/06/2016 03:18 GMT</div><div class="line">2016-06-29 07:51:39,682 [myid:] - INFO  [main:Environment@100] - Client environment:host.name=192.168.31.107</div><div class="line">2016-06-29 07:51:39,682 [myid:] - INFO  [main:Environment@100] - Client environment:java.version=1.8.0_77</div><div class="line">2016-06-29 07:51:39,684 [myid:] - INFO  [main:Environment@100] - Client environment:java.vendor=Oracle Corporation</div><div class="line">&#x2026;&#x2026;</div><div class="line">2016-06-29 07:51:39,686 [myid:] - INFO  [main:ZooKeeper@438] - Initiating client connection, connectString=127.0.0.1:2182 sessionTimeout=30000 watcher=org.apache.zookeeper.ZooKeeperMain$MyWatcher@531d72ca</div><div class="line">Welcome to ZooKeeper!</div><div class="line">2016-06-29 07:51:39,715 [myid:] - INFO  [main-SendThread(127.0.0.1:2182):ClientCnxn$SendThread@1032] - Opening socket connection to server 127.0.0.1/127.0.0.1:2182. Will not attempt to authenticate using SASL (unknown error)</div><div class="line">JLine support is enabled</div><div class="line">2016-06-29 07:51:39,797 [myid:] - INFO  [main-SendThread(127.0.0.1:2182):ClientCnxn$SendThread@876] - Socket connection established to 127.0.0.1/127.0.0.1:2182, initiating session</div><div class="line">[zk: 127.0.0.1:2182(CONNECTING) 0] 2016-06-29 07:51:39,830 [myid:] - INFO  [main-SendThread(127.0.0.1:2182):ClientCnxn$SendThread@1299] - Session establishment complete on server 127.0.0.1/127.0.0.1:2182, sessionid = 0x155996605050000, negotiated timeout = 30000</div><div class="line"></div><div class="line">WATCHER::</div><div class="line"></div><div class="line">WatchedEvent state:SyncConnected type:None path:null</div></pre></td></tr></table></figure>
+<p>&#x8FDE;&#x63A5;&#x6210;&#x529F;&#x540E;&#xFF0C;&#x4FBF;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x547D;&#x4EE4;&#x4E0E;zk&#x670D;&#x52A1;&#x8FDB;&#x884C;&#x4EA4;&#x4E92;&#x3002;</p>
+<h2 id="help"><a href="#help" class="headerlink" title="help"></a>help</h2><p>help&#x547D;&#x4EE4;&#x4F1A;&#x8F93;&#x51FA;zk&#x652F;&#x6301;&#x7684;&#x6240;&#x6709;&#x547D;&#x4EE4;&#x3002;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">[zk: 127.0.0.1:2182(CONNECTED) 0] help</div><div class="line">ZooKeeper -server host:port cmd args</div><div class="line">    stat path [watch]</div><div class="line">    set path data [version]</div><div class="line">    ls path [watch]</div><div class="line">    delquota [-n|-b] path</div><div class="line">    ls2 path [watch]</div><div class="line">    setAcl path acl</div><div class="line">    setquota -n|-b val path</div><div class="line">    history </div><div class="line">    redo cmdno</div><div class="line">    printwatches on|off</div><div class="line">    delete path [version]</div><div class="line">    sync path</div><div class="line">    listquota path</div><div class="line">    rmr path</div><div class="line">    get path [watch]</div><div class="line">    create [-s] [-e] path data acl</div><div class="line">    addauth scheme auth</div><div class="line">    quit </div><div class="line">    getAcl path</div><div class="line">    close </div><div class="line">    connect host:port</div></pre></td></tr></table></figure>
+<h2 id="ls"><a href="#ls" class="headerlink" title="ls"></a>ls</h2><p>&#x67E5;&#x770B;&#x6307;&#x5B9A;&#x8DEF;&#x5F84;&#x4E0B;&#x5305;&#x542B;&#x7684;&#x8282;&#x70B9;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[zk: localhost:2181(CONNECTED) 2] ls /</div><div class="line">[zookeeper]</div></pre></td></tr></table></figure>
+<h2 id="create"><a href="#create" class="headerlink" title="create"></a>create</h2><p>&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x8282;&#x70B9;&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[zk: localhost:2181(CONNECTED) 3] create /zk mydata</div><div class="line">Created /zk</div></pre></td></tr></table></figure>
+<p>&#x4EE5;&#x4E0A;&#x547D;&#x4EE4;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;/zk&#x8282;&#x70B9;&#xFF0C;&#x4E14;&#x5176;&#x5185;&#x5BB9;&#x4E3A; &#x201C;myData&#x201D;</p>
+<h2 id="get"><a href="#get" class="headerlink" title="get"></a>get</h2><p>&#x663E;&#x793A;&#x6307;&#x5B9A;&#x8DEF;&#x5F84;&#x4E0B;&#x8282;&#x70B9;&#x7684;&#x4FE1;&#x606F;&#xFF0C;&#x4F8B;&#x5982;&#xFF0C;&#x6211;&#x4EEC;&#x68C0;&#x67E5;&#x4E00;&#x4E0B;&#x4E0A;&#x9762;&#x7684;/zk&#x8282;&#x70B9;&#x6700;&#x5426;&#x521B;&#x5EFA;&#x6210;&#x529F;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">[zk: localhost:2181(CONNECTED) 4] get /zk</div><div class="line">mydata</div><div class="line">cZxid = 0xb59</div><div class="line">ctime = Thu Jun 30 11:13:24 CST 2016</div><div class="line">mZxid = 0xb59</div><div class="line">mtime = Thu Jun 30 11:13:24 CST 2016</div><div class="line">pZxid = 0xb59</div><div class="line">cversion = 0</div><div class="line">dataVersion = 0</div><div class="line">aclVersion = 0</div><div class="line">ephemeralOwner = 0x0</div><div class="line">dataLength = 6</div><div class="line">numChildren = 0</div></pre></td></tr></table></figure>
+<p>&#x53EF;&#x4EE5;&#x770B;&#x5230;/zk&#x8282;&#x70B9;&#x7684;&#x5185;&#x5BB9;&#x4E3A;&#x201D;myData&#x201D;&#xFF0C;&#x4E14;&#x8F93;&#x51FA;&#x5305;&#x542B;&#x4E86;znode&#x7684;&#x5176;&#x4ED6;&#x4FE1;&#x606F;&#x3002;&#x6709;&#x5173;&#x5404;&#x4E2A;&#x5B57;&#x6BB5;&#x7684;&#x5177;&#x4F53;&#x542B;&#x4E49;&#xFF0C;&#x8BF7;&#x53C2;&#x89C1;&#x4E86;&#x672C;&#x535A;&#x5BA2;&#x5BF9;znode&#x7684;&#x4ECB;&#x7ECD;&#x3002;</p>
+<h2 id="set"><a href="#set" class="headerlink" title="set"></a>set</h2><p>&#x8BBE;&#x7F6E;&#x8282;&#x70B9;&#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[zk: localhost:2181(CONNECTED) 6] set /zk &quot;anotherData&quot;</div><div class="line">&#x2026;&#x2026;</div><div class="line">[zk: localhost:2181(CONNECTED) 7] get /zk</div><div class="line">&quot;anotherData&quot;</div><div class="line">&#x2026;&#x2026;</div></pre></td></tr></table></figure>
+<h2 id="delete"><a href="#delete" class="headerlink" title="delete"></a>delete</h2><p>&#x5220;&#x9664;&#x4E00;&#x4E2A;&#x8282;&#x70B9;&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[zk: localhost:2181(CONNECTED) 8] delete /zk</div><div class="line">[zk: localhost:2181(CONNECTED) 9] get /zk</div><div class="line">Node does not exist: /zk</div></pre></td></tr></table></figure>
+<p>&#x4EE5;&#x4E0A;&#x5C31;&#x662F;zk&#x5BA2;&#x6237;&#x7AEF;&#x6700;&#x5E38;&#x7528;&#x7684;&#x51E0;&#x4E2A;&#x547D;&#x4EE4;&#xFF0C;&#x4ECE;&#x8FD9;&#x51E0;&#x4E2A;&#x547D;&#x4EE4;&#x6211;&#x4EEC;&#x4E5F;&#x53EF;&#x4EE5;&#x770B;&#x5230;zk&#x63D0;&#x4F9B;&#x7684;API&#x8BBE;&#x8BA1;&#x7684;&#x7B80;&#x5355;&#x3002;</p>
+<h2 id="&#x56DB;&#x5B57;&#x6BCD;&#x547D;&#x4EE4;"><a href="#&#x56DB;&#x5B57;&#x6BCD;&#x547D;&#x4EE4;" class="headerlink" title="&#x56DB;&#x5B57;&#x6BCD;&#x547D;&#x4EE4;"></a>&#x56DB;&#x5B57;&#x6BCD;&#x547D;&#x4EE4;</h2><p>ZooKeeper&#x63D0;&#x4F9B;&#x4E86;&#x591A;&#x4E2A;&#x7531;4&#x4E2A;&#x5B57;&#x6BCD;&#x6784;&#x6210;&#x7684;&#x547D;&#x4EE4;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;nc&#x6216;&#x8005;telnet&#x6765;&#x4F7F;&#x7528;&#x8FD9;&#x4E9B;&#x547D;&#x4EE4;&#x3002;&#x4F8B;&#x5982;&#xFF1A;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">telnet 127.0.0.1 2181</div></pre></td></tr></table></figure>
+<p>&#x6210;&#x529F;&#x8FDE;&#x63A5;zk&#x540E;&#xFF0C;&#x8F93;&#x5165;conf<br>&#x4F1A;&#x770B;&#x5230;&#x4EE5;&#x4E0B;&#x8F93;&#x51FA;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">clientPort=2181</div><div class="line">dataDir=D:\Soft\zookeeper-3.4.6\data\version-2</div><div class="line">dataLogDir=D:\Soft\zookeeper-3.4.6\data\version-2</div><div class="line">tickTime=2000</div><div class="line">maxClientCnxns=60</div><div class="line">minSessionTimeout=4000</div><div class="line">maxSessionTimeout=40000</div><div class="line">serverId=0</div></pre></td></tr></table></figure>
+<p>&#x6216;&#x8005;&#x4F7F;&#x7528;nc&#x6765;&#x5411;zk&#x53D1;&#x9001;4&#x5B57;&#x6BCD;&#x547D;&#x4EE4;&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">echo conf | nc 192.168.229.161 2181</div></pre></td></tr></table></figure>
+<p>&#x5176;&#x4ED6;&#x5E38;&#x7528;&#x7684;&#x56DB;&#x5B57;&#x6BCD;&#x547D;&#x4EE4;&#x5982;&#x4E0B;&#x8868;&#x683C;&#x6240;&#x793A;&#xFF1A;</p>
+<p>&#x8868;&#x683C;&#xFF1A;ZooKeeper&#x63D0;&#x4F9B;&#x7684;&#x56DB;&#x5B57;&#x6BCD;&#x547D;&#x4EE4;</p>
+<table>
+<thead>
+<tr>
+<th>&#x547D;&#x4EE4;</th>
+<th style="text-align:center">&#x63CF;&#x8FF0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>conf</td>
+<td style="text-align:center">zk&#x670D;&#x52A1;&#x914D;&#x7F6E;&#x7684;&#x8BE6;&#x7EC6;&#x4FE1;&#x606F;</td>
+</tr>
+<tr>
+<td>stat</td>
+<td style="text-align:center">&#x5BA2;&#x6237;&#x7AEF;&#x4E0E;zk&#x8FDE;&#x63A5;&#x7684;&#x7B80;&#x8981;&#x4FE1;&#x606F;</td>
+</tr>
+<tr>
+<td>srvr</td>
+<td style="text-align:center">zk&#x670D;&#x52A1;&#x7684;&#x8BE6;&#x7EC6;&#x4FE1;&#x606F;</td>
+</tr>
+<tr>
+<td>cons</td>
+<td style="text-align:center">&#x5BA2;&#x6237;&#x7AEF;&#x4E0E;zk&#x8FDE;&#x63A5;&#x7684;&#x8BE6;&#x7EC6;&#x4FE1;&#x606F;</td>
+</tr>
+<tr>
+<td>mntr</td>
+<td style="text-align:center">zk&#x670D;&#x52A1;&#x76EE;&#x524D;&#x7684;&#x6027;&#x80FD;&#x72B6;&#x51B5;</td>
+</tr>
+<tr>
+<td>wchs</td>
+<td style="text-align:center">watch&#x7684;&#x7B80;&#x8981;&#x4FE1;&#x606F;</td>
+</tr>
+<tr>
+<td>wchc</td>
+<td style="text-align:center">watch&#x7684;&#x8BE6;&#x7EC6;&#x4FE1;&#x606F;&#xFF0C;&#x5BA2;&#x6237;&#x7AEF; -&gt; watch&#x7684;&#x6620;&#x5C04;&#xFF0C;&#x7EBF;&#x4E0A;&#x73AF;&#x5883;&#x8981;&#x5C0F;&#x5FC3;&#x4F7F;&#x7528;</td>
+</tr>
+<tr>
+<td>wchp</td>
+<td style="text-align:center">watch&#x7684;&#x8BE6;&#x7EC6;&#x4FE1;&#x606F;, znode -&gt; &#x5BA2;&#x6237;&#x7AEF;&#x7684;&#x6620;&#x5C04;&#xFF0C;&#x7EBF;&#x4E0A;&#x73AF;&#x5883;&#x8981;&#x5C0F;&#x5FC3;&#x4F7F;&#x7528;</td>
+</tr>
+</tbody>
+</table>
+<p>&#x4F8B;&#x5982;&#xFF0C;mntr &#x547D;&#x4EE4;&#x7684;&#x8F93;&#x51FA;&#xFF1A;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">echo mntr | nc 192.168.229.161 2181</div><div class="line">zk_version  3.4.6-1569965, built on 02/20/2014 09:09 GMT</div><div class="line">zk_avg_latency  0</div><div class="line">zk_max_latency  565</div><div class="line">zk_min_latency  0</div><div class="line">zk_packets_received 95353</div><div class="line">zk_packets_sent 95713</div><div class="line">zk_num_alive_connections    3</div><div class="line">zk_outstanding_requests 0</div><div class="line">zk_server_state leader</div><div class="line">zk_znode_count  20</div><div class="line">zk_watch_count  12</div><div class="line">zk_ephemerals_count 9</div><div class="line">zk_approximate_data_size    1465</div><div class="line">zk_open_file_descriptor_count   37</div><div class="line">zk_max_file_descriptor_count    65535</div><div class="line">zk_followers    2       - &#x53EA;&#x6709;leader&#x8FDB;&#x7A0B;&#x624D;&#x6709;&#x6B64;&#x9879;&#x8F93;&#x51FA;</div><div class="line">zk_synced_followers 2   - &#x53EA;&#x6709;leader&#x8FDB;&#x7A0B;&#x624D;&#x6709;&#x6B64;&#x9879;&#x8F93;&#x51FA;</div><div class="line">zk_pending_syncs    0   - &#x53EA;&#x6709;leader&#x8FDB;&#x7A0B;&#x624D;&#x6709;&#x6B64;&#x9879;&#x8F93;&#x51FA;</div></pre></td></tr></table></figure>
+<h2 id="&#x53C2;&#x8003;&#x8D44;&#x6599;"><a href="#&#x53C2;&#x8003;&#x8D44;&#x6599;" class="headerlink" title="&#x53C2;&#x8003;&#x8D44;&#x6599;"></a>&#x53C2;&#x8003;&#x8D44;&#x6599;</h2><ol>
+<li><a href="http://www.programering.com/a/MTOxUjMwATI.html" target="_blank" rel="external">http://www.programering.com/a/MTOxUjMwATI.html</a></li>
+<li><a href="https://zookeeper.apache.org/doc/r3.4.8/zookeeperStarted.html" target="_blank" rel="external">https://zookeeper.apache.org/doc/r3.4.8/zookeeperStarted.html</a></li>
+</ol>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>Title:</span><a href="/2016/10/21/zooKeeper-command-introduce/">zooKeeper常用命令介绍</a></p>
+        <p><span>Author:</span><a href="/" title="Back to Homepage">Chenjh</a></p>
+        <p><span>Created:</span>2016-10-21, 14:32:39</p>
+        <p><span>Updated:</span>2016-11-07, 23:21:16</p>
+        <p>
+            <span>Full URL:</span><a class="post-url" href="/2016/10/21/zooKeeper-command-introduce/" title="zooKeeper常用命令介绍">http://code.skyheng.com/2016/10/21/zooKeeper-command-introduce/</a>
+            <span class="copy-path" data-clipboard-text="From http://code.skyheng.com/2016/10/21/zooKeeper-command-introduce/　　By Chenjh" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>License:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target="_blank">"CC BY-NC-SA 4.0"</a> Keep Link &amp; Author if Distribute.
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2016/10/21/win10-shortcut-key/">
+                    win10常用的快捷键
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/10/20/zookeeper-install-and-setting/">
+                    zookeeper的安装与设置
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#intro"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#help"><span class="toc-number">2.</span> <span class="toc-text">help</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ls"><span class="toc-number">3.</span> <span class="toc-text">ls</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#create"><span class="toc-number">4.</span> <span class="toc-text">create</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#get"><span class="toc-number">5.</span> <span class="toc-text">get</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#set"><span class="toc-number">6.</span> <span class="toc-text">set</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#delete"><span class="toc-number">7.</span> <span class="toc-text">delete</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四字母命令"><span class="toc-number">8.</span> <span class="toc-text">四字母命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考资料"><span class="toc-number">9.</span> <span class="toc-text">参考资料</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="Hide" title="Show or Hide Table of Contents">
+
+    <script>
+        yiliaConfig.toc = ["Hide", "Show", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"zooKeeper常用命令介绍　| Chenjh Code　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+        <section class="youyan" id="comments">
+    <script>
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = 'http://v2.uyan.cc/code/uyan.js?uid=2095968';
+            (d.head || d.body).appendChild(s);
+        }
+    </script>
+    
+    <script> loadComment(); </script>
+
+    <div id="uyan_frame"></div>
+</section>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2016/10/21/win10-shortcut-key/" title="Pre: win10常用的快捷键">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/10/20/zookeeper-install-and-setting/" title="Next: zookeeper的安装与设置">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/10/21/win10-shortcut-key/">win10常用的快捷键</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/21/zooKeeper-command-introduce/">zooKeeper常用命令介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/20/zookeeper-install-and-setting/">zookeeper的安装与设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/20/maven-pro-collection/">收集的国内maven镜像地址</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/15/windows-git-pull-bat/">Windows git pull 批处理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/15/git-common-commands/">Git常用的操作命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/11/python-install/">python安装</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/09/rect-grid-demo/">实例demo之3D transform立方体效果</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/30/redis-install-and-settings/">Redis 安装和配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/26/Tomcat-7优化配置参数/">Tomcat 7优化配置参数</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/18/some-good-technology-blog/">一些好的技术博客,追随牛逼的人,让自己更牛逼</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/17/famous-IT-blog-home-and-abroad/">国内外知名IT科技博客（强烈推荐）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/29/eclipse-common-plugin/">eclipse 常用插件安装</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/25/eclipse-install-jrebel/">eclipse安装JRebel6.4.8热部署插件教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/22/jquery-eval-paesing-json-introduce/">jquery eval解析JSON中的注意点介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/08/关于分布式一致性的探究/">关于分布式一致性的探究</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/08/初识分布式系统/">初识分布式系统</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/03/excel-markdown-table/">用 Excel 生成和管理 Markdown 表格</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/02/common-hexo-commands/">Hexo 最常用的几个命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/01/git-cheat-sheet/">GIT的常用操作命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/01/linux-commonly-used-ommands/">Linux常用命令大全</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/21/improve-efficiency-database-query/">在一个千万级的数据库查寻中，如何提高查询效率？</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/16/vmware-set-centos-static-ip/">VMware中CentOS设置静态IP</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/09/tomcat8-install-and-settings/">Tomcat 8 安装和配置、优化</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/04/wxpay-scanpay-java-sdk-demo/">【微信支付】“刷卡支付”、“被扫支付”开发JavaDemo</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/04/wxpay-scanpay-java-sdk/">【微信支付】“刷卡支付”、“被扫支付”开发说明</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/02/svn-install-and-settings/">Subversion 1.8 安装</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/02/svn-password-find/">SVN 密码破解，svn密码本地找回</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/02/mysql-install-and-settings/">Mysql 安装和配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/02/maven-install-and-settings/">Maven 安装和配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/17/jdk-install/">在linux下的JDK 安装和配置（基于 阿里云服务器CentOS 6.5）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/17/nexus-install-and-settings/">Nexus 在linux下的安装和配置（基于 阿里云服务器CentOS 6.5）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/07/my-learning-way/">我的学习、归纳方法（以学习 Maven 为例）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/05/01/github-build-hexo-blog-intensify/">使用Github搭建Hexo技术博客--增强教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/05/01/github-build-hexo-blog-install/">使用Github搭建Hexo技术博客--安装教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/03/09/maven-related-knowledge-topics/">构建工具-Maven-相关知识-整理专题</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/05/24/overloading-and-overriding-difference/">JAVA中重写和重载区别</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2015-2016 Chenjh
+            </div>
+            <div class="footer-right">
+                 <!--
+				 <a href="http://hexo.io/" target="_blank" title="A fast, simple &amp; powerful blog framework">Hexo</a>Theme 
+				 <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="Another simple and elegant theme for Hexo  v3.5">Yelee</a> by MOxFIVE 
+				 <i class="fa fa-heart animated infinite pulse"></i>
+				 -->
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style="display:none">
+                        <span id="site-visit" title="Site Visitors"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style="display:none">
+                        <span id="page-visit" title="Page Hits"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="Back to Top"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="Comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="Go to Bottom"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
+      
+    </div>
+    
+  </div>
+  
+    
+
+
+  
+</article>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"　| 向志洪　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016 向志洪
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

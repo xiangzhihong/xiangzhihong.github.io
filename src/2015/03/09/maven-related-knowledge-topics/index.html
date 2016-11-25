@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="向志洪" />
+
+
+
+<meta name="description" content="构建工具-Maven-相关知识-整理专题 | Chenjh Code
+
+
+
+
+
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,">
+<meta property="og:type" content="website">
+<meta property="og:title" content="向志洪">
+<meta property="og:url" content="http://code.youmeek.com/src/2015/03/09/maven-related-knowledge-topics/index.html">
+<meta property="og:site_name" content="向志洪">
+<meta property="og:description" content="构建工具-Maven-相关知识-整理专题 | Chenjh Code
+
+
+
+
+
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,">
+<meta property="og:image" content="http://code.youmeek.com/img/avatar.png">
+<meta property="og:image" content="http://code.youmeek.com/img/avatar.png">
+<meta property="og:image" content="http://code.youmeek.com/2015/03/09/maven-related-knowledge-topics/maven.png">
+<meta property="og:updated_time" content="2016-11-08T21:50:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="向志洪">
+<meta name="twitter:description" content="构建工具-Maven-相关知识-整理专题 | Chenjh Code
+
+
+
+
+
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,">
+<meta name="twitter:image" content="http://code.youmeek.com/img/avatar.png">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="向志洪" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>向志洪</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: false,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">向志洪</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">这里只有代码相关，要了解更多 &gt;&gt;&gt;向志洪</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">向志洪</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">向志洪</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">这里只有代码相关，要了解更多 &gt;&gt;&gt;向志洪</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="page-undefined" class="article article-type-page" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/src/2015/03/09/maven-related-knowledge-topics/index.html" class="article-date">
+      <time datetime="2016-11-25T02:53:06.685Z" itemprop="datePublished">2016-11-25</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <style>
+    .article-meta { display: none; }
+    #container .article .article-title { padding-right: 0; }
+    .article-header {
+        padding: 0;
+        padding-top: 26px;
+        border-left: none;
+        text-align: center;
+    }
+    .article-header:hover { border-left: none; }
+    .article-title { font-size: 1.6em }
+    .article-entry hr { margin: 0;}
+    .article-meta,
+    #container .article-info-post.article-info { display: none;}
+    #container .article .article-title { padding: 0; }
+</style>
+
+
+          
+        <!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="Chenjh">
+
+
+
+<meta name="description" content="&amp;#x5982;&amp;#x679C;&amp;#x4F60;&amp;#x662F;&amp;#x5B66;&amp;#x4E60; Java &amp;#x6216;&amp;#x662F;&amp;#x8BF4; JVM &amp;#x8BED;&amp;#x8A00;&amp;#x76F8;&amp;#x5173;&amp;#x7684;&amp;#x5185;&amp;#x5BB9;&amp;#x7684;&amp;#x8BDD;&amp;#xFF0C;&amp;#x5728;&amp;#x5B9E;&amp;#x9645;&amp;#x4F7F;&amp;#x75">
+<meta property="og:type" content="article">
+<meta property="og:title" content="构建工具-Maven-相关知识-整理专题">
+<meta property="og:url" content="http://code.skyheng.com/2015/03/09/maven-related-knowledge-topics/index.html">
+<meta property="og:site_name" content="Chenjh Code">
+<meta property="og:description" content="&amp;#x5982;&amp;#x679C;&amp;#x4F60;&amp;#x662F;&amp;#x5B66;&amp;#x4E60; Java &amp;#x6216;&amp;#x662F;&amp;#x8BF4; JVM &amp;#x8BED;&amp;#x8A00;&amp;#x76F8;&amp;#x5173;&amp;#x7684;&amp;#x5185;&amp;#x5BB9;&amp;#x7684;&amp;#x8BDD;&amp;#xFF0C;&amp;#x5728;&amp;#x5B9E;&amp;#x9645;&amp;#x4F7F;&amp;#x75">
+<meta property="og:image" content="http://code.skyheng.com/2015/03/09/maven-related-knowledge-topics/maven.png">
+<meta property="og:updated_time" content="2016-09-22T15:48:35.426Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="构建工具-Maven-相关知识-整理专题">
+<meta name="twitter:description" content="&amp;#x5982;&amp;#x679C;&amp;#x4F60;&amp;#x662F;&amp;#x5B66;&amp;#x4E60; Java &amp;#x6216;&amp;#x662F;&amp;#x8BF4; JVM &amp;#x8BED;&amp;#x8A00;&amp;#x76F8;&amp;#x5173;&amp;#x7684;&amp;#x5185;&amp;#x5BB9;&amp;#x7684;&amp;#x8BDD;&amp;#xFF0C;&amp;#x5728;&amp;#x5B9E;&amp;#x9645;&amp;#x4F7F;&amp;#x75">
+<meta name="twitter:image" content="http://code.skyheng.com/2015/03/09/maven-related-knowledge-topics/maven.png">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="Chenjh Code" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>构建工具-Maven-相关知识-整理专题 | Chenjh Code</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?d195b745077c1dbc09dacf43876b8f07";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">Chenjh</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">这里只有代码相关，要了解更多 &gt;&gt;&gt; www.skyheng.com</p>
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="false">
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class="no-result">No results found <i class="fa fa-spinner fa-pulse"></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>Menu</li>
+                        <li>Tags</li>
+                        
+                        <li>Friends</li>
+                        
+                        
+                        <li>About Me</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/toolbox/">工具箱</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:chenjh0611@163.com" title="Email" target="_blank" rel="external"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/chenjh0611" title="GitHub" target="_blank" rel="external"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa CSDN" href="http://blog.csdn.net/skychenjh" title="CSDN" target="_blank" rel="external"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CI/">CI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS3/">CSS3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/">CentOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Excel/">Excel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github/">Github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA/">JAVA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JDK/">JDK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JRebel/">JRebel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/">Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/">Mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nexus/">Nexus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SVN/">SVN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Table/">Table</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/">Tomcat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ajax/">ajax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dubbo/">dubbo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eclipse/">eclipse</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jquery/">jquery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/plugin/">plugin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rect/">rect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/win10/">win10</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zooKeeper/">zooKeeper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zookeeper/">zookeeper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分布式/">分布式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/刷卡支付/">刷卡支付</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习方法/">学习方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开发工具/">开发工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微信支付/">微信支付</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/版本管理/">版本管理</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://www.skyheng.com/" target="_blank" rel="external">MyBlog</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/" target="_blank" rel="external">GitHub</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于技术,专注于开发</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Chenjh</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Chenjh</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">这里只有代码相关，要了解更多 &gt;&gt;&gt; www.skyheng.com</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/toolbox/">工具箱</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:chenjh0611@163.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/chenjh0611" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa CSDN" target="_blank" href="http://blog.csdn.net/skychenjh" title="CSDN"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="Tags" friends="Friends" about="About Me">
+</nav>
+      <div class="body-wrap"><article id="post-maven-related-knowledge-topics" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/03/09/maven-related-knowledge-topics/" class="article-date">
+      <time datetime="2015-03-09T11:56:08.000Z" itemprop="datePublished">2015-03-09</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      构建工具-Maven-相关知识-整理专题
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Java/">Java</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CI/">CI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Maven/">Maven</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p></p><h2 id="intro"></h2>&#x5982;&#x679C;&#x4F60;&#x662F;&#x5B66;&#x4E60; Java &#x6216;&#x662F;&#x8BF4; JVM &#x8BED;&#x8A00;&#x76F8;&#x5173;&#x7684;&#x5185;&#x5BB9;&#x7684;&#x8BDD;&#xFF0C;&#x5728;&#x5B9E;&#x9645;&#x4F7F;&#x7528;&#x4E2D;&#x6709;&#x4E00;&#x4E2A;&#x4E1C;&#x897F;&#x4F60;&#x662F;&#x7ED5;&#x4E0D;&#x8FC7;&#x53BB;&#x7684;&#xFF0C;&#x6784;&#x5EFA;&#x5DE5;&#x5177;&#x3002;&#x7B49;&#x4F60;&#x5230;&#x4F01;&#x4E1A;&#x8FD8;&#x6709;&#x4E00;&#x4E2A;&#x4E1C;&#x897F;&#x4F60;&#x4E5F;&#x7ED5;&#x4E0D;&#x8FC7;&#x53BB;&#xFF0C;&#x6301;&#x7EED;&#x96C6;&#x6210;&#x3002;<br><a id="more"></a><p></p>
+<h2 id="&#x672C;&#x6587;&#x521D;&#x8877;"><a href="#&#x672C;&#x6587;&#x521D;&#x8877;" class="headerlink" title="&#x672C;&#x6587;&#x521D;&#x8877;"></a>&#x672C;&#x6587;&#x521D;&#x8877;</h2><ul>
+<li><img src="/2015/03/09/maven-related-knowledge-topics/maven.png" alt="Maven"></li>
+<li>&#x6574;&#x7406;&#x81EA;&#x5DF1;&#x8111;&#x888B;&#x4E2D;&#x3001;&#x6536;&#x85CF;&#x4E2D;&#x7684;&#x90A3;&#x4E9B;&#x8D44;&#x6599;&#xFF0C;&#x6765;&#x4E00;&#x6B21;&#x6E05;&#x7A7A;&#xFF0C;&#x8BA9;&#x81EA;&#x5DF1;&#x91CD;&#x65B0;&#x5F00;&#x59CB;&#x3002;</li>
+<li>&#x6574;&#x7406;&#x8FD9;&#x7BC7;&#x7684;&#x8D77;&#x70B9;&#x662F;&#x672C;&#x4EBA;&#x5DF2;&#x7ECF;&#x4F1A;&#x4F7F;&#x7528; Maven&#xFF0C;&#x5E76;&#x4E14;&#x5DF2;&#x7ECF;&#x4F7F;&#x7528;&#x4E86;&#x4E00;&#x5E74;&#x591A;&#xFF0C;&#x6240;&#x4EE5;&#x6211;&#x4E2A;&#x4EBA;&#x89C9;&#x5F97;&#x8FD9;&#x7BC7;&#x6587;&#x7AE0;&#x5BF9;&#x5B8C;&#x5168;&#x4E0D;&#x61C2; Maven &#x6765;&#x8BB2;&#x662F;&#x6709;&#x538B;&#x529B;&#x7684;&#xFF0C;&#x4F46;&#x662F;&#x5BF9;&#x4E8E;&#x521A;&#x521A;&#x5165;&#x95E8; Maven &#x7684;&#x4EBA;&#x662F;&#x6709;&#x5E2E;&#x52A9;&#x7684;&#x3002;</li>
+<li>&#x5982;&#x679C;&#x4F60;&#x8BA4;&#x4E3A;&#x4E00;&#x7BC7;&#x6587;&#x7AE0;&#x5C31;&#x53EF;&#x4EE5;&#x8BA9;&#x4F60;&#x5B8C;&#x5168;&#x4E86;&#x89E3; Maven&#xFF0C;&#x90A3;&#x4F60;&#x662F;&#x5728;&#x9119;&#x89C6;&#x5B98;&#x7F51;&#x5E2E;&#x52A9;&#x6587;&#x6863;&#x4E66;&#x5199;&#x8005;&#x3002;</li>
+<li>&#x4EE5;&#x6B64;&#x7BC7;&#x4E3A;&#x5F15;&#xFF0C;&#x5E0C;&#x671B;&#x53EF;&#x4EE5;&#x5F97;&#x5230;&#x4F60;&#x7684;&#x5EFA;&#x8BAE;&#xFF0C;&#x6211;&#x53EA;&#x60F3;&#x6210;&#x957F;&#xFF0C;&#x771F;&#x5FC3;&#x611F;&#x8C22;!&#xFF08;&#x97A0;&#x8EAC;&#xFF09;</li>
+</ul>
+<h2 id="&#x5148;&#x603B;&#x7ED3;"><a href="#&#x5148;&#x603B;&#x7ED3;" class="headerlink" title="&#x5148;&#x603B;&#x7ED3;"></a>&#x5148;&#x603B;&#x7ED3;</h2><ul>
+<li>&#x5982;&#x679C;&#x4F60;&#x662F;&#x5B66;&#x4E60; Java &#x6216;&#x662F;&#x8BF4; JVM &#x8BED;&#x8A00;&#x76F8;&#x5173;&#x7684;&#x5185;&#x5BB9;&#x7684;&#x8BDD;&#xFF0C;&#x5728;&#x5B9E;&#x9645;&#x4F7F;&#x7528;&#x4E2D;&#x6709;&#x4E00;&#x4E2A;&#x4E1C;&#x897F;&#x4F60;&#x662F;&#x7ED5;&#x4E0D;&#x8FC7;&#x53BB;&#x7684;&#xFF0C;&#x6784;&#x5EFA;&#x5DE5;&#x5177;&#x3002;&#x7B49;&#x4F60;&#x5230;&#x4F01;&#x4E1A;&#x8FD8;&#x6709;&#x4E00;&#x4E2A;&#x4E1C;&#x897F;&#x4F60;&#x4E5F;&#x7ED5;&#x4E0D;&#x8FC7;&#x53BB;&#xFF0C;&#x6301;&#x7EED;&#x96C6;&#x6210;&#x3002;</li>
+<li>&#x5728;&#x8BF4;&#x6301;&#x7EED;&#x96C6;&#x6210;&#x524D;&#xFF0C;&#x5148;&#x7B80;&#x5355;&#x5730;&#x89E3;&#x91CA;&#x4E24;&#x4E2A;&#x6982;&#x5FF5;&#xFF1A;&#x96C6;&#x7FA4;&#x3001;&#x5206;&#x5E03;&#x5F0F;<ul>
+<li>&#x5E94;&#x7528;&#x96C6;&#x7FA4;&#xFF1A;&#x540C;&#x6837;&#x7684;&#x4E00;&#x5957;&#x7A0B;&#x5E8F;/&#x4EE3;&#x7801;&#xFF0C;&#x653E;&#x5728;&#x4E00;&#x6279;&#x670D;&#x52A1;&#x5668;&#x4E0A;&#xFF0C;&#x6BCF;&#x53F0;&#x670D;&#x52A1;&#x5668;&#x4E0A;&#x7684;&#x4EE3;&#x7801;&#x4E00;&#x6837;&#x3002;</li>
+<li>&#x5E94;&#x7528;&#x5206;&#x5E03;&#x5F0F;&#xFF1A;&#x4E0D;&#x540C;&#x7684;&#x7EC4;&#x4EF6;&#x4EE3;&#x7801;&#xFF0C;&#x653E;&#x5728;&#x4E00;&#x6279;&#x670D;&#x52A1;&#x5668;&#x4E0A;&#xFF0C;&#x4E0D;&#x540C;&#x7684;&#x670D;&#x52A1;&#x5668;&#x653E;&#x4E0D;&#x540C;&#x6A21;&#x5757;&#x7684;&#x4EE3;&#x7801;&#x3002;</li>
+</ul>
+</li>
+<li>&#x5728;&#x5927;&#x516C;&#x53F8;&#xFF0C;&#x73B0;&#x5728;&#x7684;&#x9879;&#x76EE;&#x57FA;&#x672C;&#x90FD;&#x662F;&#x5206;&#x5E03;&#x5F0F;&#x7684;&#xFF0C;&#x800C;&#x8981;&#x505A;&#x5230;&#x5206;&#x5E03;&#x5F0F;&#x90A3;&#x5C31;&#x5F97;&#x5C3D;&#x53EF;&#x80FD;&#x5730;&#x5206;&#x5C42;&#x3001;&#x5206;&#x5272;&#x3001;&#x5206;&#x5E03;&#x3002;&#x4E5F;&#x56E0;&#x4E3A;&#x8FD9;&#x6837;&#xFF0C;&#x4E00;&#x4E2A;&#x9879;&#x76EE;&#x4E00;&#x822C;&#x90FD;&#x662F;&#x7531;&#x4E0D;&#x540C;&#x6A21;&#x5757;&#x7EC4;&#x5408;&#x6210;&#x7684;&#x3002;&#x516C;&#x53F8;&#x91CC;&#x5728;&#x4E0D;&#x540C;&#x7684;&#x5730;&#x533A;&#x6216;&#x662F;&#x90E8;&#x95E8;&#x505A;&#x4E0D;&#x540C;&#x7684;&#x6A21;&#x5757;&#xFF0C;&#x5C3D;&#x91CF;&#x51CF;&#x5C11;&#x90E8;&#x95E8;&#x4E0E;&#x90E8;&#x95E8;&#x3001;&#x5730;&#x533A;&#x4E0E;&#x5730;&#x533A;&#x6A21;&#x5757;&#x7684;&#x8026;&#x5408;&#x5EA6;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x964D;&#x4F4E;&#x5FC5;&#x8981;&#x7684;&#x8054;&#x7CFB;&#xFF0C;&#x8BA9;&#x4ED6;&#x4EEC;&#x5C3D;&#x53EF;&#x80FD;&#x7684;&#x80FD;&#x72EC;&#x7ACB;&#x5F00;&#x53D1;&#x3001;&#x6D4B;&#x8BD5;&#x3002;<ul>
+<li>&#x8FD9;&#x6837;&#x7684;&#x62C6;&#x5206;&#xFF0C;&#x5BF9;&#x4E00;&#x4E2A;&#x9879;&#x76EE;&#x7684;&#x597D;&#x5904;&#x662F;&#xFF1A;<ul>
+<li>&#x5206;&#x5E03;&#x5F0F;&#x67B6;&#x6784;&#xFF1A;&#x5177;&#x6709;&#x9AD8;&#x6027;&#x80FD;&#x3001;&#x9AD8;&#x53EF;&#x7528;&#x3001;&#x53EF;&#x4F38;&#x7F29;&#x3001;&#x53EF;&#x6269;&#x5C55;&#x7B49;&#x4F18;&#x70B9;</li>
+<li>&#x516C;&#x53F8;&#x6210;&#x672C;&#x4F1A;&#x964D;&#x4F4E;&#xFF0C;&#x7C7B;&#x4F3C;&#x963F;&#x91CC;&#x7684;&#x53BB; IOE</li>
+<li>&#x6548;&#x7387;&#x4F1A;&#x63D0;&#x9AD8;</li>
+<li>&#x5BB9;&#x9519;&#x80FD;&#x529B;&#x66F4;&#x5F3A;</li>
+<li>&#x7075;&#x6D3B;&#x6027;&#x66F4;&#x9AD8;</li>
+</ul>
+</li>
+<li>&#x4E3E;&#x4E00;&#x4E2A;&#x4E24;&#x8005;&#x7B80;&#x5355;&#x7684;&#x5BF9;&#x6BD4;&#x4F8B;&#x5B50;<ul>
+<li>&#x5E94;&#x7528;&#x5206;&#x5E03;&#x5F0F;<ul>
+<li>&#x4E00;&#x4E2A;&#x91C7;&#x7528;&#x5206;&#x5E03;&#x5F0F;&#x67B6;&#x6784;&#x7684;&#x7535;&#x5546;&#xFF0C;&#x5728;&#x505A;&#x62A2;&#x8D2D;&#x7684;&#x7279;&#x6B8A;&#x65F6;&#x5019;&#xFF0C;&#x538B;&#x529B;&#x7279;&#x522B;&#x7684;&#x5927;&#x7684;&#x90E8;&#x5206;&#x5E94;&#x8BE5;&#x662F;&#xFF1A;&#x8D2D;&#x7269;&#x8F66;&#x3001;&#x8BA2;&#x5355;&#x3001;&#x5E93;&#x5B58;&#x3001;&#x65E5;&#x5FD7;&#x7B49;&#x8FD9;&#x4E9B;&#x8DDF;&#x8D2D;&#x7269;&#x6709;&#x5173;&#x7684;&#x6A21;&#x5757;&#xFF0C;&#x90A3;&#x65E2;&#x7136;&#x8FD9;&#x51E0;&#x4E2A;&#x6A21;&#x5757;&#x538B;&#x529B;&#x5927;&#xFF0C;&#x90A3;&#x6211;&#x4EEC;&#x5C31;&#x5728;&#x62A2;&#x8D2D;&#x524D;&#x591A;&#x90E8;&#x7F72;&#x51E0;&#x5957;&#x8DDF;&#x8D2D;&#x7269;&#x4E1A;&#x52A1;&#x76F8;&#x5173;&#x7684;&#x6A21;&#x5757;&#x5230;&#x670D;&#x52A1;&#x5668;&#x4E0A;&#xFF0C;&#x6B64;&#x65F6;&#x8981;&#x6C42;&#x8FD9;&#x7C7B;&#x670D;&#x52A1;&#x5668;&#x6027;&#x80FD;&#x53EA;&#x8981;&#x80FD;&#x627F;&#x8F7D;&#x5BF9;&#x5E94;&#x7684;&#x6A21;&#x5757;&#x5373;&#x53EF;&#x3002;&#x5176;&#x4ED6;&#x6BD4;&#x5982;&#xFF1A;&#x8D44;&#x8BAF;&#x3001;&#x5BA2;&#x670D;&#x7B49;&#x65E0;&#x538B;&#x529B;&#x6A21;&#x5757;&#x5C31;&#x539F;&#x6837;&#x90E8;&#x7F72;&#x5373;&#x53EF;&#xFF0C;&#x65E0;&#x9700;&#x53D8;&#x52A8;&#x3002;</li>
+</ul>
+</li>
+<li>&#x5E94;&#x7528;&#x96C6;&#x7FA4;<ul>
+<li>&#x4E00;&#x4E2A;&#x91C7;&#x7528;&#x5E94;&#x7528;&#x96C6;&#x7FA4;&#x67B6;&#x6784;&#x7684;&#x7535;&#x5546;&#xFF0C;&#x5728;&#x505A;&#x62A2;&#x8D2D;&#x7684;&#x7279;&#x6B8A;&#x65F6;&#x5019;&#xFF0C;&#x4E3A;&#x4E86;&#x6297;&#x4F4F;&#x538B;&#x529B;&#xFF0C;&#x5FC5;&#x987B;&#x628A;&#x6574;&#x4E2A;&#x5E94;&#x7528;&#x4E00;&#x5957;&#x4E00;&#x5957;&#x5730;&#x90E8;&#x7F72;&#x5230;&#x65B0;&#x670D;&#x52A1;&#x5668;&#x4E0A;&#xFF0C;&#x6B64;&#x65F6;&#x5C31;&#x8981;&#x6C42;&#x670D;&#x52A1;&#x5668;&#x6027;&#x80FD;&#x8981;&#x597D;&#xFF0C;&#x80FD;&#x627F;&#x8F7D;&#x6574;&#x4E2A;&#x5E94;&#x7528;&#x3002;</li>
+</ul>
+</li>
+<li>&#x5BF9;&#x6BD4;&#x603B;&#x7ED3;&#xFF1A;&#x964D;&#x4F4E;&#x6210;&#x672C;</li>
+<li>&#x6269;&#x5C55;&#x5185;&#x5BB9;<ul>
+<li>&#x5728;&#x672A;&#x6765;&#x5BB9;&#x5668;&#x865A;&#x62DF;&#x5316;&#xFF08;&#x4EE5; Docker &#x4E3A;&#x4E3B;&#xFF09;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x6A21;&#x5757;&#x5316;&#x7684;&#x7EC4;&#x4EF6;&#x66F4;&#x5BB9;&#x6613;&#x90E8;&#x7F72;&#x5230;&#x8FD9;&#x4E9B;&#x5BB9;&#x5668;&#x4E0A;&#x9762;&#xFF0C;&#x4E5F;&#x5C31;&#x5F88;&#x5BB9;&#x6613;&#x53D1;&#x751F;&#x8FD9;&#x6837;&#x7684;&#x4E8B;&#x60C5;&#xFF1A;&#x4E00;&#x53F0;&#x670D;&#x52A1;&#x5668;&#x90E8;&#x7F72;&#x975E;&#x5E38;&#x591A;&#x6A21;&#x5757;&#xFF0C;&#x6210;&#x672C;&#x5C31;&#x4F1A;&#x964D;&#x5F97;&#x66F4;&#x4F4E;&#x3002;</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>&#x6211;&#x4EEC;&#x5DF2;&#x7ECF;&#x77E5;&#x9053;&#x4E86;&#x5206;&#x5E03;&#x5F0F;&#x6548;&#x76CA;&#x66F4;&#x597D;&#xFF0C;&#x6211;&#x4EEC;&#x4E5F;&#x77E5;&#x9053;&#x5206;&#x5E03;&#x5F0F;&#x7684;&#x7CFB;&#x7EDF;&#x90FD;&#x662F;&#x9700;&#x8981;&#x62C6;&#x5206;&#x7684;&#xFF0C;&#x5BF9;&#x9879;&#x76EE;&#x8FDB;&#x884C;&#x62C6;&#x5206;&#xFF0C;&#x628A;&#x4E00;&#x4E2A;&#x5927;&#x9879;&#x76EE;&#x62C6;&#x5206;&#x6210;&#x5F88;&#x591A;&#x5C0F;&#x6A21;&#x5757;&#x9879;&#x76EE;&#xFF0C;&#x7136;&#x540E;&#x5927;&#x5BB6;&#x5F7C;&#x6B64;&#x4F9D;&#x8D56;&#x6216;&#x901A;&#x4FE1;&#x3002;&#x6B64;&#x65F6;&#x95EE;&#x9898;&#x6765;&#x4E86;&#xFF1A;&#x5982;&#x4F55;&#x9AD8;&#x6548;&#x5730;&#x4F9D;&#x8D56;&#x3002;</li>
+<li>&#x9AD8;&#x6548;&#x5730;&#x4F9D;&#x8D56;&#x89E3;&#x51B3;&#x529E;&#x6CD5;&#x662F;&#xFF1A;&#x81EA;&#x52A8;&#x5316;&#x7684;&#x6784;&#x5EFA; + &#x6301;&#x7EED;&#x96C6;&#x6210;&#x3002;<ul>
+<li>&#x5728;&#x76EE;&#x524D; Java &#x754C;&#xFF0C;&#x6700;&#x5E38;&#x7528;&#x7684;&#x6784;&#x5EFA;&#x5DE5;&#x5177;&#x5C31;&#x662F;&#xFF1A;Maven</li>
+<li>&#x5728;&#x591A;&#x6A21;&#x5757;&#x7684;&#x9879;&#x76EE;&#x4E2D;&#xFF0C;&#x8FD8;&#x662F;&#x4EE5;&#x4E00;&#x4E2A;&#x7535;&#x5546;&#x9879;&#x76EE;&#x4E3A;&#x4F8B;&#xFF0C;&#x8D2D;&#x7269;&#x8F66;&#x6A21;&#x5757;&#x80AF;&#x5B9A;&#x662F;&#x4F1A;&#x4F9D;&#x8D56; core &#x6A21;&#x5757;&#x3001;Parent &#x6A21;&#x5757;&#x7B49;&#xFF0C;&#x800C;&#x8FD9;&#x4E9B;&#x6A21;&#x5757;&#x7684;&#x5F00;&#x53D1;&#x8005;&#x5728;&#x4E0D;&#x540C;&#x57CE;&#x5E02;&#x6216;&#x662F;&#x4E0D;&#x540C;&#x90E8;&#x95E8;&#x3002;&#x5728;&#x534F;&#x540C;&#x5F00;&#x53D1;&#x4E2D;&#xFF0C;&#x4E0D;&#x53EF;&#x80FD;&#x6BCF;&#x6B21;&#x4ED6;&#x4EEC;&#x4E00;&#x6709;&#x66F4;&#x65B0;&#x5C31;&#x5F97;&#x4E13;&#x95E8;&#x5B89;&#x6392;&#x4E00;&#x4E2A;&#x4EBA;&#x6765;&#x4EA4;&#x4ED8;&#x4F9D;&#x8D56;&#xFF0C;&#x8FD9;&#x79CD;&#x65B9;&#x5F0F;&#x6548;&#x7387;&#x662F;&#x975E;&#x5E38;&#x4F4E;&#x7684;&#x3002;</li>
+<li>&#x4ECA;&#x5929;&#x6574;&#x7406;&#x8FD9;&#x4E2A; Maven &#x6750;&#x6599;&#x5176;&#x5B9E;&#x662F;&#x4E3A;&#x4E86;&#x540E;&#x9762;&#x6574;&#x7406;&#x6301;&#x7EED;&#x96C6;&#x6210;&#x505A;&#x7684;&#x51C6;&#x5907;&#x7684;&#xFF0C;&#x5927;&#x5BB6;&#x5FC5;&#x987B;&#x6709;&#x8FD9;&#x4E2A;&#x57FA;&#x7840;&#x624D;&#x80FD;&#x8BF4;&#x540E;&#x9762;&#x7684;&#x6301;&#x7EED;&#x96C6;&#x6210;&#xFF0C;&#x540E;&#x7EED;&#x7684;&#x6301;&#x7EED;&#x96C6;&#x6210;&#x4F1A;&#x6D89;&#x53CA;&#x5230;&#xFF1A;TeamCity&#x3001;Jenkins&#x3001;Hudson</li>
+</ul>
+</li>
+</ul>
+<h2 id="Maven-&#x77E5;&#x8BC6;"><a href="#Maven-&#x77E5;&#x8BC6;" class="headerlink" title="Maven &#x77E5;&#x8BC6;"></a>Maven &#x77E5;&#x8BC6;</h2><h3 id="Maven-&#x662F;&#x4EC0;&#x4E48;"><a href="#Maven-&#x662F;&#x4EC0;&#x4E48;" class="headerlink" title="Maven &#x662F;&#x4EC0;&#x4E48;"></a>Maven &#x662F;&#x4EC0;&#x4E48;</h3><ul>
+<li>&#x672F;&#x8BED;&#x5B9A;&#x4E49;<ul>
+<li>Maven &#x5B98;&#x7F51;&#xFF1A;<a href="http://maven.apache.org/" target="_blank" rel="external">http://maven.apache.org/</a></li>
+<li>Maven &#x5B98;&#x7F51;&#x5BF9;&#x81EA;&#x5DF1;&#x7684;&#x5B9A;&#x4E49;&#xFF1A;<a href="http://maven.apache.org/what-is-maven.html" target="_blank" rel="external">http://maven.apache.org/what-is-maven.html</a></li>
+<li>&#x767E;&#x5EA6;&#x767E;&#x79D1;&#x5B9A;&#x4E49;&#xFF1A;<a href="http://baike.baidu.com/view/336103.htm" target="_blank" rel="external">http://baike.baidu.com/view/336103.htm</a></li>
+<li>&#x7EF4;&#x57FA;&#x767E;&#x79D1;&#x5B9A;&#x4E49;&#xFF1A;<a href="https://zh.wikipedia.org/wiki/Apache_Maven" target="_blank" rel="external">https://zh.wikipedia.org/wiki/Apache_Maven</a><ul>
+<li>&#x5728; Wiki &#x4E0A;&#x8FD8;&#x9700;&#x8981;&#x6CE8;&#x610F;&#x5982;&#x4E0B;&#xFF0C;&#x8FD9;&#x4E9B;&#x6709;&#x52A9;&#x4E8E;&#x4F60;&#x7AD9;&#x5728;&#x66F4;&#x52A0;&#x5B8F;&#x89C2;&#x7684;&#x89D2;&#x5EA6;&#x770B;&#x5F85;&#x5B83;&#xFF0C;&#x4F46;&#x662F;&#x53EF;&#x80FD;&#x9700;&#x8981;&#x79EF;&#x7D2F;&#xFF1A;<ul>
+<li><code>&#x53C2;&#x89C1;</code></li>
+<li><code>&#x8865;&#x5145;&#x9605;&#x8BFB;</code></li>
+<li><code>&#x53C2;&#x8003;&#x8D44;&#x6599;</code></li>
+<li><code>&#x5916;&#x90E8;&#x94FE;&#x63A5;</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>&#x5B83;&#x7684;&#x5386;&#x53F2;<ul>
+<li>Google &#x641C;&#x7D22;&#xFF1A;<code>Maven History</code><ul>
+<li>&#x641C;&#x7D22;&#x7ED3;&#x679C;&#xFF1A;<ul>
+<li>&#x5386;&#x53F2;&#x4ECB;&#x7ECD;&#xFF1A;<a href="http://maven.apache.org/background/history-of-maven.html" target="_blank" rel="external">http://maven.apache.org/background/history-of-maven.html</a></li>
+<li>&#x521B;&#x59CB;&#x4EBA;&#xFF1A;<strong>jason van zyl</strong></li>
+<li>&#x521B;&#x59CB;&#x4EBA;&#x73B0;&#x5728;&#xFF1A;<a href="http://takari.io/" target="_blank" rel="external">http://takari.io/</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Google &#x641C;&#x7D22;&#xFF1A;<code>Maven &#x533A;&#x522B;</code>&#x3001;<code>Maven difference</code><ul>
+<li>&#x641C;&#x7D22;&#x7ED3;&#x679C;&#xFF1A;<ul>
+<li>&#x4EBA;&#x4EEC;&#x5728;&#x5173;&#x6CE8;&#xFF1A;</li>
+<li>gradle maven&#x533A;&#x522B;</li>
+<li>ant maven&#x533A;&#x522B;</li>
+<li>ivy maven&#x533A;&#x522B;</li>
+<li>maven maven2&#x533A;&#x522B;<ul>
+<li>&#x901A;&#x8FC7;&#x8FD9;&#x4E2A;&#x641C;&#x7D22;&#x7ED3;&#x679C;&#x6211;&#x4EEC;&#x77E5;&#x9053;&#xFF0C;&#x73B0;&#x9636;&#x6BB5;&#x6211;&#x4EEC;&#x8981;&#x7684;&#x662F; Maven 3&#xFF1A;</li>
+<li><a href="http://www.infoq.com/cn/news/2011/07/xxb-maven-10-time-to-update" target="_blank" rel="external">Maven&#x5B9E;&#x6218;&#xFF08;&#x5341;&#xFF09;&#x2014;&#x2014;Maven 3&#xFF0C;&#x662F;&#x65F6;&#x5019;&#x5347;&#x7EA7;&#x4E86;</a></li>
+<li><a href="http://tech.it168.com/a2010/1108/1123/000001123274_all.shtml" target="_blank" rel="external">&#x516D;&#x5E74;&#x7B49;&#x4E00;&#x56DE; Maven 3&#x7684;10&#x5927;&#x65B0;&#x7279;&#x6027;&#x8BE6;&#x89E3;</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>&#x540C;&#x7C7B;&#x5E38;&#x89C1;&#x6280;&#x672F;&#xFF08;&#x6309;&#x6280;&#x672F;&#x51FA;&#x73B0;&#x65F6;&#x95F4;&#x6B63;&#x5E8F;&#xFF09;<ul>
+<li><code>Ant</code></li>
+<li><code>Gradle</code></li>
+</ul>
+</li>
+<li>&#x540C;&#x7C7B;&#x6280;&#x672F;&#x6BD4;&#x8F83;&#xFF1A;<ul>
+<li>Google &#x641C;&#x7D22;&#xFF1A;<code>Ant Maven Gradle</code><ul>
+<li>&#x641C;&#x7D22;&#x7ED3;&#x679C;&#xFF1A;<ul>
+<li><a href="http://blog.csdn.net/napolunyishi/article/details/39345995" target="_blank" rel="external">Java&#x6784;&#x5EFA;&#x5DE5;&#x5177;&#xFF1A;Ant vs Maven vs Gradle</a></li>
+<li><a href="http://www.cnblogs.com/huang0925/p/5209563.html" target="_blank" rel="external">Maven&#x548C;Gradle&#x5BF9;&#x6BD4;</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>&#x5B66;&#x4E60;&#x524D;&#x63D0;/&#x4F9D;&#x8D56;<ul>
+<li>&#x8981;&#x6709; Java &#x57FA;&#x7840;&#x76F8;&#x5173;&#xFF08;&#x5982;&#x679C;&#x4F60;&#x5B8C;&#x5168;&#x6CA1;&#x5B66;&#x8FC7; Java&#xFF0C;&#x5EFA;&#x8BAE;&#x8DF3;&#x8FC7;&#xFF0C;&#x4E0D;&#x9002;&#x5408;&#x4F60;&#xFF09;</li>
+<li>&#x6700;&#x597D;&#x6709; Java Web &#x76F8;&#x5173;&#x77E5;&#x8BC6;</li>
+<li>&#x4E0D;&#x9700;&#x8981;&#x4F1A; Ant &#x6216;&#x662F; Maven &#x65E9;&#x671F;&#x7248;&#x672C;&#x7684;&#x5185;&#x5BB9;</li>
+</ul>
+</li>
+</ul>
+<h3 id="&#x4E3A;&#x4EC0;&#x4E48;&#x4F1A;&#x51FA;&#x73B0;"><a href="#&#x4E3A;&#x4EC0;&#x4E48;&#x4F1A;&#x51FA;&#x73B0;" class="headerlink" title="&#x4E3A;&#x4EC0;&#x4E48;&#x4F1A;&#x51FA;&#x73B0;"></a>&#x4E3A;&#x4EC0;&#x4E48;&#x4F1A;&#x51FA;&#x73B0;</h3><ul>
+<li>Google &#x641C;&#x7D22;&#xFF1A;&#xFF08;&#x8FD9;&#x4E9B;&#x4E00;&#x822C;&#x90FD;&#x662F;&#x4E00;&#x4E9B;&#x6545;&#x4E8B;&#xFF0C;&#x4F60;&#x81EA;&#x5DF1;&#x6765;&#x5224;&#x65AD;&#xFF0C;&#x522B;&#x4EBA;&#x7684;&#x574E;&#x5777;&#x662F;&#x4F60;&#x6210;&#x957F;&#x7684;&#x57FA;&#x77F3;&#xFF09;<ul>
+<li>&#x5173;&#x952E;&#x5B57;&#xFF1A;<code>&#x4E3A;&#x4EC0;&#x4E48;&#x7528; maven</code></li>
+<li>&#x5173;&#x952E;&#x5B57;&#xFF1A;<code>why use maven</code></li>
+<li>&#x5173;&#x952E;&#x5B57;&#xFF1A;<code>What does Maven do</code></li>
+<li>&#x5173;&#x952E;&#x5B57;&#xFF1A;<code>Why do we need Maven</code></li>
+<li>&#x5173;&#x952E;&#x5B57;&#xFF1A;<code>Why should we use Maven</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="&#x54EA;&#x4E9B;&#x4EBA;&#x4E0D;&#x559C;&#x6B22;&#x5B83;"><a href="#&#x54EA;&#x4E9B;&#x4EBA;&#x4E0D;&#x559C;&#x6B22;&#x5B83;" class="headerlink" title="&#x54EA;&#x4E9B;&#x4EBA;&#x4E0D;&#x559C;&#x6B22;&#x5B83;"></a>&#x54EA;&#x4E9B;&#x4EBA;&#x4E0D;&#x559C;&#x6B22;&#x5B83;</h3><ul>
+<li>Google &#x641C;&#x7D22;&#xFF1A;&#xFF08;&#x8FD9;&#x4E9B;&#x4E00;&#x822C;&#x90FD;&#x662F;&#x4E00;&#x4E9B;&#x6545;&#x4E8B;&#xFF0C;&#x4F60;&#x81EA;&#x5DF1;&#x6765;&#x5224;&#x65AD;&#xFF0C;&#x522B;&#x4EBA;&#x7684;&#x574E;&#x5777;&#x662F;&#x4F60;&#x6210;&#x957F;&#x7684;&#x57FA;&#x77F3;&#xFF09;<ul>
+<li>&#x5173;&#x952E;&#x5B57;&#xFF1A;<code>&#x4E0D;&#x7528; maven</code></li>
+<li>&#x5173;&#x952E;&#x5B57;&#xFF1A;<code>Why I Don&apos;t Use Maven</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="&#x4E3A;&#x4EC0;&#x4E48;&#x5B66;&#x4E60;&#x5B83;"><a href="#&#x4E3A;&#x4EC0;&#x4E48;&#x5B66;&#x4E60;&#x5B83;" class="headerlink" title="&#x4E3A;&#x4EC0;&#x4E48;&#x5B66;&#x4E60;&#x5B83;"></a>&#x4E3A;&#x4EC0;&#x4E48;&#x5B66;&#x4E60;&#x5B83;</h3><ul>
+<li>&#x6784;&#x5EFA;&#x5DE5;&#x5177;&#x662F; Java Web &#x5F00;&#x53D1;&#x8005;&#x7ED5;&#x4E0D;&#x8FC7;&#x53BB;&#x7684;&#x4E00;&#x9053;&#x574E;</li>
+</ul>
+<h3 id="&#x6211;&#x8981;&#x600E;&#x4E48;&#x505A;&#xFF08;&#x6309;&#x4F18;&#x5148;&#x7EA7;&#x4ECE;&#x9AD8;&#x5230;&#x4F4E;&#x6392;&#x5E8F;&#xFF09;"><a href="#&#x6211;&#x8981;&#x600E;&#x4E48;&#x505A;&#xFF08;&#x6309;&#x4F18;&#x5148;&#x7EA7;&#x4ECE;&#x9AD8;&#x5230;&#x4F4E;&#x6392;&#x5E8F;&#xFF09;" class="headerlink" title="&#x6211;&#x8981;&#x600E;&#x4E48;&#x505A;&#xFF08;&#x6309;&#x4F18;&#x5148;&#x7EA7;&#x4ECE;&#x9AD8;&#x5230;&#x4F4E;&#x6392;&#x5E8F;&#xFF09;"></a>&#x6211;&#x8981;&#x600E;&#x4E48;&#x505A;&#xFF08;&#x6309;&#x4F18;&#x5148;&#x7EA7;&#x4ECE;&#x9AD8;&#x5230;&#x4F4E;&#x6392;&#x5E8F;&#xFF09;</h3><ul>
+<li>&#x770B;&#x6559;&#x7A0B;<ul>
+<li>&#x5B98;&#x7F51;&#x5FEB;&#x901F;&#x5165;&#x95E8;&#x6587;&#x6863;<ul>
+<li>&#x5728;&#x5B98;&#x7F51;&#x4E2D;&#x67E5;&#x770B;&#x5E26;&#x6709;&#x4E0B;&#x9762;&#x51E0;&#x4E2A;&#x5173;&#x952E;&#x5B57;&#x7684;&#x94FE;&#x63A5;&#xFF1A;<ul>
+<li><code>Getting Started</code></li>
+<li><code>Quick Start</code></li>
+<li><code>Getting Started Guides</code></li>
+<li><code>usage page</code></li>
+<li><code>Tutorials</code></li>
+<li><code>Guides</code></li>
+<li><code>Development Guides</code></li>
+<li><code>Documentation</code></li>
+<li><code>Docs</code></li>
+<li><code>Screencasts</code></li>
+<li>Maven &#x4E3B;&#x9875;&#x4E0A;&#x5F97;&#x5230;&#x5B57;&#x773C;&#x6709;&#xFF1A;<ul>
+<li><a href="http://maven.apache.org/guides/index.html" target="_blank" rel="external">documentation index</a></li>
+<li>&#x5728;&#x5B50;&#x9875;&#x9762;&#x6211;&#x4EEC;&#x5F97;&#x5230;&#xFF1A;<ul>
+<li><a href="http://maven.apache.org/guides/getting-started/maven-in-five-minutes.html" target="_blank" rel="external">Getting Started in 5 Minutes</a></li>
+<li><a href="http://maven.apache.org/guides/getting-started/index.html" target="_blank" rel="external">Getting Started in 30 Minutes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>&#x5728;&#x6781;&#x5BA2;&#x5B66;&#x9662;&#x641C;&#x7D22;&#x5BF9;&#x5E94;&#x7684;&#x6559;&#x5B66;&#x89C6;&#x9891;&#xFF08;&#x6211;&#x662F;&#x5E74; VIP&#xFF09;<ul>
+<li>&#x6781;&#x5BA2;&#x5B66;&#x9662;&#x5BF9; Maven &#x7684;&#x8BB2;&#x89E3;&#x6BD4;&#x8F83;&#x5230;&#x4F4D;&#xFF0C;&#x4ECE;&#x521D;&#x7EA7;&#x5230;&#x4E2D;&#x7EA7;&#x90FD;&#x6DB5;&#x76D6;&#xFF08;&#x9700;&#x8981; VIP &#x6743;&#x9650;&#xFF09;&#xFF1A;</li>
+<li>Maven &#x6982;&#x8FF0;&#x53CA;&#x5B89;&#x88C5;&#xFF0C;&#x5305;&#x542B;&#x4E0B;&#x9762;&#x5185;&#x5BB9;&#xFF1A;<ul>
+<li><code>Maven &#x6982;&#x8FF0;&#x53CA;&#x5B89;&#x88C5;</code></li>
+<li><code>&#x5728; Mac &#x7535;&#x8111;&#x4E0A;&#x5B89;&#x88C5;&#x53CA;&#x914D;&#x7F6E; Maven</code></li>
+<li><code>&#x5728; Windows &#x7535;&#x8111;&#x4E0A;&#x5B89;&#x88C5;&#x53CA;&#x914D;&#x7F6E; Maven</code></li>
+<li><code>&#x5728; Linux &#x7535;&#x8111;&#x4E0A;&#x5B89;&#x88C5;&#x53CA;&#x914D;&#x7F6E; Maven</code></li>
+<li>&#x5730;&#x5740;&#xFF1A;<a href="http://www.jikexueyuan.com/course/571.html" target="_blank" rel="external">http://www.jikexueyuan.com/course/571.html</a></li>
+</ul>
+</li>
+<li>Maven &#x6838;&#x5FC3;&#x6982;&#x5FF5;&#x8BB2;&#x89E3;&#xFF0C;&#x5305;&#x542B;&#x4E0B;&#x9762;&#x5185;&#x5BB9;&#xFF1A;<ul>
+<li><code>POM&#x6982;&#x8FF0;</code></li>
+<li><code>&#x63D2;&#x4EF6;&#x4E0E;&#x76EE;&#x6807;</code></li>
+<li><code>&#x9879;&#x76EE;&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;&#x9636;&#x6BB5;</code></li>
+<li>&#x5730;&#x5740;&#xFF1A;<a href="http://www.jikexueyuan.com/course/866.html" target="_blank" rel="external">http://www.jikexueyuan.com/course/866.html</a></li>
+</ul>
+</li>
+<li>&#x5728;&#x5DE5;&#x5177;&#x4E2D;&#x4F7F;&#x7528; Maven&#xFF0C;&#x5305;&#x542B;&#x4E0B;&#x9762;&#x5185;&#x5BB9;&#xFF1A;<ul>
+<li><code>&#x4F7F;&#x7528;&#x547D;&#x4EE4;&#x884C;&#x5DE5;&#x5177;&#x6784;&#x5EFA;&#x4E00;&#x4E2A; Maven &#x9879;&#x76EE;</code></li>
+<li><code>&#x4F7F;&#x7528; Eclipse &#x6784;&#x5EFA;&#x4E00;&#x4E2A; Maven &#x9879;&#x76EE;</code></li>
+<li><code>&#x4F7F;&#x7528; IntelliJIDEA &#x6784;&#x5EFA;&#x4E00;&#x4E2A; Maven &#x9879;&#x76EE;</code></li>
+<li>&#x5730;&#x5740;&#xFF1A;<a href="http://www.jikexueyuan.com/course/580_1.html?ss=1" target="_blank" rel="external">http://www.jikexueyuan.com/course/580_1.html?ss=1</a></li>
+</ul>
+</li>
+<li>&#x4F7F;&#x7528; Maven &#x6784;&#x5EFA; Web &#x9879;&#x76EE;&#xFF0C;&#x5305;&#x542B;&#x4E0B;&#x9762;&#x5185;&#x5BB9;&#xFF1A;<ul>
+<li><code>&#x521B;&#x5EFA;&#x4E00;&#x4E2A;Web&#x9879;&#x76EE;</code></li>
+<li><code>&#x4F7F;&#x7528; Tomcat &#x63D2;&#x4EF6;&#x8FD0;&#x884C; Web &#x9879;&#x76EE;</code></li>
+<li><code>&#x4F7F;&#x7528; Jetty &#x63D2;&#x4EF6;&#x8FD0;&#x884C; Web &#x9879;&#x76EE;</code></li>
+<li><code>&#x6DFB;&#x52A0; J2EE &#x4F9D;&#x8D56;</code></li>
+<li><code>&#x521B;&#x5EFA; JSP &#x548C; Servlet</code></li>
+<li><code>&#x5728; Eclipse &#x4E2D;&#x4F7F;&#x7528; Maven &#x6784;&#x5EFA; Web &#x9879;&#x76EE;</code></li>
+<li>&#x5730;&#x5740;&#xFF1A;<a href="http://www.jikexueyuan.com/course/908.html" target="_blank" rel="external">http://www.jikexueyuan.com/course/908.html</a></li>
+<li>&#x5730;&#x5740;&#xFF1A;<a href="http://www.jikexueyuan.com/course/951.html" target="_blank" rel="external">http://www.jikexueyuan.com/course/951.html</a></li>
+</ul>
+</li>
+<li>&#x4F7F;&#x7528; Maven &#x6784;&#x5EFA;&#x591A;&#x6A21;&#x5757;&#x9879;&#x76EE;<ul>
+<li><code>&#x591A;&#x6A21;&#x5757;&#x9879;&#x76EE;&#x4ECB;&#x7ECD;</code></li>
+<li><code>&#x521B;&#x5EFA; helloweb &#x9879;&#x76EE;&#x7684;&#x9AA8;&#x67B6;&#x7ED3;&#x6784;</code></li>
+<li><code>&#x5C06; helloweb &#x9879;&#x76EE;&#x5BFC;&#x5165; Eclipse</code></li>
+<li><code>&#x4F7F;&#x7528; dependencyManagement &#x7BA1;&#x7406;&#x4F9D;&#x8D56;</code></li>
+<li><code>&#x4F7F;&#x7528; pluginManagement &#x7BA1;&#x7406;&#x63D2;&#x4EF6;</code></li>
+<li><code>&#x5B9A;&#x4E49;&#x9879;&#x76EE;&#x5C5E;&#x6027;&#x53CA;&#x914D;&#x7F6E;&#x4FE1;&#x606F;</code></li>
+<li><code>&#x5B8C;&#x5584; helloweb-entity &#x6A21;&#x5757;</code></li>
+<li><code>&#x5B8C;&#x5584; helloweb-core &#x6A21;&#x5757;</code></li>
+<li><code>&#x5B8C;&#x5584; helloweb-web &#x6A21;&#x5757;</code></li>
+<li><code>&#x4F7F;&#x7528; log4j &#x6253;&#x5370;&#x65E5;&#x5FD7;</code></li>
+<li><code>&#x4F7F;&#x7528; junit &#x8FDB;&#x884C;&#x5355;&#x5143;&#x6D4B;&#x8BD5;</code></li>
+<li><code>&#x4F7F;&#x7528; guava &#x7F8E;&#x5316;&#x4EE3;&#x7801;</code></li>
+<li>&#x5730;&#x5740;&#xFF1A;<a href="http://www.jikexueyuan.com/course/957.html" target="_blank" rel="external">http://www.jikexueyuan.com/course/957.html</a></li>
+<li>&#x5730;&#x5740;&#xFF1A;<a href="http://www.jikexueyuan.com/course/964.html" target="_blank" rel="external">http://www.jikexueyuan.com/course/964.html</a></li>
+<li>&#x5730;&#x5740;&#xFF1A;<a href="http://www.jikexueyuan.com/course/977.html" target="_blank" rel="external">http://www.jikexueyuan.com/course/977.html</a></li>
+<li>&#x5730;&#x5740;&#xFF1A;<a href="http://www.jikexueyuan.com/course/989.html" target="_blank" rel="external">http://www.jikexueyuan.com/course/989.html</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>&#x6781;&#x5BA2;&#x5B66;&#x9662;&#x4E0A;&#x6574;&#x7406;&#x5F97;&#x5F88;&#x597D;&#x7684;&#x6587;&#x5B57;&#x6559;&#x7A0B;&#xFF1A;<a href="http://wiki.jikexueyuan.com/project/maven/" target="_blank" rel="external">http://wiki.jikexueyuan.com/project/maven/</a></li>
+<li>&#x56FD;&#x5916;&#x8457;&#x540D;&#x7684;&#x6559;&#x7A0B;&#x7F51;&#xFF1A;<a href="http://www.tutorialspoint.com/maven/index.htm" target="_blank" rel="external">http://www.tutorialspoint.com/maven/index.htm</a></li>
+<li>Google &#x641C;&#x7D22;&#xFF1A;<code>Maven &#x89C6;&#x9891; &#x6559;&#x7A0B; &#x767E;&#x5EA6;&#x4E91;&#x7F51;&#x76D8;</code>    </li>
+<li>Google &#x641C;&#x7D22;&#xFF1A;<code>Maven &#x89C6;&#x9891; &#x6559;&#x7A0B;</code></li>
+<li>&#x7B80;&#x4E66;-&#x641C;&#x7D22;&#x76F8;&#x5173;&#x5185;&#x5BB9;&#xFF1A;<a href="http://www.jianshu.com/" target="_blank" rel="external">http://www.jianshu.com/</a></li>
+<li>&#x77E5;&#x4E4E;-&#x641C;&#x7D22;&#x76F8;&#x5173;&#x5185;&#x5BB9;&#xFF1A;<a href="http://www.zhihu.com/" target="_blank" rel="external">http://www.zhihu.com/</a></li>
+<li>Quora-&#x641C;&#x7D22;&#x76F8;&#x5173;&#x5185;&#x5BB9;&#xFF1A;<a href="https://www.quora.com/" target="_blank" rel="external">https://www.quora.com/</a></li>
+<li>&#x5FAE;&#x535A;-&#x641C;&#x7D22;&#x76F8;&#x5173;&#x5185;&#x5BB9;&#xFF1A;<a href="http://weibo.com" target="_blank" rel="external">http://weibo.com</a></li>
+<li>&#x516C;&#x4F17;&#x53F7;-&#x641C;&#x7D22;&#x76F8;&#x5173;&#x5185;&#x5BB9;&#xFF1A;<a href="http://weixin.sogou.com/" target="_blank" rel="external">http://weixin.sogou.com/</a></li>
+<li>&#x5F00;&#x53D1;&#x8005;&#x5934;&#x6761;-&#x641C;&#x7D22;&#x76F8;&#x5173;&#x5185;&#x5BB9;&#xFF1A;<a href="http://toutiao.io/" target="_blank" rel="external">http://toutiao.io/</a></li>
+<li>&#x4EAC;&#x4E1C;-&#x56FE;&#x4E66;&#xFF1A;<a href="http://book.jd.com/" target="_blank" rel="external">http://book.jd.com/</a></li>
+<li>YouTube-&#x641C;&#x7D22;&#x76F8;&#x5173;&#x5185;&#x5BB9;&#xFF1A;<a href="http://youtube.com/" target="_blank" rel="external">http://youtube.com/</a></li>
+</ul>
+</li>
+<li>&#x81EA;&#x5DF1;&#x5199; Demo<ul>
+<li>Maven &#x4E0B;&#x8F7D;&#x5730;&#x5740;&#xFF1A;<a href="http://maven.apache.org/download.cgi" target="_blank" rel="external">http://maven.apache.org/download.cgi</a></li>
+<li>&#x6B64;&#x65F6;&#xFF08;2016-03-10&#xFF09;&#x6700;&#x65B0;&#x7248;&#x672C;&#x4E3A;&#xFF1A;<strong>Apache Maven 3.3.9</strong></li>
+<li>JDK &#x8981;&#x6C42;&#xFF1A;Maven 3.3 &#x8981;&#x6C42; JDK 1.7 &#x6216;&#x662F;&#x66F4;&#x65B0;&#xFF0C;&#x5176;&#x4ED6;&#x7248;&#x672C;&#x65E0;</li>
+<li>&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x6CA1;&#x8981;&#x6C42;&#xFF0C;&#x5B98;&#x7F51;&#x539F;&#x8BDD;&#xFF1A;<code>No minimum requirement. Start up scripts are included as shell scripts and Windows batch files</code><ul>
+<li>&#x4F46;&#x662F;&#xFF0C;&#x6309;&#x7CFB;&#x7EDF;&#x5E38;&#x89C1;&#x538B;&#x7F29;&#x683C;&#x5F0F;&#xFF0C;&#x6211;&#x4E2A;&#x4EBA;&#x5EFA;&#x8BAE;&#xFF1A;</li>
+<li>Windows &#x4E0B;&#x8F7D;&#x7684;&#x6587;&#x4EF6;&#xFF1A;<strong>apache-maven-&#x7248;&#x672C;&#x53F7;-bin.zip</strong></li>
+<li>&#x7C7B; Unix &#x4E0B;&#x8F7D;&#x7684;&#x6587;&#x4EF6;&#xFF1A;<strong>apache-maven-&#x7248;&#x672C;&#x53F7;-bin.tar.gz</strong></li>
+</ul>
+</li>
+<li>&#x6211;&#x8FD9;&#x91CC;&#x4EE5; Maven 3.1 &#x8FDB;&#x884C;&#x5B89;&#x88C5;&#x4E3A;&#x4F8B;&#xFF08;Windows &#x7CFB;&#x7EDF;&#xFF09;&#xFF1A;<ul>
+<li>&#x5B89;&#x88C5;&#xFF1A;<ul>
+<li>&#x6211;&#x7684; Maven &#x89E3;&#x538B;&#x76EE;&#x5F55;&#x53D1;&#x5728; D &#x76D8;&#x6839;&#x76EE;&#x5F55;&#x4E0B;</li>
+<li>&#x65B0;&#x589E;&#x7CFB;&#x7EDF;&#x53D8;&#x91CF;&#xFF1A;<code>JAVA_HOME  ===  C:\Program Files\Java\jdk1.6.0_23</code></li>
+<li>&#x65B0;&#x589E;&#x7CFB;&#x7EDF;&#x53D8;&#x91CF;&#xFF1A;<code>M2_HOME  ===  D:\maven\maven3.1.1</code><ul>
+<li>&#x9700;&#x8981;&#x6CE8;&#x610F;&#x7684;&#x662F;&#x53D8;&#x91CF;&#x540D;&#x5C31;&#x53EB;&#x8FD9;&#x4E2A; <code>M2_HOME</code>&#xFF0C;&#x4E0D;&#x8981;&#x6539;&#x5176;&#x4ED6;&#x7684;&#xFF0C;&#x56E0;&#x4E3A; TeamCity &#x8FD9;&#x7C7B;&#x5DE5;&#x5177;&#x5B83;&#x4F1A;&#x9ED8;&#x8BA4;&#x53BB;&#x627E;&#x8BE5;&#x53D8;&#x91CF;&#x4E00;&#x81F4;&#x7684;&#x5185;&#x5BB9;&#x81EA;&#x52A8;&#x5E2E;&#x6211;&#x4EEC;&#x5339;&#x914D;&#x6784;&#x5EFA;&#x73AF;&#x5883;&#x7684;&#xFF0C;&#x6240;&#x4EE5;&#x6211;&#x4EEC;&#x5C31;&#x6309;&#x5B98;&#x65B9;&#x7EA6;&#x5B9A;&#x6765;&#x3002;</li>
+</ul>
+</li>
+<li>&#x5728;&#x7CFB;&#x7EDF;&#x53D8;&#x91CF; Path &#x4E2D;&#x589E;&#x52A0;&#xFF1A;<code>;%JAVA_HOME%\bin;%M2_HOME%\bin</code></li>
+</ul>
+</li>
+<li>&#x6D4B;&#x8BD5;&#xFF1A;<ul>
+<li>&#x6253;&#x5F00; cmd</li>
+<li>&#x8F93;&#x5165;&#xFF1A;<code>java -version</code>&#xFF0C;&#x80FD;&#x663E;&#x793A; Java &#x7248;&#x672C;&#x4FE1;&#x606F;&#x5373;&#x8868;&#x793A; JAVA_HOME &#x8BBE;&#x7F6E;&#x597D;&#x4E86;</li>
+<li>&#x8F93;&#x5165;&#xFF1A;<code>mvn &#x2013;v</code>&#xFF0C;&#x80FD;&#x663E;&#x793A; Maven &#x7248;&#x672C;&#x4FE1;&#x606F;&#x5373;&#x8868;&#x793A; M2_HOME &#x8BBE;&#x7F6E;&#x597D;&#x4E86;</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>&#x53C2;&#x8003;&#x522B;&#x4EBA; Demo<ul>
+<li>&#x901A;&#x8FC7;&#x4E0A;&#x9762;&#x7684;&#x5B66;&#x4E60;&#xFF0C;&#x6211;&#x4EEC;&#x77E5;&#x9053;&#xFF0C;&#x6211;&#x4EEC;&#x8981;&#x5B66;&#x4E60;&#x522B;&#x4EBA;&#x7684; Maven &#x914D;&#x7F6E;&#xFF0C;&#x53EA;&#x8981;&#x80FD;&#x770B;&#x61C2;&#x4ED6;&#x4EEC;&#x7684; POM &#x6587;&#x4EF6;&#x914D;&#x7F6E;&#x5373;&#x53EF;&#xFF0C;&#x6240;&#x4EE5;&#x73B0;&#x5728;&#x4F60;&#x9700;&#x8981;&#x505A;&#x7684;&#x662F;&#x627E;&#x4E00;&#x4E9B;&#x5F00;&#x6E90;&#x9879;&#x76EE;&#xFF0C;&#x8BFB;&#x61C2;&#x4ED6;&#x4EEC;&#x7684; POM</li>
+<li>Gtihub &#x641C;&#x7D22; Demo&#xFF1A;<a href="https://github.com/search/advanced" target="_blank" rel="external">https://github.com/search/advanced</a></li>
+<li>Git@OSC &#x641C;&#x7D22; Demo&#xFF1A;<a href="http://git.oschina.net/" target="_blank" rel="external">http://git.oschina.net/</a></li>
+</ul>
+</li>
+<li>&#x9879;&#x76EE;&#x573A;&#x666F;&#x6A21;&#x62DF;&#x3001;&#x63D0;&#x9AD8;<ul>
+<li>&#x6211;&#x73B0;&#x5728;&#x6240;&#x6709;&#x7684; Java &#x76F8;&#x5173;&#x7684;&#x9879;&#x76EE;&#x90FD;&#x662F; Maven &#x6784;&#x5EFA;&#x7684;</li>
+<li>&#x81EA;&#x5DF1;&#x505A;&#x6301;&#x7EED;&#x96C6;&#x6210;&#x7684;&#x8BDD;&#xFF0C;&#x6709; Nexus &#x505A;&#x79C1;&#x6709;&#x4ED3;&#x5E93;</li>
+<li>&#x5E73;&#x65F6;&#x5F00;&#x53D1;&#x8FDE;&#x63A5;&#x7684;&#x662F;&#xFF1A;<strong>&#x5F00;&#x6E90;&#x4E2D;&#x56FD; Maven &#x5E93;</strong>&#xFF1A;<ul>
+<li>&#x4F7F;&#x7528;&#x6280;&#x5DE7;&#xFF1A;</li>
+<li><a href="http://maven.oschina.net/help.html" target="_blank" rel="external">http://maven.oschina.net/help.html</a></li>
+<li><a href="http://my.oschina.net/huangyong/blog/180189" target="_blank" rel="external">http://my.oschina.net/huangyong/blog/180189</a></li>
+</ul>
+</li>
+<li>POM &#x4F9D;&#x8D56; jar &#x5E38;&#x53BB;&#x7684;&#x67E5;&#x627E;&#x5730;&#xFF1A;<ul>
+<li>&#x5B98;&#x7F51;&#xFF1A;<a href="http://search.maven.org/" target="_blank" rel="external">http://search.maven.org/</a></li>
+<li>&#x5F00;&#x6E90;&#x4E2D;&#x56FD;&#xFF1A;<a href="http://maven.oschina.net/home.html" target="_blank" rel="external">http://maven.oschina.net/home.html</a></li>
+<li>Nexus &#x5E93;&#xFF1A;<a href="https://repository.sonatype.org/" target="_blank" rel="external">https://repository.sonatype.org/</a></li>
+<li>MVNRepository&#xFF1A;<a href="http://mvnrepository.com/" target="_blank" rel="external">http://mvnrepository.com/</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>&#x9047;&#x5230;&#x95EE;&#x9898;<ul>
+<li>&#x5B98;&#x7F51; FAQ&#xFF1A;<a href="https://maven.apache.org/general.html" target="_blank" rel="external">https://maven.apache.org/general.html</a></li>
+<li>Google</li>
+<li>Stack Overflow&#xFF1A;<a href="http://stackoverflow.com/" target="_blank" rel="external">http://stackoverflow.com/</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="&#x8D44;&#x6599;&#x6574;&#x7406;"><a href="#&#x8D44;&#x6599;&#x6574;&#x7406;" class="headerlink" title="&#x8D44;&#x6599;&#x6574;&#x7406;"></a>&#x8D44;&#x6599;&#x6574;&#x7406;</h3><ul>
+<li>&#x6765;&#x81EA; Google &#x8FC7;&#x7A0B;&#x4E2D;&#x7684;&#x8D44;&#x6599;&#xFF08;&#x771F;&#x5FC3;&#x611F;&#x8C22;&#x8FD9;&#x4E9B;&#x4F5C;&#x8005;&#xFF09;&#xFF1A;<ul>
+<li><a href="https://segmentfault.com/a/1190000000640821" target="_blank" rel="external">Maven&#x91CD;&#x8981;&#x6982;&#x5FF5;&#x53CA;&#x6700;&#x4F73;&#x5B9E;&#x8DF5;</a></li>
+<li><a href="http://mritd.me/2015/12/31/Maven-%E6%95%99%E7%A8%8B/#" target="_blank" rel="external">Maven &#x6559;&#x7A0B; </a></li>
+<li><a href="http://www.trinea.cn/android/maven/" target="_blank" rel="external">Maven&#x4ECB;&#x7ECD;&#xFF0C;&#x5305;&#x62EC;&#x4F5C;&#x7528;&#x3001;&#x6838;&#x5FC3;&#x6982;&#x5FF5;&#x3001;&#x7528;&#x6CD5;&#x3001;&#x5E38;&#x7528;&#x547D;&#x4EE4;&#x3001;&#x6269;&#x5C55;&#x53CA;&#x914D;&#x7F6E;</a></li>
+<li><a href="http://www.cnblogs.com/haippy/archive/2012/07/04/2576453.html" target="_blank" rel="external">7&#x5929;&#x5B66;&#x4F1A;Maven&#xFF08;&#x7B2C;&#x4E00;&#x5929;&#x2014;&#x2014;&#x4E86;&#x89E3; Maven&#xFF09;</a></li>
+<li><a href="http://www.cnblogs.com/haippy/archive/2012/07/05/2577233.html" target="_blank" rel="external">7&#x5929;&#x5B66;&#x4F1A;Maven&#xFF08;&#x7B2C;&#x4E8C;&#x5929;&#x2014;&#x2014;Maven &#x6807;&#x51C6;&#x76EE;&#x5F55;&#x7ED3;&#x6784;&#xFF09;</a></li>
+<li><a href="http://www.cnblogs.com/zhaoyang/archive/2012/01/07/2315443.html" target="_blank" rel="external">Maven 3 &#x5165;&#x95E8; &#x2013; &#x5B89;&#x88C5;&#x4E0E;&#x914D;&#x7F6E;</a></li>
+<li><a href="http://blog.csdn.net/sxyx2008/article/details/8725220" target="_blank" rel="external">Maven&#x4E4B;pom&#x4E2D;&#x6587;&#x8BE6;&#x89E3;</a></li>
+<li><a href="http://my.oschina.net/MyHeaven1987/blog/99781?fromerr=07XUhoR7" target="_blank" rel="external">maven&#x4E2D;&#x7684;&#x4F9D;&#x8D56;&#x673A;&#x5236;&#x7B80;&#x4ECB;</a></li>
+<li><a href="http://my.oschina.net/MyHeaven1987/blog/100704?fromerr=SWanTA4V" target="_blank" rel="external">maven&#x4E2D;&#x7684;&#x4ED3;&#x5E93;&#x7B80;&#x4ECB;</a></li>
+<li><a href="http://www.cnblogs.com/bigtall/archive/2011/03/23/1993253.html" target="_blank" rel="external">maven&#x5E38;&#x89C1;&#x95EE;&#x9898;&#x95EE;&#x7B54;</a></li>
+<li><a href="http://drizzlewalk.blog.51cto.com/2203401/665590" target="_blank" rel="external">maven scope&#x542B;&#x4E49;&#x7684;&#x8BF4;&#x660E;</a></li>
+<li><a href="http://www.infoq.com/cn/news/2011/06/xxb-maven-9-package" target="_blank" rel="external">Maven&#x5B9E;&#x6218;&#xFF08;&#x4E5D;&#xFF09;&#x2014;&#x2014;&#x6253;&#x5305;&#x7684;&#x6280;&#x5DE7;</a></li>
+<li><a href="http://blog.csdn.net/sxyx2008/article/details/7959220" target="_blank" rel="external">Maven&#x4ED3;&#x5E93;&#x6C47;&#x603B;</a></li>
+<li><a href="http://www.cnblogs.com/iusmile/archive/2012/11/14/2770118.html" target="_blank" rel="external">Maven &#x7684;41&#x79CD;&#x9AA8;&#x67B6;&#x529F;&#x80FD;&#x4ECB;&#x7ECD;</a></li>
+<li><a href="http://blog.csdn.net/zht666/article/details/8673609" target="_blank" rel="external">IntelliJ IDEA 12&#x521B;&#x5EFA;Maven&#x7BA1;&#x7406;&#x7684;Java Web&#x9879;&#x76EE;&#xFF08;&#x56FE;&#x89E3;&#xFF09;</a></li>
+<li><a href="http://blog.csdn.net/sxyx2008/article/details/7975129" target="_blank" rel="external">&#x5BF9;maven&#x79C1;&#x670D;&#x914D;&#x7F6E;&#x7684;&#x8BF4;&#x660E; </a></li>
+</ul>
+</li>
+</ul>
+<h2 id="&#x8FC7;&#x7A0B;&#x7EC6;&#x8282;"><a href="#&#x8FC7;&#x7A0B;&#x7EC6;&#x8282;" class="headerlink" title="&#x8FC7;&#x7A0B;&#x7EC6;&#x8282;"></a>&#x8FC7;&#x7A0B;&#x7EC6;&#x8282;</h2><ul>
+<li>&#x8FC7;&#x53BB; 2014 &#x5E74;&#x91CC;&#xFF0C;&#x57FA;&#x672C;&#x4E0A;&#x5173;&#x4E8E; Maven &#x7684;&#x77E5;&#x8BC6;&#x90FD;&#x662F;&#x5728; Google &#x4E0A;&#x641C;&#x7D22;&#x51FA;&#x6765;&#x7684;&#x3002;</li>
+<li>&#x5728; 2015 &#x5E74;&#x624D;&#x770B;&#x5230;&#x6781;&#x5BA2;&#x5B66;&#x9662;&#x4E0A;&#x9762;&#x6709;&#x6210;&#x5957;&#x8D44;&#x6599;</li>
+</ul>
+<h2 id="&#x7ED3;&#x675F;&#x8BED;"><a href="#&#x7ED3;&#x675F;&#x8BED;" class="headerlink" title="&#x7ED3;&#x675F;&#x8BED;"></a>&#x7ED3;&#x675F;&#x8BED;</h2><ul>
+<li>Maven &#x4E5F;&#x8BB8;&#x5F00;&#x59CB;&#x8981;&#x8FC7;&#x65F6;&#x4E86;&#xFF0C;&#x4F46;&#x662F;&#x5373;&#x4F7F; Gradle &#x7684;&#x65F6;&#x4EE3;&#x8981;&#x5230;&#x6765;&#x4E86;&#xFF0C;&#x4F60;&#x4F1A;&#x5BB3;&#x6015;&#x5417;&#xFF1F;&#x6211;&#x60F3;&#x4F60;&#x4E0D;&#x4F1A;&#x7684;&#xFF0C;&#x56E0;&#x4E3A;&#x4F60;&#x4F1A;&#x5B66;&#x4E60;&#x77E5;&#x8BC6;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x66F4;&#x800C;&#x4E14;&#x4ED6;&#x4EEC;&#x8FD8;&#x5DEE;&#x4E0D;&#x591A;&#x3002;</li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>Title:</span><a href="/2015/03/09/maven-related-knowledge-topics/">构建工具-Maven-相关知识-整理专题</a></p>
+        <p><span>Author:</span><a href="/" title="Back to Homepage">Chenjh</a></p>
+        <p><span>Created:</span>2015-03-09, 19:56:08</p>
+        <p><span>Updated:</span>2016-09-22, 23:48:35</p>
+        <p>
+            <span>Full URL:</span><a class="post-url" href="/2015/03/09/maven-related-knowledge-topics/" title="构建工具-Maven-相关知识-整理专题">http://code.skyheng.com/2015/03/09/maven-related-knowledge-topics/</a>
+            <span class="copy-path" data-clipboard-text="From http://code.skyheng.com/2015/03/09/maven-related-knowledge-topics/　　By Chenjh" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>License:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target="_blank">"CC BY-NC-SA 4.0"</a> Keep Link &amp; Author if Distribute.
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2015/05/01/github-build-hexo-blog-install/">
+                    使用Github搭建Hexo技术博客--安装教程
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2014/05/24/overloading-and-overriding-difference/">
+                    JAVA中重写和重载区别
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#intro"><span class="toc-number">1.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#本文初衷"><span class="toc-number">2.</span> <span class="toc-text">本文初衷</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#先总结"><span class="toc-number">3.</span> <span class="toc-text">先总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Maven-知识"><span class="toc-number">4.</span> <span class="toc-text">Maven 知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Maven-是什么"><span class="toc-number">4.1.</span> <span class="toc-text">Maven 是什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么会出现"><span class="toc-number">4.2.</span> <span class="toc-text">为什么会出现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#哪些人不喜欢它"><span class="toc-number">4.3.</span> <span class="toc-text">哪些人不喜欢它</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么学习它"><span class="toc-number">4.4.</span> <span class="toc-text">为什么学习它</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#我要怎么做（按优先级从高到低排序）"><span class="toc-number">4.5.</span> <span class="toc-text">我要怎么做（按优先级从高到低排序）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#资料整理"><span class="toc-number">4.6.</span> <span class="toc-text">资料整理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#过程细节"><span class="toc-number">5.</span> <span class="toc-text">过程细节</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结束语"><span class="toc-number">6.</span> <span class="toc-text">结束语</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="Hide" title="Show or Hide Table of Contents">
+
+    <script>
+        yiliaConfig.toc = ["Hide", "Show", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"构建工具-Maven-相关知识-整理专题　| Chenjh Code　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+        <section class="youyan" id="comments">
+    <script>
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = 'http://v2.uyan.cc/code/uyan.js?uid=2095968';
+            (d.head || d.body).appendChild(s);
+        }
+    </script>
+    
+    <script> loadComment(); </script>
+
+    <div id="uyan_frame"></div>
+</section>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2015/05/01/github-build-hexo-blog-install/" title="Pre: 使用Github搭建Hexo技术博客--安装教程">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2014/05/24/overloading-and-overriding-difference/" title="Next: JAVA中重写和重载区别">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/10/21/win10-shortcut-key/">win10常用的快捷键</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/21/zooKeeper-command-introduce/">zooKeeper常用命令介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/20/zookeeper-install-and-setting/">zookeeper的安装与设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/20/maven-pro-collection/">收集的国内maven镜像地址</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/15/windows-git-pull-bat/">Windows git pull 批处理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/15/git-common-commands/">Git常用的操作命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/11/python-install/">python安装</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/09/rect-grid-demo/">实例demo之3D transform立方体效果</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/30/redis-install-and-settings/">Redis 安装和配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/26/Tomcat-7优化配置参数/">Tomcat 7优化配置参数</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/18/some-good-technology-blog/">一些好的技术博客,追随牛逼的人,让自己更牛逼</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/17/famous-IT-blog-home-and-abroad/">国内外知名IT科技博客（强烈推荐）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/29/eclipse-common-plugin/">eclipse 常用插件安装</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/25/eclipse-install-jrebel/">eclipse安装JRebel6.4.8热部署插件教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/22/jquery-eval-paesing-json-introduce/">jquery eval解析JSON中的注意点介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/08/关于分布式一致性的探究/">关于分布式一致性的探究</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/08/初识分布式系统/">初识分布式系统</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/03/excel-markdown-table/">用 Excel 生成和管理 Markdown 表格</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/02/common-hexo-commands/">Hexo 最常用的几个命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/01/git-cheat-sheet/">GIT的常用操作命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/01/linux-commonly-used-ommands/">Linux常用命令大全</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/21/improve-efficiency-database-query/">在一个千万级的数据库查寻中，如何提高查询效率？</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/16/vmware-set-centos-static-ip/">VMware中CentOS设置静态IP</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/09/tomcat8-install-and-settings/">Tomcat 8 安装和配置、优化</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/04/wxpay-scanpay-java-sdk-demo/">【微信支付】“刷卡支付”、“被扫支付”开发JavaDemo</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/04/wxpay-scanpay-java-sdk/">【微信支付】“刷卡支付”、“被扫支付”开发说明</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/02/svn-install-and-settings/">Subversion 1.8 安装</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/02/svn-password-find/">SVN 密码破解，svn密码本地找回</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/02/mysql-install-and-settings/">Mysql 安装和配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/02/maven-install-and-settings/">Maven 安装和配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/17/jdk-install/">在linux下的JDK 安装和配置（基于 阿里云服务器CentOS 6.5）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/17/nexus-install-and-settings/">Nexus 在linux下的安装和配置（基于 阿里云服务器CentOS 6.5）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/07/my-learning-way/">我的学习、归纳方法（以学习 Maven 为例）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/05/01/github-build-hexo-blog-intensify/">使用Github搭建Hexo技术博客--增强教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/05/01/github-build-hexo-blog-install/">使用Github搭建Hexo技术博客--安装教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/03/09/maven-related-knowledge-topics/">构建工具-Maven-相关知识-整理专题</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/05/24/overloading-and-overriding-difference/">JAVA中重写和重载区别</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2015-2016 Chenjh
+            </div>
+            <div class="footer-right">
+                 <!--
+				 <a href="http://hexo.io/" target="_blank" title="A fast, simple &amp; powerful blog framework">Hexo</a>Theme 
+				 <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="Another simple and elegant theme for Hexo  v3.5">Yelee</a> by MOxFIVE 
+				 <i class="fa fa-heart animated infinite pulse"></i>
+				 -->
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style="display:none">
+                        <span id="site-visit" title="Site Visitors"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style="display:none">
+                        <span id="page-visit" title="Page Hits"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="Back to Top"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="Comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="Go to Bottom"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
+      
+    </div>
+    
+  </div>
+  
+    
+
+
+  
+</article>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"　| 向志洪　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016 向志洪
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

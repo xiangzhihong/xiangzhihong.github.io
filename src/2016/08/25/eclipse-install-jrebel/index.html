@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="向志洪" />
+
+
+
+<meta name="description" content="eclipse安装JRebel6.4.8热部署插件教程 | Chenjh Code
+
+
+
+
+
+    var yiliaConfig = {
+        fancybox: true,
+        anima">
+<meta property="og:type" content="website">
+<meta property="og:title" content="向志洪">
+<meta property="og:url" content="http://code.youmeek.com/src/2016/08/25/eclipse-install-jrebel/index.html">
+<meta property="og:site_name" content="向志洪">
+<meta property="og:description" content="eclipse安装JRebel6.4.8热部署插件教程 | Chenjh Code
+
+
+
+
+
+    var yiliaConfig = {
+        fancybox: true,
+        anima">
+<meta property="og:image" content="http://code.youmeek.com/img/avatar.png">
+<meta property="og:image" content="http://code.youmeek.com/img/avatar.png">
+<meta property="og:image" content="http://code.youmeek.com/2016/08/25/eclipse-install-jrebel/JRebel.png">
+<meta property="og:image" content="http://code.youmeek.com/2016/08/25/eclipse-install-jrebel/jrebel-modules.png">
+<meta property="og:image" content="http://code.youmeek.com/2016/08/25/eclipse-install-jrebel/run-jrebel.png">
+<meta property="og:image" content="http://code.youmeek.com/2016/08/25/eclipse-install-jrebel/run-configurations.png">
+<meta property="og:image" content="http://code.youmeek.com/2016/08/25/eclipse-install-jrebel/jrebel-setting.png">
+<meta property="og:image" content="http://code.youmeek.com/2016/08/25/eclipse-install-jrebel/20160825235430.png">
+<meta property="og:image" content="http://code.youmeek.com/2016/08/25/eclipse-install-jrebel/tomcat-setting.png">
+<meta property="og:image" content="http://code.youmeek.com/2016/08/25/eclipse-install-jrebel/20160825235926.png">
+<meta property="og:updated_time" content="2016-11-08T21:50:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="向志洪">
+<meta name="twitter:description" content="eclipse安装JRebel6.4.8热部署插件教程 | Chenjh Code
+
+
+
+
+
+    var yiliaConfig = {
+        fancybox: true,
+        anima">
+<meta name="twitter:image" content="http://code.youmeek.com/img/avatar.png">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="向志洪" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>向志洪</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: false,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">向志洪</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">这里只有代码相关，要了解更多 &gt;&gt;&gt;向志洪</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">向志洪</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">向志洪</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">这里只有代码相关，要了解更多 &gt;&gt;&gt;向志洪</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:123@123.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="page-undefined" class="article article-type-page" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/src/2016/08/25/eclipse-install-jrebel/index.html" class="article-date">
+      <time datetime="2016-11-25T02:53:08.597Z" itemprop="datePublished">2016-11-25</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <style>
+    .article-meta { display: none; }
+    #container .article .article-title { padding-right: 0; }
+    .article-header {
+        padding: 0;
+        padding-top: 26px;
+        border-left: none;
+        text-align: center;
+    }
+    .article-header:hover { border-left: none; }
+    .article-title { font-size: 1.6em }
+    .article-entry hr { margin: 0;}
+    .article-meta,
+    #container .article-info-post.article-info { display: none;}
+    #container .article .article-title { padding: 0; }
+</style>
+
+
+          
+        <!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="Chenjh">
+
+
+
+<meta name="description" content="&amp;#x6211;&amp;#x4EEC;&amp;#x7528;eclipse&amp;#x5F00;&amp;#x53D1;&amp;#x65F6;&amp;#x7ECF;&amp;#x5E38;&amp;#x9047;&amp;#x5230;&amp;#x4E00;&amp;#x4E2A;&amp;#x9EBB;&amp;#x70E6;&amp;#x7684;&amp;#x95EE;&amp;#x9898;&amp;#x662F;&amp;#x4FEE;&amp;#x6539;&amp;#x7C7B;&amp;#x6587;&amp;#x4EF6;&amp;#x540E;&amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="eclipse安装JRebel6.4.8热部署插件教程">
+<meta property="og:url" content="http://code.skyheng.com/2016/08/25/eclipse-install-jrebel/index.html">
+<meta property="og:site_name" content="Chenjh Code">
+<meta property="og:description" content="&amp;#x6211;&amp;#x4EEC;&amp;#x7528;eclipse&amp;#x5F00;&amp;#x53D1;&amp;#x65F6;&amp;#x7ECF;&amp;#x5E38;&amp;#x9047;&amp;#x5230;&amp;#x4E00;&amp;#x4E2A;&amp;#x9EBB;&amp;#x70E6;&amp;#x7684;&amp;#x95EE;&amp;#x9898;&amp;#x662F;&amp;#x4FEE;&amp;#x6539;&amp;#x7C7B;&amp;#x6587;&amp;#x4EF6;&amp;#x540E;&amp;">
+<meta property="og:image" content="http://code.skyheng.com/2016/08/25/eclipse-install-jrebel/JRebel.png">
+<meta property="og:image" content="http://code.skyheng.com/2016/08/25/eclipse-install-jrebel/jrebel-modules.png">
+<meta property="og:image" content="http://code.skyheng.com/2016/08/25/eclipse-install-jrebel/run-jrebel.png">
+<meta property="og:image" content="http://code.skyheng.com/2016/08/25/eclipse-install-jrebel/run-configurations.png">
+<meta property="og:image" content="http://code.skyheng.com/2016/08/25/eclipse-install-jrebel/jrebel-setting.png">
+<meta property="og:image" content="http://code.skyheng.com/2016/08/25/eclipse-install-jrebel/20160825235430.png">
+<meta property="og:image" content="http://code.skyheng.com/2016/08/25/eclipse-install-jrebel/tomcat-setting.png">
+<meta property="og:image" content="http://code.skyheng.com/2016/08/25/eclipse-install-jrebel/20160825235926.png">
+<meta property="og:updated_time" content="2016-10-20T15:49:39.644Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="eclipse安装JRebel6.4.8热部署插件教程">
+<meta name="twitter:description" content="&amp;#x6211;&amp;#x4EEC;&amp;#x7528;eclipse&amp;#x5F00;&amp;#x53D1;&amp;#x65F6;&amp;#x7ECF;&amp;#x5E38;&amp;#x9047;&amp;#x5230;&amp;#x4E00;&amp;#x4E2A;&amp;#x9EBB;&amp;#x70E6;&amp;#x7684;&amp;#x95EE;&amp;#x9898;&amp;#x662F;&amp;#x4FEE;&amp;#x6539;&amp;#x7C7B;&amp;#x6587;&amp;#x4EF6;&amp;#x540E;&amp;">
+<meta name="twitter:image" content="http://code.skyheng.com/2016/08/25/eclipse-install-jrebel/JRebel.png">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="Chenjh Code" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>eclipse安装JRebel6.4.8热部署插件教程 | Chenjh Code</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?d195b745077c1dbc09dacf43876b8f07";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">Chenjh</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">这里只有代码相关，要了解更多 &gt;&gt;&gt; www.skyheng.com</p>
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="false">
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class="no-result">No results found <i class="fa fa-spinner fa-pulse"></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>Menu</li>
+                        <li>Tags</li>
+                        
+                        <li>Friends</li>
+                        
+                        
+                        <li>About Me</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/toolbox/">工具箱</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:chenjh0611@163.com" title="Email" target="_blank" rel="external"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/chenjh0611" title="GitHub" target="_blank" rel="external"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa CSDN" href="http://blog.csdn.net/skychenjh" title="CSDN" target="_blank" rel="external"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CI/">CI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS3/">CSS3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/">CentOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Excel/">Excel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github/">Github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA/">JAVA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JDK/">JDK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JRebel/">JRebel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/">Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/">Mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nexus/">Nexus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SVN/">SVN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Table/">Table</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/">Tomcat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ajax/">ajax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dubbo/">dubbo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eclipse/">eclipse</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jquery/">jquery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/plugin/">plugin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rect/">rect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/win10/">win10</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zooKeeper/">zooKeeper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zookeeper/">zookeeper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分布式/">分布式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/刷卡支付/">刷卡支付</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习方法/">学习方法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开发工具/">开发工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微信支付/">微信支付</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/版本管理/">版本管理</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://www.skyheng.com/" target="_blank" rel="external">MyBlog</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/" target="_blank" rel="external">GitHub</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于技术,专注于开发</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Chenjh</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Chenjh</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">这里只有代码相关，要了解更多 &gt;&gt;&gt; www.skyheng.com</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/toolbox/">工具箱</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:chenjh0611@163.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/chenjh0611" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa CSDN" target="_blank" href="http://blog.csdn.net/skychenjh" title="CSDN"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="Tags" friends="Friends" about="About Me">
+</nav>
+      <div class="body-wrap"><article id="post-eclipse-install-jrebel" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/08/25/eclipse-install-jrebel/" class="article-date">
+      <time datetime="2016-08-25T15:19:19.000Z" itemprop="datePublished">2016-08-25</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      eclipse安装JRebel6.4.8热部署插件教程
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/eclipse/">eclipse</a><a class="article-category-link" href="/categories/eclipse/JRebel/">JRebel</a><a class="article-category-link" href="/categories/eclipse/JRebel/开发工具/">开发工具</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JRebel/">JRebel</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eclipse/">eclipse</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/开发工具/">开发工具</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p></p><h2 id="intro"></h2>&#x6211;&#x4EEC;&#x7528;eclipse&#x5F00;&#x53D1;&#x65F6;&#x7ECF;&#x5E38;&#x9047;&#x5230;&#x4E00;&#x4E2A;&#x9EBB;&#x70E6;&#x7684;&#x95EE;&#x9898;&#x662F;&#x4FEE;&#x6539;&#x7C7B;&#x6587;&#x4EF6;&#x540E;&#x9700;&#x91CD;&#x542F;tomcat&#x624D;&#x80FD;&#x751F;&#x6548;&#xFF0C;&#x5373;&#x4F7F;&#x4F7F;&#x7528;&#x4E00;&#x4E9B;tomcat&#x63D2;&#x4EF6;&#xFF0C;&#x6709;&#x65F6;&#x4FEE;&#x6539;&#x4E86;&#x65B9;&#x6CD5;&#x540D;&#x6216;&#x6DFB;&#x52A0;&#x4E86;&#x7C7B;&#xFF0C;&#x4E5F;&#x9700;&#x8981;&#x91CD;&#x542F;&#x3002;&#x4F7F;&#x7528;&#x83B7;&#x5F97;jolt&#x5927;&#x5956;&#x7684;&#x4F5C;&#x54C1;jrebel&#xFF0C;&#x5C31;&#x80FD;&#x8F7B;&#x677E;&#x5B9E;&#x73B0; jvm&#x70ED;&#x90E8;&#x7F72;&#xFF0C;Rebel &#x53EF;&#x5FEB;&#x901F;&#x5B9E;&#x73B0;Tomcat&#x7684;&#x70ED;&#x90E8;&#x7F72;&#xFF0C;&#x6700;&#x4E3A;&#x5F3A;&#x5927;&#x7684;&#x662F;&#x652F;&#x6301;Spring&#x6CE8;&#x89E3;&#x7684;&#x70ED;&#x90E8;&#x7F72;&#xFF0C;&#x8FD9;&#x6837;&#x5C31;&#x80FD;&#x8282;&#x7701;&#x5927;&#x91CF;&#x7684;&#x670D;&#x52A1;&#x5668;&#x91CD;&#x542F;&#x65F6;&#x95F4;&#xFF0C;&#x63D0;&#x9AD8;&#x4E86;&#x4E2A;&#x4EBA;&#x5F00;&#x53D1;&#x6548;&#x7387;&#x3002;JRebel&#x652F;&#x6301;Eclipse&#x548C;IntelliJ IDEA&#xFF0C;&#x4E0B;&#x9762;&#x5206;&#x522B;&#x4ECE;&#x4E24;&#x4E2A;IDE&#x4ECB;&#x7ECD;JRebel&#x7684;&#x5B89;&#x88C5;&#x65B9;&#x6CD5;&#xFF0C;&#x5982;&#x6709;&#x9519;&#x8BEF;&#x6216;&#x9057;&#x6F0F;&#xFF0C;&#x6B22;&#x8FCE;&#x6307;&#x51FA;&#x3002;PS: &#x6539;properties\xml&#x65E0;&#x6548;&#xFF0C;&#x8FD9;&#x662F;&#x8981;&#x624B;&#x52A8;&#x91CD;&#x542F;&#x7684;&#x3002;<br><a id="more"></a><p></p>
+<h2 id="&#x5B89;&#x88C5;&#x65B9;&#x6CD5;"><a href="#&#x5B89;&#x88C5;&#x65B9;&#x6CD5;" class="headerlink" title="&#x5B89;&#x88C5;&#x65B9;&#x6CD5;"></a>&#x5B89;&#x88C5;&#x65B9;&#x6CD5;</h2><h3 id="1-Eclipse&#x5B89;&#x88C5;JRebel"><a href="#1-Eclipse&#x5B89;&#x88C5;JRebel" class="headerlink" title="1.Eclipse&#x5B89;&#x88C5;JRebel"></a>1.Eclipse&#x5B89;&#x88C5;JRebel</h3><ul>
+<li>JRebel&#x5B98;&#x7F51;&#x5730;&#x5740;&#xFF1A;<a href="https://manuals.zeroturnaround.com/jrebel/index.html" target="_blank" rel="external">https://manuals.zeroturnaround.com/jrebel/index.html</a></li>
+<li>Eclipse&#x63D2;&#x4EF6;&#x5728;&#x7EBF;&#x5B89;&#x88C5;&#x5730;&#x5740;&#xFF1A;<a href="http://update.zeroturnaround.com/update-site/" target="_blank" rel="external">http://update.zeroturnaround.com/update-site/</a></li>
+<li>&#x6DFB;&#x52A0;&#x63D2;&#x4EF6;&#x5728;&#x7EBF;&#x5B89;&#x88C5;&#x5730;&#x5740;&#x5230;Eclipse&#xFF0C;&#x7136;&#x540E;&#x9009;&#x62E9;&#x5B89;&#x88C5;  JRebel for Java EE&#xFF0C;&#x91CD;&#x542F;&#x4E4B;&#x540E;&#x8BBE;&#x7F6E;&#x91CC;&#x4F1A;&#x51FA;&#x73B0;  Jrebel&#x7684;&#x9009;&#x9879;&#xFF0C;&#x8BF4;&#x660E;&#x5B89;&#x88C5;&#x6210;&#x529F;&#x3002;<h4 id="&#x7834;&#x89E3;&#xFF1A;Crack"><a href="#&#x7834;&#x89E3;&#xFF1A;Crack" class="headerlink" title="&#x7834;&#x89E3;&#xFF1A;Crack:"></a>&#x7834;&#x89E3;&#xFF1A;Crack:</h4></li>
+</ul>
+<ol>
+<li>&#x4F7F;&#x7528;&#x6388;&#x6743;&#x670D;&#x52A1;&#x5668;&#xFF1A;Help &gt; JRebel Activation &gt; I already have a license &gt; Connect to License Server</li>
+</ol>
+<ul>
+<li>Group URL &#x586B;&#x5199;&#xFF1A;<a href="http://idea.lanyus.com/{username}" target="_blank" rel="external">http://idea.lanyus.com/{username}</a>  (&#x7528;&#x4EFB;&#x610F;&#x7528;&#x6237;&#x540D;&#x66FF;&#x6362; {username})&#xFF0C;Email &#x968F;&#x610F;&#x3002;</li>
+</ul>
+<ol>
+<li>&#x624B;&#x52A8;&#xFF1A;&#x6253;&#x5F00;Eclipse&#x76EE;&#x5F55;&#xFF1A;plugins/org.zeroturnaround.eclipse.embedder_*<br>&#x5206;&#x522B;&#x66FF;&#x6362; jrebel&#xFF0C;jr6/jrebel &#x6587;&#x4EF6;&#x5939;&#x91CC;&#x7684;jar&#x6587;&#x4EF6;&#x4E3A;&#x7834;&#x89E3;&#x540E;&#x7684;jar&#x6587;&#x4EF6;&#xFF0C;&#x5C06;&#x8BC1;&#x4E66;&#x653E;&#x5230;&#x7528;&#x6237;&#x6587;&#x4EF6;&#x5939;&#x7684; .jrebel &#x6587;&#x4EF6;&#x5939;&#x4E0B;&#xFF0C;&#x4F8B;&#x5982; ~/.jrebel/&#x3002;<br>&#x56DE;&#x5230;Eclipse&#xFF0C;&#x9009;&#x62E9;Help -&gt; JRebel Configuration &#x6253;&#x5F00;jrebel&#x7684;&#x914D;&#x7F6E;&#x4E2D;&#x5FC3;&#xFF0C;&#x5230;Advance&#x91CC;&#x8BBE;&#x7F6E;JRebel agent&#x4E3A;JRebel 6 Agent&#x3002;<br>&#x5982;&#x679C;Jrebel&#x63D0;&#x793A;&#x6CA1;&#x6FC0;&#x6D3B;&#xFF0C;&#x8BF7;&#x624B;&#x52A8;&#x9009;&#x62E9;&#x4E00;&#x4E0B;&#x6CE8;&#x518C;&#x8BC1;&#x4E66;&#x7684;&#x8DEF;&#x5F84;&#x3002;<br>&#x8BBE;&#x7F6E;&#x597D;&#x4E4B;&#x540E;&#xFF0C;&#x5728;&#x5DF2;&#x6709;&#x9879;&#x76EE;&#x4E0A;&#x53F3;&#x952E; -&gt; Jrebel -&gt; Add Jrebel Nature&#xFF0C;&#x7136;&#x540E;&#x6E90;&#x7801;&#x76EE;&#x5F55;&#x5C31;&#x4F1A;&#x751F;&#x6210;&#x4E00;&#x4E2A;  rebel.xml &#x6587;&#x4EF6;&#xFF0C;&#x8BBE;&#x7F6E;&#x6210;&#x529F;&#x3002;</li>
+</ol>
+<h3 id="2-IntelliJ-IDEA&#x5B89;&#x88C5;JRebel&#x63D2;&#x4EF6;&#xFF1A;"><a href="#2-IntelliJ-IDEA&#x5B89;&#x88C5;JRebel&#x63D2;&#x4EF6;&#xFF1A;" class="headerlink" title="2.IntelliJ IDEA&#x5B89;&#x88C5;JRebel&#x63D2;&#x4EF6;&#xFF1A;"></a>2.IntelliJ IDEA&#x5B89;&#x88C5;JRebel&#x63D2;&#x4EF6;&#xFF1A;</h3><p>&#x4EE5;&#x4E0B;&#x6B65;&#x9AA4;&#x57FA;&#x4E8E;IntelliJ IDEA 16&#xFF0C;&#x5176;&#x4ED6;&#x7248;&#x672C;&#x5927;&#x540C;&#x5C0F;&#x5F02;&#x3002;</p>
+<ul>
+<li>File -&gt; Settings -&gt; Plugins -&gt; Browse repositories&#x2026;&#x67E5;&#x627E; JRebel for Intellij &#x5E76;&#x5B89;&#x88C5;&#x3002;<h4 id="&#x7834;&#x89E3;&#xFF1A;Crack-1"><a href="#&#x7834;&#x89E3;&#xFF1A;Crack-1" class="headerlink" title="&#x7834;&#x89E3;&#xFF1A;Crack:"></a>&#x7834;&#x89E3;&#xFF1A;Crack:</h4></li>
+</ul>
+<ol>
+<li>&#x4F7F;&#x7528;&#x7B2C;&#x4E09;&#x65B9;&#x6388;&#x6743;&#x670D;&#x52A1;&#x5668;&#xFF1A;</li>
+</ol>
+<ul>
+<li><img src="/2016/08/25/eclipse-install-jrebel/JRebel.png" alt="JRebel"></li>
+<li>&#x8FD8;&#x662F;&#x90A3;&#x53E5;&#x8BDD;&#xFF0C;&#x5982;&#x679C;JRebel&#x7ED9;&#x4F60;&#x8282;&#x7EA6;&#x4E86;&#x5927;&#x91CF;&#x65F6;&#x95F4;&#xFF0C;&#x800C;&#x4F60;&#x53C8;&#x7684;&#x786E;&#x559C;&#x6B22;&#x8FD9;&#x6B3E;&#x8F6F;&#x4EF6;&#xFF0C;&#x8BF7;&#x4E70;&#x6B63;&#x7248;&#x652F;&#x6301;&#x4E00;&#x4E0B;&#x3002;</li>
+</ul>
+<ol>
+<li>&#x624B;&#x52A8;&#xFF1A;<br>&#x6253;&#x5F00;&#x63D2;&#x4EF6;&#x76EE;&#x5F55;&#xFF1A;C:/Users/&lt;&#x5F53;&#x524D;&#x7528;&#x6237;&gt;/.IntelliJIdea16/config/plugins/jr-ide-idea/lib&#xFF0C;&#x6216;&#x8005; ~/.IntelliJIdea16/config/plugins/jr-ide-idea/lib&#x3002;<br>&#x5206;&#x522B;&#x66FF;&#x6362; jrebel &#x548C; jrebel6 &#x91CC;&#x8FB9;&#x7684;jar&#x6587;&#x4EF6;&#x4E3A;&#x7834;&#x89E3;&#x540E;&#x7684;jar&#x6587;&#x4EF6;&#xFF0C;&#x5E76;&#x5C06;&#x6CE8;&#x518C;&#x8BC1;&#x4E66;&#x653E;&#x5230; C:/Users/&lt;&#x5F53;&#x524D;&#x7528;&#x6237;&gt;/.jrebel/ &#x6587;&#x4EF6;&#x5939;&#x4E0B;&#xFF0C;&#x6216;&#x8005; ~/.jrebel/&#x3002;<br>&#x56DE;&#x5230;IntelliJ IDEA&#xFF1A;File -&gt; Settings -&gt; JRebel&#xFF0C;&#x786E;&#x8BA4;&#x4E00;&#x4E0B;&#x6CE8;&#x518C;&#x72B6;&#x6001;&#xFF0C;&#x7136;&#x540E;&#x5230; Advanced &#x9009;&#x62E9;JRebel 6 Agent&#x3002;</li>
+</ol>
+<ul>
+<li>&#x4F7F;&#x7528;&#x65B9;&#x6CD5;&#xFF1A;&#x5728;&#x5F53;&#x524D;&#x9879;&#x76EE;&#x4E0A;&#x53F3;&#x952E; -&gt; JRebel -&gt; rebel.xml &#x6765;&#x751F;&#x6210; rebel.xml &#x6587;&#x4EF6;&#xFF0C;&#x6216;&#x8005;&#x5728;IntelliJ&#x5DE6;&#x4E0B;&#x89D2;&#xFF0C;&#x9009;&#x62E9;JRebel&#x9009;&#x9879;&#x5361;&#xFF0C;&#x5C06;&#x7B2C;&#x4E00;&#x4E2A;&#x52FE;&#x4E0A;&#x5373;&#x53EF;&#x3002;&#xFF08;&#x4E0D;&#x505A;&#x8FD9;&#x6B65;&#x4E5F;&#x53EF;&#x4EE5;&#xFF09;</li>
+<li><img src="/2016/08/25/eclipse-install-jrebel/jrebel-modules.png" alt="JRebel"></li>
+<li>Run -&gt; Edit Configurations&#x2026;&#xFF0C;&#x8BBE;&#x7F6E;On &#x2018;Update action&#x2019; &#x548C; On firame deactivation&#x3002;</li>
+<li><img src="/2016/08/25/eclipse-install-jrebel/run-jrebel.png" alt="JRebel"></li>
+</ul>
+<blockquote>
+<p>PS:&#x5B98;&#x65B9;&#x6587;&#x6863;&#x91CC;&#x8FB9;&#x7ED9;&#x51FA;&#x7684;&#x662F;&#x5206;&#x522B;&#x8BBE;&#x7F6E;&#x4E3A;&#x201C;Restart server&#x201D;&#x548C;&#x201C;Do nothing&#x201D;&#xFF0C;&#x4F46;&#x662F;&#x9700;&#x8981;&#x624B;&#x52A8;&#x7F16;&#x8BD1;&#x624D;&#x80FD;&#x81EA;&#x52A8;&#x90E8;&#x7F72;&#x3002;&#x6211;&#x63A8;&#x8350;&#x8BBE;&#x7F6E;&#x4E3A;&#x5982;&#x4E0B;&#x56FE;&#xFF0C;&#x5F53;IDEA&#x5931;&#x53BB;&#x7126;&#x70B9;&#x7684;&#x65F6;&#x5019;&#x4F1A;&#x81EA;&#x52A8;&#x7F16;&#x8BD1;&#x5E76;&#x91CD;&#x65B0;&#x90E8;&#x7F72;&#xFF0C;&#x66F4;&#x65B9;&#x4FBF;&#x3002;</p>
+<ul>
+<li>IntelliJ&#x5B89;&#x88C5;JRebel&#x5B98;&#x65B9;&#x6559;&#x7A0B;&#xFF1A;<a href="http://manuals.zeroturnaround.com/jrebel/ide/intellij.html" title="IntelliJ IDEA &#x2014; JRebel documentation" target="_blank" rel="external">http://manuals.zeroturnaround.com/jrebel/ide/intellij.html</a></li>
+<li><img src="/2016/08/25/eclipse-install-jrebel/run-configurations.png" alt="JRebel"></li>
+</ul>
+</blockquote>
+<h2 id="&#x914D;&#x7F6E;&#x8BB2;&#x89E3;"><a href="#&#x914D;&#x7F6E;&#x8BB2;&#x89E3;" class="headerlink" title="&#x914D;&#x7F6E;&#x8BB2;&#x89E3;"></a>&#x914D;&#x7F6E;&#x8BB2;&#x89E3;</h2><h3 id="1-&#x4F7F;&#x7528;&#x65B9;&#x6CD5;"><a href="#1-&#x4F7F;&#x7528;&#x65B9;&#x6CD5;" class="headerlink" title="1.&#x4F7F;&#x7528;&#x65B9;&#x6CD5;"></a>1.&#x4F7F;&#x7528;&#x65B9;&#x6CD5;</h3><ul>
+<li>&#x603B;&#x4F53;&#x7684;&#x601D;&#x8DEF;&#x5C31;&#x662F;&#xFF1A;&#x4E0B;&#x8F7D;&#x5B98;&#x65B9;&#x7684;Eclipse&#x63D2;&#x4EF6;  &#x7136;&#x540E;&#x518D;&#x6307;&#x5B9A;javaagent&#x7B49;&#x4E8E;&#x7834;&#x89E3;&#x7248;&#x7684;jrebel.java&#x8DEF;&#x5F84;</li>
+</ul>
+<ol>
+<li>&#x4E0B;&#x8F7D;&#x5B98;&#x65B9;&#x7684;Eclipse&#x63D2;&#x4EF6; &#x5728;eclipse marketplace &#x91CC;&#x9762;&#x4E0B;&#x8F7D; jrebel  &#x6211;&#x4E0B;&#x8F7D;&#x7684;&#x662F; 6.&#x51E0;  &#x5FD8;&#x4E86;&#xFF0C;&#x76F4;&#x63A5;&#x4E0B;&#x6700;&#x8FD1;&#x7248;&#x7684;&#x5C31;Ok&#x4E86;  &#x91CC;&#x9762;&#x5305;&#x542B;&#x4E86;&#x4E09;&#x4E2A;&#x57FA;&#x672C;&#x7684;&#x63D2;&#x4EF6;</li>
+<li>&#x7834;&#x89E3;&#x7248;&#x7684;jrebel.jar &#x7F51;&#x4E0A;&#x81EA;&#x5DF1;&#x641C;&#x7D22; &#x5F88;&#x591A; &#x3002;&#x89E3;&#x538B;&#x540E;&#x7684;&#x76EE;&#x5F55;&#x4E3A;D:\jrebel</li>
+<li>&#x6307;&#x5B9A;javaagent&#x7684;&#x503C;  &#x770B;&#x56FE;  &#x5728;&#x5C31;rebel config center &#x91CC;&#x9762; &#x5728;overview plug-ins advanced &#x4E00;&#x680F;&#x4E2D; &#x70B9;&#x51FB;advanced &#x5C31;&#x4F1A;&#x770B;&#x5230;jrebel agent &#x9009;&#x62E9;other jrebel.jar &#x9009;&#x62E9;&#x7834;&#x89E3;&#x7248;jrebel.jar&#x7684;&#x4F4D;&#x7F6E;</li>
+</ol>
+<ul>
+<li><img src="/2016/08/25/eclipse-install-jrebel/jrebel-setting.png" alt="JRebel"></li>
+<li>&#x8FD9;&#x4E00;&#x6B65;&#x8FD8;&#x6709;&#x53E6;&#x5916;&#x4E00;&#x79CD;&#x66F4;&#x65B9;&#x4FBF;&#x7684;&#x601D;&#x8DEF;&#xFF0C;&#x76F4;&#x63A5;&#x66FF;&#x6362;eclipse&#x7684;plugins&#x76EE;&#x5F55;&#x4E0B;&#xFF0C;org.zeroturnaround.eclipse.embedder_6.4.1.RELEASE &#x8FD9;&#x4E2A;&#x76EE;&#x5F55;&#x4E0B;&#x7684;&#x6240;&#x6709;jrebel.jar &#x8FD9;&#x6837;&#x5C31;&#x4E0D;&#x7528;&#x8BBE;&#x7F6E;&#x4EE3;&#x7406;&#x4E86;&#xFF0C;&#x540E;&#x9762;&#x7684;&#x8DEF;&#x5F84;&#x4E5F;&#x4E0D;&#x7528;&#x914D;&#x7F6E;&#x4E86;&#xFF0C;&#x56E0;&#x4E3A;&#x76F4;&#x63A5;&#x7528;&#x7684;&#x662F;&#x9ED8;&#x8BA4;&#x7684;&#x3002;</li>
+</ul>
+<ol>
+<li>&#x5728;overview&#x4E2D; &#x9009;&#x62E9;&#x597D;&#x670D;&#x52A1;&#x5668;&#x7C7B;&#x578B; &#x52FE;&#x9009;&#x670D;&#x52A1;&#x5668;</li>
+</ol>
+<ul>
+<li><img src="/2016/08/25/eclipse-install-jrebel/20160825235430.png" alt="JRebel"></li>
+</ul>
+<ol>
+<li>&#x5728;server&#x4E2D;&#x53EF;&#x4EE5;&#x9009;&#x62E9;&#x8FD9;&#x4E24;&#x4E2A;&#x9009;&#x9879;&#xFF0C;&#x540C;&#x65F6;&#x5728;tomcat&#x7684;conf/server.xml &#x4E2D;&#x5C06;context&#x7684;reloadable&#x8BBE;&#x4E3A;false&#x3002;&#x4E3A;true&#x7684;&#x65F6;&#x5019; &#x5C31;&#x662F;&#x91CD;&#x542F;tomcat&#xFF0C;&#x8FD9;&#x5C31;&#x4F1A;&#x5F88;&#x4E0D;&#x723D;&#x3002;<blockquote>
+<p>&#x8FD9;&#x91CC;&#x6807;&#x6CE8;&#x4E00;&#x4E0B;&#xFF0C;&#x4EE5;&#x524D;&#x6211;&#x5728;&#x7F51;&#x4E0A;&#x770B;&#x5230;&#x522B;&#x4EBA;&#x90FD;&#x662F;&#x8BF4;&#x8981;&#x628A;&#x8FD9;&#x4E2A;never publish sutomatically&#x9009;&#x62E9;&#x7684;&#xFF0C;&#x53EF;&#x662F;&#x5728;&#x6211;&#x672C;&#x673A;&#x9009;&#x62E9;&#x4E0D;&#x81EA;&#x52A8;&#x53D1;&#x5E03;&#x540E;&#x4FEE;&#x6539;jsp&#x9875;&#x5C31;&#x4E0D;&#x80FD;&#x91CD;&#x65B0;&#x52A0;&#x8F7D;&#x4E86;&#xFF0C;&#x9009;&#x4E0A;Automatically<br>publish when resources change&#x540E;jsp&#x5C31;&#x53EF;&#x4EE5;&#x548C;&#x4EE5;&#x524D;&#x4E00;&#x6837;&#x70ED;&#x52A0;&#x8F7D;&#x4E86;</p>
+</blockquote>
+</li>
+</ol>
+<ul>
+<li><img src="/2016/08/25/eclipse-install-jrebel/tomcat-setting.png" alt="JRebel"></li>
+</ul>
+<ol>
+<li>tomcat&#x542F;&#x52A8;&#x65F6; &#x53C2;&#x6570;&#x7684;&#x4F20;&#x5165;&#x4E2D;&#x8BBE;&#x7F6E;tomcat 7&#x7684;&#x914D;&#x7F6E;&#x91CC;&#x53EB;&#x505A; Open launch configuration&#x3002;&#xFF01;&#xFF01;&#xFF01;&#xFF01;</li>
+</ol>
+<ul>
+<li><img src="/2016/08/25/eclipse-install-jrebel/20160825235926.png" alt="JRebel"><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="variable">${jrebel_args}</span> </div><div class="line">-Drebel.generate.show=<span class="literal">true</span></div><div class="line">-Drebel.spring_plugin=<span class="literal">true</span></div><div class="line">-Drebel.aspectj_plugin=<span class="literal">true</span></div><div class="line">-Drebel.cxf_plugin=<span class="literal">true</span></div><div class="line">-Drebel.logback_plugin=<span class="literal">true</span></div><div class="line">-Drebel.mybatis_plugin=<span class="literal">true</span></div><div class="line">-javaagent:D:\Software\jrebel6\jrebel.jar</div><div class="line">-noverify -XX:PermSize=128M -XX:MaxPermSize=512M</div><div class="line">-Drebel.log=d\:\\jrebel\\jrebel.log</div><div class="line">-Xms512m -Xmx1024m</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="&#x4E5F;&#x53EF;&#x4EE5;&#x8FD9;&#x6837;&#x914D;&#x7F6E;"><a href="#&#x4E5F;&#x53EF;&#x4EE5;&#x8FD9;&#x6837;&#x914D;&#x7F6E;" class="headerlink" title="&#x4E5F;&#x53EF;&#x4EE5;&#x8FD9;&#x6837;&#x914D;&#x7F6E;"></a>&#x4E5F;&#x53EF;&#x4EE5;&#x8FD9;&#x6837;&#x914D;&#x7F6E;</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">-noverify</div><div class="line">-Djavaagent:C:\jrebel6\jrebel.jar</div><div class="line">-DXbootclasspath/p:D:\jrebel6\rebelboot.jar</div><div class="line">-Drebel.generate.show=<span class="literal">true</span></div><div class="line">-Drebel.spring_plugin=<span class="literal">true</span></div><div class="line">-Drebel.aspectj_plugin=<span class="literal">true</span></div><div class="line">-Drebel.cxf_plugin=<span class="literal">true</span></div><div class="line">-Drebel.logback_plugin=<span class="literal">true</span></div><div class="line">-Drebel.mybatis_plugin=<span class="literal">true</span></div><div class="line">-Xdebug -Djava.compiler=NONE -DXrunjdwp:transport=dt_socket,address=8787,server=y,<span class="built_in">suspend</span>=n</div><div class="line">-Drebel.dirs=E:\workspace\shop-server\mmarket-server\target\classes</div><div class="line">-Dmmarket-server.root=E:\workspace\shop-server\mmarket-server</div><div class="line">-Drebel.disable_update=<span class="literal">true</span></div><div class="line">-XX:PermSize=128M -XX:MaxPermSize=512M -Xms512m -Xmx1024m</div></pre></td></tr></table></figure>
+<ol>
+<li>&#x5C06;&#x7279;&#x5B9A;&#x7684;project&#x6DFB;&#x52A0;jrebel nature&#x9009;&#x4E2D;project &#x53F3;&#x51FB; &#x9009;&#x62E9;jrebel  &#x9009;&#x62E9; <code>add jrebel nature</code>  &#x5C31;&#x4F1A;&#x751F;&#x6210;&#x4E00;&#x4E2A;&#x6587;&#x4EF6;rebel.xml &#x91CC;&#x9762;&#x914D;&#x7F6E;&#x7740; jrebel&#x5BF9;&#x5F53;&#x524D;project&#x76D1;&#x63A7;&#x7684;&#x8DEF;&#x5F84; &#x7136;&#x540E;&#x91CC;&#x9762;&#x6709;${}&#x5305;&#x542B;&#x7684;&#x53C2;&#x6570; &#x8FD9;&#x4E2A;&#x662F;&#x5728;jrebel config center &#x91CC;&#x9762; &#x67E5;&#x770B;</li>
+</ol>
+<h3 id="2-&#x6CE8;&#x610F;"><a href="#2-&#x6CE8;&#x610F;" class="headerlink" title="2.&#x6CE8;&#x610F;"></a>2.&#x6CE8;&#x610F;</h3><ul>
+<li>tomcat&#x9700;&#x914D;&#x7F6E;&#x81EA;&#x52A8;&#x52A0;&#x8F7D;&#x8D44;&#x6E90;, &#x6700;&#x597D;&#x4EE5;debug&#x65B9;&#x5F0F;&#x542F;&#x52A8;</li>
+<li>&#x5F53;&#x4E00;&#x4E2A;&#x9879;&#x76EE;&#x4F7F;&#x7528;maven&#x591A;&#x6A21;&#x5757;&#x5F00;&#x53D1;&#x65F6;&#x901A;&#x8FC7;&#x4E0A;&#x9762;&#x7684;&#x914D;&#x7F6E;, &#x53EA;&#x80FD;&#x81EA;&#x52A8;&#x52A0;&#x8F7D;webapp&#x6240;&#x5728;&#x7684;&#x6A21;&#x5757;, &#x82E5;&#x60F3;&#x6539;&#x52A8;&#x5176;&#x4ED6;&#x6A21;&#x5757;&#x7684;&#x4EE3;&#x7801;&#x4E5F;&#x8981;&#x81EA;&#x52A8;&#x52A0;&#x8F7D;, &#x9700;&#x5728;&#x9879;&#x76EE;&#x7684;&#x8DDF;pom&#x4E2D;&#x52A0;&#x5165;&#x4E0B;&#x9762;&#x7684;&#x914D;&#x7F6E;: <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span> </div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.zeroturnaround<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>  </div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jrebel-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>  </div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.1.5<span class="tag">&lt;/<span class="name">version</span>&gt;</span>  </div><div class="line">  <span class="tag">&lt;<span class="name">configuration</span>&gt;</span> </div><div class="line">    <span class="tag">&lt;<span class="name">addResourcesDirToRebelXml</span>&gt;</span>true<span class="tag">&lt;/<span class="name">addResourcesDirToRebelXml</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">alwaysGenerate</span>&gt;</span>true<span class="tag">&lt;/<span class="name">alwaysGenerate</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">showGenerated</span>&gt;</span>true<span class="tag">&lt;/<span class="name">showGenerated</span>&gt;</span> </div><div class="line">  <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span>  </div><div class="line">  <span class="tag">&lt;<span class="name">executions</span>&gt;</span> </div><div class="line">    <span class="tag">&lt;<span class="name">execution</span>&gt;</span> </div><div class="line">      <span class="tag">&lt;<span class="name">id</span>&gt;</span>generate-rebel-xml<span class="tag">&lt;/<span class="name">id</span>&gt;</span>  </div><div class="line">      <span class="tag">&lt;<span class="name">phase</span>&gt;</span>process-resources<span class="tag">&lt;/<span class="name">phase</span>&gt;</span>  </div><div class="line">      <span class="tag">&lt;<span class="name">goals</span>&gt;</span> </div><div class="line">        <span class="tag">&lt;<span class="name">goal</span>&gt;</span>generate<span class="tag">&lt;/<span class="name">goal</span>&gt;</span> </div><div class="line">      <span class="tag">&lt;/<span class="name">goals</span>&gt;</span> </div><div class="line">    <span class="tag">&lt;/<span class="name">execution</span>&gt;</span> </div><div class="line">  <span class="tag">&lt;/<span class="name">executions</span>&gt;</span> </div><div class="line"><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="3-JRebel&#x4F7F;&#x7528;&#x8BF4;&#x660E;"><a href="#3-JRebel&#x4F7F;&#x7528;&#x8BF4;&#x660E;" class="headerlink" title="3.JRebel&#x4F7F;&#x7528;&#x8BF4;&#x660E;"></a>3.JRebel&#x4F7F;&#x7528;&#x8BF4;&#x660E;</h3><ul>
+<li>&#x9879;&#x76EE;&#x4E0B;&#x7684;src/rebel.xml&#x6587;&#x4EF6;&#x914D;&#x7F6E;&#x7684;&#x662F;JRebel&#x7684;&#x76D1;&#x63A7;&#x8DEF;&#x5F84;&#xFF0C;&#x5982;&#x679C;&#x4F7F;&#x7528;&#x4E0D;&#x6B63;&#x5E38;&#xFF0C;&#x8BF7;&#x786E;&#x8BA4;&#x4E00;&#x4E0B;&#x8FD9;&#x4E2A;&#x6587;&#x4EF6;&#x91CC;&#x8FB9;&#x914D;&#x7F6E;&#x7684;&#x8DEF;&#x5F84;&#x662F;&#x5426;&#x6B63;&#x786E;&#x3002;<br>&#x542F;&#x52A8;&#x9879;&#x76EE;&#xFF0C;&#x5982;&#x679C;&#x63D0;&#x793A;&#x7C7B;&#x4F3C;&#x4EE5;&#x4E0B;&#x4FE1;&#x606F;&#xFF0C;&#x8BF4;&#x660E;JRebel&#x8FD0;&#x884C;&#x6B63;&#x5E38;&#xFF1A;</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">2016-08-29 15:05:09 JRebel:  <span class="comment">#############################################################</span></div><div class="line">2016-08-29 15:05:09 JRebel:  </div><div class="line">2016-08-29 15:05:09 JRebel:  JRebel Agent 6.4.8 (201608161142)</div><div class="line">2016-08-29 15:05:09 JRebel:  (c) Copyright ZeroTurnaround AS, Estonia, Tartu.</div><div class="line">2016-08-29 15:05:09 JRebel:  </div><div class="line">2016-08-29 15:05:09 JRebel:  Over the last 1 days JRebel prevented</div><div class="line">2016-08-29 15:05:09 JRebel:  at least 25 redeploys/restarts saving you about 0.4 hours.</div><div class="line">2016-08-29 15:05:09 JRebel:  </div><div class="line">2016-08-29 15:05:09 JRebel:  License acquired from License Server: http://idea.lanyus.com</div><div class="line">2016-08-29 15:05:09 JRebel:  </div><div class="line">2016-08-29 15:05:09 JRebel:  Licensed to skyheng.</div><div class="line">2016-08-29 15:05:09 JRebel:  </div><div class="line">2016-08-29 15:05:09 JRebel:  </div><div class="line">2016-08-29 15:05:09 JRebel:  <span class="comment">#############################################################</span></div></pre></td></tr></table></figure>
+<h3 id="&#x5728;Maven&#x4E0B;&#x4F7F;&#x7528;"><a href="#&#x5728;Maven&#x4E0B;&#x4F7F;&#x7528;" class="headerlink" title="&#x5728;Maven&#x4E0B;&#x4F7F;&#x7528;"></a>&#x5728;Maven&#x4E0B;&#x4F7F;&#x7528;</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">plugins</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">plugin</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-compiler-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">version</span>&gt;</span>2.3.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">configuration</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">source</span>&gt;</span>1.7<span class="tag">&lt;/<span class="name">source</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">target</span>&gt;</span>1.7<span class="tag">&lt;/<span class="name">target</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></div><div class="line">	<span class="comment">&lt;!-- &#x914D;&#x7F6E; maven &#x7684; jetty &#x63D2;&#x4EF6; --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">plugin</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mortbay.jetty<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jetty-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">version</span>&gt;</span>7.2.2.v20101205<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">configuration</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">webAppConfig</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">contextPath</span>&gt;</span>/${project.artifactId}<span class="tag">&lt;/<span class="name">contextPath</span>&gt;</span></div><div class="line">				<span class="comment">&lt;!-- &#x6307;&#x5B9A; root context &#x5728;&#x8FD9;&#x91CC;&#x6307;&#x5B9A;&#x4E3A;${project.artifactId} &#x5373; jetty&#xFF0C; &#x90A3;&#x4E48;&#x8BBF;&#x95EE;&#x65F6;&#x5C31;&#x7528;http://localized:8080/jetty </span></div><div class="line">					&#x8BBF;&#x95EE;&#xFF0C; &#x5982;&#x679C;&#x6307;&#x5B9A;&#x68B6;&#x4E3A;test &#x5C31;&#x7528;http://localized:8080/test&#x8BBF;&#x95EE;&#xFF0C;&#x66F4;&#x591A;&#x4FE1;&#x606F;&#xFF0C;&#x8BF7;&#x67E5;&#x770B;jetty &#x63D2;&#x4EF6;&#x5B98;&#x65B9;&#x6587;&#x6863; --&gt;</div><div class="line">				<span class="comment">&lt;!-- &#x8BBE;&#x7F6E;&#x5176;&#x4ED6;&#x9879;&#x76EE;extraClasspath&#xFF0C;&#x591A;&#x4E2A;&#x7528;&quot;;&quot;&#x9694;&#x5F00; --&gt;</span></div><div class="line">					<span class="tag">&lt;<span class="name">extraClasspath</span>&gt;</span>../data-service/target/classes<span class="tag">&lt;/<span class="name">extraClasspath</span>&gt;</span></div><div class="line">				<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">			<span class="tag">&lt;/<span class="name">webAppConfig</span>&gt;</span></div><div class="line"></div><div class="line">			<span class="tag">&lt;<span class="name">scanTargets</span>&gt;</span></div><div class="line">				<span class="comment">&lt;!-- &lt;scanTarget&gt;../data-service/target/classes&lt;/scanTarget&gt; --&gt;</span></div><div class="line">			<span class="tag">&lt;/<span class="name">scanTargets</span>&gt;</span></div><div class="line"></div><div class="line">			<span class="comment">&lt;!-- &#x6307;&#x5B9A;&#x989D;&#x5916;&#x9700;&#x8981;&#x76D1;&#x63A7;&#x53D8;&#x5316;&#x7684;&#x6587;&#x4EF6;&#x6216;&#x6587;&#x4EF6;&#x5939;&#xFF0C;&#x4E3B;&#x8981;&#x7528;&#x4E8E;&#x70ED;&#x90E8;&#x7F72;&#x4E2D;&#x7684;&#x8BC6;&#x522B;&#x6587;&#x4EF6;&#x66F4;&#x65B0; --&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">scanTargetPatterns</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">scanTargetPattern</span>&gt;</span></div><div class="line">					<span class="tag">&lt;<span class="name">directory</span>&gt;</span>src<span class="tag">&lt;/<span class="name">directory</span>&gt;</span></div><div class="line">					<span class="tag">&lt;<span class="name">includes</span>&gt;</span></div><div class="line">						<span class="tag">&lt;<span class="name">include</span>&gt;</span>**/*.java<span class="tag">&lt;/<span class="name">include</span>&gt;</span></div><div class="line">						<span class="tag">&lt;<span class="name">include</span>&gt;</span>**/*.properties<span class="tag">&lt;/<span class="name">include</span>&gt;</span></div><div class="line">					<span class="tag">&lt;/<span class="name">includes</span>&gt;</span></div><div class="line">					<span class="comment">&lt;!-- &lt;excludes&gt;</span></div><div class="line">						 	&lt;exclude&gt;**/*.xml&lt;/exclude&gt;</div><div class="line">							&lt;exclude&gt;**/myspecial.properties&lt;/exclude&gt; </div><div class="line">						&lt;/excludes&gt;</div><div class="line">					 --&gt;</div><div class="line">				<span class="tag">&lt;/<span class="name">scanTargetPattern</span>&gt;</span></div><div class="line">			<span class="tag">&lt;/<span class="name">scanTargetPatterns</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">scanIntervalSeconds</span>&gt;</span>0<span class="tag">&lt;/<span class="name">scanIntervalSeconds</span>&gt;</span><span class="comment">&lt;!-- &#x6307;&#x5B9A;&#x76D1;&#x63A7;&#x7684;&#x626B;&#x63CF;&#x65F6;&#x95F4;&#x95F4;&#x9694;&#xFF0C;0&#x4E3A;&#x5173;&#x95ED;jetty&#x81EA;&#x8EAB;&#x7684;&#x70ED;&#x90E8;&#x7F72;&#xFF0C;&#x4E3B;&#x8981;&#x662F;&#x4E3A;&#x4E86;&#x4F7F;&#x7528;jrebel --&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">webAppSourceDirectory</span>&gt;</span>${basedir}/src/main/webapp<span class="tag">&lt;/<span class="name">webAppSourceDirectory</span>&gt;</span></div><div class="line">			<span class="comment">&lt;!-- &#x6307;&#x5B9A;web&#x9875;&#x9762;&#x7684;&#x6587;&#x4EF6;&#x5939; --&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></div><div class="line"></div><div class="line">	<span class="comment">&lt;!-- jerebel maven &#x63D2;&#x4EF6;&#xFF0C;&#x7528;&#x4E8E;&#x751F;&#x6210;jrebel.xml --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">plugin</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.zeroturnaround<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jrebel-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">version</span>&gt;</span>1.1.5<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">executions</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">execution</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">id</span>&gt;</span>generate-rebel-xml<span class="tag">&lt;/<span class="name">id</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">phase</span>&gt;</span>process-resources<span class="tag">&lt;/<span class="name">phase</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">goals</span>&gt;</span></div><div class="line">					<span class="tag">&lt;<span class="name">goal</span>&gt;</span>generate<span class="tag">&lt;/<span class="name">goal</span>&gt;</span></div><div class="line">				<span class="tag">&lt;/<span class="name">goals</span>&gt;</span></div><div class="line">			<span class="tag">&lt;/<span class="name">execution</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">executions</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">configuration</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">rebelXmlDirectory</span>&gt;</span>${basedir}/src/main/webapp/WEB-INF/classes<span class="tag">&lt;/<span class="name">rebelXmlDirectory</span>&gt;</span></div><div class="line">			<span class="comment">&lt;!-- &#x6307;&#x5B9A;&#x751F;&#x6210;&#x7684;jrebel.xml&#x653E;&#x5728;&#x54EA;&#x91CC;&#xFF0C; &#x8981;&#x6C42;&#x653E;&#x5728;web&#x5E94;&#x7528;&#x7684; classpath&#x4E0B; --&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">outputDirectory</span>&gt;</span>${basedir}/src/main/webapp/WEB-INF/classes<span class="tag">&lt;/<span class="name">outputDirectory</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- </span></div><div class="line">&#x6307;&#x5B9A;&#x7F16;&#x8BD1;&#x540E;&#x6587;&#x4EF6;&#x7684;&#x5B58;&#x653E;&#x8DEF;&#x5F84;&#xFF0C;&#x56E0;&#x4E3A;jetty&#x9ED8;&#x8BA4;src/main/webapp&#x4E3A; web&#x5E94;&#x7528;&#x7684;&#x6839;&#x76EE;&#x5F55;&#x800C; maven compile &#x76EE;&#x6807;&#x540E;&#x7684;&#x9ED8;&#x8BA4;classpath </div><div class="line">&#x5728;target&#x6587;&#x4EF6;&#x5939;&#x4E0B;&#xFF0C;&#x5C31;&#x9020;&#x6210;jrebel.xml&#x65E0;&#x6CD5;&#x517C;&#x987E; jetty &#x9ED8;&#x8BA4;&#x7684;&#x662F;webapp&#x4E2D;&#x7684;classes&#x4E3A; web &#x5E94;&#x7528;&#x7684;&#x6839;&#x76EE;&#x5F55;&#xFF0C; &#x800C;maven </div><div class="line">&#x9ED8;&#x8BA4;&#x662F;target &#x76EE;&#x5F55;&#x6240;&#x4EE5;&#x9700;&#x8981;&#x4FEE;&#x6539;&#x8BE5;maven&#x7684;&#x9ED8;&#x8BA4;classes&#x76EE;&#x5F55;&#x3002;</div><div class="line">--&gt;</div></pre></td></tr></table></figure>
+<h3 id="Maven&#x63D2;&#x4EF6;"><a href="#Maven&#x63D2;&#x4EF6;" class="headerlink" title="Maven&#x63D2;&#x4EF6;"></a>Maven&#x63D2;&#x4EF6;</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.zeroturnaround<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jrebel-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.1.5<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">executions</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">execution</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">id</span>&gt;</span>generate-rebel-xml<span class="tag">&lt;/<span class="name">id</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">phase</span>&gt;</span>process-resources<span class="tag">&lt;/<span class="name">phase</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">goals</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">goal</span>&gt;</span>generate<span class="tag">&lt;/<span class="name">goal</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">goals</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">execution</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">executions</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li>&#x63D2;&#x4EF6;&#x5730;&#x5740;&#xFF1A;<a href="http://manuals.zeroturnaround.com/jrebel/standalone/maven.html" target="_blank" rel="external">http://manuals.zeroturnaround.com/jrebel/standalone/maven.html</a></li>
+</ul>
+<h3 id="&#x4E0B;&#x8F7D;&#x5730;&#x5740;"><a href="#&#x4E0B;&#x8F7D;&#x5730;&#x5740;" class="headerlink" title="&#x4E0B;&#x8F7D;&#x5730;&#x5740;"></a>&#x4E0B;&#x8F7D;&#x5730;&#x5740;</h3><ul>
+<li>JRebel&#x514D;&#x5B89;&#x88C5;&#x7248;&#x672C;&#x4E0B;&#x8F7D;&#x5730;&#x5740;&#xFF0C;&#x4E0D;&#x662F;IDE&#x63D2;&#x4EF6;&#xFF0C;&#x53EF;&#x76F4;&#x63A5;&#x6302;&#x8F7D;&#x5230;Tomcat&#xFF1A;<code>&lt;https://zeroturnaround.com/software/jrebel/download/thank-you/?file=jrebel-6.4.8-nosetup.zip&gt;</code></li>
+<li>&#x94FE;&#x63A5;&#xFF1A;<a href="http://pan.baidu.com/s/1qWOnH7I" target="_blank" rel="external">http://pan.baidu.com/s/1qWOnH7I</a> &#x5BC6;&#x7801;&#xFF1A;ynyq</li>
+<li>&#x6765;&#x6E90; &#xFF1A;<a href="http://download.csdn.net/user/cock333" target="_blank" rel="external">http://download.csdn.net/user/cock333</a></li>
+<li>6.4.3 &#x4EE5;&#x4E0A;&#x6682;&#x65E0;&#xFF0C;&#x8BF7;&#x4F7F;&#x7528;&#x6FC0;&#x6D3B;&#x670D;&#x52A1;&#x5668;&#x3002;</li>
+<li>Jrebel&#x4ECE;6.5.1&#x7248;&#x5F00;&#x59CB;&#x5C01;&#x4E86;idea.lanyus.com&#xFF0C;&#x76EE;&#x524D;&#x8FD8;&#x53EF;&#x4EE5;&#x7528;idea.qinxi1992.cn&#x6FC0;&#x6D3B;&#xFF0C;&#x73B0;&#x5728;Jrebel&#x9650;&#x5236;&#x5207;&#x6362;&#x79BB;&#x7EBF;&#x6700;&#x591A;&#x53EA;&#x80FD;&#x79BB;&#x7EBF;&#x534A;&#x5E74;&#x3002;</li>
+</ul>
+<h2 id="&#x8D44;&#x6599;"><a href="#&#x8D44;&#x6599;" class="headerlink" title="&#x8D44;&#x6599;"></a>&#x8D44;&#x6599;</h2><ul>
+<li>&#x6269;&#x8F6F;&#x535A;&#x5BA2;&#xFF1A;<a href="https://blog.kuoruan.com/62.html" target="_blank" rel="external">https://blog.kuoruan.com/62.html</a></li>
+<li>IDEA&#x4E0B;&#x5B89;&#x88C5;JRebel&#x70ED;&#x90E8;&#x7F72;&#xFF1A;<a href="http://www.cnblogs.com/winner-0715/p/5263422.html" target="_blank" rel="external">http://www.cnblogs.com/winner-0715/p/5263422.html</a></li>
+<li>JRebel&#x4F7F;&#x7528;&#xFF1A;<a href="http://truemylife.iteye.com/blog/1140921" target="_blank" rel="external">http://truemylife.iteye.com/blog/1140921</a></li>
+<li>&#x5B89;&#x88C5;eclipse&#x7684;JRebel6.4.3&#x7684;&#x63D2;&#x4EF6;&#xFF1A;<a href="http://blog.csdn.net/paincupid/article/details/52226014" target="_blank" rel="external">http://blog.csdn.net/paincupid/article/details/52226014</a></li>
+<li><a href="http://she.iteye.com/blog/1493669" target="_blank" rel="external">http://she.iteye.com/blog/1493669</a></li>
+<li>&#x9519;&#x8BEF;&#x89E3;&#x51B3;&#xFF1A;<a href="mailto:http://blog.163.com/olfzpp@126/blog/static/19766968201031252128351/" target="_blank" rel="external">http://blog.163.com/olfzpp@126/blog/static/19766968201031252128351/</a></li>
+<li>jrebel eclipse/tomcat&#xFF1A;<a href="http://www.xuebuyuan.com/2169652.html" target="_blank" rel="external">http://www.xuebuyuan.com/2169652.html</a></li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>Title:</span><a href="/2016/08/25/eclipse-install-jrebel/">eclipse安装JRebel6.4.8热部署插件教程</a></p>
+        <p><span>Author:</span><a href="/" title="Back to Homepage">Chenjh</a></p>
+        <p><span>Created:</span>2016-08-25, 23:19:19</p>
+        <p><span>Updated:</span>2016-10-20, 23:49:39</p>
+        <p>
+            <span>Full URL:</span><a class="post-url" href="/2016/08/25/eclipse-install-jrebel/" title="eclipse安装JRebel6.4.8热部署插件教程">http://code.skyheng.com/2016/08/25/eclipse-install-jrebel/</a>
+            <span class="copy-path" data-clipboard-text="From http://code.skyheng.com/2016/08/25/eclipse-install-jrebel/　　By Chenjh" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>License:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target="_blank">"CC BY-NC-SA 4.0"</a> Keep Link &amp; Author if Distribute.
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2016/08/29/eclipse-common-plugin/">
+                    eclipse 常用插件安装
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/08/22/jquery-eval-paesing-json-introduce/">
+                    jquery eval解析JSON中的注意点介绍
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#intro"><span class="toc-number">1.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装方法"><span class="toc-number">2.</span> <span class="toc-text">安装方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Eclipse安装JRebel"><span class="toc-number">2.1.</span> <span class="toc-text">1.Eclipse安装JRebel</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#破解：Crack"><span class="toc-number">2.1.1.</span> <span class="toc-text">破解：Crack:</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-IntelliJ-IDEA安装JRebel插件："><span class="toc-number">2.2.</span> <span class="toc-text">2.IntelliJ IDEA安装JRebel插件：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#破解：Crack-1"><span class="toc-number">2.2.1.</span> <span class="toc-text">破解：Crack:</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置讲解"><span class="toc-number">3.</span> <span class="toc-text">配置讲解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-使用方法"><span class="toc-number">3.1.</span> <span class="toc-text">1.使用方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#也可以这样配置"><span class="toc-number">3.2.</span> <span class="toc-text">也可以这样配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-注意"><span class="toc-number">3.3.</span> <span class="toc-text">2.注意</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-JRebel使用说明"><span class="toc-number">3.4.</span> <span class="toc-text">3.JRebel使用说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在Maven下使用"><span class="toc-number">3.5.</span> <span class="toc-text">在Maven下使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Maven插件"><span class="toc-number">3.6.</span> <span class="toc-text">Maven插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#下载地址"><span class="toc-number">3.7.</span> <span class="toc-text">下载地址</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#资料"><span class="toc-number">4.</span> <span class="toc-text">资料</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="Hide" title="Show or Hide Table of Contents">
+
+    <script>
+        yiliaConfig.toc = ["Hide", "Show", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"eclipse安装JRebel6.4.8热部署插件教程　| Chenjh Code　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+        <section class="youyan" id="comments">
+    <script>
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = 'http://v2.uyan.cc/code/uyan.js?uid=2095968';
+            (d.head || d.body).appendChild(s);
+        }
+    </script>
+    
+    <script> loadComment(); </script>
+
+    <div id="uyan_frame"></div>
+</section>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2016/08/29/eclipse-common-plugin/" title="Pre: eclipse 常用插件安装">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/08/22/jquery-eval-paesing-json-introduce/" title="Next: jquery eval解析JSON中的注意点介绍">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/10/21/win10-shortcut-key/">win10常用的快捷键</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/21/zooKeeper-command-introduce/">zooKeeper常用命令介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/20/zookeeper-install-and-setting/">zookeeper的安装与设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/20/maven-pro-collection/">收集的国内maven镜像地址</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/15/windows-git-pull-bat/">Windows git pull 批处理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/15/git-common-commands/">Git常用的操作命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/11/python-install/">python安装</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/09/rect-grid-demo/">实例demo之3D transform立方体效果</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/30/redis-install-and-settings/">Redis 安装和配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/26/Tomcat-7优化配置参数/">Tomcat 7优化配置参数</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/18/some-good-technology-blog/">一些好的技术博客,追随牛逼的人,让自己更牛逼</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/17/famous-IT-blog-home-and-abroad/">国内外知名IT科技博客（强烈推荐）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/29/eclipse-common-plugin/">eclipse 常用插件安装</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/25/eclipse-install-jrebel/">eclipse安装JRebel6.4.8热部署插件教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/22/jquery-eval-paesing-json-introduce/">jquery eval解析JSON中的注意点介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/08/关于分布式一致性的探究/">关于分布式一致性的探究</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/08/初识分布式系统/">初识分布式系统</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/03/excel-markdown-table/">用 Excel 生成和管理 Markdown 表格</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/02/common-hexo-commands/">Hexo 最常用的几个命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/01/git-cheat-sheet/">GIT的常用操作命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/01/linux-commonly-used-ommands/">Linux常用命令大全</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/21/improve-efficiency-database-query/">在一个千万级的数据库查寻中，如何提高查询效率？</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/16/vmware-set-centos-static-ip/">VMware中CentOS设置静态IP</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/09/tomcat8-install-and-settings/">Tomcat 8 安装和配置、优化</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/04/wxpay-scanpay-java-sdk-demo/">【微信支付】“刷卡支付”、“被扫支付”开发JavaDemo</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/04/wxpay-scanpay-java-sdk/">【微信支付】“刷卡支付”、“被扫支付”开发说明</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/02/svn-install-and-settings/">Subversion 1.8 安装</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/02/svn-password-find/">SVN 密码破解，svn密码本地找回</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/02/mysql-install-and-settings/">Mysql 安装和配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/02/maven-install-and-settings/">Maven 安装和配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/17/jdk-install/">在linux下的JDK 安装和配置（基于 阿里云服务器CentOS 6.5）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/17/nexus-install-and-settings/">Nexus 在linux下的安装和配置（基于 阿里云服务器CentOS 6.5）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/07/my-learning-way/">我的学习、归纳方法（以学习 Maven 为例）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/05/01/github-build-hexo-blog-intensify/">使用Github搭建Hexo技术博客--增强教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/05/01/github-build-hexo-blog-install/">使用Github搭建Hexo技术博客--安装教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/03/09/maven-related-knowledge-topics/">构建工具-Maven-相关知识-整理专题</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/05/24/overloading-and-overriding-difference/">JAVA中重写和重载区别</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2015-2016 Chenjh
+            </div>
+            <div class="footer-right">
+                 <!--
+				 <a href="http://hexo.io/" target="_blank" title="A fast, simple &amp; powerful blog framework">Hexo</a>Theme 
+				 <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="Another simple and elegant theme for Hexo  v3.5">Yelee</a> by MOxFIVE 
+				 <i class="fa fa-heart animated infinite pulse"></i>
+				 -->
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style="display:none">
+                        <span id="site-visit" title="Site Visitors"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style="display:none">
+                        <span id="page-visit" title="Page Hits"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="Back to Top"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="Comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="Go to Bottom"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
+      
+    </div>
+    
+  </div>
+  
+    
+
+
+  
+</article>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"　| 向志洪　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016 向志洪
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
