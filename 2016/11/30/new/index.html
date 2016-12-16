@@ -13,22 +13,22 @@
 
 
 
-<meta name="description" content="title: Swift基础语法
-Quick Start本文来自Swift中文开发组，感谢翻译者的分享。本文将分几部分对Swift对iOS的语法做讲解。本文为第一节，主要讲解基础语法。常量和变量
-常量和变量把一个名字（比如maximumNumberOfLoginAttempts或者welcomeMessage）和一个指定类型的值（比如数字10或者字符串”Hello”）关联起来。常量的值一旦设定就">
+<meta name="description" content="本文来自Swift中文开发组，感谢翻译者的分享。本文将分几部分对Swift对iOS的语法做讲解。本文为第一节，主要讲解基础语法。常量和变量
+常量和变量把一个名字（比如maximumNumberOfLoginAttempts或者welcomeMessage）和一个指定类型的值（比如数字10或者字符串”Hello”）关联起来。常量的值一旦设定就不能改变，而变量的值可以随意更改。声明常量和变量
+常量和变">
 <meta property="og:type" content="article">
-<meta property="og:title" content="向志洪">
+<meta property="og:title" content="Swift基础语法">
 <meta property="og:url" content="http://code.youmeek.com/2016/11/30/new/index.html">
 <meta property="og:site_name" content="向志洪">
-<meta property="og:description" content="title: Swift基础语法
-Quick Start本文来自Swift中文开发组，感谢翻译者的分享。本文将分几部分对Swift对iOS的语法做讲解。本文为第一节，主要讲解基础语法。常量和变量
-常量和变量把一个名字（比如maximumNumberOfLoginAttempts或者welcomeMessage）和一个指定类型的值（比如数字10或者字符串”Hello”）关联起来。常量的值一旦设定就">
-<meta property="og:updated_time" content="2016-11-26T14:57:08.000Z">
+<meta property="og:description" content="本文来自Swift中文开发组，感谢翻译者的分享。本文将分几部分对Swift对iOS的语法做讲解。本文为第一节，主要讲解基础语法。常量和变量
+常量和变量把一个名字（比如maximumNumberOfLoginAttempts或者welcomeMessage）和一个指定类型的值（比如数字10或者字符串”Hello”）关联起来。常量的值一旦设定就不能改变，而变量的值可以随意更改。声明常量和变量
+常量和变">
+<meta property="og:updated_time" content="2016-12-16T02:35:17.914Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="向志洪">
-<meta name="twitter:description" content="title: Swift基础语法
-Quick Start本文来自Swift中文开发组，感谢翻译者的分享。本文将分几部分对Swift对iOS的语法做讲解。本文为第一节，主要讲解基础语法。常量和变量
-常量和变量把一个名字（比如maximumNumberOfLoginAttempts或者welcomeMessage）和一个指定类型的值（比如数字10或者字符串”Hello”）关联起来。常量的值一旦设定就">
+<meta name="twitter:title" content="Swift基础语法">
+<meta name="twitter:description" content="本文来自Swift中文开发组，感谢翻译者的分享。本文将分几部分对Swift对iOS的语法做讲解。本文为第一节，主要讲解基础语法。常量和变量
+常量和变量把一个名字（比如maximumNumberOfLoginAttempts或者welcomeMessage）和一个指定类型的值（比如数字10或者字符串”Hello”）关联起来。常量的值一旦设定就不能改变，而变量的值可以随意更改。声明常量和变量
+常量和变">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -60,7 +60,7 @@ Quick Start本文来自Swift中文开发组，感谢翻译者的分享。本文�
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>向志洪</title>
+<title>Swift基础语法 | 向志洪</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -100,7 +100,7 @@ Quick Start本文来自Swift中文开发组，感谢翻译者的分享。本文�
 <div class="intrude-less">
     <header id="header" class="inner">
         <a href="/" class="profilepic">
-            <img src="/img/avatar.png" class="animated zoomIn">
+            <img src="http://ohe65w0xx.bkt.clouddn.com/avert.png" class="animated zoomIn">
         </a>
         <hgroup>
           <h1 class="header-author"><a href="/">向志洪</a></h1>
@@ -229,7 +229,7 @@ Quick Start本文来自Swift中文开发组，感谢翻译者的分享。本文�
     <div class="intrude-less">
         <header id="header" class="inner">
             <a href="/" class="profilepic">
-                <img src="/img/avatar.png" class="animated zoomIn">
+                <img src="http://ohe65w0xx.bkt.clouddn.com/avert.png" class="animated zoomIn">
             </a>
             <hgroup>
               <h1 class="header-author"><a href="/" title="回到主页">向志洪</a></h1>
@@ -281,12 +281,23 @@ Quick Start本文来自Swift中文开发组，感谢翻译者的分享。本文�
       <input type="hidden" class="isFancy">
     
     
+      <header class="article-header">
+        <h1 class="article-title" itemprop="name">
+      Swift基础语法
+    </h1>
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
     <div class="article-entry" itemprop="articleBody">
       
           
-        <hr>
-<p>title: Swift基础语法</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><p>本文来自Swift中文开发组，感谢翻译者的分享。<br>本文将分几部分对Swift对iOS的语法做讲解。本文为第一节，主要讲解基础语法。<br>常量和变量</p>
+        <p>本文来自Swift中文开发组，感谢翻译者的分享。<br>本文将分几部分对Swift对iOS的语法做讲解。本文为第一节，主要讲解基础语法。<br>常量和变量</p>
 <p>常量和变量把一个名字（比如maximumNumberOfLoginAttempts或者welcomeMessage）和一个指定类型的值（比如数字10或者字符串”Hello”）关联起来。常量的值一旦设定就不能改变，而变量的值可以随意更改。<br>声明常量和变量</p>
 <p>常量和变量必须在使用前声明，用let来声明常量，用var来声明变量。下面的例子展示了如何用常量和变量来记录用户尝试登录的次数：<br>[html] view plain copy print?在CODE上查看代码片派生到我的代码片<br>let maximumNumberOfLoginAttempts = 10<br>var currentLoginAttempt = 0<br>这两行代码可以被理解为：“声明一个名字是maximumNumberOfLoginAttempts的新常量，并给它一个值10。然后，声明一个名字是currentLoginAttempt的变量并将它的值初始化为0.”</p>
 <p>在这个例子中，允许的最大尝试登录次数被声明为一个常量，因为这个值不会改变。当前尝试登录次数被声明为一个变量，因为每次尝试登录失败的时候都需要增加这个值。</p>
@@ -362,12 +373,12 @@ Quick Start本文来自Swift中文开发组，感谢翻译者的分享。本文�
   </div>
   
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2016/11/30/new/"></a></p>
+        <p><span>本文标题:</span><a href="/2016/11/30/new/">Swift基础语法</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">向志洪</a></p>
         <p><span>发布时间:</span>2016-11-30, 20:45:43</p>
-        <p><span>最后更新:</span>2016-11-26, 22:57:08</p>
+        <p><span>最后更新:</span>2016-12-16, 10:35:17</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2016/11/30/new/" title="">http://code.youmeek.com/2016/11/30/new/</a>
+            <span>原始链接:</span><a class="post-url" href="/2016/11/30/new/" title="Swift基础语法">http://code.youmeek.com/2016/11/30/new/</a>
             <span class="copy-path" data-clipboard-text="原文: http://code.youmeek.com/2016/11/30/new/　　作者: 向志洪" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -379,6 +390,12 @@ Quick Start本文来自Swift中文开发组，感谢翻译者的分享。本文�
 
 
     <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2016/12/16/Iterate/">
+                    迭代子模式
+                </a>
+            </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
@@ -393,7 +410,7 @@ Quick Start本文来自Swift中文开发组，感谢翻译者的分享。本文�
 <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-number">1.</span> <span class="toc-text">Quick Start</span></a></li></ol>
+            
         
     </div>
     <style>
@@ -427,7 +444,7 @@ Quick Start本文来自Swift中文开发组，感谢翻译者的分享。本文�
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"　| 向志洪　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"Swift基础语法　| 向志洪　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -453,7 +470,9 @@ Quick Start本文来自Swift中文开发组，感谢翻译者的分享。本文�
 
 <div class="scroll" id="post-nav-button">
         
-            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+            <a href="/2016/12/16/Iterate/" title="上一篇: 迭代子模式">
+                <i class="fa fa-angle-left"></i>
+            </a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
@@ -465,7 +484,7 @@ Quick Start本文来自Swift中文开发组，感谢翻译者的分享。本文�
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/11/30/new/">new</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/24/hello-world/">Hello World</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/12/16/robot/">机器学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/16/Iterate/">迭代子模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/30/new/">Swift基础语法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/24/hello-world/">Hello World</a></li></ul>
 
 
     <script>

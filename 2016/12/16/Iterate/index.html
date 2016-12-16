@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="向志洪">
+
+
+
+<meta name="description" content="概述概念：在阎宏博士的《JAVA与模式》中关于迭代子模式的定义是这样的：迭代子模式又叫游标(Cursor)模式，是对象的行为模式。迭代子模式可以顺序地访问一个聚集中的元素而不必暴露聚集的内部表象（internal representation）。
+迭代子模式的意图及组成迭代子模式有两种实现方式，分别是白箱聚集与外禀迭代子和黑箱聚集于内禀迭代子。
+白箱聚集与外禀迭代子如果一个聚集的接口提供了可以用来">
+<meta property="og:type" content="article">
+<meta property="og:title" content="迭代子模式">
+<meta property="og:url" content="http://code.youmeek.com/2016/12/16/Iterate/index.html">
+<meta property="og:site_name" content="向志洪">
+<meta property="og:description" content="概述概念：在阎宏博士的《JAVA与模式》中关于迭代子模式的定义是这样的：迭代子模式又叫游标(Cursor)模式，是对象的行为模式。迭代子模式可以顺序地访问一个聚集中的元素而不必暴露聚集的内部表象（internal representation）。
+迭代子模式的意图及组成迭代子模式有两种实现方式，分别是白箱聚集与外禀迭代子和黑箱聚集于内禀迭代子。
+白箱聚集与外禀迭代子如果一个聚集的接口提供了可以用来">
+<meta property="og:image" content="http://img.blog.csdn.net/20161215214253592?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20161215214425814?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20161215215023673?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2016-12-16T02:35:20.303Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="迭代子模式">
+<meta name="twitter:description" content="概述概念：在阎宏博士的《JAVA与模式》中关于迭代子模式的定义是这样的：迭代子模式又叫游标(Cursor)模式，是对象的行为模式。迭代子模式可以顺序地访问一个聚集中的元素而不必暴露聚集的内部表象（internal representation）。
+迭代子模式的意图及组成迭代子模式有两种实现方式，分别是白箱聚集与外禀迭代子和黑箱聚集于内禀迭代子。
+白箱聚集与外禀迭代子如果一个聚集的接口提供了可以用来">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20161215214253592?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="向志洪" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>迭代子模式 | 向志洪</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="http://ohe65w0xx.bkt.clouddn.com/avert.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">向志洪</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">这里只有代码相关，要了解更多 &gt;&gt;http://blog.csdn.net/xiangzhihong8</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="/1044817967@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/xiangzhihong/" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa CSDN" href="http://blog.csdn.net/xiangzhihong8/" title="CSDN"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://www.xiangzhihong.com/">Blog</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">向志洪</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="http://ohe65w0xx.bkt.clouddn.com/avert.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">向志洪</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">这里只有代码相关，要了解更多 &gt;&gt;http://blog.csdn.net/xiangzhihong8</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="/1044817967@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/xiangzhihong/" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa CSDN" target="_blank" href="http://blog.csdn.net/xiangzhihong8/" title="CSDN"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我">
+</nav>
+      <div class="body-wrap"><article id="post-Iterate" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/12/16/Iterate/" class="article-date">
+      <time datetime="2016-12-16T02:31:57.428Z" itemprop="datePublished">2016-12-16</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        <h1 class="article-title" itemprop="name">
+      迭代子模式
+    </h1>
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>概念：在阎宏博士的《JAVA与模式》中关于迭代子模式的定义是这样的：迭代子模式又叫游标(Cursor)模式，是对象的行为模式。迭代子模式可以顺序地访问一个聚集中的元素而不必暴露聚集的内部表象（internal representation）。</p>
+<h2 id="迭代子模式的意图及组成"><a href="#迭代子模式的意图及组成" class="headerlink" title="迭代子模式的意图及组成"></a>迭代子模式的意图及组成</h2><p>迭代子模式有两种实现方式，分别是白箱聚集与外禀迭代子和黑箱聚集于内禀迭代子。</p>
+<h3 id="白箱聚集与外禀迭代子"><a href="#白箱聚集与外禀迭代子" class="headerlink" title="白箱聚集与外禀迭代子"></a>白箱聚集与外禀迭代子</h3><p>如果一个聚集的接口提供了可以用来修改聚集元素的方法，这个接口就是所谓的宽接口。<br>如果聚集对象为所有对象提供同一个接口，也就是宽接口的话，当然会满足迭代子模式对迭代子对象的要求。但是，这样会破坏对聚集对象的封装。这种提供宽接口的聚集叫做白箱聚集。聚集对象向外界提供同样的宽接口，如下图所示：<br><img src="http://img.blog.csdn.net/20161215214253592?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>由于聚集自己实现迭代逻辑，并向外部提供适当的接口，使得迭代子可以从外部控制聚集元素的迭代过程。这样一来迭代子所控制的仅仅是一个游标而已，这种迭代子叫做游标迭代子（Cursor Iterator）。由于迭代子是在聚集结构之外的，因此这样的迭代子又叫做外禀迭代子（Extrinsic Iterator）。<br>一个白箱聚集向外界提供访问自己内部元素的接口（称作遍历方法或者Traversing Method），从而使外禀迭代子可以通过聚集的遍历方法实现迭代功能。<br>　　因为迭代的逻辑是由聚集对象本身提供的，所以这样的外禀迭代子角色往往仅仅保持迭代的游标位置。<br>　　一个典型的由白箱聚集与外禀迭代子组成的系统如下图所示：<br><img src="http://img.blog.csdn.net/20161215214425814?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h3 id="迭代子模式组成"><a href="#迭代子模式组成" class="headerlink" title="迭代子模式组成"></a>迭代子模式组成</h3><p>迭代子模式的组成主要有以下几个角色：<br><strong>抽象迭代子(Iterator)角色</strong>：此抽象角色定义出遍历元素所需的接口。<br><strong>具体迭代子(ConcreteIterator)角色</strong>：此角色实现了Iterator接口，并保持迭代过程中的游标位置。<br><strong>聚集(Aggregate)角色</strong>：此抽象角色给出创建迭代子(Iterator)对象的接口。<br><strong>具体聚集(ConcreteAggregate)角色</strong>：实现了创建迭代子(Iterator)对象的接口，返回一个合适的具体迭代子实例。<br><strong>客户端(Client)角色</strong>：持有对聚集及其迭代子对象的引用，调用迭代子对象的迭代接口，也有可能通过迭代子操作聚集元素的增加和删除。</p>
+<h4 id="代码实例"><a href="#代码实例" class="headerlink" title="代码实例"></a>代码实例</h4><p>抽象聚集角色类<br>这个角色规定出所有的具体聚集必须实现的接口。迭代子模式要求聚集对象必须有一个工厂方法，也就是createIterator()方法，以向外界提供迭代子对象的实例。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">public abstract class Aggregate &#123;  </div><div class="line">    /** </div><div class="line">     * 工厂方法，创建相应迭代子对象的接口 </div><div class="line">     */  </div><div class="line">    public abstract Iterator createIterator();  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>具体聚集角色类<br>实现了抽象聚集角色类所要求的接口，也就是createIterator()方法。此外，还有方法getElement()向外界提供聚集元素，而方法size()向外界提供聚集的大小等。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">public class ConcreteAggregate extends Aggregate &#123;  </div><div class="line">      </div><div class="line">    private Object[] objArray = null;  </div><div class="line">    /** </div><div class="line">     * 构造方法，传入聚合对象的具体内容 </div><div class="line">     */  </div><div class="line">    public ConcreteAggregate(Object[] objArray)&#123;  </div><div class="line">        this.objArray = objArray;  </div><div class="line">    &#125;  </div><div class="line">      </div><div class="line">    @Override  </div><div class="line">    public Iterator createIterator() &#123;  </div><div class="line">          </div><div class="line">        return new ConcreteIterator(this);  </div><div class="line">    &#125;  </div><div class="line">    /** </div><div class="line">     * 取值方法：向外界提供聚集元素 </div><div class="line">     */  </div><div class="line">    public Object getElement(int index)&#123;  </div><div class="line">          </div><div class="line">        if(index &lt; objArray.length)&#123;  </div><div class="line">            return objArray[index];  </div><div class="line">        &#125;else&#123;  </div><div class="line">            return null;  </div><div class="line">        &#125;  </div><div class="line">    &#125;  </div><div class="line">    /** </div><div class="line">     * 取值方法：向外界提供聚集的大小 </div><div class="line">     */  </div><div class="line">    public int size()&#123;  </div><div class="line">        return objArray.length;  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>抽象迭代子角色类</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">public interface Iterator &#123;  </div><div class="line">    /** </div><div class="line">     * 迭代方法：移动到第一个元素 </div><div class="line">     */  </div><div class="line">    public void first();  </div><div class="line">    /** </div><div class="line">     * 迭代方法：移动到下一个元素 </div><div class="line">     */  </div><div class="line">    public void next();  </div><div class="line">    /** </div><div class="line">     * 迭代方法：是否为最后一个元素 </div><div class="line">     */  </div><div class="line">    public boolean isDone();  </div><div class="line">    /** </div><div class="line">     * 迭代方法：返还当前元素 </div><div class="line">     */  </div><div class="line">    public Object currentItem();  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>具体迭代子角色类</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line">public class ConcreteIterator implements Iterator &#123;  </div><div class="line">    //持有被迭代的具体的聚合对象  </div><div class="line">    private ConcreteAggregate agg;  </div><div class="line">    //内部索引，记录当前迭代到的索引位置  </div><div class="line">    private int index = 0;  </div><div class="line">    //记录当前聚集对象的大小  </div><div class="line">    private int size = 0;  </div><div class="line">      </div><div class="line">    public ConcreteIterator(ConcreteAggregate agg)&#123;  </div><div class="line">        this.agg = agg;  </div><div class="line">        this.size = agg.size();  </div><div class="line">        index = 0;  </div><div class="line">    &#125;  </div><div class="line">    /** </div><div class="line">     * 迭代方法：返还当前元素 </div><div class="line">     */  </div><div class="line">    @Override  </div><div class="line">    public Object currentItem() &#123;  </div><div class="line">        return agg.getElement(index);  </div><div class="line">    &#125;  </div><div class="line">    /** </div><div class="line">     * 迭代方法：移动到第一个元素 </div><div class="line">     */  </div><div class="line">    @Override  </div><div class="line">    public void first() &#123;  </div><div class="line">          </div><div class="line">        index = 0;  </div><div class="line">    &#125;  </div><div class="line">    /** </div><div class="line">     * 迭代方法：是否为最后一个元素 </div><div class="line">     */  </div><div class="line">    @Override  </div><div class="line">    public boolean isDone() &#123;  </div><div class="line">        return (index &gt;= size);  </div><div class="line">    &#125;  </div><div class="line">    /** </div><div class="line">     * 迭代方法：移动到下一个元素 </div><div class="line">     */  </div><div class="line">    @Override  </div><div class="line">    public void next() &#123;  </div><div class="line">  </div><div class="line">        if(index &lt; size)  </div><div class="line">        &#123;  </div><div class="line">            index ++;  </div><div class="line">        &#125;  </div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>客户端测试类</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">public class Client &#123;  </div><div class="line">    public void operation()&#123;  </div><div class="line">        Object[] objArray = &#123;&quot;One&quot;,&quot;Two&quot;,&quot;Three&quot;,&quot;Four&quot;,&quot;Five&quot;,&quot;Six&quot;&#125;;  </div><div class="line">        //创建聚合对象  </div><div class="line">        Aggregate agg = new ConcreteAggregate(objArray);  </div><div class="line">        //循环输出聚合对象中的值  </div><div class="line">        Iterator it = agg.createIterator();  </div><div class="line">        while(!it.isDone())&#123;  </div><div class="line">            System.out.println(it.currentItem());  </div><div class="line">            it.next();  </div><div class="line">        &#125;  </div><div class="line">    &#125;  </div><div class="line">    public static void main(String[] args) &#123;  </div><div class="line">          </div><div class="line">        Client client = new Client();  </div><div class="line">        client.operation();  </div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="黑箱聚集与内禀迭代子"><a href="#黑箱聚集与内禀迭代子" class="headerlink" title="黑箱聚集与内禀迭代子"></a>黑箱聚集与内禀迭代子</h3><p>如果一个聚集的接口没有提供修改聚集元素的方法，这样的接口就是所谓的窄接口。<br>　　聚集对象为迭代子对象提供一个宽接口，而为其他对象提供一个窄接口。换言之，聚集对象的内部结构应当对迭代子对象适当公开，以便迭代子对象能够对聚集对象有足够的了解，从而可以进行迭代操作。但是，聚集对象应当避免向其他的对象提供这些方法，因为其他对象应当经过迭代子对象进行这些工作，而不是直接操控聚集对象。<br><img src="http://img.blog.csdn.net/20161215215023673?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>在JAVA语言中，实现双重接口的办法就是将迭代子类设计成聚集类的内部成员类。这样迭代子对象将可以像聚集对象的内部成员一样访问聚集对象的内部结构。下面给出一个示意性的实现，说明这种双重接口的结构时怎么样产生的，以及使用了双重接口结构之后迭代子模式的实现方案。这种同时保证聚集对象的封装和迭代子功能的实现的方案叫做黑箱实现方案。<br>　　由于迭代子是聚集的内部类，迭代子可以自由访问聚集的元素，所以迭代子可以自行实现迭代功能并控制对聚集元素的迭代逻辑。由于迭代子是在聚集的结构之内定义的，因此这样的迭代子又叫做内禀迭代子（Intrinsic Iterator）。<br>　　为了说明黑箱方案的细节，这里给出一个示意性的黑箱实现。在这个实现里，聚集类ConcreteAggregate含有一个内部成员类ConcreteIterator，也就是实现了抽象迭代子接口的具体迭代子类，同时聚集并不向外界提供访问自己内部元素的方法。</p>
+<h4 id="代码实例-1"><a href="#代码实例-1" class="headerlink" title="代码实例"></a>代码实例</h4><p>抽象聚集角色类</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">public abstract class Aggregate &#123;</div><div class="line">    /**</div><div class="line">     * 工厂方法，创建相应迭代子对象的接口</div><div class="line">     */</div><div class="line">    public abstract Iterator createIterator();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>抽象迭代子角色类</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">public interface Iterator &#123;</div><div class="line">    /**</div><div class="line">     * 迭代方法：移动到第一个元素</div><div class="line">     */</div><div class="line">    public void first();</div><div class="line">    /**</div><div class="line">     * 迭代方法：移动到下一个元素</div><div class="line">     */</div><div class="line">    public void next();</div><div class="line">    /**</div><div class="line">     * 迭代方法：是否为最后一个元素</div><div class="line">     */</div><div class="line">    public boolean isDone();</div><div class="line">    /**</div><div class="line">     * 迭代方法：返还当前元素</div><div class="line">     */</div><div class="line">    public Object currentItem();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>具体聚集角色类，实现了抽象聚集角色所要求的接口。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div></pre></td><td class="code"><pre><div class="line">public class ConcreteAggregate extends Aggregate &#123;</div><div class="line">    </div><div class="line">    private Object[] objArray = null;</div><div class="line">    /**</div><div class="line">     * 构造方法，传入聚合对象的具体内容</div><div class="line">     */</div><div class="line">    public ConcreteAggregate(Object[] objArray)&#123;</div><div class="line">        this.objArray = objArray;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    @Override</div><div class="line">    public Iterator createIterator() &#123;</div><div class="line"></div><div class="line">        return new ConcreteIterator();</div><div class="line">    &#125;</div><div class="line">    /**</div><div class="line">     * 内部成员类，具体迭代子类</div><div class="line">     */</div><div class="line">    private class ConcreteIterator implements Iterator</div><div class="line">    &#123;</div><div class="line">        //内部索引，记录当前迭代到的索引位置</div><div class="line">        private int index = 0;</div><div class="line">        //记录当前聚集对象的大小</div><div class="line">        private int size = 0;</div><div class="line">        /**</div><div class="line">         * 构造函数</div><div class="line">         */</div><div class="line">        public ConcreteIterator()&#123;</div><div class="line">            </div><div class="line">            this.size = objArray.length;</div><div class="line">            index = 0;</div><div class="line">        &#125;</div><div class="line">        /**</div><div class="line">         * 迭代方法：返还当前元素</div><div class="line">         */</div><div class="line">        @Override</div><div class="line">        public Object currentItem() &#123;</div><div class="line">            return objArray[index];</div><div class="line">        &#125;</div><div class="line">        /**</div><div class="line">         * 迭代方法：移动到第一个元素</div><div class="line">         */</div><div class="line">        @Override</div><div class="line">        public void first() &#123;</div><div class="line">            </div><div class="line">            index = 0;</div><div class="line">        &#125;</div><div class="line">        /**</div><div class="line">         * 迭代方法：是否为最后一个元素</div><div class="line">         */</div><div class="line">        @Override</div><div class="line">        public boolean isDone() &#123;</div><div class="line">            return (index &gt;= size);</div><div class="line">        &#125;</div><div class="line">        /**</div><div class="line">         * 迭代方法：移动到下一个元素</div><div class="line">         */</div><div class="line">        @Override</div><div class="line">        public void next() &#123;</div><div class="line"></div><div class="line">            if(index &lt; size)</div><div class="line">            &#123;</div><div class="line">                index ++;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>客户端测试类</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">public class Client &#123;</div><div class="line"></div><div class="line">    public void operation()&#123;</div><div class="line">        Object[] objArray = &#123;&quot;One&quot;,&quot;Two&quot;,&quot;Three&quot;,&quot;Four&quot;,&quot;Five&quot;,&quot;Six&quot;&#125;;</div><div class="line">        //创建聚合对象</div><div class="line">        Aggregate agg = new ConcreteAggregate(objArray);</div><div class="line">        //循环输出聚合对象中的值</div><div class="line">        Iterator it = agg.createIterator();</div><div class="line">        while(!it.isDone())&#123;</div><div class="line">            System.out.println(it.currentItem());</div><div class="line">            it.next();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        </div><div class="line">        Client client = new Client();</div><div class="line">        client.operation();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="使用迭代子模式的优点"><a href="#使用迭代子模式的优点" class="headerlink" title="使用迭代子模式的优点"></a>使用迭代子模式的优点</h2><p>　（1）迭代子模式简化了聚集的接口。迭代子具备了一个遍历接口，这样聚集的接口就不必具备遍历接口。<br>　　（2）每一个聚集对象都可以有一个或多个迭代子对象，每一个迭代子的迭代状态可以是彼此独立的。因此，一个聚集对象可以同时有几个迭代在进行之中。<br>　　（3）由于遍历算法被封装在迭代子角色里面，因此迭代的算法可以独立于聚集角色变化。</p>
+      
+    </div>
+    
+  </div>
+  
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/12/16/Iterate/">迭代子模式</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">向志洪</a></p>
+        <p><span>发布时间:</span>2016-12-16, 10:31:57</p>
+        <p><span>最后更新:</span>2016-12-16, 10:35:20</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/12/16/Iterate/" title="迭代子模式">http://code.youmeek.com/2016/12/16/Iterate/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://code.youmeek.com/2016/12/16/Iterate/　　作者: 向志洪" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target="_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2016/12/16/robot/">
+                    机器学习
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/11/30/new/">
+                    Swift基础语法
+                </a>
+            </div>
+        
+    </nav>
+  
+</article>
+<div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#概述"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#迭代子模式的意图及组成"><span class="toc-number">2.</span> <span class="toc-text">迭代子模式的意图及组成</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#白箱聚集与外禀迭代子"><span class="toc-number">2.1.</span> <span class="toc-text">白箱聚集与外禀迭代子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#迭代子模式组成"><span class="toc-number">2.2.</span> <span class="toc-text">迭代子模式组成</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#代码实例"><span class="toc-number">2.2.1.</span> <span class="toc-text">代码实例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#黑箱聚集与内禀迭代子"><span class="toc-number">2.3.</span> <span class="toc-text">黑箱聚集与内禀迭代子</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#代码实例-1"><span class="toc-number">2.3.1.</span> <span class="toc-text">代码实例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用迭代子模式的优点"><span class="toc-number">3.</span> <span class="toc-text">使用迭代子模式的优点</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录" title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+    <div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"迭代子模式　| 向志洪　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+    
+        <section class="youyan" id="comments">
+    <script>
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = 'http://v2.uyan.cc/code/uyan.js?uid=2120654';
+            (d.head || d.body).appendChild(s);
+        }
+    </script>
+    <script> loadComment(); </script>
+    <div id="uyan_frame"></div>
+</section>
+    
+
+
+<div class="scroll" id="post-nav-button">
+        
+            <a href="/2016/12/16/robot/" title="上一篇: 机器学习">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/11/30/new/" title="下一篇: Swift基础语法">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/12/16/robot/">机器学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/16/Iterate/">迭代子模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/30/new/">Swift基础语法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/24/hello-world/">Hello World</a></li></ul>
+
+
+    <script>
+        
+    </script></div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016 向志洪
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style="display:none">
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style="display:none">
+                        <span id="page-visit" title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    <script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+<script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide()" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>

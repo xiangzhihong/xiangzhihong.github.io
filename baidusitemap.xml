@@ -3,15 +3,27 @@
 
 
     
-    
-    
+  <url>
+    <loc>http://code.youmeek.com/2016/12/16/Iterate/</loc>
+    <lastmod>2016-12-16T02:35:20.303Z</lastmod>
+    <data>
+        <display>
+        <title>迭代子模式</title>
+        <pubTime>2016-12-16T02:31:57.428Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
     
   <url>
     <loc>http://code.youmeek.com/2016/11/30/new/</loc>
-    <lastmod>2016-11-26T14:57:08.000Z</lastmod>
+    <lastmod>2016-12-16T02:35:17.914Z</lastmod>
     <data>
         <display>
-        <title></title>
+        <title>Swift基础语法</title>
         <pubTime>2016-11-30T12:45:43.149Z</pubTime>
         
          
@@ -20,6 +32,24 @@
     </data>
     </url>
 
+    
+  <url>
+    <loc>http://code.youmeek.com/2016/12/16/robot/</loc>
+    <lastmod>2016-12-16T02:35:13.563Z</lastmod>
+    <data>
+        <display>
+        <title>机器学习</title>
+        <pubTime>2016-12-16T02:32:43.230Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+    
+    
     
   <url>
     <loc>http://code.youmeek.com/2016/11/24/hello-world/</loc>
