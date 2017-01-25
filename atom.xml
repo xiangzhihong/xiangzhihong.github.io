@@ -48,6 +48,99 @@
   </entry>
   
   <entry>
+    <title>Swift基础语法</title>
+    <link href="http://code.youmeek.com/2016/12/05/swift/"/>
+    <id>http://code.youmeek.com/2016/12/05/swift/</id>
+    <published>2016-12-04T16:00:00.000Z</published>
+    <updated>2017-01-24T08:23:08.864Z</updated>
+    
+    <content type="html"><![CDATA[<p>本文来自Swift中文开发组，感谢翻译者的分享。<br>本文将分几部分对Swift对iOS的语法做讲解。本文为第一节，主要讲解基础语法。<br>常量和变量</p>
+<p>常量和变量把一个名字（比如maximumNumberOfLoginAttempts或者welcomeMessage）和一个指定类型的值（比如数字10或者字符串”Hello”）关联起来。常量的值一旦设定就不能改变，而变量的值可以随意更改。<br>声明常量和变量</p>
+<p>常量和变量必须在使用前声明，用let来声明常量，用var来声明变量。下面的例子展示了如何用常量和变量来记录用户尝试登录的次数：<br>[html] view plain copy print?在CODE上查看代码片派生到我的代码片<br>let maximumNumberOfLoginAttempts = 10<br>var currentLoginAttempt = 0<br>这两行代码可以被理解为：“声明一个名字是maximumNumberOfLoginAttempts的新常量，并给它一个值10。然后，声明一个名字是currentLoginAttempt的变量并将它的值初始化为0.”</p>
+<p>在这个例子中，允许的最大尝试登录次数被声明为一个常量，因为这个值不会改变。当前尝试登录次数被声明为一个变量，因为每次尝试登录失败的时候都需要增加这个值。</p>
+<p>你可以在一行中声明多个常量或者多个变量，用逗号隔开：<br>[html] view plain copy print?在CODE上查看代码片派生到我的代码片<br>var x = 0.0, y = 0.0, z = 0.0<br>注意：如果你的代码中有不需要改变的值，请使用let关键字将它声明为常量。只将需要改变的值声明为变量。<br>类型标注</p>
+<p>当你声明常量或者变量的时候可以加上类型标注(type annotation)，说明常量或者变量中要存储的值的类型。如果要添加类型标注，需要在常量或者变量名后面加上一个冒号和空格，然后加上类型名称。</p>
+<p>这个例子给welcomeMessage变量添加了类型标注，表示这个变量可以存储String类型的值：<br>[html] view plain copy print?在CODE上查看代码片派生到我的代码片<br>var welcomeMessage: String<br>声明中的冒号代表着“是…类型”，所以这行代码可以被理解为：“声明一个类型为String，名字为welcomeMessage的变量。”</p>
+<p>“类型为String”的意思是“可以存储任意String类型的值。”</p>
+<p>welcomeMessage变量现在可以被设置成任意字符串：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>welcomeMessage = “Hello”<br>注意：一般来说你很少需要写类型标注。如果你在声明常量或者变量的时候赋了一个初始值，Swift可以推断出这个常量或者变量的类型，请参考类型安全和类型推断。在上面的例子中，没有给welcomeMessage赋初始值，所以变量welcomeMessage的类型是通过一个类型标注指定的，而不是通过初始值推断的。<br>常量和变量的命名</p>
+<p>你可以用任何你喜欢的字符作为常量和变量名，包括 Unicode 字符：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>let π = 3.14159<br>let 你好 = “你好世界”<br>常量与变量名不能包含数学符号，箭头，保留的（或者非法的）Unicode 码位，连线与制表符。也不能以数字开头，但是可以在常量与变量名的其他地方包含数字。</p>
+<p>一旦你将常量或者变量声明为确定的类型，你就不能使用相同的名字再次进行声明，或者改变其存储的值的类型。同时，你也不能将常量与变量进行互转。<br>注意：如果你需要使用与Swift保留关键字相同的名称作为常量或者变量名，你可以使用反引号（`）将关键字包围的方式将其作为名字使用。无论如何，你应当避免使用关键字作为常量或变量名，除非你别无选择。<br>你可以更改现有的变量值为其他同类型的值，在下面的例子中，friendlyWelcome的值从”Hello!”改为了”Bonjour!”:<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>var friendlyWelcome = “Hello!”<br>friendlyWelcome = “Bonjour!”<br>// friendlyWelcome 现在是 “Bonjour!”<br>与变量不同，常量的值一旦被确定就不能更改了。尝试这样做会导致编译时报错：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>let languageName = “Swift”<br>languageName = “Swift++”<br>// 这会报编译时错误 - languageName 不可改变<br>输出常量和变量</p>
+<p>你可以用println函数来输出当前常量或变量的值:<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>println(friendlyWelcome) // 输出 “Bonjour!”<br>println是一个用来输出的全局函数，输出的内容会在最后换行。如果你用 Xcode，println将会输出内容到“console”面板上。(另一种函数叫print，唯一区别是在输出内容最后不会换行。)</p>
+<p>println函数输出传入的String值：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>println(“This is a string”) // 输出 “This is a string”<br>与 Cocoa 里的NSLog函数类似的是，println函数可以输出更复杂的信息。这些信息可以包含当前常量和变量的值。</p>
+<p>Swift 用字符串插值（string interpolation）的方式把常量名或者变量名当做占位符加入到长字符串中，Swift 会用当前常量或变量的值替换这些占位符。将常量或变量名放入圆括号中，并在开括号前使用反斜杠将其转义：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>println(“The current value of friendlyWelcome is (friendlyWelcome)”)<br>// 输出 “The current value of friendlyWelcome is Bonjour!<br>注意：字符串插值所有可用的选项，请参考字符串插值。</p>
+<p>注释</p>
+<p>请将你的代码中的非执行文本注释成提示或者笔记以方便你将来阅读。Swift 的编译器将会在编译代码时自动忽略掉注释部分。</p>
+<p>Swift 中的注释与C 语言的注释非常相似。单行注释以双正斜杠作(//)为起始标记；<br>// 这是一个注释<br>你也可以进行多行注释，其起始标记为单个正斜杠后跟随一个星号(/<em>)，终止标记为一个星号后跟随单个正斜杠(</em>/)<br>/<em> 这是一个, 多行注释 </em>/<br>与C 语言多行注释不同，Swift 的多行注释可以嵌套在其它的多行注释之中。你可以先生成一个多行注释块，然后在这个注释块之中再嵌套成第二个多行注释。终止注释时先插入第二个注释块的终止标记，然后再插入第一个注释块的终止标记：<br>/<em> 这是第一个多行注释的开头<br>/</em> 这是第二个被嵌套的多行注释 <em>/<br>这是第一个多行注释的结尾 </em>/<br>通过运用嵌套多行注释，你可以快速方便的注释掉一大段代码，即使这段代码之中已经含有了多行注释块。</p>
+<p>分号</p>
+<p>与其他大部分编程语言不同，Swift 并不强制要求你在每条语句的结尾处使用分号（;），当然，你也可以按照你自己的习惯添加分号。有一种情况下必须要用分号，即你打算在同一行内写多条独立的语句：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>let cat = “<br>整数</p>
+<p>整数就是没有小数部分的数字，比如42和-23。整数可以是有符号（正、负、零）或者无符号（正、零）。</p>
+<p>Swift 提供了8，16，32和64位的有符号和无符号整数类型。这些整数类型和 C 语言的命名方式很像，比如8位无符号整数类型是UInt8，32位有符号整数类型是Int32。就像 Swift 的其他类型一样，整数类型采用大写命名法。<br>整数范围</p>
+<p>你可以访问不同整数类型的min和max属性来获取对应类型的最大值和最小值：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>let minValue = UInt8.min // minValue 为 0，是 UInt8 类型的最小值<br>let maxValue = UInt8.max // maxValue 为 255，是 UInt8 类型的最大值<br>Int</p>
+<p>一般来说，你不需要专门指定整数的长度。Swift 提供了一个特殊的整数类型Int，长度与当前平台的原生字长相同：<br>在32位平台上，Int和Int32长度相同。<br>在64位平台上，Int和Int64长度相同。</p>
+<p>除非你需要特定长度的整数，一般来说使用Int就够了。这可以提高代码一致性和可复用性。即使是在32位平台上，Int可以存储的整数范围也可以达到-2147483648~2147483647，大多数时候这已经足够大了。<br>UInt</p>
+<p>Swift 也提供了一个特殊的无符号类型UInt，长度与当前平台的原生字长相同：<br>在32位平台上，UInt和UInt32长度相同。<br>在64位平台上，UInt和UInt64长度相同。<br>注意：尽量不要使用UInt，除非你真的需要存储一个和当前平台原生字长相同的无符号整数。除了这种情况，最好使用Int，即使你要存储的值已知是非负的。统一使用Int可以提高代码的可复用性，避免不同类型数字之间的转换，并且匹配数字的类型推测，请参考类型安全和类型推测。<br>浮点数</p>
+<p>浮点数是有小数部分的数字，比如3.14159，0.1和-273.15。</p>
+<p>浮点类型比整数类型表示的范围更大，可以存储比Int类型更大或者更小的数字。Swift 提供了两种有符号浮点数类型：<br>Double表示64位浮点数。当你需要存储很大或者很高精度的浮点数时请使用此类型。<br>Float表示32位浮点数。精度要求不高的话可以使用此类型。<br>注意：Double精确度很高，至少有15位数字，而Float最少只有6位数字。选择哪个类型取决于你的代码需要处理的值的范围。<br>类型安全和类型推测</p>
+<p>Swift 是一个类型安全(type safe )的语言。类型安全的语言可以让你清楚地知道代码要处理的值的类型。如果你的代码需要一个String，你绝对不可能不小心传进去一个Int。</p>
+<p>由于 Swift 是类型安全的，所以它会在编译你的代码时进行类型检查(type checks)，并把不匹配的类型标记为错误。这可以让你在开发的时候尽早发现并修复错误。</p>
+<p>当你要处理不同类型的值时，类型检查可以帮你避免错误。然而，这并不是说你每次声明常量和变量的时候都需要显式指定类型。如果你没有显式指定类型，Swift 会使用类型推测(type inference)来选择合适的类型。有了类型推测，编译器可以在编译代码的时候自动推测出表达式的类型。原理很简单，只要检查你赋的值即可。</p>
+<p>因为有类型推测，和 C 或者 Objective-C 比起来 Swift 很少需要声明类型。常量和变量虽然需要明确类型，但是大部分工作并不需要你自己来完成。</p>
+<p>当你声明常量或者变量并赋初值的时候类型推测非常有用。当你在声明常量或者变量的时候赋给它们一个字面量(literal value 或 literal)即可触发类型推测。（字面量就是会直接出现在你代码中的值，比如42和3.14159。）</p>
+<p>例如，如果你给一个新常量赋值42并且没有标明类型，Swift 可以推测出常量类型是Int，因为你给它赋的初始值看起来像一个整数：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>let meaningOfLife = 42 // meaningOfLife 会被推测为 Int 类型<br>同理，如果你没有给浮点字面量标明类型，Swift 会推测你想要的是Double：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>let pi = 3.14159 // pi 会被推测为 Double 类型<br>当推测浮点数的类型时，Swift 总是会选择Double而不是Float。</p>
+<p>如果表达式中同时出现了整数和浮点数，会被推测为Double类型：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>let anotherPi = 3 + 0.14159 // anotherPi 会被推测为 Double 类型<br>原始值3没有显式声明类型，而表达式中出现了一个浮点字面量，所以表达式会被推测为Double类型。<br>数值型字面量</p>
+<p>整数字面量可以被写作：<br>一个十进制数，没有前缀<br>一个二进制数，前缀是0b<br>一个八进制数，前缀是0o<br>一个十六进制数，前缀是0x</p>
+<p>下面的所有整数字面量的十进制值都是17:<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>let decimalInteger = 17<br>let binaryInteger = 0b10001 // 二进制的17<br>let octalInteger = 0o21 // 八进制的17<br>let hexadecimalInteger = 0x11 // 十六进制的17<br>浮点字面量可以是十进制（没有前缀）或者是十六进制（前缀是0x）。小数点两边必须有至少一个十进制数字（或者是十六进制的数字）。浮点字面量还有一个可选的指数(exponent)，在十进制浮点数中通过大写或者小写的e来指定，在十六进制浮点数中通过大写或者小写的p来指定。</p>
+<p>如果一个十进制数的指数为exp，那这个数相当于基数和$10^{exp}$的乘积：<br>1.25e2 表示 $1.25 × 10^{2}$，等于 125.0。<br>1.25e-2 表示 $1.25 × 10^{-2}$，等于 0.0125。</p>
+<p>如果一个十六进制数的指数为exp，那这个数相当于基数和$2^{exp}$的乘积：<br>0xFp2 表示 $15 × 2^{2}$，等于 60.0。<br>0xFp-2 表示 $15 × 2^{-2}$，等于 3.75。</p>
+<p>下面的这些浮点字面量都等于十进制的12.1875：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>let decimalDouble = 12.1875<br>let exponentDouble = 1.21875e1<br>let hexadecimalDouble = 0xC.3p0<br>数值类字面量可以包括额外的格式来增强可读性。整数和浮点数都可以添加额外的零并且包含下划线，并不会影响字面量：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>let paddedDouble = 000123.456<br>let oneMillion = 1_000_000<br>let justOverOneMillion = 1_000_000.000_000_1<br>数值型类型转换</p>
+<p>通常来讲，即使代码中的整数常量和变量已知非负，也请使用Int类型。总是使用默认的整数类型可以保证你的整数常量和变量可以直接被复用并且可以匹配整数类字面量的类型推测。 只有在必要的时候才使用其他整数类型，比如要处理外部的长度明确的数据或者为了优化性能、内存占用等等。使用显式指定长度的类型可以及时发现值溢出并且可以暗示正在处理特殊数据。<br>整数转换</p>
+<p>不同整数类型的变量和常量可以存储不同范围的数字。Int8类型的常量或者变量可以存储的数字范围是-128~127，而UInt8类型的常量或者变量能存储的数字范围是0~255。如果数字超出了常量或者变量可存储的范围，编译的时候会报错：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>let cannotBeNegative: UInt8 = -1 // UInt8 类型不能存储负数，所以会报错<br>let tooBig: Int8 = Int8.max + 1 // Int8 类型不能存储超过最大值的数，所以会报错<br>由于每中整数类型都可以存储不同范围的值，所以你必须根据不同情况选择性使用数值型类型转换。这种选择性使用的方式，可以预防隐式转换的错误并让你的代码中的类型转换意图变得清晰。</p>
+<p>要将一种数字类型转换成另一种，你要用当前值来初始化一个期望类型的新数字，这个数字的类型就是你的目标类型。在下面的例子中，常量twoThousand是UInt16类型，然而常量one是Uint8类型。它们不能直接相加，因为它们类型不同。所以要调用UInt16(one)来创建一个新的UInt16数字并用one的值来初始化，然后使用这个新数字来计算：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>let twoThousand: UInt16 = 2_000<br>let one: UInt8 = 1<br>let twoThousandAndOne = twoThousand + UInt16(one)<br>现在两个数字的类型都是UInt16，可以进行相加。目标常量twoThousandAndOne的类型被推测为UInt16，因为它是两个UInt16值的和。</p>
+<p>SomeType(ofInitialValue)是调用 Swift 构造器并传入一个初始值的默认方法。在语言内部，UInt16有一个构造器，可以接受一个UInt8类型的值，所以这个构造器可以用现有的UInt8来创建一个新的UInt16。注意，你并不能传入任意类型的值，只能传入UInt16内部有对应构造器的值。不过你可以扩展现有的类型来让它可以接收其他类型的值（包括自定义类型），请参考扩展。<br>整数和浮点数转换</p>
+<p>整数和浮点数的转换必须显式指定类型：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>let three = 3<br>let pointOneFourOneFiveNine = 0.14159<br>let pi = Double(three) + pointOneFourOneFiveNine<br>// pi 等于 3.14159，所以被推测为 Double 类型<br>这个例子中，常量three的值被用来创建一个Double类型的值，所以加号两边的数类型相同。如果不进行转换，两者无法相加。</p>
+<p>浮点数到整数的反向转换同样行，整数类型可以用Double或者Float类型来初始化：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>let integerPi = Int(pi) // integerPi 等于 3，所以被推测为 Int 类型<br>当用这种方式来初始化一个新的整数值时，浮点值会被截断。也就是说4.75会变成4，-3.9会变成-3。<br>注意：结合数字类常量和变量不同于结合数字类字面量。字面量3可以直接和字面量0.14159相加，因为数字字面量本身没有明确的类型。它们的类型只在编译器需要求值的时候被推测。<br>类型别名</p>
+<p>类型别名(type aliases)就是给现有类型定义另一个名字。你可以使用typealias关键字来定义类型别名。</p>
+<p>当你想要给现有类型起一个更有意义的名字时，类型别名非常有用。假设你正在处理特定长度的外部资源的数据：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>typealias AudioSample = UInt16<br>定义了一个类型别名之后，你可以在任何使用原始名的地方使用别名：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>var maxAmplitudeFound = AudioSample.min // maxAmplitudeFound 现在是 0<br>本例中，AudioSample被定义为UInt16的一个别名。因为它是别名，AudioSample.min实际上是UInt16.min，所以会给maxAmplitudeFound赋一个初值0。<br>布尔值</p>
+<p>Swift 有一个基本的布尔(Boolean)类型，叫做Bool。布尔值指逻辑上的(logical)，因为它们只能是真或者假。Swift 有两个布尔常量，true和false：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>let orangesAreOrange = true<br>let turnipsAreDelicious = false<br>orangesAreOrange和turnipsAreDelicious的类型会被推测为Bool，因为它们的初值是布尔字面量。就像之前提到的Int和Double一样，如果你创建变量的时候给它们赋值true或者false，那你不需要将常量或者变量声明为Bool类型。初始化常量或者变量的时候如果所赋的值类型已知，就可以触发类型推测，这让 Swift 代码更加简洁并且可读性更高。</p>
+<p>当你编写条件语句比如if语句的时候，布尔值非常有用：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>if turnipsAreDelicious {<br>    println(“Mmm, tasty turnips!”)<br>} else {<br>    println(“Eww, turnips are horrible.”)<br>}<br>// 输出 “Eww, turnips are horrible.”<br>条件语句，例如if，请参考控制流。</p>
+<p>如果你在需要使用Bool类型的地方使用了非布尔值，Swift 的类型安全机制会报错。下面的例子会报告一个编译时错误：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>let i = 1 if i { // 这个例子不会通过编译，会报错 }<br>然而，下面的例子是合法的：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>let i = 1 if i == 1 { // 这个例子会编译成功 }<br>i == 1的比较结果是Bool类型，所以第二个例子可以通过类型检查。类似i == 1这样的比较，请参考基本操作符。</p>
+<p>和 Swift 中的其他类型安全的例子一样，这个方法可以避免错误并保证这块代码的意图总是清晰的。<br>元组</p>
+<p>元组（tuples）把多个值组合成一个复合值。元组内的值可以使任意类型，并不要求是相同类型。</p>
+<p>下面这个例子中，(404, “Not Found”)是一个描述 HTTP 状态码（HTTP status code）的元组。HTTP 状态码是当你请求网页的时候 web 服务器返回的一个特殊值。如果你请求的网页不存在就会返回一个404 Not Found状态码。<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>let http404Error = (404, “Not Found”) // http404Error 的类型是 (Int, String)，值是 (404, “Not Found”)<br>(404, “Not Found”)元组把一个Int值和一个String值组合起来表示 HTTP 状态码的两个部分：一个数字和一个人类可读的描述。这个元组可以被描述为“一个类型为(Int, String)的元组”。</p>
+<p>你可以把任意顺序的类型组合成一个元组，这个元组可以包含所有类型。只要你想，你可以创建一个类型为(Int, Int, Int)或者(String, Bool)或者其他任何你想要的组合的元组。</p>
+<p>你可以将一个元组的内容分解（decompose）成单独的常量和变量，然后你就可以正常使用它们了：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>let (statusCode, statusMessage) = http404Error<br>println(“The status code is (statusCode)”)<br>// 输出 “The status code is 404”<br>println(“The status message is (statusMessage)”)<br>// 输出 “The status message is Not Found”<br>如果你只需要一部分元组值，分解的时候可以把要忽略的部分用下划线（<em>）标记：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>let (justTheStatusCode, </em>) = http404Error<br>println(“The status code is (justTheStatusCode)”)<br>// 输出 “The status code is 404”<br>此外，你还可以通过下标来访问元组中的单个元素，下标从零开始：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>println(“The status code is (http404Error.0)”) // 输出 “The status code is 404”<br>println(“The status message is (http404Error.1)”) // 输出 “The status message is Not Found”<br>你可以在定义元组的时候给单个元素命名：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>let http200Status = (statusCode: 200, description: “OK”)<br>给元组中的元素命名后，你可以通过名字来获取这些元素的值：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>println(“The status code is (http200Status.statusCode)”) // 输出 “The status code is 200”<br>println(“The status message is (http200Status.description)”) // 输出 “The status message is OK”<br>作为函数返回值时，元组非常有用。一个用来获取网页的函数可能会返回一个(Int, String)元组来描述是否获取成功。和只能返回一个类型的值比较起来，一个包含两个不同类型值的元组可以让函数的返回信息更有用。请参考[函数参数与返回值(06_Functions.html#Function_Parameters_and_Return_Values)。<br>注意：元组在临时组织值的时候很有用，但是并不适合创建复杂的数据结构。如果你的数据结构并不是临时使用，请使用类或者结构体而不是元组。请参考类和结构体。<br>可选</p>
+<p>使用可选（optionals）来处理值可能缺失的情况。可选表示：<br>有值，等于 x<br>或者<br>没有值<br>注意：C 和 Objective-C 中并没有可选这个概念。最接近的是 Objective-C 中的一个特性，一个方法要不返回一个对象要不返回nil，nil表示“缺少一个合法的对象”。然而，这只对对象起作用——对于结构体，基本的 C 类型或者枚举类型不起作用。对于这些类型，Objective-C 方法一般会返回一个特殊值（比如NSNotFound）来暗示值缺失。这种方法假设方法的调用者知道并记得对特殊值进行判断。然而，Swift 的可选可以让你暗示任意类型的值缺失，并不需要一个特殊值。<br>来看一个例子。Swift 的String类型有一个叫做toInt的方法，作用是将一个String值转换成一个Int值。然而，并不是所有的字符串都可以转换成一个整数。字符串”123”可以被转换成数字123，但是字符串”hello, world”不行。</p>
+<p>下面的例子使用toInt方法来尝试将一个String转换成Int：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>let possibleNumber = “123”<br>let convertedNumber = possibleNumber.toInt()<br>// convertedNumber 被推测为类型 “Int?”， 或者类型 “optional Int”<br>因为toInt方法可能会失败，所以它返回一个可选的（optional）Int，而不是一个Int。一个可选的Int被写作Int?而不是Int。问号暗示包含的值是可选，也就是说可能包含Int值也可能不包含值。（不能包含其他任何值比如Bool值或者String值。只能是Int或者什么都没有。）<br>if 语句以及强制解析</p>
+<p>你可以使用if语句来判断一个可选是否包含值。如果可选有值，结果是true；如果没有值，结果是false。</p>
+<p>当你确定可选包确实含值之后，你可以在可选的名字后面加一个感叹号(!)来获取值。这个惊叹号表示“我知道这个可选有值，请使用它。”这被称为可选值的强制解析（forced unwrapping）：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>if convertedNumber {<br>    println(“(possibleNumber) has an integer value of (convertedNumber!)”)<br>} else {<br>    println(“(possibleNumber) could not be converted to an integer”)<br>}<br>// 输出 “123 has an integer value of 123”<br>更多关于if语句的内容，请参考控制流。<br>注意：使用!来获取一个不存在的可选值会导致运行时错误。使用!来强制解析值之前，一定要确定可选包含一个非nil的值。<br>可选绑定</p>
+<p>使用可选绑定（optional binding）来判断可选是否包含值，如果包含就把值赋给一个临时常量或者变量。可选绑定可以用在if和while语句中来对可选的值进行判断并把值赋给一个常量或者变量。if和while语句，请参考控制流。</p>
+<p>像下面这样在if语句中写一个可选绑定：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>if let constantName = someOptional { statements }<br>你可以像上面这样使用可选绑定来重写possibleNumber这个例子：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>if let actualNumber = possibleNumber.toInt() {<br>    println(“(possibleNumber) has an integer value of (actualNumber)”)<br>} else {<br>    println(“(possibleNumber) could not be converted to an integer”)<br>}<br>// 输出 “123 has an integer value of 123”<br>这段代码可以被理解为：“如果possibleNumber.toInt返回的可选Int包含一个值，创建一个叫做actualNumber的新常量并将可选包含的值赋给它。”</p>
+<p>如果转换成功，actualNumber常量可以在if语句的第一个分支中使用。它已经被可选包含的值初始化过，所以不需要再使用!后缀来获取它的值。在这个例子中，actualNumber只被用来输出转换结果。</p>
+<p>你可以在可选绑定中使用常量和变量。如果你想在if语句的第一个分支中操作actualNumber的值，你可以改成if var actualNumber，这样可选包含的值就会被赋给一个变量而非常量。<br>nil</p>
+<p>你可以给可选变量赋值为nil来表示它没有值：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>var serverResponseCode: Int? = 404  // serverResponseCode 包含一个可选的 Int 值 404<br>serverResponseCode = nil // serverResponseCode 现在不包含值<br>注意：nil不能用于非可选的常量和变量。如果你的代码中有常量或者变量需要处理值缺失的情况，请把它们声明成对应的可选类型。<br>如果你声明一个可选常量或者变量但是没有赋值，它们会自动被设置为nil：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>var surveyAnswer: String? // surveyAnswer 被自动设置为 nil</p>
+<p>注意：Swift 的nil和 Objective-C 中的nil并不一样。在 Objective-C 中，nil是一个指向不存在对象的指针。在 Swift 中，nil不是指针——它是一个确定的值，用来表示值缺失。任何类型的可选都可以被设置为nil，不只是对象类型。<br>隐式解析可选</p>
+<p>如上所述，可选暗示了常量或者变量可以“没有值”。可选可以通过if语句来判断是否有值，如果有值的话可以通过可选绑定来解析值。</p>
+<p>有时候在程序架构中，第一次被赋值之后，可以确定一个可选总会有值。在这种情况下，每次都要判断和解析可选值是非常低效的，因为可以确定它总会有值。</p>
+<p>这种类型的可选被定义为隐式解析可选（implicitly unwrapped optionals）。把想要用作可选的类型的后面的问号（String?）改成感叹号（String!）来声明一个隐式解析可选。</p>
+<p>当可选被第一次赋值之后就可以确定之后一直有值的时候，隐式解析可选非常有用。隐式解析可选主要被用在 Swift 中类的构造过程中，请参考类实例之间的循环强引用。</p>
+<p>一个隐式解析可选其实就是一个普通的可选，但是可以被当做非可选来使用，并不需要每次都使用解析来获取可选值。下面的例子展示了可选String和隐式解析可选String之间的区别：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>let possibleString: String? = “An optional string.”<br>println(possibleString!) // 需要惊叹号来获取值<br>// 输出 “An optional string.”<br>let assumedString: String! = “An implicitly unwrapped optional string.”<br>println(assumedString) // 不需要感叹号<br>// 输出 “An implicitly unwrapped optional string.”<br>你可以把隐式解析可选当做一个可以自动解析的可选。你要做的只是声明的时候把感叹号放到类型的结尾，而不是每次取值的可选名字的结尾。<br>注意：如果你在隐式解析可选没有值的时候尝试取值，会触发运行时错误。和你在没有值的普通可选后面加一个惊叹号一样。<br>你仍然可以把隐式解析可选当做普通可选来判断它是否包含值：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>if assumedString {<br>    println(assumedString)<br>}<br>// 输出 “An implicitly unwrapped optional string.”<br>你也可以在可选绑定中使用隐式解析可选来检查并解析它的值：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>if let definiteString = assumedString {<br>    println(definiteString)<br>}<br>// 输出 “An implicitly unwrapped optional string.”<br>注意：如果一个变量之后可能变成nil的话请不要使用隐式解析可选。如果你需要在变量的生命周期中判断是否是nil的话，请使用普通可选类型。</p>]]></content>
+    
+    <summary type="html">
+    
+      Swift基础语法3.0
+    
+    </summary>
+    
+      <category term="ios" scheme="http://code.youmeek.com/categories/ios/"/>
+    
+    
+      <category term="ios" scheme="http://code.youmeek.com/tags/ios/"/>
+    
+      <category term="swift" scheme="http://code.youmeek.com/tags/swift/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Angular2入坑指南</title>
     <link href="http://code.youmeek.com/2016/12/05/Angular2%E5%85%A5%E5%9D%91%E6%8C%87%E5%8D%97/"/>
     <id>http://code.youmeek.com/2016/12/05/Angular2入坑指南/</id>
@@ -89,9 +182,75 @@
       <category term="前端" scheme="http://code.youmeek.com/categories/Angular2/%E5%89%8D%E7%AB%AF/"/>
     
     
+      <category term="Angular2" scheme="http://code.youmeek.com/tags/Angular2/"/>
+    
       <category term="前端开发" scheme="http://code.youmeek.com/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
     
-      <category term="Angular2" scheme="http://code.youmeek.com/tags/Angular2/"/>
+  </entry>
+  
+  <entry>
+    <title>node.js基本工作原理及流程</title>
+    <link href="http://code.youmeek.com/2016/12/05/Node.js%E5%9F%BA%E6%9C%AC%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/"/>
+    <id>http://code.youmeek.com/2016/12/05/Node.js基本工作原理/</id>
+    <published>2016-12-04T16:00:00.000Z</published>
+    <updated>2017-01-25T03:03:13.497Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><h2 id="Node-js是什么"><a href="#Node-js是什么" class="headerlink" title="Node.js是什么"></a>Node.js是什么</h2><p>Node 是一个服务器端 JavaScript 解释器，用于方便地搭建响应速度快、易于扩展的网络应用。Node.js 使用事件驱动， 非阻塞I/O 模型而得以轻量和高效，非常适合在分布式设备上运行数据密集型的实时应用。<br>Node.js 是一个可以让 JavaScript 运行在浏览器之外的平台。它实现了诸如文件系统、模块、包、操作系统 API、网络通信等 Core JavaScript 没有或者不完善的功能。历史上将 JavaScript移植到浏览器外的计划不止一个，但Node.js 是最出色的一个。</p>
+<h2 id="什么是v8引擎"><a href="#什么是v8引擎" class="headerlink" title="什么是v8引擎"></a>什么是v8引擎</h2><p>V8 JavaScript 引擎是 Google 用于其 Chrome 浏览器的底层 JavaScript 引擎。很少有人考虑 JavaScript 在客户机上实际做了些什么？实际上，JavaScript 引擎负责解释并执行代码。Google 使用 V8 创建了一个用 C++ 编写的超快解释器，该解释器拥有另一个独特特征；您可以下载该引擎并将其嵌入任何 应用程序。V8 JavaScript 引擎并不仅限于在一个浏览器中运行。因此，Node 实际上会使用 Google 编写的 V8 JavaScript 引擎，并将其重建为可在服务器上使用。</p>
+<h2 id="Node-js的作用"><a href="#Node-js的作用" class="headerlink" title="Node.js的作用"></a>Node.js的作用</h2><p>Node 公开宣称的目标是 “旨在提供一种简单的构建可伸缩网络程序的方法”。我们来看一个简单的例子，在 Java™ 和 PHP 这类语言中，每个连接都会生成一个新线程，每个新线程可能需要 2 MB 的配套内存。在一个拥有 8 GB RAM 的系统上，理论上最大的并发连接数量是 4,000 个用户。随着您的客户群的增长，如果希望您的 Web 应用程序支持更多用户，那么，您必须添加更多服务器。所以在传统的后台开发中，整个 Web 应用程序架构（包括流量、处理器速度和内存速度）中的瓶颈是：服务器能够处理的并发连接的最大数量。这个不同的架构承载的并发数量是不一致的。<br>而Node的出现就是为了解决这个问题：更改连接到服务器的方式。在Node 声称它不允许使用锁，它不会直接阻塞 I/O 调用。Node在每个连接发射一个在 Node 引擎的进程中运行的事件，而不是为每个连接生成一个新的 OS 线程（并为其分配一些配套内存）。</p>
+<h2 id="Node-js能做什么"><a href="#Node-js能做什么" class="headerlink" title="Node.js能做什么"></a>Node.js能做什么</h2><p>借用一句经典的描述Node.js的话:正如 JavaScript 为客户端而生，Node.js 为网络而生。<br>使用Node.js，你可以轻易的实现：</p>
+<ul>
+<li>具有复杂逻辑的网站；</li>
+<li>基于社交网络的大规模 Web 应用；</li>
+<li>Web Socket 服务器；</li>
+<li>TCP/UDP 套接字应用程序；</li>
+<li>命令行工具；</li>
+<li>交互式终端程序；</li>
+<li>带有图形用户界面的本地应用程序；</li>
+<li>单元测试工具；</li>
+<li>客户端 JavaScript 编译器。</li>
+</ul>
+<h2 id="什么是事件驱动编程"><a href="#什么是事件驱动编程" class="headerlink" title="什么是事件驱动编程"></a>什么是事件驱动编程</h2><p>在我们使用Java，PHP等语言实现编程的时候，我们面向对象编程是完美的编程设计，这使得他们对其他编程方法不屑一顾。却不知大名鼎鼎Node使用的却是事件驱动编程的思想。那什么是事件驱动编程。<br><strong>事件驱动编程，为需要处理的事件编写相应的事件处理程序。代码在事件发生时执行。</strong><br>为需要处理的事件编写相应的事件处理程序。要理解事件驱动和程序，就需要与非事件驱动的程序进行比较。实际上，现代的程序大多是事件驱动的，比如多线程的程序，肯定是事件驱动的。早期则存在许多非事件驱动的程序，这样的程序，在需要等待某个条件触发时，会不断地检查这个条件，直到条件满足，这是很浪费cpu时间的。而事件驱动的程序，则有机会释放cpu从而进入睡眠态（注意是有机会，当然程序也可自行决定不释放cpu），当事件触发时被操作系统唤醒，这样就能更加有效地使用cpu。<br>来看一张简单的事件驱动模型（uml）：</p>
+<p><img src="http://img.blog.csdn.net/20161231115520916?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>事件驱动模型主要包含3个对象：事件源、事件和事件处理程序。</p>
+<ul>
+<li>事件源：产生事件的地方(html元素)</li>
+<li>事件：点击/鼠标操作/键盘操作等等</li>
+<li>事件对象：当某个事件发生时，可能会产生一个事件对象，该时间对象会封装好该时间的信息，传递给事件处理程序</li>
+<li>事件处理程序：响应用户事件的代码<br>其实我们使用的window系统也算得上是事件驱动了。我们来看一个简单的事例：监听鼠标点击事件，并能够显示鼠标点击的位置x,y。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;html&gt; </div><div class="line">   &lt;head&gt; </div><div class="line">   &lt;script&gt; </div><div class="line">   function test1(e)&#123; </div><div class="line">     window.alert(&quot;x=&quot;+e.clientX+&quot;y=&quot;+e.clientY); </div><div class="line">   &#125; </div><div class="line">   &lt;/script&gt; </div><div class="line">   &lt;/head&gt; </div><div class="line">   &lt;body onmousedown=&quot;test1(event)&quot;&gt; </div><div class="line">   &lt;/body&gt; </div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+<h1 id="Node-js运行原理分析"><a href="#Node-js运行原理分析" class="headerlink" title="Node.js运行原理分析"></a>Node.js运行原理分析</h1><p>当我们搜索Node.js时，夺眶而出的关键字就是 “单线程，异步I/O，事件驱动”，应用程序的请求过程可以分为俩个部分：CPU运算和I/O读写，CPU计算速度通常远高于磁盘读写速度，这就导致CPU运算已经完成，但是不得不等待磁盘I/O任务完成之后再继续接下来的业务。<br>    所以I/O才是应用程序的瓶颈所在，在I/O密集型业务中，假设请求需要100ms来完成，其中99ms化在I/O上。如果需要优化应用程序，让他能同时处理更多的请求，我们会采用多线程，同时开启100个、1000个线程来提高我们请求处理，当然这也是一种可观的方案。<br>     但是由于一个CPU核心在一个时刻只能做一件事情，操作系统只能通过将CPU切分为时间片的方法，让线程可以较为均匀的使用CPU资源。但操作系统在内核切换线程的同时也要切换线程的上线文，当线程数量过多时，时间将会被消耗在上下文切换中。所以在大并发时，多线程结构还是无法做到强大的伸缩性。<br> 那么是否可以另辟蹊径呢？！我们先来看看单线程，《深入浅出Node》一书提到 “单线程的最大好处，是不用像多线程编程那样处处在意状态的同步问题，这里没有死锁的存在，也没有线程上下文切换所带来的性能上的开销”，那么一个线程一次只能处理一个请求岂不是无稽之谈，先让我们看张图：<br> <img src="http://img.blog.csdn.net/20161231120417621?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br> Node.js的单线程并不是真正的单线程，只是开启了单个线程进行业务处理（cpu的运算），同时开启了其他线程专门处理I/O。当一个指令到达主线程，主线程发现有I/O之后，直接把这个事件传给I/O线程，不会等待I/O结束后，再去处理下面的业务，而是拿到一个状态后立即往下走，这就是“单线程”、“异步I/O”。<br> I/O操作完之后呢？Node.js的I/O 处理完之后会有一个回调事件，这个事件会放在一个事件处理队列里头，在进程启动时node会创建一个类似于While(true)的循环，它的每一次轮询都会去查看是否有事件需要处理，是否有事件关联的回调函数需要处理，如果有就处理，然后加入下一个轮询，如果没有就退出进程，这就是所谓的“事件驱动”。这也从Node的角度解释了什么是”事件驱动”。<br> 在node.js中，事件主要来源于网络请求，文件I/O等，根据事件的不同对观察者进行了分类，有文件I/O观察者，网络I/O观察者。事件驱动是一个典型的生产者/消费者模型，请求到达观察者那里，事件循环从观察者进行消费，主线程就可以马不停蹄的只关注业务不用再去进行I/O等待。</p>
+<h1 id="Node-js的简单实践"><a href="#Node-js的简单实践" class="headerlink" title="Node.js的简单实践"></a>Node.js的简单实践</h1><p> 关于node的环境搭建这里就不说明了<a href="http://blog.csdn.net/xiangzhihong8/article/details/52842061" target="_blank" rel="external">node入门</a>。这里为了方便大家理解，我们写一个简单的登录实例。<br> 这里为了方便前端小白的理解，新增一个小节，如何使用Node搭建一个新的项目。</p>
+<h2 id="使用Node创建项目"><a href="#使用Node创建项目" class="headerlink" title="使用Node创建项目"></a>使用Node创建项目</h2><p> 安装Express</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">npm install -g express  </div><div class="line">npm install -g express-generator</div></pre></td></tr></table></figure>
+<p>新建项目<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">express -t ejs newsproject</div></pre></td></tr></table></figure></p>
+<p>按照提示进入项目目录，运行npm安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd newsprojec</div><div class="line">npm install</div></pre></td></tr></table></figure>
+<p>运行项目</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">node app.js</div></pre></td></tr></table></figure>
+<p>浏览器访问:<a href="http://127.0.0.1:3000/即可见nodejs站点页面即可。" target="_blank" rel="external">http://127.0.0.1:3000/即可见nodejs站点页面即可。</a><br>接下来我们写一个简单的例子，来看一下效果图：<br><img src="http://img.blog.csdn.net/20161231215128577?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br> 整个目录如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">根目录--------------</div><div class="line">    |-package.json</div><div class="line">    |-test.js</div><div class="line">    |-public</div><div class="line">        |-main.html</div><div class="line">        |-next.html</div></pre></td></tr></table></figure></p>
+<p>整个目录包含三个文件，test.js（作为控制文件）、main.html和next.html作为页面的显示文件。<br>来看一下代码：<br>test.js（作为控制文件）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">// file name :test.js</div><div class="line">var express             = require(&apos;express&apos;);</div><div class="line">var app                 = express();</div><div class="line">var bodyParse           = require(&apos;body-parser&apos;)</div><div class="line">var cookieParser        = require(&apos;cookie-parser&apos;) ;</div><div class="line">app.use(cookieParser()) ;</div><div class="line">app.use(bodyParse.urlencoded(&#123;extended:false&#125;)) ;</div><div class="line"></div><div class="line">// 处理根目录的get请求</div><div class="line">app.get(&apos;/&apos;,function(req,res)&#123;</div><div class="line">    res.sendfile(&apos;public/main.html&apos;) ;</div><div class="line">    console.log(&apos;main page is required &apos;);</div><div class="line">&#125;) ;</div><div class="line"></div><div class="line">// 处理/login的get请求</div><div class="line">app.get(&apos;/add&apos;, function (req,res) &#123;</div><div class="line">    res.sendfile(&apos;public/add.html&apos;) ;</div><div class="line">    console.log(&apos;add page is required &apos;) ;</div><div class="line">&#125;) ;</div><div class="line"></div><div class="line">// 处理/login的post请求</div><div class="line">app.post(&apos;/login&apos;,function(req,res)&#123;</div><div class="line">    name=req.body.name ;</div><div class="line">    pwd=req.body.pwd   ;</div><div class="line">    console.log(name+&apos;--&apos;+pwd) ;</div><div class="line">    res.status(200).send(name+&apos;--&apos;+pwd) ;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">// 监听3000端口</div><div class="line">var server=app.listen(3000) ;</div></pre></td></tr></table></figure>
+<p>main.html的代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div></pre></td><td class="code"><pre><div class="line">&lt;html&gt;</div><div class="line"></div><div class="line">    &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;http://fonts.useso.com/css?family=Tangerine|Inconsolata|Droid+Sans&quot;&gt;</div><div class="line"></div><div class="line">    &lt;style&gt;</div><div class="line">        div#test&#123;</div><div class="line">            font-family: &apos;Tangerine&apos;,serif;</div><div class="line">            font-size: 48px;</div><div class="line">        &#125;</div><div class="line">        p#link1&#123;</div><div class="line">            font-family: &apos;Tangerine&apos;,serif;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &lt;/style&gt;</div><div class="line"></div><div class="line">    &lt;script src=&quot;//cdn.bootcss.com/jquery/2.2.1/jquery.min.js&quot;&gt;&lt;/script&gt;</div><div class="line"></div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line"></div><div class="line">&lt;div id=&quot;test&quot;&gt;</div><div class="line">    &lt;h1&gt;Main Page&lt;/h1&gt;</div><div class="line">&lt;/div&gt;</div><div class="line">&lt;p&gt;Register &amp; Login&lt;/p&gt;</div><div class="line">&lt;form action=&quot;test.jsp&quot; method=&quot;post&quot;&gt;</div><div class="line">    账号 :</div><div class="line">    &lt;input type=&quot;text&quot; id=&quot;name&quot; /&gt;</div><div class="line">    &lt;br/&gt;&lt;br/&gt;</div><div class="line">    密码 :</div><div class="line">    &lt;input type=&quot;text&quot; id=&quot;pwd&quot; /&gt;</div><div class="line">    &lt;br/&gt;&lt;br/&gt;</div><div class="line">    &amp;nbsp&amp;nbsp&amp;nbsp&amp;nbsp&amp;nbsp</div><div class="line">    &lt;div&gt;&lt;a href=&quot;/add&quot; id=&quot;add&quot;&gt;EXTRA&lt;/a&gt;&lt;/div&gt;</div><div class="line">    &lt;input type=&quot;button&quot; value=&quot;Submit&quot; id=&quot;x&quot;&gt;</div><div class="line">&lt;/form&gt;</div><div class="line"></div><div class="line">&lt;/body&gt;</div><div class="line"></div><div class="line">    &lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line"></div><div class="line">        var after_login=function(data,status)&#123;</div><div class="line">            if (status==&apos;success&apos;)&#123;</div><div class="line">                alert(data+&apos;--&apos;+status) ;</div><div class="line">            &#125;</div><div class="line">            else alert(&apos;login refused&apos;) ;</div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        $(document).ready(function()&#123;</div><div class="line">            $(&quot;#x&quot;).click(function()&#123;</div><div class="line">                var name    =   $(&quot;#name&quot;).val() ;</div><div class="line">                var pwd     =   $(&quot;#pwd&quot;).val() ;</div><div class="line">                $.post(&apos;http://127.0.0.1:3000/login&apos;,</div><div class="line">                &#123;</div><div class="line">                    name    :   name ,</div><div class="line">                    pwd     :   pwd</div><div class="line">                &#125;,</div><div class="line">//                        function(data,status)&#123;</div><div class="line">//                            alert(data+&apos;--&apos;+status) ;</div><div class="line">//                        &#125;</div><div class="line">                        after_login</div><div class="line">                );</div><div class="line">//                $.get(&apos;add&apos;,function(data,status)&#123;</div><div class="line">//                    document.write(data) ;</div><div class="line">//                &#125;) ;</div><div class="line">            &#125;);</div><div class="line">        &#125;);</div><div class="line">    &lt;/script&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+<p>next.html的代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html&gt;</div><div class="line">&lt;head lang=&quot;en&quot;&gt;</div><div class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</div><div class="line">    &lt;title&gt;第二页面&lt;/title&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">&lt;h1&gt;This is an additional web page&lt;/h1&gt;</div><div class="line">&lt;p&gt;just for test&lt;/p&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      Node 是一个服务器端 JavaScript 解释器，用于方便地搭建响应速度快、易于扩展的网络应用。
+    
+    </summary>
+    
+      <category term="node" scheme="http://code.youmeek.com/categories/node/"/>
+    
+      <category term="前端" scheme="http://code.youmeek.com/categories/node/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+      <category term="前端开发" scheme="http://code.youmeek.com/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="Node入门" scheme="http://code.youmeek.com/tags/Node%E5%85%A5%E9%97%A8/"/>
     
   </entry>
   
@@ -196,165 +355,6 @@
       <category term="webpack" scheme="http://code.youmeek.com/tags/webpack/"/>
     
       <category term="gulp" scheme="http://code.youmeek.com/tags/gulp/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Swift基础语法</title>
-    <link href="http://code.youmeek.com/2016/12/05/swift/"/>
-    <id>http://code.youmeek.com/2016/12/05/swift/</id>
-    <published>2016-12-04T16:00:00.000Z</published>
-    <updated>2017-01-24T08:23:08.864Z</updated>
-    
-    <content type="html"><![CDATA[<p>本文来自Swift中文开发组，感谢翻译者的分享。<br>本文将分几部分对Swift对iOS的语法做讲解。本文为第一节，主要讲解基础语法。<br>常量和变量</p>
-<p>常量和变量把一个名字（比如maximumNumberOfLoginAttempts或者welcomeMessage）和一个指定类型的值（比如数字10或者字符串”Hello”）关联起来。常量的值一旦设定就不能改变，而变量的值可以随意更改。<br>声明常量和变量</p>
-<p>常量和变量必须在使用前声明，用let来声明常量，用var来声明变量。下面的例子展示了如何用常量和变量来记录用户尝试登录的次数：<br>[html] view plain copy print?在CODE上查看代码片派生到我的代码片<br>let maximumNumberOfLoginAttempts = 10<br>var currentLoginAttempt = 0<br>这两行代码可以被理解为：“声明一个名字是maximumNumberOfLoginAttempts的新常量，并给它一个值10。然后，声明一个名字是currentLoginAttempt的变量并将它的值初始化为0.”</p>
-<p>在这个例子中，允许的最大尝试登录次数被声明为一个常量，因为这个值不会改变。当前尝试登录次数被声明为一个变量，因为每次尝试登录失败的时候都需要增加这个值。</p>
-<p>你可以在一行中声明多个常量或者多个变量，用逗号隔开：<br>[html] view plain copy print?在CODE上查看代码片派生到我的代码片<br>var x = 0.0, y = 0.0, z = 0.0<br>注意：如果你的代码中有不需要改变的值，请使用let关键字将它声明为常量。只将需要改变的值声明为变量。<br>类型标注</p>
-<p>当你声明常量或者变量的时候可以加上类型标注(type annotation)，说明常量或者变量中要存储的值的类型。如果要添加类型标注，需要在常量或者变量名后面加上一个冒号和空格，然后加上类型名称。</p>
-<p>这个例子给welcomeMessage变量添加了类型标注，表示这个变量可以存储String类型的值：<br>[html] view plain copy print?在CODE上查看代码片派生到我的代码片<br>var welcomeMessage: String<br>声明中的冒号代表着“是…类型”，所以这行代码可以被理解为：“声明一个类型为String，名字为welcomeMessage的变量。”</p>
-<p>“类型为String”的意思是“可以存储任意String类型的值。”</p>
-<p>welcomeMessage变量现在可以被设置成任意字符串：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>welcomeMessage = “Hello”<br>注意：一般来说你很少需要写类型标注。如果你在声明常量或者变量的时候赋了一个初始值，Swift可以推断出这个常量或者变量的类型，请参考类型安全和类型推断。在上面的例子中，没有给welcomeMessage赋初始值，所以变量welcomeMessage的类型是通过一个类型标注指定的，而不是通过初始值推断的。<br>常量和变量的命名</p>
-<p>你可以用任何你喜欢的字符作为常量和变量名，包括 Unicode 字符：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>let π = 3.14159<br>let 你好 = “你好世界”<br>常量与变量名不能包含数学符号，箭头，保留的（或者非法的）Unicode 码位，连线与制表符。也不能以数字开头，但是可以在常量与变量名的其他地方包含数字。</p>
-<p>一旦你将常量或者变量声明为确定的类型，你就不能使用相同的名字再次进行声明，或者改变其存储的值的类型。同时，你也不能将常量与变量进行互转。<br>注意：如果你需要使用与Swift保留关键字相同的名称作为常量或者变量名，你可以使用反引号（`）将关键字包围的方式将其作为名字使用。无论如何，你应当避免使用关键字作为常量或变量名，除非你别无选择。<br>你可以更改现有的变量值为其他同类型的值，在下面的例子中，friendlyWelcome的值从”Hello!”改为了”Bonjour!”:<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>var friendlyWelcome = “Hello!”<br>friendlyWelcome = “Bonjour!”<br>// friendlyWelcome 现在是 “Bonjour!”<br>与变量不同，常量的值一旦被确定就不能更改了。尝试这样做会导致编译时报错：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>let languageName = “Swift”<br>languageName = “Swift++”<br>// 这会报编译时错误 - languageName 不可改变<br>输出常量和变量</p>
-<p>你可以用println函数来输出当前常量或变量的值:<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>println(friendlyWelcome) // 输出 “Bonjour!”<br>println是一个用来输出的全局函数，输出的内容会在最后换行。如果你用 Xcode，println将会输出内容到“console”面板上。(另一种函数叫print，唯一区别是在输出内容最后不会换行。)</p>
-<p>println函数输出传入的String值：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>println(“This is a string”) // 输出 “This is a string”<br>与 Cocoa 里的NSLog函数类似的是，println函数可以输出更复杂的信息。这些信息可以包含当前常量和变量的值。</p>
-<p>Swift 用字符串插值（string interpolation）的方式把常量名或者变量名当做占位符加入到长字符串中，Swift 会用当前常量或变量的值替换这些占位符。将常量或变量名放入圆括号中，并在开括号前使用反斜杠将其转义：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>println(“The current value of friendlyWelcome is (friendlyWelcome)”)<br>// 输出 “The current value of friendlyWelcome is Bonjour!<br>注意：字符串插值所有可用的选项，请参考字符串插值。</p>
-<p>注释</p>
-<p>请将你的代码中的非执行文本注释成提示或者笔记以方便你将来阅读。Swift 的编译器将会在编译代码时自动忽略掉注释部分。</p>
-<p>Swift 中的注释与C 语言的注释非常相似。单行注释以双正斜杠作(//)为起始标记；<br>// 这是一个注释<br>你也可以进行多行注释，其起始标记为单个正斜杠后跟随一个星号(/<em>)，终止标记为一个星号后跟随单个正斜杠(</em>/)<br>/<em> 这是一个, 多行注释 </em>/<br>与C 语言多行注释不同，Swift 的多行注释可以嵌套在其它的多行注释之中。你可以先生成一个多行注释块，然后在这个注释块之中再嵌套成第二个多行注释。终止注释时先插入第二个注释块的终止标记，然后再插入第一个注释块的终止标记：<br>/<em> 这是第一个多行注释的开头<br>/</em> 这是第二个被嵌套的多行注释 <em>/<br>这是第一个多行注释的结尾 </em>/<br>通过运用嵌套多行注释，你可以快速方便的注释掉一大段代码，即使这段代码之中已经含有了多行注释块。</p>
-<p>分号</p>
-<p>与其他大部分编程语言不同，Swift 并不强制要求你在每条语句的结尾处使用分号（;），当然，你也可以按照你自己的习惯添加分号。有一种情况下必须要用分号，即你打算在同一行内写多条独立的语句：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>let cat = “<br>整数</p>
-<p>整数就是没有小数部分的数字，比如42和-23。整数可以是有符号（正、负、零）或者无符号（正、零）。</p>
-<p>Swift 提供了8，16，32和64位的有符号和无符号整数类型。这些整数类型和 C 语言的命名方式很像，比如8位无符号整数类型是UInt8，32位有符号整数类型是Int32。就像 Swift 的其他类型一样，整数类型采用大写命名法。<br>整数范围</p>
-<p>你可以访问不同整数类型的min和max属性来获取对应类型的最大值和最小值：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>let minValue = UInt8.min // minValue 为 0，是 UInt8 类型的最小值<br>let maxValue = UInt8.max // maxValue 为 255，是 UInt8 类型的最大值<br>Int</p>
-<p>一般来说，你不需要专门指定整数的长度。Swift 提供了一个特殊的整数类型Int，长度与当前平台的原生字长相同：<br>在32位平台上，Int和Int32长度相同。<br>在64位平台上，Int和Int64长度相同。</p>
-<p>除非你需要特定长度的整数，一般来说使用Int就够了。这可以提高代码一致性和可复用性。即使是在32位平台上，Int可以存储的整数范围也可以达到-2147483648~2147483647，大多数时候这已经足够大了。<br>UInt</p>
-<p>Swift 也提供了一个特殊的无符号类型UInt，长度与当前平台的原生字长相同：<br>在32位平台上，UInt和UInt32长度相同。<br>在64位平台上，UInt和UInt64长度相同。<br>注意：尽量不要使用UInt，除非你真的需要存储一个和当前平台原生字长相同的无符号整数。除了这种情况，最好使用Int，即使你要存储的值已知是非负的。统一使用Int可以提高代码的可复用性，避免不同类型数字之间的转换，并且匹配数字的类型推测，请参考类型安全和类型推测。<br>浮点数</p>
-<p>浮点数是有小数部分的数字，比如3.14159，0.1和-273.15。</p>
-<p>浮点类型比整数类型表示的范围更大，可以存储比Int类型更大或者更小的数字。Swift 提供了两种有符号浮点数类型：<br>Double表示64位浮点数。当你需要存储很大或者很高精度的浮点数时请使用此类型。<br>Float表示32位浮点数。精度要求不高的话可以使用此类型。<br>注意：Double精确度很高，至少有15位数字，而Float最少只有6位数字。选择哪个类型取决于你的代码需要处理的值的范围。<br>类型安全和类型推测</p>
-<p>Swift 是一个类型安全(type safe )的语言。类型安全的语言可以让你清楚地知道代码要处理的值的类型。如果你的代码需要一个String，你绝对不可能不小心传进去一个Int。</p>
-<p>由于 Swift 是类型安全的，所以它会在编译你的代码时进行类型检查(type checks)，并把不匹配的类型标记为错误。这可以让你在开发的时候尽早发现并修复错误。</p>
-<p>当你要处理不同类型的值时，类型检查可以帮你避免错误。然而，这并不是说你每次声明常量和变量的时候都需要显式指定类型。如果你没有显式指定类型，Swift 会使用类型推测(type inference)来选择合适的类型。有了类型推测，编译器可以在编译代码的时候自动推测出表达式的类型。原理很简单，只要检查你赋的值即可。</p>
-<p>因为有类型推测，和 C 或者 Objective-C 比起来 Swift 很少需要声明类型。常量和变量虽然需要明确类型，但是大部分工作并不需要你自己来完成。</p>
-<p>当你声明常量或者变量并赋初值的时候类型推测非常有用。当你在声明常量或者变量的时候赋给它们一个字面量(literal value 或 literal)即可触发类型推测。（字面量就是会直接出现在你代码中的值，比如42和3.14159。）</p>
-<p>例如，如果你给一个新常量赋值42并且没有标明类型，Swift 可以推测出常量类型是Int，因为你给它赋的初始值看起来像一个整数：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>let meaningOfLife = 42 // meaningOfLife 会被推测为 Int 类型<br>同理，如果你没有给浮点字面量标明类型，Swift 会推测你想要的是Double：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>let pi = 3.14159 // pi 会被推测为 Double 类型<br>当推测浮点数的类型时，Swift 总是会选择Double而不是Float。</p>
-<p>如果表达式中同时出现了整数和浮点数，会被推测为Double类型：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>let anotherPi = 3 + 0.14159 // anotherPi 会被推测为 Double 类型<br>原始值3没有显式声明类型，而表达式中出现了一个浮点字面量，所以表达式会被推测为Double类型。<br>数值型字面量</p>
-<p>整数字面量可以被写作：<br>一个十进制数，没有前缀<br>一个二进制数，前缀是0b<br>一个八进制数，前缀是0o<br>一个十六进制数，前缀是0x</p>
-<p>下面的所有整数字面量的十进制值都是17:<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>let decimalInteger = 17<br>let binaryInteger = 0b10001 // 二进制的17<br>let octalInteger = 0o21 // 八进制的17<br>let hexadecimalInteger = 0x11 // 十六进制的17<br>浮点字面量可以是十进制（没有前缀）或者是十六进制（前缀是0x）。小数点两边必须有至少一个十进制数字（或者是十六进制的数字）。浮点字面量还有一个可选的指数(exponent)，在十进制浮点数中通过大写或者小写的e来指定，在十六进制浮点数中通过大写或者小写的p来指定。</p>
-<p>如果一个十进制数的指数为exp，那这个数相当于基数和$10^{exp}$的乘积：<br>1.25e2 表示 $1.25 × 10^{2}$，等于 125.0。<br>1.25e-2 表示 $1.25 × 10^{-2}$，等于 0.0125。</p>
-<p>如果一个十六进制数的指数为exp，那这个数相当于基数和$2^{exp}$的乘积：<br>0xFp2 表示 $15 × 2^{2}$，等于 60.0。<br>0xFp-2 表示 $15 × 2^{-2}$，等于 3.75。</p>
-<p>下面的这些浮点字面量都等于十进制的12.1875：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>let decimalDouble = 12.1875<br>let exponentDouble = 1.21875e1<br>let hexadecimalDouble = 0xC.3p0<br>数值类字面量可以包括额外的格式来增强可读性。整数和浮点数都可以添加额外的零并且包含下划线，并不会影响字面量：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>let paddedDouble = 000123.456<br>let oneMillion = 1_000_000<br>let justOverOneMillion = 1_000_000.000_000_1<br>数值型类型转换</p>
-<p>通常来讲，即使代码中的整数常量和变量已知非负，也请使用Int类型。总是使用默认的整数类型可以保证你的整数常量和变量可以直接被复用并且可以匹配整数类字面量的类型推测。 只有在必要的时候才使用其他整数类型，比如要处理外部的长度明确的数据或者为了优化性能、内存占用等等。使用显式指定长度的类型可以及时发现值溢出并且可以暗示正在处理特殊数据。<br>整数转换</p>
-<p>不同整数类型的变量和常量可以存储不同范围的数字。Int8类型的常量或者变量可以存储的数字范围是-128~127，而UInt8类型的常量或者变量能存储的数字范围是0~255。如果数字超出了常量或者变量可存储的范围，编译的时候会报错：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>let cannotBeNegative: UInt8 = -1 // UInt8 类型不能存储负数，所以会报错<br>let tooBig: Int8 = Int8.max + 1 // Int8 类型不能存储超过最大值的数，所以会报错<br>由于每中整数类型都可以存储不同范围的值，所以你必须根据不同情况选择性使用数值型类型转换。这种选择性使用的方式，可以预防隐式转换的错误并让你的代码中的类型转换意图变得清晰。</p>
-<p>要将一种数字类型转换成另一种，你要用当前值来初始化一个期望类型的新数字，这个数字的类型就是你的目标类型。在下面的例子中，常量twoThousand是UInt16类型，然而常量one是Uint8类型。它们不能直接相加，因为它们类型不同。所以要调用UInt16(one)来创建一个新的UInt16数字并用one的值来初始化，然后使用这个新数字来计算：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>let twoThousand: UInt16 = 2_000<br>let one: UInt8 = 1<br>let twoThousandAndOne = twoThousand + UInt16(one)<br>现在两个数字的类型都是UInt16，可以进行相加。目标常量twoThousandAndOne的类型被推测为UInt16，因为它是两个UInt16值的和。</p>
-<p>SomeType(ofInitialValue)是调用 Swift 构造器并传入一个初始值的默认方法。在语言内部，UInt16有一个构造器，可以接受一个UInt8类型的值，所以这个构造器可以用现有的UInt8来创建一个新的UInt16。注意，你并不能传入任意类型的值，只能传入UInt16内部有对应构造器的值。不过你可以扩展现有的类型来让它可以接收其他类型的值（包括自定义类型），请参考扩展。<br>整数和浮点数转换</p>
-<p>整数和浮点数的转换必须显式指定类型：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>let three = 3<br>let pointOneFourOneFiveNine = 0.14159<br>let pi = Double(three) + pointOneFourOneFiveNine<br>// pi 等于 3.14159，所以被推测为 Double 类型<br>这个例子中，常量three的值被用来创建一个Double类型的值，所以加号两边的数类型相同。如果不进行转换，两者无法相加。</p>
-<p>浮点数到整数的反向转换同样行，整数类型可以用Double或者Float类型来初始化：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>let integerPi = Int(pi) // integerPi 等于 3，所以被推测为 Int 类型<br>当用这种方式来初始化一个新的整数值时，浮点值会被截断。也就是说4.75会变成4，-3.9会变成-3。<br>注意：结合数字类常量和变量不同于结合数字类字面量。字面量3可以直接和字面量0.14159相加，因为数字字面量本身没有明确的类型。它们的类型只在编译器需要求值的时候被推测。<br>类型别名</p>
-<p>类型别名(type aliases)就是给现有类型定义另一个名字。你可以使用typealias关键字来定义类型别名。</p>
-<p>当你想要给现有类型起一个更有意义的名字时，类型别名非常有用。假设你正在处理特定长度的外部资源的数据：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>typealias AudioSample = UInt16<br>定义了一个类型别名之后，你可以在任何使用原始名的地方使用别名：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>var maxAmplitudeFound = AudioSample.min // maxAmplitudeFound 现在是 0<br>本例中，AudioSample被定义为UInt16的一个别名。因为它是别名，AudioSample.min实际上是UInt16.min，所以会给maxAmplitudeFound赋一个初值0。<br>布尔值</p>
-<p>Swift 有一个基本的布尔(Boolean)类型，叫做Bool。布尔值指逻辑上的(logical)，因为它们只能是真或者假。Swift 有两个布尔常量，true和false：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>let orangesAreOrange = true<br>let turnipsAreDelicious = false<br>orangesAreOrange和turnipsAreDelicious的类型会被推测为Bool，因为它们的初值是布尔字面量。就像之前提到的Int和Double一样，如果你创建变量的时候给它们赋值true或者false，那你不需要将常量或者变量声明为Bool类型。初始化常量或者变量的时候如果所赋的值类型已知，就可以触发类型推测，这让 Swift 代码更加简洁并且可读性更高。</p>
-<p>当你编写条件语句比如if语句的时候，布尔值非常有用：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>if turnipsAreDelicious {<br>    println(“Mmm, tasty turnips!”)<br>} else {<br>    println(“Eww, turnips are horrible.”)<br>}<br>// 输出 “Eww, turnips are horrible.”<br>条件语句，例如if，请参考控制流。</p>
-<p>如果你在需要使用Bool类型的地方使用了非布尔值，Swift 的类型安全机制会报错。下面的例子会报告一个编译时错误：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>let i = 1 if i { // 这个例子不会通过编译，会报错 }<br>然而，下面的例子是合法的：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>let i = 1 if i == 1 { // 这个例子会编译成功 }<br>i == 1的比较结果是Bool类型，所以第二个例子可以通过类型检查。类似i == 1这样的比较，请参考基本操作符。</p>
-<p>和 Swift 中的其他类型安全的例子一样，这个方法可以避免错误并保证这块代码的意图总是清晰的。<br>元组</p>
-<p>元组（tuples）把多个值组合成一个复合值。元组内的值可以使任意类型，并不要求是相同类型。</p>
-<p>下面这个例子中，(404, “Not Found”)是一个描述 HTTP 状态码（HTTP status code）的元组。HTTP 状态码是当你请求网页的时候 web 服务器返回的一个特殊值。如果你请求的网页不存在就会返回一个404 Not Found状态码。<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>let http404Error = (404, “Not Found”) // http404Error 的类型是 (Int, String)，值是 (404, “Not Found”)<br>(404, “Not Found”)元组把一个Int值和一个String值组合起来表示 HTTP 状态码的两个部分：一个数字和一个人类可读的描述。这个元组可以被描述为“一个类型为(Int, String)的元组”。</p>
-<p>你可以把任意顺序的类型组合成一个元组，这个元组可以包含所有类型。只要你想，你可以创建一个类型为(Int, Int, Int)或者(String, Bool)或者其他任何你想要的组合的元组。</p>
-<p>你可以将一个元组的内容分解（decompose）成单独的常量和变量，然后你就可以正常使用它们了：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>let (statusCode, statusMessage) = http404Error<br>println(“The status code is (statusCode)”)<br>// 输出 “The status code is 404”<br>println(“The status message is (statusMessage)”)<br>// 输出 “The status message is Not Found”<br>如果你只需要一部分元组值，分解的时候可以把要忽略的部分用下划线（<em>）标记：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>let (justTheStatusCode, </em>) = http404Error<br>println(“The status code is (justTheStatusCode)”)<br>// 输出 “The status code is 404”<br>此外，你还可以通过下标来访问元组中的单个元素，下标从零开始：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>println(“The status code is (http404Error.0)”) // 输出 “The status code is 404”<br>println(“The status message is (http404Error.1)”) // 输出 “The status message is Not Found”<br>你可以在定义元组的时候给单个元素命名：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>let http200Status = (statusCode: 200, description: “OK”)<br>给元组中的元素命名后，你可以通过名字来获取这些元素的值：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>println(“The status code is (http200Status.statusCode)”) // 输出 “The status code is 200”<br>println(“The status message is (http200Status.description)”) // 输出 “The status message is OK”<br>作为函数返回值时，元组非常有用。一个用来获取网页的函数可能会返回一个(Int, String)元组来描述是否获取成功。和只能返回一个类型的值比较起来，一个包含两个不同类型值的元组可以让函数的返回信息更有用。请参考[函数参数与返回值(06_Functions.html#Function_Parameters_and_Return_Values)。<br>注意：元组在临时组织值的时候很有用，但是并不适合创建复杂的数据结构。如果你的数据结构并不是临时使用，请使用类或者结构体而不是元组。请参考类和结构体。<br>可选</p>
-<p>使用可选（optionals）来处理值可能缺失的情况。可选表示：<br>有值，等于 x<br>或者<br>没有值<br>注意：C 和 Objective-C 中并没有可选这个概念。最接近的是 Objective-C 中的一个特性，一个方法要不返回一个对象要不返回nil，nil表示“缺少一个合法的对象”。然而，这只对对象起作用——对于结构体，基本的 C 类型或者枚举类型不起作用。对于这些类型，Objective-C 方法一般会返回一个特殊值（比如NSNotFound）来暗示值缺失。这种方法假设方法的调用者知道并记得对特殊值进行判断。然而，Swift 的可选可以让你暗示任意类型的值缺失，并不需要一个特殊值。<br>来看一个例子。Swift 的String类型有一个叫做toInt的方法，作用是将一个String值转换成一个Int值。然而，并不是所有的字符串都可以转换成一个整数。字符串”123”可以被转换成数字123，但是字符串”hello, world”不行。</p>
-<p>下面的例子使用toInt方法来尝试将一个String转换成Int：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>let possibleNumber = “123”<br>let convertedNumber = possibleNumber.toInt()<br>// convertedNumber 被推测为类型 “Int?”， 或者类型 “optional Int”<br>因为toInt方法可能会失败，所以它返回一个可选的（optional）Int，而不是一个Int。一个可选的Int被写作Int?而不是Int。问号暗示包含的值是可选，也就是说可能包含Int值也可能不包含值。（不能包含其他任何值比如Bool值或者String值。只能是Int或者什么都没有。）<br>if 语句以及强制解析</p>
-<p>你可以使用if语句来判断一个可选是否包含值。如果可选有值，结果是true；如果没有值，结果是false。</p>
-<p>当你确定可选包确实含值之后，你可以在可选的名字后面加一个感叹号(!)来获取值。这个惊叹号表示“我知道这个可选有值，请使用它。”这被称为可选值的强制解析（forced unwrapping）：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>if convertedNumber {<br>    println(“(possibleNumber) has an integer value of (convertedNumber!)”)<br>} else {<br>    println(“(possibleNumber) could not be converted to an integer”)<br>}<br>// 输出 “123 has an integer value of 123”<br>更多关于if语句的内容，请参考控制流。<br>注意：使用!来获取一个不存在的可选值会导致运行时错误。使用!来强制解析值之前，一定要确定可选包含一个非nil的值。<br>可选绑定</p>
-<p>使用可选绑定（optional binding）来判断可选是否包含值，如果包含就把值赋给一个临时常量或者变量。可选绑定可以用在if和while语句中来对可选的值进行判断并把值赋给一个常量或者变量。if和while语句，请参考控制流。</p>
-<p>像下面这样在if语句中写一个可选绑定：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>if let constantName = someOptional { statements }<br>你可以像上面这样使用可选绑定来重写possibleNumber这个例子：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>if let actualNumber = possibleNumber.toInt() {<br>    println(“(possibleNumber) has an integer value of (actualNumber)”)<br>} else {<br>    println(“(possibleNumber) could not be converted to an integer”)<br>}<br>// 输出 “123 has an integer value of 123”<br>这段代码可以被理解为：“如果possibleNumber.toInt返回的可选Int包含一个值，创建一个叫做actualNumber的新常量并将可选包含的值赋给它。”</p>
-<p>如果转换成功，actualNumber常量可以在if语句的第一个分支中使用。它已经被可选包含的值初始化过，所以不需要再使用!后缀来获取它的值。在这个例子中，actualNumber只被用来输出转换结果。</p>
-<p>你可以在可选绑定中使用常量和变量。如果你想在if语句的第一个分支中操作actualNumber的值，你可以改成if var actualNumber，这样可选包含的值就会被赋给一个变量而非常量。<br>nil</p>
-<p>你可以给可选变量赋值为nil来表示它没有值：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>var serverResponseCode: Int? = 404  // serverResponseCode 包含一个可选的 Int 值 404<br>serverResponseCode = nil // serverResponseCode 现在不包含值<br>注意：nil不能用于非可选的常量和变量。如果你的代码中有常量或者变量需要处理值缺失的情况，请把它们声明成对应的可选类型。<br>如果你声明一个可选常量或者变量但是没有赋值，它们会自动被设置为nil：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>var surveyAnswer: String? // surveyAnswer 被自动设置为 nil</p>
-<p>注意：Swift 的nil和 Objective-C 中的nil并不一样。在 Objective-C 中，nil是一个指向不存在对象的指针。在 Swift 中，nil不是指针——它是一个确定的值，用来表示值缺失。任何类型的可选都可以被设置为nil，不只是对象类型。<br>隐式解析可选</p>
-<p>如上所述，可选暗示了常量或者变量可以“没有值”。可选可以通过if语句来判断是否有值，如果有值的话可以通过可选绑定来解析值。</p>
-<p>有时候在程序架构中，第一次被赋值之后，可以确定一个可选总会有值。在这种情况下，每次都要判断和解析可选值是非常低效的，因为可以确定它总会有值。</p>
-<p>这种类型的可选被定义为隐式解析可选（implicitly unwrapped optionals）。把想要用作可选的类型的后面的问号（String?）改成感叹号（String!）来声明一个隐式解析可选。</p>
-<p>当可选被第一次赋值之后就可以确定之后一直有值的时候，隐式解析可选非常有用。隐式解析可选主要被用在 Swift 中类的构造过程中，请参考类实例之间的循环强引用。</p>
-<p>一个隐式解析可选其实就是一个普通的可选，但是可以被当做非可选来使用，并不需要每次都使用解析来获取可选值。下面的例子展示了可选String和隐式解析可选String之间的区别：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>let possibleString: String? = “An optional string.”<br>println(possibleString!) // 需要惊叹号来获取值<br>// 输出 “An optional string.”<br>let assumedString: String! = “An implicitly unwrapped optional string.”<br>println(assumedString) // 不需要感叹号<br>// 输出 “An implicitly unwrapped optional string.”<br>你可以把隐式解析可选当做一个可以自动解析的可选。你要做的只是声明的时候把感叹号放到类型的结尾，而不是每次取值的可选名字的结尾。<br>注意：如果你在隐式解析可选没有值的时候尝试取值，会触发运行时错误。和你在没有值的普通可选后面加一个惊叹号一样。<br>你仍然可以把隐式解析可选当做普通可选来判断它是否包含值：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>if assumedString {<br>    println(assumedString)<br>}<br>// 输出 “An implicitly unwrapped optional string.”<br>你也可以在可选绑定中使用隐式解析可选来检查并解析它的值：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>if let definiteString = assumedString {<br>    println(definiteString)<br>}<br>// 输出 “An implicitly unwrapped optional string.”<br>注意：如果一个变量之后可能变成nil的话请不要使用隐式解析可选。如果你需要在变量的生命周期中判断是否是nil的话，请使用普通可选类型。</p>]]></content>
-    
-    <summary type="html">
-    
-      Swift基础语法3.0
-    
-    </summary>
-    
-      <category term="ios" scheme="http://code.youmeek.com/categories/ios/"/>
-    
-    
-      <category term="ios" scheme="http://code.youmeek.com/tags/ios/"/>
-    
-      <category term="swift" scheme="http://code.youmeek.com/tags/swift/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>node.js基本工作原理及流程</title>
-    <link href="http://code.youmeek.com/2016/12/05/Node.js%E5%9F%BA%E6%9C%AC%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/"/>
-    <id>http://code.youmeek.com/2016/12/05/Node.js基本工作原理/</id>
-    <published>2016-12-04T16:00:00.000Z</published>
-    <updated>2017-01-25T03:03:13.497Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><h2 id="Node-js是什么"><a href="#Node-js是什么" class="headerlink" title="Node.js是什么"></a>Node.js是什么</h2><p>Node 是一个服务器端 JavaScript 解释器，用于方便地搭建响应速度快、易于扩展的网络应用。Node.js 使用事件驱动， 非阻塞I/O 模型而得以轻量和高效，非常适合在分布式设备上运行数据密集型的实时应用。<br>Node.js 是一个可以让 JavaScript 运行在浏览器之外的平台。它实现了诸如文件系统、模块、包、操作系统 API、网络通信等 Core JavaScript 没有或者不完善的功能。历史上将 JavaScript移植到浏览器外的计划不止一个，但Node.js 是最出色的一个。</p>
-<h2 id="什么是v8引擎"><a href="#什么是v8引擎" class="headerlink" title="什么是v8引擎"></a>什么是v8引擎</h2><p>V8 JavaScript 引擎是 Google 用于其 Chrome 浏览器的底层 JavaScript 引擎。很少有人考虑 JavaScript 在客户机上实际做了些什么？实际上，JavaScript 引擎负责解释并执行代码。Google 使用 V8 创建了一个用 C++ 编写的超快解释器，该解释器拥有另一个独特特征；您可以下载该引擎并将其嵌入任何 应用程序。V8 JavaScript 引擎并不仅限于在一个浏览器中运行。因此，Node 实际上会使用 Google 编写的 V8 JavaScript 引擎，并将其重建为可在服务器上使用。</p>
-<h2 id="Node-js的作用"><a href="#Node-js的作用" class="headerlink" title="Node.js的作用"></a>Node.js的作用</h2><p>Node 公开宣称的目标是 “旨在提供一种简单的构建可伸缩网络程序的方法”。我们来看一个简单的例子，在 Java™ 和 PHP 这类语言中，每个连接都会生成一个新线程，每个新线程可能需要 2 MB 的配套内存。在一个拥有 8 GB RAM 的系统上，理论上最大的并发连接数量是 4,000 个用户。随着您的客户群的增长，如果希望您的 Web 应用程序支持更多用户，那么，您必须添加更多服务器。所以在传统的后台开发中，整个 Web 应用程序架构（包括流量、处理器速度和内存速度）中的瓶颈是：服务器能够处理的并发连接的最大数量。这个不同的架构承载的并发数量是不一致的。<br>而Node的出现就是为了解决这个问题：更改连接到服务器的方式。在Node 声称它不允许使用锁，它不会直接阻塞 I/O 调用。Node在每个连接发射一个在 Node 引擎的进程中运行的事件，而不是为每个连接生成一个新的 OS 线程（并为其分配一些配套内存）。</p>
-<h2 id="Node-js能做什么"><a href="#Node-js能做什么" class="headerlink" title="Node.js能做什么"></a>Node.js能做什么</h2><p>借用一句经典的描述Node.js的话:正如 JavaScript 为客户端而生，Node.js 为网络而生。<br>使用Node.js，你可以轻易的实现：</p>
-<ul>
-<li>具有复杂逻辑的网站；</li>
-<li>基于社交网络的大规模 Web 应用；</li>
-<li>Web Socket 服务器；</li>
-<li>TCP/UDP 套接字应用程序；</li>
-<li>命令行工具；</li>
-<li>交互式终端程序；</li>
-<li>带有图形用户界面的本地应用程序；</li>
-<li>单元测试工具；</li>
-<li>客户端 JavaScript 编译器。</li>
-</ul>
-<h2 id="什么是事件驱动编程"><a href="#什么是事件驱动编程" class="headerlink" title="什么是事件驱动编程"></a>什么是事件驱动编程</h2><p>在我们使用Java，PHP等语言实现编程的时候，我们面向对象编程是完美的编程设计，这使得他们对其他编程方法不屑一顾。却不知大名鼎鼎Node使用的却是事件驱动编程的思想。那什么是事件驱动编程。<br><strong>事件驱动编程，为需要处理的事件编写相应的事件处理程序。代码在事件发生时执行。</strong><br>为需要处理的事件编写相应的事件处理程序。要理解事件驱动和程序，就需要与非事件驱动的程序进行比较。实际上，现代的程序大多是事件驱动的，比如多线程的程序，肯定是事件驱动的。早期则存在许多非事件驱动的程序，这样的程序，在需要等待某个条件触发时，会不断地检查这个条件，直到条件满足，这是很浪费cpu时间的。而事件驱动的程序，则有机会释放cpu从而进入睡眠态（注意是有机会，当然程序也可自行决定不释放cpu），当事件触发时被操作系统唤醒，这样就能更加有效地使用cpu。<br>来看一张简单的事件驱动模型（uml）：</p>
-<p><img src="http://img.blog.csdn.net/20161231115520916?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p>事件驱动模型主要包含3个对象：事件源、事件和事件处理程序。</p>
-<ul>
-<li>事件源：产生事件的地方(html元素)</li>
-<li>事件：点击/鼠标操作/键盘操作等等</li>
-<li>事件对象：当某个事件发生时，可能会产生一个事件对象，该时间对象会封装好该时间的信息，传递给事件处理程序</li>
-<li>事件处理程序：响应用户事件的代码<br>其实我们使用的window系统也算得上是事件驱动了。我们来看一个简单的事例：监听鼠标点击事件，并能够显示鼠标点击的位置x,y。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;html&gt; </div><div class="line">   &lt;head&gt; </div><div class="line">   &lt;script&gt; </div><div class="line">   function test1(e)&#123; </div><div class="line">     window.alert(&quot;x=&quot;+e.clientX+&quot;y=&quot;+e.clientY); </div><div class="line">   &#125; </div><div class="line">   &lt;/script&gt; </div><div class="line">   &lt;/head&gt; </div><div class="line">   &lt;body onmousedown=&quot;test1(event)&quot;&gt; </div><div class="line">   &lt;/body&gt; </div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
-<h1 id="Node-js运行原理分析"><a href="#Node-js运行原理分析" class="headerlink" title="Node.js运行原理分析"></a>Node.js运行原理分析</h1><p>当我们搜索Node.js时，夺眶而出的关键字就是 “单线程，异步I/O，事件驱动”，应用程序的请求过程可以分为俩个部分：CPU运算和I/O读写，CPU计算速度通常远高于磁盘读写速度，这就导致CPU运算已经完成，但是不得不等待磁盘I/O任务完成之后再继续接下来的业务。<br>    所以I/O才是应用程序的瓶颈所在，在I/O密集型业务中，假设请求需要100ms来完成，其中99ms化在I/O上。如果需要优化应用程序，让他能同时处理更多的请求，我们会采用多线程，同时开启100个、1000个线程来提高我们请求处理，当然这也是一种可观的方案。<br>     但是由于一个CPU核心在一个时刻只能做一件事情，操作系统只能通过将CPU切分为时间片的方法，让线程可以较为均匀的使用CPU资源。但操作系统在内核切换线程的同时也要切换线程的上线文，当线程数量过多时，时间将会被消耗在上下文切换中。所以在大并发时，多线程结构还是无法做到强大的伸缩性。<br> 那么是否可以另辟蹊径呢？！我们先来看看单线程，《深入浅出Node》一书提到 “单线程的最大好处，是不用像多线程编程那样处处在意状态的同步问题，这里没有死锁的存在，也没有线程上下文切换所带来的性能上的开销”，那么一个线程一次只能处理一个请求岂不是无稽之谈，先让我们看张图：<br> <img src="http://img.blog.csdn.net/20161231120417621?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br> Node.js的单线程并不是真正的单线程，只是开启了单个线程进行业务处理（cpu的运算），同时开启了其他线程专门处理I/O。当一个指令到达主线程，主线程发现有I/O之后，直接把这个事件传给I/O线程，不会等待I/O结束后，再去处理下面的业务，而是拿到一个状态后立即往下走，这就是“单线程”、“异步I/O”。<br> I/O操作完之后呢？Node.js的I/O 处理完之后会有一个回调事件，这个事件会放在一个事件处理队列里头，在进程启动时node会创建一个类似于While(true)的循环，它的每一次轮询都会去查看是否有事件需要处理，是否有事件关联的回调函数需要处理，如果有就处理，然后加入下一个轮询，如果没有就退出进程，这就是所谓的“事件驱动”。这也从Node的角度解释了什么是”事件驱动”。<br> 在node.js中，事件主要来源于网络请求，文件I/O等，根据事件的不同对观察者进行了分类，有文件I/O观察者，网络I/O观察者。事件驱动是一个典型的生产者/消费者模型，请求到达观察者那里，事件循环从观察者进行消费，主线程就可以马不停蹄的只关注业务不用再去进行I/O等待。</p>
-<h1 id="Node-js的简单实践"><a href="#Node-js的简单实践" class="headerlink" title="Node.js的简单实践"></a>Node.js的简单实践</h1><p> 关于node的环境搭建这里就不说明了<a href="http://blog.csdn.net/xiangzhihong8/article/details/52842061" target="_blank" rel="external">node入门</a>。这里为了方便大家理解，我们写一个简单的登录实例。<br> 这里为了方便前端小白的理解，新增一个小节，如何使用Node搭建一个新的项目。</p>
-<h2 id="使用Node创建项目"><a href="#使用Node创建项目" class="headerlink" title="使用Node创建项目"></a>使用Node创建项目</h2><p> 安装Express</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">npm install -g express  </div><div class="line">npm install -g express-generator</div></pre></td></tr></table></figure>
-<p>新建项目<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">express -t ejs newsproject</div></pre></td></tr></table></figure></p>
-<p>按照提示进入项目目录，运行npm安装</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd newsprojec</div><div class="line">npm install</div></pre></td></tr></table></figure>
-<p>运行项目</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">node app.js</div></pre></td></tr></table></figure>
-<p>浏览器访问:<a href="http://127.0.0.1:3000/即可见nodejs站点页面即可。" target="_blank" rel="external">http://127.0.0.1:3000/即可见nodejs站点页面即可。</a><br>接下来我们写一个简单的例子，来看一下效果图：<br><img src="http://img.blog.csdn.net/20161231215128577?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br> 整个目录如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">根目录--------------</div><div class="line">    |-package.json</div><div class="line">    |-test.js</div><div class="line">    |-public</div><div class="line">        |-main.html</div><div class="line">        |-next.html</div></pre></td></tr></table></figure></p>
-<p>整个目录包含三个文件，test.js（作为控制文件）、main.html和next.html作为页面的显示文件。<br>来看一下代码：<br>test.js（作为控制文件）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">// file name :test.js</div><div class="line">var express             = require(&apos;express&apos;);</div><div class="line">var app                 = express();</div><div class="line">var bodyParse           = require(&apos;body-parser&apos;)</div><div class="line">var cookieParser        = require(&apos;cookie-parser&apos;) ;</div><div class="line">app.use(cookieParser()) ;</div><div class="line">app.use(bodyParse.urlencoded(&#123;extended:false&#125;)) ;</div><div class="line"></div><div class="line">// 处理根目录的get请求</div><div class="line">app.get(&apos;/&apos;,function(req,res)&#123;</div><div class="line">    res.sendfile(&apos;public/main.html&apos;) ;</div><div class="line">    console.log(&apos;main page is required &apos;);</div><div class="line">&#125;) ;</div><div class="line"></div><div class="line">// 处理/login的get请求</div><div class="line">app.get(&apos;/add&apos;, function (req,res) &#123;</div><div class="line">    res.sendfile(&apos;public/add.html&apos;) ;</div><div class="line">    console.log(&apos;add page is required &apos;) ;</div><div class="line">&#125;) ;</div><div class="line"></div><div class="line">// 处理/login的post请求</div><div class="line">app.post(&apos;/login&apos;,function(req,res)&#123;</div><div class="line">    name=req.body.name ;</div><div class="line">    pwd=req.body.pwd   ;</div><div class="line">    console.log(name+&apos;--&apos;+pwd) ;</div><div class="line">    res.status(200).send(name+&apos;--&apos;+pwd) ;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">// 监听3000端口</div><div class="line">var server=app.listen(3000) ;</div></pre></td></tr></table></figure>
-<p>main.html的代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div></pre></td><td class="code"><pre><div class="line">&lt;html&gt;</div><div class="line"></div><div class="line">    &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;http://fonts.useso.com/css?family=Tangerine|Inconsolata|Droid+Sans&quot;&gt;</div><div class="line"></div><div class="line">    &lt;style&gt;</div><div class="line">        div#test&#123;</div><div class="line">            font-family: &apos;Tangerine&apos;,serif;</div><div class="line">            font-size: 48px;</div><div class="line">        &#125;</div><div class="line">        p#link1&#123;</div><div class="line">            font-family: &apos;Tangerine&apos;,serif;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &lt;/style&gt;</div><div class="line"></div><div class="line">    &lt;script src=&quot;//cdn.bootcss.com/jquery/2.2.1/jquery.min.js&quot;&gt;&lt;/script&gt;</div><div class="line"></div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line"></div><div class="line">&lt;div id=&quot;test&quot;&gt;</div><div class="line">    &lt;h1&gt;Main Page&lt;/h1&gt;</div><div class="line">&lt;/div&gt;</div><div class="line">&lt;p&gt;Register &amp; Login&lt;/p&gt;</div><div class="line">&lt;form action=&quot;test.jsp&quot; method=&quot;post&quot;&gt;</div><div class="line">    账号 :</div><div class="line">    &lt;input type=&quot;text&quot; id=&quot;name&quot; /&gt;</div><div class="line">    &lt;br/&gt;&lt;br/&gt;</div><div class="line">    密码 :</div><div class="line">    &lt;input type=&quot;text&quot; id=&quot;pwd&quot; /&gt;</div><div class="line">    &lt;br/&gt;&lt;br/&gt;</div><div class="line">    &amp;nbsp&amp;nbsp&amp;nbsp&amp;nbsp&amp;nbsp</div><div class="line">    &lt;div&gt;&lt;a href=&quot;/add&quot; id=&quot;add&quot;&gt;EXTRA&lt;/a&gt;&lt;/div&gt;</div><div class="line">    &lt;input type=&quot;button&quot; value=&quot;Submit&quot; id=&quot;x&quot;&gt;</div><div class="line">&lt;/form&gt;</div><div class="line"></div><div class="line">&lt;/body&gt;</div><div class="line"></div><div class="line">    &lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line"></div><div class="line">        var after_login=function(data,status)&#123;</div><div class="line">            if (status==&apos;success&apos;)&#123;</div><div class="line">                alert(data+&apos;--&apos;+status) ;</div><div class="line">            &#125;</div><div class="line">            else alert(&apos;login refused&apos;) ;</div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        $(document).ready(function()&#123;</div><div class="line">            $(&quot;#x&quot;).click(function()&#123;</div><div class="line">                var name    =   $(&quot;#name&quot;).val() ;</div><div class="line">                var pwd     =   $(&quot;#pwd&quot;).val() ;</div><div class="line">                $.post(&apos;http://127.0.0.1:3000/login&apos;,</div><div class="line">                &#123;</div><div class="line">                    name    :   name ,</div><div class="line">                    pwd     :   pwd</div><div class="line">                &#125;,</div><div class="line">//                        function(data,status)&#123;</div><div class="line">//                            alert(data+&apos;--&apos;+status) ;</div><div class="line">//                        &#125;</div><div class="line">                        after_login</div><div class="line">                );</div><div class="line">//                $.get(&apos;add&apos;,function(data,status)&#123;</div><div class="line">//                    document.write(data) ;</div><div class="line">//                &#125;) ;</div><div class="line">            &#125;);</div><div class="line">        &#125;);</div><div class="line">    &lt;/script&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
-<p>next.html的代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html&gt;</div><div class="line">&lt;head lang=&quot;en&quot;&gt;</div><div class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</div><div class="line">    &lt;title&gt;第二页面&lt;/title&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">&lt;h1&gt;This is an additional web page&lt;/h1&gt;</div><div class="line">&lt;p&gt;just for test&lt;/p&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      Node 是一个服务器端 JavaScript 解释器，用于方便地搭建响应速度快、易于扩展的网络应用。
-    
-    </summary>
-    
-      <category term="node" scheme="http://code.youmeek.com/categories/node/"/>
-    
-      <category term="前端" scheme="http://code.youmeek.com/categories/node/%E5%89%8D%E7%AB%AF/"/>
-    
-    
-      <category term="Node入门" scheme="http://code.youmeek.com/tags/Node%E5%85%A5%E9%97%A8/"/>
-    
-      <category term="前端开发" scheme="http://code.youmeek.com/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
     
   </entry>
   
@@ -466,6 +466,70 @@
   </entry>
   
   <entry>
+    <title>Node入门</title>
+    <link href="http://code.youmeek.com/2016/11/05/visitor/"/>
+    <id>http://code.youmeek.com/2016/11/05/visitor/</id>
+    <published>2016-11-04T16:00:00.000Z</published>
+    <updated>2017-01-24T08:06:38.307Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><h2 id="Node-js是什么"><a href="#Node-js是什么" class="headerlink" title="Node.js是什么"></a>Node.js是什么</h2><p>Node 是一个服务器端 JavaScript 解释器，用于方便地搭建响应速度快、易于扩展的网络应用。Node.js 使用事件驱动， 非阻塞I/O 模型而得以轻量和高效，非常适合在分布式设备上运行数据密集型的实时应用。<br>Node.js 是一个可以让 JavaScript 运行在浏览器之外的平台。它实现了诸如文件系统、模块、包、操作系统 API、网络通信等 Core JavaScript 没有或者不完善的功能。历史上将 JavaScript移植到浏览器外的计划不止一个，但Node.js 是最出色的一个。</p>
+<h2 id="什么是v8引擎"><a href="#什么是v8引擎" class="headerlink" title="什么是v8引擎"></a>什么是v8引擎</h2><p>V8 JavaScript 引擎是 Google 用于其 Chrome 浏览器的底层 JavaScript 引擎。很少有人考虑 JavaScript 在客户机上实际做了些什么？实际上，JavaScript 引擎负责解释并执行代码。Google 使用 V8 创建了一个用 C++ 编写的超快解释器，该解释器拥有另一个独特特征；您可以下载该引擎并将其嵌入任何 应用程序。V8 JavaScript 引擎并不仅限于在一个浏览器中运行。因此，Node 实际上会使用 Google 编写的 V8 JavaScript 引擎，并将其重建为可在服务器上使用。</p>
+<h2 id="Node-js的作用"><a href="#Node-js的作用" class="headerlink" title="Node.js的作用"></a>Node.js的作用</h2><p>Node 公开宣称的目标是 “旨在提供一种简单的构建可伸缩网络程序的方法”。我们来看一个简单的例子，在 Java™ 和 PHP 这类语言中，每个连接都会生成一个新线程，每个新线程可能需要 2 MB 的配套内存。在一个拥有 8 GB RAM 的系统上，理论上最大的并发连接数量是 4,000 个用户。随着您的客户群的增长，如果希望您的 Web 应用程序支持更多用户，那么，您必须添加更多服务器。所以在传统的后台开发中，整个 Web 应用程序架构（包括流量、处理器速度和内存速度）中的瓶颈是：服务器能够处理的并发连接的最大数量。这个不同的架构承载的并发数量是不一致的。<br>而Node的出现就是为了解决这个问题：更改连接到服务器的方式。在Node 声称它不允许使用锁，它不会直接阻塞 I/O 调用。Node在每个连接发射一个在 Node 引擎的进程中运行的事件，而不是为每个连接生成一个新的 OS 线程（并为其分配一些配套内存）。</p>
+<h2 id="Node-js能做什么"><a href="#Node-js能做什么" class="headerlink" title="Node.js能做什么"></a>Node.js能做什么</h2><p>借用一句经典的描述Node.js的话:正如 JavaScript 为客户端而生，Node.js 为网络而生。<br>使用Node.js，你可以轻易的实现：</p>
+<ul>
+<li>具有复杂逻辑的网站；</li>
+<li>基于社交网络的大规模 Web 应用；</li>
+<li>Web Socket 服务器；</li>
+<li>TCP/UDP 套接字应用程序；</li>
+<li>命令行工具；</li>
+<li>交互式终端程序；</li>
+<li>带有图形用户界面的本地应用程序；</li>
+<li>单元测试工具；</li>
+<li>客户端 JavaScript 编译器。</li>
+</ul>
+<h2 id="什么是事件驱动编程"><a href="#什么是事件驱动编程" class="headerlink" title="什么是事件驱动编程"></a>什么是事件驱动编程</h2><p>在我们使用Java，PHP等语言实现编程的时候，我们面向对象编程是完美的编程设计，这使得他们对其他编程方法不屑一顾。却不知大名鼎鼎Node使用的却是事件驱动编程的思想。那什么是事件驱动编程。<br><strong>事件驱动编程，为需要处理的事件编写相应的事件处理程序。代码在事件发生时执行。</strong><br>为需要处理的事件编写相应的事件处理程序。要理解事件驱动和程序，就需要与非事件驱动的程序进行比较。实际上，现代的程序大多是事件驱动的，比如多线程的程序，肯定是事件驱动的。早期则存在许多非事件驱动的程序，这样的程序，在需要等待某个条件触发时，会不断地检查这个条件，直到条件满足，这是很浪费cpu时间的。而事件驱动的程序，则有机会释放cpu从而进入睡眠态（注意是有机会，当然程序也可自行决定不释放cpu），当事件触发时被操作系统唤醒，这样就能更加有效地使用cpu。<br>来看一张简单的事件驱动模型（uml）：</p>
+<p><img src="http://img.blog.csdn.net/20161231115520916?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>事件驱动模型主要包含3个对象：事件源、事件和事件处理程序。</p>
+<ul>
+<li>事件源：产生事件的地方(html元素)</li>
+<li>事件：点击/鼠标操作/键盘操作等等</li>
+<li>事件对象：当某个事件发生时，可能会产生一个事件对象，该时间对象会封装好该时间的信息，传递给事件处理程序</li>
+<li>事件处理程序：响应用户事件的代码<br>其实我们使用的window系统也算得上是事件驱动了。我们来看一个简单的事例：监听鼠标点击事件，并能够显示鼠标点击的位置x,y。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;html&gt; </div><div class="line">   &lt;head&gt; </div><div class="line">   &lt;script&gt; </div><div class="line">   function test1(e)&#123; </div><div class="line">     window.alert(&quot;x=&quot;+e.clientX+&quot;y=&quot;+e.clientY); </div><div class="line">   &#125; </div><div class="line">   &lt;/script&gt; </div><div class="line">   &lt;/head&gt; </div><div class="line">   &lt;body onmousedown=&quot;test1(event)&quot;&gt; </div><div class="line">   &lt;/body&gt; </div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+<h1 id="Node-js运行原理分析"><a href="#Node-js运行原理分析" class="headerlink" title="Node.js运行原理分析"></a>Node.js运行原理分析</h1><p>当我们搜索Node.js时，夺眶而出的关键字就是 “单线程，异步I/O，事件驱动”，应用程序的请求过程可以分为俩个部分：CPU运算和I/O读写，CPU计算速度通常远高于磁盘读写速度，这就导致CPU运算已经完成，但是不得不等待磁盘I/O任务完成之后再继续接下来的业务。<br>    所以I/O才是应用程序的瓶颈所在，在I/O密集型业务中，假设请求需要100ms来完成，其中99ms化在I/O上。如果需要优化应用程序，让他能同时处理更多的请求，我们会采用多线程，同时开启100个、1000个线程来提高我们请求处理，当然这也是一种可观的方案。<br>     但是由于一个CPU核心在一个时刻只能做一件事情，操作系统只能通过将CPU切分为时间片的方法，让线程可以较为均匀的使用CPU资源。但操作系统在内核切换线程的同时也要切换线程的上线文，当线程数量过多时，时间将会被消耗在上下文切换中。所以在大并发时，多线程结构还是无法做到强大的伸缩性。<br> 那么是否可以另辟蹊径呢？！我们先来看看单线程，《深入浅出Node》一书提到 “单线程的最大好处，是不用像多线程编程那样处处在意状态的同步问题，这里没有死锁的存在，也没有线程上下文切换所带来的性能上的开销”，那么一个线程一次只能处理一个请求岂不是无稽之谈，先让我们看张图：<br> <img src="http://img.blog.csdn.net/20161231120417621?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br> Node.js的单线程并不是真正的单线程，只是开启了单个线程进行业务处理（cpu的运算），同时开启了其他线程专门处理I/O。当一个指令到达主线程，主线程发现有I/O之后，直接把这个事件传给I/O线程，不会等待I/O结束后，再去处理下面的业务，而是拿到一个状态后立即往下走，这就是“单线程”、“异步I/O”。<br> I/O操作完之后呢？Node.js的I/O 处理完之后会有一个回调事件，这个事件会放在一个事件处理队列里头，在进程启动时node会创建一个类似于While(true)的循环，它的每一次轮询都会去查看是否有事件需要处理，是否有事件关联的回调函数需要处理，如果有就处理，然后加入下一个轮询，如果没有就退出进程，这就是所谓的“事件驱动”。这也从Node的角度解释了什么是”事件驱动”。<br> 在node.js中，事件主要来源于网络请求，文件I/O等，根据事件的不同对观察者进行了分类，有文件I/O观察者，网络I/O观察者。事件驱动是一个典型的生产者/消费者模型，请求到达观察者那里，事件循环从观察者进行消费，主线程就可以马不停蹄的只关注业务不用再去进行I/O等待。</p>
+<h1 id="Node-js的简单实践"><a href="#Node-js的简单实践" class="headerlink" title="Node.js的简单实践"></a>Node.js的简单实践</h1><p> 关于node的环境搭建这里就不说明了<a href="http://blog.csdn.net/xiangzhihong8/article/details/52842061" target="_blank" rel="external">node入门</a>。这里为了方便大家理解，我们写一个简单的登录实例。<br> 这里为了方便前端小白的理解，新增一个小节，如何使用Node搭建一个新的项目。</p>
+<h2 id="使用Node创建项目"><a href="#使用Node创建项目" class="headerlink" title="使用Node创建项目"></a>使用Node创建项目</h2><p> 安装Express</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">npm install -g express  </div><div class="line">npm install -g express-generator</div></pre></td></tr></table></figure>
+<p>新建项目<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">express -t ejs newsproject</div></pre></td></tr></table></figure></p>
+<p>按照提示进入项目目录，运行npm安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd newsprojec</div><div class="line">npm install</div></pre></td></tr></table></figure>
+<p>运行项目</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">node app.js</div></pre></td></tr></table></figure>
+<p>浏览器访问:<a href="http://127.0.0.1:3000/即可见nodejs站点页面即可。" target="_blank" rel="external">http://127.0.0.1:3000/即可见nodejs站点页面即可。</a><br>接下来我们写一个简单的例子，来看一下效果图：<br><img src="http://img.blog.csdn.net/20161231215128577?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br> 整个目录如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">根目录--------------</div><div class="line">    |-package.json</div><div class="line">    |-test.js</div><div class="line">    |-public</div><div class="line">        |-main.html</div><div class="line">        |-next.html</div></pre></td></tr></table></figure></p>
+<p>整个目录包含三个文件，test.js（作为控制文件）、main.html和next.html作为页面的显示文件。<br>来看一下代码：<br>test.js（作为控制文件）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">// file name :test.js</div><div class="line">var express             = require(&apos;express&apos;);</div><div class="line">var app                 = express();</div><div class="line">var bodyParse           = require(&apos;body-parser&apos;)</div><div class="line">var cookieParser        = require(&apos;cookie-parser&apos;) ;</div><div class="line">app.use(cookieParser()) ;</div><div class="line">app.use(bodyParse.urlencoded(&#123;extended:false&#125;)) ;</div><div class="line"></div><div class="line">// 处理根目录的get请求</div><div class="line">app.get(&apos;/&apos;,function(req,res)&#123;</div><div class="line">    res.sendfile(&apos;public/main.html&apos;) ;</div><div class="line">    console.log(&apos;main page is required &apos;);</div><div class="line">&#125;) ;</div><div class="line"></div><div class="line">// 处理/login的get请求</div><div class="line">app.get(&apos;/add&apos;, function (req,res) &#123;</div><div class="line">    res.sendfile(&apos;public/add.html&apos;) ;</div><div class="line">    console.log(&apos;add page is required &apos;) ;</div><div class="line">&#125;) ;</div><div class="line"></div><div class="line">// 处理/login的post请求</div><div class="line">app.post(&apos;/login&apos;,function(req,res)&#123;</div><div class="line">    name=req.body.name ;</div><div class="line">    pwd=req.body.pwd   ;</div><div class="line">    console.log(name+&apos;--&apos;+pwd) ;</div><div class="line">    res.status(200).send(name+&apos;--&apos;+pwd) ;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">// 监听3000端口</div><div class="line">var server=app.listen(3000) ;</div></pre></td></tr></table></figure>
+<p>main.html的代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div></pre></td><td class="code"><pre><div class="line">&lt;html&gt;</div><div class="line"></div><div class="line">    &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;http://fonts.useso.com/css?family=Tangerine|Inconsolata|Droid+Sans&quot;&gt;</div><div class="line"></div><div class="line">    &lt;style&gt;</div><div class="line">        div#test&#123;</div><div class="line">            font-family: &apos;Tangerine&apos;,serif;</div><div class="line">            font-size: 48px;</div><div class="line">        &#125;</div><div class="line">        p#link1&#123;</div><div class="line">            font-family: &apos;Tangerine&apos;,serif;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &lt;/style&gt;</div><div class="line"></div><div class="line">    &lt;script src=&quot;//cdn.bootcss.com/jquery/2.2.1/jquery.min.js&quot;&gt;&lt;/script&gt;</div><div class="line"></div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line"></div><div class="line">&lt;div id=&quot;test&quot;&gt;</div><div class="line">    &lt;h1&gt;Main Page&lt;/h1&gt;</div><div class="line">&lt;/div&gt;</div><div class="line">&lt;p&gt;Register &amp; Login&lt;/p&gt;</div><div class="line">&lt;form action=&quot;test.jsp&quot; method=&quot;post&quot;&gt;</div><div class="line">    账号 :</div><div class="line">    &lt;input type=&quot;text&quot; id=&quot;name&quot; /&gt;</div><div class="line">    &lt;br/&gt;&lt;br/&gt;</div><div class="line">    密码 :</div><div class="line">    &lt;input type=&quot;text&quot; id=&quot;pwd&quot; /&gt;</div><div class="line">    &lt;br/&gt;&lt;br/&gt;</div><div class="line">    &amp;nbsp&amp;nbsp&amp;nbsp&amp;nbsp&amp;nbsp</div><div class="line">    &lt;div&gt;&lt;a href=&quot;/add&quot; id=&quot;add&quot;&gt;EXTRA&lt;/a&gt;&lt;/div&gt;</div><div class="line">    &lt;input type=&quot;button&quot; value=&quot;Submit&quot; id=&quot;x&quot;&gt;</div><div class="line">&lt;/form&gt;</div><div class="line"></div><div class="line">&lt;/body&gt;</div><div class="line"></div><div class="line">    &lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line"></div><div class="line">        var after_login=function(data,status)&#123;</div><div class="line">            if (status==&apos;success&apos;)&#123;</div><div class="line">                alert(data+&apos;--&apos;+status) ;</div><div class="line">            &#125;</div><div class="line">            else alert(&apos;login refused&apos;) ;</div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        $(document).ready(function()&#123;</div><div class="line">            $(&quot;#x&quot;).click(function()&#123;</div><div class="line">                var name    =   $(&quot;#name&quot;).val() ;</div><div class="line">                var pwd     =   $(&quot;#pwd&quot;).val() ;</div><div class="line">                $.post(&apos;http://127.0.0.1:3000/login&apos;,</div><div class="line">                &#123;</div><div class="line">                    name    :   name ,</div><div class="line">                    pwd     :   pwd</div><div class="line">                &#125;,</div><div class="line">//                        function(data,status)&#123;</div><div class="line">//                            alert(data+&apos;--&apos;+status) ;</div><div class="line">//                        &#125;</div><div class="line">                        after_login</div><div class="line">                );</div><div class="line">//                $.get(&apos;add&apos;,function(data,status)&#123;</div><div class="line">//                    document.write(data) ;</div><div class="line">//                &#125;) ;</div><div class="line">            &#125;);</div><div class="line">        &#125;);</div><div class="line">    &lt;/script&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+<p>next.html的代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html&gt;</div><div class="line">&lt;head lang=&quot;en&quot;&gt;</div><div class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</div><div class="line">    &lt;title&gt;第二页面&lt;/title&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">&lt;h1&gt;This is an additional web page&lt;/h1&gt;</div><div class="line">&lt;p&gt;just for test&lt;/p&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      Node入门
+    
+    </summary>
+    
+      <category term="前端" scheme="http://code.youmeek.com/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+      <category term="前端开发" scheme="http://code.youmeek.com/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="Node入门" scheme="http://code.youmeek.com/tags/Node%E5%85%A5%E9%97%A8/"/>
+    
+  </entry>
+  
+  <entry>
     <title>webpack+react环境搭建</title>
     <link href="http://code.youmeek.com/2016/11/05/webpack+react%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
     <id>http://code.youmeek.com/2016/11/05/webpack+react环境搭建/</id>
@@ -531,73 +595,98 @@
   </entry>
   
   <entry>
-    <title>Node入门</title>
-    <link href="http://code.youmeek.com/2016/11/05/visitor/"/>
-    <id>http://code.youmeek.com/2016/11/05/visitor/</id>
-    <published>2016-11-04T16:00:00.000Z</published>
-    <updated>2017-01-24T08:06:38.307Z</updated>
+    <title>Android WindowManager详解</title>
+    <link href="http://code.youmeek.com/2016/10/05/Android%20WindowManager%E8%AF%A6%E8%A7%A3/"/>
+    <id>http://code.youmeek.com/2016/10/05/Android WindowManager详解/</id>
+    <published>2016-10-04T16:00:00.000Z</published>
+    <updated>2017-01-25T06:24:31.413Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><h2 id="Node-js是什么"><a href="#Node-js是什么" class="headerlink" title="Node.js是什么"></a>Node.js是什么</h2><p>Node 是一个服务器端 JavaScript 解释器，用于方便地搭建响应速度快、易于扩展的网络应用。Node.js 使用事件驱动， 非阻塞I/O 模型而得以轻量和高效，非常适合在分布式设备上运行数据密集型的实时应用。<br>Node.js 是一个可以让 JavaScript 运行在浏览器之外的平台。它实现了诸如文件系统、模块、包、操作系统 API、网络通信等 Core JavaScript 没有或者不完善的功能。历史上将 JavaScript移植到浏览器外的计划不止一个，但Node.js 是最出色的一个。</p>
-<h2 id="什么是v8引擎"><a href="#什么是v8引擎" class="headerlink" title="什么是v8引擎"></a>什么是v8引擎</h2><p>V8 JavaScript 引擎是 Google 用于其 Chrome 浏览器的底层 JavaScript 引擎。很少有人考虑 JavaScript 在客户机上实际做了些什么？实际上，JavaScript 引擎负责解释并执行代码。Google 使用 V8 创建了一个用 C++ 编写的超快解释器，该解释器拥有另一个独特特征；您可以下载该引擎并将其嵌入任何 应用程序。V8 JavaScript 引擎并不仅限于在一个浏览器中运行。因此，Node 实际上会使用 Google 编写的 V8 JavaScript 引擎，并将其重建为可在服务器上使用。</p>
-<h2 id="Node-js的作用"><a href="#Node-js的作用" class="headerlink" title="Node.js的作用"></a>Node.js的作用</h2><p>Node 公开宣称的目标是 “旨在提供一种简单的构建可伸缩网络程序的方法”。我们来看一个简单的例子，在 Java™ 和 PHP 这类语言中，每个连接都会生成一个新线程，每个新线程可能需要 2 MB 的配套内存。在一个拥有 8 GB RAM 的系统上，理论上最大的并发连接数量是 4,000 个用户。随着您的客户群的增长，如果希望您的 Web 应用程序支持更多用户，那么，您必须添加更多服务器。所以在传统的后台开发中，整个 Web 应用程序架构（包括流量、处理器速度和内存速度）中的瓶颈是：服务器能够处理的并发连接的最大数量。这个不同的架构承载的并发数量是不一致的。<br>而Node的出现就是为了解决这个问题：更改连接到服务器的方式。在Node 声称它不允许使用锁，它不会直接阻塞 I/O 调用。Node在每个连接发射一个在 Node 引擎的进程中运行的事件，而不是为每个连接生成一个新的 OS 线程（并为其分配一些配套内存）。</p>
-<h2 id="Node-js能做什么"><a href="#Node-js能做什么" class="headerlink" title="Node.js能做什么"></a>Node.js能做什么</h2><p>借用一句经典的描述Node.js的话:正如 JavaScript 为客户端而生，Node.js 为网络而生。<br>使用Node.js，你可以轻易的实现：</p>
-<ul>
-<li>具有复杂逻辑的网站；</li>
-<li>基于社交网络的大规模 Web 应用；</li>
-<li>Web Socket 服务器；</li>
-<li>TCP/UDP 套接字应用程序；</li>
-<li>命令行工具；</li>
-<li>交互式终端程序；</li>
-<li>带有图形用户界面的本地应用程序；</li>
-<li>单元测试工具；</li>
-<li>客户端 JavaScript 编译器。</li>
-</ul>
-<h2 id="什么是事件驱动编程"><a href="#什么是事件驱动编程" class="headerlink" title="什么是事件驱动编程"></a>什么是事件驱动编程</h2><p>在我们使用Java，PHP等语言实现编程的时候，我们面向对象编程是完美的编程设计，这使得他们对其他编程方法不屑一顾。却不知大名鼎鼎Node使用的却是事件驱动编程的思想。那什么是事件驱动编程。<br><strong>事件驱动编程，为需要处理的事件编写相应的事件处理程序。代码在事件发生时执行。</strong><br>为需要处理的事件编写相应的事件处理程序。要理解事件驱动和程序，就需要与非事件驱动的程序进行比较。实际上，现代的程序大多是事件驱动的，比如多线程的程序，肯定是事件驱动的。早期则存在许多非事件驱动的程序，这样的程序，在需要等待某个条件触发时，会不断地检查这个条件，直到条件满足，这是很浪费cpu时间的。而事件驱动的程序，则有机会释放cpu从而进入睡眠态（注意是有机会，当然程序也可自行决定不释放cpu），当事件触发时被操作系统唤醒，这样就能更加有效地使用cpu。<br>来看一张简单的事件驱动模型（uml）：</p>
-<p><img src="http://img.blog.csdn.net/20161231115520916?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p>事件驱动模型主要包含3个对象：事件源、事件和事件处理程序。</p>
-<ul>
-<li>事件源：产生事件的地方(html元素)</li>
-<li>事件：点击/鼠标操作/键盘操作等等</li>
-<li>事件对象：当某个事件发生时，可能会产生一个事件对象，该时间对象会封装好该时间的信息，传递给事件处理程序</li>
-<li>事件处理程序：响应用户事件的代码<br>其实我们使用的window系统也算得上是事件驱动了。我们来看一个简单的事例：监听鼠标点击事件，并能够显示鼠标点击的位置x,y。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;html&gt; </div><div class="line">   &lt;head&gt; </div><div class="line">   &lt;script&gt; </div><div class="line">   function test1(e)&#123; </div><div class="line">     window.alert(&quot;x=&quot;+e.clientX+&quot;y=&quot;+e.clientY); </div><div class="line">   &#125; </div><div class="line">   &lt;/script&gt; </div><div class="line">   &lt;/head&gt; </div><div class="line">   &lt;body onmousedown=&quot;test1(event)&quot;&gt; </div><div class="line">   &lt;/body&gt; </div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
-<h1 id="Node-js运行原理分析"><a href="#Node-js运行原理分析" class="headerlink" title="Node.js运行原理分析"></a>Node.js运行原理分析</h1><p>当我们搜索Node.js时，夺眶而出的关键字就是 “单线程，异步I/O，事件驱动”，应用程序的请求过程可以分为俩个部分：CPU运算和I/O读写，CPU计算速度通常远高于磁盘读写速度，这就导致CPU运算已经完成，但是不得不等待磁盘I/O任务完成之后再继续接下来的业务。<br>    所以I/O才是应用程序的瓶颈所在，在I/O密集型业务中，假设请求需要100ms来完成，其中99ms化在I/O上。如果需要优化应用程序，让他能同时处理更多的请求，我们会采用多线程，同时开启100个、1000个线程来提高我们请求处理，当然这也是一种可观的方案。<br>     但是由于一个CPU核心在一个时刻只能做一件事情，操作系统只能通过将CPU切分为时间片的方法，让线程可以较为均匀的使用CPU资源。但操作系统在内核切换线程的同时也要切换线程的上线文，当线程数量过多时，时间将会被消耗在上下文切换中。所以在大并发时，多线程结构还是无法做到强大的伸缩性。<br> 那么是否可以另辟蹊径呢？！我们先来看看单线程，《深入浅出Node》一书提到 “单线程的最大好处，是不用像多线程编程那样处处在意状态的同步问题，这里没有死锁的存在，也没有线程上下文切换所带来的性能上的开销”，那么一个线程一次只能处理一个请求岂不是无稽之谈，先让我们看张图：<br> <img src="http://img.blog.csdn.net/20161231120417621?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br> Node.js的单线程并不是真正的单线程，只是开启了单个线程进行业务处理（cpu的运算），同时开启了其他线程专门处理I/O。当一个指令到达主线程，主线程发现有I/O之后，直接把这个事件传给I/O线程，不会等待I/O结束后，再去处理下面的业务，而是拿到一个状态后立即往下走，这就是“单线程”、“异步I/O”。<br> I/O操作完之后呢？Node.js的I/O 处理完之后会有一个回调事件，这个事件会放在一个事件处理队列里头，在进程启动时node会创建一个类似于While(true)的循环，它的每一次轮询都会去查看是否有事件需要处理，是否有事件关联的回调函数需要处理，如果有就处理，然后加入下一个轮询，如果没有就退出进程，这就是所谓的“事件驱动”。这也从Node的角度解释了什么是”事件驱动”。<br> 在node.js中，事件主要来源于网络请求，文件I/O等，根据事件的不同对观察者进行了分类，有文件I/O观察者，网络I/O观察者。事件驱动是一个典型的生产者/消费者模型，请求到达观察者那里，事件循环从观察者进行消费，主线程就可以马不停蹄的只关注业务不用再去进行I/O等待。</p>
-<h1 id="Node-js的简单实践"><a href="#Node-js的简单实践" class="headerlink" title="Node.js的简单实践"></a>Node.js的简单实践</h1><p> 关于node的环境搭建这里就不说明了<a href="http://blog.csdn.net/xiangzhihong8/article/details/52842061" target="_blank" rel="external">node入门</a>。这里为了方便大家理解，我们写一个简单的登录实例。<br> 这里为了方便前端小白的理解，新增一个小节，如何使用Node搭建一个新的项目。</p>
-<h2 id="使用Node创建项目"><a href="#使用Node创建项目" class="headerlink" title="使用Node创建项目"></a>使用Node创建项目</h2><p> 安装Express</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">npm install -g express  </div><div class="line">npm install -g express-generator</div></pre></td></tr></table></figure>
-<p>新建项目<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">express -t ejs newsproject</div></pre></td></tr></table></figure></p>
-<p>按照提示进入项目目录，运行npm安装</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd newsprojec</div><div class="line">npm install</div></pre></td></tr></table></figure>
-<p>运行项目</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">node app.js</div></pre></td></tr></table></figure>
-<p>浏览器访问:<a href="http://127.0.0.1:3000/即可见nodejs站点页面即可。" target="_blank" rel="external">http://127.0.0.1:3000/即可见nodejs站点页面即可。</a><br>接下来我们写一个简单的例子，来看一下效果图：<br><img src="http://img.blog.csdn.net/20161231215128577?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br> 整个目录如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">根目录--------------</div><div class="line">    |-package.json</div><div class="line">    |-test.js</div><div class="line">    |-public</div><div class="line">        |-main.html</div><div class="line">        |-next.html</div></pre></td></tr></table></figure></p>
-<p>整个目录包含三个文件，test.js（作为控制文件）、main.html和next.html作为页面的显示文件。<br>来看一下代码：<br>test.js（作为控制文件）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">// file name :test.js</div><div class="line">var express             = require(&apos;express&apos;);</div><div class="line">var app                 = express();</div><div class="line">var bodyParse           = require(&apos;body-parser&apos;)</div><div class="line">var cookieParser        = require(&apos;cookie-parser&apos;) ;</div><div class="line">app.use(cookieParser()) ;</div><div class="line">app.use(bodyParse.urlencoded(&#123;extended:false&#125;)) ;</div><div class="line"></div><div class="line">// 处理根目录的get请求</div><div class="line">app.get(&apos;/&apos;,function(req,res)&#123;</div><div class="line">    res.sendfile(&apos;public/main.html&apos;) ;</div><div class="line">    console.log(&apos;main page is required &apos;);</div><div class="line">&#125;) ;</div><div class="line"></div><div class="line">// 处理/login的get请求</div><div class="line">app.get(&apos;/add&apos;, function (req,res) &#123;</div><div class="line">    res.sendfile(&apos;public/add.html&apos;) ;</div><div class="line">    console.log(&apos;add page is required &apos;) ;</div><div class="line">&#125;) ;</div><div class="line"></div><div class="line">// 处理/login的post请求</div><div class="line">app.post(&apos;/login&apos;,function(req,res)&#123;</div><div class="line">    name=req.body.name ;</div><div class="line">    pwd=req.body.pwd   ;</div><div class="line">    console.log(name+&apos;--&apos;+pwd) ;</div><div class="line">    res.status(200).send(name+&apos;--&apos;+pwd) ;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">// 监听3000端口</div><div class="line">var server=app.listen(3000) ;</div></pre></td></tr></table></figure>
-<p>main.html的代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div></pre></td><td class="code"><pre><div class="line">&lt;html&gt;</div><div class="line"></div><div class="line">    &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;http://fonts.useso.com/css?family=Tangerine|Inconsolata|Droid+Sans&quot;&gt;</div><div class="line"></div><div class="line">    &lt;style&gt;</div><div class="line">        div#test&#123;</div><div class="line">            font-family: &apos;Tangerine&apos;,serif;</div><div class="line">            font-size: 48px;</div><div class="line">        &#125;</div><div class="line">        p#link1&#123;</div><div class="line">            font-family: &apos;Tangerine&apos;,serif;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &lt;/style&gt;</div><div class="line"></div><div class="line">    &lt;script src=&quot;//cdn.bootcss.com/jquery/2.2.1/jquery.min.js&quot;&gt;&lt;/script&gt;</div><div class="line"></div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line"></div><div class="line">&lt;div id=&quot;test&quot;&gt;</div><div class="line">    &lt;h1&gt;Main Page&lt;/h1&gt;</div><div class="line">&lt;/div&gt;</div><div class="line">&lt;p&gt;Register &amp; Login&lt;/p&gt;</div><div class="line">&lt;form action=&quot;test.jsp&quot; method=&quot;post&quot;&gt;</div><div class="line">    账号 :</div><div class="line">    &lt;input type=&quot;text&quot; id=&quot;name&quot; /&gt;</div><div class="line">    &lt;br/&gt;&lt;br/&gt;</div><div class="line">    密码 :</div><div class="line">    &lt;input type=&quot;text&quot; id=&quot;pwd&quot; /&gt;</div><div class="line">    &lt;br/&gt;&lt;br/&gt;</div><div class="line">    &amp;nbsp&amp;nbsp&amp;nbsp&amp;nbsp&amp;nbsp</div><div class="line">    &lt;div&gt;&lt;a href=&quot;/add&quot; id=&quot;add&quot;&gt;EXTRA&lt;/a&gt;&lt;/div&gt;</div><div class="line">    &lt;input type=&quot;button&quot; value=&quot;Submit&quot; id=&quot;x&quot;&gt;</div><div class="line">&lt;/form&gt;</div><div class="line"></div><div class="line">&lt;/body&gt;</div><div class="line"></div><div class="line">    &lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line"></div><div class="line">        var after_login=function(data,status)&#123;</div><div class="line">            if (status==&apos;success&apos;)&#123;</div><div class="line">                alert(data+&apos;--&apos;+status) ;</div><div class="line">            &#125;</div><div class="line">            else alert(&apos;login refused&apos;) ;</div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        $(document).ready(function()&#123;</div><div class="line">            $(&quot;#x&quot;).click(function()&#123;</div><div class="line">                var name    =   $(&quot;#name&quot;).val() ;</div><div class="line">                var pwd     =   $(&quot;#pwd&quot;).val() ;</div><div class="line">                $.post(&apos;http://127.0.0.1:3000/login&apos;,</div><div class="line">                &#123;</div><div class="line">                    name    :   name ,</div><div class="line">                    pwd     :   pwd</div><div class="line">                &#125;,</div><div class="line">//                        function(data,status)&#123;</div><div class="line">//                            alert(data+&apos;--&apos;+status) ;</div><div class="line">//                        &#125;</div><div class="line">                        after_login</div><div class="line">                );</div><div class="line">//                $.get(&apos;add&apos;,function(data,status)&#123;</div><div class="line">//                    document.write(data) ;</div><div class="line">//                &#125;) ;</div><div class="line">            &#125;);</div><div class="line">        &#125;);</div><div class="line">    &lt;/script&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
-<p>next.html的代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html&gt;</div><div class="line">&lt;head lang=&quot;en&quot;&gt;</div><div class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</div><div class="line">    &lt;title&gt;第二页面&lt;/title&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">&lt;h1&gt;This is an additional web page&lt;/h1&gt;</div><div class="line">&lt;p&gt;just for test&lt;/p&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>WindowManager是Android中一个重要的服务（Service ）。WindowManager Service 是全局的，是唯一的。它将用户的操作，翻译成为指令，发送给呈现在界面上的各个Window。Activity会将顶级的控件注册到 Window Manager 中，<br>当用户真是触碰屏幕或键盘的时候，Window Manager就会通知到，而当控件有一些请求产生，也会经由ViewParent送回到Window Manager中。从而完成整个通信流程。<br>整个Android的窗口机制是基于一个叫做 WindowManager，这个接口可以添加view到屏幕，也可以从屏幕删除view。它面向的对象一端是屏幕，另一端就是View，通过WindowManager的 addView方法创建View，这样产生出来的View根据<br>WindowManager.LayoutParams属性不同，效果也就不同了。比如创建 系统顶级窗口，实现悬浮窗口效果！WindowManager的方法很简单，基本用到的就三addView，removeView，updateViewLayout。接口，而WindowManager.LayoutParams的属性就多了，后面为大家一一详解。</p>
+<h2 id="WindowManager小实例"><a href="#WindowManager小实例" class="headerlink" title="WindowManager小实例"></a>WindowManager小实例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">Button bb=new Button(getApplicationContext());  </div><div class="line">WindowManager wmManager=(WindowManager) getSystemService(Context.WINDOW_SERVICE);  </div><div class="line">WindowManager.LayoutParams wmParams = new WindowManager.LayoutParams();  </div><div class="line"></div><div class="line">       wmParams.type=2002;   </div><div class="line">       wmParams.format=1;  </div><div class="line">       </div><div class="line">       wmParams.flags=40;  </div><div class="line">       wmParams.width=40;  </div><div class="line">       wmParams.height=40;  </div><div class="line">         </div><div class="line">       wmManager.addView(bb, wmParams);</div></pre></td></tr></table></figure>
+<p>解释：创建了一个Button对象然后通过WindowManager实例对象的addView添加这个ButtonVIew并根据相应的LayoutParams参数进行显示。</p>
+<h1 id="WindowManager属性详解"><a href="#WindowManager属性详解" class="headerlink" title="WindowManager属性详解"></a>WindowManager属性详解</h1><p><strong>继承关系</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">java.lang.Object</div><div class="line">   ↳android.view.ViewGroup.LayoutParams</div><div class="line">       ↳android.view.WindowManager.LayoutParams</div></pre></td></tr></table></figure>
+<p><strong>继承来的属性与常量</strong><br>从 ViewManager.LayoutParams 继承来的属性：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">android:layout_height</div><div class="line">        Specifies the basic height of the view.</div><div class="line"></div><div class="line">   android:layout_width</div><div class="line">        Specifies the basic width of the view.</div></pre></td></tr></table></figure>
+<p>从 ViewManager.LayoutParams继承的常量：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">FILL_PARENT</div><div class="line">    WRAP_CONTENT</div><div class="line">    MATCH_PARENT</div></pre></td></tr></table></figure>
+<h2 id="其他可用的常量定义"><a href="#其他可用的常量定义" class="headerlink" title="其他可用的常量定义"></a>其他可用的常量定义</h2><p><strong>public int x;</strong><br>如果忽略gravity属性，那么它表示窗口的绝对X位置。<br>当设置了 Gravity.LEFT 或 Gravity.RIGHT 之后，x值就表示到特定边的距离。</p>
+<p><strong>public int y;</strong><br>如果忽略gravity属性，那么它表示窗口的绝对Y位置。<br>当设置了 Gravity.TOP 或 Gravity.BOTTOM 之后，y值就表示到特定边的距离。</p>
+<p><strong>public float horizontalWeight/public float verticalWeight;</strong><br>在纵/横向上，为关联的view预留了多少扩展空间（像素）。如果是0，那么此view不能被拉伸。其他情况下，扩展空间（像素）将被widget所均分。</p>
+<p><strong>public int type;</strong><br>窗口类型。有3种主要类型：<br> a)Applicationwindows：<br>        取值在 FIRST_APPLICATION_WINDOW 和 LAST_APPLICATION_WINDOW 之间。<br>        是通常的、顶层的应用程序窗口。必须将 token 设置成 activity 的 token 。</p>
+<p>b)Sub_windows：<br>        取值在 FIRST_SUB_WINDOW 和 LAST_SUB_WINDOW 之间。<br>        与顶层窗口相关联，token 必须设置为它所附着的宿主窗口的 token。</p>
+<p>c)Systemwindows：<br>        取值在 FIRST_SYSTEM_WINDOW 和 LAST_SYSTEM_WINDOW 之间。<br>        用于特定的系统功能。它不能用于应用程序，使用时需要特殊权限。</p>
+<p><strong>public int memoryType;</strong><br>   指出窗口所使用的内存缓冲类型。默认为 NORMAL 。</p>
+<p>下面定义了 memoryType 的取值：<br>窗口缓冲位于主内存。<br>public static final int MEMORY_TYPE_NORMAL = 0;</p>
+<p>窗口缓冲位于可以被DMA访问，或者硬件加速的内存区域。<br>public static final int MEMORY_TYPE_HARDWARE = 1;</p>
+<p>窗口缓冲位于可被图形加速器访问的区域。<br>public static final int MEMORY_TYPE_GPU = 2;</p>
+<p>窗口缓冲不拥有自己的缓冲区，不能被锁定。缓冲区由本地方法提供。<br>public static final int MEMORY_TYPE_PUSH_BUFFERS = 3;</p>
+<p><strong>public int flags</strong><br>行为选项/旗标，默认为 none .<br>下面定义了 flags 的取值：<br>窗口之后的内容变暗。<br>public static final int FLAG_DIM_BEHIND       = 0x00000002;</p>
+<p>窗口之后的内容变模糊。<br>public static final int FLAG_BLUR_BEHIND       = 0x00000004;</p>
+<p>不许获得焦点。<br>public static final int FLAG_NOT_FOCUSABLE     = 0x00000008;</p>
+<p>不接受触摸屏事件。<br>public static final int FLAG_NOT_TOUCHABLE     = 0x00000010;</p>
+<p>当窗口可以获得焦点（没有设置 FLAG_NOT_FOCUSALBE 选项）时，仍然将窗口范围之外的点设备事件（鼠标、触摸屏）发送给后面的窗口处理。否则它将独占所有的点设备事件，而不管它们是不是发生在窗口范围内。<br>public static final int FLAG_NOT_TOUCH_MODAL   = 0x00000020;</p>
+<p> 如果设置了这个标志，当设备休眠时，点击触摸屏，设备将收到这个第一触摸事件。通常第一触摸事件被系统所消耗，用户不会看到他们点击屏幕有什么反应。<br>public static final int FLAG_TOUCHABLE_WHEN_WAKING = 0x00000040;</p>
+<p>当此窗口为用户可见时，保持设备常开，并保持亮度不变。<br>public static final int FLAG_KEEP_SCREEN_ON    = 0x00000080;</p>
+<p>窗口占满整个屏幕，忽略周围的装饰边框（例如状态栏）。此窗口需考虑到装饰边框的内容。<br>public static final int FLAG_LAYOUT_IN_SCREEN   =0x00000100;</p>
+<p>允许窗口扩展到屏幕之外。<br>public static final int FLAG_LAYOUT_NO_LIMITS   =0x00000200;</p>
+<p>窗口显示时，隐藏所有的屏幕装饰（例如状态条）。使窗口占用整个显示区域。<br>public static final int FLAG_FULLSCREEN     = 0x00000400;</p>
+<p>此选项将覆盖FLAG_FULLSCREEN选项，并强制屏幕装饰（如状态条）弹出。<br>public static final int FLAG_FORCE_NOT_FULLSCREEN   =0x00000800;</p>
+<p>抖动。指 对半透明的显示方法。又称“点透”。图形处理较差的设备往往用“点透”替代Alpha混合。<br>public static final int FLAG_DITHER = 0x00001000;</p>
+<p>不允许屏幕截图。<br>public static final int FLAG_SECURE           = 0x00002000;</p>
+<p>一种特殊模式，布局参数用于指示显示比例。<br>public static final int FLAG_SCALED           = 0x00004000;</p>
+<p>当屏幕有可能贴着脸时，这一选项可防止面颊对屏幕造成误操作。<br>public static final int FLAG_IGNORE_CHEEK_PRESSES   = 0x00008000;</p>
+<p>当请求布局时，你的窗口可能出现在状态栏的上面或下面，从而造成遮挡。当设置这一选项后，窗口管理器将确保窗口内容不会被装饰条（状态栏）盖住。<br>public static final int FLAG_LAYOUT_INSET_DECOR = 0x00010000;</p>
+<p>反转FLAG_NOT_FOCUSABLE选项。<br>如果同时设置了FLAG_NOT_FOCUSABLE选项和本选项，窗口将能够与输入法交互，允许输入法窗口覆盖；      如果FLAG_NOT_FOCUSABLE没有设置而设置了本选项，窗口不能与输入法交互，可以覆盖输入法窗口。<br>public static final int FLAG_ALT_FOCUSABLE_IM = 0x00020000;</p>
+<p>如果你设置了FLAG_NOT_TOUCH_MODAL，那么当触屏事件发生在窗口之外事，可以通过设置此标志接收到一个 MotionEvent.ACTION_OUTSIDE事件。注意，你不会收到完整的down/move/up事件，只有第一次down事件时可以收到 ACTION_OUTSIDE。<br>public static final int FLAG_WATCH_OUTSIDE_TOUCH = 0x00040000;</p>
+<p>当屏幕锁定时，窗口可以被看到。这使得应用程序窗口优先于锁屏界面。可配合FLAG_KEEP_SCREEN_ON选项点亮屏幕并直接显示在锁屏界面之前。可使用FLAG_DISMISS_KEYGUARD选项直接解除非加锁的锁屏状态。此选项只用于最顶层的全屏幕窗口。      public static final int FLAG_SHOW_WHEN_LOCKED = 0x00080000;</p>
+<p>请求系统墙纸显示在你的窗口后面。窗口必须是半透明的。<br>public static final int FLAG_SHOW_WALLPAPER = 0x00100000;</p>
+<p>窗口一旦显示出来，系统将点亮屏幕，正如用户唤醒设备那样。<br>public static final int FLAG_TURN_SCREEN_ON = 0x00200000;</p>
+<p>解除锁屏。只有锁屏界面不是加密的才能解锁。如果锁屏界面是加密的，那么用户解锁之后才能看到此窗口，除非设置了FLAG_SHOW_WHEN_LOCKED选项。<br>public static final int FLAG_DISMISS_KEYGUARD = 0x00400000;</p>
+<p>锁屏界面淡出时，继续运行它的动画。<br>public static final int FLAG_KEEP_SURFACE_WHILE_ANIMATING =0x10000000;</p>
+<p>以原始尺寸显示窗口。用于在兼容模式下运行程序。<br>public static final int FLAG_COMPATIBLE_WINDOW = 0x20000000;</p>
+<p>用于系统对话框。设置此选项的窗口将无条件获得焦点。<br>public static final int FLAG_SYSTEM_ERROR = 0x40000000;</p>
+<p><strong>public int softInputMode</strong>（重要）<br>以下选项与 softInputMode 有关：<br>软输入区域是否可见。<br>public static final int SOFT_INPUT_MASK_STATE = 0x0f;</p>
+<p>未指定状态。<br>public static final int SOFT_INPUT_STATE_UNSPECIFIED = 0;</p>
+<p>不要修改软输入法区域的状态。<br>public static final int SOFT_INPUT_STATE_UNCHANGED = 1;</p>
+<p>隐藏输入法区域（当用户进入窗口时）。<br>public static final int SOFT_INPUT_STATE_HIDDEN = 2;</p>
+<p>当窗口获得焦点时，隐藏输入法区域。<br>public static final int SOFT_INPUT_STATE_ALWAYS_HIDDEN = 3;</p>
+<p>显示输入法区域（当用户进入窗口时）。<br>public static final int SOFT_INPUT_STATE_VISIBLE = 4;</p>
+<p>当窗口获得焦点时，显示输入法区域。<br> public static final int SOFT_INPUT_STATE_ALWAYS_VISIBLE = 5;</p>
+<p>窗口应当主动调整，以适应软输入窗口。<br>public static final int SOFT_INPUT_MASK_ADJUST = 0xf0;</p>
+<p>未指定状态，系统将根据窗口内容尝试选择一个输入法样式。<br>public static final int SOFT_INPUT_ADJUST_UNSPECIFIED = 0x00;</p>
+<p>当输入法显示时，允许窗口重新计算尺寸，使内容不被输入法所覆盖。不可与SOFT_INPUT_ADJUSP_PAN混合使用,如果两个都没有设置，系统将根据窗口内容自动设置一个选项。<br> public static final int SOFT_INPUT_ADJUST_RESIZE = 0x10;</p>
+<p>输入法显示时平移窗口。它不需要处理尺寸变化，框架能够移动窗口以确保输入焦点可见。不可与SOFT_INPUT_ADJUST_RESIZE混合使用;如果两个都没设置,系统将根据窗口内容自动设置一个选项。<br> public static final int SOFT_INPUT_ADJUST_PAN = 0x20;</p>
+<p>当用户转至此窗口时，由系统自动设置，所以你不要设置它。当窗口显示之后该标志自动清除。<br> public static final int SOFT_INPUT_IS_FORWARD_NAVIGATION = 0x100;</p>
+<p><strong>public float horizontalMargin/public float verticalMargin</strong><br>水平边距/ 纵向边距，容器与widget之间的距离，占容器宽度的百分率。</p>
+<p><strong>public int windowAnimations</strong><br> 窗口所使用的动画设置。它必须是一个系统资源而不是应用程序资源，因为窗口管理器不能访问应用程序。</p>
+<p><strong>public float alpha</strong><br>整个窗口的透明值。</p>
+<h2 id="其他常用方法"><a href="#其他常用方法" class="headerlink" title="其他常用方法"></a>其他常用方法</h2><p>public staticfinal int LAYOUT_CHANGED =1&lt;&lt;0;<br>    public staticfinal int TYPE_CHANGED =1&lt;&lt;1;<br>    public staticfinal int FLAGS_CHANGED =1&lt;&lt;2;<br>    public staticfinal int FORMAT_CHANGED =1&lt;&lt;3;<br>    public staticfinal int ANIMATION_CHANGED =1&lt;&lt;4;<br>    public staticfinal int DIM_AMOUNT_CHANGED =1&lt;&lt;5;<br>    public staticfinal int TITLE_CHANGED =1&lt;&lt;6;<br>    public staticfinal int ALPHA_CHANGED =1&lt;&lt;7;<br>    public staticfinal int MEMORY_TYPE_CHANGED =1&lt;&lt;8;<br>    public staticfinal int SOFT_INPUT_MODE_CHANGED =1&lt;&lt;9;<br>    public staticfinal int SCREEN_ORIENTATION_CHANGED =1&lt;&lt;10;<br>    public staticfinal int SCREEN_BRIGHTNESS_CHANGED =1&lt;&lt;11;</p>
+<p>当然还有很多，这里列出了一些常用的。</p>]]></content>
     
     <summary type="html">
     
-      Node入门
+      WindowManager是Android中一个重要的服务（Service ）。WindowManager Service 是全局的，是唯一的。
     
     </summary>
     
-      <category term="前端" scheme="http://code.youmeek.com/categories/%E5%89%8D%E7%AB%AF/"/>
+      <category term="Android" scheme="http://code.youmeek.com/categories/Android/"/>
+    
+      <category term="WindowManager" scheme="http://code.youmeek.com/categories/Android/WindowManager/"/>
     
     
-      <category term="Node入门" scheme="http://code.youmeek.com/tags/Node%E5%85%A5%E9%97%A8/"/>
+      <category term="Android" scheme="http://code.youmeek.com/tags/Android/"/>
     
-      <category term="前端开发" scheme="http://code.youmeek.com/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+      <category term="WindowManager" scheme="http://code.youmeek.com/tags/WindowManager/"/>
+    
+      <category term="系统服务" scheme="http://code.youmeek.com/tags/%E7%B3%BB%E7%BB%9F%E6%9C%8D%E5%8A%A1/"/>
     
   </entry>
   
   <entry>
     <title>刷博客等流量</title>
-    <link href="http://code.youmeek.com/2016/10/05/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/"/>
-    <id>http://code.youmeek.com/2016/10/05/微信小程序/</id>
+    <link href="http://code.youmeek.com/2016/10/05/%E5%88%B7%E6%B5%81%E9%87%8F%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95/"/>
+    <id>http://code.youmeek.com/2016/10/05/刷流量的几种方法/</id>
     <published>2016-10-04T16:00:00.000Z</published>
     <updated>2017-01-24T08:22:19.211Z</updated>
     
@@ -637,8 +726,8 @@
   
   <entry>
     <title>刷博客等流量</title>
-    <link href="http://code.youmeek.com/2016/10/05/%E5%88%B7%E6%B5%81%E9%87%8F%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95/"/>
-    <id>http://code.youmeek.com/2016/10/05/刷流量的几种方法/</id>
+    <link href="http://code.youmeek.com/2016/10/05/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/"/>
+    <id>http://code.youmeek.com/2016/10/05/微信小程序/</id>
     <published>2016-10-04T16:00:00.000Z</published>
     <updated>2017-01-24T08:22:19.211Z</updated>
     
@@ -731,6 +820,139 @@
       <category term="个人博客" scheme="http://code.youmeek.com/tags/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/"/>
     
       <category term="搭建网站" scheme="http://code.youmeek.com/tags/%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android WindowManager详解</title>
+    <link href="http://code.youmeek.com/2016/09/05/Android%E7%BA%BF%E7%A8%8B%E6%B1%A0/"/>
+    <id>http://code.youmeek.com/2016/09/05/Android线程池/</id>
+    <published>2016-09-04T16:00:00.000Z</published>
+    <updated>2017-01-25T06:25:15.604Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>WindowManager是Android中一个重要的服务（Service ）。WindowManager Service 是全局的，是唯一的。它将用户的操作，翻译成为指令，发送给呈现在界面上的各个Window。Activity会将顶级的控件注册到 Window Manager 中，<br>当用户真是触碰屏幕或键盘的时候，Window Manager就会通知到，而当控件有一些请求产生，也会经由ViewParent送回到Window Manager中。从而完成整个通信流程。<br>整个Android的窗口机制是基于一个叫做 WindowManager，这个接口可以添加view到屏幕，也可以从屏幕删除view。它面向的对象一端是屏幕，另一端就是View，通过WindowManager的 addView方法创建View，这样产生出来的View根据<br>WindowManager.LayoutParams属性不同，效果也就不同了。比如创建 系统顶级窗口，实现悬浮窗口效果！WindowManager的方法很简单，基本用到的就三addView，removeView，updateViewLayout。接口，而WindowManager.LayoutParams的属性就多了，后面为大家一一详解。</p>
+<h2 id="WindowManager小实例"><a href="#WindowManager小实例" class="headerlink" title="WindowManager小实例"></a>WindowManager小实例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">Button bb=new Button(getApplicationContext());  </div><div class="line">WindowManager wmManager=(WindowManager) getSystemService(Context.WINDOW_SERVICE);  </div><div class="line">WindowManager.LayoutParams wmParams = new WindowManager.LayoutParams();  </div><div class="line"></div><div class="line">       wmParams.type=2002;   </div><div class="line">       wmParams.format=1;  </div><div class="line">       </div><div class="line">       wmParams.flags=40;  </div><div class="line">       wmParams.width=40;  </div><div class="line">       wmParams.height=40;  </div><div class="line">         </div><div class="line">       wmManager.addView(bb, wmParams);</div></pre></td></tr></table></figure>
+<p>解释：创建了一个Button对象然后通过WindowManager实例对象的addView添加这个ButtonVIew并根据相应的LayoutParams参数进行显示。</p>
+<h1 id="WindowManager属性详解"><a href="#WindowManager属性详解" class="headerlink" title="WindowManager属性详解"></a>WindowManager属性详解</h1><p><strong>继承关系</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">java.lang.Object</div><div class="line">   ↳android.view.ViewGroup.LayoutParams</div><div class="line">       ↳android.view.WindowManager.LayoutParams</div></pre></td></tr></table></figure>
+<p><strong>继承来的属性与常量</strong><br>从 ViewManager.LayoutParams 继承来的属性：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">android:layout_height</div><div class="line">        Specifies the basic height of the view.</div><div class="line"></div><div class="line">   android:layout_width</div><div class="line">        Specifies the basic width of the view.</div></pre></td></tr></table></figure>
+<p>从 ViewManager.LayoutParams继承的常量：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">FILL_PARENT</div><div class="line">    WRAP_CONTENT</div><div class="line">    MATCH_PARENT</div></pre></td></tr></table></figure>
+<h2 id="其他可用的常量定义"><a href="#其他可用的常量定义" class="headerlink" title="其他可用的常量定义"></a>其他可用的常量定义</h2><p><strong>public int x;</strong><br>如果忽略gravity属性，那么它表示窗口的绝对X位置。<br>当设置了 Gravity.LEFT 或 Gravity.RIGHT 之后，x值就表示到特定边的距离。</p>
+<p><strong>public int y;</strong><br>如果忽略gravity属性，那么它表示窗口的绝对Y位置。<br>当设置了 Gravity.TOP 或 Gravity.BOTTOM 之后，y值就表示到特定边的距离。</p>
+<p><strong>public float horizontalWeight/public float verticalWeight;</strong><br>在纵/横向上，为关联的view预留了多少扩展空间（像素）。如果是0，那么此view不能被拉伸。其他情况下，扩展空间（像素）将被widget所均分。</p>
+<p><strong>public int type;</strong><br>窗口类型。有3种主要类型：<br> a)Applicationwindows：<br>        取值在 FIRST_APPLICATION_WINDOW 和 LAST_APPLICATION_WINDOW 之间。<br>        是通常的、顶层的应用程序窗口。必须将 token 设置成 activity 的 token 。</p>
+<p>b)Sub_windows：<br>        取值在 FIRST_SUB_WINDOW 和 LAST_SUB_WINDOW 之间。<br>        与顶层窗口相关联，token 必须设置为它所附着的宿主窗口的 token。</p>
+<p>c)Systemwindows：<br>        取值在 FIRST_SYSTEM_WINDOW 和 LAST_SYSTEM_WINDOW 之间。<br>        用于特定的系统功能。它不能用于应用程序，使用时需要特殊权限。</p>
+<p><strong>public int memoryType;</strong><br>   指出窗口所使用的内存缓冲类型。默认为 NORMAL 。</p>
+<p>下面定义了 memoryType 的取值：<br>窗口缓冲位于主内存。<br>public static final int MEMORY_TYPE_NORMAL = 0;</p>
+<p>窗口缓冲位于可以被DMA访问，或者硬件加速的内存区域。<br>public static final int MEMORY_TYPE_HARDWARE = 1;</p>
+<p>窗口缓冲位于可被图形加速器访问的区域。<br>public static final int MEMORY_TYPE_GPU = 2;</p>
+<p>窗口缓冲不拥有自己的缓冲区，不能被锁定。缓冲区由本地方法提供。<br>public static final int MEMORY_TYPE_PUSH_BUFFERS = 3;</p>
+<p><strong>public int flags</strong><br>行为选项/旗标，默认为 none .<br>下面定义了 flags 的取值：<br>窗口之后的内容变暗。<br>public static final int FLAG_DIM_BEHIND       = 0x00000002;</p>
+<p>窗口之后的内容变模糊。<br>public static final int FLAG_BLUR_BEHIND       = 0x00000004;</p>
+<p>不许获得焦点。<br>public static final int FLAG_NOT_FOCUSABLE     = 0x00000008;</p>
+<p>不接受触摸屏事件。<br>public static final int FLAG_NOT_TOUCHABLE     = 0x00000010;</p>
+<p>当窗口可以获得焦点（没有设置 FLAG_NOT_FOCUSALBE 选项）时，仍然将窗口范围之外的点设备事件（鼠标、触摸屏）发送给后面的窗口处理。否则它将独占所有的点设备事件，而不管它们是不是发生在窗口范围内。<br>public static final int FLAG_NOT_TOUCH_MODAL   = 0x00000020;</p>
+<p> 如果设置了这个标志，当设备休眠时，点击触摸屏，设备将收到这个第一触摸事件。通常第一触摸事件被系统所消耗，用户不会看到他们点击屏幕有什么反应。<br>public static final int FLAG_TOUCHABLE_WHEN_WAKING = 0x00000040;</p>
+<p>当此窗口为用户可见时，保持设备常开，并保持亮度不变。<br>public static final int FLAG_KEEP_SCREEN_ON    = 0x00000080;</p>
+<p>窗口占满整个屏幕，忽略周围的装饰边框（例如状态栏）。此窗口需考虑到装饰边框的内容。<br>public static final int FLAG_LAYOUT_IN_SCREEN   =0x00000100;</p>
+<p>允许窗口扩展到屏幕之外。<br>public static final int FLAG_LAYOUT_NO_LIMITS   =0x00000200;</p>
+<p>窗口显示时，隐藏所有的屏幕装饰（例如状态条）。使窗口占用整个显示区域。<br>public static final int FLAG_FULLSCREEN     = 0x00000400;</p>
+<p>此选项将覆盖FLAG_FULLSCREEN选项，并强制屏幕装饰（如状态条）弹出。<br>public static final int FLAG_FORCE_NOT_FULLSCREEN   =0x00000800;</p>
+<p>抖动。指 对半透明的显示方法。又称“点透”。图形处理较差的设备往往用“点透”替代Alpha混合。<br>public static final int FLAG_DITHER = 0x00001000;</p>
+<p>不允许屏幕截图。<br>public static final int FLAG_SECURE           = 0x00002000;</p>
+<p>一种特殊模式，布局参数用于指示显示比例。<br>public static final int FLAG_SCALED           = 0x00004000;</p>
+<p>当屏幕有可能贴着脸时，这一选项可防止面颊对屏幕造成误操作。<br>public static final int FLAG_IGNORE_CHEEK_PRESSES   = 0x00008000;</p>
+<p>当请求布局时，你的窗口可能出现在状态栏的上面或下面，从而造成遮挡。当设置这一选项后，窗口管理器将确保窗口内容不会被装饰条（状态栏）盖住。<br>public static final int FLAG_LAYOUT_INSET_DECOR = 0x00010000;</p>
+<p>反转FLAG_NOT_FOCUSABLE选项。<br>如果同时设置了FLAG_NOT_FOCUSABLE选项和本选项，窗口将能够与输入法交互，允许输入法窗口覆盖；      如果FLAG_NOT_FOCUSABLE没有设置而设置了本选项，窗口不能与输入法交互，可以覆盖输入法窗口。<br>public static final int FLAG_ALT_FOCUSABLE_IM = 0x00020000;</p>
+<p>如果你设置了FLAG_NOT_TOUCH_MODAL，那么当触屏事件发生在窗口之外事，可以通过设置此标志接收到一个 MotionEvent.ACTION_OUTSIDE事件。注意，你不会收到完整的down/move/up事件，只有第一次down事件时可以收到 ACTION_OUTSIDE。<br>public static final int FLAG_WATCH_OUTSIDE_TOUCH = 0x00040000;</p>
+<p>当屏幕锁定时，窗口可以被看到。这使得应用程序窗口优先于锁屏界面。可配合FLAG_KEEP_SCREEN_ON选项点亮屏幕并直接显示在锁屏界面之前。可使用FLAG_DISMISS_KEYGUARD选项直接解除非加锁的锁屏状态。此选项只用于最顶层的全屏幕窗口。      public static final int FLAG_SHOW_WHEN_LOCKED = 0x00080000;</p>
+<p>请求系统墙纸显示在你的窗口后面。窗口必须是半透明的。<br>public static final int FLAG_SHOW_WALLPAPER = 0x00100000;</p>
+<p>窗口一旦显示出来，系统将点亮屏幕，正如用户唤醒设备那样。<br>public static final int FLAG_TURN_SCREEN_ON = 0x00200000;</p>
+<p>解除锁屏。只有锁屏界面不是加密的才能解锁。如果锁屏界面是加密的，那么用户解锁之后才能看到此窗口，除非设置了FLAG_SHOW_WHEN_LOCKED选项。<br>public static final int FLAG_DISMISS_KEYGUARD = 0x00400000;</p>
+<p>锁屏界面淡出时，继续运行它的动画。<br>public static final int FLAG_KEEP_SURFACE_WHILE_ANIMATING =0x10000000;</p>
+<p>以原始尺寸显示窗口。用于在兼容模式下运行程序。<br>public static final int FLAG_COMPATIBLE_WINDOW = 0x20000000;</p>
+<p>用于系统对话框。设置此选项的窗口将无条件获得焦点。<br>public static final int FLAG_SYSTEM_ERROR = 0x40000000;</p>
+<p><strong>public int softInputMode</strong>（重要）<br>以下选项与 softInputMode 有关：<br>软输入区域是否可见。<br>public static final int SOFT_INPUT_MASK_STATE = 0x0f;</p>
+<p>未指定状态。<br>public static final int SOFT_INPUT_STATE_UNSPECIFIED = 0;</p>
+<p>不要修改软输入法区域的状态。<br>public static final int SOFT_INPUT_STATE_UNCHANGED = 1;</p>
+<p>隐藏输入法区域（当用户进入窗口时）。<br>public static final int SOFT_INPUT_STATE_HIDDEN = 2;</p>
+<p>当窗口获得焦点时，隐藏输入法区域。<br>public static final int SOFT_INPUT_STATE_ALWAYS_HIDDEN = 3;</p>
+<p>显示输入法区域（当用户进入窗口时）。<br>public static final int SOFT_INPUT_STATE_VISIBLE = 4;</p>
+<p>当窗口获得焦点时，显示输入法区域。<br> public static final int SOFT_INPUT_STATE_ALWAYS_VISIBLE = 5;</p>
+<p>窗口应当主动调整，以适应软输入窗口。<br>public static final int SOFT_INPUT_MASK_ADJUST = 0xf0;</p>
+<p>未指定状态，系统将根据窗口内容尝试选择一个输入法样式。<br>public static final int SOFT_INPUT_ADJUST_UNSPECIFIED = 0x00;</p>
+<p>当输入法显示时，允许窗口重新计算尺寸，使内容不被输入法所覆盖。不可与SOFT_INPUT_ADJUSP_PAN混合使用,如果两个都没有设置，系统将根据窗口内容自动设置一个选项。<br> public static final int SOFT_INPUT_ADJUST_RESIZE = 0x10;</p>
+<p>输入法显示时平移窗口。它不需要处理尺寸变化，框架能够移动窗口以确保输入焦点可见。不可与SOFT_INPUT_ADJUST_RESIZE混合使用;如果两个都没设置,系统将根据窗口内容自动设置一个选项。<br> public static final int SOFT_INPUT_ADJUST_PAN = 0x20;</p>
+<p>当用户转至此窗口时，由系统自动设置，所以你不要设置它。当窗口显示之后该标志自动清除。<br> public static final int SOFT_INPUT_IS_FORWARD_NAVIGATION = 0x100;</p>
+<p><strong>public float horizontalMargin/public float verticalMargin</strong><br>水平边距/ 纵向边距，容器与widget之间的距离，占容器宽度的百分率。</p>
+<p><strong>public int windowAnimations</strong><br> 窗口所使用的动画设置。它必须是一个系统资源而不是应用程序资源，因为窗口管理器不能访问应用程序。</p>
+<p><strong>public float alpha</strong><br>整个窗口的透明值。</p>
+<h2 id="其他常用方法"><a href="#其他常用方法" class="headerlink" title="其他常用方法"></a>其他常用方法</h2><p>public staticfinal int LAYOUT_CHANGED =1&lt;&lt;0;<br>    public staticfinal int TYPE_CHANGED =1&lt;&lt;1;<br>    public staticfinal int FLAGS_CHANGED =1&lt;&lt;2;<br>    public staticfinal int FORMAT_CHANGED =1&lt;&lt;3;<br>    public staticfinal int ANIMATION_CHANGED =1&lt;&lt;4;<br>    public staticfinal int DIM_AMOUNT_CHANGED =1&lt;&lt;5;<br>    public staticfinal int TITLE_CHANGED =1&lt;&lt;6;<br>    public staticfinal int ALPHA_CHANGED =1&lt;&lt;7;<br>    public staticfinal int MEMORY_TYPE_CHANGED =1&lt;&lt;8;<br>    public staticfinal int SOFT_INPUT_MODE_CHANGED =1&lt;&lt;9;<br>    public staticfinal int SCREEN_ORIENTATION_CHANGED =1&lt;&lt;10;<br>    public staticfinal int SCREEN_BRIGHTNESS_CHANGED =1&lt;&lt;11;</p>
+<p>当然还有很多，这里列出了一些常用的。</p>]]></content>
+    
+    <summary type="html">
+    
+      WindowManager是Android中一个重要的服务（Service ）。WindowManager Service 是全局的，是唯一的。
+    
+    </summary>
+    
+      <category term="Android" scheme="http://code.youmeek.com/categories/Android/"/>
+    
+      <category term="WindowManager" scheme="http://code.youmeek.com/categories/Android/WindowManager/"/>
+    
+    
+      <category term="Android" scheme="http://code.youmeek.com/tags/Android/"/>
+    
+      <category term="WindowManager" scheme="http://code.youmeek.com/tags/WindowManager/"/>
+    
+      <category term="系统服务" scheme="http://code.youmeek.com/tags/%E7%B3%BB%E7%BB%9F%E6%9C%8D%E5%8A%A1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>android7.0新特性</title>
+    <link href="http://code.youmeek.com/2016/08/05/Android7.0%E6%96%B0%E7%89%B9%E6%80%A7/"/>
+    <id>http://code.youmeek.com/2016/08/05/Android7.0新特性/</id>
+    <published>2016-08-04T16:00:00.000Z</published>
+    <updated>2017-01-25T06:20:54.791Z</updated>
+    
+    <content type="html"><![CDATA[<p>前言：<br>总想写点自己的东西，因为很多Android知识网上大部分都有教程，这样写的话总是忍不住借鉴别人写的东西，再加入点自己的一些元素，我只好对网上的各种知识，我认为很多知识可以总结到一起的把它们总结到一起再附上原文，以供以后的方便查阅，进入今天的正题 Android7.0正式发布了，小伙伴都很激动的啊！</p>
+<p>7.0发展<br>2016年3月10日凌晨，谷歌正式放出了Android 7.0的首个测试版本Developer Preview，数据包大小在1.1GB左右。相比往年测试版的公开时间，2016年的Android 7.0明显来得要早了一些。而谷歌负责人透露这样做也是为了给开发者争取到更多测试时间。<br>谷歌官方已放出安装包镜像，支持Nexus 6P、Nexus 5X、Nexus 6、Pixel C、Nexus 9以及Nexus Player这几款设备。功能方面，Android 7.0新功能以实用为主，比如分屏多任务、全新设计的通知控制栏等等<br>2016年5月18日，Android7.0系统初次公开亮相于GoogleI/O大会。<br>2016年8月22日，谷歌正式推送Android 7.0Nougat正式版。他们还会三个月一次推送开发版，而曝光的消息看，第一个开发版就是Android 7.1。<br>7.0变化<br>分屏多任务<br>进入后台多任务管理页面，然后按住其中一个卡片，然后向上拖动至顶部即可开启分屏多任务，支持上下分栏和左右分栏，允许拖动中间的分割线调整两个APP所占的比例。目前，安卓7.0开发者预览版支持全部第三方应用尝试分屏操作，但个别应用适配可能存在问题，分屏后可能导致界面显示不全等问题.<br>全新下拉快捷开关页<br>在安卓7.0中，下拉打开通知栏顶部即可显示5个用户常用的快捷开关，支持单击开关以及长按进入对应设置。如果继续下拉通知栏即可显示全部快捷开关，此外在快捷开关页右下角也会显示一个“编辑”按钮，点击之后即可自定义添加/删除快捷开关，或拖动进行排序。<br>通知消息快捷回复<br>安卓7.0加入了全新的API，支持第三方应用通知的快捷操作和回复，例如来电会以横幅方式在屏幕顶部出现，提供接听/挂断两个按钮；信息/社交类应用通知，还可以直接打开键盘，在输入栏里进行快捷回复。<br>通知消息归拢<br>安卓7.0会将同一应用的多条通知提示消息归拢为一项，点击该项即可展开此前的全部通知，允许用户对每个通知执行单独操作。<br>夜间模式<br>安卓7.0中重新加入了夜间深色主题模式，该功能依然需要在系统调谐器中开启，从顶部下划打开快捷设置页，然后长按其中的设置图标，齿轮旋转10秒钟左右即可提示已开启系统调谐器，之后用户在设置中即可找到“系统调谐器”设置项。点开其中的“色彩和外观”，即可找到夜间模式，开启后即可使用全局的深色主题模式，同时亮度和色彩也会进行一定的调整，该功能可以基于时间或地理位置自动开启。另外，系统调谐器中也提供了RGB红绿蓝三色调节滑动条，允许用户手动精细调节，例如减少蓝色或增加红色以提供类似护眼模式的效果。<br>流量保护模式<br>安卓7.0新增的流量保护模式不仅可以禁止应用在后台使用流量，还会进一步减少该应用在前台时的流量使用。其具体实现原理目前尚不清楚，推测其有可能使用了类似Chrome浏览器的数据压缩技术。此外，谷歌还扩展了ConnectivityManager API的能力，使得应用可以检测系统是否开启了流量保护模式，或者检测自己是否在白名单中。安卓7.0允许用户单独针对每个应用，选择是否开启数据保护模式。<br>全新设置样式<br>安卓7.0启用了全新的设置样式，首先每个分类下各个子项之间的分割线消失了，只保留分类之间的分割线。全新的设置菜单还提供了一个绿色的顶栏，允许用户通过后方的下拉箭头，快速设定勿扰模式等。除了勿扰模式外，顶栏菜单还可以显示诸多其他的设置状态，例如数据流量的使用情况，自动亮度是否开启等。谷歌也在安卓7.0的设置中加入了汉堡菜单，在二级设置界面中的左上角，你就会看到这个汉堡菜单，点击后即可看到所有设置项，方便用户快速跳转。<br>改进的Doze休眠机制<br>谷歌在安卓7.0中对Doze休眠机制做了进一步的优化，在此前的安卓6.0中，Doze深度休眠机制对于改善安卓的续航提供了巨大的作用。而在安卓7.0中，谷歌对Doze进行了更多的优化，休眠机制的使用规则和场景有所扩展，例如只要手动在后台删掉应用卡片，关屏后该应用就会被很快深度休眠。<br>系统级电话黑名单功能<br>安卓7.0将电话拦截功能变成了一个系统级功能。其它应用可以调用这个拦截名单，但只有个别应用可以写入，包括拨号应用、默认的短信应用等。被拦截号码将不会出现在来电记录中，也不会出现通知。另外用户也可以通过账户体系备份和恢复这个拦截名单，以便快速导入其它设备或账号。<br>菜单键快速应用切换</p>
+<h2 id="双击菜单键，就能自动切换到上一个应用。此外，如果你不停地点击菜单键的话，就会在所有应用中不间断地轮换，应用窗口会自动放大，顶部还会出现倒计时条，停止点击且倒计时结束后，当前应用会自动放大并返回到前台。"><a href="#双击菜单键，就能自动切换到上一个应用。此外，如果你不停地点击菜单键的话，就会在所有应用中不间断地轮换，应用窗口会自动放大，顶部还会出现倒计时条，停止点击且倒计时结束后，当前应用会自动放大并返回到前台。" class="headerlink" title="双击菜单键，就能自动切换到上一个应用。此外，如果你不停地点击菜单键的话，就会在所有应用中不间断地轮换，应用窗口会自动放大，顶部还会出现倒计时条，停止点击且倒计时结束后，当前应用会自动放大并返回到前台。"></a>双击菜单键，就能自动切换到上一个应用。此外，如果你不停地点击菜单键的话，就会在所有应用中不间断地轮换，应用窗口会自动放大，顶部还会出现倒计时条，停止点击且倒计时结束后，当前应用会自动放大并返回到前台。</h2><p>7.0主要特征:</p>
+<p>2016年5月19日，谷歌I/O开发者大会召开，谷歌详细介绍了最新的Android N系统。Android N支持无缝更新，能提升效率，增强了安全性。谷歌称，他们希望让广大用户来决定Android N的正式名称。在刚刚上线的专门页面当中，任何人都可以输入自己喜欢的以N打头的单词，谷歌将会在这些名字当中挑选出Android N的正式名称。<br>关于Android N的性能改进，谷歌方面称，Android N建立了先进的图形处理Vulkan系统，能少的减少对CPU的占用。与此同时，Android N加入了JIT编译器，安装程序快了75%，所占空间减少了50%。<br>在安全性上，Android N加入了全新安全性能，其中包括基于文件的数据加密。谷歌移动版Chrome能识别恶意网站。<br>Android N可以进行无缝更新，与Chromebook一样，用户将不再需要下载安装，也不再需要进行重启。<br>在效率提升上，Android N可以自动关闭用户较长时间未使用的应用程序。在通知上新增了直接回复功能，并支持一键全部清除功能</p>
+<p>另外看了一些新闻，都感觉非常不错！分享给大家linux公社<br>Android 7.0 —— 效率史上最高：运行速度飙升600%</p>
+<p>目前，我们已经知道，新一代Android操作系统将支持无缝升级，能够通过Vulkan API来在中低硬件配置设备上实现流畅游戏体验以及更多的Emoji表情。不过，Android 7.0最大也是最引人关注的还是来自运行效率上的改进。<br>来自I/O大会现场的PPT显示，Android N的代码减少了50%，新的代码减少50%，安卓N运行环境有了明显改善，软件运行速度提升幅度达到600%，应用安装提速75%。<br>这意味着用户正在迎来史上运行效率最高的一代Android操作系统。<br>与此同时，官方还为开发者准备了Android Studio 2.2开发工具，其拥有更强大的UI设计工具，增强了对Java8和C++语言的支持，而且JIT编辑器也变得更加强大，模块化应用的构建变得更加简单。<br>目前，谷歌已经放出了Android 7.0的第三个预览版系统，正式版则要等到今年秋季才会与用户见面，届时同步到来的还有Android Wear 2.0系统。<br>Android 7.0正式发布下载！七大新特性值得关注<br>Google I/O 2016开发者大会上，Android N正式揭开了其神秘面纱，按照惯例它应该会成为Android 7.0，不过Google还并不急于公布具体版本号，甚至尚未确认最终代号，而是让大家来集思广益。</p>
+<p>Google表示，Android N重点在三个方面做了改进，分别是性能、安全、生产力。当然这里介绍的都是一些大面上的关键变化，细节改进会非常之多。</p>
+<p>首先，Android N正式支持Vulkan API，包括其全部特性，尤其是能够大大降低CPU系统开销，提升描绘指令(Draw Call)，当然也支持预编译着色器，这对于应用、游戏开发无疑是个大好消息。</p>
+<p>应用编译与安装方面，Android N不会一股脑地全部进行AOT预先编译，而是结合JIT实时编译、混合编译，都针对每个应用进行优化，可大大提升应用安装速度、性能、存储和能效，号称安装速度比现在快最多75％。</p>
+<p>安全方面，Android N将会支持基于文件的加密、媒体框架硬化、无缝升级，特别是最后一点，Android N会使用两个系统镜像来确保OTA更新顺利、安全。</p>
+<p>Google发现，在多任务列表里，99％的人只会关注最近七个，所以Android N会自动移除更老的任务，同时增加了一个清除所有按钮(内存释放控可以满足了)，而双击最近按钮会自动将最后一个使用的应用调到前台。<br>同时，分屏多任务也会正式加入进来。<br>通知同样得到了大幅改进，可以直接回复消息，长按通知可将其静音或者拦截。<br>Android 7.0 Nougat停止支持Nexus 5 和 2013 Nexus 7<br>Google 开始逐步向 Nexus 6、9、5X、6P、Pixel C 、Nexus Player、General Mobile 4G (Android One 手机) 推送 Android 7.0 Nougat，其它旧的型号将停留在上一代的 Android 6，这意味着在发布三年之后 Google 准备终止对 Nexus 5 和 2013 Nexus 7的支持。Nexus 5用户也许可以等待即将发布的新Nexus手机，但 Nexus 7用户目前看起来没有相应的替代产品了。Android 7.0的新特性包括了多窗口支持，应用可调整大小，在最近使用的两个应用之间快速切换，新的通知功能，用户可以定制快速设置，新的Unicode 9 emoji，无缝更新，等等。详细可阅读Ars的评测。</p>
+<p>Google发布Android 7.0，带来250多项新特性<br>Google已经开始使用代号为Nougat的Android 7.0升级特定的设备。通常，新版本的Android会从秋季（9月底或10月初）开始向设备推送。但今年，他们改变了节奏，3月份发布了预览版，8月份发布了正式版。</p>
+<p>据Google介绍，Nougat带来了250多项新特性。以下是其中的部分特性。</p>
+<p>新的Interpreter+JIT+AOT编译器，我们之前详细介绍过。总的来说，该编译器减少了应用程序安装时间和存储空间，并在手机空闲的时候编译代码的热点部分，提高性能。<br>Daydream：一个在移动设备上创建虚拟现实体验的VR SDK。其中有一个面向Unity 3D的SDK，用于创建Android和iOS VR应用程序，还有一个SDK是专门用于Android的。<br>Vulkan：一个跨平台的图形和计算API。它来自Khronos Group，面向现代GPU。Vulkan不只适用于智能手机，还适用于PC、控制器，甚至是嵌入式设备。Vulkan 1.0规范是今年早些时候发布的。<br>多窗口：在Nougat上，开发人员可以创建两个窗口，一个在上面，一个在下面，或者在分屏模式下并排显示。应用界面的大小可以改变。<br>借助Direct Reply，开发人员可以增强通知功能，让用户可以在通知抽屉上直接操作。<br>改进了在Android Marshmallow中引入的Doze，当屏幕关闭而设备没有接通电源时，限制应用程序使用CPU和网络。也就是说，只允许在特定的时间窗口内同步和访问网络，以便节省电池。<br>Svelte进一步降低了后台运行的应用程序使用的内存。</p>
+<p>要想更全面地了解Android Nougat的新特性，我们建议您阅读Android 7.0 for Developers，其中包含有关“数据流量节省（Data Saver）”、号码拦截、呼叫显示、多区域支持、新Emojis、WebView(已回归Chrome)、 虚拟文件等特性的详细信息。</p>
+<p>多种Nexus设备、Pixel C及Android测试计划推出的设备将首先收到Android Nougat。如果说上一年首先收到Android新版本的新设备是Nexus，那么今年LG V20的用户将最先体验到Nougat。</p>
+<p>Google指出，他们已经致力于第一次Nougat升级相关的工作，升级包将会在今年秋天的某个时候发布，带来Bug修复和小改进。</p>
+<p>结束语：</p>
+<p>好了，总结到这块就完毕了，借这篇文章来庆祝7.0的诞生。基本上全部都是查看资料的，总结到了一起。</p>]]></content>
+    
+    <summary type="html">
+    
+      2016年3月10日凌晨，谷歌正式放出了Android 7.0的首个测试版本Developer Preview，数据包大小在1.1GB左右。相比往年测试版的公开时间，2016年的Android 7.0明显来得要早了一些。
+    
+    </summary>
+    
+      <category term="Android" scheme="http://code.youmeek.com/categories/Android/"/>
+    
+      <category term="系统" scheme="http://code.youmeek.com/categories/Android/%E7%B3%BB%E7%BB%9F/"/>
+    
+    
+      <category term="Android" scheme="http://code.youmeek.com/tags/Android/"/>
+    
+      <category term="新特性" scheme="http://code.youmeek.com/tags/%E6%96%B0%E7%89%B9%E6%80%A7/"/>
     
   </entry>
   

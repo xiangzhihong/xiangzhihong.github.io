@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="向志洪">
+
+
+
+<meta name="description" content="2016年3月10日凌晨，谷歌正式放出了Android 7.0的首个测试版本Developer Preview，数据包大小在1.1GB左右。相比往年测试版的公开时间，2016年的Android 7.0明显来得要早了一些。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="android7.0新特性">
+<meta property="og:url" content="http://code.youmeek.com/2016/08/05/Android7.0新特性/index.html">
+<meta property="og:site_name" content="向志洪">
+<meta property="og:description" content="2016年3月10日凌晨，谷歌正式放出了Android 7.0的首个测试版本Developer Preview，数据包大小在1.1GB左右。相比往年测试版的公开时间，2016年的Android 7.0明显来得要早了一些。">
+<meta property="og:updated_time" content="2017-01-25T06:20:54.791Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="android7.0新特性">
+<meta name="twitter:description" content="2016年3月10日凌晨，谷歌正式放出了Android 7.0的首个测试版本Developer Preview，数据包大小在1.1GB左右。相比往年测试版的公开时间，2016年的Android 7.0明显来得要早了一些。">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="向志洪" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>android7.0新特性 | 向志洪</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="http://ohe65w0xx.bkt.clouddn.com/avert.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">向志洪</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">这里只有代码相关，要了解更多 &gt;&gt;http://blog.csdn.net/xiangzhihong8</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa GitHub" href="https://github.com/xiangzhihong/" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa CSDN" href="http://blog.csdn.net/xiangzhihong8/" title="CSDN"></a>
+                            
+                                <a class="fa QQ" href="/1044817967" title="QQ"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Angular2/">Angular2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node入门/">Node入门</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WindowManager/">WindowManager</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gulp/">gulp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift/">swift</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/个人博客/">个人博客</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端开发/">前端开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大数据/">大数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/小程序/">小程序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微信/">微信</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建网站/">搭建网站</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/新特性/">新特性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/流量/">流量</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/系统服务/">系统服务</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/迭代子模式/">迭代子模式</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://www.xiangzhihong.com/">Blog</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">向志洪</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="http://ohe65w0xx.bkt.clouddn.com/avert.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">向志洪</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">这里只有代码相关，要了解更多 &gt;&gt;http://blog.csdn.net/xiangzhihong8</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/xiangzhihong/" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa CSDN" target="_blank" href="http://blog.csdn.net/xiangzhihong8/" title="CSDN"></a>
+                            
+                                <a class="fa QQ" target="_blank" href="/1044817967" title="QQ"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我">
+</nav>
+      <div class="body-wrap"><article id="post-Android7.0新特性" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/08/05/Android7.0新特性/" class="article-date">
+      <time datetime="2016-08-04T16:00:00.000Z" itemprop="datePublished">2016-08-05</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        <h1 class="article-title" itemprop="name">
+      android7.0新特性
+    </h1>
+      </header>
+      
+      <div class="article-info article-info-post">
+        <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Android/">Android</a><a class="article-category-link" href="/categories/Android/系统/">系统</a>
+    </div>
+        <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/新特性/">新特性</a></li></ul>
+    </div>
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>前言：<br>总想写点自己的东西，因为很多Android知识网上大部分都有教程，这样写的话总是忍不住借鉴别人写的东西，再加入点自己的一些元素，我只好对网上的各种知识，我认为很多知识可以总结到一起的把它们总结到一起再附上原文，以供以后的方便查阅，进入今天的正题 Android7.0正式发布了，小伙伴都很激动的啊！</p>
+<p>7.0发展<br>2016年3月10日凌晨，谷歌正式放出了Android 7.0的首个测试版本Developer Preview，数据包大小在1.1GB左右。相比往年测试版的公开时间，2016年的Android 7.0明显来得要早了一些。而谷歌负责人透露这样做也是为了给开发者争取到更多测试时间。<br>谷歌官方已放出安装包镜像，支持Nexus 6P、Nexus 5X、Nexus 6、Pixel C、Nexus 9以及Nexus Player这几款设备。功能方面，Android 7.0新功能以实用为主，比如分屏多任务、全新设计的通知控制栏等等<br>2016年5月18日，Android7.0系统初次公开亮相于GoogleI/O大会。<br>2016年8月22日，谷歌正式推送Android 7.0Nougat正式版。他们还会三个月一次推送开发版，而曝光的消息看，第一个开发版就是Android 7.1。<br>7.0变化<br>分屏多任务<br>进入后台多任务管理页面，然后按住其中一个卡片，然后向上拖动至顶部即可开启分屏多任务，支持上下分栏和左右分栏，允许拖动中间的分割线调整两个APP所占的比例。目前，安卓7.0开发者预览版支持全部第三方应用尝试分屏操作，但个别应用适配可能存在问题，分屏后可能导致界面显示不全等问题.<br>全新下拉快捷开关页<br>在安卓7.0中，下拉打开通知栏顶部即可显示5个用户常用的快捷开关，支持单击开关以及长按进入对应设置。如果继续下拉通知栏即可显示全部快捷开关，此外在快捷开关页右下角也会显示一个“编辑”按钮，点击之后即可自定义添加/删除快捷开关，或拖动进行排序。<br>通知消息快捷回复<br>安卓7.0加入了全新的API，支持第三方应用通知的快捷操作和回复，例如来电会以横幅方式在屏幕顶部出现，提供接听/挂断两个按钮；信息/社交类应用通知，还可以直接打开键盘，在输入栏里进行快捷回复。<br>通知消息归拢<br>安卓7.0会将同一应用的多条通知提示消息归拢为一项，点击该项即可展开此前的全部通知，允许用户对每个通知执行单独操作。<br>夜间模式<br>安卓7.0中重新加入了夜间深色主题模式，该功能依然需要在系统调谐器中开启，从顶部下划打开快捷设置页，然后长按其中的设置图标，齿轮旋转10秒钟左右即可提示已开启系统调谐器，之后用户在设置中即可找到“系统调谐器”设置项。点开其中的“色彩和外观”，即可找到夜间模式，开启后即可使用全局的深色主题模式，同时亮度和色彩也会进行一定的调整，该功能可以基于时间或地理位置自动开启。另外，系统调谐器中也提供了RGB红绿蓝三色调节滑动条，允许用户手动精细调节，例如减少蓝色或增加红色以提供类似护眼模式的效果。<br>流量保护模式<br>安卓7.0新增的流量保护模式不仅可以禁止应用在后台使用流量，还会进一步减少该应用在前台时的流量使用。其具体实现原理目前尚不清楚，推测其有可能使用了类似Chrome浏览器的数据压缩技术。此外，谷歌还扩展了ConnectivityManager API的能力，使得应用可以检测系统是否开启了流量保护模式，或者检测自己是否在白名单中。安卓7.0允许用户单独针对每个应用，选择是否开启数据保护模式。<br>全新设置样式<br>安卓7.0启用了全新的设置样式，首先每个分类下各个子项之间的分割线消失了，只保留分类之间的分割线。全新的设置菜单还提供了一个绿色的顶栏，允许用户通过后方的下拉箭头，快速设定勿扰模式等。除了勿扰模式外，顶栏菜单还可以显示诸多其他的设置状态，例如数据流量的使用情况，自动亮度是否开启等。谷歌也在安卓7.0的设置中加入了汉堡菜单，在二级设置界面中的左上角，你就会看到这个汉堡菜单，点击后即可看到所有设置项，方便用户快速跳转。<br>改进的Doze休眠机制<br>谷歌在安卓7.0中对Doze休眠机制做了进一步的优化，在此前的安卓6.0中，Doze深度休眠机制对于改善安卓的续航提供了巨大的作用。而在安卓7.0中，谷歌对Doze进行了更多的优化，休眠机制的使用规则和场景有所扩展，例如只要手动在后台删掉应用卡片，关屏后该应用就会被很快深度休眠。<br>系统级电话黑名单功能<br>安卓7.0将电话拦截功能变成了一个系统级功能。其它应用可以调用这个拦截名单，但只有个别应用可以写入，包括拨号应用、默认的短信应用等。被拦截号码将不会出现在来电记录中，也不会出现通知。另外用户也可以通过账户体系备份和恢复这个拦截名单，以便快速导入其它设备或账号。<br>菜单键快速应用切换</p>
+<h2 id="双击菜单键，就能自动切换到上一个应用。此外，如果你不停地点击菜单键的话，就会在所有应用中不间断地轮换，应用窗口会自动放大，顶部还会出现倒计时条，停止点击且倒计时结束后，当前应用会自动放大并返回到前台。"><a href="#双击菜单键，就能自动切换到上一个应用。此外，如果你不停地点击菜单键的话，就会在所有应用中不间断地轮换，应用窗口会自动放大，顶部还会出现倒计时条，停止点击且倒计时结束后，当前应用会自动放大并返回到前台。" class="headerlink" title="双击菜单键，就能自动切换到上一个应用。此外，如果你不停地点击菜单键的话，就会在所有应用中不间断地轮换，应用窗口会自动放大，顶部还会出现倒计时条，停止点击且倒计时结束后，当前应用会自动放大并返回到前台。"></a>双击菜单键，就能自动切换到上一个应用。此外，如果你不停地点击菜单键的话，就会在所有应用中不间断地轮换，应用窗口会自动放大，顶部还会出现倒计时条，停止点击且倒计时结束后，当前应用会自动放大并返回到前台。</h2><p>7.0主要特征:</p>
+<p>2016年5月19日，谷歌I/O开发者大会召开，谷歌详细介绍了最新的Android N系统。Android N支持无缝更新，能提升效率，增强了安全性。谷歌称，他们希望让广大用户来决定Android N的正式名称。在刚刚上线的专门页面当中，任何人都可以输入自己喜欢的以N打头的单词，谷歌将会在这些名字当中挑选出Android N的正式名称。<br>关于Android N的性能改进，谷歌方面称，Android N建立了先进的图形处理Vulkan系统，能少的减少对CPU的占用。与此同时，Android N加入了JIT编译器，安装程序快了75%，所占空间减少了50%。<br>在安全性上，Android N加入了全新安全性能，其中包括基于文件的数据加密。谷歌移动版Chrome能识别恶意网站。<br>Android N可以进行无缝更新，与Chromebook一样，用户将不再需要下载安装，也不再需要进行重启。<br>在效率提升上，Android N可以自动关闭用户较长时间未使用的应用程序。在通知上新增了直接回复功能，并支持一键全部清除功能</p>
+<p>另外看了一些新闻，都感觉非常不错！分享给大家linux公社<br>Android 7.0 —— 效率史上最高：运行速度飙升600%</p>
+<p>目前，我们已经知道，新一代Android操作系统将支持无缝升级，能够通过Vulkan API来在中低硬件配置设备上实现流畅游戏体验以及更多的Emoji表情。不过，Android 7.0最大也是最引人关注的还是来自运行效率上的改进。<br>来自I/O大会现场的PPT显示，Android N的代码减少了50%，新的代码减少50%，安卓N运行环境有了明显改善，软件运行速度提升幅度达到600%，应用安装提速75%。<br>这意味着用户正在迎来史上运行效率最高的一代Android操作系统。<br>与此同时，官方还为开发者准备了Android Studio 2.2开发工具，其拥有更强大的UI设计工具，增强了对Java8和C++语言的支持，而且JIT编辑器也变得更加强大，模块化应用的构建变得更加简单。<br>目前，谷歌已经放出了Android 7.0的第三个预览版系统，正式版则要等到今年秋季才会与用户见面，届时同步到来的还有Android Wear 2.0系统。<br>Android 7.0正式发布下载！七大新特性值得关注<br>Google I/O 2016开发者大会上，Android N正式揭开了其神秘面纱，按照惯例它应该会成为Android 7.0，不过Google还并不急于公布具体版本号，甚至尚未确认最终代号，而是让大家来集思广益。</p>
+<p>Google表示，Android N重点在三个方面做了改进，分别是性能、安全、生产力。当然这里介绍的都是一些大面上的关键变化，细节改进会非常之多。</p>
+<p>首先，Android N正式支持Vulkan API，包括其全部特性，尤其是能够大大降低CPU系统开销，提升描绘指令(Draw Call)，当然也支持预编译着色器，这对于应用、游戏开发无疑是个大好消息。</p>
+<p>应用编译与安装方面，Android N不会一股脑地全部进行AOT预先编译，而是结合JIT实时编译、混合编译，都针对每个应用进行优化，可大大提升应用安装速度、性能、存储和能效，号称安装速度比现在快最多75％。</p>
+<p>安全方面，Android N将会支持基于文件的加密、媒体框架硬化、无缝升级，特别是最后一点，Android N会使用两个系统镜像来确保OTA更新顺利、安全。</p>
+<p>Google发现，在多任务列表里，99％的人只会关注最近七个，所以Android N会自动移除更老的任务，同时增加了一个清除所有按钮(内存释放控可以满足了)，而双击最近按钮会自动将最后一个使用的应用调到前台。<br>同时，分屏多任务也会正式加入进来。<br>通知同样得到了大幅改进，可以直接回复消息，长按通知可将其静音或者拦截。<br>Android 7.0 Nougat停止支持Nexus 5 和 2013 Nexus 7<br>Google 开始逐步向 Nexus 6、9、5X、6P、Pixel C 、Nexus Player、General Mobile 4G (Android One 手机) 推送 Android 7.0 Nougat，其它旧的型号将停留在上一代的 Android 6，这意味着在发布三年之后 Google 准备终止对 Nexus 5 和 2013 Nexus 7的支持。Nexus 5用户也许可以等待即将发布的新Nexus手机，但 Nexus 7用户目前看起来没有相应的替代产品了。Android 7.0的新特性包括了多窗口支持，应用可调整大小，在最近使用的两个应用之间快速切换，新的通知功能，用户可以定制快速设置，新的Unicode 9 emoji，无缝更新，等等。详细可阅读Ars的评测。</p>
+<p>Google发布Android 7.0，带来250多项新特性<br>Google已经开始使用代号为Nougat的Android 7.0升级特定的设备。通常，新版本的Android会从秋季（9月底或10月初）开始向设备推送。但今年，他们改变了节奏，3月份发布了预览版，8月份发布了正式版。</p>
+<p>据Google介绍，Nougat带来了250多项新特性。以下是其中的部分特性。</p>
+<p>新的Interpreter+JIT+AOT编译器，我们之前详细介绍过。总的来说，该编译器减少了应用程序安装时间和存储空间，并在手机空闲的时候编译代码的热点部分，提高性能。<br>Daydream：一个在移动设备上创建虚拟现实体验的VR SDK。其中有一个面向Unity 3D的SDK，用于创建Android和iOS VR应用程序，还有一个SDK是专门用于Android的。<br>Vulkan：一个跨平台的图形和计算API。它来自Khronos Group，面向现代GPU。Vulkan不只适用于智能手机，还适用于PC、控制器，甚至是嵌入式设备。Vulkan 1.0规范是今年早些时候发布的。<br>多窗口：在Nougat上，开发人员可以创建两个窗口，一个在上面，一个在下面，或者在分屏模式下并排显示。应用界面的大小可以改变。<br>借助Direct Reply，开发人员可以增强通知功能，让用户可以在通知抽屉上直接操作。<br>改进了在Android Marshmallow中引入的Doze，当屏幕关闭而设备没有接通电源时，限制应用程序使用CPU和网络。也就是说，只允许在特定的时间窗口内同步和访问网络，以便节省电池。<br>Svelte进一步降低了后台运行的应用程序使用的内存。</p>
+<p>要想更全面地了解Android Nougat的新特性，我们建议您阅读Android 7.0 for Developers，其中包含有关“数据流量节省（Data Saver）”、号码拦截、呼叫显示、多区域支持、新Emojis、WebView(已回归Chrome)、 虚拟文件等特性的详细信息。</p>
+<p>多种Nexus设备、Pixel C及Android测试计划推出的设备将首先收到Android Nougat。如果说上一年首先收到Android新版本的新设备是Nexus，那么今年LG V20的用户将最先体验到Nougat。</p>
+<p>Google指出，他们已经致力于第一次Nougat升级相关的工作，升级包将会在今年秋天的某个时候发布，带来Bug修复和小改进。</p>
+<p>结束语：</p>
+<p>好了，总结到这块就完毕了，借这篇文章来庆祝7.0的诞生。基本上全部都是查看资料的，总结到了一起。</p>
+      
+    </div>
+    
+  </div>
+  
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/08/05/Android7.0新特性/">android7.0新特性</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">向志洪</a></p>
+        <p><span>发布时间:</span>2016-08-05, 00:00:00</p>
+        <p><span>最后更新:</span>2017-01-25, 14:20:54</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/08/05/Android7.0新特性/" title="android7.0新特性">http://code.youmeek.com/2016/08/05/Android7.0新特性/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://code.youmeek.com/2016/08/05/Android7.0新特性/　　作者: 向志洪" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target="_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2016/09/05/Android线程池/">
+                    Android WindowManager详解
+                </a>
+            </div>
+        
+        
+    </nav>
+  
+</article>
+<div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#双击菜单键，就能自动切换到上一个应用。此外，如果你不停地点击菜单键的话，就会在所有应用中不间断地轮换，应用窗口会自动放大，顶部还会出现倒计时条，停止点击且倒计时结束后，当前应用会自动放大并返回到前台。"><span class="toc-number">1.</span> <span class="toc-text">双击菜单键，就能自动切换到上一个应用。此外，如果你不停地点击菜单键的话，就会在所有应用中不间断地轮换，应用窗口会自动放大，顶部还会出现倒计时条，停止点击且倒计时结束后，当前应用会自动放大并返回到前台。</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录" title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+    <div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"android7.0新特性　| 向志洪　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+    
+        <section class="youyan" id="comments">
+    <script>
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = 'http://v2.uyan.cc/code/uyan.js?uid=2120654';
+            (d.head || d.body).appendChild(s);
+        }
+    </script>
+    <script> loadComment(); </script>
+    <div id="uyan_frame"></div>
+</section>
+    
+
+
+<div class="scroll" id="post-nav-button">
+        
+            <a href="/2016/09/05/Android线程池/" title="上一篇: Android WindowManager详解">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/01/05/搭建网站 - 副本/">小程序，会是下一个创业风口吗</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/05/Angular2入坑指南/">Angular2入坑指南</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/05/Node.js基本工作原理/">node.js基本工作原理及流程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/05/gulp+webpack工具整合简介/">gulp+webpack工具整合简介</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/05/swift/">Swift基础语法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/03/Iterate/">迭代子模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/01/robot/">机器学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/05/visitor/">Node入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/05/webpack+react环境搭建/">webpack+react环境搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/Android WindowManager详解/">Android WindowManager详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/刷流量的几种方法/">刷博客等流量</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/微信小程序/">刷博客等流量</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/搭建网站/">搭建网站</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/05/Android线程池/">Android WindowManager详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/05/Android7.0新特性/">android7.0新特性</a></li></ul>
+
+
+    <script>
+        
+    </script></div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2017 向志洪
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style="display:none">
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style="display:none">
+                        <span id="page-visit" title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    <script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+<script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide()" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>

@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="向志洪">
+
+
+
+<meta name="description" content="WindowManager是Android中一个重要的服务（Service ）。WindowManager Service 是全局的，是唯一的。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android WindowManager详解">
+<meta property="og:url" content="http://code.youmeek.com/2016/10/05/Android WindowManager详解/index.html">
+<meta property="og:site_name" content="向志洪">
+<meta property="og:description" content="WindowManager是Android中一个重要的服务（Service ）。WindowManager Service 是全局的，是唯一的。">
+<meta property="og:updated_time" content="2017-01-25T06:24:31.413Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android WindowManager详解">
+<meta name="twitter:description" content="WindowManager是Android中一个重要的服务（Service ）。WindowManager Service 是全局的，是唯一的。">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="向志洪" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>Android WindowManager详解 | 向志洪</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="http://ohe65w0xx.bkt.clouddn.com/avert.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">向志洪</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">这里只有代码相关，要了解更多 &gt;&gt;http://blog.csdn.net/xiangzhihong8</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa GitHub" href="https://github.com/xiangzhihong/" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa CSDN" href="http://blog.csdn.net/xiangzhihong8/" title="CSDN"></a>
+                            
+                                <a class="fa QQ" href="/1044817967" title="QQ"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Angular2/">Angular2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node入门/">Node入门</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WindowManager/">WindowManager</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gulp/">gulp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift/">swift</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/个人博客/">个人博客</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端开发/">前端开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大数据/">大数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/小程序/">小程序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微信/">微信</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建网站/">搭建网站</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/新特性/">新特性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/流量/">流量</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/系统服务/">系统服务</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/迭代子模式/">迭代子模式</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://www.xiangzhihong.com/">Blog</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">向志洪</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="http://ohe65w0xx.bkt.clouddn.com/avert.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">向志洪</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">这里只有代码相关，要了解更多 &gt;&gt;http://blog.csdn.net/xiangzhihong8</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/xiangzhihong/" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa CSDN" target="_blank" href="http://blog.csdn.net/xiangzhihong8/" title="CSDN"></a>
+                            
+                                <a class="fa QQ" target="_blank" href="/1044817967" title="QQ"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我">
+</nav>
+      <div class="body-wrap"><article id="post-Android WindowManager详解" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/10/05/Android WindowManager详解/" class="article-date">
+      <time datetime="2016-10-04T16:00:00.000Z" itemprop="datePublished">2016-10-05</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        <h1 class="article-title" itemprop="name">
+      Android WindowManager详解
+    </h1>
+      </header>
+      
+      <div class="article-info article-info-post">
+        <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Android/">Android</a><a class="article-category-link" href="/categories/Android/WindowManager/">WindowManager</a>
+    </div>
+        <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WindowManager/">WindowManager</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/系统服务/">系统服务</a></li></ul>
+    </div>
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>WindowManager是Android中一个重要的服务（Service ）。WindowManager Service 是全局的，是唯一的。它将用户的操作，翻译成为指令，发送给呈现在界面上的各个Window。Activity会将顶级的控件注册到 Window Manager 中，<br>当用户真是触碰屏幕或键盘的时候，Window Manager就会通知到，而当控件有一些请求产生，也会经由ViewParent送回到Window Manager中。从而完成整个通信流程。<br>整个Android的窗口机制是基于一个叫做 WindowManager，这个接口可以添加view到屏幕，也可以从屏幕删除view。它面向的对象一端是屏幕，另一端就是View，通过WindowManager的 addView方法创建View，这样产生出来的View根据<br>WindowManager.LayoutParams属性不同，效果也就不同了。比如创建 系统顶级窗口，实现悬浮窗口效果！WindowManager的方法很简单，基本用到的就三addView，removeView，updateViewLayout。接口，而WindowManager.LayoutParams的属性就多了，后面为大家一一详解。</p>
+<h2 id="WindowManager小实例"><a href="#WindowManager小实例" class="headerlink" title="WindowManager小实例"></a>WindowManager小实例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">Button bb=new Button(getApplicationContext());  </div><div class="line">WindowManager wmManager=(WindowManager) getSystemService(Context.WINDOW_SERVICE);  </div><div class="line">WindowManager.LayoutParams wmParams = new WindowManager.LayoutParams();  </div><div class="line"></div><div class="line">       wmParams.type=2002;   </div><div class="line">       wmParams.format=1;  </div><div class="line">       </div><div class="line">       wmParams.flags=40;  </div><div class="line">       wmParams.width=40;  </div><div class="line">       wmParams.height=40;  </div><div class="line">         </div><div class="line">       wmManager.addView(bb, wmParams);</div></pre></td></tr></table></figure>
+<p>解释：创建了一个Button对象然后通过WindowManager实例对象的addView添加这个ButtonVIew并根据相应的LayoutParams参数进行显示。</p>
+<h1 id="WindowManager属性详解"><a href="#WindowManager属性详解" class="headerlink" title="WindowManager属性详解"></a>WindowManager属性详解</h1><p><strong>继承关系</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">java.lang.Object</div><div class="line">   ↳android.view.ViewGroup.LayoutParams</div><div class="line">       ↳android.view.WindowManager.LayoutParams</div></pre></td></tr></table></figure>
+<p><strong>继承来的属性与常量</strong><br>从 ViewManager.LayoutParams 继承来的属性：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">android:layout_height</div><div class="line">        Specifies the basic height of the view.</div><div class="line"></div><div class="line">   android:layout_width</div><div class="line">        Specifies the basic width of the view.</div></pre></td></tr></table></figure>
+<p>从 ViewManager.LayoutParams继承的常量：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">FILL_PARENT</div><div class="line">    WRAP_CONTENT</div><div class="line">    MATCH_PARENT</div></pre></td></tr></table></figure>
+<h2 id="其他可用的常量定义"><a href="#其他可用的常量定义" class="headerlink" title="其他可用的常量定义"></a>其他可用的常量定义</h2><p><strong>public int x;</strong><br>如果忽略gravity属性，那么它表示窗口的绝对X位置。<br>当设置了 Gravity.LEFT 或 Gravity.RIGHT 之后，x值就表示到特定边的距离。</p>
+<p><strong>public int y;</strong><br>如果忽略gravity属性，那么它表示窗口的绝对Y位置。<br>当设置了 Gravity.TOP 或 Gravity.BOTTOM 之后，y值就表示到特定边的距离。</p>
+<p><strong>public float horizontalWeight/public float verticalWeight;</strong><br>在纵/横向上，为关联的view预留了多少扩展空间（像素）。如果是0，那么此view不能被拉伸。其他情况下，扩展空间（像素）将被widget所均分。</p>
+<p><strong>public int type;</strong><br>窗口类型。有3种主要类型：<br> a)Applicationwindows：<br>        取值在 FIRST_APPLICATION_WINDOW 和 LAST_APPLICATION_WINDOW 之间。<br>        是通常的、顶层的应用程序窗口。必须将 token 设置成 activity 的 token 。</p>
+<p>b)Sub_windows：<br>        取值在 FIRST_SUB_WINDOW 和 LAST_SUB_WINDOW 之间。<br>        与顶层窗口相关联，token 必须设置为它所附着的宿主窗口的 token。</p>
+<p>c)Systemwindows：<br>        取值在 FIRST_SYSTEM_WINDOW 和 LAST_SYSTEM_WINDOW 之间。<br>        用于特定的系统功能。它不能用于应用程序，使用时需要特殊权限。</p>
+<p><strong>public int memoryType;</strong><br>   指出窗口所使用的内存缓冲类型。默认为 NORMAL 。</p>
+<p>下面定义了 memoryType 的取值：<br>窗口缓冲位于主内存。<br>public static final int MEMORY_TYPE_NORMAL = 0;</p>
+<p>窗口缓冲位于可以被DMA访问，或者硬件加速的内存区域。<br>public static final int MEMORY_TYPE_HARDWARE = 1;</p>
+<p>窗口缓冲位于可被图形加速器访问的区域。<br>public static final int MEMORY_TYPE_GPU = 2;</p>
+<p>窗口缓冲不拥有自己的缓冲区，不能被锁定。缓冲区由本地方法提供。<br>public static final int MEMORY_TYPE_PUSH_BUFFERS = 3;</p>
+<p><strong>public int flags</strong><br>行为选项/旗标，默认为 none .<br>下面定义了 flags 的取值：<br>窗口之后的内容变暗。<br>public static final int FLAG_DIM_BEHIND       = 0x00000002;</p>
+<p>窗口之后的内容变模糊。<br>public static final int FLAG_BLUR_BEHIND       = 0x00000004;</p>
+<p>不许获得焦点。<br>public static final int FLAG_NOT_FOCUSABLE     = 0x00000008;</p>
+<p>不接受触摸屏事件。<br>public static final int FLAG_NOT_TOUCHABLE     = 0x00000010;</p>
+<p>当窗口可以获得焦点（没有设置 FLAG_NOT_FOCUSALBE 选项）时，仍然将窗口范围之外的点设备事件（鼠标、触摸屏）发送给后面的窗口处理。否则它将独占所有的点设备事件，而不管它们是不是发生在窗口范围内。<br>public static final int FLAG_NOT_TOUCH_MODAL   = 0x00000020;</p>
+<p> 如果设置了这个标志，当设备休眠时，点击触摸屏，设备将收到这个第一触摸事件。通常第一触摸事件被系统所消耗，用户不会看到他们点击屏幕有什么反应。<br>public static final int FLAG_TOUCHABLE_WHEN_WAKING = 0x00000040;</p>
+<p>当此窗口为用户可见时，保持设备常开，并保持亮度不变。<br>public static final int FLAG_KEEP_SCREEN_ON    = 0x00000080;</p>
+<p>窗口占满整个屏幕，忽略周围的装饰边框（例如状态栏）。此窗口需考虑到装饰边框的内容。<br>public static final int FLAG_LAYOUT_IN_SCREEN   =0x00000100;</p>
+<p>允许窗口扩展到屏幕之外。<br>public static final int FLAG_LAYOUT_NO_LIMITS   =0x00000200;</p>
+<p>窗口显示时，隐藏所有的屏幕装饰（例如状态条）。使窗口占用整个显示区域。<br>public static final int FLAG_FULLSCREEN     = 0x00000400;</p>
+<p>此选项将覆盖FLAG_FULLSCREEN选项，并强制屏幕装饰（如状态条）弹出。<br>public static final int FLAG_FORCE_NOT_FULLSCREEN   =0x00000800;</p>
+<p>抖动。指 对半透明的显示方法。又称“点透”。图形处理较差的设备往往用“点透”替代Alpha混合。<br>public static final int FLAG_DITHER = 0x00001000;</p>
+<p>不允许屏幕截图。<br>public static final int FLAG_SECURE           = 0x00002000;</p>
+<p>一种特殊模式，布局参数用于指示显示比例。<br>public static final int FLAG_SCALED           = 0x00004000;</p>
+<p>当屏幕有可能贴着脸时，这一选项可防止面颊对屏幕造成误操作。<br>public static final int FLAG_IGNORE_CHEEK_PRESSES   = 0x00008000;</p>
+<p>当请求布局时，你的窗口可能出现在状态栏的上面或下面，从而造成遮挡。当设置这一选项后，窗口管理器将确保窗口内容不会被装饰条（状态栏）盖住。<br>public static final int FLAG_LAYOUT_INSET_DECOR = 0x00010000;</p>
+<p>反转FLAG_NOT_FOCUSABLE选项。<br>如果同时设置了FLAG_NOT_FOCUSABLE选项和本选项，窗口将能够与输入法交互，允许输入法窗口覆盖；      如果FLAG_NOT_FOCUSABLE没有设置而设置了本选项，窗口不能与输入法交互，可以覆盖输入法窗口。<br>public static final int FLAG_ALT_FOCUSABLE_IM = 0x00020000;</p>
+<p>如果你设置了FLAG_NOT_TOUCH_MODAL，那么当触屏事件发生在窗口之外事，可以通过设置此标志接收到一个 MotionEvent.ACTION_OUTSIDE事件。注意，你不会收到完整的down/move/up事件，只有第一次down事件时可以收到 ACTION_OUTSIDE。<br>public static final int FLAG_WATCH_OUTSIDE_TOUCH = 0x00040000;</p>
+<p>当屏幕锁定时，窗口可以被看到。这使得应用程序窗口优先于锁屏界面。可配合FLAG_KEEP_SCREEN_ON选项点亮屏幕并直接显示在锁屏界面之前。可使用FLAG_DISMISS_KEYGUARD选项直接解除非加锁的锁屏状态。此选项只用于最顶层的全屏幕窗口。      public static final int FLAG_SHOW_WHEN_LOCKED = 0x00080000;</p>
+<p>请求系统墙纸显示在你的窗口后面。窗口必须是半透明的。<br>public static final int FLAG_SHOW_WALLPAPER = 0x00100000;</p>
+<p>窗口一旦显示出来，系统将点亮屏幕，正如用户唤醒设备那样。<br>public static final int FLAG_TURN_SCREEN_ON = 0x00200000;</p>
+<p>解除锁屏。只有锁屏界面不是加密的才能解锁。如果锁屏界面是加密的，那么用户解锁之后才能看到此窗口，除非设置了FLAG_SHOW_WHEN_LOCKED选项。<br>public static final int FLAG_DISMISS_KEYGUARD = 0x00400000;</p>
+<p>锁屏界面淡出时，继续运行它的动画。<br>public static final int FLAG_KEEP_SURFACE_WHILE_ANIMATING =0x10000000;</p>
+<p>以原始尺寸显示窗口。用于在兼容模式下运行程序。<br>public static final int FLAG_COMPATIBLE_WINDOW = 0x20000000;</p>
+<p>用于系统对话框。设置此选项的窗口将无条件获得焦点。<br>public static final int FLAG_SYSTEM_ERROR = 0x40000000;</p>
+<p><strong>public int softInputMode</strong>（重要）<br>以下选项与 softInputMode 有关：<br>软输入区域是否可见。<br>public static final int SOFT_INPUT_MASK_STATE = 0x0f;</p>
+<p>未指定状态。<br>public static final int SOFT_INPUT_STATE_UNSPECIFIED = 0;</p>
+<p>不要修改软输入法区域的状态。<br>public static final int SOFT_INPUT_STATE_UNCHANGED = 1;</p>
+<p>隐藏输入法区域（当用户进入窗口时）。<br>public static final int SOFT_INPUT_STATE_HIDDEN = 2;</p>
+<p>当窗口获得焦点时，隐藏输入法区域。<br>public static final int SOFT_INPUT_STATE_ALWAYS_HIDDEN = 3;</p>
+<p>显示输入法区域（当用户进入窗口时）。<br>public static final int SOFT_INPUT_STATE_VISIBLE = 4;</p>
+<p>当窗口获得焦点时，显示输入法区域。<br> public static final int SOFT_INPUT_STATE_ALWAYS_VISIBLE = 5;</p>
+<p>窗口应当主动调整，以适应软输入窗口。<br>public static final int SOFT_INPUT_MASK_ADJUST = 0xf0;</p>
+<p>未指定状态，系统将根据窗口内容尝试选择一个输入法样式。<br>public static final int SOFT_INPUT_ADJUST_UNSPECIFIED = 0x00;</p>
+<p>当输入法显示时，允许窗口重新计算尺寸，使内容不被输入法所覆盖。不可与SOFT_INPUT_ADJUSP_PAN混合使用,如果两个都没有设置，系统将根据窗口内容自动设置一个选项。<br> public static final int SOFT_INPUT_ADJUST_RESIZE = 0x10;</p>
+<p>输入法显示时平移窗口。它不需要处理尺寸变化，框架能够移动窗口以确保输入焦点可见。不可与SOFT_INPUT_ADJUST_RESIZE混合使用;如果两个都没设置,系统将根据窗口内容自动设置一个选项。<br> public static final int SOFT_INPUT_ADJUST_PAN = 0x20;</p>
+<p>当用户转至此窗口时，由系统自动设置，所以你不要设置它。当窗口显示之后该标志自动清除。<br> public static final int SOFT_INPUT_IS_FORWARD_NAVIGATION = 0x100;</p>
+<p><strong>public float horizontalMargin/public float verticalMargin</strong><br>水平边距/ 纵向边距，容器与widget之间的距离，占容器宽度的百分率。</p>
+<p><strong>public int windowAnimations</strong><br> 窗口所使用的动画设置。它必须是一个系统资源而不是应用程序资源，因为窗口管理器不能访问应用程序。</p>
+<p><strong>public float alpha</strong><br>整个窗口的透明值。</p>
+<h2 id="其他常用方法"><a href="#其他常用方法" class="headerlink" title="其他常用方法"></a>其他常用方法</h2><p>public staticfinal int LAYOUT_CHANGED =1&lt;&lt;0;<br>    public staticfinal int TYPE_CHANGED =1&lt;&lt;1;<br>    public staticfinal int FLAGS_CHANGED =1&lt;&lt;2;<br>    public staticfinal int FORMAT_CHANGED =1&lt;&lt;3;<br>    public staticfinal int ANIMATION_CHANGED =1&lt;&lt;4;<br>    public staticfinal int DIM_AMOUNT_CHANGED =1&lt;&lt;5;<br>    public staticfinal int TITLE_CHANGED =1&lt;&lt;6;<br>    public staticfinal int ALPHA_CHANGED =1&lt;&lt;7;<br>    public staticfinal int MEMORY_TYPE_CHANGED =1&lt;&lt;8;<br>    public staticfinal int SOFT_INPUT_MODE_CHANGED =1&lt;&lt;9;<br>    public staticfinal int SCREEN_ORIENTATION_CHANGED =1&lt;&lt;10;<br>    public staticfinal int SCREEN_BRIGHTNESS_CHANGED =1&lt;&lt;11;</p>
+<p>当然还有很多，这里列出了一些常用的。</p>
+      
+    </div>
+    
+  </div>
+  
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/10/05/Android WindowManager详解/">Android WindowManager详解</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">向志洪</a></p>
+        <p><span>发布时间:</span>2016-10-05, 00:00:00</p>
+        <p><span>最后更新:</span>2017-01-25, 14:24:31</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/10/05/Android WindowManager详解/" title="Android WindowManager详解">http://code.youmeek.com/2016/10/05/Android WindowManager详解/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://code.youmeek.com/2016/10/05/Android WindowManager详解/　　作者: 向志洪" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target="_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2016/11/05/webpack+react环境搭建/">
+                    webpack+react环境搭建
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/10/05/刷流量的几种方法/">
+                    刷博客等流量
+                </a>
+            </div>
+        
+    </nav>
+  
+</article>
+<div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#概述"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#WindowManager小实例"><span class="toc-number">1.1.</span> <span class="toc-text">WindowManager小实例</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#WindowManager属性详解"><span class="toc-number">2.</span> <span class="toc-text">WindowManager属性详解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#其他可用的常量定义"><span class="toc-number">2.1.</span> <span class="toc-text">其他可用的常量定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他常用方法"><span class="toc-number">2.2.</span> <span class="toc-text">其他常用方法</span></a></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录" title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+    <div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"Android WindowManager详解　| 向志洪　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+    
+        <section class="youyan" id="comments">
+    <script>
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = 'http://v2.uyan.cc/code/uyan.js?uid=2120654';
+            (d.head || d.body).appendChild(s);
+        }
+    </script>
+    <script> loadComment(); </script>
+    <div id="uyan_frame"></div>
+</section>
+    
+
+
+<div class="scroll" id="post-nav-button">
+        
+            <a href="/2016/11/05/webpack+react环境搭建/" title="上一篇: webpack+react环境搭建">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/10/05/刷流量的几种方法/" title="下一篇: 刷博客等流量">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/01/05/搭建网站 - 副本/">小程序，会是下一个创业风口吗</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/05/Angular2入坑指南/">Angular2入坑指南</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/05/Node.js基本工作原理/">node.js基本工作原理及流程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/05/gulp+webpack工具整合简介/">gulp+webpack工具整合简介</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/05/swift/">Swift基础语法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/03/Iterate/">迭代子模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/01/robot/">机器学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/05/visitor/">Node入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/05/webpack+react环境搭建/">webpack+react环境搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/Android WindowManager详解/">Android WindowManager详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/刷流量的几种方法/">刷博客等流量</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/微信小程序/">刷博客等流量</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/搭建网站/">搭建网站</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/05/Android线程池/">Android WindowManager详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/05/Android7.0新特性/">android7.0新特性</a></li></ul>
+
+
+    <script>
+        
+    </script></div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2017 向志洪
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style="display:none">
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style="display:none">
+                        <span id="page-visit" title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    <script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+<script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide()" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
