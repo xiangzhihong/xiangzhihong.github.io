@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="向志洪">
+
+
+
+<meta name="description" content="Android硬件加速介绍与实现">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android硬件加速介绍与实现">
+<meta property="og:url" content="http://code.youmeek.com/2016/07/05/Android硬件加速介绍与实现/index.html">
+<meta property="og:site_name" content="向志洪">
+<meta property="og:description" content="Android硬件加速介绍与实现">
+<meta property="og:image" content="http://img.blog.csdn.net/20170212231111278?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170212231353438?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170212231712579?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170212231812757?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170212231846096?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170212232340426?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170212232942960?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170212233306290?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2017-03-02T12:00:17.783Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android硬件加速介绍与实现">
+<meta name="twitter:description" content="Android硬件加速介绍与实现">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20170212231111278?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="向志洪" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>Android硬件加速介绍与实现 | 向志洪</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="http://ohe65w0xx.bkt.clouddn.com/avert.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">向志洪</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">这里只有代码相关，要了解更多 &gt;&gt;http://blog.csdn.net/xiangzhihong8</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa GitHub" href="https://github.com/xiangzhihong/" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa CSDN" href="http://blog.csdn.net/xiangzhihong8/" title="CSDN"></a>
+                            
+                                <a class="fa QQ" href="/1044817967" title="QQ"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Angular2/">Angular2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google/">Google</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node/">Node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node入门/">Node入门</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React-Native/">React Native</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VR/">VR</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WindowManager/">WindowManager</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xcode/">Xcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/">android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gif/">gif</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gulp/">gulp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/https/">https</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift/">swift</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/个人博客/">个人博客</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/入门/">入门</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端开发/">前端开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原理/">原理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大数据/">大数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/小程序/">小程序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微信/">微信</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建网站/">搭建网站</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/新特性/">新特性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/流量/">流量</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/源码/">源码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/知识库/">知识库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/硬件/">硬件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/系统服务/">系统服务</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/迭代子模式/">迭代子模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高仿/">高仿</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://www.xiangzhihong.com/">Blog</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">向志洪</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="http://ohe65w0xx.bkt.clouddn.com/avert.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">向志洪</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">这里只有代码相关，要了解更多 &gt;&gt;http://blog.csdn.net/xiangzhihong8</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/xiangzhihong/" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa CSDN" target="_blank" href="http://blog.csdn.net/xiangzhihong8/" title="CSDN"></a>
+                            
+                                <a class="fa QQ" target="_blank" href="/1044817967" title="QQ"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我">
+</nav>
+      <div class="body-wrap"><article id="post-Android硬件加速介绍与实现" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/07/05/Android硬件加速介绍与实现/" class="article-date">
+      <time datetime="2016-07-04T16:00:00.000Z" itemprop="datePublished">2016-07-05</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        <h1 class="article-title" itemprop="name">
+      Android硬件加速介绍与实现
+    </h1>
+      </header>
+      
+      <div class="article-info article-info-post">
+        <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+    </div>
+        <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/硬件/">硬件</a></li></ul>
+    </div>
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>在手机客户端尤其是Android应用的开发过程中，我们经常会接触到“硬件加速”这个词。由于操作系统对底层软硬件封装非常完善，上层软件开发者往往对硬件加速的底层原理了解很少，也不清楚了解底层原理的意义，因此常会有一些误解，如硬件加速是不是通过特殊算法实现页面渲染加速，或是通过硬件提高CPU/GPU运算速率实现渲染加速。<br>本文尝试从底层硬件原理，一直到上层代码实现，对硬件加速技术进行简单介绍，其中上层实现基于Android 6.0。</p>
+<h1 id="硬件加速对App开发的意义"><a href="#硬件加速对App开发的意义" class="headerlink" title="硬件加速对App开发的意义"></a>硬件加速对App开发的意义</h1><p>对于App开发者，简单了解硬件加速原理及上层API实现，开发时就可以充分利用硬件加速提高页面的性能。以Android举例，实现一个圆角矩形按钮通常有两种方案：使用PNG图片；使用代码（XML/Java）实现。简单对比两种方案如下：<br><img src="http://img.blog.csdn.net/20170212231111278?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h1 id="页面渲染背景知识"><a href="#页面渲染背景知识" class="headerlink" title="页面渲染背景知识"></a>页面渲染背景知识</h1><ul>
+<li>页面渲染时，被绘制的元素最终要转换成矩阵像素点（即多维数组形式，类似安卓中的Bitmap），才能被显示器显示。</li>
+<li>页面由各种基本元素组成，例如圆形、圆角矩形、线段、文字、矢量图（常用贝塞尔曲线组成）、Bitmap等。</li>
+<li>元素绘制时尤其是动画绘制过程中，经常涉及插值、缩放、旋转、透明度变化、动画过渡、毛玻璃模糊，甚至包括3D变换、物理运动（例如游戏中常见的抛物线运动）、多媒体文件解码（主要在桌面机中有应用，移动设备一般不用GPU做解码）等运算。</li>
+<li>绘制过程经常需要进行逻辑较简单、但数据量庞大的浮点运算。<h1 id="CPU与GPU结构介绍"><a href="#CPU与GPU结构介绍" class="headerlink" title="CPU与GPU结构介绍"></a>CPU与GPU结构介绍</h1><strong>CPU</strong>（Central Processing Unit，中央处理器）是计算机设备核心器件，用于执行程序代码，软件开发者对此都很熟悉；<br><strong>GPU</strong>（Graphics Processing Unit，图形处理器）主要用于处理图形运算，通常所说“显卡”的核心部件就是GPU。</li>
+</ul>
+<p>下面是CPU和GPU的结构对比图。其中：</p>
+<ul>
+<li>黄色的Control为控制器，用于协调控制整个CPU的运行，包括取出指令、控制其他模块的运行等；</li>
+<li>绿色的ALU（Arithmetic Logic Unit）是算术逻辑单元，用于进行数学、逻辑运算；</li>
+<li>橙色的Cache和DRAM分别为缓存和RAM，用于存储信息。<br><img src="http://img.blog.csdn.net/20170212231353438?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>说明：从结构图可以看出，CPU的控制器较为复杂，而ALU数量较少。因此CPU擅长各种复杂的逻辑运算，但不擅长数学尤其是浮点运算。</li>
+<li>以8086为例，一百多条汇编指令大部分都是逻辑指令，数学计算相关的主要是16位加减乘除和移位运算。一次整型和逻辑运算一般需要1~3个机器周期，而浮点运算要转换成整数计算，一次运算可能消耗上百个机器周期。</li>
+<li>更简单的CPU甚至只有加法指令，减法用补码加法实现，乘法用累加实现，除法用减法循环实现。</li>
+<li>现代CPU一般都带有硬件浮点运算器（FPU），但主要适用于数据量不大的情况。</li>
+<li>CPU是串行结构。以计算100个数字为例，对于CPU的一个核，每次只能计算两个数的和，结果逐步累加。</li>
+<li>和CPU不同的是，GPU就是为实现大量数学运算设计的。从结构图中可以看到，GPU的控制器比较简单，但包含了大量ALU。GPU中的ALU使用了并行设计，且具有较多浮点运算单元。</li>
+<li>硬件加速的主要原理，就是通过底层软件代码，将CPU不擅长的图形计算转换成GPU专用指令，由GPU完成。</li>
+</ul>
+<p><strong>扩展</strong>：很多计算机中的GPU有自己独立的显存；没有独立显存则使用共享内存的形式，从内存中划分一块区域作为显存。显存可以保存GPU指令等信息。</p>
+<h1 id="并行结构举例：级联加法器"><a href="#并行结构举例：级联加法器" class="headerlink" title="并行结构举例：级联加法器"></a>并行结构举例：级联加法器</h1><p>为了方便理解，这里先从底层电路结构的角度举一个例子。如下图为一个加法器，对应实际的数字电路结构。</p>
+<ul>
+<li>A、B为输入，C为输出，且A、B、C均为总线，以32位CPU为例，则每根总线实际由32根导线组成，每根导线用不同的电压表示一个二进制的0或1。</li>
+<li>Clock为时钟信号线，每个固定的时钟周期可向其输入一个特定的电压信号，每当一个时钟信号到来时，A和B的和就会输出到C。<br><img src="http://img.blog.csdn.net/20170212231712579?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>现在我们要计算8个整数的和。</li>
+</ul>
+<p>对于CPU这种串行结构，代码编写很简单，用for循环把所有数字逐个相加即可。串行结构只有一个加法器，需要7次求和运算；每次计算完部分和，还要将其再转移到加法器的输入端，做下一次计算。整个过程至少要消耗十几个机器周期。</p>
+<p>而对于并行结构，一种常见的设计是级联加法器，如下图，其中所有的clock连在一起。当需要相加的8个数据在输入端A1~B4准备好后，经过三个时钟周期，求和操作就完成了。如果数据量更大、级联的层级更大，则并行结构的优势更明显。</p>
+<p>由于电路的限制，不容易通过提高时钟频率、减小时钟周期的方式提高运算速度。并行结构通过增加电路规模、并行处理，来实现更快的运算。但并行结构不容易实现复杂逻辑，因为同时考虑多个支路的输出结果，并协调同步处理的过程很复杂（有点像多线程编程）。<br><img src="http://img.blog.csdn.net/20170212231812757?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h1 id="GPU并行计算举例"><a href="#GPU并行计算举例" class="headerlink" title="GPU并行计算举例"></a>GPU并行计算举例</h1><p>假设我们有如下图像处理任务，给每个像素值加1。GPU并行计算的方式简单粗暴，在资源允许的情况下，可以为每个像素开一个GPU线程，由其进行加1操作。数学运算量越大，这种并行方式性能优势越明显。<br><img src="http://img.blog.csdn.net/20170212231846096?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h1 id="Android中的硬件加速"><a href="#Android中的硬件加速" class="headerlink" title="Android中的硬件加速"></a>Android中的硬件加速</h1><p>在Android中，大多数应用的界面都是利用常规的View来构建的（除了游戏、视频、图像等应用可能直接使用OpenGL ES）。下面根据Android 6.0原生系统的Java层代码，对View的软件和硬件加速渲染做一些分析和对比。</p>
+<h2 id="DisplayList"><a href="#DisplayList" class="headerlink" title="DisplayList"></a>DisplayList</h2><p>DisplayList是一个基本绘制元素，包含元素原始属性（位置、尺寸、角度、透明度等），对应Canvas的drawXxx()方法（如下图）。</p>
+<p>信息传递流程：Canvas(Java API) —&gt; OpenGL(C/C++ Lib) —&gt; 驱动程序 —&gt; GPU。</p>
+<p>在Android 4.1及以上版本，DisplayList支持属性，如果View的一些属性发生变化（比如Scale、Alpha、Translate），只需把属性更新给GPU，不需要生成新的DisplayList。</p>
+<h2 id="RenderNode"><a href="#RenderNode" class="headerlink" title="RenderNode"></a>RenderNode</h2><p>一个RenderNode包含若干个DisplayList，通常一个RenderNode对应一个View，包含View自身及其子View的所有DisplayList。<br><img src="http://img.blog.csdn.net/20170212232340426?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h2 id="Android绘制流程（Android-6-0）"><a href="#Android绘制流程（Android-6-0）" class="headerlink" title="Android绘制流程（Android 6.0）"></a>Android绘制流程（Android 6.0）</h2><p>下面是安卓View完整的绘制流程图，主要通过阅读源码和调试得出，虚线箭头表示递归调用。下面是绘制的简单流程：</p>
+<ol>
+<li>从ViewRootImpl.performTraversals到PhoneWindow.DecroView.drawChild是每次遍历View树的固定流程，首先根据标志位判断是否需要重新布局并执行布局；然后进行Canvas的创建等操作开始绘制。<br>注：<br>如果硬件加速不支持或者被关闭，则使用软件绘制，生成的Canvas即Canvas.class的对象；</li>
+</ol>
+<p>如果支持硬件加速，则生成的是DisplayListCanvas.class的对象；</p>
+<p>两者的isHardwareAccelerated()方法返回的值分别为false、true，View根据这个值判断是否使用硬件加速。</p>
+<ol>
+<li>View中的draw(canvas,parent,drawingTime) - draw(canvas) - onDraw -dispachDraw -drawChild这条递归路径（下文简称Draw路径），调用了Canvas.drawXxx()方法，在软件渲染时用于实际绘制；在硬件加速时，用于构建DisplayList。</li>
+<li>View中的updateDisplayListIfDirty - dispatchGetDisplayList -<br>recreateChildDisplayList这条递归路径（下文简称DisplayList路径），仅在硬件加速时会经过，用于在遍历View树绘制的过程中更新DisplayList属性，并快速跳过不需要重建DisplayList的View。</li>
+<li>Android 6.0中，和DisplayList相关的API目前仍被标记为“@hide”不可访问，表示还不成熟，后续版本可能开放。硬件加速情况下，draw流程执行结束后DisplayList构建完成，然后通过ThreadedRenderer.nSyncAndDrawFrame()利用GPU绘制DisplayList到屏幕上。<br>完整的绘制流程如下：<br><img src="http://img.blog.csdn.net/20170212232942960?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><h1 id="纯软件绘制-VS-硬件加速"><a href="#纯软件绘制-VS-硬件加速" class="headerlink" title="纯软件绘制 VS 硬件加速"></a>纯软件绘制 VS 硬件加速</h1>下面根据具体的几种场景，具体分析一下硬件加速前后的流程与加速效果。<br><img src="http://img.blog.csdn.net/20170212233306290?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>说明：<br><strong>场景1</strong>中，无论是否加速，遍历View树并都会走Draw路径。硬件加速后Draw路径不做实际绘制工作，只是构建DisplayList，复杂的绘制计算任务被GPU分担，已经有了较大的加速效果。</li>
+</ol>
+<p><strong>场景2</strong>中，TextView设置前后尺寸位置不变，不会触发重新Layout。</p>
+<ul>
+<li>软件绘制时，TextView所在区域即为脏区。由于TextView有透明区域，遍历View树的过程中，和脏区重叠的多数View都要重绘，包括与之重叠的兄弟节点和他们的父节点（详见后面的介绍），不需要绘制的View在draw(canvas,parent,drawingTime)方法中判断直接返回。</li>
+<li>硬件加速后，也需要遍历View树，但只有TextView及其每一层父节点需要重建DisplayList，走的是Draw路径，其他View直接走了DisplayList路径，剩下的工作都交给GPU处理。页面越复杂，两者性能差距越明显。</li>
+</ul>
+<p><strong>场景3</strong>中，软件绘制每一帧都要做大量绘制工作，很容易导致动画卡顿。硬件加速后，动画过程直接走DisplayList路径更新DisplayList的属性，动画流畅度能得到极大提高。</p>
+<p><strong>场景4</strong>中，两者的性能差距更明显。简单修改透明度，软件绘制仍然要做很多工作；硬件加速后一般直接更新RenderNode的属性，不需要触发invalidate，也不会遍历View树（除了少数View可能要对Alpha做特殊响应并在onSetAlpha()返回true，代码如下）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">public class View &#123;</div><div class="line">    // ...</div><div class="line">    public void setAlpha(@FloatRange(from=0.0, to=1.0) float alpha) &#123;</div><div class="line">        ensureTransformationInfo();</div><div class="line">        if (mTransformationInfo.mAlpha != alpha) &#123;</div><div class="line">            mTransformationInfo.mAlpha = alpha;</div><div class="line">            if (onSetAlpha((int) (alpha * 255))) &#123;</div><div class="line">                // ...</div><div class="line">                invalidate(true);</div><div class="line">            &#125; else &#123;</div><div class="line">                // ...</div><div class="line">                mRenderNode.setAlpha(getFinalAlpha());</div><div class="line">                // ...</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    protected boolean onSetAlpha(int alpha) &#123;</div><div class="line">        return false;</div><div class="line">    &#125;</div><div class="line">    // ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="软件绘制刷新逻辑简介"><a href="#软件绘制刷新逻辑简介" class="headerlink" title="软件绘制刷新逻辑简介"></a>软件绘制刷新逻辑简介</h1><p>实际阅读源码并实验，得出通常情况下的软件绘制刷新逻辑：<br>1，默认情况下，View的clipChildren属性为true，即每个View绘制区域不能超出其父View的范围。如果设置一个页面根布局的clipChildren属性为false，则子View可以超出父View的绘制区域。</p>
+<p>2，当一个View触发invalidate，且没有播放动画、没有触发layout的情况下：</p>
+<ul>
+<li>对于全不透明的View，其自身会设置标志位PFLAG_DIRTY，其父View会设置标志位PFLAG_DIRTY_OPAQUE。在draw(canvas)方法中，只有这个View自身重绘。</li>
+<li>对于可能有透明区域的View，其自身和父View都会设置标志位PFLAG_DIRTY。<br>clipChildren为true时，脏区会被转换成ViewRoot中的Rect，刷新时层层向下判断，当View与脏区有重叠则重绘。如果一个View超出父View范围且与脏区重叠，但其父View不与脏区重叠，这个子View不会重绘。<br>clipChildren为false时，ViewGroup.invalidateChildInParent()中会把脏区扩大到自身整个区域，于是与这个区域重叠的所有View都会重绘。<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1>对于硬件加速我们总结一下：</li>
+<li>CPU更擅长复杂逻辑控制，而GPU得益于大量ALU和并行结构设计，更擅长数学运算。</li>
+<li>页面由各种基础元素（DisplayList）构成，渲染时需要进行大量浮点运算。</li>
+<li>硬件加速条件下，CPU用于控制复杂绘制逻辑、构建或更新DisplayList；GPU用于完成图形计算、渲染DisplayList。</li>
+<li>硬件加速条件下，刷新界面尤其是播放动画时，CPU只重建或更新必要的DisplayList，进一步提高渲染效率。</li>
+<li>实现同样效果，应尽量使用更简单的DisplayList，从而达到更好的性能（Shape代替Bitmap等）。</li>
+</ul>
+      
+    </div>
+    
+  </div>
+  
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/07/05/Android硬件加速介绍与实现/">Android硬件加速介绍与实现</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">向志洪</a></p>
+        <p><span>发布时间:</span>2016-07-05, 00:00:00</p>
+        <p><span>最后更新:</span>2017-03-02, 20:00:17</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/07/05/Android硬件加速介绍与实现/" title="Android硬件加速介绍与实现">http://code.youmeek.com/2016/07/05/Android硬件加速介绍与实现/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://code.youmeek.com/2016/07/05/Android硬件加速介绍与实现/　　作者: 向志洪" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target="_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2016/07/05/Xcode 8新功能介绍/">
+                    Xcode 8新功能介绍
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/07/05/iOS 滚动视图的复用问题解决方案/">
+                    iOS 滚动视图的复用问题解决方案
+                </a>
+            </div>
+        
+    </nav>
+  
+</article>
+<div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#概述"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#硬件加速对App开发的意义"><span class="toc-number">2.</span> <span class="toc-text">硬件加速对App开发的意义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#页面渲染背景知识"><span class="toc-number">3.</span> <span class="toc-text">页面渲染背景知识</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CPU与GPU结构介绍"><span class="toc-number">4.</span> <span class="toc-text">CPU与GPU结构介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#并行结构举例：级联加法器"><span class="toc-number">5.</span> <span class="toc-text">并行结构举例：级联加法器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#GPU并行计算举例"><span class="toc-number">6.</span> <span class="toc-text">GPU并行计算举例</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Android中的硬件加速"><span class="toc-number">7.</span> <span class="toc-text">Android中的硬件加速</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#DisplayList"><span class="toc-number">7.1.</span> <span class="toc-text">DisplayList</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RenderNode"><span class="toc-number">7.2.</span> <span class="toc-text">RenderNode</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Android绘制流程（Android-6-0）"><span class="toc-number">7.3.</span> <span class="toc-text">Android绘制流程（Android 6.0）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#纯软件绘制-VS-硬件加速"><span class="toc-number">8.</span> <span class="toc-text">纯软件绘制 VS 硬件加速</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#软件绘制刷新逻辑简介"><span class="toc-number">9.</span> <span class="toc-text">软件绘制刷新逻辑简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结"><span class="toc-number">10.</span> <span class="toc-text">总结</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录" title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+    <div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"Android硬件加速介绍与实现　| 向志洪　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+    
+        <section class="youyan" id="comments">
+    <script>
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = 'http://v2.uyan.cc/code/uyan.js?uid=2120654';
+            (d.head || d.body).appendChild(s);
+        }
+    </script>
+    <script> loadComment(); </script>
+    <div id="uyan_frame"></div>
+</section>
+    
+
+
+<div class="scroll" id="post-nav-button">
+        
+            <a href="/2016/07/05/Xcode 8新功能介绍/" title="上一篇: Xcode 8新功能介绍">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/07/05/iOS 滚动视图的复用问题解决方案/" title="下一篇: iOS 滚动视图的复用问题解决方案">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/02/28/前端知识库/">前端知识库</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/10/微信小程序尝鲜一个月现状分析/">微信小程序尝鲜一个月现状分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/05/swift/">Swift基础语法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/05/Node.js基本工作原理/">node.js基本工作原理及流程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/05/React Native的Navigator详解/">React Native的Navigator详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/05/gulp+webpack工具整合简介/">gulp+webpack工具整合简介</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/05/Angular2入坑指南/">Angular2入坑指南</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/03/Iterate/">迭代子模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/01/robot/">机器学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/05/visitor/">Node入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/05/ios高仿斗鱼app/">高仿ios斗鱼界面</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/05/Android ExpandableListView详解/">ExpandableListView实现商品列表折叠</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/05/iOS使用自签名证书实现HTTPS请求/">iOS使用自签名证书实现HTTPS请求</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/05/webpack+react环境搭建/">webpack+react环境搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/28/React 页面渲染原理/">深入理解React Native页面构建渲染原理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/08/高仿网易云音乐/">Android仿网易云音乐播放界面</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/搭建网站/">搭建网站</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/React Native在Android平台运行gif的解决方法/">React Native在Android平台运行gif的解决方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/Android WindowManager详解/">Android WindowManager详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/Spring Boot搭建Web应用/">Spring Boot入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/微信小程序/">刷博客等流量</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/刷流量的几种方法/">刷博客等流量</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/node.js基本工作原理及流程/">Node.js原理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/05/Android线程池/">Android WindowManager详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/05/Android7.0新特性/">android7.0新特性</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/05/Android高仿天猫详情页/">Android仿京东、天猫商品详情页</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/Xcode 8新功能介绍/">Xcode 8新功能介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/Android硬件加速介绍与实现/">Android硬件加速介绍与实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/iOS 滚动视图的复用问题解决方案/">iOS 滚动视图的复用问题解决方案</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/05/Google VR技术大揭秘/">Google VR技术大揭秘</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/05/ios gif图片加载框架介绍/">FLAnimatedImage -ios gif图片加载框架介绍</a></li></ul>
+
+
+    <script>
+        
+    </script></div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2017 向志洪
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style="display:none">
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style="display:none">
+                        <span id="page-visit" title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    <script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+<script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide()" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>

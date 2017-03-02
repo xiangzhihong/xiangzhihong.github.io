@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="向志洪">
+
+
+
+<meta name="description" content="Android仿网易云音乐播放界面">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android仿网易云音乐播放界面">
+<meta property="og:url" content="http://code.youmeek.com/2016/10/08/高仿网易云音乐/index.html">
+<meta property="og:site_name" content="向志洪">
+<meta property="og:description" content="Android仿网易云音乐播放界面">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3240261-8676c6c0d84f8eec.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3240261-0c5befe60db210e9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3240261-b7b82827b035741f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3240261-9159b69ee9ab13a9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3240261-dfd9f29c282b6b25.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3240261-1ea7e25a1139f8e0.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3240261-d298744c7a9553a2.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3240261-d10a9206b303c189.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3240261-7ae16da08ca69c62.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3240261-e99e774172afd536.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-03-02T11:54:46.906Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android仿网易云音乐播放界面">
+<meta name="twitter:description" content="Android仿网易云音乐播放界面">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/3240261-8676c6c0d84f8eec.gif?imageMogr2/auto-orient/strip">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="向志洪" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>Android仿网易云音乐播放界面 | 向志洪</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="http://ohe65w0xx.bkt.clouddn.com/avert.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">向志洪</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">这里只有代码相关，要了解更多 &gt;&gt;http://blog.csdn.net/xiangzhihong8</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa GitHub" href="https://github.com/xiangzhihong/" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa CSDN" href="http://blog.csdn.net/xiangzhihong8/" title="CSDN"></a>
+                            
+                                <a class="fa QQ" href="/1044817967" title="QQ"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Angular2/">Angular2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google/">Google</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node/">Node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node入门/">Node入门</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React-Native/">React Native</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VR/">VR</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WindowManager/">WindowManager</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xcode/">Xcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/">android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gif/">gif</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gulp/">gulp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/https/">https</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift/">swift</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/个人博客/">个人博客</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/入门/">入门</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端开发/">前端开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原理/">原理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大数据/">大数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/小程序/">小程序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微信/">微信</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建网站/">搭建网站</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/新特性/">新特性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/流量/">流量</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/源码/">源码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/知识库/">知识库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/硬件/">硬件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/系统服务/">系统服务</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/迭代子模式/">迭代子模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高仿/">高仿</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://www.xiangzhihong.com/">Blog</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">向志洪</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="http://ohe65w0xx.bkt.clouddn.com/avert.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">向志洪</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">这里只有代码相关，要了解更多 &gt;&gt;http://blog.csdn.net/xiangzhihong8</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/xiangzhihong/" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa CSDN" target="_blank" href="http://blog.csdn.net/xiangzhihong8/" title="CSDN"></a>
+                            
+                                <a class="fa QQ" target="_blank" href="/1044817967" title="QQ"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我">
+</nav>
+      <div class="body-wrap"><article id="post-高仿网易云音乐" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/10/08/高仿网易云音乐/" class="article-date">
+      <time datetime="2016-10-07T16:00:00.000Z" itemprop="datePublished">2016-10-08</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        <h1 class="article-title" itemprop="name">
+      Android仿网易云音乐播放界面
+    </h1>
+      </header>
+      
+      <div class="article-info article-info-post">
+        <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+    </div>
+        <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/高仿/">高仿</a></li></ul>
+    </div>
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>网易云音乐是一款非常优秀的音乐播放器，尤其是播放界面，使用唱盘机风格，显得格外古典优雅。这里抛砖引玉，原文地址：<a href="http://www.jianshu.com/p/cb54990219d9" target="_blank" rel="external">http://www.jianshu.com/p/cb54990219d9</a><br>首先来看一下网易的播放效果。<br><img src="http://upload-images.jianshu.io/upload_images/3240261-8676c6c0d84f8eec.gif?imageMogr2/auto-orient/strip" alt="这里写图片描述"><br>要实现上面的功能，我们需要对界面进行一个拆分，拆分后大概包含如下结构：</p>
+<ul>
+<li>主界面布局设计</li>
+<li>唱盘布局设计</li>
+<li>动态布局</li>
+<li>唱盘控件DiscView对外接口及方法</li>
+<li>音乐状态控制时序图<h1 id="分析及实现"><a href="#分析及实现" class="headerlink" title="分析及实现"></a>分析及实现</h1><h2 id="主界面布局设计"><a href="#主界面布局设计" class="headerlink" title="主界面布局设计"></a>主界面布局设计</h2>主界面布局从上到下可以划分几大区域，如图：<br><img src="http://upload-images.jianshu.io/upload_images/3240261-0c5befe60db210e9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="这里写图片描述"><br>如图，由上到下主要分为：标题栏区、唱盘区域、时长显示区域、播放控制区域。<br><strong>标题栏</strong><br>使用ToolBar实现，字体可能需要自定义。<br><strong>唱盘区域</strong><br>唱盘区域包括唱盘、唱针、底盘、以及实现切换的ViewPager等控件，该布局比较复杂，本案例使用自定义控件实现唱盘区域。<br><strong>时长显示区域</strong><br>使用RelativeLayout作为根布局，进度条使用SeekBar实现。<br><strong>播放控制区域</strong><br>比较简单，使用LinearLayout作为根布局。<h2 id="唱盘布局实现（难点）"><a href="#唱盘布局实现（难点）" class="headerlink" title="唱盘布局实现（难点）"></a>唱盘布局实现（难点）</h2>唱盘区域由控件DiscView实现，以RelativeLayout为根布局，子控件包括：底盘、唱针、ViewPager等。其中，底盘和唱针均用ImageView实现，然后使用ViewPager加载ImageView实现唱片的切换。如图：<br><img src="http://upload-images.jianshu.io/upload_images/3240261-b7b82827b035741f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="这里写图片描述"><br>唱片布局如下：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">&lt;?ml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;com.achillesl.neteasedisc.widget.DiscView</div><div class="line">    mlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</div><div class="line">    android:layout_width=&quot;match_parent&quot;</div><div class="line">    android:layout_height=&quot;wrap_content&quot;&gt;</div><div class="line"></div><div class="line">    &lt;!--底盘--&gt;</div><div class="line">    &lt;ImageView</div><div class="line">        android:id=&quot;@+id/ivDiscBlackgound&quot;</div><div class="line">        android:layout_width=&quot;wrap_content&quot;</div><div class="line">        android:layout_height=&quot;wrap_content&quot;</div><div class="line">        android:layout_centerHorizontal=&quot;true&quot;</div><div class="line">        /&gt;</div><div class="line"></div><div class="line">    &lt;!--ViewPager实现唱片切换--&gt;</div><div class="line">    &lt;android.support.v4.view.ViewPager</div><div class="line">        android:id=&quot;@+id/vpDiscContain&quot;</div><div class="line">        android:layout_width=&quot;wrap_content&quot;</div><div class="line">        android:layout_height=&quot;wrap_content&quot;</div><div class="line">        android:layout_centerHorizontal=&quot;true&quot;</div><div class="line">        /&gt;</div><div class="line"></div><div class="line">    &lt;!--唱针--&gt;</div><div class="line">    &lt;ImageView</div><div class="line">        android:id=&quot;@+id/ivNeedle&quot;</div><div class="line">        android:layout_width=&quot;wrap_content&quot;</div><div class="line">        android:layout_height=&quot;wrap_content&quot;</div><div class="line">        android:src=&quot;@drawable/ic_needle&quot;/&gt;</div><div class="line"></div><div class="line">&lt;/com.achillesl.neteasedisc.widget.DiscView&gt;</div></pre></td></tr></table></figure>
+<p>这里面涉及到一个DiscView类，这个是一个复合类，我们来看一些主要的功能。<br>唱盘控件DiscView提供一个接口IPlayInfo，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">public interface IPlayInfo &#123;</div><div class="line">    /*用于更新标题栏变化*/</div><div class="line">    void onMusicInfoChanged(String musicName, String musicAuthor);</div><div class="line">    /*用于更新背景图片*/</div><div class="line">    void onMusicPicChanged(int musicPicRes);</div><div class="line">    /*用于更新音乐播放状态*/</div><div class="line">    void onMusicChanged(MusicChangedStatus musicChangedStatus);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这上面定义的三个函数作用：　分别用于更新标题栏（音乐名、作者名）、更新背景图片以及控制音乐播放状态（播放、暂停、上/下一首等）。<br>点击主界面播放/暂停、上/下一首按钮时，调用DiscView暴露的方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">public void onClick(View v) &#123;</div><div class="line">    if (v == mIvPlayOrPause) &#123;</div><div class="line">        mDisc.playOrPause();</div><div class="line">    &#125; else if (v == mIvNet) &#123;</div><div class="line">        mDisc.net();</div><div class="line">    &#125; else if (v == mIvLast) &#123;</div><div class="line">        mDisc.last();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>当主界面收到DiscView回调时，调用相关方法控制音乐播放，这样逻辑就会很清晰，各分职责：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">public void onMusicChanged(MusicChangedStatus musicChangedStatus) &#123;</div><div class="line">    switch (musicChangedStatus) &#123;</div><div class="line">        case PLAY:&#123;</div><div class="line">            play();</div><div class="line">            break;</div><div class="line">        &#125;</div><div class="line">        case PAUSE:&#123;</div><div class="line">            pause();</div><div class="line">            break;</div><div class="line">        &#125;</div><div class="line">        case NET:&#123;</div><div class="line">            net();</div><div class="line">            break;</div><div class="line">        &#125;</div><div class="line">        case LAST:&#123;</div><div class="line">            last();</div><div class="line">            break;</div><div class="line">        &#125;</div><div class="line">        case STOP:&#123;</div><div class="line">            stop();</div><div class="line">            break;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="音乐状态控制时序图"><a href="#音乐状态控制时序图" class="headerlink" title="音乐状态控制时序图"></a>音乐状态控制时序图</h2><p><img src="http://upload-images.jianshu.io/upload_images/3240261-9159b69ee9ab13a9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="这里写图片描述"><br>音乐控制状态时序如图3-3所示，点击Activity的按钮时，先调用DiscView的相关方法，并在合适的时机（如动画结束）再将状态回调到Activity，并通过广播发送指令到Service，实现音乐状态切换，最后通过广播更新UI状态。<br>这个状态的切换只有你仔细观察就会明白它的流程了。项目架构介绍到这里，接下来是部分视觉效果以及设计思路的介绍和项目的一些难点介绍。</p>
+<h2 id="解决加载大图OOM问题"><a href="#解决加载大图OOM问题" class="headerlink" title="解决加载大图OOM问题"></a>解决加载大图OOM问题</h2><p>解决大图加载一般有几种方案：</p>
+<ol>
+<li>设置largeHeap为true。</li>
+<li>根据图片类型选定解码格式。</li>
+<li>根据原始图片宽高及目标显示宽高，设置图片采样率。</li>
+</ol>
+<p>根据实际经验我们一般采用后两种，第一种虽然通过增加堆内存来延缓了oom的时机，但是治标不治本。这里我们整理一个类。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">private Bitmap getMusicPicBitmap(int musicPicSize, int musicPicRes) &#123;</div><div class="line">    BitmapFactory.Options options = new BitmapFactory.Options();</div><div class="line">    options.inJustDecodeBounds = true;</div><div class="line"></div><div class="line">    BitmapFactory.decodeResource(getResources(),musicPicRes,options);</div><div class="line">    int imageWidth = options.outWidth;</div><div class="line"></div><div class="line">    int sample = imageWidth / musicPicSize;</div><div class="line">    int dstSample = 1;</div><div class="line">    if (sample &gt; dstSample) &#123;</div><div class="line">        dstSample = sample;</div><div class="line">    &#125;</div><div class="line">    options.inJustDecodeBounds = false;</div><div class="line">    //设置图片采样率</div><div class="line">    options.inSampleSize = dstSample;</div><div class="line">    //设置图片解码格式</div><div class="line">    options.inPreferredConfig = Bitmap.Config.RGB_565;</div><div class="line"></div><div class="line">    return Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(),</div><div class="line">            musicPicRes, options), musicPicSize, musicPicSize, true);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我相信有过几年Java开发经验或Android经验的人都会知道这么一个常识：首先设置options.inJustDecodeBounds = true，这样BitmapFactory.decodeResource的时候仅仅会加载图片的一些信息，然后通过options.outWidth获取到图片的宽度，根据目标图片尺寸算出采样率。最后通过inPreferredConfig设置解码格式，才正式加载图片，这样有效的避免了图片的oom。</p>
+<h2 id="生成圆图最简单方式"><a href="#生成圆图最简单方式" class="headerlink" title="生成圆图最简单方式"></a>生成圆图最简单方式</h2><p>以前我们使用圆圈一般会自定义一个View，然后实现onDraw()，不过Android在android.support.v4.graphics.drawable 里面为我们实现了一个类RoundedBitmapDrawable。使用如下，我们可以对其做一个简单的封装：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">private Drawable getDiscBlackgroundDrawable() &#123;</div><div class="line">    int discSize = (int) (mScreenWidth * DisplayUtil.SCALE_DISC_SIZE);</div><div class="line">    Bitmap bitmapDisc = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R</div><div class="line">            .drawable.ic_disc_blackground), discSize, discSize, false);</div><div class="line">    RoundedBitmapDrawable roundDiscDrawable = RoundedBitmapDrawableFactory.create</div><div class="line">            (getResources(), bitmapDisc);</div><div class="line">    return roundDiscDrawable;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="使用LayerDrawable进行图片合成"><a href="#使用LayerDrawable进行图片合成" class="headerlink" title="使用LayerDrawable进行图片合成"></a>使用LayerDrawable进行图片合成</h2><p><strong>LayerDrawable介绍</strong><br>　　LayerDrawable也可包含一个Drawable数组，因此系统将会按这些Drawable对象的数组顺序来绘制它们，索引最大的Drawable对象将会被绘制在最上面。 LayerDrawable有点类似PhotoShop图层的概念。<br>      我们在分析唱片布局的时候发现原View包含两个ImageView，估计是一个用来显示唱盘，一个用来显示专辑图片。<br><img src="http://upload-images.jianshu.io/upload_images/3240261-dfd9f29c282b6b25.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="这里写图片描述"><br>使用LayerDrawable生成复合图片代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">private Drawable getDiscDrawable(int musicPicRes) &#123;</div><div class="line">    int discSize = (int) (mScreenWidth * DisplayUtil.SCALE_DISC_SIZE);</div><div class="line">    int musicPicSize = (int) (mScreenWidth * DisplayUtil.SCALE_MUSIC_PIC_SIZE);</div><div class="line"></div><div class="line">    Bitmap bitmapDisc = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R</div><div class="line">            .drawable.ic_disc), discSize, discSize, false);</div><div class="line">    Bitmap bitmapMusicPic = getMusicPicBitmap(musicPicSize,musicPicRes);</div><div class="line">    BitmapDrawable discDrawable = new BitmapDrawable(bitmapDisc);</div><div class="line">    RoundedBitmapDrawable roundMusicDrawable = RoundedBitmapDrawableFactory.create</div><div class="line">            (getResources(), bitmapMusicPic);</div><div class="line"></div><div class="line">    //抗锯齿</div><div class="line">    discDrawable.setAntiAlias(true);</div><div class="line">    roundMusicDrawable.setAntiAlias(true);</div><div class="line"></div><div class="line">    Drawable[] drawables = new Drawable[2];</div><div class="line">    drawables[0] = roundMusicDrawable;</div><div class="line">    drawables[1] = discDrawable;</div><div class="line"></div><div class="line">    LayerDrawable layerDrawable = new LayerDrawable(drawables);</div><div class="line">    int musicPicMargin = (int) ((DisplayUtil.SCALE_DISC_SIZE - DisplayUtil</div><div class="line">            .SCALE_MUSIC_PIC_SIZE) * mScreenWidth / 2);</div><div class="line">    //调整专辑图片的四周边距</div><div class="line">    layerDrawable.setLayerInset(0, musicPicMargin, musicPicMargin, musicPicMargin,</div><div class="line">            musicPicMargin);</div><div class="line"></div><div class="line">    return layerDrawable;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>　在上面代码中，我们先生成了唱盘对象BitmapDrawable，然后通过RoundedBitmapDrawable生成圆形专辑图片，然后存放到Drawable[]数组中，并用来初始化LayerDrawable对象。最后，我们用setLayerInset方法调整专辑图片的四周边距，让它显示在唱盘正中。</p>
+<h2 id="实现背景毛玻璃效果"><a href="#实现背景毛玻璃效果" class="headerlink" title="实现背景毛玻璃效果"></a>实现背景毛玻璃效果</h2><p>这个网上的资料很多，也有基于JNI实现的，这个使用JNI实现可以看一下我之前的博客<a href="http://www.jianshu.com/p/f8463b3bbffb" target="_blank" rel="external">JNI实现毛玻璃效果</a>，这里为了方便大家使用，我就直接使用工具类的方式，关于模糊化的实现逻辑大家可以搜索一下“BlurUtil”，考虑到这部分代码可能会阻塞UI线程，因此将其放着单独线程中执行。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">private void try2UpdateMusicPicBackground(final int musicPicRes) &#123;</div><div class="line">    if (mRootLayout.isNeed2UpdateBackground(musicPicRes)) &#123;</div><div class="line">        new Thread(new Runnable() &#123;</div><div class="line">            @Override</div><div class="line">            public void run() &#123;</div><div class="line">                final Drawable foregroundDrawable = getForegroundDrawable(musicPicRes);</div><div class="line">                runOnUiThread(new Runnable() &#123;</div><div class="line">                    @Override</div><div class="line">                    public void run() &#123;</div><div class="line">                        mRootLayout.setForeground(foregroundDrawable);</div><div class="line">                        mRootLayout.beginAnimation();</div><div class="line">                    &#125;</div><div class="line">                &#125;);</div><div class="line">            &#125;</div><div class="line">        &#125;).start();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="使用LayerDrawable与属性动画，实现背景切换时渐变效果"><a href="#使用LayerDrawable与属性动画，实现背景切换时渐变效果" class="headerlink" title="使用LayerDrawable与属性动画，实现背景切换时渐变效果"></a>使用LayerDrawable与属性动画，实现背景切换时渐变效果</h2><p>仔细观察网易云音乐，发现切换歌曲时，背景图也会随着变化。其实这种也很好做，可以使用LayerDrawable加属性动画来实现。<br>　思路如下：<br>　　1. 给LayerDrawable设置两个图层，第一图层是前一个背景，第二图层是准备显示的背景。<br>　　2. 先把准备显示的背景透明度设为0，因此完全透明，此时只显示前一个背景图。<br>　　3. 通过属性动画，动态将第二图层的透明度从0调整至100，并不断更新控件的背景。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line">public class BackgourndAnimationRelativeLayout etends RelativeLayout</div><div class="line"></div><div class="line">//初始化LayerDrawable对象</div><div class="line">private void initLayerDrawable() &#123;</div><div class="line">    Drawable backgroundDrawable = getContet().getDrawable(R.drawable.ic_blackground);</div><div class="line">    Drawable[] drawables = new Drawable[2];</div><div class="line"></div><div class="line">    /*初始化时先将前景与背景颜色设为一致*/</div><div class="line">    drawables[INDE_BACKGROUND] = backgroundDrawable;</div><div class="line">    drawables[INDE_FOREGROUND] = backgroundDrawable;</div><div class="line"></div><div class="line">    layerDrawable = new LayerDrawable(drawables);</div><div class="line">&#125;</div><div class="line"></div><div class="line">private void initObjectAnimator() &#123;</div><div class="line">    objectAnimator = ObjectAnimator.ofFloat(this, &quot;number&quot;, 0f, 1.0f);</div><div class="line">    objectAnimator.setDuration(DURATION_ANIMATION);</div><div class="line">    objectAnimator.setInterpolator(new AccelerateInterpolator());</div><div class="line">    objectAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() &#123;</div><div class="line">        @Override</div><div class="line">        public void onAnimationUpdate(ValueAnimator animation) &#123;</div><div class="line">            int foregroundAlpha = (int) ((float) animation.getAnimatedValue() * 255);</div><div class="line">            /*动态设置Drawable的透明度，让前景图逐渐显示*/</div><div class="line">            layerDrawable.getDrawable(INDE_FOREGROUND).setAlpha(foregroundAlpha);</div><div class="line">            BackgourndAnimationRelativeLayout.this.setBackground(layerDrawable);</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">    objectAnimator.addListener(new Animator.AnimatorListener() &#123;</div><div class="line">        @Override</div><div class="line">        public void onAnimationStart(Animator animation) &#123;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        @Override</div><div class="line">        public void onAnimationEnd(Animator animation) &#123;</div><div class="line">            /*动画结束后，记得将原来的背景图及时更新*/</div><div class="line">            layerDrawable.setDrawable(INDE_BACKGROUND, layerDrawable.getDrawable(</div><div class="line">                    INDE_FOREGROUND));</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        @Override</div><div class="line">        public void onAnimationCancel(Animator animation) &#123;</div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        @Override</div><div class="line">        public void onAnimationRepeat(Animator animation) &#123;</div><div class="line"></div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">//对外提供方法，用于播放渐变动画</div><div class="line">public void beginAnimation() &#123;</div><div class="line">    objectAnimator.start();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="唱针变化逻辑"><a href="#唱针变化逻辑" class="headerlink" title="唱针变化逻辑"></a>唱针变化逻辑</h2><p>我们来看一下唱针的变化，为了真实的模拟真实的场景，唱针主要有以下状态：</p>
+<ul>
+<li>初始状态为暂停/停止时，点击播放按钮，此时唱针移动到底部。</li>
+<li>初始状态为播放时，点击暂停按钮，此时唱针移到顶部。</li>
+<li>初始状态为播放时，手指按住唱盘并稍微偏移，等唱针未移到顶部时，立刻松开手指，此时唱针回到顶部后立刻再回到唱盘位置。</li>
+<li>初始状态为暂停/停止时，点击播放，此时唱针往下移动，当唱针还未移到底部，手指马上按住唱盘并偏移，此时唱针立刻往顶部移动。</li>
+<li>初始状态为播放/暂停/停止时，左右滑动唱片进行音乐切换，唱针动画未结束时，立刻点击上/下一首按钮，进行音乐切换，此时唱针状态不能出现混乱。</li>
+</ul>
+<p>初始状态为暂停/停止时，点击播放按钮，此时唱针移动到底部。<br><img src="http://upload-images.jianshu.io/upload_images/3240261-1ea7e25a1139f8e0.gif?imageMogr2/auto-orient/strip" alt="这里写图片描述"><br>初始状态为播放时，点击暂停按钮，此时唱针移到顶部。<br><img src="http://upload-images.jianshu.io/upload_images/3240261-d298744c7a9553a2.gif?imageMogr2/auto-orient/strip" alt="这里写图片描述"><br>初始状态为播放时，手指按住唱盘并稍微偏移，等唱针未移到顶部时，立刻松开手指，此时唱针回到顶部后立刻再回到唱盘位置。<br><img src="http://upload-images.jianshu.io/upload_images/3240261-d10a9206b303c189.gif?imageMogr2/auto-orient/strip" alt="这里写图片描述"><br>初始状态为暂停/停止时，点击播放，此时唱针往下移动，当唱针还未移到底部，手指马上按住唱盘并偏移，此时唱针立刻往顶部移动。<br><a href="http://upload-images.jianshu.io/upload_images/3240261-bc47abb2298a5c36.gif?imageMogr2/auto-orient/strip" target="_blank" rel="external">这里写链接内容</a><br>初始状态为播放/暂停/停止时，左右滑动唱片进行音乐切换，唱针动画未结束时，立刻点击上/下一首按钮，进行音乐切换，此时唱针状态不能出现混乱，反复做了步骤1的动作。<br><img src="http://upload-images.jianshu.io/upload_images/3240261-7ae16da08ca69c62.gif?imageMogr2/auto-orient/strip" alt="这里写图片描述"><br>我们队上面的图片仔细分析，然后结合ViewPager的原理我们来看看。<br><img src="http://upload-images.jianshu.io/upload_images/3240261-e99e774172afd536.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="这里写图片描述"><br>唱片(即ViewPager)的状态可以通过PageChangeListener得到。唱针的状态，笔者用枚举来表示，并且在动画的开始、结束时对唱针状态及时更新。那么我们很容易就想到case或者枚举。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">private enum NeedleAnimatorStatus &#123;</div><div class="line">       /*移动时：从唱盘往远处移动*/</div><div class="line">       TO_FAR_END,</div><div class="line">       /*移动时：从远处往唱盘移动*/</div><div class="line">       TO_NEAR_END,</div><div class="line">       /*静止时：离开唱盘*/</div><div class="line">       IN_FAR_END,</div><div class="line">       /*静止时：贴近唱盘*/</div><div class="line">       IN_NEAR_END</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<p>动画开始时，更新唱针状态：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">public void onAnimationStart(Animator animator) &#123;</div><div class="line">    /**</div><div class="line">     *根据动画开始前NeedleAnimatorStatus的状态，</div><div class="line">     *即可得出动画进行时NeedleAnimatorStatus的状态</div><div class="line">     **/</div><div class="line">    if (needleAnimatorStatus == NeedleAnimatorStatus.IN_FAR_END) &#123;</div><div class="line">        needleAnimatorStatus = NeedleAnimatorStatus.TO_NEAR_END;</div><div class="line">    &#125; else if (needleAnimatorStatus == NeedleAnimatorStatus.IN_NEAR_END) &#123;</div><div class="line">        needleAnimatorStatus = NeedleAnimatorStatus.TO_FAR_END;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>动画结束时，更新唱针状态：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">public void onAnimationEnd(Animator animator) &#123;</div><div class="line">    if (needleAnimatorStatus == NeedleAnimatorStatus.TO_NEAR_END) &#123;</div><div class="line">        needleAnimatorStatus = NeedleAnimatorStatus.IN_NEAR_END;</div><div class="line">        int inde = mVpContain.getCurrentItem();</div><div class="line">        playDiscAnimator(inde);</div><div class="line">    &#125; else if (needleAnimatorStatus == NeedleAnimatorStatus.TO_FAR_END) &#123;</div><div class="line">        needleAnimatorStatus = NeedleAnimatorStatus.IN_FAR_END;</div><div class="line">    &#125;</div><div class="line">｝</div></pre></td></tr></table></figure>
+<p>每种状态都定义清楚，每个动画负责的功能都拆分这样写起来就比较清楚了。<br>　比如需要播放动画时，就包含两个状态：　</p>
+<ul>
+<li>唱针动画暂停中，唱针处于远端。</li>
+<li><p>唱针动画播放中，唱针处于从近端往远端移动</p>
+<p>那么我们调用代码的时候就这么用：</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">/*播放动画*/</div><div class="line">private void playAnimator() &#123;</div><div class="line">    /*唱针处于远端时，直接播放动画*/</div><div class="line">    if (needleAnimatorStatus == NeedleAnimatorStatus.IN_FAR_END) &#123;</div><div class="line">        mNeedleAnimator.start();</div><div class="line">    &#125; </div><div class="line">    /*唱针处于往远端移动时，设置标记，等动画结束后再播放动画*/</div><div class="line">    else if (needleAnimatorStatus == NeedleAnimatorStatus.TO_FAR_END) &#123;</div><div class="line">        mIsNeed2StartPlayAnimator = true;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>至于其他的比较跨组件的界面更新，一般会使用广播，大家也可以使用事件总线（EventBus）.<br>附上源码，这里可能需要大家自己编译。<br>附：<a href="https://github.com/AchillesLzg/jianshu-neteasedisc" target="_blank" rel="external">仿网易云音乐界面源码</a></p>
+      
+    </div>
+    
+  </div>
+  
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/10/08/高仿网易云音乐/">Android仿网易云音乐播放界面</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">向志洪</a></p>
+        <p><span>发布时间:</span>2016-10-08, 00:00:00</p>
+        <p><span>最后更新:</span>2017-03-02, 19:54:46</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/10/08/高仿网易云音乐/" title="Android仿网易云音乐播放界面">http://code.youmeek.com/2016/10/08/高仿网易云音乐/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://code.youmeek.com/2016/10/08/高仿网易云音乐/　　作者: 向志洪" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target="_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2016/10/28/React 页面渲染原理/">
+                    深入理解React Native页面构建渲染原理
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/10/05/搭建网站/">
+                    搭建网站
+                </a>
+            </div>
+        
+    </nav>
+  
+</article>
+<div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#概述"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#分析及实现"><span class="toc-number">2.</span> <span class="toc-text">分析及实现</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#主界面布局设计"><span class="toc-number">2.1.</span> <span class="toc-text">主界面布局设计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#唱盘布局实现（难点）"><span class="toc-number">2.2.</span> <span class="toc-text">唱盘布局实现（难点）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#音乐状态控制时序图"><span class="toc-number">2.3.</span> <span class="toc-text">音乐状态控制时序图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决加载大图OOM问题"><span class="toc-number">2.4.</span> <span class="toc-text">解决加载大图OOM问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#生成圆图最简单方式"><span class="toc-number">2.5.</span> <span class="toc-text">生成圆图最简单方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用LayerDrawable进行图片合成"><span class="toc-number">2.6.</span> <span class="toc-text">使用LayerDrawable进行图片合成</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现背景毛玻璃效果"><span class="toc-number">2.7.</span> <span class="toc-text">实现背景毛玻璃效果</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用LayerDrawable与属性动画，实现背景切换时渐变效果"><span class="toc-number">2.8.</span> <span class="toc-text">使用LayerDrawable与属性动画，实现背景切换时渐变效果</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#唱针变化逻辑"><span class="toc-number">2.9.</span> <span class="toc-text">唱针变化逻辑</span></a></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录" title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+    <div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"Android仿网易云音乐播放界面　| 向志洪　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+    
+        <section class="youyan" id="comments">
+    <script>
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = 'http://v2.uyan.cc/code/uyan.js?uid=2120654';
+            (d.head || d.body).appendChild(s);
+        }
+    </script>
+    <script> loadComment(); </script>
+    <div id="uyan_frame"></div>
+</section>
+    
+
+
+<div class="scroll" id="post-nav-button">
+        
+            <a href="/2016/10/28/React 页面渲染原理/" title="上一篇: 深入理解React Native页面构建渲染原理">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/10/05/搭建网站/" title="下一篇: 搭建网站">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/02/28/前端知识库/">前端知识库</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/10/微信小程序尝鲜一个月现状分析/">微信小程序尝鲜一个月现状分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/05/swift/">Swift基础语法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/05/Node.js基本工作原理/">node.js基本工作原理及流程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/05/React Native的Navigator详解/">React Native的Navigator详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/05/gulp+webpack工具整合简介/">gulp+webpack工具整合简介</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/05/Angular2入坑指南/">Angular2入坑指南</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/03/Iterate/">迭代子模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/01/robot/">机器学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/05/visitor/">Node入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/05/ios高仿斗鱼app/">高仿ios斗鱼界面</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/05/Android ExpandableListView详解/">ExpandableListView实现商品列表折叠</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/05/iOS使用自签名证书实现HTTPS请求/">iOS使用自签名证书实现HTTPS请求</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/05/webpack+react环境搭建/">webpack+react环境搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/28/React 页面渲染原理/">深入理解React Native页面构建渲染原理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/08/高仿网易云音乐/">Android仿网易云音乐播放界面</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/搭建网站/">搭建网站</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/React Native在Android平台运行gif的解决方法/">React Native在Android平台运行gif的解决方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/Android WindowManager详解/">Android WindowManager详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/Spring Boot搭建Web应用/">Spring Boot入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/微信小程序/">刷博客等流量</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/刷流量的几种方法/">刷博客等流量</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/node.js基本工作原理及流程/">Node.js原理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/05/Android线程池/">Android WindowManager详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/05/Android7.0新特性/">android7.0新特性</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/05/Android高仿天猫详情页/">Android仿京东、天猫商品详情页</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/Xcode 8新功能介绍/">Xcode 8新功能介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/Android硬件加速介绍与实现/">Android硬件加速介绍与实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/iOS 滚动视图的复用问题解决方案/">iOS 滚动视图的复用问题解决方案</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/05/Google VR技术大揭秘/">Google VR技术大揭秘</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/05/ios gif图片加载框架介绍/">FLAnimatedImage -ios gif图片加载框架介绍</a></li></ul>
+
+
+    <script>
+        
+    </script></div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2017 向志洪
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style="display:none">
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style="display:none">
+                        <span id="page-visit" title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    <script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+<script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide()" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>

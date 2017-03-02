@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="向志洪">
+
+
+
+<meta name="description" content="iOS 滚动视图的复用问题解决方案">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS 滚动视图的复用问题解决方案">
+<meta property="og:url" content="http://code.youmeek.com/2016/07/05/iOS 滚动视图的复用问题解决方案/index.html">
+<meta property="og:site_name" content="向志洪">
+<meta property="og:description" content="iOS 滚动视图的复用问题解决方案">
+<meta property="og:image" content="http://img.blog.csdn.net/20161227201849943?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20161227203823670?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2017-03-02T12:14:24.748Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS 滚动视图的复用问题解决方案">
+<meta name="twitter:description" content="iOS 滚动视图的复用问题解决方案">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20161227201849943?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="向志洪" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>iOS 滚动视图的复用问题解决方案 | 向志洪</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="http://ohe65w0xx.bkt.clouddn.com/avert.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">向志洪</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">这里只有代码相关，要了解更多 &gt;&gt;http://blog.csdn.net/xiangzhihong8</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa GitHub" href="https://github.com/xiangzhihong/" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa CSDN" href="http://blog.csdn.net/xiangzhihong8/" title="CSDN"></a>
+                            
+                                <a class="fa QQ" href="/1044817967" title="QQ"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Angular2/">Angular2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google/">Google</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node/">Node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node入门/">Node入门</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React-Native/">React Native</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VR/">VR</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WindowManager/">WindowManager</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xcode/">Xcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/">android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gif/">gif</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gulp/">gulp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/https/">https</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift/">swift</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/个人博客/">个人博客</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/入门/">入门</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端开发/">前端开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原理/">原理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大数据/">大数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/小程序/">小程序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微信/">微信</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建网站/">搭建网站</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/新特性/">新特性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/流量/">流量</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/源码/">源码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/知识库/">知识库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/硬件/">硬件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/系统服务/">系统服务</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/迭代子模式/">迭代子模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高仿/">高仿</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://www.xiangzhihong.com/">Blog</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">向志洪</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="http://ohe65w0xx.bkt.clouddn.com/avert.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">向志洪</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">这里只有代码相关，要了解更多 &gt;&gt;http://blog.csdn.net/xiangzhihong8</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/xiangzhihong/" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa CSDN" target="_blank" href="http://blog.csdn.net/xiangzhihong8/" title="CSDN"></a>
+                            
+                                <a class="fa QQ" target="_blank" href="/1044817967" title="QQ"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我">
+</nav>
+      <div class="body-wrap"><article id="post-iOS 滚动视图的复用问题解决方案" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/07/05/iOS 滚动视图的复用问题解决方案/" class="article-date">
+      <time datetime="2016-07-04T16:00:00.000Z" itemprop="datePublished">2016-07-05</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        <h1 class="article-title" itemprop="name">
+      iOS 滚动视图的复用问题解决方案
+    </h1>
+      </header>
+      
+      <div class="article-info article-info-post">
+        <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/ios/">ios</a>
+    </div>
+        <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Xcode/">Xcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ios/">ios</a></li></ul>
+    </div>
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>##LazyScroll是什么</p>
+<p>LazyScrollView 继承自ScrollView，目标是解决异构（与TableView的同构对比）滚动视图的复用回收问题。它可以支持跨View层的复用，用易用方式来生成一个高性能的滚动视图。</p>
+<h2 id="为什么要用LazyScrollView"><a href="#为什么要用LazyScrollView" class="headerlink" title="为什么要用LazyScrollView"></a>为什么要用LazyScrollView</h2><p>我们在做首页的时候，往往展示的东西会很多，随着View数量逐渐膨胀，没有一套复用回收机制的ScrollView已经影响到性能了，迫切需要处理对ScrollView中View的复用和回收。使用TableView只能用来解决同类Cell的展示，然而在实际的场景中在ScrollView里面，View的种类往往会比较多，所以使用TableView不适合我们的场景。<br>而UICollectionView本身的布局和复用回收机制不够灵活，用起来也较为繁琐。所以诞生了LazyScrollView去解决这个问题。这也是天猫iOS客户端的首页落地方案。</p>
+<h2 id="LazyScroll使用"><a href="#LazyScroll使用" class="headerlink" title="LazyScroll使用"></a>LazyScroll使用</h2><p>LazyScrollView的使用和TableView很像，不过多了一个需要实现的方法：返回对应index的View 相对LazyScrollView的绝对坐标。</p>
+<h3 id="实现LazyScrollViewDatasource"><a href="#实现LazyScrollViewDatasource" class="headerlink" title="实现LazyScrollViewDatasource"></a>实现LazyScrollViewDatasource</h3><p>类似TableView的用法，我们需要使用方实现LazyScrollViewDatasource的Delegate。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">@protocol TMMuiLazyScrollViewDataSource &lt;NSObject&gt;</div><div class="line">@required</div><div class="line">//ScrollView展示item个数</div><div class="line">- (NSUInteger)numberOfItemInScrollView:(TMMuiLazyScrollView *)scrollView;</div><div class="line">//要求根据index直接返回RectModel</div><div class="line">- (TMMuiRectModel *)scrollView:(TMMuiLazyScrollView *)scrollView rectModelAtIndex:(NSUInteger)index;</div><div class="line">//返回下标所对应的view</div><div class="line">- (UIView *)scrollView:(TMMuiLazyScrollView *)scrollView itemByMuiID:(NSString *)muiID;</div></pre></td></tr></table></figure>
+<p>LazyScrollView的核心是在初始状态就得知所有View应该显示的位置。第一个方法很简单，获取LazyScrollView中item的个数。第二个方法需要按照Index返回TMMuiRectModel ，它会携带对应index的View 相对LazyScrollView的绝对坐标。<br>这里出现了一个TMMuiRectModel ，这是个什么东西呢？我们看一下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">@interface TMMuiRectModel:NSObject</div><div class="line">//转换后的绝对值rect</div><div class="line">@property (nonatomic,assign) CGRect absRect;</div><div class="line">//业务下标</div><div class="line">@property (nonatomic,copy) NSString *muiID;</div></pre></td></tr></table></figure>
+<p>这里有两个属性，absRect是LazyScroll中的View相对LazyScrollView的绝对坐标，muiID是这个View在LazyScrollView中唯一的标识符，可赋值也可不赋值。<br>第三个方法，返回View。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">@interface UIView(TMMui)</div><div class="line"></div><div class="line">//索引过的标识，在LazyScrollView范围内唯一</div><div class="line">@property (nonatomic, copy) NSString  *muiID;</div><div class="line">//重用的ID</div><div class="line">@property (nonatomic, copy) NSString *reuseIdentifier;</div></pre></td></tr></table></figure>
+<p>首先，我们在UIView之外加了一个Category,这个category可以让View携带muiID和reuseIdentifier,对于返回的View来说，只需要在乎对View的reuseIdentifier赋值，muiID的赋值会在lazyScrollView中处理掉。reuseIdentifier相同的View会被复用，如果这个View的reuseIdentifier是nil或者空字符串，则不会被复用。</p>
+<h2 id="LazyScrollView内部原理分析"><a href="#LazyScrollView内部原理分析" class="headerlink" title="LazyScrollView内部原理分析"></a>LazyScrollView内部原理分析</h2><p>首先来看一个简单的案例：<br><img src="http://img.blog.csdn.net/20161227201849943?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h3 id="根据DataSource获取所有的TMMuiRectModel"><a href="#根据DataSource获取所有的TMMuiRectModel" class="headerlink" title="根据DataSource获取所有的TMMuiRectModel"></a>根据DataSource获取所有的TMMuiRectModel</h3><p>根据DataSource的Delegate，拿到所有的View应该被显示的位置。这一步，核心是拿到的位置是确定的。根据Demo，我们观察从 0/1 - 2/3 之间这些View，这个时候LazyScrollView拿到的Rect如下：</p>
+<p><table><br>        <tr><br>            <th>Index</th><br>            <th>标号(MUIID)</th><br>            <th>Rect</th><br>        </tr><br>         <tr><br>            <th>0</th><br>            <th>    0/0</th><br>            <th>    origin = (x = 25, y = 15), size = (width = 156, height = 150</th><br>        </tr><br>          <tr><br>            <th>1</th><br>            <th>0/1</th><br>            <th>origin = (x = 194, y = 15), size = (width = 156, height = 150)</th><br>        </tr><br>            <tr><br>            <th>2</th><br>            <th>0/2</th><br>            <th>origin = (x = 25, y = 180), size = (width = 156, height = 150)</th><br>        </tr><br>            <tr><br>            <th>3</th><br>            <th>0/3</th><br>            <th>origin = (x = 194, y = 180), size = (width = 156, height = 150</th><br>        </tr><br>            <tr><br>            <th>4</th><br>            <th>1/0</th><br>            <th>origin = (x = 5, y = 360), size = (width = 177.5, height = 150)</th><br>        </tr><br>           <tr><br>            <th>5</th><br>            <th>1/1</th><br>            <th>origin = (x = 192.5, y = 426), size = (width = 84, height = 84)</th><br>        </tr><br>           <tr><br>            <th>6</th><br>            <th>1/2</th><br>            <th>origin = (x = 192.5, y = 360), size = (width = 177.5, height = 56)</th><br>        </tr><br>        <tr><br>            <th>7</th><br>            <th>1/3</th><br>            <th>origin = (x = 286.5, y = 426), size = (width = 83.5, height = 84)</th><br>        </tr><br>            <tr><br>            <th>8</th><br>            <th>2/0</th><br>            <th>origin = (x = 25, y = 530), size = (width = 325, height = 150)</th><br>        </tr><br>               <tr><br>            <th>9</th><br>            <th>2/1</th><br>            <th>origin = (x = 25, y = 695), size = (width = 325, height = 150)</th><br>        </tr><br>           <tr><br>            <th>10</th><br>            <th>2/2</th><br>            <th>origin = (x = 25, y = 860), size = (width = 325, height = 150)</th><br>        </tr><br></table></p>
+<h3 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h3><p>拿到了这些位置之后，接下来做的事情就是排序。排序生成的索引会有两个：根据顶边(y)升序排序的索引和根据底边(y+height)降序排序的索引。<br><strong>根据顶边(y)升序排序的索引</strong></p>
+<p><table><br>        <tr><br>            <th>Index</th><br>            <th>标号(MUIID)</th><br>            <th>Rect</th><br>        </tr><br>         <tr><br>            <th>0</th><br>            <th>    0/0</th><br>            <th>    origin = (x = 25, y = 15), size = (width = 156, height = 150</th><br>        </tr><br>          <tr><br>            <th>1</th><br>            <th>0/1</th><br>            <th>origin = (x = 194, y = 15), size = (width = 156, height = 150)</th><br>        </tr><br>            <tr><br>            <th>2</th><br>            <th>0/2</th><br>            <th>origin = (x = 25, y = 180), size = (width = 156, height = 150)</th><br>        </tr><br>            <tr><br>            <th>3</th><br>            <th>0/3</th><br>            <th>origin = (x = 194, y = 180), size = (width = 156, height = 150</th><br>        </tr><br>            <tr><br>            <th>4</th><br>            <th>1/0</th><br>            <th>origin = (x = 5, y = 360), size = (width = 177.5, height = 150)</th><br>        </tr><br>           <tr><br>            <th>5</th><br>            <th>1/1</th><br>            <th>origin = (x = 192.5, y = 360), size = (width = 177.5, height = 56)</th><br>        </tr><br>           <tr><br>            <th>6</th><br>            <th>1/2</th><br>            <th>origin = (x = 192.5, y = 360), size = (width = 177.5, height = 56)</th><br>        </tr><br>        <tr><br>            <th>7</th><br>            <th>1/3</th><br>            <th>origin = (x = 286.5, y = 426), size = (width = 83.5, height = 84)</th><br>        </tr><br>            <tr><br>            <th>8</th><br>            <th>2/0</th><br>            <th>origin = (x = 25, y = 530), size = (width = 325, height = 150)</th><br>        </tr><br>               <tr><br>            <th>9</th><br>            <th>2/1</th><br>            <th>origin = (x = 25, y = 695), size = (width = 325, height = 150)</th><br>        </tr><br>           <tr><br>            <th>10</th><br>            <th>2/2</th><br>            <th>origin = (x = 25, y = 860), size = (width = 325, height = 150)</th><br>        </tr><br></table><br><strong>根据底边(y+height)降序排序的索引</strong></p>
+<p><table><br>        <tr><br>            <th>Index</th><br>            <th>标号(MUIID)</th><br>            <th>Rect</th><br>        </tr><br>         <tr><br>            <th>0</th><br>            <th>2/2</th><br>            <th>origin = (x = 25, y = 860), size = (width = 325, height = 150)</th><br>        </tr><br>          <tr><br>            <th>1</th><br>            <th>2/1</th><br>            <th>origin = (x = 25, y = 695), size = (width = 325, height = 150)</th><br>        </tr><br>            <tr><br>            <th>2</th><br>            <th>2/0</th><br>            <th>origin = (x = 25, y = 530), size = (width = 325, height = 150)</th><br>        </tr><br>            <tr><br>            <th>3</th><br>            <th>1/0</th><br>            <th>origin = (x = 5, y = 360), size = (width = 177.5, height = 150)</th><br>        </tr><br>            <tr><br>            <th>4</th><br>            <th>1/2</th><br>            <th>origin = (x = 192.5, y = 360), size = (width = 177.5, height = 56)</th><br>        </tr><br>           <tr><br>            <th>5</th><br>            <th>1/3</th><br>            <th>origin = (x = 286.5, y = 426), size = (width = 83.5, height = 84)</th><br>        </tr><br>           <tr><br>            <th>6</th><br>            <th>    1/1</th><br>            <th>origin = (x = 192.5, y = 426), size = (width = 84, height = 84)</th><br>        </tr><br>        <tr><br>            <th>7</th><br>            <th>    0/2</th><br>            <th>origin = (x = 25, y = 180), size = (width = 156, height = 150)</th><br>        </tr><br>            <tr><br>            <th>8</th><br>            <th>    0/3</th><br>            <th>    origin = (x = 194, y = 180), size = (width = 156, height = 150</th><br>        </tr><br>               <tr><br>            <th>9</th><br>            <th>    0/0</th><br>            <th>origin = (x = 25, y = 15), size = (width = 156, height = 150</th><br>        </tr><br>           <tr><br>            <th>10</th><br>            <th>    0/1</th><br>            <th>origin = (x = 194, y = 15), size = (width = 156, height = 150)</th><br>        </tr><br></table></p>
+<h3 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h3><p>前两步是在执行完reload，在视图还没有生成的时候就开始做了，而接下来的步骤在要生成视图（初始化或滚动的时候）才会去做。<br>我们设定了Buffer为上下各20，滚动超过20个像素后才会指定查找视图并显示的动作。举个例子，如下图，红圈是应该显示的区域。<br><img src="http://img.blog.csdn.net/20161227203823670?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>如上图所示，现在已知的是红圈顶边y是242，底边y是949，加上缓冲区Buffer，应该是找222 - 969 之间的View。我们要做的是，找到底边y小于969的Model和顶边y大于222的Model，取交集，就是我们要显示的View。<br>采用的方法为二分查找，在根据顶边升序排序的索引中找949，找到的index为0(MUIID为2/2)，我们使用一个Set，把根据顶边排序中index &gt;= 0 的元素先放在这里。获取的Set中包含的muiID为 0/0,0/1,0/2,0/3,1/0,1/1,1/2,1/3,2/0,2/1,2/2。<br>根据底边排序的索引中找222，找到的index为2，我们把index &gt;= 2的元素放在另一个Set，获取的Set中包含的muiID为0/2,0/3,1/0,1/1,1/2,1/3,2/0,2/1,2/2<br>两个Set取交集，得到的就是我们的ResultSet，这里面都是我们要显示View的Model，它们的muiID是0/2,0/3,1/0,1/1,1/2,1/3,2/0,2/1,2/2。</p>
+<h3 id="回收、复用、生成"><a href="#回收、复用、生成" class="headerlink" title="回收、复用、生成"></a>回收、复用、生成</h3><p>我们知道了应该显示哪些View，但是我们之后做的第一步是把不需要显示的View加入到复用池中。LazyScroll可以取到当前显示了的View，拿当前显示的View的muiID和将要显示view的Model的muiID做对比，可以知道当前显示的View哪些应该被回收。<br>LazyScrollView中有一个Dictionary，key是reuseIdentifier,Value是对应reuseIdentifier被回收的View，当LazyScrollView得知这个View不该再出现了，会把View放在这里，并且把这个View hidden掉。<br>然后，用LazyScrollView会去调用datasource。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">- (UIView *)scrollView:(TMMuiLazyScrollView *)scrollView itemByMuiID:(NSString *)muiID;</div></pre></td></tr></table></figure></p>
+<p>复用还是不复用，是由datasource决定的。如果要复用，需要datasource方法内调用，即：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">- (UIView *)dequeueReusableItemWithIdentifier:(NSString *)identifier</div></pre></td></tr></table></figure>
+<p>获取复用的View，这个方法取出来的View就是在上一段所说的Dictionary中拿的。<br>最后我们看一下LazyScrollView的使用流程：找到所有View将要显示的位置 – 排序 – 查找应该显示的View – 回收 – 创建/复用。</p>
+      
+    </div>
+    
+  </div>
+  
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/07/05/iOS 滚动视图的复用问题解决方案/">iOS 滚动视图的复用问题解决方案</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">向志洪</a></p>
+        <p><span>发布时间:</span>2016-07-05, 00:00:00</p>
+        <p><span>最后更新:</span>2017-03-02, 20:14:24</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/07/05/iOS 滚动视图的复用问题解决方案/" title="iOS 滚动视图的复用问题解决方案">http://code.youmeek.com/2016/07/05/iOS 滚动视图的复用问题解决方案/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://code.youmeek.com/2016/07/05/iOS 滚动视图的复用问题解决方案/　　作者: 向志洪" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target="_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2016/07/05/Android硬件加速介绍与实现/">
+                    Android硬件加速介绍与实现
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/06/05/Google VR技术大揭秘/">
+                    Google VR技术大揭秘
+                </a>
+            </div>
+        
+    </nav>
+  
+</article>
+<div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么要用LazyScrollView"><span class="toc-number">1.</span> <span class="toc-text">为什么要用LazyScrollView</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LazyScroll使用"><span class="toc-number">2.</span> <span class="toc-text">LazyScroll使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实现LazyScrollViewDatasource"><span class="toc-number">2.1.</span> <span class="toc-text">实现LazyScrollViewDatasource</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LazyScrollView内部原理分析"><span class="toc-number">3.</span> <span class="toc-text">LazyScrollView内部原理分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#根据DataSource获取所有的TMMuiRectModel"><span class="toc-number">3.1.</span> <span class="toc-text">根据DataSource获取所有的TMMuiRectModel</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#排序"><span class="toc-number">3.2.</span> <span class="toc-text">排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查找"><span class="toc-number">3.3.</span> <span class="toc-text">查找</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#回收、复用、生成"><span class="toc-number">3.4.</span> <span class="toc-text">回收、复用、生成</span></a></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录" title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+    <div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"iOS 滚动视图的复用问题解决方案　| 向志洪　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+    
+        <section class="youyan" id="comments">
+    <script>
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = 'http://v2.uyan.cc/code/uyan.js?uid=2120654';
+            (d.head || d.body).appendChild(s);
+        }
+    </script>
+    <script> loadComment(); </script>
+    <div id="uyan_frame"></div>
+</section>
+    
+
+
+<div class="scroll" id="post-nav-button">
+        
+            <a href="/2016/07/05/Android硬件加速介绍与实现/" title="上一篇: Android硬件加速介绍与实现">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/06/05/Google VR技术大揭秘/" title="下一篇: Google VR技术大揭秘">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/02/28/前端知识库/">前端知识库</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/10/微信小程序尝鲜一个月现状分析/">微信小程序尝鲜一个月现状分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/05/swift/">Swift基础语法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/05/Node.js基本工作原理/">node.js基本工作原理及流程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/05/React Native的Navigator详解/">React Native的Navigator详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/05/gulp+webpack工具整合简介/">gulp+webpack工具整合简介</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/05/Angular2入坑指南/">Angular2入坑指南</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/03/Iterate/">迭代子模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/01/robot/">机器学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/05/visitor/">Node入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/05/ios高仿斗鱼app/">高仿ios斗鱼界面</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/05/Android ExpandableListView详解/">ExpandableListView实现商品列表折叠</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/05/iOS使用自签名证书实现HTTPS请求/">iOS使用自签名证书实现HTTPS请求</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/05/webpack+react环境搭建/">webpack+react环境搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/28/React 页面渲染原理/">深入理解React Native页面构建渲染原理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/08/高仿网易云音乐/">Android仿网易云音乐播放界面</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/搭建网站/">搭建网站</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/React Native在Android平台运行gif的解决方法/">React Native在Android平台运行gif的解决方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/Android WindowManager详解/">Android WindowManager详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/Spring Boot搭建Web应用/">Spring Boot入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/微信小程序/">刷博客等流量</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/刷流量的几种方法/">刷博客等流量</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/node.js基本工作原理及流程/">Node.js原理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/05/Android线程池/">Android WindowManager详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/05/Android7.0新特性/">android7.0新特性</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/05/Android高仿天猫详情页/">Android仿京东、天猫商品详情页</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/Xcode 8新功能介绍/">Xcode 8新功能介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/Android硬件加速介绍与实现/">Android硬件加速介绍与实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/iOS 滚动视图的复用问题解决方案/">iOS 滚动视图的复用问题解决方案</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/05/Google VR技术大揭秘/">Google VR技术大揭秘</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/05/ios gif图片加载框架介绍/">FLAnimatedImage -ios gif图片加载框架介绍</a></li></ul>
+
+
+    <script>
+        
+    </script></div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2017 向志洪
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style="display:none">
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style="display:none">
+                        <span id="page-visit" title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    <script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+<script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide()" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>

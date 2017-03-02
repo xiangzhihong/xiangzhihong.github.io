@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="向志洪">
+
+
+
+<meta name="description" content="微信小程序尝鲜一个月现状分析">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微信小程序尝鲜一个月现状分析">
+<meta property="og:url" content="http://code.youmeek.com/2017/02/10/微信小程序尝鲜一个月现状分析/index.html">
+<meta property="og:site_name" content="向志洪">
+<meta property="og:description" content="微信小程序尝鲜一个月现状分析">
+<meta property="og:updated_time" content="2017-03-02T12:01:42.277Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="微信小程序尝鲜一个月现状分析">
+<meta name="twitter:description" content="微信小程序尝鲜一个月现状分析">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="向志洪" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>微信小程序尝鲜一个月现状分析 | 向志洪</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="http://ohe65w0xx.bkt.clouddn.com/avert.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">向志洪</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">这里只有代码相关，要了解更多 &gt;&gt;http://blog.csdn.net/xiangzhihong8</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa GitHub" href="https://github.com/xiangzhihong/" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa CSDN" href="http://blog.csdn.net/xiangzhihong8/" title="CSDN"></a>
+                            
+                                <a class="fa QQ" href="/1044817967" title="QQ"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Angular2/">Angular2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google/">Google</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node/">Node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node入门/">Node入门</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React-Native/">React Native</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VR/">VR</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WindowManager/">WindowManager</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xcode/">Xcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/">android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gif/">gif</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gulp/">gulp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/https/">https</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift/">swift</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/个人博客/">个人博客</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/入门/">入门</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端开发/">前端开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原理/">原理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大数据/">大数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/小程序/">小程序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微信/">微信</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建网站/">搭建网站</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/新特性/">新特性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/流量/">流量</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/源码/">源码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/知识库/">知识库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/硬件/">硬件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/系统服务/">系统服务</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/迭代子模式/">迭代子模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高仿/">高仿</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://www.xiangzhihong.com/">Blog</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">向志洪</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="http://ohe65w0xx.bkt.clouddn.com/avert.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">向志洪</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">这里只有代码相关，要了解更多 &gt;&gt;http://blog.csdn.net/xiangzhihong8</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/xiangzhihong/" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa CSDN" target="_blank" href="http://blog.csdn.net/xiangzhihong8/" title="CSDN"></a>
+                            
+                                <a class="fa QQ" target="_blank" href="/1044817967" title="QQ"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我">
+</nav>
+      <div class="body-wrap"><article id="post-微信小程序尝鲜一个月现状分析" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/02/10/微信小程序尝鲜一个月现状分析/" class="article-date">
+      <time datetime="2017-02-09T16:00:00.000Z" itemprop="datePublished">2017-02-10</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        <h1 class="article-title" itemprop="name">
+      微信小程序尝鲜一个月现状分析
+    </h1>
+      </header>
+      
+      <div class="article-info article-info-post">
+        <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/小程序/">小程序</a>
+    </div>
+        <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/小程序/">小程序</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/微信/">微信</a></li></ul>
+    </div>
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>曾记得在微信小程序还没有上线的时候，大家都是翘首以待，希望在张小龙，在企鹅的带领下，走出区别于原生开发的另一条移动开发的道路，我也是一直关注着，知道1月9号，微信小程序终于对外开放了，作为第一批内测开发者，我也是在第一时间启动了微信小程序的开发。<br>其开发也确实相对简单，不过体验上嘛，可能和原生有一些差距，体验上有点类似于企业的x5渲染的webview。不过因为其高度依赖于微信这个平台，也限制了其开放性，所以我当时在csdn的内部群预言：微信小程序不会完全取代原生app，甚至都不可能威胁到原生app。<br>那么现在一个多月过去了，现状如何呢？</p>
+<h1 id="微信小程序现状"><a href="#微信小程序现状" class="headerlink" title="微信小程序现状"></a>微信小程序现状</h1><p>就在过年之前，其实好多之前的微信小程序都悄悄下线了，诸如最早入住微信的ota，在过完年不就都纷纷下线，各种股票交易类的小程序也在证监会的要求下纷纷暂停服务。究其原因，就是其转换率并不高。<br>你是否有这样的困扰：手机里装了几十个甚至上百个App，但平均每天都会用到的数量屈指可数，又或者地图、外卖等同类App不得不装好几个换着用，明知使用频率不高却耗电、占内存就是删不得？也因为有这样的用户痛点，当“微信之父”张小龙对外阐释小程序是一个不需要下载安装就可使用的用完即走应用后一直备受关注。<br>2017微信公开课PRO版上，张小龙也举了两个小程序的场景化例子，一个是在公交站，扫一下站牌的二维码就可以了解下一辆公交车的到站时间；一个是在汽车站，扫一下二维码就可以购买车票而不需要排长队。<br>这样的示例已经说明了微信团队对小程序的定位和理解，明显看出重心是要深入开拓线下的场景运营。现在不管是在地铁、公交站等线下场景，许多广告牌中都已加入了二维码等待被“扫一扫”。但张小龙认为，对企业来说，广告中嵌入二维码，被扫后应该能直接触达企业服务而不是消息订阅。<br>他强调，更多希望小程序的启动来自于扫二维码。并且，小程序坚持去中心化的思路，不会有类似应用商店的分类、排行和推荐等功能，也不能推送消息，不会有订阅关系和粉丝机制。<br>值得注意的是，尽管微信官方反复说明小程序并非应用商店的复刻版，但关于小程序可能冲击原有App体系及应用市场的观点依然存在。原因在于，相比苹果iOS系统下App Store的一统江湖，国内的安卓应用市场因某些原因百花齐放，多个第三方应用商店并存。与此同时，流量分散、用户需求和习惯的变化加上技术变迁，都使得应用市场本身面临转型。<br>就在笔者写这篇散文的时候，谷歌正式推出了“谷歌小程序（Android Instant Apps）”。<br>那么这里要八卦一些了，什么是谷歌小程序（Android Instant Apps）？</p>
+<h1 id="谷歌小程序"><a href="#谷歌小程序" class="headerlink" title="谷歌小程序"></a>谷歌小程序</h1><p>大家知道，不管是谷歌小程序还是微信小程序，都是一种轻量级的方法，其目的是：运行Android应用而无需安装、从任意位置访问应用。<br>在去年5月的Google I/O大会上，谷歌用了大约10分钟时间为我们介绍了Android Instant Apps，可理解为安卓“即时应用”，也就是无需安装可直接使用的应用，显然这跟微信推出的小程序非常类似，昨天，谷歌正式上线了一小批应用来测试这项功能。<br>上线的几款支持应用包括了BuzzFeed、Wish、Periscope以及Viki，Android Instant Apps并不是简单的网页浏览形式，通过Android Instant Apps，你其实就是打开了这个App的“简洁版”，经过一些媒体的测试，Android Instant Apps的加载速度也要比同等状况下的网页形式要快。<br>谷歌小程序工作原理：将App模块化了之后，Google Play只会在你点击了链接之后下载所需的那部分功能，这样你就相当于在一个简洁的模式下使用该App。对于开发者来说，他们也不必为此专门再去开发一个独立的App，它使用的还是同样的Android API和同样的源代码，开发者们只需要在原有App的基础上进行一下升级，接入Android Instant Apps的功能就可以了，对于一些开发者们来说，这个过程可能都用不了一天。<br>从这方面来说，由于google的全球影响力，加之在系统级别的多年耕耘，优势相对于微信小程序那可不是一点点。</p>
+<h1 id="微信小程序的几大痛点"><a href="#微信小程序的几大痛点" class="headerlink" title="微信小程序的几大痛点"></a>微信小程序的几大痛点</h1><p>随着第一轮玩家激情褪去后的纷纷退场，以及第二批第三批玩家的涌入，为什么小程序的存活时间并不长？这不得不说说微信小程序当前存在的几个问题：</p>
+<h2 id="bug较多"><a href="#bug较多" class="headerlink" title="bug较多"></a>bug较多</h2><p>这是不得不说的话题，小程序为了实现在苹果发布十周年推出具有“颠覆”的小程序，其实是带了很多bug上线的，即使到现在，开发人员依然会遇到很多问题。<br>对于人力充足的大公司，有专门的人来参与到小程序的开发维护中;而对于小公司，他们没有足够的人力投入，他们可能一半时间来维护其他平台产品另一半时间来开发小程序，这个时候如果碰到几个小程序的bug，基本上是吃不消的。</p>
+<h2 id="产品定位"><a href="#产品定位" class="headerlink" title="产品定位"></a>产品定位</h2><p>举一个简单的例子，比如以内容为主的app，我们常常会向用户推送一些消息来提高点击率，但是在小程序里，这条路是死的。对于“今日头条”推出小程序真心搞不太懂，如此高频使用的产品为什么要放到小程序上，先不说重大新闻你怎么推送，那么对于普通用户的爱好如何进行个性化推荐?大概也是跟风吧。</p>
+<h2 id="安全风险"><a href="#安全风险" class="headerlink" title="安全风险"></a>安全风险</h2><p>1月13日，证监会担心金融类小程序涉及客户隐私和安全问题，要求金融类的小程序只能进行产品的展示，不能进行诸如申购、赎回、转换、定投、开户等功能。那这就很蛋疼了，你只能在小程序上看最新的股价、咨询，你要想交易那对不起，你可以另跳链接，我们知道微信不支持外链的，那好吧，我得回到APP上，进行交易。那么问题来了，我APP啥都有了，我还要小程序干嘛，所以，很多基金、证券类的小程序直接停止服务。</p>
+<h2 id="开发市场"><a href="#开发市场" class="headerlink" title="开发市场"></a>开发市场</h2><p>在小程序开放之前，微信小程序的群满天飞，首先是ios、android的开发者加入到了小程序开发群中，然后是PM也加入了进来，再到后排搞PHP的也加入了进来。小程序开发成本并不高，把官方文档的代码复制过来基本就能用，所以大家都来一起搞。其结果是其转换率并不高，其市场定位只能成为Android，ios的补充和附属品。</p>
+<h1 id="小程序未来怎么走"><a href="#小程序未来怎么走" class="headerlink" title="小程序未来怎么走"></a>小程序未来怎么走</h1><p>独立互联网评论人洪波此前接受《每日经济新闻》记者采访时也认为，小程序毕竟是一个新东西，开发者可能会按照手机应用的流程去做小程序，这可能也是早期避免不了的。但小程序并不是免安装的手机应用，它最适合的场景是有一个明显的触发契机，大家需要对小程序应该怎么做、通过哪些场景触发等有个重新而且深入的思考。<br>虽然在推出当天，各类微信小程序一窝蜂的上线，但从推出后1个月的情况看，或许作为一个新思路的产品，没持续引发疯狂跟风反是个好信号，毕竟不管是对用户还是开发者来说，复制一个App生态体系意义不大，而思路和标准的改变跟产品开发都不能一蹴而就。<br>的确，作为线上的用户来说，小程序的设计似乎是如此不便，但换个角度来看，小程序或许本来就不是为被用户找到而设计的，或者说，致力于“勾连线下”的小程序，本身存在的价值或许是在特定的场景下找到特定的用户。</p>
+      
+    </div>
+    
+  </div>
+  
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/02/10/微信小程序尝鲜一个月现状分析/">微信小程序尝鲜一个月现状分析</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">向志洪</a></p>
+        <p><span>发布时间:</span>2017-02-10, 00:00:00</p>
+        <p><span>最后更新:</span>2017-03-02, 20:01:42</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/02/10/微信小程序尝鲜一个月现状分析/" title="微信小程序尝鲜一个月现状分析">http://code.youmeek.com/2017/02/10/微信小程序尝鲜一个月现状分析/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://code.youmeek.com/2017/02/10/微信小程序尝鲜一个月现状分析/　　作者: 向志洪" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target="_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2017/02/28/前端知识库/">
+                    前端知识库
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/12/05/gulp+webpack工具整合简介/">
+                    gulp+webpack工具整合简介
+                </a>
+            </div>
+        
+    </nav>
+  
+</article>
+<div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#概述"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#微信小程序现状"><span class="toc-number">2.</span> <span class="toc-text">微信小程序现状</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#谷歌小程序"><span class="toc-number">3.</span> <span class="toc-text">谷歌小程序</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#微信小程序的几大痛点"><span class="toc-number">4.</span> <span class="toc-text">微信小程序的几大痛点</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#bug较多"><span class="toc-number">4.1.</span> <span class="toc-text">bug较多</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#产品定位"><span class="toc-number">4.2.</span> <span class="toc-text">产品定位</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安全风险"><span class="toc-number">4.3.</span> <span class="toc-text">安全风险</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#开发市场"><span class="toc-number">4.4.</span> <span class="toc-text">开发市场</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#小程序未来怎么走"><span class="toc-number">5.</span> <span class="toc-text">小程序未来怎么走</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录" title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+    <div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"微信小程序尝鲜一个月现状分析　| 向志洪　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+    
+        <section class="youyan" id="comments">
+    <script>
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = 'http://v2.uyan.cc/code/uyan.js?uid=2120654';
+            (d.head || d.body).appendChild(s);
+        }
+    </script>
+    <script> loadComment(); </script>
+    <div id="uyan_frame"></div>
+</section>
+    
+
+
+<div class="scroll" id="post-nav-button">
+        
+            <a href="/2017/02/28/前端知识库/" title="上一篇: 前端知识库">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/12/05/gulp+webpack工具整合简介/" title="下一篇: gulp+webpack工具整合简介">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/02/28/前端知识库/">前端知识库</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/10/微信小程序尝鲜一个月现状分析/">微信小程序尝鲜一个月现状分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/05/swift/">Swift基础语法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/05/Node.js基本工作原理/">node.js基本工作原理及流程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/05/React Native的Navigator详解/">React Native的Navigator详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/05/gulp+webpack工具整合简介/">gulp+webpack工具整合简介</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/05/Angular2入坑指南/">Angular2入坑指南</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/03/Iterate/">迭代子模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/01/robot/">机器学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/05/visitor/">Node入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/05/ios高仿斗鱼app/">高仿ios斗鱼界面</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/05/Android ExpandableListView详解/">ExpandableListView实现商品列表折叠</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/05/iOS使用自签名证书实现HTTPS请求/">iOS使用自签名证书实现HTTPS请求</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/05/webpack+react环境搭建/">webpack+react环境搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/28/React 页面渲染原理/">深入理解React Native页面构建渲染原理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/08/高仿网易云音乐/">Android仿网易云音乐播放界面</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/搭建网站/">搭建网站</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/React Native在Android平台运行gif的解决方法/">React Native在Android平台运行gif的解决方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/Android WindowManager详解/">Android WindowManager详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/Spring Boot搭建Web应用/">Spring Boot入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/微信小程序/">刷博客等流量</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/刷流量的几种方法/">刷博客等流量</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/node.js基本工作原理及流程/">Node.js原理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/05/Android线程池/">Android WindowManager详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/05/Android7.0新特性/">android7.0新特性</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/05/Android高仿天猫详情页/">Android仿京东、天猫商品详情页</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/Xcode 8新功能介绍/">Xcode 8新功能介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/Android硬件加速介绍与实现/">Android硬件加速介绍与实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/iOS 滚动视图的复用问题解决方案/">iOS 滚动视图的复用问题解决方案</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/05/Google VR技术大揭秘/">Google VR技术大揭秘</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/05/ios gif图片加载框架介绍/">FLAnimatedImage -ios gif图片加载框架介绍</a></li></ul>
+
+
+    <script>
+        
+    </script></div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2017 向志洪
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style="display:none">
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style="display:none">
+                        <span id="page-visit" title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    <script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+<script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide()" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
