@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="向志洪">
+
+
+
+<meta name="description" content="OpenGL ES简介">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenGL ES简介">
+<meta property="og:url" content="http://code.youmeek.com/2017/03/05/OpenGL ES简介/index.html">
+<meta property="og:site_name" content="向志洪">
+<meta property="og:description" content="OpenGL ES简介">
+<meta property="og:image" content="http://img.blog.csdn.net/20170317165805869?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170317205203849?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170317211006433?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170317211119324?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170317211329575?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2017-03-23T07:07:26.523Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="OpenGL ES简介">
+<meta name="twitter:description" content="OpenGL ES简介">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20170317165805869?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="向志洪" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>OpenGL ES简介 | 向志洪</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="http://ohe65w0xx.bkt.clouddn.com/avert.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">向志洪</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">这里只有代码相关，要了解更多 &gt;&gt;http://blog.csdn.net/xiangzhihong8</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa GitHub" href="https://github.com/xiangzhihong/" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa CSDN" href="http://blog.csdn.net/xiangzhihong8/" title="CSDN"></a>
+                            
+                                <a class="fa QQ" href="/1044817967" title="QQ"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Angular2/">Angular2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google/">Google</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node/">Node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node入门/">Node入门</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenGL/">OpenGL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React-Native/">React Native</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VR/">VR</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WindowManager/">WindowManager</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xcode/">Xcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/">android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gif/">gif</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gulp/">gulp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/https/">https</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift/">swift</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/个人博客/">个人博客</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/入门/">入门</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端开发/">前端开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原理/">原理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大数据/">大数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/小程序/">小程序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微信/">微信</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建网站/">搭建网站</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/新特性/">新特性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/流量/">流量</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/深入理解/">深入理解</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/源码/">源码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/环境/">环境</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/知识库/">知识库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/硬件/">硬件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/系统服务/">系统服务</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/迭代子模式/">迭代子模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高仿/">高仿</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://www.xiangzhihong.com/">Blog</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">向志洪</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="http://ohe65w0xx.bkt.clouddn.com/avert.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">向志洪</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">这里只有代码相关，要了解更多 &gt;&gt;http://blog.csdn.net/xiangzhihong8</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/xiangzhihong/" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa CSDN" target="_blank" href="http://blog.csdn.net/xiangzhihong8/" title="CSDN"></a>
+                            
+                                <a class="fa QQ" target="_blank" href="/1044817967" title="QQ"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我">
+</nav>
+      <div class="body-wrap"><article id="post-OpenGL ES简介" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/03/05/OpenGL ES简介/" class="article-date">
+      <time datetime="2017-03-04T16:00:00.000Z" itemprop="datePublished">2017-03-05</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        <h1 class="article-title" itemprop="name">
+      OpenGL ES简介
+    </h1>
+      </header>
+      
+      <div class="article-info article-info-post">
+        <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/OpenGL/">OpenGL</a>
+    </div>
+        <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenGL/">OpenGL</a></li></ul>
+    </div>
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>在聊Android的View渲染流程中，通常会有一个比较核心的步骤：通过OpeGL ES接口调用GPU接口通知GPU绘制图形。其完整的流程：UI对象—-&gt;CPU处理为多维图形,纹理 —–通过OpeGL ES接口调用GPU—-&gt; GPU对图进行光栅化(Frame Rate ) —-&gt;硬件时钟(Refresh Rate)—-垂直同步—-&gt;投射到屏幕。</p>
+<p><img src="http://img.blog.csdn.net/20170317165805869?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>详解的绘制原理，后面会慢慢讲的。</p>
+<h2 id="渲染的基础知识"><a href="#渲染的基础知识" class="headerlink" title="渲染的基础知识"></a>渲染的基础知识</h2><p>使用OpenGL ES，一般包括如下几个步骤：</p>
+<p>　　（1）EGL初始化<br>　　（2）OpenGL ES初始化<br>　　（3）OpenGL ES设置选项&amp;绘制<br>　　（4）OpenGL ES资源释放（可选）<br>　　（5）EGL资源释放</p>
+<p>Android提供的GLSurfaceView和Renderer自动完成了（1）（5）两个部分，这部分只需要开发者做一些简单配置即可。另外（4）这一步是可选的，因为随着EGL中上下文的销毁，openGL ES用到的资源也跟着释放了。因此只有（2）（3）是开发者必须做的。这大大简化了开发过程，但是灵活性也有所降低，利用这两个类是无法完成offscreen render的。要想完成offscreen render其实也很简单，相信大家也都猜到了，只要我们把（1）~（5）都自己完成就可以了。后续部分的代码大部分都是C/C++，少部分是Java。</p>
+<h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><p>EGL的功能是将OpenGL ES API和设备当前的窗口系统粘合在一起，起到了沟通桥梁的作用。不同设备的窗口系统千变万化，但是OpenGL ES提供的API却是统一的，所以EGL需要协调当前设备的窗口系统和OpenGL ES。下面EGL初始化的代码我是用C++写的，然后通过jni调用。Android在Java层面上也提供了对应的Java接口函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div></pre></td><td class="code"><pre><div class="line">static EGLConfig eglConf;</div><div class="line">static EGLSurface eglSurface;</div><div class="line">static EGLContext eglCtx;</div><div class="line">static EGLDisplay eglDisp;</div><div class="line"></div><div class="line">JNIEXPORT void JNICALL Java_com_handspeaker_offscreentest_MyGles_init</div><div class="line">(JNIEnv*env,jobject obj)</div><div class="line">&#123;</div><div class="line">    // EGL config attributes</div><div class="line">    const EGLint confAttr[] =</div><div class="line">    &#123;</div><div class="line">            EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,// very important!</div><div class="line">            EGL_SURFACE_TYPE,EGL_PBUFFER_BIT,//EGL_WINDOW_BIT EGL_PBUFFER_BIT we will create a pixelbuffer surface</div><div class="line">            EGL_RED_SIZE,   8,</div><div class="line">            EGL_GREEN_SIZE, 8,</div><div class="line">            EGL_BLUE_SIZE,  8,</div><div class="line">            EGL_ALPHA_SIZE, 8,// if you need the alpha channel</div><div class="line">            EGL_DEPTH_SIZE, 8,// if you need the depth buffer</div><div class="line">            EGL_STENCIL_SIZE,8,</div><div class="line">            EGL_NONE</div><div class="line">    &#125;;</div><div class="line">    // EGL context attributes</div><div class="line">    const EGLint ctxAttr[] = &#123;</div><div class="line">            EGL_CONTEXT_CLIENT_VERSION, 2,// very important!</div><div class="line">            EGL_NONE</div><div class="line">    &#125;;</div><div class="line">    // surface attributes</div><div class="line">    // the surface size is set to the input frame size</div><div class="line">    const EGLint surfaceAttr[] = &#123;</div><div class="line">             EGL_WIDTH,512,</div><div class="line">             EGL_HEIGHT,512,</div><div class="line">             EGL_NONE</div><div class="line">    &#125;;</div><div class="line">    EGLint eglMajVers, eglMinVers;</div><div class="line">    EGLint numConfigs;</div><div class="line"></div><div class="line">    eglDisp = eglGetDisplay(EGL_DEFAULT_DISPLAY);</div><div class="line">    if(eglDisp == EGL_NO_DISPLAY)</div><div class="line">    &#123;</div><div class="line">        //Unable to open connection to local windowing system</div><div class="line">        LOGI(&quot;Unable to open connection to local windowing system&quot;);</div><div class="line">    &#125;</div><div class="line">    if(!eglInitialize(eglDisp, &amp;eglMajVers, &amp;eglMinVers))</div><div class="line">    &#123;</div><div class="line">        // Unable to initialize EGL. Handle and recover</div><div class="line">        LOGI(&quot;Unable to initialize EGL&quot;);</div><div class="line">    &#125;</div><div class="line">    LOGI(&quot;EGL init with version %d.%d&quot;, eglMajVers, eglMinVers);</div><div class="line">    // choose the first config, i.e. best config</div><div class="line">    if(!eglChooseConfig(eglDisp, confAttr, &amp;eglConf, 1, &amp;numConfigs))</div><div class="line">    &#123;</div><div class="line">        LOGI(&quot;some config is wrong&quot;);</div><div class="line">    &#125;</div><div class="line">    else</div><div class="line">    &#123;</div><div class="line">        LOGI(&quot;all configs is OK&quot;);</div><div class="line">    &#125;</div><div class="line">    // create a pixelbuffer surface</div><div class="line">    eglSurface = eglCreatePbufferSurface(eglDisp, eglConf, surfaceAttr);</div><div class="line">    if(eglSurface == EGL_NO_SURFACE)</div><div class="line">    &#123;</div><div class="line">        switch(eglGetError())</div><div class="line">        &#123;</div><div class="line">        case EGL_BAD_ALLOC:</div><div class="line">        // Not enough resources available. Handle and recover</div><div class="line">            LOGI(&quot;Not enough resources available&quot;);</div><div class="line">            break;</div><div class="line">        case EGL_BAD_CONFIG:</div><div class="line">        // Verify that provided EGLConfig is valid</div><div class="line">            LOGI(&quot;provided EGLConfig is invalid&quot;);</div><div class="line">            break;</div><div class="line">        case EGL_BAD_PARAMETER:</div><div class="line">        // Verify that the EGL_WIDTH and EGL_HEIGHT are</div><div class="line">        // non-negative values</div><div class="line">            LOGI(&quot;provided EGL_WIDTH and EGL_HEIGHT is invalid&quot;);</div><div class="line">            break;</div><div class="line">        case EGL_BAD_MATCH:</div><div class="line">        // Check window and EGLConfig attributes to determine</div><div class="line">        // compatibility and pbuffer-texture parameters</div><div class="line">            LOGI(&quot;Check window and EGLConfig attributes&quot;);</div><div class="line">            break;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    eglCtx = eglCreateContext(eglDisp, eglConf, EGL_NO_CONTEXT, ctxAttr);</div><div class="line">    if(eglCtx == EGL_NO_CONTEXT)</div><div class="line">    &#123;</div><div class="line">        EGLint error = eglGetError();</div><div class="line">        if(error == EGL_BAD_CONFIG)</div><div class="line">        &#123;</div><div class="line">            // Handle error and recover</div><div class="line">            LOGI(&quot;EGL_BAD_CONFIG&quot;);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    if(!eglMakeCurrent(eglDisp, eglSurface, eglSurface, eglCtx))</div><div class="line">    &#123;</div><div class="line">        LOGI(&quot;MakeCurrent failed&quot;);</div><div class="line">    &#125;</div><div class="line">    LOGI(&quot;initialize success!&quot;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>代码比较长，不过大部分都是检测当前函数调用是否出错的，核心的函数只有6个，只要它们的调用没有问题即可：</p>
+<p>eglGetDisplay(EGL_DEFAULT_DISPLAY)</p>
+<p>eglInitialize(eglDisp, &amp;eglMajVers, &amp;eglMinVers)</p>
+<p>eglChooseConfig(eglDisp, confAttr, &amp;eglConf, 1, &amp;numConfigs)</p>
+<p>eglCreatePbufferSurface(eglDisp, eglConf, surfaceAttr)</p>
+<p>eglCreateContext(eglDisp, eglConf, EGL_NO_CONTEXT, ctxAttr)</p>
+<p>eglMakeCurrent(eglDisp, eglSurface, eglSurface, eglCtx)</p>
+<h3 id="OpenGL-ES初始化"><a href="#OpenGL-ES初始化" class="headerlink" title="OpenGL ES初始化"></a>OpenGL ES初始化</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">JNIEXPORT void JNICALL Java_com_handspeaker_offscreentest_MyGles_draw</div><div class="line">(JNIEnv*env,jobject obj)</div><div class="line">&#123;</div><div class="line">    const char*vertex_shader=vertex_shader_fix;</div><div class="line">    const char*fragment_shader=fragment_shader_simple;</div><div class="line">    glPixelStorei(GL_UNPACK_ALIGNMENT,1);</div><div class="line">    glClearColor(0.0,0.0,0.0,0.0);</div><div class="line">    glEnable(GL_DEPTH_TEST);</div><div class="line">    glDepthFunc(GL_LESS);</div><div class="line">    glCullFace(GL_BACK);</div><div class="line">    glViewport(0,0,512,512);</div><div class="line">    GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);</div><div class="line">    glShaderSource(vertexShader,1,&amp;vertex_shader,NULL);</div><div class="line">    glCompileShader(vertexShader);</div><div class="line">    GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);</div><div class="line">    glShaderSource(fragmentShader,1,&amp;fragment_shader,NULL);</div><div class="line">    glCompileShader(fragmentShader);</div><div class="line">    GLuint program = glCreateProgram();</div><div class="line">    glAttachShader(program, vertexShader);</div><div class="line">    glAttachShader(program, fragmentShader);</div><div class="line">    glLinkProgram(program);</div><div class="line">    glUseProgram(program);</div><div class="line">    GLuint aPositionLocation =glGetAttribLocation(program, &quot;a_Position&quot;);</div><div class="line">    glVertexAttribPointer(aPositionLocation,2,GL_FLOAT,GL_FALSE,0,tableVerticesWithTriangles);</div><div class="line">    glEnableVertexAttribArray(aPositionLocation);</div><div class="line">    //draw something</div><div class="line">    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);</div><div class="line">    glDrawArrays(GL_TRIANGLES,0,6);</div><div class="line">    eglSwapBuffers(eglDisp,eglSurface);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="EGL资源释放"><a href="#EGL资源释放" class="headerlink" title="EGL资源释放"></a>EGL资源释放</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">JNIEXPORT void JNICALL Java_com_handspeaker_offscreentest_MyGles_release</div><div class="line">(JNIEnv*env,jobject obj)</div><div class="line">&#123;</div><div class="line">    eglMakeCurrent(eglDisp, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);</div><div class="line">    eglDestroyContext(eglDisp, eglCtx);</div><div class="line">    eglDestroySurface(eglDisp, eglSurface);</div><div class="line">    eglTerminate(eglDisp);</div><div class="line"></div><div class="line">    eglDisp = EGL_NO_DISPLAY;</div><div class="line">    eglSurface = EGL_NO_SURFACE;</div><div class="line">    eglCtx = EGL_NO_CONTEXT;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="OpenGL-ES在Android中的应用"><a href="#OpenGL-ES在Android中的应用" class="headerlink" title="OpenGL ES在Android中的应用"></a>OpenGL ES在Android中的应用</h2><p>为了让你的控件能够显示在界面上，你必须创建一个view作为容器。而要想创建View容器，最直接的方式莫过于从GLSurfaceView和GLSurfaceView.Renderer分别派生一个类，实际的绘图动作都是在GLSurfaceView.Renderer里面发生的。对于一个全屏或近全屏的graphicsview，它是最好的选择。如果只是在某个小部分显示OpenGLES图形则可以考虑TextureView。当然你也可以直接继承自OpenGLES view创建一个View，不过一般都不会这么做。</p>
+<h3 id="OpenGL-ES-的Android实例"><a href="#OpenGL-ES-的Android实例" class="headerlink" title="OpenGL ES 的Android实例"></a>OpenGL ES 的Android实例</h3><h4 id="1，在Manifest中声明使用OpenGLES"><a href="#1，在Manifest中声明使用OpenGLES" class="headerlink" title="1，在Manifest中声明使用OpenGLES"></a>1，在Manifest中声明使用OpenGLES</h4><p>为了能使用OpenGLES 2.0 API，你必须在你的manifest中添加以下声明：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;uses-feature android:glEsVersion=&quot;0x00020000&quot; android:required=&quot;true&quot; /&gt;</div></pre></td></tr></table></figure>
+<p>如果你的应用要使用纹理压缩功能，还必须声明设备需要支持什么样的压缩格式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;supports-gl-texture android:name=&quot;GL_OES_compressed_ETC1_RGB8_texture&quot; /&gt;</div><div class="line">&lt;supports-gl-texture android:name=&quot;GL_OES_compressed_paletted_texture&quot; /&gt;</div></pre></td></tr></table></figure>
+<h4 id="2-创建一个Activity"><a href="#2-创建一个Activity" class="headerlink" title="2,创建一个Activity"></a>2,创建一个Activity</h4><p>这个Activity和普通的activity一样，不过其使用的布局layout需要使用GLSurfaceView包裹。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;GLSurfaceView xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;</div><div class="line">     ....</div><div class="line">&lt;/GLSurfaceView&gt;</div></pre></td></tr></table></figure>
+<p>注:OpenGL ES 2.0需要Android2.2 (API Level 8) 及以上版本。</p>
+<h4 id="3，构键GLSurfaceView对象"><a href="#3，构键GLSurfaceView对象" class="headerlink" title="3，构键GLSurfaceView对象"></a>3，构键GLSurfaceView对象</h4><p>GLSurfaceView中其实不需要做太多工作，实际的绘制任务都在GLSurfaceView.Renderer中了。这里我们可以直接使用GLSurfaceView。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">class MyGLSurfaceView extends GLSurfaceView &#123;</div><div class="line"></div><div class="line">    public MyGLSurfaceView(Context context)&#123;</div><div class="line">        super(context);</div><div class="line">        //设置Renderer到GLSurfaceView</div><div class="line">        setRenderer(new MyRenderer());</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>当使用OpenGLES 2.0时，你必须在GLSurfaceView构造器中调用另外一个函数，它说明了你将要使用2.0版的API：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">setEGLContextClientVersion(2);</div></pre></td></tr></table></figure>
+<p>另一个可以添加的你的GLSurfaceView实现的可选的操作是设置render模式为只在绘制数据发生改变时才绘制view。使用GLSurfaceView.RENDERMODE_WHEN_DIRTY：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);</div></pre></td></tr></table></figure>
+<p>####4， 构建一个Renderer类<br>Renderer类主要负责GLSurfaceView的绘制工作，它主要有三个方法：</p>
+<ul>
+<li>onSurfaceCreated()- 仅调用一次，用于设置view的OpenGLES环境。</li>
+<li>onDrawFrame()- 每次View被重绘时被调用。</li>
+<li>onSurfaceChanged()- 如果view的几和形状发生变化了就调用，例如当竖屏变为横屏时。</li>
+</ul>
+<p>如我们要在GLSurfaceView上画了一个灰色的背景。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">public class MyGL20Renderer implements GLSurfaceView.Renderer &#123;</div><div class="line"></div><div class="line">    public void onSurfaceCreated(GL10 unused, EGLConfig config) &#123;</div><div class="line">        //设置背景的颜色</div><div class="line">        GLES20.glClearColor(0.5f, 0.5f, 0.5f, 1.0f);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void onDrawFrame(GL10 unused) &#123;</div><div class="line">        // 重绘背景色</div><div class="line">        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void onSurfaceChanged(GL10 unused, int width, int height) &#123;</div><div class="line">        GLES20.glViewport(0, 0, width, height);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="OpenGL-ES渲染原理"><a href="#OpenGL-ES渲染原理" class="headerlink" title="OpenGL ES渲染原理"></a>OpenGL ES渲染原理</h1><p>首先来看一个OpenGL ES2.0的渲染原理图。</p>
+<p><img src="http://img.blog.csdn.net/20170317205203849?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h2 id="1-VBO-VAO"><a href="#1-VBO-VAO" class="headerlink" title="1 VBO/VAO"></a>1 VBO/VAO</h2><p>VBO/VAO是cpu提供给GPU的顶点信息，包括了顶点的位置、颜色、纹理坐标（用于纹理贴图）等顶点信息。<br>VBO，全名Vertex Buffer Object。它是GPU里面的一块缓冲区，当我们需要传递数据的时候，可以先向GPU申请一块内存，然后往里面填充数据。最后，再通过调用glVertexAttribPointer把数据传递给Vertex Shader。<br>VAO，全名为Vertex Array Object，它的作用主要是记录当前有哪些VBO，每个VBO里面绑定的是什么数据，还有每一个vertex attribute绑定的是哪一个VBO。</p>
+<h2 id="2-VertexShader（顶点着色器）"><a href="#2-VertexShader（顶点着色器）" class="headerlink" title="2 VertexShader（顶点着色器）"></a>2 VertexShader（顶点着色器）</h2><p>顶点着色器的输入数据由下面组成：</p>
+<ul>
+<li>Attributes：使用顶点数组封装每个顶点的数据，一般用于每个顶点都各不相同的变量，如顶点位置、颜色等</li>
+<li>Uniforms：顶点着色器使用的常量数据，不能被着色器修改，一般用于对同一组顶点组成的单个3D物体中所有顶点都相同的变量，如当前光源的位置。</li>
+<li>Samplers：这个是可选的，一种特殊的uniforms，表示顶点着色器使用的纹理。</li>
+<li>Shader program：顶点着色器的源码或可执行文件，描述了将对顶点执行的操作。</li>
+</ul>
+<p>顶点着色器的输出：</p>
+<ul>
+<li>varying：在图元光栅化阶段，这些varying值为每个生成的片元进行计算，并将结果作为片元着色器的输入数据。从分配给每个顶点的原始varying值来为每个片元生成一个varying值的机制叫做插值。</li>
+<li>另外，还有gl_postion、gl_FrontFacing和gl_PointSize。</li>
+</ul>
+<p>顶点着色器可用于传统的基于顶点的操作，例如：基于矩阵变换位置，进行光照计算来生成每个顶点的颜色，生成或者变换纹理坐标。<br>另外因为顶点着色器是由应用程序指定的，所以你可以用来进行任意自定义的顶点变换。</p>
+<h2 id="3-PrimitiveAssembly（图元装配）："><a href="#3-PrimitiveAssembly（图元装配）：" class="headerlink" title="3 PrimitiveAssembly（图元装配）："></a>3 PrimitiveAssembly（图元装配）：</h2><p>顶点着色器下一个阶段是图元装配，这个阶段，把顶点着色器输出的顶点组合成图元。图元（primitive）是一个能用opengl es绘图命令绘制的几何体，包括三角形、直线或者点精灵等几何对象，绘图命令指定了一组顶点属性，描述了图元的几何形状和图元类型。在图元装配阶段，这些着色器处理过的顶点被组装到一个个独立的几何图元中，例如三角形、线、点精灵。对于每个图元，必须确定它是否位于视椎体内(3维空间显示在屏幕上的可见区域)，如果图元部分在视椎体中，需要进行裁剪，如果图元全部在视椎体外，则直接丢弃图元。裁剪之后，顶点位置转换成了屏幕坐标。背面剔除操作也会执行，它根据图元是正面还是背面，如果是背面则丢弃该图元。经过裁剪和背面剔除操作后，就进入渲染流水线的下一个阶段：光栅化。</p>
+<h2 id="4-rasterization（光栅化）"><a href="#4-rasterization（光栅化）" class="headerlink" title="4 rasterization（光栅化）"></a>4 rasterization（光栅化）</h2><p><img src="http://img.blog.csdn.net/20170317211006433?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>光栅化是将图元转化为一组二维片段的过程，然后，这些片段由片段着色器处理（片段着色器的输入）。这些二维片段代表着可在屏幕上绘制的像素。用于从分配给每个图元顶点的顶点着色器输出生成每个片段值的机制称作插值（Interpolation）。这句不是人话的话解释了一个问题，就是从cpu提供的分散的顶点信息是如何变成屏幕上密集的像素的，图元装配后顶点可以理解成变为图形，光栅化时可以根据图形的形状，插值出那个图形区域的像素（纹理坐标v_texCoord、颜色等信息）。注意，此时的像素并不是屏幕上的像素，是不带有颜色的。接下来的片段着色器完成上色的工作。总之，光栅化阶段把图元转换成片元集合，之后会提交给片元着色器处理，这些片元集合表示可以被绘制到屏幕的像素。</p>
+<h2 id="5-FragmentShader（片段着色器）"><a href="#5-FragmentShader（片段着色器）" class="headerlink" title="5 FragmentShader（片段着色器）"></a>5 FragmentShader（片段着色器）</h2><p><img src="http://img.blog.csdn.net/20170317211119324?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>片段着色器为片段（像素）上的操作实现了通用的可编程方法，光栅化输出的每个片段都执行一遍片段着色器，对光栅化阶段生成每个片段执行这个着色器，生成一个或多个（多重渲染）颜色值作为输出。<br>片元着色器对片元实现了一种通用的可编程方法，它对光栅化阶段产生的每个片元进行操作，需要的输入数据如下：</p>
+<ul>
+<li>Varying variables：顶点着色器输出的varying变量经过光栅化插值计算后产生的作用于每个片元的值。</li>
+<li>Uniforms：片元着色器使用的常量数据</li>
+<li>Samplers：一种特殊的uniforms，表示片元着色器使用的纹理。</li>
+<li>Shader program：片元着色器的源码或可执行文件，描述了将对片元执行的操作。</li>
+</ul>
+<p>片元着色器也可以丢弃片元或者为片元生成一个颜色值，保存到内置变量gl_FragColor。光栅化阶段产生的颜色、深度、模板和屏幕坐标(Xw, Yw)成为流水线中pre-fragment阶段(FragmentShader之后)的输入。</p>
+<p>##６Per-Fragment Operations(逐个片元操作阶段)</p>
+<p><img src="http://img.blog.csdn.net/20170317211329575?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>片元着色器之后就是逐个片元操作阶段，包括一系列的测试阶段。一个光栅化阶段产生的具有屏幕坐标(Xw, Yw)的片元，只能修改framebuffer(帧缓冲)中位置在(Xw, Yw)的像素。</p>
+<p>上图显示了Opengl es 2.0逐片元操作过程：</p>
+<ul>
+<li>Pixel ownership test：像素所有权测试决定framebuffer中某一个(Xw,Yw)位置的像素是否属于当前Opengl ES的context，比如：如果一个Opengl  ES帧缓冲窗口被其他窗口遮住了，窗口系统将决定被遮住的像素不属于当前Opengl ES的context，因此也就不会被显示。</li>
+<li>Scissor test：裁剪测试决定位置为(Xw, Yw)的片元是否位于裁剪矩形内，如果不在，则被丢弃。</li>
+<li>Stencil and depth tests：模板和深度测试传入片元的模板和深度值，决定是否丢弃片元。</li>
+<li>Blending：将新产生的片元颜色值和framebuffer中某个(Xw, Yw)位置存储的颜色值进行混合。</li>
+<li>Dithering：抖动可以用来最大限度的减少使用有限精度存储颜色值到framebuffer的工件。</li>
+<li>逐片元操作之后，片元要么被丢弃，要么一个片元的颜色，深度或者模板值被写入到framebuffer的(Xw,Yw)位置，不过是否真的会写入还得依赖于write masks启用与否。write masks能更好的控制颜色、深度和模板值写入到合适的缓冲区。例如：颜色缓冲区中的write mask可以被设置成没有红色值写入到颜色缓冲区。另外，Opengl ES 2.0提framebuffer中获取像素的接口，不过需要记住的是像素只能从颜色缓冲区读回，深度和模板值不能读回。</li>
+</ul>
+<p>参考：<br>OpenGL渲染流程 <a href="http://www.cnblogs.com/BigFeng/p/5068715.html" target="_blank" rel="external">http://www.cnblogs.com/BigFeng/p/5068715.html</a><br>OpenGL ES 2.0渲染管线 <a href="http://codingnow.cn/opengles/1504.html" target="_blank" rel="external">http://codingnow.cn/opengles/1504.html</a><br>OpenGL ES 2.0可编程管道 <a href="http://www.cnblogs.com/listenheart/p/3292672.html" target="_blank" rel="external">http://www.cnblogs.com/listenheart/p/3292672.html</a><br>OpenGL ES 2.0编程基础 <a href="http://blog.csdn.net/iispring/article/details/7649628" target="_blank" rel="external">http://blog.csdn.net/iispring/article/details/7649628</a><br>OpenGL-渲染管线的流程 <a href="http://www.cnblogs.com/zhanglitong/p/3238989.html" target="_blank" rel="external">http://www.cnblogs.com/zhanglitong/p/3238989.html</a></p>
+      
+    </div>
+    
+  </div>
+  
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/03/05/OpenGL ES简介/">OpenGL ES简介</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">向志洪</a></p>
+        <p><span>发布时间:</span>2017-03-05, 00:00:00</p>
+        <p><span>最后更新:</span>2017-03-23, 15:07:26</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/03/05/OpenGL ES简介/" title="OpenGL ES简介">http://code.youmeek.com/2017/03/05/OpenGL ES简介/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://code.youmeek.com/2017/03/05/OpenGL ES简介/　　作者: 向志洪" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target="_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2017/02/28/前端知识库/">
+                    前端知识库
+                </a>
+            </div>
+        
+    </nav>
+  
+</article>
+<div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#概述"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#渲染的基础知识"><span class="toc-number">1.1.</span> <span class="toc-text">渲染的基础知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化"><span class="toc-number">1.1.1.</span> <span class="toc-text">初始化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OpenGL-ES初始化"><span class="toc-number">1.1.2.</span> <span class="toc-text">OpenGL ES初始化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#EGL资源释放"><span class="toc-number">1.1.3.</span> <span class="toc-text">EGL资源释放</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OpenGL-ES在Android中的应用"><span class="toc-number">1.2.</span> <span class="toc-text">OpenGL ES在Android中的应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#OpenGL-ES-的Android实例"><span class="toc-number">1.2.1.</span> <span class="toc-text">OpenGL ES 的Android实例</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1，在Manifest中声明使用OpenGLES"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">1，在Manifest中声明使用OpenGLES</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-创建一个Activity"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">2,创建一个Activity</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3，构键GLSurfaceView对象"><span class="toc-number">1.2.1.3.</span> <span class="toc-text">3，构键GLSurfaceView对象</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#OpenGL-ES渲染原理"><span class="toc-number">2.</span> <span class="toc-text">OpenGL ES渲染原理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-VBO-VAO"><span class="toc-number">2.1.</span> <span class="toc-text">1 VBO/VAO</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-VertexShader（顶点着色器）"><span class="toc-number">2.2.</span> <span class="toc-text">2 VertexShader（顶点着色器）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-PrimitiveAssembly（图元装配）："><span class="toc-number">2.3.</span> <span class="toc-text">3 PrimitiveAssembly（图元装配）：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-rasterization（光栅化）"><span class="toc-number">2.4.</span> <span class="toc-text">4 rasterization（光栅化）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-FragmentShader（片段着色器）"><span class="toc-number">2.5.</span> <span class="toc-text">5 FragmentShader（片段着色器）</span></a></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录" title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+    <div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"OpenGL ES简介　| 向志洪　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+    
+        <section class="youyan" id="comments">
+    <script>
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = 'http://v2.uyan.cc/code/uyan.js?uid=2120654';
+            (d.head || d.body).appendChild(s);
+        }
+    </script>
+    <script> loadComment(); </script>
+    <div id="uyan_frame"></div>
+</section>
+    
+
+
+<div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2017/02/28/前端知识库/" title="下一篇: 前端知识库">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/03/05/OpenGL ES简介/">OpenGL ES简介</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/28/前端知识库/">前端知识库</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/10/微信小程序尝鲜一个月现状分析/">微信小程序尝鲜一个月现状分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/05/gulp+webpack工具整合简介/">gulp+webpack工具整合简介</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/05/swift/">Swift基础语法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/05/Node.js基本工作原理/">node.js基本工作原理及流程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/05/React Native的Navigator详解/">React Native的Navigator详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/05/Angular2入坑指南/">Angular2入坑指南</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/03/Iterate/">迭代子模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/01/robot/">机器学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/05/webpack+react环境搭建/">webpack+react环境搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/05/visitor/">Node入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/05/ios高仿斗鱼app/">高仿ios斗鱼界面</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/05/Android ExpandableListView详解/">ExpandableListView实现商品列表折叠</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/05/iOS使用自签名证书实现HTTPS请求/">iOS使用自签名证书实现HTTPS请求</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/28/React 页面渲染原理/">深入理解React Native页面构建渲染原理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/13/深入理解Android渲染机制/">深入理解Android渲染机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/08/高仿网易云音乐/">Android仿网易云音乐播放界面</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/搭建网站/">搭建网站</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/node.js基本工作原理及流程/">Node.js原理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/微信小程序/">刷博客等流量</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/Spring Boot搭建Web应用/">Spring Boot入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/刷流量的几种方法/">刷博客等流量</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/React Native在Android平台运行gif的解决方法/">React Native在Android平台运行gif的解决方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/Android WindowManager详解/">Android WindowManager详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/05/Android线程池/">Android WindowManager详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/05/Android高仿天猫详情页/">Android仿京东、天猫商品详情页</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/05/Android7.0新特性/">android7.0新特性</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/iOS 滚动视图的复用问题解决方案/">iOS 滚动视图的复用问题解决方案</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/Android硬件加速介绍与实现/">Android硬件加速介绍与实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/Xcode 8新功能介绍/">Xcode 8新功能介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/05/Google VR技术大揭秘/">Google VR技术大揭秘</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/10/mac 搭建Android开发环境/">mac 搭建Android开发环境</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/05/ios gif图片加载框架介绍/">FLAnimatedImage -ios gif图片加载框架介绍</a></li></ul>
+
+
+    <script>
+        
+    </script></div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2017 向志洪
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style="display:none">
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style="display:none">
+                        <span id="page-visit" title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    <script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+<script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide()" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
