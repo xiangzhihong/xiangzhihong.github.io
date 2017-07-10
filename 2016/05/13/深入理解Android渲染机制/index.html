@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8">
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya">
+    
+    <title>深入理解Android渲染机制 | 向志洪</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
+    <meta name="keywords" content="前端, Web, 移动, 向志洪">
+    <meta name="description" content="">
+
+    
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <!--[if lt IE 9]>
+    <script src="/js/html5.js"></script>
+    <![endif]-->
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?fd459238242776d173cdc64918fb32f2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+    
+    <script>var yunModuleEnv = true;</script>
+    <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+    
+</head></html>
+<body class="home">
+    <!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="/">
+                <div class="cover">
+                    <span class="name">向志洪</span>
+                    <span class="description">个人技术博客</span>
+                </div>
+            </a>
+        </div>
+        <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
+        <ul class="menu hidden" id="JELON__menu">
+            
+            <li rel="/2016/05/13/深入理解Android渲染机制/index.html" class="item">
+                <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
+            </li>
+            
+            <li rel="/2016/05/13/深入理解Android渲染机制/index.html" class="item">
+                <a href="/archives/" title="文章列表" class="icon-lab">&nbsp;文章列表</a>
+            </li>
+            
+            <li rel="/2016/05/13/深入理解Android渲染机制/index.html" class="item">
+                <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
+            </li>
+            
+            <li rel="/2016/05/13/深入理解Android渲染机制/index.html" class="item">
+                <a href="/404/" title="留言" class="icon-comment">&nbsp;留言</a>
+            </li>
+            
+        </ul>
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        <a href="https://github.com/xiangzhihong" target="_blank">Github</a>
+                        |
+                    
+                        <a href="http://tongji.baidu.com/web/welcome/login" target="_blank">站长统计</a>
+                        |
+                    
+                        <a href="http://weibo.com/code_xzh" target="_blank">新浪微博</a>
+                        |
+                    
+                </p>
+                <p class="sns">
+                    
+                    <a href="javascript: void(0);" class="wechat">
+                        <b>■</b>
+                        公众号
+                        <span class="popover">
+                            <img src="/img/wechat_mp.jpg" width="120" height="120" alt="我的微信订阅号">
+                            <i class="arrow"></i>
+                        </span>
+                    </a>
+                </p>
+                
+            </div>
+            <div class="avatar fr">
+                <img src="http://ohe65w0xx.bkt.clouddn.com/avert.png" alt="avatar" title="Jelon">
+            </div>
+        </div>
+    </section>
+</header>
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+        <section class="content">
+            <div class="content-main widget">
+                <!-- 文章页 -->
+<!-- 文章 -->
+<article class="post article">
+    <header class="text-center">
+        <h3 class="post-title"><span>深入理解Android渲染机制</span></h3>
+    </header>
+    <p class="post-meta text-center">
+        xiangzhihong 发表于
+        <time datetime="2016-05-12T16:00:00.000Z">2016-05-13</time>
+    </p>
+    <div class="post-content">
+        <h1 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h1><p><strong>CPU</strong>: 中央处理器,它集成了运算,缓冲,控制等单元,包括绘图功能.CPU将对象处理为多维图形,纹理(Bitmaps、Drawables等都是一起打包到统一的纹理)。</p>
+<p><strong>GPU</strong>:一个类似于CPU的专门用来处理Graphics的处理器, 作用用来帮助加快格栅化操作,当然,也有相应的缓存数据(例如缓存已经光栅化过的bitmap等)机制。</p>
+<p><strong>OpenGL ES</strong>：是手持嵌入式设备的3DAPI,跨平台的、功能完善的2D和3D图形应用程序接口API,有一套固定渲染管线流程. <a href="http://blog.csdn.net/xiangzhihong8/article/details/62893357" target="_blank" rel="external">OpenGL ES详解</a></p>
+<p><strong>DisplayList</strong> 在Android把XML布局文件转换成GPU能够识别并绘制的对象。这个操作是在DisplayList的帮助下完成的。DisplayList持有所有将要交给GPU绘制到屏幕上的数据信息。</p>
+<p><strong>格栅化</strong> 是 将图片等矢量资源,转化为一格格像素点的像素图,显示到屏幕上。</p>
+<p><strong>垂直同步VSYNC</strong>:让显卡的运算和显示器刷新率一致以稳定输出的画面质量。它告知GPU在载入新帧之前，要等待屏幕绘制完成前一帧。下面的三张图分别是GPU和硬件同步所发生的情况,Refresh Rate:屏幕一秒内刷新屏幕的次数,由硬件决定,例如60Hz.而Frame Rate:GPU一秒绘制操作的帧数,单位是30fps,正常情况过程图如下：<br><img src="http://img.blog.csdn.net/20170318125548061?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h1 id="渲染机制分析"><a href="#渲染机制分析" class="headerlink" title="渲染机制分析"></a>渲染机制分析</h1><h2 id="渲染流程简介"><a href="#渲染流程简介" class="headerlink" title="渲染流程简介"></a>渲染流程简介</h2><p>Android整体的绘制流程如下：<br>UI对象—-&gt;CPU处理为多维图形,纹理 —–通过OpeGL ES接口调用GPU—-&gt; GPU对图进行光栅化(Frame Rate ) —-&gt;硬件时钟(Refresh Rate)—-垂直同步—-&gt;投射到屏幕</p>
+<p><img src="http://img.blog.csdn.net/20170318131012037?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>Android系统每隔16ms发出VSYNC信号(1000ms/60=16.66ms)，触发对UI进行渲染， 如果每次渲染都成功，这样就能够达到流畅的画面所需要的60fps，为了能够实现60fps，这意味着计算渲染的大多数操作都必须在16ms内完成。</p>
+<h3 id="渲染时间线"><a href="#渲染时间线" class="headerlink" title="渲染时间线"></a>渲染时间线</h3><p><img src="http://img.blog.csdn.net/20170318131416790?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p><img src="http://img.blog.csdn.net/20170318131615259?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>正常情况下Android的GPU会在16ms完成页面的绘制，如果一帧画面渲染时间超过16ms的时候,垂直同步机制会让显示器硬件 等待GPU完成栅格化渲染操作,然后再次绘制界面，这样就会看起来画面停顿。</p>
+<p>当GPU渲染速度过慢,就会导致如下情况,某些帧显示的画面内容就会与上一帧的画面相同。</p>
+<p><img src="http://img.blog.csdn.net/20170318132055924?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h2 id="渲染常见问题"><a href="#渲染常见问题" class="headerlink" title="渲染常见问题"></a>渲染常见问题</h2><h3 id="GPU过度绘制"><a href="#GPU过度绘制" class="headerlink" title="GPU过度绘制"></a>GPU过度绘制</h3><p>OverDraw是开发中常见的优化点，是指一个界面出现层层绘制的情况，如：<br><img src="http://img.blog.csdn.net/20170318132444577?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>我们可以使用一些第三方工具来查看是否过渡绘制。如小米魅族。</p>
+<p><img src="http://img.blog.csdn.net/20170318134753149?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>任何时候View中的绘制内容发生变化时，都会重新执行创建DisplayList，渲染DisplayList，更新到屏幕上等一 系列操作。这个流程的表现性能取决于你的View的复杂程度，View的状态变化以及渲染管道的执行性能。</p>
+<p>当View的大小发生改变,DisplayList就会重新创建,然后再渲染,而当View发生位移,则DisplayList不会重新创建,而是执行重新渲染的操作。<br>所以当界面过于复杂的时候，DisplayList绘制界面就会出现延迟而造成卡顿。</p>
+<p>我们可以使用渲染工具检测，工具中,不同手机呈现方式可能会有差别.分别关于StatusBar，NavBar，激活的程序Activity区域的GPU Rending信息。激活的程序Activity区域的GPU Rending信息。</p>
+<p>我们打开手机的GPU Rending呈现的信息，我们以魅族为例：<br><img src="http://img.blog.csdn.net/20170320153809760?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p><img src="http://img.blog.csdn.net/20170318145401448?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>说明：每一条柱状线都包含三部分，<br>蓝色代表测量绘制Display List的时间，<br>红色代表OpenGL渲染Display List所需要的时间，<br>黄色代表CPU等待GPU处理的时间。</p>
+<h1 id="Android渲染优化"><a href="#Android渲染优化" class="headerlink" title="Android渲染优化"></a>Android渲染优化</h1><p>读懂Android的渲染机制对于优化，特别是在写布局的时候是很有帮助的。减少布局层级，减少GPU的渲染这对我们提供app的质量是很有帮助的。</p>
+<h4 id="去掉不必要的界面："><a href="#去掉不必要的界面：" class="headerlink" title="去掉不必要的界面："></a>去掉不必要的界面：</h4><p><img src="http://img.blog.csdn.net/20170318150217499?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h4 id="布局层级优化"><a href="#布局层级优化" class="headerlink" title="布局层级优化"></a>布局层级优化</h4><p>使用Hierarchy Viewer工具可以查看界面的层级，关于这块的介绍请查看我之前的博客：<a href="http://blog.csdn.net/xiangzhihong8/article/details/52411976" target="_blank" rel="external">Android布局优化</a></p>
+<p><img src="http://img.blog.csdn.net/20170318151736976?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>当然Android在某些系统版本也增加了检测overdraw的工具。如Android 在4。2版本中增加了Debug GPU Overdraw选项，如果你用的是Jelly Bean 4.3 或者 KitKat 设备，在屏幕的左下角会有一个计数展示屏幕overdraw的程度。</p>
+<p>另一种查看overdraw的方式是在Debug GPU overdraw菜单里选择“Show Overdraw areas”选项。选择之后，会在app的不同区域覆盖不同的颜色来表示overdraw的次数。比较屏幕上这些不同的颜色，可以快速方便的定位overdraw问题。</p>
+<h4 id="图片格式选择"><a href="#图片格式选择" class="headerlink" title="图片格式选择"></a>图片格式选择</h4><p>Android的界面能用png最好是用png了，因为32位的png颜色过渡平滑且支持透明。jpg是像素化压缩过的图片，质量已经下降了，再拿来做9path的按钮和平铺拉伸的控件必然惨不忍睹，要尽量避免。有条件的可以选择webpp，这种格式的图片占据的大小比较小，并且能满足手机显示的需要。</p>
+<h4 id="当背景无法避免-尽量用Color-TRANSPARENT"><a href="#当背景无法避免-尽量用Color-TRANSPARENT" class="headerlink" title="当背景无法避免,尽量用Color.TRANSPARENT"></a>当背景无法避免,尽量用Color.TRANSPARENT</h4><p>因为透明色Color.TRANSPARENT是不会被渲染的,他是透明的。<br>所以我们在设置界面的时候需要做一个判断：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Bean bean=list.get(i);</div><div class="line"> if (bean.img == 0) &#123;</div><div class="line">            Picasso.with(getContext()).load(android.R.color.transparent).into(holder.imageView);</div><div class="line">            holder.imageView.setBackgroundColor(bean.backPic);</div><div class="line">        &#125; else &#123;</div><div class="line">            Picasso.with(getContext()).load(bean.img).into(holder.imageView);</div><div class="line">            holder.imageView.setBackgroundColor(Color.TRANSPARENT);</div><div class="line">        &#125;</div></pre></td></tr></table></figure>
+    </div>
+    <p class="post-meta">
+        <span class="post-cat">分类：
+            <a class="cat-link" href="/categories/android/">android</a>
+        </span>
+        <span class="post-tags">
+            标签：
+            <a href="/tags/android/" title="android">android</a> / 
+    
+        <a href="/tags/深入理解/" title="深入理解">深入理解</a>
+        </span>
+    </p>
+</article>
+<div class="article-share clearfix text-center">
+    <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+</div>
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br>
+        <a href="/2016/05/14/深入理解Java之JVM堆内存分配/">
+            
+                深入理解Java之JVM堆内存分配
+            
+        </a>
+    </span>
+    
+
+    
+    <span class="next fr">
+        下一篇<br>
+        <a href="/2016/05/11/前端知识库/">
+            
+                前端知识库
+            
+        </a>
+    </span>
+    
+</div>
+<!-- 文章评论 -->
+<div id="comments" class="comments cloud-tie-wrapper"></div>
+    <script>
+    var cloudTieConfig = {
+      url: document.location.href, 
+      sourceId: "深入理解Android渲染机制",
+      productKey: "c06bb9930e6f4b38a9997cb9bd17aba5",
+      target: "comments"
+    };
+    var yunManualLoad = true;
+    Tie.loader("aHR0cHM6Ly9hcGkuZ2VudGllLjE2My5jb20vcGMvbGl2ZXNjcmlwdC5odG1s", true);
+    </script>
+            </div>
+
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章分类</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+    <li>
+        <a href="/categories/Android/">Android</a>
+        <span class="badge">(10)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Android/系统/">系统</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Angular2/">Angular2</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/React-Native/">React Native</a>
+        <span class="badge">(9)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Java/">Java</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/前端/">前端</a>
+        <span class="badge">(6)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/VR/">VR</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Angular2/前端/">前端</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Spring/">Spring</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/ios/">ios</a>
+        <span class="badge">(7)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Google/">Google</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Google/VR/">VR</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/技术人生/">技术人生</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/小程序/">小程序</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/机器学习/">机器学习</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/android/">android</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/设计模式/">设计模式</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+</ul>
+    </section>
+
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="/tags/Android/" title="Android">Android (7)</a>
+  
+    <a class="tag-item" href="/tags/新特性/" title="新特性">新特性 (2)</a>
+  
+    <a class="tag-item" href="/tags/高仿/" title="高仿">高仿 (4)</a>
+  
+    <a class="tag-item" href="/tags/深入系统/" title="深入系统">深入系统 (1)</a>
+  
+    <a class="tag-item" href="/tags/系统服务/" title="系统服务">系统服务 (1)</a>
+  
+    <a class="tag-item" href="/tags/android/" title="android">android (4)</a>
+  
+    <a class="tag-item" href="/tags/混淆打包/" title="混淆打包">混淆打包 (1)</a>
+  
+    <a class="tag-item" href="/tags/Angular2/" title="Angular2">Angular2 (1)</a>
+  
+    <a class="tag-item" href="/tags/前端开发/" title="前端开发">前端开发 (3)</a>
+  
+    <a class="tag-item" href="/tags/硬件/" title="硬件">硬件 (1)</a>
+  
+    <a class="tag-item" href="/tags/React-Native/" title="React Native">React Native (7)</a>
+  
+    <a class="tag-item" href="/tags/FlexBox布局/" title="FlexBox布局">FlexBox布局 (1)</a>
+  
+    <a class="tag-item" href="/tags/Java/" title="Java">Java (2)</a>
+  
+    <a class="tag-item" href="/tags/垃圾回收/" title="垃圾回收">垃圾回收 (1)</a>
+  
+    <a class="tag-item" href="/tags/Node/" title="Node">Node (2)</a>
+  
+    <a class="tag-item" href="/tags/Google/" title="Google">Google (2)</a>
+  
+    <a class="tag-item" href="/tags/VR/" title="VR">VR (2)</a>
+  
+    <a class="tag-item" href="/tags/OpenGL/" title="OpenGL">OpenGL (1)</a>
+  
+    <a class="tag-item" href="/tags/Promise/" title="Promise">Promise (1)</a>
+  
+    <a class="tag-item" href="/tags/前端/" title="前端">前端 (4)</a>
+  
+    <a class="tag-item" href="/tags/调试/" title="调试">调试 (1)</a>
+  
+    <a class="tag-item" href="/tags/eact-Native/" title="eact Native">eact Native (1)</a>
+  
+    <a class="tag-item" href="/tags/打包/" title="打包">打包 (1)</a>
+  
+    <a class="tag-item" href="/tags/Spring/" title="Spring">Spring (2)</a>
+  
+    <a class="tag-item" href="/tags/入门/" title="入门">入门 (2)</a>
+  
+    <a class="tag-item" href="/tags/原生/" title="原生">原生 (1)</a>
+  
+    <a class="tag-item" href="/tags/ios/" title="ios">ios (7)</a>
+  
+    <a class="tag-item" href="/tags/swift/" title="swift">swift (1)</a>
+  
+    <a class="tag-item" href="/tags/Swift/" title="Swift">Swift (1)</a>
+  
+    <a class="tag-item" href="/tags/AR/" title="AR">AR (1)</a>
+  
+    <a class="tag-item" href="/tags/webpack/" title="webpack">webpack (1)</a>
+  
+    <a class="tag-item" href="/tags/gulp/" title="gulp">gulp (1)</a>
+  
+    <a class="tag-item" href="/tags/Xcode/" title="Xcode">Xcode (2)</a>
+  
+    <a class="tag-item" href="/tags/https/" title="https">https (1)</a>
+  
+    <a class="tag-item" href="/tags/gif/" title="gif">gif (1)</a>
+  
+    <a class="tag-item" href="/tags/mac/" title="mac">mac (1)</a>
+  
+    <a class="tag-item" href="/tags/环境/" title="环境">环境 (1)</a>
+  
+    <a class="tag-item" href="/tags/知识库/" title="知识库">知识库 (1)</a>
+  
+    <a class="tag-item" href="/tags/原理/" title="原理">原理 (1)</a>
+  
+</div>
+    </section>
+    
+
+    
+    <!-- 我的微博 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>我的微博</strong></h3>
+        <div class="widget-bd" style="position: relative">
+  <div id="myWeiboLoading" class="text-center" style="position:absolute;top:0;left:0;right:0;bottom:0;line-height:50px;font-size:12px;background-color:#fff;z-index:9">微博加载中...</div>
+  <iframe width="100%" height="550" class="share_self" frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&amp;width=0&amp;height=550&amp;fansRow=2&amp;ptype=1&amp;speed=0&amp;skin=4&amp;isTitle=1&amp;noborder=1&amp;isWeibo=1&amp;isFans=1&amp;uid=1831462560&amp;verifier=5192ec39&amp;dpc=1"></iframe>
+  <script>
+  (function () {
+    var oMyWeibo = document.getElementById('myWeibo');
+    var oMyWeiboLoading = document.getElementById('myWeiboLoading');
+    var isIE = /msie/i.test(navigator.userAgent) && !window.opera;
+    var timer = null;
+    if (isIE) {
+      oMyWeibo.onreadystatechange = function(){
+        if(oMyWeibo.readyState === 'loaded' || oMyWeibo.readyState === 'complete'){
+          timer = setTimeout(function () {
+            oMyWeiboLoading.parentNode.removeChild(oMyWeiboLoading);
+            timer = null;
+          }, 300);
+        }
+      };
+    } else {
+      oMyWeibo.onload = function () {
+        timer = setTimeout(function () {
+          oMyWeiboLoading.parentNode.removeChild(oMyWeiboLoading);
+          timer = null;
+        }, 300);
+      };
+    }
+  })();
+  </script>
+</div>
+    </section>
+    
+
+    
+    <!-- 友情链接 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>友情链接</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+        <li>
+            <a href="http://blog.csdn.net/xiangzhihong8/" target="_blank" title="csdn个人博客">csdn博客</a>
+        </li>
+    
+        <li>
+            <a href="https://yq.aliyun.com/u/xiangzhihong" target="_blank" title="阿里云技术博客">阿里云博客</a>
+        </li>
+    
+</ul>
+    </section>
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <footer class="footer">
+    &copy;
+    
+        2016-2017
+    
+
+    <a href="/">Jelon Loves You</a>
+</footer>
+<div class="back-to-top" id="JELON__backToTop" title="返回顶部">返回顶部</div>
+<!-- 添加百度自动推送 -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+    <!--博客js脚本 -->
+    <!-- 这里放网站js脚本 -->
+<script src="/js/main.js"></script>
+</body>

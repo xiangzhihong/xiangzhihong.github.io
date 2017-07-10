@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8">
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya">
+    
+    <title>React Native在Android平台运行gif的解决方法 | 向志洪</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
+    <meta name="keywords" content="前端, Web, 移动, 向志洪">
+    <meta name="description" content="">
+
+    
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <!--[if lt IE 9]>
+    <script src="/js/html5.js"></script>
+    <![endif]-->
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?fd459238242776d173cdc64918fb32f2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+    
+    <script>var yunModuleEnv = true;</script>
+    <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+    
+</head></html>
+<body class="home">
+    <!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="/">
+                <div class="cover">
+                    <span class="name">向志洪</span>
+                    <span class="description">个人技术博客</span>
+                </div>
+            </a>
+        </div>
+        <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
+        <ul class="menu hidden" id="JELON__menu">
+            
+            <li rel="/2016/10/08/React Native在Android平台运行gif的解决方法/index.html" class="item">
+                <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
+            </li>
+            
+            <li rel="/2016/10/08/React Native在Android平台运行gif的解决方法/index.html" class="item">
+                <a href="/archives/" title="文章列表" class="icon-lab">&nbsp;文章列表</a>
+            </li>
+            
+            <li rel="/2016/10/08/React Native在Android平台运行gif的解决方法/index.html" class="item">
+                <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
+            </li>
+            
+            <li rel="/2016/10/08/React Native在Android平台运行gif的解决方法/index.html" class="item">
+                <a href="/404/" title="留言" class="icon-comment">&nbsp;留言</a>
+            </li>
+            
+        </ul>
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        <a href="https://github.com/xiangzhihong" target="_blank">Github</a>
+                        |
+                    
+                        <a href="http://tongji.baidu.com/web/welcome/login" target="_blank">站长统计</a>
+                        |
+                    
+                        <a href="http://weibo.com/code_xzh" target="_blank">新浪微博</a>
+                        |
+                    
+                </p>
+                <p class="sns">
+                    
+                    <a href="javascript: void(0);" class="wechat">
+                        <b>■</b>
+                        公众号
+                        <span class="popover">
+                            <img src="/img/wechat_mp.jpg" width="120" height="120" alt="我的微信订阅号">
+                            <i class="arrow"></i>
+                        </span>
+                    </a>
+                </p>
+                
+            </div>
+            <div class="avatar fr">
+                <img src="http://ohe65w0xx.bkt.clouddn.com/avert.png" alt="avatar" title="Jelon">
+            </div>
+        </div>
+    </section>
+</header>
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+        <section class="content">
+            <div class="content-main widget">
+                <!-- 文章页 -->
+<!-- 文章 -->
+<article class="post article">
+    <header class="text-center">
+        <h3 class="post-title"><span>React Native在Android平台运行gif的解决方法</span></h3>
+    </header>
+    <p class="post-meta text-center">
+        xiangzhihong 发表于
+        <time datetime="2016-10-07T16:00:00.000Z">2016-10-08</time>
+    </p>
+    <div class="post-content">
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>目前RN在Android平台上不支持gif格式的图片，而在ios平台是支持的，期待以后的版本中系统也是可以默认支持Android的。首先说下在ios平台怎么加载gif呢？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;Image source= &#123;require(&apos;./img/loading.gif&apos;)&#125; style = &#123;styles.loading&#125;/&gt;</div></pre></td></tr></table></figure>
+<p>完整实例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">xport default class Loading extends React.Component &#123;  </div><div class="line">    render()&#123;  </div><div class="line">  </div><div class="line">        if (!this.props.isShow) &#123;  </div><div class="line">            return &lt;View /&gt;  </div><div class="line">        &#125;  </div><div class="line">  </div><div class="line">        return (  </div><div class="line">            &lt;View style = &#123;styles.container&#125;&gt;  </div><div class="line">                &lt;Image source= &#123;require(&apos;./img/loading.gif&apos;)&#125; style = &#123;styles.loading&#125;/&gt;  </div><div class="line">            &lt;/View&gt;  </div><div class="line">        )  </div><div class="line">    &#125;;  </div><div class="line">&#125;  </div><div class="line">  </div><div class="line">const styles = StyleSheet.create(&#123;  </div><div class="line">  container:&#123;  </div><div class="line">    backgroundColor: &apos;transparent&apos;,  </div><div class="line">    position: &apos;absolute&apos;,  </div><div class="line">    top: 0,  </div><div class="line">    left: 0,  </div><div class="line">    height: Util.screenSizeUtil.height,  </div><div class="line">    width: Util.screenSizeUtil.width,  </div><div class="line">    alignItems: &apos;center&apos;,  </div><div class="line">    justifyContent: &apos;center&apos;,  </div><div class="line">  </div><div class="line">  &#125;,  </div><div class="line">  loading:&#123;  </div><div class="line">    height:30,  </div><div class="line">    width:30,  </div><div class="line">  &#125;,  </div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h1 id="RN在Android平台的解决方法"><a href="#RN在Android平台的解决方法" class="headerlink" title="RN在Android平台的解决方法"></a>RN在Android平台的解决方法</h1><h2 id="facebook-fresco方法"><a href="#facebook-fresco方法" class="headerlink" title="facebook fresco方法"></a>facebook fresco方法</h2><p>要解决上面的问题，方法还是很多的，最简单的莫过于使用facebook的jar支持库，在android/app/build.gradle文件中新增</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">compile &apos;com.facebook.fresco:animated-gif:0.13.0&apos;</div></pre></td></tr></table></figure>
+<p>Fresco是一个强大的图片加载组件，Android 本身的图片库不支持此格式，但是Fresco支持。使用时，和往常一样，仅仅需要提供一个图片的URI即可，剩下的事情，Fresco会处理。<br>如我们运行一个名为loading.gif的图片：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;Image source=&#123;&#123;uri:loading&#125;&#125; style=&#123;&#123;width:20,height:20&#125;&#125;/&gt;</div></pre></td></tr></table></figure>
+<p>当然网上还有另外的方法，就是自己去实现读取gif图片，对图片资源做拆解，这有点类似于，在很久以前，Android平台也是不支持gif的，出现了自定义view对gif图片进行拆解，然后运行image的方案。有点类似于Android的帧动画，在xml定义图片数组，然后使用Animator来加载。不过这种方法性能差。</p>
+<h2 id="自定义组件实现"><a href="#自定义组件实现" class="headerlink" title="自定义组件实现"></a>自定义组件实现</h2><p>将gif切成15张png的图片，暂且命名为loading1、loading2…. loading15。</p>
+<h3 id="在构造方法中初始化图片数组"><a href="#在构造方法中初始化图片数组" class="headerlink" title="在构造方法中初始化图片数组"></a>在构造方法中初始化图片数组</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">//图片数组  </div><div class="line">var loading_imgs = new Array();  </div><div class="line">//最大图片张数  </div><div class="line">const imageLength = 15;  </div><div class="line">//动画使用的数组下标  </div><div class="line">const imageIndex = 0;  </div><div class="line">  </div><div class="line">  </div><div class="line">  constructor(props) &#123;  </div><div class="line">      super(props);  </div><div class="line">      this.state = &#123;  </div><div class="line">          dataSource: new ListView.DataSource(&#123;rowHasChanged: (r1, r2) =&gt; r1 !== r2,&#125;),    </div><div class="line">          ….  </div><div class="line">          imageIndex:imageIndex,  </div><div class="line">      &#125;;  </div><div class="line">        </div><div class="line">//组装图片数组   共15张图片  loading1  -&gt; loading15  </div><div class="line">      for( i=1;i&lt;= imageLength;i++)&#123;  </div><div class="line">        let loadingUri = &quot;loading&quot; + i;  </div><div class="line">        let img = &lt;Image source=&#123;&#123;uri:loadingUri&#125;&#125; key=&#123;i&#125; style=&#123;&#123;width:20,height:20&#125;&#125;/&gt;;  </div><div class="line">        loading_imgs.push(img);  </div><div class="line">      &#125;  </div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<h3 id="也没渲染"><a href="#也没渲染" class="headerlink" title="也没渲染"></a>也没渲染</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">render() &#123;  </div><div class="line">  return (  </div><div class="line">      &lt;View style=&#123;styles.container&#125;&gt;  </div><div class="line">          &lt;View style=&#123;&#123;position:&apos;absolute&apos;, top:-1000&#125;&#125;&gt;  </div><div class="line">            &#123;  </div><div class="line">              loading_imgs.map((item,i)=&gt; loading_imgs[i])  </div><div class="line">            &#125;  </div><div class="line">          &lt;/View&gt;  </div><div class="line">     &lt;/View&gt;  </div><div class="line">)&#125;;</div></pre></td></tr></table></figure>
+<h3 id="轮播图片"><a href="#轮播图片" class="headerlink" title="轮播图片"></a>轮播图片</h3><p>每隔100毫秒切换一张图片，当数据加载完毕，清楚定时任务，并且将图片置为第一张。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">图片轮播函数  </div><div class="line">  _loop() &#123;  </div><div class="line">    this.loopCount++;  </div><div class="line">    if (this.loopCount &lt; loading_imgs.length) &#123;  </div><div class="line">        this.setState(&#123;  </div><div class="line">            imageIndex: this.loopCount,  </div><div class="line">        &#125;);  </div><div class="line">    &#125;else &#123;  </div><div class="line">        this.loopCount = -1;  </div><div class="line">    &#125;  </div><div class="line">&#125;  </div><div class="line">  </div><div class="line">//轮播图片  </div><div class="line">this.timerPic = setInterval(this._loop.bind(this), 100);  </div><div class="line">  </div><div class="line">//清除图片轮播效果  </div><div class="line">this.timer1 &amp;&amp; clearInterval(this.timer1);  </div><div class="line">this.loopCount = -1;</div></pre></td></tr></table></figure></p>
+<p>这样就实现了自己实现对gif运行的实现，不过其性能确实太差，建议使用第一种。</p>
+<p>附：<a href="http://lib.csdn.net/xiangzhihong8/5375/chart/React%20Native" target="_blank" rel="external">RN知识库</a></p>
+    </div>
+    <p class="post-meta">
+        <span class="post-cat">分类：
+            <a class="cat-link" href="/categories/React-Native/">React Native</a>
+        </span>
+        <span class="post-tags">
+            标签：
+            <a href="/tags/android/" title="android">android</a> / 
+    
+        <a href="/tags/React-Native/" title="React Native">React Native</a>
+        </span>
+    </p>
+</article>
+<div class="article-share clearfix text-center">
+    <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+</div>
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br>
+        <a href="/2016/10/12/Spring Boot搭建Web应用/">
+            
+                Spring Boot入门
+            
+        </a>
+    </span>
+    
+
+    
+    <span class="next fr">
+        下一篇<br>
+        <a href="/2016/10/05/Android WindowManager详解/">
+            
+                Android WindowManager详解
+            
+        </a>
+    </span>
+    
+</div>
+<!-- 文章评论 -->
+<div id="comments" class="comments cloud-tie-wrapper"></div>
+    <script>
+    var cloudTieConfig = {
+      url: document.location.href, 
+      sourceId: "React Native在Android平台运行gif的解决方法",
+      productKey: "c06bb9930e6f4b38a9997cb9bd17aba5",
+      target: "comments"
+    };
+    var yunManualLoad = true;
+    Tie.loader("aHR0cHM6Ly9hcGkuZ2VudGllLjE2My5jb20vcGMvbGl2ZXNjcmlwdC5odG1s", true);
+    </script>
+            </div>
+
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章分类</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+    <li>
+        <a href="/categories/Android/">Android</a>
+        <span class="badge">(10)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Android/系统/">系统</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Angular2/">Angular2</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/React-Native/">React Native</a>
+        <span class="badge">(9)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Java/">Java</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/前端/">前端</a>
+        <span class="badge">(6)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/VR/">VR</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Angular2/前端/">前端</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Spring/">Spring</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/ios/">ios</a>
+        <span class="badge">(7)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Google/">Google</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Google/VR/">VR</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/技术人生/">技术人生</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/小程序/">小程序</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/机器学习/">机器学习</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/android/">android</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/设计模式/">设计模式</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+</ul>
+    </section>
+
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="/tags/Android/" title="Android">Android (7)</a>
+  
+    <a class="tag-item" href="/tags/新特性/" title="新特性">新特性 (2)</a>
+  
+    <a class="tag-item" href="/tags/高仿/" title="高仿">高仿 (4)</a>
+  
+    <a class="tag-item" href="/tags/深入系统/" title="深入系统">深入系统 (1)</a>
+  
+    <a class="tag-item" href="/tags/系统服务/" title="系统服务">系统服务 (1)</a>
+  
+    <a class="tag-item" href="/tags/android/" title="android">android (4)</a>
+  
+    <a class="tag-item" href="/tags/混淆打包/" title="混淆打包">混淆打包 (1)</a>
+  
+    <a class="tag-item" href="/tags/Angular2/" title="Angular2">Angular2 (1)</a>
+  
+    <a class="tag-item" href="/tags/前端开发/" title="前端开发">前端开发 (3)</a>
+  
+    <a class="tag-item" href="/tags/硬件/" title="硬件">硬件 (1)</a>
+  
+    <a class="tag-item" href="/tags/React-Native/" title="React Native">React Native (7)</a>
+  
+    <a class="tag-item" href="/tags/FlexBox布局/" title="FlexBox布局">FlexBox布局 (1)</a>
+  
+    <a class="tag-item" href="/tags/Java/" title="Java">Java (2)</a>
+  
+    <a class="tag-item" href="/tags/垃圾回收/" title="垃圾回收">垃圾回收 (1)</a>
+  
+    <a class="tag-item" href="/tags/Node/" title="Node">Node (2)</a>
+  
+    <a class="tag-item" href="/tags/Google/" title="Google">Google (2)</a>
+  
+    <a class="tag-item" href="/tags/VR/" title="VR">VR (2)</a>
+  
+    <a class="tag-item" href="/tags/OpenGL/" title="OpenGL">OpenGL (1)</a>
+  
+    <a class="tag-item" href="/tags/Promise/" title="Promise">Promise (1)</a>
+  
+    <a class="tag-item" href="/tags/前端/" title="前端">前端 (4)</a>
+  
+    <a class="tag-item" href="/tags/调试/" title="调试">调试 (1)</a>
+  
+    <a class="tag-item" href="/tags/eact-Native/" title="eact Native">eact Native (1)</a>
+  
+    <a class="tag-item" href="/tags/打包/" title="打包">打包 (1)</a>
+  
+    <a class="tag-item" href="/tags/Spring/" title="Spring">Spring (2)</a>
+  
+    <a class="tag-item" href="/tags/入门/" title="入门">入门 (2)</a>
+  
+    <a class="tag-item" href="/tags/原生/" title="原生">原生 (1)</a>
+  
+    <a class="tag-item" href="/tags/ios/" title="ios">ios (7)</a>
+  
+    <a class="tag-item" href="/tags/swift/" title="swift">swift (1)</a>
+  
+    <a class="tag-item" href="/tags/Swift/" title="Swift">Swift (1)</a>
+  
+    <a class="tag-item" href="/tags/AR/" title="AR">AR (1)</a>
+  
+    <a class="tag-item" href="/tags/webpack/" title="webpack">webpack (1)</a>
+  
+    <a class="tag-item" href="/tags/gulp/" title="gulp">gulp (1)</a>
+  
+    <a class="tag-item" href="/tags/Xcode/" title="Xcode">Xcode (2)</a>
+  
+    <a class="tag-item" href="/tags/https/" title="https">https (1)</a>
+  
+    <a class="tag-item" href="/tags/gif/" title="gif">gif (1)</a>
+  
+    <a class="tag-item" href="/tags/mac/" title="mac">mac (1)</a>
+  
+    <a class="tag-item" href="/tags/环境/" title="环境">环境 (1)</a>
+  
+    <a class="tag-item" href="/tags/知识库/" title="知识库">知识库 (1)</a>
+  
+    <a class="tag-item" href="/tags/原理/" title="原理">原理 (1)</a>
+  
+</div>
+    </section>
+    
+
+    
+    <!-- 我的微博 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>我的微博</strong></h3>
+        <div class="widget-bd" style="position: relative">
+  <div id="myWeiboLoading" class="text-center" style="position:absolute;top:0;left:0;right:0;bottom:0;line-height:50px;font-size:12px;background-color:#fff;z-index:9">微博加载中...</div>
+  <iframe width="100%" height="550" class="share_self" frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&amp;width=0&amp;height=550&amp;fansRow=2&amp;ptype=1&amp;speed=0&amp;skin=4&amp;isTitle=1&amp;noborder=1&amp;isWeibo=1&amp;isFans=1&amp;uid=1831462560&amp;verifier=5192ec39&amp;dpc=1"></iframe>
+  <script>
+  (function () {
+    var oMyWeibo = document.getElementById('myWeibo');
+    var oMyWeiboLoading = document.getElementById('myWeiboLoading');
+    var isIE = /msie/i.test(navigator.userAgent) && !window.opera;
+    var timer = null;
+    if (isIE) {
+      oMyWeibo.onreadystatechange = function(){
+        if(oMyWeibo.readyState === 'loaded' || oMyWeibo.readyState === 'complete'){
+          timer = setTimeout(function () {
+            oMyWeiboLoading.parentNode.removeChild(oMyWeiboLoading);
+            timer = null;
+          }, 300);
+        }
+      };
+    } else {
+      oMyWeibo.onload = function () {
+        timer = setTimeout(function () {
+          oMyWeiboLoading.parentNode.removeChild(oMyWeiboLoading);
+          timer = null;
+        }, 300);
+      };
+    }
+  })();
+  </script>
+</div>
+    </section>
+    
+
+    
+    <!-- 友情链接 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>友情链接</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+        <li>
+            <a href="http://blog.csdn.net/xiangzhihong8/" target="_blank" title="csdn个人博客">csdn博客</a>
+        </li>
+    
+        <li>
+            <a href="https://yq.aliyun.com/u/xiangzhihong" target="_blank" title="阿里云技术博客">阿里云博客</a>
+        </li>
+    
+</ul>
+    </section>
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <footer class="footer">
+    &copy;
+    
+        2016-2017
+    
+
+    <a href="/">Jelon Loves You</a>
+</footer>
+<div class="back-to-top" id="JELON__backToTop" title="返回顶部">返回顶部</div>
+<!-- 添加百度自动推送 -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+    <!--博客js脚本 -->
+    <!-- 这里放网站js脚本 -->
+<script src="/js/main.js"></script>
+</body>

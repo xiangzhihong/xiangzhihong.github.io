@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8">
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya">
+    
+    <title>机器学习 | 向志洪</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
+    <meta name="keywords" content="前端, Web, 移动, 向志洪">
+    <meta name="description" content="">
+
+    
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <!--[if lt IE 9]>
+    <script src="/js/html5.js"></script>
+    <![endif]-->
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?fd459238242776d173cdc64918fb32f2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+    
+    <script>var yunModuleEnv = true;</script>
+    <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+    
+</head></html>
+<body class="home">
+    <!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="/">
+                <div class="cover">
+                    <span class="name">向志洪</span>
+                    <span class="description">个人技术博客</span>
+                </div>
+            </a>
+        </div>
+        <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
+        <ul class="menu hidden" id="JELON__menu">
+            
+            <li rel="/2016/12/01/机器学习/index.html" class="item">
+                <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
+            </li>
+            
+            <li rel="/2016/12/01/机器学习/index.html" class="item">
+                <a href="/archives/" title="文章列表" class="icon-lab">&nbsp;文章列表</a>
+            </li>
+            
+            <li rel="/2016/12/01/机器学习/index.html" class="item">
+                <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
+            </li>
+            
+            <li rel="/2016/12/01/机器学习/index.html" class="item">
+                <a href="/404/" title="留言" class="icon-comment">&nbsp;留言</a>
+            </li>
+            
+        </ul>
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        <a href="https://github.com/xiangzhihong" target="_blank">Github</a>
+                        |
+                    
+                        <a href="http://tongji.baidu.com/web/welcome/login" target="_blank">站长统计</a>
+                        |
+                    
+                        <a href="http://weibo.com/code_xzh" target="_blank">新浪微博</a>
+                        |
+                    
+                </p>
+                <p class="sns">
+                    
+                    <a href="javascript: void(0);" class="wechat">
+                        <b>■</b>
+                        公众号
+                        <span class="popover">
+                            <img src="/img/wechat_mp.jpg" width="120" height="120" alt="我的微信订阅号">
+                            <i class="arrow"></i>
+                        </span>
+                    </a>
+                </p>
+                
+            </div>
+            <div class="avatar fr">
+                <img src="http://ohe65w0xx.bkt.clouddn.com/avert.png" alt="avatar" title="Jelon">
+            </div>
+        </div>
+    </section>
+</header>
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+        <section class="content">
+            <div class="content-main widget">
+                <!-- 文章页 -->
+<!-- 文章 -->
+<article class="post article">
+    <header class="text-center">
+        <h3 class="post-title"><span>机器学习</span></h3>
+    </header>
+    <p class="post-meta text-center">
+        xiangzhihong 发表于
+        <time datetime="2016-11-30T16:00:00.000Z">2016-12-01</time>
+    </p>
+    <div class="post-content">
+        <h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>什么是机器学习？<br>机器学习是英文名称Machine Learning(简称ML)的直译。机器学习涉及概率论、统计学、逼近论、凸分析、算法复杂度理论等多门学科。专门研究计算机怎样模拟或实现人类的学习行为，以获取新的知识或技能，重新组织已有的知识结构使之不断改善自身的性能。它是人工智能的核心，是使计算机具有智能的根本途径，其应用遍及人工智能的各个领域，它主要使用归纳、综合而不是演绎。<br>相对于传统的计算机工作，我们给它一串指令，然后它遵照这个指令一步步执行下去即可。机器学习根本不接受你输入的指令，相反，它只接受你输入的数据!也就是说它某种意义上具有了我们人处理事情的能力。</p>
+<h2 id="机器学习发展史"><a href="#机器学习发展史" class="headerlink" title="机器学习发展史"></a>机器学习发展史</h2><p>机器学习是人工智能研究较为年轻的分支，它的发展过程大体上可分为4个时期。<br>第一阶段是在20世纪50年代中叶到60年代中叶，属于热烈时期。<br>第二阶段是在20世纪60年代中叶至70年代中叶，被称为机器学习的冷静时期。<br>第三阶段是从20世纪70年代中叶至80年代中叶，称为复兴时期。<br>机器学习的最新阶段始于1986年。机器学习进入新阶段的重要表现在下列诸方面：<br>(1) 机器学习已成为新的边缘学科并在高校形成一门课程。它综合应用心理学、生物学和神经生理学以及数学、自动化和计算机科学形成机器学习理论基础。<br>(2) 结合各种学习方法，取长补短的多种形式的集成学习系统研究正在兴起。特别是连接学习符号学习的耦合可以更好地解决连续性信号处理中知识与技能的获取与求精问题而受到重视。<br>(3) 机器学习与人工智能各种基础问题的统一性观点正在形成。例如学习与问题求解结合进行、知识表达便于学习的观点产生了通用智能系统SOAR的组块学习。类比学习与问题求解结合的基于案例方法已成为经验学习的重要方向。<br>(4) 各种学习方法的应用范围不断扩大，一部分已形成商品。归纳学习的知识获取工具已在诊断分类型专家系统中广泛使用。连接学习在声图文识别中占优势。分析学习已用于设计综合型专家系统。遗传算法与强化学习在工程控制中有较好的应用前景。与符号系统耦合的神经网络连接学习将在企业的智能管理与智能机器人运动规划中发挥作用。<br>(5) 与机器学习有关的学术活动空前活跃。国际上除每年一次的机器学习研讨会外，还有计算机学习理论会议以及遗传算法会议。</p>
+<h2 id="机器学习的范围"><a href="#机器学习的范围" class="headerlink" title="机器学习的范围"></a>机器学习的范围</h2><p>机器学习跟模式识别，统计学习，数据挖掘，计算机视觉，语音识别，自然语言处理等领域有着很深的联系。从范围上来说，机器学习跟模式识别，统计学习，数据挖掘是类似的，同时，机器学习与其他领域的处理技术的结合，形成了计算机视觉、语音识别、自然语言处理等交叉学科。因此，一般说数据挖掘时，可以等同于说机器学习。同时，我们平常所说的机器学习应用，应该是通用的，不仅仅局限在结构化数据，还有图像，音频等应用。</p>
+<h3 id="模式识别"><a href="#模式识别" class="headerlink" title="模式识别"></a>模式识别</h3><p>模式识别=机器学习。两者的主要区别在于前者是从工业界发展起来的概念，后者则主要源自计算机学科。在著名的《Pattern Recognition And Machine Learning》这本书中，Christopher M. Bishop在开头是这样说的“模式识别源自工业界，而机器学习来自于计算机学科。不过，它们中的活动可以被视为同一个领域的两个方面，同时在过去的10年间，它们都有了长足的发展”。</p>
+<h3 id="数据挖掘"><a href="#数据挖掘" class="headerlink" title="数据挖掘"></a>数据挖掘</h3><p>数据挖掘=机器学习+数据库，记得大学的最后一学期开了一门数据挖掘的课，何为数据挖掘，就是从海量的数据中挖掘出有用的数据，其实从某种意义上来说和大数据分析很像。数据挖掘通常与计算机科学有关，并通过统计、在线分析处理、情报检索、机器学习、专家系统（依靠过去的经验法则）和模式识别等诸多方法来实现上述目标。</p>
+<h3 id="统计学习"><a href="#统计学习" class="headerlink" title="统计学习"></a>统计学习</h3><p>统计学习近似等于机器学习。统计学习是个与机器学习高度重叠的学科。因为机器学习中的大多数方法来自统计学，甚至可以认为，统计学的发展促进机器学习的繁荣昌盛。例如著名的支持向量机算法，就是源自统计学科。但是在某种程度上两者是有分别的，这个分别在于：统计学习者重点关注的是统计模型的发展与优化，偏数学，而机器学习者更关注的是能够解决问题，偏实践，因此机器学习研究者会重点研究学习算法在计算机上执行的效率与准确性的提升。</p>
+<h3 id="计算机视觉"><a href="#计算机视觉" class="headerlink" title="计算机视觉"></a>计算机视觉</h3><p>计算机视觉=图像处理+机器学习。图像处理技术用于将图像处理为适合进入机器学习模型中的输入，机器学习则负责从图像中识别出相关的模式。随着机器学习的新领域深度学习的发展，大大促进了计算机图像识别的效果，因此未来计算机视觉界的发展前景不可估量。</p>
+<h3 id="语音识别"><a href="#语音识别" class="headerlink" title="语音识别"></a>语音识别</h3><p>语音识别=语音处理+机器学习。语音识别就是音频处理技术与机器学习的结合。语音识别技术一般不会单独使用，一般会结合自然语言处理的相关技术。目前的相关应用有苹果的语音助手siri，讯飞等国内很多的科技公司和机构。</p>
+<h3 id="自然语言处理"><a href="#自然语言处理" class="headerlink" title="自然语言处理"></a>自然语言处理</h3><p>自然语言处理=文本处理+机器学习。自然语言处理技术主要是让机器理解人类的语言的一门领域。在自然语言处理技术中，大量使用了编译原理相关的技术，例如词法分析，语法分析等等，除此之外，在理解这个层面，则使用了语义理解，机器学习等技术。</p>
+<h2 id="机器学习算法"><a href="#机器学习算法" class="headerlink" title="机器学习算法"></a>机器学习算法</h2><h3 id="监督式学习"><a href="#监督式学习" class="headerlink" title="监督式学习"></a>监督式学习</h3><p>监督式学习算法包括一个目标变量（因变量）和用来预测目标变量的预测变量（自变量）。通过这些变量我们可以搭建一个模型，从而对于一个已知的预测变量值，我们可以得到对应的目标变量值。重复训练这个模型，直到它能在训练数据集上达到预定的准确度。 属于监督式学习的算法有：回归模型，决策树，随机森林，K邻近算法，逻辑回归等。</p>
+<h3 id="无监督式学习"><a href="#无监督式学习" class="headerlink" title="无监督式学习"></a>无监督式学习</h3><p>与监督式学习不同的是，无监督学习中我们没有需要预测或估计的目标变量。无监督式学习是用来对总体对象进行分类的。它在根据某一指标将客户分类上有广泛应用。 属于无监督式学习的算法有：关联规则，K-means聚类算法等。</p>
+<h3 id="强化学习"><a href="#强化学习" class="headerlink" title="强化学习"></a>强化学习</h3><p>这个算法可以训练程序做出某一决定。程序在某一情况下尝试所有的可能行动，记录不同行动的结果并试着找出最好的一次尝试来做决定。 属于这一类算法的有马尔可夫决策过程。</p>
+<h3 id="常见算法"><a href="#常见算法" class="headerlink" title="常见算法"></a>常见算法</h3><p>常见的机器学习算法<br>以下是最常用的机器学习算法，大部分数据问题都可以通过它们解决：<br>1.线性回归 (Linear Regression)<br>2.逻辑回归 (Logistic Regression)<br>3.决策树 (Decision Tree)<br>4.支持向量机（SVM）<br>5.朴素贝叶斯 (Naive Bayes)<br>6.K邻近算法（KNN）<br>7.K-均值算法（K-means）<br>8.随机森林 (Random Forest)<br>9.降低维度算法（DimensionalityReduction Algorithms）<br>10.GradientBoost和Adaboost算法</p>
+<h2 id="机器学习分类"><a href="#机器学习分类" class="headerlink" title="机器学习分类"></a>机器学习分类</h2><h3 id="基于学习策略的分类"><a href="#基于学习策略的分类" class="headerlink" title="基于学习策略的分类"></a>基于学习策略的分类</h3><p>学习策略是指学习过程中系统所采用的推理策略。一个学习系统总是由学习和环境两部分组成。由环境（如书本或教师）提供信息，学习部分则实现信息转换，用能够理解的形式记忆下来，并从中获取有用的信息。在学习过程中，学生（学习部分）使用的推理越少，他对教师（环境）的依赖就越大，教师的负担也就越重。学习策略的分类标准就是根据学生实现信息转换所需的推理多少和难易程度来分类的，依从简单到复杂，从少到多的次序分为以下六种基本类型：</p>
+<h4 id="1）机械学习-Rote-learning"><a href="#1）机械学习-Rote-learning" class="headerlink" title="1）机械学习 (Rote learning)"></a>1）机械学习 (Rote learning)</h4><p>学习者无需任何推理或其它的知识转换，直接吸取环境所提供的信息。如塞缪尔的跳棋程序，纽厄尔和西蒙的LT系统。这类学习系统主要考虑的是如何索引存贮的知识并加以利用。系统的学习方法是直接通过事先编好、构造好的程序来学习，学习者不作任何工作，或者是通过直接接收既定的事实和数据进行学习，对输入信息不作任何的推理。</p>
+<h4 id="2）示教学习-Learning-from-instruction或Learning-by-being-told"><a href="#2）示教学习-Learning-from-instruction或Learning-by-being-told" class="headerlink" title="2）示教学习 (Learning from instruction或Learning by being told)"></a>2）示教学习 (Learning from instruction或Learning by being told)</h4><p>学生从环境（教师或其它信息源如教科书等）获取信息，把知识转换成内部可使用的表示形式，并将新的知识和原有知识有机地结合为一体。所以要求学生有一定程度的推理能力，但环境仍要做大量的工作。教师以某种形式提出和组织知识，以使学生拥有的知识可以不断地增加。这种学习方法和人类社会的学校教学方式相似，学习的任务就是建立一个系统，使它能接受教导和建议，并有效地存贮和应用学到的知识。不少专家系统在建立知识库时使用这种方法去实现知识获取。示教学习的一个典型应用例是FOO程序。</p>
+<h4 id="3）演绎学习-Learning-by-deduction"><a href="#3）演绎学习-Learning-by-deduction" class="headerlink" title="3）演绎学习 (Learning by deduction)"></a>3）演绎学习 (Learning by deduction)</h4><p>学生所用的推理形式为演绎推理。推理从公理出发，经过逻辑变换推导出结论。这种推理是”保真”变换和特化(specialization)的过程，使学生在推理过程中可以获取有用的知识。这种学习方法包含宏操作(macro-operation)学习、知识编辑和组块(Chunking)技术。演绎推理的逆过程是归纳推理。</p>
+<h4 id="4）类比学习-Learning-by-analogy"><a href="#4）类比学习-Learning-by-analogy" class="headerlink" title="4）类比学习 (Learning by analogy)"></a>4）类比学习 (Learning by analogy)</h4><p>利用二个不同领域（源域、目标域）中的知识相似性，可以通过类比，从源域的知识（包括相似的特征和其它性质）推导出目标域的相应知识，从而实现学习。类比学习系统可以使一个已有的计算机应用系统转变为适应于新的领域，来完成原先没有设计的相类似的功能。<br>类比学习需要比上述三种学习方式更多的推理。它一般要求先从知识源（源域）中检索出可用的知识，再将其转换成新的形式，用到新的状况（目标域）中去。类比学习在人类科学技术发展史上起着重要作用，许多科学发现就是通过类比得到的。例如著名的卢瑟福类比就是通过将原子结构（目标域）同太阳系（源域）作类比，揭示了原子结构的奥秘。</p>
+<h4 id="5）基于解释的学习-Explanation-based-learning-EBL"><a href="#5）基于解释的学习-Explanation-based-learning-EBL" class="headerlink" title="5）基于解释的学习 (Explanation-based learning, EBL)"></a>5）基于解释的学习 (Explanation-based learning, EBL)</h4><p>学生根据教师提供的目标概念、该概念的一个例子、领域理论及可操作准则，首先构造一个解释来说明为什该例子满足目标概念，然后将解释推广为目标概念的一个满足可操作准则的充分条件。EBL已被广泛应用于知识库求精和改善系统的性能。<br>著名的EBL系统有迪乔恩（G.DeJong）的GENESIS,米切尔（T.Mitchell）的LEXII和LEAP, 以及明顿（S.Minton）等的PRODIGY。</p>
+<h4 id="6）归纳学习-Learning-from-induction"><a href="#6）归纳学习-Learning-from-induction" class="headerlink" title="6）归纳学习 (Learning from induction)"></a>6）归纳学习 (Learning from induction)</h4><p>归纳学习是由教师或环境提供某概念的一些实例或反例，让学生通过归纳推理得出该概念的一般描述。这种学习的推理工作量远多于示教学习和演绎学习，因为环境并不提供一般性概念描述（如公理）。从某种程度上说，归纳学习的推理量也比类比学习大，因为没有一个类似的概念可以作为”源概念”加以取用。归纳学习是最基本的，发展也较为成熟的学习方法，在人工智能领域中已经得到广泛的研究和应用。</p>
+<h3 id="基于所获取知识的表示形式分类"><a href="#基于所获取知识的表示形式分类" class="headerlink" title="基于所获取知识的表示形式分类　"></a>基于所获取知识的表示形式分类　</h3><p>学习系统获取的知识可能有：行为规则、物理对象的描述、问题求解策略、各种分类及其它用于任务实现的知识类型。<br>对于学习中获取的知识，主要有以下一些表示形式：</p>
+<h4 id="1）代数表达式参数"><a href="#1）代数表达式参数" class="headerlink" title="1）代数表达式参数"></a>1）代数表达式参数</h4><p>学习的目标是调节一个固定函数形式的代数表达式参数或系数来达到一个理想的性能。</p>
+<h4 id="2）决策树"><a href="#2）决策树" class="headerlink" title="2）决策树"></a>2）决策树</h4><p>用决策树来划分物体的类属，树中每一内部节点对应一个物体属性，而每一边对应于这些属性的可选值，树的叶节点则对应于物体的每个基本分类。</p>
+<h4 id="3）形式文法"><a href="#3）形式文法" class="headerlink" title="3）形式文法"></a>3）形式文法</h4><p>在识别一个特定语言的学习中，通过对该语言的一系列表达式进行归纳，形成该语言的形式文法。</p>
+<h4 id="4）产生式规则"><a href="#4）产生式规则" class="headerlink" title="4）产生式规则"></a>4）产生式规则</h4><p>产生式规则表示为条件—动作对，已被极为广泛地使用。学习系统中的学习行为主要是：生成、泛化、特化（Specialization）或合成产生式规则。</p>
+<h4 id="5）形式逻辑表达式"><a href="#5）形式逻辑表达式" class="headerlink" title="5）形式逻辑表达式"></a>5）形式逻辑表达式</h4><p>形式逻辑表达式的基本成分是命题、谓词、变量、约束变量范围的语句，及嵌入的逻辑表达式。</p>
+<h4 id="6）图和网络"><a href="#6）图和网络" class="headerlink" title="6）图和网络"></a>6）图和网络</h4><p>有的系统采用图匹配和图转换方案来有效地比较和索引知识。</p>
+<h4 id="7）框架和模式（schema）"><a href="#7）框架和模式（schema）" class="headerlink" title="7）框架和模式（schema）"></a>7）框架和模式（schema）</h4><p>每个框架包含一组槽，用于描述事物（概念和个体）的各个方面。</p>
+<h4 id="8）计算机程序和其它的过程编码"><a href="#8）计算机程序和其它的过程编码" class="headerlink" title="8）计算机程序和其它的过程编码"></a>8）计算机程序和其它的过程编码</h4><p>获取这种形式的知识，目的在于取得一种能实现特定过程的能力，而不是为了推断该过程的内部结构。</p>
+<h4 id="9）神经网络"><a href="#9）神经网络" class="headerlink" title="9）神经网络"></a>9）神经网络</h4><p>这主要用在联接学习中。学习所获取的知识，最后归纳为一个神经网络。</p>
+<h4 id="10）多种表示形式的组合"><a href="#10）多种表示形式的组合" class="headerlink" title="10）多种表示形式的组合"></a>10）多种表示形式的组合</h4><p>根据表示的精细程度，可将知识表示形式分为两大类：泛化程度高的粗粒度符号表示、??泛化程度低的精粒度亚符号(sub-symbolic)表示。像决策树、形式文法、产生式规则、形式逻辑表达式、框架和模式等属于符号表示类；而代数表达式参数、图和网络、神经网络等则属亚符号表示类。</p>
+<h3 id="按应用领域分类"><a href="#按应用领域分类" class="headerlink" title="按应用领域分类　"></a>按应用领域分类　</h3><p>最主要的应用领域有：专家系统、认知模拟、规划和问题求解、数据挖掘、网络信息服务、图象识别、故障诊断、自然语言理解、机器人和博弈等领域。<br>从机器学习的执行部分所反映的任务类型上看，大部分的应用研究领域基本上集中于以下两个范畴：分类和问题求解。<br>（1）分类任务要求系统依据已知的分类知识对输入的未知模式（该模式的描述）作分析，以确定输入模式的类属。相应的学习目标就是学习用于分类的准则（如分类规则）。<br>（2）问题求解任务要求对于给定的目标状态,??寻找一个将当前状态转换为目标状态的动作序列；机器学习在这一领域的研究工作大部分集中于通过学习来获取能提高问题求解效率的知识（如搜索控制知识，启发式知识等）。</p>
+<h3 id="综合分类"><a href="#综合分类" class="headerlink" title="综合分类"></a>综合分类</h3><h4 id="1）经验性归纳学习-empirical-inductive-learning"><a href="#1）经验性归纳学习-empirical-inductive-learning" class="headerlink" title="1）经验性归纳学习 (empirical inductive learning)"></a>1）经验性归纳学习 (empirical inductive learning)</h4><p>经验性归纳学习采用一些数据密集的经验方法（如版本空间法、ID3法，定律发现方法）对例子进行归纳学习。其例子和学习结果一般都采用属性、谓词、关系等符号表示。它相当于基于学习策略分类中的归纳学习，但扣除联接学习、遗传算法、加强学习的部分。</p>
+<h4 id="2）分析学习（analytic-learning）"><a href="#2）分析学习（analytic-learning）" class="headerlink" title="2）分析学习（analytic learning）"></a>2）分析学习（analytic learning）</h4><p>分析学习方法是从一个或少数几个实例出发，运用领域知识进行分析。其主要特征为：<br>·推理策略主要是演绎，而非归纳；<br>·使用过去的问题求解经验（实例）指导新的问题求解，或产生能更有效地运用领域知识的搜索控制规则。<br>分析学习的目标是改善系统的性能，而不是新的概念描述。分析学习包括应用解释学习、演绎学习、多级结构组块以及宏操作学习等技术。</p>
+<h4 id="3）类比学习"><a href="#3）类比学习" class="headerlink" title="3）类比学习"></a>3）类比学习</h4><p>它相当于基于学习策略分类中的类比学习。在这一类型的学习中比较引人注目的研究是通过与过去经历的具体事例作类比来学习，称为基于范例的学习(case_based learning)，或简称范例学习。</p>
+<h2 id="机器学习代码示例"><a href="#机器学习代码示例" class="headerlink" title="机器学习代码示例"></a>机器学习代码示例</h2><p>机器学习语音设计到pytho和R等最新语言。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line">//在gcc-4.7.2下编译通过。</div><div class="line">//命令行：g++-Wall-ansi-O2test.cpp-otest</div><div class="line">#include&lt;iostream&gt;</div><div class="line">usingnamespacestd;</div><div class="line">voidinput(int&amp;oper,constboolmeth)</div><div class="line">&#123;</div><div class="line">//meth为true则只判断1，为false则判断1或0</div><div class="line">while(true)</div><div class="line">&#123;</div><div class="line">cin&gt;&gt;oper;</div><div class="line">if(meth&amp;&amp;oper==1)</div><div class="line">break;</div><div class="line">elseif(oper==0||oper==1)</div><div class="line">break;</div><div class="line">cout&lt;&lt;&quot;输入错误，请重新输入。&quot;&lt;&lt;endl;//判断参数</div><div class="line">cin.sync();//避免极端输入导致死循环</div><div class="line">cin.clear();</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line">intmain(void)</div><div class="line">&#123;</div><div class="line">cout&lt;&lt;&quot;1+1=2吗？那要看您怎么教我了，不要惊讶我会学习的&quot;&lt;&lt;endl;</div><div class="line">intladd,radd,aprs,rcnt(0),wcnt(0);//定义输入与结果，正确次数与错误次数</div><div class="line">cout&lt;&lt;&quot;开始学习……&quot;&lt;&lt;endl;</div><div class="line">for(inti(0);i!=10;++i)</div><div class="line">&#123;</div><div class="line">cout&lt;&lt;&quot;参数1（必须是1）：&quot;&lt;&lt;flush;//提示输入参数</div><div class="line">input(ladd,true);</div><div class="line">cout&lt;&lt;&quot;参数2（必须是1）：&quot;&lt;&lt;flush;</div><div class="line">input(radd,true);</div><div class="line">cout&lt;&lt;&quot;结果：&quot;&lt;&lt;(ladd+radd)&lt;&lt;endl;//输出结果</div><div class="line">cout&lt;&lt;&quot;您对这满意吗（满意输入1，不满意输入0）：&quot;&lt;&lt;flush;//评价等级</div><div class="line">input(aprs,false);</div><div class="line">if(aprs)//判断用户评价</div><div class="line">++rcnt;</div><div class="line">else</div><div class="line">++wcnt;</div><div class="line">cout&lt;&lt;&quot;正确次数：&quot;&lt;&lt;rcnt&lt;&lt;&quot;错误次数：&quot;&lt;&lt;wcnt&lt;&lt;endl;//错误次数</div><div class="line">&#125;</div><div class="line">if(rcnt&gt;wcnt)//判断学习结果</div><div class="line">cout&lt;&lt;&quot;主人告诉我1+1=2。&quot;&lt;&lt;endl;</div><div class="line">else</div><div class="line">if(rcnt&lt;wcnt)</div><div class="line">cout&lt;&lt;&quot;主人告诉我1+1!=2。&quot;&lt;&lt;endl;</div><div class="line">else</div><div class="line">cout&lt;&lt;&quot;我不明白主人是什么意思。&quot;&lt;&lt;endl;</div><div class="line">intterm;//退出部分</div><div class="line">cout&lt;&lt;&quot;您对我的表现满意吗？满意请输入1不满意请输入0：&quot;&lt;&lt;flush;</div><div class="line">input(term,false);</div><div class="line">if(term)</div><div class="line">cout&lt;&lt;&quot;谢谢我会继续努力学习&quot;&lt;&lt;endl;</div><div class="line">else</div><div class="line">cout&lt;&lt;&quot;谢谢我会继续努力学习D&quot;&lt;&lt;endl;</div><div class="line">//cin&gt;&gt;term;//在Windows上测试时启用</div><div class="line">return0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+    </div>
+    <p class="post-meta">
+        <span class="post-cat">分类：
+            <a class="cat-link" href="/categories/机器学习/">机器学习</a>
+        </span>
+        <span class="post-tags">
+            标签：
+            <a href="/tags/机器学习/" title="机器学习">机器学习</a>
+        </span>
+    </p>
+</article>
+<div class="article-share clearfix text-center">
+    <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+</div>
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br>
+        <a href="/2016/12/05/gulp+webpack工具整合简介/">
+            
+                gulp+webpack工具整合简介
+            
+        </a>
+    </span>
+    
+
+    
+    <span class="next fr">
+        下一篇<br>
+        <a href="/2016/11/18/React Native和原生app通信机制详解/">
+            
+                React Native和原生app通信机制详解
+            
+        </a>
+    </span>
+    
+</div>
+<!-- 文章评论 -->
+<div id="comments" class="comments cloud-tie-wrapper"></div>
+    <script>
+    var cloudTieConfig = {
+      url: document.location.href, 
+      sourceId: "机器学习",
+      productKey: "c06bb9930e6f4b38a9997cb9bd17aba5",
+      target: "comments"
+    };
+    var yunManualLoad = true;
+    Tie.loader("aHR0cHM6Ly9hcGkuZ2VudGllLjE2My5jb20vcGMvbGl2ZXNjcmlwdC5odG1s", true);
+    </script>
+            </div>
+
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章分类</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+    <li>
+        <a href="/categories/Android/">Android</a>
+        <span class="badge">(10)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Android/系统/">系统</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Angular2/">Angular2</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/React-Native/">React Native</a>
+        <span class="badge">(9)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Java/">Java</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/前端/">前端</a>
+        <span class="badge">(6)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/VR/">VR</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Angular2/前端/">前端</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Spring/">Spring</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/ios/">ios</a>
+        <span class="badge">(7)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Google/">Google</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Google/VR/">VR</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/技术人生/">技术人生</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/小程序/">小程序</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/机器学习/">机器学习</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/android/">android</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/设计模式/">设计模式</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+</ul>
+    </section>
+
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="/tags/Android/" title="Android">Android (7)</a>
+  
+    <a class="tag-item" href="/tags/新特性/" title="新特性">新特性 (2)</a>
+  
+    <a class="tag-item" href="/tags/高仿/" title="高仿">高仿 (4)</a>
+  
+    <a class="tag-item" href="/tags/深入系统/" title="深入系统">深入系统 (1)</a>
+  
+    <a class="tag-item" href="/tags/系统服务/" title="系统服务">系统服务 (1)</a>
+  
+    <a class="tag-item" href="/tags/android/" title="android">android (4)</a>
+  
+    <a class="tag-item" href="/tags/混淆打包/" title="混淆打包">混淆打包 (1)</a>
+  
+    <a class="tag-item" href="/tags/Angular2/" title="Angular2">Angular2 (1)</a>
+  
+    <a class="tag-item" href="/tags/前端开发/" title="前端开发">前端开发 (3)</a>
+  
+    <a class="tag-item" href="/tags/硬件/" title="硬件">硬件 (1)</a>
+  
+    <a class="tag-item" href="/tags/React-Native/" title="React Native">React Native (7)</a>
+  
+    <a class="tag-item" href="/tags/FlexBox布局/" title="FlexBox布局">FlexBox布局 (1)</a>
+  
+    <a class="tag-item" href="/tags/Java/" title="Java">Java (2)</a>
+  
+    <a class="tag-item" href="/tags/垃圾回收/" title="垃圾回收">垃圾回收 (1)</a>
+  
+    <a class="tag-item" href="/tags/Node/" title="Node">Node (2)</a>
+  
+    <a class="tag-item" href="/tags/Google/" title="Google">Google (2)</a>
+  
+    <a class="tag-item" href="/tags/VR/" title="VR">VR (2)</a>
+  
+    <a class="tag-item" href="/tags/OpenGL/" title="OpenGL">OpenGL (1)</a>
+  
+    <a class="tag-item" href="/tags/Promise/" title="Promise">Promise (1)</a>
+  
+    <a class="tag-item" href="/tags/前端/" title="前端">前端 (4)</a>
+  
+    <a class="tag-item" href="/tags/调试/" title="调试">调试 (1)</a>
+  
+    <a class="tag-item" href="/tags/eact-Native/" title="eact Native">eact Native (1)</a>
+  
+    <a class="tag-item" href="/tags/打包/" title="打包">打包 (1)</a>
+  
+    <a class="tag-item" href="/tags/Spring/" title="Spring">Spring (2)</a>
+  
+    <a class="tag-item" href="/tags/入门/" title="入门">入门 (2)</a>
+  
+    <a class="tag-item" href="/tags/原生/" title="原生">原生 (1)</a>
+  
+    <a class="tag-item" href="/tags/ios/" title="ios">ios (7)</a>
+  
+    <a class="tag-item" href="/tags/swift/" title="swift">swift (1)</a>
+  
+    <a class="tag-item" href="/tags/Swift/" title="Swift">Swift (1)</a>
+  
+    <a class="tag-item" href="/tags/AR/" title="AR">AR (1)</a>
+  
+    <a class="tag-item" href="/tags/webpack/" title="webpack">webpack (1)</a>
+  
+    <a class="tag-item" href="/tags/gulp/" title="gulp">gulp (1)</a>
+  
+    <a class="tag-item" href="/tags/Xcode/" title="Xcode">Xcode (2)</a>
+  
+    <a class="tag-item" href="/tags/https/" title="https">https (1)</a>
+  
+    <a class="tag-item" href="/tags/gif/" title="gif">gif (1)</a>
+  
+    <a class="tag-item" href="/tags/mac/" title="mac">mac (1)</a>
+  
+    <a class="tag-item" href="/tags/环境/" title="环境">环境 (1)</a>
+  
+    <a class="tag-item" href="/tags/知识库/" title="知识库">知识库 (1)</a>
+  
+    <a class="tag-item" href="/tags/原理/" title="原理">原理 (1)</a>
+  
+</div>
+    </section>
+    
+
+    
+    <!-- 我的微博 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>我的微博</strong></h3>
+        <div class="widget-bd" style="position: relative">
+  <div id="myWeiboLoading" class="text-center" style="position:absolute;top:0;left:0;right:0;bottom:0;line-height:50px;font-size:12px;background-color:#fff;z-index:9">微博加载中...</div>
+  <iframe width="100%" height="550" class="share_self" frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&amp;width=0&amp;height=550&amp;fansRow=2&amp;ptype=1&amp;speed=0&amp;skin=4&amp;isTitle=1&amp;noborder=1&amp;isWeibo=1&amp;isFans=1&amp;uid=1831462560&amp;verifier=5192ec39&amp;dpc=1"></iframe>
+  <script>
+  (function () {
+    var oMyWeibo = document.getElementById('myWeibo');
+    var oMyWeiboLoading = document.getElementById('myWeiboLoading');
+    var isIE = /msie/i.test(navigator.userAgent) && !window.opera;
+    var timer = null;
+    if (isIE) {
+      oMyWeibo.onreadystatechange = function(){
+        if(oMyWeibo.readyState === 'loaded' || oMyWeibo.readyState === 'complete'){
+          timer = setTimeout(function () {
+            oMyWeiboLoading.parentNode.removeChild(oMyWeiboLoading);
+            timer = null;
+          }, 300);
+        }
+      };
+    } else {
+      oMyWeibo.onload = function () {
+        timer = setTimeout(function () {
+          oMyWeiboLoading.parentNode.removeChild(oMyWeiboLoading);
+          timer = null;
+        }, 300);
+      };
+    }
+  })();
+  </script>
+</div>
+    </section>
+    
+
+    
+    <!-- 友情链接 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>友情链接</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+        <li>
+            <a href="http://blog.csdn.net/xiangzhihong8/" target="_blank" title="csdn个人博客">csdn博客</a>
+        </li>
+    
+        <li>
+            <a href="https://yq.aliyun.com/u/xiangzhihong" target="_blank" title="阿里云技术博客">阿里云博客</a>
+        </li>
+    
+</ul>
+    </section>
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <footer class="footer">
+    &copy;
+    
+        2016-2017
+    
+
+    <a href="/">Jelon Loves You</a>
+</footer>
+<div class="back-to-top" id="JELON__backToTop" title="返回顶部">返回顶部</div>
+<!-- 添加百度自动推送 -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+    <!--博客js脚本 -->
+    <!-- 这里放网站js脚本 -->
+<script src="/js/main.js"></script>
+</body>

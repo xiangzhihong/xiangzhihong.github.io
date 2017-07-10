@@ -1,0 +1,577 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8">
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya">
+    
+    <title>机器学习算法集锦 | 向志洪</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
+    <meta name="keywords" content="前端, Web, 移动, 向志洪">
+    <meta name="description" content="">
+
+    
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <!--[if lt IE 9]>
+    <script src="/js/html5.js"></script>
+    <![endif]-->
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?fd459238242776d173cdc64918fb32f2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+    
+    <script>var yunModuleEnv = true;</script>
+    <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+    
+</head></html>
+<body class="home">
+    <!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="/">
+                <div class="cover">
+                    <span class="name">向志洪</span>
+                    <span class="description">个人技术博客</span>
+                </div>
+            </a>
+        </div>
+        <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
+        <ul class="menu hidden" id="JELON__menu">
+            
+            <li rel="/2016/05/07/机器学习算法集锦/index.html" class="item">
+                <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
+            </li>
+            
+            <li rel="/2016/05/07/机器学习算法集锦/index.html" class="item">
+                <a href="/archives/" title="文章列表" class="icon-lab">&nbsp;文章列表</a>
+            </li>
+            
+            <li rel="/2016/05/07/机器学习算法集锦/index.html" class="item">
+                <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
+            </li>
+            
+            <li rel="/2016/05/07/机器学习算法集锦/index.html" class="item">
+                <a href="/404/" title="留言" class="icon-comment">&nbsp;留言</a>
+            </li>
+            
+        </ul>
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        <a href="https://github.com/xiangzhihong" target="_blank">Github</a>
+                        |
+                    
+                        <a href="http://tongji.baidu.com/web/welcome/login" target="_blank">站长统计</a>
+                        |
+                    
+                        <a href="http://weibo.com/code_xzh" target="_blank">新浪微博</a>
+                        |
+                    
+                </p>
+                <p class="sns">
+                    
+                    <a href="javascript: void(0);" class="wechat">
+                        <b>■</b>
+                        公众号
+                        <span class="popover">
+                            <img src="/img/wechat_mp.jpg" width="120" height="120" alt="我的微信订阅号">
+                            <i class="arrow"></i>
+                        </span>
+                    </a>
+                </p>
+                
+            </div>
+            <div class="avatar fr">
+                <img src="http://ohe65w0xx.bkt.clouddn.com/avert.png" alt="avatar" title="Jelon">
+            </div>
+        </div>
+    </section>
+</header>
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+        <section class="content">
+            <div class="content-main widget">
+                <!-- 文章页 -->
+<!-- 文章 -->
+<article class="post article">
+    <header class="text-center">
+        <h3 class="post-title"><span>机器学习算法集锦</span></h3>
+    </header>
+    <p class="post-meta text-center">
+        Jelon 发表于
+        <time datetime="2016-05-06T16:00:00.000Z">2016-05-07</time>
+    </p>
+    <div class="post-content">
+        <h1 id="机器学习"><a href="#机器学习" class="headerlink" title="机器学习"></a>机器学习</h1><p><strong>机器学习</strong>(Machine Learning, ML)是一门多领域交叉学科，涉及概率论、统计学、逼近论、凸分析、算法复杂度理论等多门学科。专门研究计算机怎样模拟或实现人类的学习行为，以获取新的知识或技能，重新组织已有的知识结构使之不断改善自身的性能。<br><strong>严格的定义</strong>：机器学习是一门研究机器获取新知识和新技能，并识别现有知识的学问。这里所说的“机器”，指的就是计算机，电子计算机，中子计算机、光子计算机或神经计算机等等。</p>
+<h2 id="机器学习概论"><a href="#机器学习概论" class="headerlink" title="机器学习概论"></a>机器学习概论</h2><p><img src="http://img.blog.csdn.net/20170220214750102?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>由上图所示：机器学习分为四大块： <strong>classification (分类)</strong>， <strong>clustering (聚类)</strong>, <strong>regression (回归)</strong>, <strong>dimensionality reduction (降维)</strong>。<br><strong>classification &amp; regression</strong><br>举一个简单的例子：<br>给定一个样本特征 x, 我们希望预测其对应的属性值 y, 如果 y 是离散的, 那么这就是一个分类问题，反之，如果 y 是连续的实数, 这就是一个回归问题。</p>
+<p>如果给定一组样本特征 S={x∈RD}, 我们没有对应的 y, 而是想发掘这组样本在 D 维空间的分布, 比如分析哪些样本靠的更近，哪些样本之间离得很远, 这就是属于聚类问题。</p>
+<p>如果我们想用维数更低的子空间来表示原来高维的特征空间, 那么这就是降维问题。<br>无论是分类还是回归，都是想建立一个预测模型 H，给定一个输入 x, 可以得到一个输出 y:<br>                                        y=H(x)<br>不同的只是在分类问题中, y 是离散的; 而在回归问题中 y 是连续的。所以总得来说，两种问题的学习算法都很类似。所以在这个图谱上，我们看到在分类问题中用到的学习算法，在回归问题中也能使用。分类问题最常用的学习算法包括 SVM (支持向量机) , SGD (随机梯度下降算法), Bayes (贝叶斯估计), Ensemble, KNN 等。而回归问题也能使用 SVR, SGD, Ensemble 等算法，以及其它线性回归算法。<br><strong>clustering</strong><br>聚类也是分析样本的属性, 有点类似classification, 不同的就是classification 在预测之前是知道 y 的范围, 或者说知道到底有几个类别, 而聚类是不知道属性的范围的。所以 classification 也常常被称为 supervised learning, 而clustering就被称为 unsupervised learning。<br>clustering 事先不知道样本的属性范围，只能凭借样本在特征空间的分布来分析样本的属性。这种问题一般更复杂。而常用的算法包括 k-means (K-均值), GMM (高斯混合模型) 等。</p>
+<p><strong>dimensionality reduction</strong><br>降维是机器学习另一个重要的领域, 降维有很多重要的应用, 特征的维数过高, 会增加训练的负担与存储空间, 降维就是希望去除特征的冗余, 用更加少的维数来表示特征. 降维算法最基础的就是PCA了, 后面的很多算法都是以PCA为基础演化而来。</p>
+<h1 id="机器-学习常见算法"><a href="#机器-学习常见算法" class="headerlink" title="机器 学习常见算法"></a>机器 学习常见算法</h1><p>机器学习领域涉及到很多的算法和模型，这里遴选一些常见的算法：</p>
+<ul>
+<li>正则化算法（Regularization Algorithms）</li>
+<li>集成算法（Ensemble Algorithms）</li>
+<li>决策树算法（Decision Tree Algorithm）</li>
+<li>回归（Regression）</li>
+<li>人工神经网络（Artificial Neural Network）</li>
+<li>深度学习（Deep Learning）</li>
+<li>支持向量机（Support Vector Machine）</li>
+<li>降维算法（Dimensionality Reduction Algorithms）</li>
+<li>聚类算法（Clustering Algorithms）</li>
+<li>基于实例的算法（Instance-based Algorithms）</li>
+<li>贝叶斯算法（Bayesian Algorithms）</li>
+<li>关联规则学习算法（Association Rule Learning Algorithms）</li>
+<li>图模型（Graphical Models）<h3 id="正则化算法（Regularization-Algorithms）"><a href="#正则化算法（Regularization-Algorithms）" class="headerlink" title="正则化算法（Regularization Algorithms）"></a>正则化算法（Regularization Algorithms）</h3>正则化算法是另一种方法（通常是回归方法）的拓展，这种方法会基于模型复杂性对其进行惩罚，它喜欢相对简单能够更好的泛化的模型。<br>正则化中我们将保留所有的特征变量，但是会减小特征变量的数量级（参数数值的大小θ(j)）。这个方法非常有效，当我们有很多特征变量时，其中每一个变量都能对预测产生一点影响。<br>算法实例：</li>
+<li>岭回归（Ridge Regression）</li>
+<li>最小绝对收缩与选择算子（LASSO）</li>
+<li>GLASSO</li>
+<li>弹性网络（Elastic Net）</li>
+<li>最小角回归（Least-Angle Regression）<br>详解链接：<a href="http://blog.csdn.net/u011467621/article/details/49888467" target="_blank" rel="external">机器学习之正则化算法</a></li>
+</ul>
+<h3 id="集成算法（Ensemble-algorithms）"><a href="#集成算法（Ensemble-algorithms）" class="headerlink" title="集成算法（Ensemble algorithms）"></a>集成算法（Ensemble algorithms）</h3><p><strong>集成方法</strong>是由多个较弱的模型集成模型组，其中的模型可以单独进行训练，并且它们的预测能以某种方式结合起来去做出一个总体预测。这类算法又称元算法(meta-algorithm)。最常见的集成思想有两种bagging和boosting。</p>
+<p><strong>boosting</strong><br>基于错误提升分类器性能，通过集中关注被已有分类器分类错误的样本，构建新分类器并集成。<br><strong>bagging</strong><br>基于数据随机重抽样的分类器构建方法。 </p>
+<p>算法实例：</p>
+<ul>
+<li>Boosting</li>
+<li>Bootstrapped Aggregation（Bagging）</li>
+<li>AdaBoost</li>
+<li>层叠泛化（Stacked Generalization）（blending）</li>
+<li>梯度推进机（Gradient Boosting Machines，GBM）</li>
+<li>梯度提升回归树（Gradient Boosted Regression Trees，GBRT）</li>
+<li>随机森林（Random Forest）<br>总结：当先最先进的预测几乎都使用了算法集成。它比使用单个模型预测出来的结果要精确的多。但是该算法需要大量的维护工作。<br>详细讲解：<a href="http://blog.csdn.net/autoliuweijie/article/details/50285817" target="_blank" rel="external">机器学习算法之集成算法</a><h3 id="决策树算法（Decision-Tree-Algorithm）"><a href="#决策树算法（Decision-Tree-Algorithm）" class="headerlink" title="决策树算法（Decision Tree Algorithm）"></a>决策树算法（Decision Tree Algorithm）</h3>决策树学习使用一个决策树作为一个预测模型，它将对一个 item（表征在分支上）观察所得映射成关于该 item 的目标值的结论（表征在叶子中）。<br>决策树通过把实例从艮节点排列到某个叶子结点来分类实例，叶子结点即为实例所属的分类。树上的每一个结点指定了对实例的某个属性的测试，并且该结点的每一个后继分支对应于该属性的一个可能值。分类实例的方法是从这棵树的根节点开始，测试这个结点的属性，然后按照给定实例的属性值对应的树枝向下移动。然后这个过程在以新结点的根的子树上重复。<br>算法实例：</li>
+<li>分类和回归树（Classification and Regression Tree，CART）</li>
+<li>Iterative Dichotomiser 3（ID3）</li>
+<li>C4.5 和 C5.0（一种强大方法的两个不同版本）<br>详解：<a href="http://blog.csdn.net/nieson2012/article/details/51314873" target="_blank" rel="external">机器学习算法之决策树算法</a></li>
+</ul>
+<h3 id="回归（Regression）算法"><a href="#回归（Regression）算法" class="headerlink" title="回归（Regression）算法"></a>回归（Regression）算法</h3><p>回归是用于估计两种变量之间关系的统计过程。当用于分析因变量和一个 多个自变量之间的关系时，该算法能提供很多建模和分析多个变量的技巧。具体一点说，回归分析可以帮助我们理解当任意一个自变量变化，另一个自变量不变时，因变量变化的典型值。最常见的是，回归分析能在给定自变量的条件下估计出因变量的条件期望。</p>
+<p>算法实例：</p>
+<ul>
+<li>普通最小二乘回归（Ordinary Least Squares Regression，OLSR）</li>
+<li>线性回归（Linear Regression）</li>
+<li>逻辑回归（Logistic Regression）</li>
+<li>逐步回归（Stepwise Regression）</li>
+<li>多元自适应回归样条（Multivariate Adaptive Regression Splines，MARS）</li>
+<li>本地散点平滑估计（Locally Estimated Scatterplot Smoothing，LOESS）</li>
+</ul>
+<p>回归算法详解：<a href="http://blog.csdn.net/moodytong/article/details/9731283" target="_blank" rel="external">机器学习算法之回归算法</a></p>
+<h3 id="人工神经网络"><a href="#人工神经网络" class="headerlink" title="人工神经网络"></a>人工神经网络</h3><p>人工神经网络是受生物神经网络启发而构建的算法模型。它是一种模式匹配，常被用于回归和分类问题，但拥有庞大的子域，由数百种算法和各类问题的变体组成。<br>人工神经网络（ANN）提供了一种普遍而且实际的方法从样例中学习值为实数、离散值或向量函数。人工神经网络由一系列简单的单元相互连接构成，其中每个单元有一定数量的实值输入，并产生单一的实值输出。<br>算法实例：</p>
+<ul>
+<li>感知器</li>
+<li>反向传播</li>
+<li>Hopfield 网络</li>
+<li>径向基函数网络（Radial Basis Function Network，RBFN）</li>
+</ul>
+<p>详细链接：<a href="http://www.52ml.net/1408.html" target="_blank" rel="external">机器学习算法之人工神经网络</a></p>
+<h3 id="深度学习（Deep-Learning）"><a href="#深度学习（Deep-Learning）" class="headerlink" title="深度学习（Deep Learning）"></a>深度学习（Deep Learning）</h3><p>深度学习是人工神经网络的最新分支，它受益于当代硬件的快速发展。<br>众多研究者目前的方向主要集中于构建更大、更复杂的神经网络，目前有许多方法正在聚焦半监督学习问题，其中用于训练的大数据集只包含很少的标记。</p>
+<p>算法实例：</p>
+<ul>
+<li>深玻耳兹曼机（Deep Boltzmann Machine，DBM）</li>
+<li>Deep Belief Networks（DBN）</li>
+<li>卷积神经网络（CNN）</li>
+<li>Stacked Auto-Encoders</li>
+</ul>
+<p>深度学习详解：<a href="http://blog.csdn.net/zouxy09/article/details/8775360" target="_blank" rel="external">机器学习算法之深度学习</a></p>
+<h3 id="支持向量机（Support-Vector-Machines）"><a href="#支持向量机（Support-Vector-Machines）" class="headerlink" title="支持向量机（Support Vector Machines）"></a>支持向量机（Support Vector Machines）</h3><p><strong>支持向量机</strong>是一种监督式学习 (Supervised Learning)的方法，主要用在统计分类 (Classification)问题和回归分析 (Regression)问题上。支持向量机属于一般化线性分类器，也可以被认为是提克洛夫规范化（Tikhonov Regularization）方法的一个特例。这族分类器的特点是他们能够同时最小化经验误差与最大化几何边缘区，因此支持向量机也被称为最大边缘区分类器。现在多简称为SVM。<br>给定一组训练事例，其中每个事例都属于两个类别中的一个，支持向量机（SVM）训练算法可以在被输入新的事例后将其分类到两个类别中的一个，使自身成为非概率二进制线性分类器。<br>SVM 模型将训练事例表示为空间中的点，它们被映射到一幅图中，由一条明确的、尽可能宽的间隔分开以区分两个类别。</p>
+<p>算法详解：<a href="http://blog.csdn.net/xidiancoder/article/details/50913607" target="_blank" rel="external">机器学习算法之支持向量机</a></p>
+<h3 id="降维算法（Dimensionality-Reduction-Algorithms）"><a href="#降维算法（Dimensionality-Reduction-Algorithms）" class="headerlink" title="降维算法（Dimensionality Reduction Algorithms）"></a>降维算法（Dimensionality Reduction Algorithms）</h3><p>所谓的降维就是指采用某种映射方法，将原高维空间中的数据点映射到低维度的空间中。降维的本质是学习一个映射函数 f : x-&gt;y，其中x是原始数据点的表达，目前最多使用向量表达形式。 y是数据点映射后的低维向量表达，通常y的维度小于x的维度（当然提高维度也是可以的）。f可能是显式的或隐式的、线性的或非线性的。<br>这一算法可用于可视化高维数据或简化接下来可用于监督学习中的数据。许多这样的方法可针对分类和回归的使用进行调整。</p>
+<p>算法实例：</p>
+<ul>
+<li>主成分分析（Principal Component Analysis (PCA)）</li>
+<li>主成分回归（Principal Component Regression (PCR)）</li>
+<li>偏最小二乘回归（Partial Least Squares Regression (PLSR)）</li>
+<li>Sammon 映射（Sammon Mapping）</li>
+<li>多维尺度变换（Multidimensional Scaling (MDS)）</li>
+<li>投影寻踪（Projection Pursuit）</li>
+<li>线性判别分析（Linear Discriminant Analysis (LDA)）</li>
+<li>混合判别分析（Mixture Discriminant Analysis (MDA)）</li>
+<li>二次判别分析（Quadratic Discriminant Analysis (QDA)）</li>
+<li>灵活判别分析（Flexible Discriminant Analysis (FDA)）</li>
+</ul>
+<p>详解链接：<a href="http://blog.csdn.net/rosenor1/article/details/52278116" target="_blank" rel="external">降维算法</a></p>
+<h3 id="聚类算法（Clustering-Algorithms）"><a href="#聚类算法（Clustering-Algorithms）" class="headerlink" title="聚类算法（Clustering Algorithms）"></a>聚类算法（Clustering Algorithms）</h3><p>聚类算法是指对一组目标进行分类，属于同一组（亦即一个类，cluster）的目标被划分在一组中，与其他组目标相比，同一组目标更加彼此相似。<br>优点是让数据变得有意义，缺点是结果难以解读，针对不同的数据组，结果可能无用。<br>算法实例：</p>
+<ul>
+<li>K-均值（k-Means）</li>
+<li>k-Medians 算法</li>
+<li>Expectation Maximi 封层 ation (EM)</li>
+<li>最大期望算法（EM）</li>
+<li>分层集群（Hierarchical Clstering）</li>
+</ul>
+<p>聚类算法详解：<a href="http://blog.csdn.net/king523103/article/details/49421321" target="_blank" rel="external">机器学习算法之聚类算法</a></p>
+<h3 id="贝叶斯算法（Bayesian-Algorithms）"><a href="#贝叶斯算法（Bayesian-Algorithms）" class="headerlink" title="贝叶斯算法（Bayesian Algorithms）"></a>贝叶斯算法（Bayesian Algorithms）</h3><p>贝叶斯定理（英语：Bayes’ theorem）是概率论中的一个定理，它跟随机变量的条件概率以及边缘概率分布有关。在有些关于概率的解说中，贝叶斯定理（贝叶斯更新）能够告知我们如何利用新证据修改已有的看法。贝叶斯方法是指明确应用了贝叶斯定理来解决如分类和回归等问题的方法。</p>
+<p>算法实例：</p>
+<ul>
+<li>朴素贝叶斯（Naive Bayes）</li>
+<li>高斯朴素贝叶斯（Gaussian Naive Bayes）</li>
+<li>多项式朴素贝叶斯（Multinomial Naive Bayes）</li>
+<li>平均一致依赖估计器（Averaged One-Dependence Estimators (AODE)）</li>
+<li>贝叶斯信念网络（Bayesian Belief Network (BBN)）</li>
+<li>贝叶斯网络（Bayesian Network (BN)）</li>
+</ul>
+<p>贝叶斯算法链接：<a href="http://www.cnblogs.com/xiaohuahua108/p/5867448.html" target="_blank" rel="external">贝叶斯算法详解</a></p>
+<h3 id="关联规则学习算法（Association-Rule-Learning-Algorithms）"><a href="#关联规则学习算法（Association-Rule-Learning-Algorithms）" class="headerlink" title="关联规则学习算法（Association Rule Learning Algorithms）"></a>关联规则学习算法（Association Rule Learning Algorithms）</h3><p>关联规则学习方法能够提取出对数据中的变量之间的关系的最佳解释。比如说一家超市的销售数据中存在规则 {洋葱，土豆}=&gt; {汉堡}，那说明当一位客户同时购买了洋葱和土豆的时候，他很有可能还会购买汉堡肉。有点类似于联想算法。</p>
+<p>算法实例：</p>
+<ul>
+<li>Apriori 算法（Apriori algorithm）</li>
+<li>Eclat 算法（Eclat algorithm）</li>
+<li>FP-growth</li>
+</ul>
+<p>关联规则学习算法：<a href="http://www.cnblogs.com/hdu-cpd/p/5987904.html" target="_blank" rel="external">关联规则学习算法</a></p>
+<h3 id="图模型（Graphical-Models）"><a href="#图模型（Graphical-Models）" class="headerlink" title="图模型（Graphical Models）"></a>图模型（Graphical Models）</h3><p><strong>图模型</strong>(GraphicalModels)在概率论与图论之间建立起了联姻关系。它提供了一种自然工具来处理应用数学与工程中的两类问题——不确定性(Uncertainty)和复杂性(Complexity)问 题，特别是在机器学习算法的分析与设计中扮演着重要角色。图模型的基本理念是模块化的思想，复杂系统是通过组合简单系统建构的。概率论提供了一种粘合剂使 系统的各个部分组合在一起，确保系统作为整体的持续一致性，提供了多种数据接口模型方法。</p>
+<p>图模型或概率图模型（PGM/probabilistic graphical model）是一种概率模型，一个图（graph）可以通过其表示随机变量之间的条件依赖结构（conditional dependence structure）。</p>
+<p>算法实例：</p>
+<ul>
+<li>贝叶斯网络（Bayesian network）</li>
+<li>马尔可夫随机域（Markov random field）</li>
+<li>链图（Chain Graphs）</li>
+<li>祖先图（Ancestral graph）</li>
+</ul>
+<p>图模型详解：<a href="http://blog.exbot.net/archives/427" target="_blank" rel="external">机器学习算法之图模型</a></p>
+<p>参考：<br><a href="http://blog.csdn.net/xxinliu/article/details/7408742/" target="_blank" rel="external">机器学习10大算法</a><br><a href="http://open.163.com/special/opencourse/machinelearning.html" target="_blank" rel="external">机器学习斯坦福公开课</a></p>
+    </div>
+    <p class="post-meta">
+        <span class="post-cat">分类：
+            <a class="cat-link" href="/categories/机器学习/">机器学习</a>
+        </span>
+        <span class="post-tags">
+            标签：
+            <a href="/tags/机器学习/" title="机器学习">机器学习</a> / 
+    
+        <a href="/tags/算法/" title="算法">算法</a>
+        </span>
+    </p>
+</article>
+<div class="article-share clearfix text-center">
+    <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+</div>
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br>
+        <a href="/2016/05/10/mac 搭建Android开发环境/">
+            
+                mac 搭建Android开发环境
+            
+        </a>
+    </span>
+    
+
+    
+    <span class="next fr">
+        下一篇<br>
+        <a href="/2016/05/05/ios gif图片加载框架介绍/">
+            
+                FLAnimatedImage -ios gif图片加载框架介绍
+            
+        </a>
+    </span>
+    
+</div>
+<!-- 文章评论 -->
+<div id="comments" class="comments cloud-tie-wrapper"></div>
+    <script>
+    var cloudTieConfig = {
+      url: document.location.href, 
+      sourceId: "机器学习算法集锦",
+      productKey: "c06bb9930e6f4b38a9997cb9bd17aba5",
+      target: "comments"
+    };
+    var yunManualLoad = true;
+    Tie.loader("aHR0cHM6Ly9hcGkuZ2VudGllLjE2My5jb20vcGMvbGl2ZXNjcmlwdC5odG1s", true);
+    </script>
+            </div>
+
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章分类</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+    <li>
+        <a href="/categories/Android/">Android</a>
+        <span class="badge">(10)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Android/系统/">系统</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Angular2/">Angular2</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/React-Native/">React Native</a>
+        <span class="badge">(9)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Java/">Java</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/前端/">前端</a>
+        <span class="badge">(6)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/VR/">VR</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Angular2/前端/">前端</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Spring/">Spring</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/ios/">ios</a>
+        <span class="badge">(7)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Google/">Google</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Google/VR/">VR</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/技术人生/">技术人生</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/小程序/">小程序</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/机器学习/">机器学习</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/android/">android</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/设计模式/">设计模式</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+</ul>
+    </section>
+
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="/tags/Android/" title="Android">Android (7)</a>
+  
+    <a class="tag-item" href="/tags/新特性/" title="新特性">新特性 (2)</a>
+  
+    <a class="tag-item" href="/tags/高仿/" title="高仿">高仿 (4)</a>
+  
+    <a class="tag-item" href="/tags/深入系统/" title="深入系统">深入系统 (1)</a>
+  
+    <a class="tag-item" href="/tags/系统服务/" title="系统服务">系统服务 (1)</a>
+  
+    <a class="tag-item" href="/tags/android/" title="android">android (4)</a>
+  
+    <a class="tag-item" href="/tags/混淆打包/" title="混淆打包">混淆打包 (1)</a>
+  
+    <a class="tag-item" href="/tags/Angular2/" title="Angular2">Angular2 (1)</a>
+  
+    <a class="tag-item" href="/tags/前端开发/" title="前端开发">前端开发 (3)</a>
+  
+    <a class="tag-item" href="/tags/硬件/" title="硬件">硬件 (1)</a>
+  
+    <a class="tag-item" href="/tags/React-Native/" title="React Native">React Native (7)</a>
+  
+    <a class="tag-item" href="/tags/FlexBox布局/" title="FlexBox布局">FlexBox布局 (1)</a>
+  
+    <a class="tag-item" href="/tags/Java/" title="Java">Java (2)</a>
+  
+    <a class="tag-item" href="/tags/垃圾回收/" title="垃圾回收">垃圾回收 (1)</a>
+  
+    <a class="tag-item" href="/tags/Node/" title="Node">Node (2)</a>
+  
+    <a class="tag-item" href="/tags/Google/" title="Google">Google (2)</a>
+  
+    <a class="tag-item" href="/tags/VR/" title="VR">VR (2)</a>
+  
+    <a class="tag-item" href="/tags/OpenGL/" title="OpenGL">OpenGL (1)</a>
+  
+    <a class="tag-item" href="/tags/Promise/" title="Promise">Promise (1)</a>
+  
+    <a class="tag-item" href="/tags/前端/" title="前端">前端 (4)</a>
+  
+    <a class="tag-item" href="/tags/调试/" title="调试">调试 (1)</a>
+  
+    <a class="tag-item" href="/tags/eact-Native/" title="eact Native">eact Native (1)</a>
+  
+    <a class="tag-item" href="/tags/打包/" title="打包">打包 (1)</a>
+  
+    <a class="tag-item" href="/tags/Spring/" title="Spring">Spring (2)</a>
+  
+    <a class="tag-item" href="/tags/入门/" title="入门">入门 (2)</a>
+  
+    <a class="tag-item" href="/tags/原生/" title="原生">原生 (1)</a>
+  
+    <a class="tag-item" href="/tags/ios/" title="ios">ios (7)</a>
+  
+    <a class="tag-item" href="/tags/swift/" title="swift">swift (1)</a>
+  
+    <a class="tag-item" href="/tags/Swift/" title="Swift">Swift (1)</a>
+  
+    <a class="tag-item" href="/tags/AR/" title="AR">AR (1)</a>
+  
+    <a class="tag-item" href="/tags/webpack/" title="webpack">webpack (1)</a>
+  
+    <a class="tag-item" href="/tags/gulp/" title="gulp">gulp (1)</a>
+  
+    <a class="tag-item" href="/tags/Xcode/" title="Xcode">Xcode (2)</a>
+  
+    <a class="tag-item" href="/tags/https/" title="https">https (1)</a>
+  
+    <a class="tag-item" href="/tags/gif/" title="gif">gif (1)</a>
+  
+    <a class="tag-item" href="/tags/mac/" title="mac">mac (1)</a>
+  
+    <a class="tag-item" href="/tags/环境/" title="环境">环境 (1)</a>
+  
+    <a class="tag-item" href="/tags/知识库/" title="知识库">知识库 (1)</a>
+  
+    <a class="tag-item" href="/tags/原理/" title="原理">原理 (1)</a>
+  
+</div>
+    </section>
+    
+
+    
+    <!-- 我的微博 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>我的微博</strong></h3>
+        <div class="widget-bd" style="position: relative">
+  <div id="myWeiboLoading" class="text-center" style="position:absolute;top:0;left:0;right:0;bottom:0;line-height:50px;font-size:12px;background-color:#fff;z-index:9">微博加载中...</div>
+  <iframe width="100%" height="550" class="share_self" frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&amp;width=0&amp;height=550&amp;fansRow=2&amp;ptype=1&amp;speed=0&amp;skin=4&amp;isTitle=1&amp;noborder=1&amp;isWeibo=1&amp;isFans=1&amp;uid=1831462560&amp;verifier=5192ec39&amp;dpc=1"></iframe>
+  <script>
+  (function () {
+    var oMyWeibo = document.getElementById('myWeibo');
+    var oMyWeiboLoading = document.getElementById('myWeiboLoading');
+    var isIE = /msie/i.test(navigator.userAgent) && !window.opera;
+    var timer = null;
+    if (isIE) {
+      oMyWeibo.onreadystatechange = function(){
+        if(oMyWeibo.readyState === 'loaded' || oMyWeibo.readyState === 'complete'){
+          timer = setTimeout(function () {
+            oMyWeiboLoading.parentNode.removeChild(oMyWeiboLoading);
+            timer = null;
+          }, 300);
+        }
+      };
+    } else {
+      oMyWeibo.onload = function () {
+        timer = setTimeout(function () {
+          oMyWeiboLoading.parentNode.removeChild(oMyWeiboLoading);
+          timer = null;
+        }, 300);
+      };
+    }
+  })();
+  </script>
+</div>
+    </section>
+    
+
+    
+    <!-- 友情链接 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>友情链接</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+        <li>
+            <a href="http://blog.csdn.net/xiangzhihong8/" target="_blank" title="csdn个人博客">csdn博客</a>
+        </li>
+    
+        <li>
+            <a href="https://yq.aliyun.com/u/xiangzhihong" target="_blank" title="阿里云技术博客">阿里云博客</a>
+        </li>
+    
+</ul>
+    </section>
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <footer class="footer">
+    &copy;
+    
+        2016-2017
+    
+
+    <a href="/">Jelon Loves You</a>
+</footer>
+<div class="back-to-top" id="JELON__backToTop" title="返回顶部">返回顶部</div>
+<!-- 添加百度自动推送 -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+    <!--博客js脚本 -->
+    <!-- 这里放网站js脚本 -->
+<script src="/js/main.js"></script>
+</body>

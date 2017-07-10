@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8">
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya">
+    
+    <title>高仿ios斗鱼界面 | 向志洪</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
+    <meta name="keywords" content="前端, Web, 移动, 向志洪">
+    <meta name="description" content="">
+
+    
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <!--[if lt IE 9]>
+    <script src="/js/html5.js"></script>
+    <![endif]-->
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?fd459238242776d173cdc64918fb32f2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+    
+    <script>var yunModuleEnv = true;</script>
+    <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+    
+</head></html>
+<body class="home">
+    <!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="/">
+                <div class="cover">
+                    <span class="name">向志洪</span>
+                    <span class="description">个人技术博客</span>
+                </div>
+            </a>
+        </div>
+        <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
+        <ul class="menu hidden" id="JELON__menu">
+            
+            <li rel="/2016/09/05/ios高仿斗鱼app/index.html" class="item">
+                <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
+            </li>
+            
+            <li rel="/2016/09/05/ios高仿斗鱼app/index.html" class="item">
+                <a href="/archives/" title="文章列表" class="icon-lab">&nbsp;文章列表</a>
+            </li>
+            
+            <li rel="/2016/09/05/ios高仿斗鱼app/index.html" class="item">
+                <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
+            </li>
+            
+            <li rel="/2016/09/05/ios高仿斗鱼app/index.html" class="item">
+                <a href="/404/" title="留言" class="icon-comment">&nbsp;留言</a>
+            </li>
+            
+        </ul>
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        <a href="https://github.com/xiangzhihong" target="_blank">Github</a>
+                        |
+                    
+                        <a href="http://tongji.baidu.com/web/welcome/login" target="_blank">站长统计</a>
+                        |
+                    
+                        <a href="http://weibo.com/code_xzh" target="_blank">新浪微博</a>
+                        |
+                    
+                </p>
+                <p class="sns">
+                    
+                    <a href="javascript: void(0);" class="wechat">
+                        <b>■</b>
+                        公众号
+                        <span class="popover">
+                            <img src="/img/wechat_mp.jpg" width="120" height="120" alt="我的微信订阅号">
+                            <i class="arrow"></i>
+                        </span>
+                    </a>
+                </p>
+                
+            </div>
+            <div class="avatar fr">
+                <img src="http://ohe65w0xx.bkt.clouddn.com/avert.png" alt="avatar" title="Jelon">
+            </div>
+        </div>
+    </section>
+</header>
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+        <section class="content">
+            <div class="content-main widget">
+                <!-- 文章页 -->
+<!-- 文章 -->
+<article class="post article">
+    <header class="text-center">
+        <h3 class="post-title"><span>高仿ios斗鱼界面</span></h3>
+    </header>
+    <p class="post-meta text-center">
+        xiangzhihong 发表于
+        <time datetime="2016-09-04T16:00:00.000Z">2016-09-05</time>
+    </p>
+    <div class="post-content">
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>过去的2016年是一个直播年，各大平台都相继接入了直播频道，电商，社交…更是火了一批做视频的，譬如喵播，映客，都斗鱼等直播平台。全民直播，一下子掀起了直播的技术潮，今天要聊聊如何实现一个ios的直播app。<br>首先来看最终的效果：<br><img src="http://upload-images.jianshu.io/upload_images/428088-59c0c6faf4804622.gif?imageMogr2/auto-orient/strip" alt="这里写图片描述"><br>最近也是因为入门swift不久，在网上找了一个项目就开始模仿，本项目用到的第三方库：<br><a href="https://github.com/Alamofire/Alamofire/" target="_blank" rel="external">Alamofire</a><br><a href="https://github.com/onevcat/Kingfisher" target="_blank" rel="external">Kingfisher</a></p>
+<h1 id="Swift3-0的蝶变"><a href="#Swift3-0的蝶变" class="headerlink" title="Swift3.0的蝶变"></a>Swift3.0的蝶变</h1><p>swift3.0相对于2.x，渐渐的脱离了oc和c的风格，不管是从命名规范还是新能上都有了较大的提升，笔者认为应该是未来一个相对稳定的版本，而不是1.0和2.0时代的实验版本。相对于2.x，我们来看3.0或以后的3.x主要有哪些特性：<br><strong>稳定二进制接口（ABI)</strong><br>API大家都知道是应用程序接口 API只是提供函数签名，而ABI是系统和语言层面的 如果ABI稳定 意味着以后Swift版本更新升级 我们不需要再修改老版本 Swift 语言编译的库了。<br><strong>弹性/韧性 解决易碎二进制接口问题</strong><br><a href="https://en.wikipedia.org/wiki/Fragile_binary_interface_problem" target="_blank" rel="external">Fragile binary interface problem</a>是面向对象编程语言的通病 如果在程序中引入了外部库 我们的的程序中使用并继承了该外部库中的类 如果外部库有改动 我们必须重新编译所有该类的继承树 而这类问题被称为<a href="https://en.wikipedia.org/wiki/Fragile_base_class" target="_blank" rel="external">脆弱的基类</a> (Fragile base class)<br><strong>可移植性</strong><br>这个对于高级语言是很重要的特性，这意味着Swift可被移植到其他平台上。<br><strong>全面支持泛型特性</strong><br>Swift 2.2已经很好的支持泛型 但是还不够完善，Swift 3.0开始 将全面支持泛型的所有特性。<br><strong>新的API设计规范</strong><br>Swift3.0 发布了新的语言设计规范 其中在Swift3.0中标准库和核心库将会遵循这个设计规范。<a href="https://swift.org/documentation/api-design-guidelines/" target="_blank" rel="external">规范地址</a><br><strong>从函数参数中删除var关键字</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">func doSomethingWithVar(var i: Int) &#123;</div><div class="line">     i = 2 // This will NOT have an effect on the caller&apos;s Int that was passed, but i can be modified locally</div><div class="line">  &#125;</div><div class="line"></div><div class="line">func doSomethingWithInout(inout i: Int) &#123;</div><div class="line">       i = 2 // This will have an effect on the caller&apos;s Int that was passed.</div><div class="line">&#125;  </div><div class="line"></div><div class="line">doSomethingWithVar(x)  </div><div class="line"> print(x) // 1</div><div class="line"></div><div class="line">doSomethingWithInout(&amp;x)</div><div class="line"> print(x) // 2</div></pre></td></tr></table></figure>
+<p>删除var是因为var与inout会产生歧义和混乱。<br><strong>为autoreleasepool添加错误处理</strong><br>旧版autoreleasepool处理错误方式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">func doWork() throws -&gt; Result &#123;</div><div class="line">   var result: Result? = nil</div><div class="line">   var error: ErrorProtocol? = nil</div><div class="line">   autoreleasepool &#123; </div><div class="line">          do &#123;</div><div class="line">            ... actual computation which hopefully assigns to result but might not ...</div><div class="line">         &#125; catch let e &#123;</div><div class="line">                       error = e</div><div class="line">          &#125;</div><div class="line">     &#125; </div><div class="line"></div><div class="line">    guard let result = result else &#123; </div><div class="line">              throw error! </div><div class="line">      &#125; </div><div class="line">          return result!</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p>Swift3.0 autoreleasepool 处理错误方式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">public func autoreleasepool&lt;Result&gt;(@noescape body: () throws -&gt; Result) rethrows -&gt; Result</div><div class="line"></div><div class="line">  func doWork() throws -&gt; Result &#123;</div><div class="line"></div><div class="line">     return try autoreleasepool</div><div class="line">         &#123; </div><div class="line">                 ... actual computation which either returns or throws       ...         </div><div class="line">         &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>允许直接引用（Default, Private, Repeat）关键字成员</strong><br>在Swift3.0之前我们引用default和repeat成员时 需要这样写：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">let cell = UITableViewCell(style: .`default`, reuseIdentifier: nil)</div><div class="line">particleSystem.imageSequenceAnimationMode = SCNParticleImageSequenceAnimationMode.`repeat`</div></pre></td></tr></table></figure></p>
+<p>Swift3.0时 允许我们直接访问default repeat 关键字成员：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">let cell = UITableViewCell(style: .default, reuseIdentifier: nil)</div><div class="line">particleSystem.imageSequenceAnimationMode = SCNParticleImageSequenceAnimationMode.repeat</div></pre></td></tr></table></figure>
+<p> <strong>将声明式@noescape和@autoclosure 改为类型属性</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">func f(@noescape fn : () -&gt; ()) &#123;&#125; // declaration  attribute </div><div class="line"></div><div class="line">//新的语法</div><div class="line">func f(fn : @noescape () -&gt; ()) &#123;&#125; // type attribute.</div><div class="line">func f2(a : @autoclosure () -&gt; ()) &#123;&#125; // type attribute.</div></pre></td></tr></table></figure>
+<p><strong>重命名 Debug 标示符</strong><br>Debug 标示符重命名后将会与#available #selector 关键字统一风格。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">__FILE__ -&gt;  #file</div><div class="line">__LINE__ -&gt; #line</div><div class="line">__COLUMN__ -&gt; #column</div><div class="line">__FUNCTION__ -&gt; #function</div><div class="line">__DSO_HANDLE__ -&gt; #dsohandle</div></pre></td></tr></table></figure>
+<h1 id="斗鱼部分代码分析"><a href="#斗鱼部分代码分析" class="headerlink" title="斗鱼部分代码分析"></a>斗鱼部分代码分析</h1><p>本app采用的是mvvm的开发架构，做到业务，数据，页面的真正分离，我们来看几个核心的类：<br>base</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div></pre></td><td class="code"><pre><div class="line">import UIKit  </div><div class="line">  </div><div class="line">private let kItemMargin : CGFloat = 10  </div><div class="line">private let kHeaderViewH : CGFloat = 50  </div><div class="line">private let NormalCellID = &quot;NormalCellID&quot;  </div><div class="line">private let HeaderViewID = &quot;HeaderViewID&quot;  </div><div class="line">let kNormalItemW = (kScreenW - 33 * kItemMargin) / 2  </div><div class="line">let kNormalItemH = kNormalItemW * 3 / 4  </div><div class="line">let kPrettyItemH = kNormalItemW * 5 / 4  </div><div class="line">let PrettyCellID = &quot;PrettyCellID&quot;  </div><div class="line">  </div><div class="line">class BaseAnchorVC: BaseVC &#123;  </div><div class="line">  </div><div class="line">    //!表示用到的时候保证有值  </div><div class="line">    var baseVM : BaseVM!  </div><div class="line">      </div><div class="line">    lazy var collectionView : UICollectionView = &#123;[unowned self] in  </div><div class="line">        let layout = UICollectionViewFlowLayout()  </div><div class="line">        layout.itemSize = CGSize(width: kNormalItemW, height: kNormalItemH)  </div><div class="line">        layout.minimumLineSpacing = 0  </div><div class="line">        layout.minimumInteritemSpacing = kItemMargin  </div><div class="line">        layout.headerReferenceSize = CGSize(width: kScreenW, height: kHeaderViewH)  </div><div class="line">        layout.sectionInset = UIEdgeInsets(top: 0, left: kItemMargin, bottom: 0, right: kItemMargin)  </div><div class="line">          </div><div class="line">        let collectionView = UICollectionView(frame: self.view.bounds, collectionViewLayout: layout)  </div><div class="line">        collectionView.backgroundColor = UIColor.white  </div><div class="line">        collectionView.dataSource = self  </div><div class="line">        collectionView.delegate = self  </div><div class="line">        collectionView.autoresizingMask = [.flexibleHeight, .flexibleWidth]  </div><div class="line">          </div><div class="line">        collectionView.register(UINib(nibName: &quot;CollectionNormalCell&quot;, bundle: nil), forCellWithReuseIdentifier: NormalCellID)  </div><div class="line">        collectionView.register(UINib(nibName: &quot;CollectionPrettyCell&quot;, bundle: nil), forCellWithReuseIdentifier: PrettyCellID)  </div><div class="line">        collectionView.register(UINib(nibName: &quot;CollectionHeaderView&quot;, bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: HeaderViewID)  </div><div class="line">          </div><div class="line">        return collectionView  </div><div class="line">        &#125;()  </div><div class="line">      </div><div class="line">    override func viewDidLoad() &#123;  </div><div class="line">        super.viewDidLoad()  </div><div class="line">        setupUI()  </div><div class="line">        loadData()  </div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">&#125;  </div><div class="line">  </div><div class="line">extension BaseAnchorVC &#123;  </div><div class="line">    override func setupUI() &#123;  </div><div class="line">        contentView = collectionView  </div><div class="line">        view.addSubview(collectionView)  </div><div class="line">        super.setupUI()  </div><div class="line">    &#125;  </div><div class="line">&#125;  </div><div class="line">  </div><div class="line">extension BaseAnchorVC &#123;  </div><div class="line">    func loadData() &#123;  </div><div class="line">    &#125;  </div><div class="line">&#125;  </div><div class="line">  </div><div class="line">extension BaseAnchorVC : UICollectionViewDataSource &#123;  </div><div class="line">    func numberOfSections(in collectionView: UICollectionView) -&gt; Int &#123;  </div><div class="line">        return baseVM.anchorGroups.count  </div><div class="line">    &#125;  </div><div class="line">      </div><div class="line">    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -&gt; Int &#123;  </div><div class="line">        return baseVM.anchorGroups[section].anchors.count  </div><div class="line">    &#125;  </div><div class="line">      </div><div class="line">    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -&gt; UICollectionViewCell &#123;  </div><div class="line">        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NormalCellID, for: indexPath) as! CollectionNormalCell  </div><div class="line">        cell.anchor = baseVM.anchorGroups[indexPath.section].anchors[indexPath.item]  </div><div class="line">        return cell  </div><div class="line">    &#125;  </div><div class="line">      </div><div class="line">    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -&gt; UICollectionReusableView &#123;  </div><div class="line">        let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HeaderViewID, for: indexPath) as! CollectionHeaderView  </div><div class="line">        headerView.group = baseVM.anchorGroups[indexPath.section]  </div><div class="line">        return headerView  </div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">&#125;  </div><div class="line">  </div><div class="line">extension BaseAnchorVC : UICollectionViewDelegate &#123;  </div><div class="line">    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) &#123;  </div><div class="line">        let anchor = baseVM.anchorGroups[indexPath.section].anchors[indexPath.item]  </div><div class="line">        anchor.isVertical == 0 ? pushNormalRoomVc(anchor) : presentShowRoomVc(anchor)  </div><div class="line">    &#125;  </div><div class="line">      </div><div class="line">    private func presentShowRoomVc(_ anchor : AnchorModel) &#123;  </div><div class="line">        let showVc = ShowRoomVC()  </div><div class="line">        showVc.anchor = anchor  </div><div class="line">        present(showVc, animated: true, completion: nil)  </div><div class="line">    &#125;  </div><div class="line">      </div><div class="line">    private func pushNormalRoomVc(_ anchor : AnchorModel) &#123;  </div><div class="line">        let normalVc = NormalRoomVC()  </div><div class="line">        normalVc.anchor = anchor  </div><div class="line">        navigationController?.pushViewController(normalVc, animated: true)  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">import UIKit  </div><div class="line">  </div><div class="line">class GameVC: BaseAnchorVC &#123;  </div><div class="line">    fileprivate lazy var gameVM : GameVM = GameVM()  </div><div class="line">    fileprivate lazy var menuView : MenuView = &#123;  </div><div class="line">        let menuView = MenuView.menuView()  </div><div class="line">        menuView.frame = CGRect(x: 0, y: -kMenuViewH, width: kScreenW, height: kMenuViewH)//设置collectionView的-y,放置menuView  </div><div class="line">        return menuView  </div><div class="line">    &#125;()  </div><div class="line">      </div><div class="line">&#125;  </div><div class="line">  </div><div class="line">extension GameVC &#123;  </div><div class="line">    override func setupUI() &#123;  </div><div class="line">        super.setupUI()  </div><div class="line">        collectionView.addSubview(menuView)  </div><div class="line">        collectionView.contentInset = UIEdgeInsets(top: kMenuViewH, left: 0, bottom: 0, right: 0)//设置内边距  </div><div class="line">    &#125;  </div><div class="line">&#125;  </div><div class="line">  </div><div class="line">extension GameVC&#123;  </div><div class="line">    override func loadData() &#123;  </div><div class="line">        baseVM = self.gameVM  </div><div class="line">        gameVM.requestData &#123;  </div><div class="line">            self.collectionView.reloadData()  </div><div class="line">            var gameGroups = Array(self.gameVM.anchorGroups[1...15])//0...15 &amp; gameGroups.removeFirst()  </div><div class="line">            let moreGroup = AnchorGroup()  </div><div class="line">            moreGroup.tag_name = &quot;更多分类&quot;  </div><div class="line">            gameGroups.append(moreGroup)  </div><div class="line">            self.menuView.groups = gameGroups  </div><div class="line">            self.loadDataFinished()  </div><div class="line">        &#125;  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>请求类：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">import UIKit  </div><div class="line">import Alamofire  </div><div class="line">  </div><div class="line">enum MethodType &#123;  </div><div class="line">    case get  </div><div class="line">    case post  </div><div class="line">&#125;  </div><div class="line">  </div><div class="line">class HttpTools &#123;  </div><div class="line">    class func requestData(_ type : MethodType, URLString : String, parameters : [String : Any]? = nil, finishedCallback :  @escaping (_ result : Any) -&gt; ()) &#123;  </div><div class="line">        let method = type == .get ? HTTPMethod.get : HTTPMethod.post  </div><div class="line">        Alamofire.request(URLString, method: method, parameters: parameters).responseJSON &#123; (response) in  </div><div class="line">            guard let result = response.result.value else &#123;  </div><div class="line">                print(response.result.error)  </div><div class="line">                return  </div><div class="line">            &#125;  </div><div class="line">            finishedCallback(result)  </div><div class="line">        &#125;  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>附：<a href="https://github.com/xiangzhihong/douyu" target="_blank" rel="external">swift斗鱼app界面</a><br>     <a href="https://pan.baidu.com/s/1nv8iubJ?errno=0&amp;errmsg=Auth%20Login%20Sucess&amp;&amp;bduss=&amp;ssnerror=0" target="_blank" rel="external">斗鱼完整代码oc</a><br>     <a href="http://www.jianshu.com/p/4d2032ca9cc5" target="_blank" rel="external">oc代码原文</a></p>
+    </div>
+    <p class="post-meta">
+        <span class="post-cat">分类：
+            <a class="cat-link" href="/categories/ios/">ios</a>
+        </span>
+        <span class="post-tags">
+            标签：
+            <a href="/tags/高仿/" title="高仿">高仿</a> / 
+    
+        <a href="/tags/ios/" title="ios">ios</a>
+        </span>
+    </p>
+</article>
+<div class="article-share clearfix text-center">
+    <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+</div>
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br>
+        <a href="/2016/09/05/Promise机制详解/">
+            
+                Promise机制详解
+            
+        </a>
+    </span>
+    
+
+    
+    <span class="next fr">
+        下一篇<br>
+        <a href="/2016/09/01/iOS使用自签名证书实现HTTPS请求/">
+            
+                iOS使用自签名证书实现HTTPS请求
+            
+        </a>
+    </span>
+    
+</div>
+<!-- 文章评论 -->
+<div id="comments" class="comments cloud-tie-wrapper"></div>
+    <script>
+    var cloudTieConfig = {
+      url: document.location.href, 
+      sourceId: "ios高仿斗鱼app",
+      productKey: "c06bb9930e6f4b38a9997cb9bd17aba5",
+      target: "comments"
+    };
+    var yunManualLoad = true;
+    Tie.loader("aHR0cHM6Ly9hcGkuZ2VudGllLjE2My5jb20vcGMvbGl2ZXNjcmlwdC5odG1s", true);
+    </script>
+            </div>
+
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章分类</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+    <li>
+        <a href="/categories/Android/">Android</a>
+        <span class="badge">(10)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Android/系统/">系统</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Angular2/">Angular2</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/React-Native/">React Native</a>
+        <span class="badge">(9)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Java/">Java</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/前端/">前端</a>
+        <span class="badge">(6)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/VR/">VR</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Angular2/前端/">前端</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Spring/">Spring</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/ios/">ios</a>
+        <span class="badge">(7)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Google/">Google</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Google/VR/">VR</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/技术人生/">技术人生</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/小程序/">小程序</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/机器学习/">机器学习</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/android/">android</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/设计模式/">设计模式</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+</ul>
+    </section>
+
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="/tags/Android/" title="Android">Android (7)</a>
+  
+    <a class="tag-item" href="/tags/新特性/" title="新特性">新特性 (2)</a>
+  
+    <a class="tag-item" href="/tags/高仿/" title="高仿">高仿 (4)</a>
+  
+    <a class="tag-item" href="/tags/深入系统/" title="深入系统">深入系统 (1)</a>
+  
+    <a class="tag-item" href="/tags/系统服务/" title="系统服务">系统服务 (1)</a>
+  
+    <a class="tag-item" href="/tags/android/" title="android">android (4)</a>
+  
+    <a class="tag-item" href="/tags/混淆打包/" title="混淆打包">混淆打包 (1)</a>
+  
+    <a class="tag-item" href="/tags/Angular2/" title="Angular2">Angular2 (1)</a>
+  
+    <a class="tag-item" href="/tags/前端开发/" title="前端开发">前端开发 (3)</a>
+  
+    <a class="tag-item" href="/tags/硬件/" title="硬件">硬件 (1)</a>
+  
+    <a class="tag-item" href="/tags/React-Native/" title="React Native">React Native (7)</a>
+  
+    <a class="tag-item" href="/tags/FlexBox布局/" title="FlexBox布局">FlexBox布局 (1)</a>
+  
+    <a class="tag-item" href="/tags/Java/" title="Java">Java (2)</a>
+  
+    <a class="tag-item" href="/tags/垃圾回收/" title="垃圾回收">垃圾回收 (1)</a>
+  
+    <a class="tag-item" href="/tags/Node/" title="Node">Node (2)</a>
+  
+    <a class="tag-item" href="/tags/Google/" title="Google">Google (2)</a>
+  
+    <a class="tag-item" href="/tags/VR/" title="VR">VR (2)</a>
+  
+    <a class="tag-item" href="/tags/OpenGL/" title="OpenGL">OpenGL (1)</a>
+  
+    <a class="tag-item" href="/tags/Promise/" title="Promise">Promise (1)</a>
+  
+    <a class="tag-item" href="/tags/前端/" title="前端">前端 (4)</a>
+  
+    <a class="tag-item" href="/tags/调试/" title="调试">调试 (1)</a>
+  
+    <a class="tag-item" href="/tags/eact-Native/" title="eact Native">eact Native (1)</a>
+  
+    <a class="tag-item" href="/tags/打包/" title="打包">打包 (1)</a>
+  
+    <a class="tag-item" href="/tags/Spring/" title="Spring">Spring (2)</a>
+  
+    <a class="tag-item" href="/tags/入门/" title="入门">入门 (2)</a>
+  
+    <a class="tag-item" href="/tags/原生/" title="原生">原生 (1)</a>
+  
+    <a class="tag-item" href="/tags/ios/" title="ios">ios (7)</a>
+  
+    <a class="tag-item" href="/tags/swift/" title="swift">swift (1)</a>
+  
+    <a class="tag-item" href="/tags/Swift/" title="Swift">Swift (1)</a>
+  
+    <a class="tag-item" href="/tags/AR/" title="AR">AR (1)</a>
+  
+    <a class="tag-item" href="/tags/webpack/" title="webpack">webpack (1)</a>
+  
+    <a class="tag-item" href="/tags/gulp/" title="gulp">gulp (1)</a>
+  
+    <a class="tag-item" href="/tags/Xcode/" title="Xcode">Xcode (2)</a>
+  
+    <a class="tag-item" href="/tags/https/" title="https">https (1)</a>
+  
+    <a class="tag-item" href="/tags/gif/" title="gif">gif (1)</a>
+  
+    <a class="tag-item" href="/tags/mac/" title="mac">mac (1)</a>
+  
+    <a class="tag-item" href="/tags/环境/" title="环境">环境 (1)</a>
+  
+    <a class="tag-item" href="/tags/知识库/" title="知识库">知识库 (1)</a>
+  
+    <a class="tag-item" href="/tags/原理/" title="原理">原理 (1)</a>
+  
+</div>
+    </section>
+    
+
+    
+    <!-- 我的微博 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>我的微博</strong></h3>
+        <div class="widget-bd" style="position: relative">
+  <div id="myWeiboLoading" class="text-center" style="position:absolute;top:0;left:0;right:0;bottom:0;line-height:50px;font-size:12px;background-color:#fff;z-index:9">微博加载中...</div>
+  <iframe width="100%" height="550" class="share_self" frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&amp;width=0&amp;height=550&amp;fansRow=2&amp;ptype=1&amp;speed=0&amp;skin=4&amp;isTitle=1&amp;noborder=1&amp;isWeibo=1&amp;isFans=1&amp;uid=1831462560&amp;verifier=5192ec39&amp;dpc=1"></iframe>
+  <script>
+  (function () {
+    var oMyWeibo = document.getElementById('myWeibo');
+    var oMyWeiboLoading = document.getElementById('myWeiboLoading');
+    var isIE = /msie/i.test(navigator.userAgent) && !window.opera;
+    var timer = null;
+    if (isIE) {
+      oMyWeibo.onreadystatechange = function(){
+        if(oMyWeibo.readyState === 'loaded' || oMyWeibo.readyState === 'complete'){
+          timer = setTimeout(function () {
+            oMyWeiboLoading.parentNode.removeChild(oMyWeiboLoading);
+            timer = null;
+          }, 300);
+        }
+      };
+    } else {
+      oMyWeibo.onload = function () {
+        timer = setTimeout(function () {
+          oMyWeiboLoading.parentNode.removeChild(oMyWeiboLoading);
+          timer = null;
+        }, 300);
+      };
+    }
+  })();
+  </script>
+</div>
+    </section>
+    
+
+    
+    <!-- 友情链接 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>友情链接</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+        <li>
+            <a href="http://blog.csdn.net/xiangzhihong8/" target="_blank" title="csdn个人博客">csdn博客</a>
+        </li>
+    
+        <li>
+            <a href="https://yq.aliyun.com/u/xiangzhihong" target="_blank" title="阿里云技术博客">阿里云博客</a>
+        </li>
+    
+</ul>
+    </section>
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <footer class="footer">
+    &copy;
+    
+        2016-2017
+    
+
+    <a href="/">Jelon Loves You</a>
+</footer>
+<div class="back-to-top" id="JELON__backToTop" title="返回顶部">返回顶部</div>
+<!-- 添加百度自动推送 -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+    <!--博客js脚本 -->
+    <!-- 这里放网站js脚本 -->
+<script src="/js/main.js"></script>
+</body>

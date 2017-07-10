@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8">
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya">
+    
+    <title>Swift 3.0介绍 | 向志洪</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
+    <meta name="keywords" content="前端, Web, 移动, 向志洪">
+    <meta name="description" content="">
+
+    
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <!--[if lt IE 9]>
+    <script src="/js/html5.js"></script>
+    <![endif]-->
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?fd459238242776d173cdc64918fb32f2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+    
+    <script>var yunModuleEnv = true;</script>
+    <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+    
+</head></html>
+<body class="home">
+    <!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="/">
+                <div class="cover">
+                    <span class="name">向志洪</span>
+                    <span class="description">个人技术博客</span>
+                </div>
+            </a>
+        </div>
+        <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
+        <ul class="menu hidden" id="JELON__menu">
+            
+            <li rel="/2016/08/21/Swift3.0介绍/index.html" class="item">
+                <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
+            </li>
+            
+            <li rel="/2016/08/21/Swift3.0介绍/index.html" class="item">
+                <a href="/archives/" title="文章列表" class="icon-lab">&nbsp;文章列表</a>
+            </li>
+            
+            <li rel="/2016/08/21/Swift3.0介绍/index.html" class="item">
+                <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
+            </li>
+            
+            <li rel="/2016/08/21/Swift3.0介绍/index.html" class="item">
+                <a href="/404/" title="留言" class="icon-comment">&nbsp;留言</a>
+            </li>
+            
+        </ul>
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        <a href="https://github.com/xiangzhihong" target="_blank">Github</a>
+                        |
+                    
+                        <a href="http://tongji.baidu.com/web/welcome/login" target="_blank">站长统计</a>
+                        |
+                    
+                        <a href="http://weibo.com/code_xzh" target="_blank">新浪微博</a>
+                        |
+                    
+                </p>
+                <p class="sns">
+                    
+                    <a href="javascript: void(0);" class="wechat">
+                        <b>■</b>
+                        公众号
+                        <span class="popover">
+                            <img src="/img/wechat_mp.jpg" width="120" height="120" alt="我的微信订阅号">
+                            <i class="arrow"></i>
+                        </span>
+                    </a>
+                </p>
+                
+            </div>
+            <div class="avatar fr">
+                <img src="http://ohe65w0xx.bkt.clouddn.com/avert.png" alt="avatar" title="Jelon">
+            </div>
+        </div>
+    </section>
+</header>
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+        <section class="content">
+            <div class="content-main widget">
+                <!-- 文章页 -->
+<!-- 文章 -->
+<article class="post article">
+    <header class="text-center">
+        <h3 class="post-title"><span>Swift 3.0介绍</span></h3>
+    </header>
+    <p class="post-meta text-center">
+        xiangzhihong 发表于
+        <time datetime="2016-08-20T16:00:00.000Z">2016-08-21</time>
+    </p>
+    <div class="post-content">
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p> 我接触swift是从2.0开始，当时出于对ios的好奇，加上官方的大力推荐，于是扎入了ios的怀抱，从1.2发展到了今天的3.0.1，这期间由于Swift目前还在发展阶段并不能向下兼容，这也造成部分我们2.x开发的版本在新版本上运行的问题，不过基于最近基本版本改动比较小的原因吧，我觉得swift是为了ios的趋势。尽管对于开发人员来说Swift3.0的变化会令你的程序几乎处处报错，但是试想一下如果Apple没有追求极致的精神又怎么会做出如此多的更改。本文介绍主要以3.0为基础讲解，从Swift编译器和标准库两个方面来说明从Swift3.0的变化。</p>
+<h1 id="编译器和语法变化"><a href="#编译器和语法变化" class="headerlink" title="编译器和语法变化"></a>编译器和语法变化</h1><h2 id="函数或方法参数"><a href="#函数或方法参数" class="headerlink" title="函数或方法参数"></a>函数或方法参数</h2><p><strong>调用函数或方法时从第一个参数开始就必须指定参数名</strong><br> 在Swift的历史版本中出现过在调用函数时不需要指定任何函数参数（或者从第二个参数开始指定参数名），在调用方法时则必须从第二个参数开始必须指定参数名等多种情况，而在Swift3.0中不管是函数还是方法都必须从第一个参数开始必须指定参数名（当然可以使用“_”明确指出调用时省略参数）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">func sum(num1:Int,num2:Int)-&gt;Int&#123;</div><div class="line">    return num1 + num2</div><div class="line">&#125;</div><div class="line">sum(num1: 1, num2: 2) // old: sum(1,2)或者sum(1, num2: 2)</div></pre></td></tr></table></figure>
+<p><strong>取消var参数</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">//func increase(var a:Int)&#123;</div><div class="line">//    a += 1</div><div class="line">//&#125;</div><div class="line">// 上面的代码会报错，可改写成</div><div class="line">func increase(a:Int)&#123;</div><div class="line">    var a = a</div><div class="line">    a += 1</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>inout参数修饰改放到类型前</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">//func increase(inout a:Int) &#123;</div><div class="line">//    a += 1</div><div class="line">//&#125;</div><div class="line">// 上面的代码会报错,可改为</div><div class="line">func increase( a:inout Int) &#123;</div><div class="line">    a += 1</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="方法返回值"><a href="#方法返回值" class="headerlink" title="方法返回值"></a>方法返回值</h2><p>Swift 3.0 中方法的返回值必须有接收否则会报警告，当然其实主要目的是为了避免开发人员忘记接收返回值的情况，但是有些情况下确实不需要使用返回值可以使用”_”接收来忽略返回值。当然你也可以增加 <em>@discardableResult</em>  声明，告诉编译器此方法可以不用接收返回值。<br>例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">struct Caculator &#123;</div><div class="line">    func sum(a:Int,b:Int) -&gt; Int &#123;</div><div class="line">        return a + b</div><div class="line">    &#125;</div><div class="line">    //@discardableResult声明,告诉编译器此方法可以不用接收返回值</div><div class="line">    @discardableResult</div><div class="line">    func func1(a:Int,b:Int) -&gt;Int &#123;</div><div class="line">        return a - b + 1</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">let ca = Caculator()</div><div class="line">ca.sum(a: 1, b: 2) // 此处会警告，因为方法有返回值但是没有接收</div><div class="line">let _ = ca.sum(a: 1, b: 2) // 使用&quot;_&quot;接收无用返回值</div><div class="line">ca.func1(a: 1, b: 2) // 由于func1添加了@discardableResult声明，即使不接收返回值也不会警告</div></pre></td></tr></table></figure>
+<h2 id="可选类型"><a href="#可选类型" class="headerlink" title="可选类型"></a>可选类型</h2><p>Swift3.0对于可选类型控制更加严谨，隐式可选类型和其他类型的运算之后获得的是可选类型而不是隐式可选类型。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">let a:Int! = 1</div><div class="line">let b = a + 1 // 此时强制解包，b是Int型</div><div class="line">let c = a // 注意此时c是Int? 在之前的Swift版本中c是Int！</div></pre></td></tr></table></figure>
+<h2 id="Selector的变化"><a href="#Selector的变化" class="headerlink" title="Selector的变化"></a>Selector的变化</h2><p>Selector的改变其实从1.0到3.0经历了多次变化，从最早的@Selector(“method:”)到现在的#selector(method(param1:))可以说经历了多次修改，好在它变得越来越好，毕竟字符串操作对于语法检查来说是很无助的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">class MyClass &#123;</div><div class="line">    @objc func sum(a:Int,b:Int) -&gt; Int &#123;</div><div class="line">        return a + b</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    func func1()&#123;</div><div class="line">        let _ = #selector(sum(a:b:))</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// old: Swift 2.x</div><div class="line">//class MyClass &#123;</div><div class="line">//    @objc func sum(a:Int,b:Int) -&gt; Int &#123;</div><div class="line">//        return a + b</div><div class="line">//    &#125;</div><div class="line">//    </div><div class="line">//    func func1()&#123;</div><div class="line">//        let _ = #selector(sum(_:b:))</div><div class="line">//    &#125;</div><div class="line">//&#125;</div></pre></td></tr></table></figure>
+<h2 id="协议中的可选方法"><a href="#协议中的可选方法" class="headerlink" title="协议中的可选方法"></a>协议中的可选方法</h2><p>在Swift3.0之前如果要定义协议中可选方法，只需要给协议加上<em>@objc</em>之后方法使用optional修饰就可以了，但是Swift3.0中除了协议需要<em>@objc</em>修饰，可选方法也必须使用<em>@objc</em>来修饰。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">@objc protocol MyProtocol &#123;</div><div class="line">    @objc optional func func1() //old: optional func func1()</div><div class="line">    func func2()</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="取消-、–操作符"><a href="#取消-、–操作符" class="headerlink" title="取消++、–操作符"></a>取消++、–操作符</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var d = 1</div><div class="line">d++ //报错,可以改写成 d += 1 或者 d = d + 1</div></pre></td></tr></table></figure>
+<h2 id="取消C风格for循环"><a href="#取消C风格for循环" class="headerlink" title="取消C风格for循环"></a>取消C风格for循环</h2><p>取消C风格for循环，使用更加简洁的语法（有点类似于前端的语法）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">//for var i = 0 ;i &lt; 10 ; i += 1 &#123;</div><div class="line">//    debugPrint(i)</div><div class="line">//&#125;</div><div class="line">// 上面的代码会报错，可改写成如下代码</div><div class="line">for i in 0  ..&lt; 10  &#123;</div><div class="line">    debugPrint(i)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="SDK类库变化"><a href="#SDK类库变化" class="headerlink" title="SDK类库变化"></a>SDK类库变化</h1><p>大家都知道Swift诞生在Objective-C已经发展的相当成熟的情况下，为了保证ObjC开发人员顺利过渡到Swift，也因为Swift处于初级阶段，很多类库和方法命名都尽量和ObjC保持一致，在使用Swift开发iOS应用中处处可以看到ObjC的影子。但是作为一门Modern语言Swift还是做出了改变，从中可以看出日后Swift将彻底摆脱ObjC的影子。这其中包括重新导入Foundation消除类型前缀、方法名去重、函数和方法去C风格等等。</p>
+<h2 id="命名"><a href="#命名" class="headerlink" title="命名"></a>命名</h2><p>去掉一些前缀，更加注重语意的表达，书写上也尽量考虑一些驼峰命名等规则。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">// 1.去掉前缀</div><div class="line">let url1 = URL(string: &quot;www.cmjstudio.com&quot;)</div><div class="line">let isFileURL = url1?.isFileURL //old:url1.fileURL ，现在更加注重语意</div><div class="line">let data1 = Data() //NSData</div><div class="line"></div><div class="line">// 2.方法名使用动词，其他名词、介词等作为参数或移除</div><div class="line">var array1 = [1,2,3]</div><div class="line">array1.append(contentsOf: [4,5,6]) // old:array1.appendContentsOf([4,5,6])</div><div class="line">array1.remove(at: 0) // old:array1.removeAtIndex(0)</div><div class="line"></div><div class="line">// 3.不引起歧义的情况下尽量消除重复</div><div class="line">let color1 = UIColor.red() // old:var color1 = UIColor.redColor()</div><div class="line"></div><div class="line">// 4.枚举成员首字母变成小写</div><div class="line">let label1 = UILabel()</div><div class="line">label1.textAlignment = .center // old:label1.textAlignment = .Center</div><div class="line"></div><div class="line">// 5.按钮的Normal状态去掉</div><div class="line">let btn1 = UIButton()</div><div class="line">btn1.setTitle(&quot;hello&quot;, for: UIControlState()) // 相当于Normal状态</div></pre></td></tr></table></figure></p>
+<h2 id="去C风格"><a href="#去C风格" class="headerlink" title="去C风格"></a>去C风格</h2><p>Swift发展初期很多类库的引入依然保持的ObjC风格，但是ObjC由于根出C语言，因此很多操作其实并不是对象和方法操作而是C语言的函数形式。到了Swift3.0之后这一现状将发生变化，全局函数将会变成某些类型的方法;某些常量定义将以某个枚举类型的成员来表示。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">let rect1 = CGRect(x: 0, y: 0, width: 100, height: 100)</div><div class="line">// 下面的代码将要报错，3.0完全废除这种类C的风格</div><div class="line">//let rect1 = CGRectMake(0, 0, 100, 100)</div><div class="line"></div><div class="line">if let context1 = UIGraphicsGetCurrentContext() &#123;</div><div class="line">    CGContext.fillPath(context1) // old:CGContextFillPath(context1!)</div><div class="line">&#125;</div><div class="line"></div><div class="line">// GCD的改变</div><div class="line">let queue = DispatchQueue(label: &quot;myqueue&quot;)</div><div class="line">queue.async &#123;</div><div class="line">    debugPrint(&quot;hello world!&quot;)</div><div class="line">&#125;</div><div class="line">// old:</div><div class="line">//let queue = dispatch_queue_create(&quot;myqueue&quot;, nil)</div><div class="line">//dispatch_async(queue) &#123;</div><div class="line">//    debugPrint(&quot;hello world!&quot;)</div><div class="line">//&#125;</div><div class="line"></div><div class="line">// 相关常量定义被移到枚举内部</div><div class="line">NotificationCenter.defaultCenter().addObserver(self, selector: #selector(userDefaultChange()), name: UserDefaults.didChangeNotification, object: nil)</div><div class="line">//old:NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(userDefaultChange()), name: NSUserDefaultsDidChangeNotification, object: nil)</div></pre></td></tr></table></figure>
+<h2 id="集合API的变化"><a href="#集合API的变化" class="headerlink" title="集合API的变化"></a>集合API的变化</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">let array1 = [1,2,3]</div><div class="line">let next = array1.index(after: 0)  // old:let start = array1.startIndex let next = start.successor()</div><div class="line">let first = array1.first &#123; (element) -&gt; Bool in // 增加新的方法</div><div class="line">    element &gt; 1</div><div class="line">&#125;</div><div class="line"></div><div class="line">let r = Range(0..&lt;3) //old: let _ = NSRange(location: 0, length: 3)</div><div class="line"></div><div class="line">// 下面的代码必须在控制器中执行，用于遍历当前view及其父视图</div><div class="line">for subview in sequence(first: self.view, next: &#123; $0?.superview &#125;)&#123;</div><div class="line">    debugPrint(subview)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="新的浮点协议"><a href="#新的浮点协议" class="headerlink" title="新的浮点协议"></a>新的浮点协议</h2><p>Float、Double、CGFloat使用了新的协议，提供了提供 IEEE-754标准的属性和方法。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">let a = 2 * Float.pi // old: let a = 2 * M_PI</div><div class="line">let b = 2.0 * .pi // 注意前面是浮点型，后面可以省略Float</div></pre></td></tr></table></figure></p>
+<h1 id="Swift2-2和Swift3-0对比"><a href="#Swift2-2和Swift3-0对比" class="headerlink" title="Swift2.2和Swift3.0对比"></a>Swift2.2和Swift3.0对比</h1><p>可以看出如果要更新到Swift3.0现有项目需要作出大量修改，经过使用之前开源项目TagEditor进行测试，区区十个类文件就出现了一百多个错误，不过好在Xcode 8已经提供了很好用的迁移工具（Xcode：Editor - Convert - To Current Swift Syntax），经过迁移工具转化后仅仅发现两处错误需要手动修正。在使用这个工具的时候大家会看到如下界面：<br><img src="http://img.blog.csdn.net/20170222213331397?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>为什么上图会出现2.3,其实就是Swift 2.2 + New SDKs。之所以如此是因为Xcode 8目前还是beta版，使用Swift 3.0进行开发的应用还不能提交App Store，所以就使用了一个新的版本2.3。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>Swift的每次变化由于对之前的版本乃至上一个版本都不兼容造成每次Swift的升级都显得比较虐心，但是事实上这也是Swift的重大进步。记得之前曾有传闻说Swift3.0的语法和API都会稳定并且向上兼容，但是不久这个消息就破灭了，WWDC上官方也再次证实这个希望可能要到4.0才能实现。但是试想一下：Apple在很短的时间内就固话API对于Swift的发展真的是好事吗？毕竟新特性的加入、更好的语法优化才能让Swift越来越好！总的来说，如果应用要升级到Swift3.0可能要做不同程度的修改，但是这种改动仅仅是语法和SDK的变动并不会消耗太多的工作量，更何况Apple提供了迁移工具。</p>
+    </div>
+    <p class="post-meta">
+        <span class="post-cat">分类：
+            <a class="cat-link" href="/categories/ios/">ios</a>
+        </span>
+        <span class="post-tags">
+            标签：
+            <a href="/tags/ios/" title="ios">ios</a> / 
+    
+        <a href="/tags/Swift/" title="Swift">Swift</a>
+        </span>
+    </p>
+</article>
+<div class="article-share clearfix text-center">
+    <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+</div>
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br>
+        <a href="/2016/08/29/React Native的Navigator详解/">
+            
+                React Native的Navigator详解
+            
+        </a>
+    </span>
+    
+
+    
+    <span class="next fr">
+        下一篇<br>
+        <a href="/2016/08/18/node.js基本工作原理及流程/">
+            
+                Node.js原理
+            
+        </a>
+    </span>
+    
+</div>
+<!-- 文章评论 -->
+<div id="comments" class="comments cloud-tie-wrapper"></div>
+    <script>
+    var cloudTieConfig = {
+      url: document.location.href, 
+      sourceId: "Swift3.0介绍",
+      productKey: "c06bb9930e6f4b38a9997cb9bd17aba5",
+      target: "comments"
+    };
+    var yunManualLoad = true;
+    Tie.loader("aHR0cHM6Ly9hcGkuZ2VudGllLjE2My5jb20vcGMvbGl2ZXNjcmlwdC5odG1s", true);
+    </script>
+            </div>
+
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章分类</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+    <li>
+        <a href="/categories/Android/">Android</a>
+        <span class="badge">(10)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Android/系统/">系统</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Angular2/">Angular2</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/React-Native/">React Native</a>
+        <span class="badge">(9)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Java/">Java</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/前端/">前端</a>
+        <span class="badge">(6)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/VR/">VR</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Angular2/前端/">前端</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Spring/">Spring</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/ios/">ios</a>
+        <span class="badge">(7)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Google/">Google</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Google/VR/">VR</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/技术人生/">技术人生</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/小程序/">小程序</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/机器学习/">机器学习</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/android/">android</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/设计模式/">设计模式</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+</ul>
+    </section>
+
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="/tags/Android/" title="Android">Android (7)</a>
+  
+    <a class="tag-item" href="/tags/新特性/" title="新特性">新特性 (2)</a>
+  
+    <a class="tag-item" href="/tags/高仿/" title="高仿">高仿 (4)</a>
+  
+    <a class="tag-item" href="/tags/深入系统/" title="深入系统">深入系统 (1)</a>
+  
+    <a class="tag-item" href="/tags/系统服务/" title="系统服务">系统服务 (1)</a>
+  
+    <a class="tag-item" href="/tags/android/" title="android">android (4)</a>
+  
+    <a class="tag-item" href="/tags/混淆打包/" title="混淆打包">混淆打包 (1)</a>
+  
+    <a class="tag-item" href="/tags/Angular2/" title="Angular2">Angular2 (1)</a>
+  
+    <a class="tag-item" href="/tags/前端开发/" title="前端开发">前端开发 (3)</a>
+  
+    <a class="tag-item" href="/tags/硬件/" title="硬件">硬件 (1)</a>
+  
+    <a class="tag-item" href="/tags/React-Native/" title="React Native">React Native (7)</a>
+  
+    <a class="tag-item" href="/tags/FlexBox布局/" title="FlexBox布局">FlexBox布局 (1)</a>
+  
+    <a class="tag-item" href="/tags/Java/" title="Java">Java (2)</a>
+  
+    <a class="tag-item" href="/tags/垃圾回收/" title="垃圾回收">垃圾回收 (1)</a>
+  
+    <a class="tag-item" href="/tags/Node/" title="Node">Node (2)</a>
+  
+    <a class="tag-item" href="/tags/Google/" title="Google">Google (2)</a>
+  
+    <a class="tag-item" href="/tags/VR/" title="VR">VR (2)</a>
+  
+    <a class="tag-item" href="/tags/OpenGL/" title="OpenGL">OpenGL (1)</a>
+  
+    <a class="tag-item" href="/tags/Promise/" title="Promise">Promise (1)</a>
+  
+    <a class="tag-item" href="/tags/前端/" title="前端">前端 (4)</a>
+  
+    <a class="tag-item" href="/tags/调试/" title="调试">调试 (1)</a>
+  
+    <a class="tag-item" href="/tags/eact-Native/" title="eact Native">eact Native (1)</a>
+  
+    <a class="tag-item" href="/tags/打包/" title="打包">打包 (1)</a>
+  
+    <a class="tag-item" href="/tags/Spring/" title="Spring">Spring (2)</a>
+  
+    <a class="tag-item" href="/tags/入门/" title="入门">入门 (2)</a>
+  
+    <a class="tag-item" href="/tags/原生/" title="原生">原生 (1)</a>
+  
+    <a class="tag-item" href="/tags/ios/" title="ios">ios (7)</a>
+  
+    <a class="tag-item" href="/tags/swift/" title="swift">swift (1)</a>
+  
+    <a class="tag-item" href="/tags/Swift/" title="Swift">Swift (1)</a>
+  
+    <a class="tag-item" href="/tags/AR/" title="AR">AR (1)</a>
+  
+    <a class="tag-item" href="/tags/webpack/" title="webpack">webpack (1)</a>
+  
+    <a class="tag-item" href="/tags/gulp/" title="gulp">gulp (1)</a>
+  
+    <a class="tag-item" href="/tags/Xcode/" title="Xcode">Xcode (2)</a>
+  
+    <a class="tag-item" href="/tags/https/" title="https">https (1)</a>
+  
+    <a class="tag-item" href="/tags/gif/" title="gif">gif (1)</a>
+  
+    <a class="tag-item" href="/tags/mac/" title="mac">mac (1)</a>
+  
+    <a class="tag-item" href="/tags/环境/" title="环境">环境 (1)</a>
+  
+    <a class="tag-item" href="/tags/知识库/" title="知识库">知识库 (1)</a>
+  
+    <a class="tag-item" href="/tags/原理/" title="原理">原理 (1)</a>
+  
+</div>
+    </section>
+    
+
+    
+    <!-- 我的微博 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>我的微博</strong></h3>
+        <div class="widget-bd" style="position: relative">
+  <div id="myWeiboLoading" class="text-center" style="position:absolute;top:0;left:0;right:0;bottom:0;line-height:50px;font-size:12px;background-color:#fff;z-index:9">微博加载中...</div>
+  <iframe width="100%" height="550" class="share_self" frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&amp;width=0&amp;height=550&amp;fansRow=2&amp;ptype=1&amp;speed=0&amp;skin=4&amp;isTitle=1&amp;noborder=1&amp;isWeibo=1&amp;isFans=1&amp;uid=1831462560&amp;verifier=5192ec39&amp;dpc=1"></iframe>
+  <script>
+  (function () {
+    var oMyWeibo = document.getElementById('myWeibo');
+    var oMyWeiboLoading = document.getElementById('myWeiboLoading');
+    var isIE = /msie/i.test(navigator.userAgent) && !window.opera;
+    var timer = null;
+    if (isIE) {
+      oMyWeibo.onreadystatechange = function(){
+        if(oMyWeibo.readyState === 'loaded' || oMyWeibo.readyState === 'complete'){
+          timer = setTimeout(function () {
+            oMyWeiboLoading.parentNode.removeChild(oMyWeiboLoading);
+            timer = null;
+          }, 300);
+        }
+      };
+    } else {
+      oMyWeibo.onload = function () {
+        timer = setTimeout(function () {
+          oMyWeiboLoading.parentNode.removeChild(oMyWeiboLoading);
+          timer = null;
+        }, 300);
+      };
+    }
+  })();
+  </script>
+</div>
+    </section>
+    
+
+    
+    <!-- 友情链接 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>友情链接</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+        <li>
+            <a href="http://blog.csdn.net/xiangzhihong8/" target="_blank" title="csdn个人博客">csdn博客</a>
+        </li>
+    
+        <li>
+            <a href="https://yq.aliyun.com/u/xiangzhihong" target="_blank" title="阿里云技术博客">阿里云博客</a>
+        </li>
+    
+</ul>
+    </section>
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <footer class="footer">
+    &copy;
+    
+        2016-2017
+    
+
+    <a href="/">Jelon Loves You</a>
+</footer>
+<div class="back-to-top" id="JELON__backToTop" title="返回顶部">返回顶部</div>
+<!-- 添加百度自动推送 -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+    <!--博客js脚本 -->
+    <!-- 这里放网站js脚本 -->
+<script src="/js/main.js"></script>
+</body>

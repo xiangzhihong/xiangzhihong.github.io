@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8">
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya">
+    
+    <title>FlexBox布局 | 向志洪</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
+    <meta name="keywords" content="前端, Web, 移动, 向志洪">
+    <meta name="description" content="">
+
+    
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <!--[if lt IE 9]>
+    <script src="/js/html5.js"></script>
+    <![endif]-->
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?fd459238242776d173cdc64918fb32f2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+    
+    <script>var yunModuleEnv = true;</script>
+    <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+    
+</head></html>
+<body class="home">
+    <!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="/">
+                <div class="cover">
+                    <span class="name">向志洪</span>
+                    <span class="description">个人技术博客</span>
+                </div>
+            </a>
+        </div>
+        <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
+        <ul class="menu hidden" id="JELON__menu">
+            
+            <li rel="/2016/07/20/Flex布局/index.html" class="item">
+                <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
+            </li>
+            
+            <li rel="/2016/07/20/Flex布局/index.html" class="item">
+                <a href="/archives/" title="文章列表" class="icon-lab">&nbsp;文章列表</a>
+            </li>
+            
+            <li rel="/2016/07/20/Flex布局/index.html" class="item">
+                <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
+            </li>
+            
+            <li rel="/2016/07/20/Flex布局/index.html" class="item">
+                <a href="/404/" title="留言" class="icon-comment">&nbsp;留言</a>
+            </li>
+            
+        </ul>
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        <a href="https://github.com/xiangzhihong" target="_blank">Github</a>
+                        |
+                    
+                        <a href="http://tongji.baidu.com/web/welcome/login" target="_blank">站长统计</a>
+                        |
+                    
+                        <a href="http://weibo.com/code_xzh" target="_blank">新浪微博</a>
+                        |
+                    
+                </p>
+                <p class="sns">
+                    
+                    <a href="javascript: void(0);" class="wechat">
+                        <b>■</b>
+                        公众号
+                        <span class="popover">
+                            <img src="/img/wechat_mp.jpg" width="120" height="120" alt="我的微信订阅号">
+                            <i class="arrow"></i>
+                        </span>
+                    </a>
+                </p>
+                
+            </div>
+            <div class="avatar fr">
+                <img src="http://ohe65w0xx.bkt.clouddn.com/avert.png" alt="avatar" title="Jelon">
+            </div>
+        </div>
+    </section>
+</header>
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+        <section class="content">
+            <div class="content-main widget">
+                <!-- 文章页 -->
+<!-- 文章 -->
+<article class="post article">
+    <header class="text-center">
+        <h3 class="post-title"><span>FlexBox布局</span></h3>
+    </header>
+    <p class="post-meta text-center">
+        xiangzhihong 发表于
+        <time datetime="2016-07-19T16:00:00.000Z">2016-07-20</time>
+    </p>
+    <div class="post-content">
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p><strong>FlexBox（弹性框布局）</strong>：英文全称the flexible box Module，FlexBox旨在提供了在不同尺寸设备上都能保持一致的布局方式。<br>其主要思想是：让容器有能力让其子项目能够改变其宽度|高度|顺序，以最佳方式填充可用空间。在布局中，首先得确定主轴方向(flexDirection)，主轴组件的对齐方式（justifyContent），侧轴组件的对齐方式(alignItems)，通过以上四点可以基本确定布局。<br>注：FlexBox是CSS3弹性框布局规范，目前还处于最终征求意见稿 (Last Call Working Draft)阶段，并不是所有的浏览器都支持Flexbox。</p>
+<p>在学习FlexBox之前首先要清楚一个概念“宽和高”。一个组件的高度和宽度决定了它在屏幕上的尺寸，显示的效果。</p>
+<h2 id="FlexBox属性"><a href="#FlexBox属性" class="headerlink" title="FlexBox属性"></a>FlexBox属性</h2><p>为了更好的理解与应用FlexBox，我们先看一下FlexBox所具有的属性。</p>
+<h3 id="主轴和侧轴-横轴和竖轴"><a href="#主轴和侧轴-横轴和竖轴" class="headerlink" title="主轴和侧轴(横轴和竖轴)"></a>主轴和侧轴(横轴和竖轴)</h3><p>在学习属性之前，让我们先了解一个概念：主轴和侧轴。<br><img src="http://img.blog.csdn.net/20170408112119139?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>如图：主轴即水平方向的轴线，可以理解成横轴，侧轴垂直于主轴，可以理解为竖轴。</p>
+<p><strong>flexDirection</strong><br>该属性确定了主轴方向。</p>
+<table><br>        <tr><br>            <th>属性名</th><br>            <th>说明</th><br>        </tr><br>         <tr><br>            <th>row(默认)</th><br>            <th>主轴方向为水平，起点在左端</th><br>        </tr><br>        <tr><br>            <th>row- reverse</th><br>            <th>主轴方向为水平，起点在右端</th><br>        </tr><br>        <tr><br>            <th>column</th><br>            <th>主轴方向为垂直，起点在上端</th><br>        </tr><br>        <tr><br>            <th>column-reverse</th><br>            <th>主轴方向为垂直，起点在下端</th><br>        </tr><br></table>
+
+<p><strong>justifyContent</strong><br>该属性确定了组件在主轴方向上的对齐方式。</p>
+<table><br>        <tr><br>            <th>属性名</th><br>            <th>说明</th><br>        </tr><br>         <tr><br>            <th>flex-start(默认)</th><br>            <th>组件沿着主轴方向的起始位置靠齐</th><br>        </tr><br>        <tr><br>            <th>flex-end</th><br>            <th>组件沿着主轴方向的结束位置靠齐，和flex-start相反</th><br>        </tr><br>        <tr><br>            <th>space-between</th><br>            <th>组件在主轴方向上两端对齐，其中的间隔相等</th><br>        </tr><br>        <tr><br>            <th>space-around</th><br>            <th>组件会平均分配在主轴方向上，两端保留一定的位置空间</th><br>        </tr><br></table>
+
+
+<p><strong>alignItems</strong><br>该属性确定了组件在侧轴方向上的对齐方式。</p>
+<table><br>        <tr><br>            <th>属性名</th><br>            <th>说明</th><br>        </tr><br>         <tr><br>            <th>flex-start</th><br>            <th>组件沿着侧轴上的起点对齐</th><br>        </tr><br>        <tr><br>            <th>flex-end</th><br>            <th>组件沿着侧轴上的终点对齐</th><br>        </tr><br>        <tr><br>            <th>center</th><br>            <th>组价在侧轴方向上居中对齐</th><br>        </tr><br>        <tr><br>            <th>stretch(默认)</th><br>            <th>组件在侧轴方向上占满</th><br>        </tr><br></table>
+
+
+
+<p><strong>flexWrap</strong><br>该属性主要用作换行，默认情况下，项目都排列在一条线上，放不下的部分则不放置，flexWap就是定义是否换行的。。</p>
+<table><br>        <tr><br>            <th>属性名</th><br>            <th>说明</th><br>        </tr><br>         <tr><br>            <th>nowrap(默认)</th><br>            <th>不换行</th><br>        </tr><br>        <tr><br>            <th>wrap</th><br>            <th> 换行，第一行在上方</th><br>        </tr><br>        <tr><br>            <th>wrap-reverse </th><br>            <th>换行，第一行在下方</th><br>        </tr><br></table>
+
+<h3 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&lt;View style=&#123; &#123;flexDirection:&apos;row-reverse&apos;,backgroundColor:&quot;darkgray&quot;,marginTop:20&#125;&#125;&gt;</div><div class="line">    &lt;View style=&#123; &#123;width:40,height:40,backgroundColor:&quot;darkcyan&quot;,margin:5&#125;&#125;&gt;</div><div class="line">    &lt;Text style=&#123; &#123;fontSize:16&#125;&#125;&gt;1&lt;/Text&gt;</div><div class="line">  &lt;/View&gt;</div><div class="line">  &lt;View style=&#123; &#123;width:40,height:40,backgroundColor:&quot;darkcyan&quot;,margin:5&#125;&#125;&gt;</div><div class="line">    &lt;Text style=&#123; &#123;fontSize:16&#125;&#125;&gt;2&lt;/Text&gt;</div><div class="line">  &lt;/View&gt;</div><div class="line">  &lt;View style=&#123; &#123;width:40,height:40,backgroundColor:&quot;darkcyan&quot;,margin:5&#125;&#125;&gt;</div><div class="line">    &lt;Text style=&#123; &#123;fontSize:16&#125;&#125;&gt;3&lt;/Text&gt;</div><div class="line">  &lt;/View&gt;</div><div class="line">  &lt;View style=&#123; &#123;width:40,height:40,backgroundColor:&quot;darkcyan&quot;,margin:5&#125;&#125;&gt;</div><div class="line">    &lt;Text style=&#123; &#123;fontSize:16&#125;&#125;&gt;4&lt;/Text&gt;</div><div class="line">  &lt;/View&gt;</div><div class="line">  &lt;/View&gt;</div></pre></td></tr></table></figure>
+<p><img src="http://img.blog.csdn.net/20170408112418769?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h1 id="宽和高"><a href="#宽和高" class="headerlink" title="宽和高"></a>宽和高</h1><p>在React Native中尺寸是没有单位的，它代表了设备独立像素。有点类似于Android的设备像素。<br>如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;View style=&#123; &#123;width:100,height:100,margin:40,backgroundColor:&apos;gray&apos;&#125;&#125;&gt;</div><div class="line">        &lt;Text style=&#123; &#123;fontSize:16,margin:20&#125;&#125;&gt;尺寸&lt;/Text&gt;</div><div class="line">&lt;/View&gt;</div></pre></td></tr></table></figure>
+<p>上诉代码：运行在Android上时，View的长和宽被解释成：100dp 100dp单位是dp，字体被解释成16sp 单位是sp，运行在iOS上时尺寸单位被解释称了pt，这些单位确保了布局在任何不同dpi的手机屏幕上显示不会发生改变。</p>
+<h2 id="RN的FlexBox和css的FlexBox的异同"><a href="#RN的FlexBox和css的FlexBox的异同" class="headerlink" title="RN的FlexBox和css的FlexBox的异同"></a>RN的FlexBox和css的FlexBox的异同</h2><p>虽然React Native中的FlexBox 和Web CSSS上FlexBox工作方式是一样的。但是在某些方面还是有细微区别的：</p>
+<ul>
+<li><strong>flexDirection</strong>: React Native中默认为flexDirection:’column’，在Web  CSS中默认为flex-direction:’row’</li>
+<li><strong>alignItems</strong>: React Native中默认为alignItems:’stretch’，在Web CSS中默认align-items:’flex-start’</li>
+<li><strong>flex</strong>: React Native中flex只接受一个参数，而Web Css的flex可以接受多参数，如:flex: 2 2 10%</li>
+<li><strong>RN不支持属性</strong>：align-content，flex-basis，order，flex-basis，flex-flow，flex-grow，flex-shrink</li>
+</ul>
+<h1 id="React-Native"><a href="#React-Native" class="headerlink" title="React Native"></a>React Native</h1><h2 id="React-Native布局属性"><a href="#React-Native布局属性" class="headerlink" title="React Native布局属性"></a>React Native布局属性</h2><p>以下属性是React Native所支持的Flex属性。</p>
+<h3 id="父视图属性-容器属性-："><a href="#父视图属性-容器属性-：" class="headerlink" title="父视图属性(容器属性)："></a>父视图属性(容器属性)：</h3><ul>
+<li>flexDirection enum(‘row’, ‘column’,’row-reverse’,’column-reverse’)</li>
+<li>flexWrap enum(‘wrap’, ‘nowrap’)</li>
+<li>justifyContent enum(‘flex-start’, ‘flex-end’, ‘center’,<br>‘space-between’, ‘space-around’)</li>
+<li>alignItems enum(‘flex-start’, ‘flex-end’, ‘center’, ‘stretch’)</li>
+</ul>
+<h3 id="justifyContent"><a href="#justifyContent" class="headerlink" title="justifyContent"></a>justifyContent</h3><p>该属性定义了浏览器如何分配顺着父容器主轴的弹性（flex）元素之间及其周围的空间，默认为flex-start。</p>
+<table><br>        <tr><br>            <th>属性名</th><br>            <th>说明</th><br>        </tr><br>         <tr><br>            <th>flex-start(默认)</th><br>            <th>从行首开始排列。每行第一个弹性元素与行首对齐，同时所有后续的弹性元素与前一个对齐</th><br>        </tr><br>        <tr><br>            <th>flex-end</th><br>            <th> 从行尾开始排列。每行最后一个弹性元素与行尾对齐，其他元素将与后一个对齐。</th><br>        </tr><br>        <tr><br>            <th>center</th><br>            <th>伸缩元素向每行中点排列。每行第一个元素到行首的距离将与每行最后一个元素到行尾的距离相同。</th><br>        </tr><br>        <tr><br>            <th>space-between</th><br>            <th>在每行上均匀分配弹性元素。相邻元素间距离相同。每行第一个元素与行首对齐，每行最后一个元素与行尾对齐。</th><br>        </tr><br>         <tr><br>            <th>space-around</th><br>            <th>在每行上均匀分配弹性元素。相邻元素间距离相同。每行第一个元素到行首的距离和每行最后一个元素到行尾的距离将会是相邻元素之间距离的一半。</th><br>        </tr><br></table>
+
+<p>代码示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;View 		 style=&#123; &#123;justifyContent:&apos;center&apos;,flexDirection:&apos;row&apos;,backgroundColor:&quot;darkgray&quot;,marginTop:20&#125;&#125;&gt;</div><div class="line">···</div><div class="line">&lt;/View&gt;</div></pre></td></tr></table></figure>
+<p><img src="http://img.blog.csdn.net/20170408113056709?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h3 id="alignItems"><a href="#alignItems" class="headerlink" title="alignItems"></a>alignItems</h3><p>属性以与justify-content相同的方式在侧轴方向上将当前行上的弹性元素对齐，默认为stretch。<br>属性请参照本文开头的讲解。<br>代码示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;View 		 style=&#123; &#123;justifyContent:&apos;center&apos;,flexDirection:&apos;row&apos;,backgroundColor:&quot;darkgray&quot;,marginTop:20&#125;&#125;&gt;</div><div class="line">···</div><div class="line">&lt;/View&gt;</div></pre></td></tr></table></figure>
+<p><img src="http://img.blog.csdn.net/20170408113257429?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h2 id="子视图属性"><a href="#子视图属性" class="headerlink" title="子视图属性"></a>子视图属性</h2><h3 id="alignSelf"><a href="#alignSelf" class="headerlink" title="alignSelf"></a>alignSelf</h3><p>该属性以属性定义了flex容器内被选中项目的对齐方式。注意：alignSelf 属性可重写灵活容器的 alignItems 属性。</p>
+<table><br>        <tr><br>            <th>属性名</th><br>            <th>说明</th><br>        </tr><br>         <tr><br>            <th>auto(默认)</th><br>            <th>元素继承了它的父容器的 align-items 属性。如果没有父容器则为 “stretch”</th><br>        </tr><br>        <tr><br>            <th>stretch</th><br>            <th> 元素被拉伸以适应容器</th><br>        </tr><br>        <tr><br>            <th>center</th><br>            <th>元素位于容器的中心</th><br>        </tr><br>        <tr><br>            <th>flex-start</th><br>            <th>元素位于容器的开头</th><br>        </tr><br>         <tr><br>            <th>flex-end</th><br>            <th>元素位于容器的结尾</th><br>        </tr><br></table>
+
+<p>代码示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;View style=&#123; &#123;alignSelf:&apos;baseline&apos;,width:60,height:	20,backgroundColor:&quot;darkcyan&quot;,margin:5&#125;&#125;&gt;</div><div class="line">   &lt;Text style=&#123; &#123;fontSize:16&#125;&#125;&gt;1&lt;/Text&gt;</div><div class="line">&lt;/View&gt;</div></pre></td></tr></table></figure>
+<p><img src="http://img.blog.csdn.net/20170408113645192?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h3 id="flex"><a href="#flex" class="headerlink" title="flex"></a>flex</h3><p>该属性定义了一个可伸缩元素的能力，默认为0。类似于比重这么一个概念（因其位于父视图下面，所以比重相当于所占的百分比）。</p>
+<p>代码示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;View style=&#123; &#123;flexDirection:&apos;row&apos;,height:40, backgroundColor:&quot;darkgray&quot;,marginTop:20&#125;&#125;&gt;</div><div class="line">  &lt;View style=&#123; &#123;flex:1,backgroundColor:&quot;darkcyan&quot;,margin:5&#125;&#125;&gt;</div><div class="line">    &lt;Text style=&#123; &#123;fontSize:16&#125;&#125;&gt;flex:1&lt;/Text&gt;</div><div class="line">  &lt;/View&gt;</div><div class="line">  &lt;View style=&#123; &#123;flex:2,backgroundColor:&quot;darkcyan&quot;,margin:5&#125;&#125;&gt;</div><div class="line">    &lt;Text style=&#123; &#123;fontSize:16&#125;&#125;&gt;flex:2&lt;/Text&gt;</div><div class="line">  &lt;/View&gt;</div><div class="line">  &lt;View style=&#123; &#123;flex:3,backgroundColor:&quot;darkcyan&quot;,margin:5&#125;&#125;&gt;</div><div class="line">    &lt;Text style=&#123; &#123;fontSize:16&#125;&#125;&gt;flex:3&lt;/Text&gt;</div><div class="line">  &lt;/View&gt;          </div><div class="line">&lt;/View&gt;</div></pre></td></tr></table></figure>
+<p><img src="http://img.blog.csdn.net/20170408114100729?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h2 id="其他属性"><a href="#其他属性" class="headerlink" title="其他属性"></a>其他属性</h2><h3 id="视图边框"><a href="#视图边框" class="headerlink" title="视图边框"></a>视图边框</h3><table><br>        <tr><br>            <th>属性名</th><br>            <th>说明</th><br>        </tr><br>         <tr><br>            <th>borderBottomWidth</th><br>            <th>底部边框宽度</th><br>        </tr><br>        <tr><br>            <th>borderLeftWidth</th><br>            <th> 左边框宽度</th><br>        </tr><br>        <tr><br>            <th>borderRightWidth</th><br>            <th>右边框宽度</th><br>        </tr><br>        <tr><br>            <th>borderTopWidth</th><br>            <th> 顶部边框宽度</th><br>        </tr><br>         <tr><br>            <th>borderWidth</th><br>            <th>边框宽度</th><br>        </tr><br>         <tr><br>            <th>border（Bottom|Left|Right|Top）Color</th><br>            <th>边框颜色</th><br>        </tr><br></table>
+
+<h3 id="外边框"><a href="#外边框" class="headerlink" title="外边框"></a>外边框</h3><table><br>        <tr><br>            <th>属性名</th><br>            <th>说明</th><br>        </tr><br>         <tr><br>            <th>margin</th><br>            <th>外边距</th><br>        </tr><br>        <tr><br>            <th>marginBottom</th><br>            <th> 下外边距</th><br>        </tr><br>        <tr><br>            <th>marginHorizontal</th><br>            <th>左右外边距</th><br>        </tr><br>        <tr><br>            <th>marginLeft</th><br>            <th>左外边距</th><br>        </tr><br>         <tr><br>            <th>marginRight</th><br>            <th>右外边距</th><br>        </tr><br>         <tr><br>            <th>marginTop</th><br>            <th>上外边距</th><br>        </tr><br>        <tr><br>            <th>marginVertical</th><br>            <th>上下外边距</th><br>        </tr><br></table>
+
+<h3 id="内边框"><a href="#内边框" class="headerlink" title="内边框"></a>内边框</h3><table><br>        <tr><br>            <th>属性名</th><br>            <th>说明</th><br>        </tr><br>         <tr><br>            <th>padding</th><br>            <th>内边距</th><br>        </tr><br>        <tr><br>            <th>paddingBottom</th><br>            <th> 下内边距</th><br>        </tr><br>        <tr><br>            <th>paddingHorizontal</th><br>            <th>左右内边距</th><br>        </tr><br>        <tr><br>            <th>paddingLeft</th><br>            <th>左内边距</th><br>        </tr><br>         <tr><br>            <th>paddingRight</th><br>            <th>右内边距</th><br>        </tr><br>         <tr><br>            <th>paddingTop</th><br>            <th>上内边距</th><br>        </tr><br>        <tr><br>            <th>paddingVertical</th><br>            <th>上下内边距</th><br>        </tr><br></table>
+
+<h3 id="边缘"><a href="#边缘" class="headerlink" title="边缘"></a>边缘</h3><table><br>        <tr><br>            <th>属性名</th><br>            <th>说明</th><br>        </tr><br>         <tr><br>            <th>left</th><br>            <th>元素的左边缘</th><br>        </tr><br>        <tr><br>            <th>right</th><br>            <th> 元素的右边缘</th><br>        </tr><br>        <tr><br>            <th>top</th><br>            <th>元素的上边缘</th><br>        </tr><br>        <tr><br>            <th>bottom</th><br>            <th>元素的下边缘</th><br>        </tr><br></table>
+
+<h3 id="元素定位"><a href="#元素定位" class="headerlink" title="元素定位"></a>元素定位</h3><table><br>        <tr><br>            <th>属性名</th><br>            <th>说明</th><br>        </tr><br>         <tr><br>            <th>absolute</th><br>            <th>生成绝对定位的元素，元素的位置通过 “left”, “top”, “right” 以及 “bottom” 属性进行规定</th><br>        </tr><br>        <tr><br>            <th>relative</th><br>            <th> 生成相对定位的元素，相对于其正常位置进行定位</th><br>        </tr><br></table>
+    </div>
+    <p class="post-meta">
+        <span class="post-cat">分类：
+            <a class="cat-link" href="/categories/React-Native/">React Native</a>
+        </span>
+        <span class="post-tags">
+            标签：
+            <a href="/tags/React-Native/" title="React Native">React Native</a> / 
+    
+        <a href="/tags/FlexBox布局/" title="FlexBox布局">FlexBox布局</a>
+        </span>
+    </p>
+</article>
+<div class="article-share clearfix text-center">
+    <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+</div>
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br>
+        <a href="/2016/07/25/Google VR技术大揭秘/">
+            
+                Google VR技术大揭秘
+            
+        </a>
+    </span>
+    
+
+    
+    <span class="next fr">
+        下一篇<br>
+        <a href="/2016/07/05/iOS 滚动视图的复用问题解决方案/">
+            
+                iOS 滚动视图的复用问题解决方案
+            
+        </a>
+    </span>
+    
+</div>
+<!-- 文章评论 -->
+<div id="comments" class="comments cloud-tie-wrapper"></div>
+    <script>
+    var cloudTieConfig = {
+      url: document.location.href, 
+      sourceId: "Flex布局",
+      productKey: "c06bb9930e6f4b38a9997cb9bd17aba5",
+      target: "comments"
+    };
+    var yunManualLoad = true;
+    Tie.loader("aHR0cHM6Ly9hcGkuZ2VudGllLjE2My5jb20vcGMvbGl2ZXNjcmlwdC5odG1s", true);
+    </script>
+            </div>
+
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章分类</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+    <li>
+        <a href="/categories/Android/">Android</a>
+        <span class="badge">(10)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Android/系统/">系统</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Angular2/">Angular2</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/React-Native/">React Native</a>
+        <span class="badge">(9)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Java/">Java</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/前端/">前端</a>
+        <span class="badge">(6)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/VR/">VR</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Angular2/前端/">前端</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Spring/">Spring</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/ios/">ios</a>
+        <span class="badge">(7)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Google/">Google</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Google/VR/">VR</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/技术人生/">技术人生</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/小程序/">小程序</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/机器学习/">机器学习</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/android/">android</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/设计模式/">设计模式</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+</ul>
+    </section>
+
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="/tags/Android/" title="Android">Android (7)</a>
+  
+    <a class="tag-item" href="/tags/新特性/" title="新特性">新特性 (2)</a>
+  
+    <a class="tag-item" href="/tags/高仿/" title="高仿">高仿 (4)</a>
+  
+    <a class="tag-item" href="/tags/深入系统/" title="深入系统">深入系统 (1)</a>
+  
+    <a class="tag-item" href="/tags/系统服务/" title="系统服务">系统服务 (1)</a>
+  
+    <a class="tag-item" href="/tags/android/" title="android">android (4)</a>
+  
+    <a class="tag-item" href="/tags/混淆打包/" title="混淆打包">混淆打包 (1)</a>
+  
+    <a class="tag-item" href="/tags/Angular2/" title="Angular2">Angular2 (1)</a>
+  
+    <a class="tag-item" href="/tags/前端开发/" title="前端开发">前端开发 (3)</a>
+  
+    <a class="tag-item" href="/tags/硬件/" title="硬件">硬件 (1)</a>
+  
+    <a class="tag-item" href="/tags/React-Native/" title="React Native">React Native (7)</a>
+  
+    <a class="tag-item" href="/tags/FlexBox布局/" title="FlexBox布局">FlexBox布局 (1)</a>
+  
+    <a class="tag-item" href="/tags/Java/" title="Java">Java (2)</a>
+  
+    <a class="tag-item" href="/tags/垃圾回收/" title="垃圾回收">垃圾回收 (1)</a>
+  
+    <a class="tag-item" href="/tags/Node/" title="Node">Node (2)</a>
+  
+    <a class="tag-item" href="/tags/Google/" title="Google">Google (2)</a>
+  
+    <a class="tag-item" href="/tags/VR/" title="VR">VR (2)</a>
+  
+    <a class="tag-item" href="/tags/OpenGL/" title="OpenGL">OpenGL (1)</a>
+  
+    <a class="tag-item" href="/tags/Promise/" title="Promise">Promise (1)</a>
+  
+    <a class="tag-item" href="/tags/前端/" title="前端">前端 (4)</a>
+  
+    <a class="tag-item" href="/tags/调试/" title="调试">调试 (1)</a>
+  
+    <a class="tag-item" href="/tags/eact-Native/" title="eact Native">eact Native (1)</a>
+  
+    <a class="tag-item" href="/tags/打包/" title="打包">打包 (1)</a>
+  
+    <a class="tag-item" href="/tags/Spring/" title="Spring">Spring (2)</a>
+  
+    <a class="tag-item" href="/tags/入门/" title="入门">入门 (2)</a>
+  
+    <a class="tag-item" href="/tags/原生/" title="原生">原生 (1)</a>
+  
+    <a class="tag-item" href="/tags/ios/" title="ios">ios (7)</a>
+  
+    <a class="tag-item" href="/tags/swift/" title="swift">swift (1)</a>
+  
+    <a class="tag-item" href="/tags/Swift/" title="Swift">Swift (1)</a>
+  
+    <a class="tag-item" href="/tags/AR/" title="AR">AR (1)</a>
+  
+    <a class="tag-item" href="/tags/webpack/" title="webpack">webpack (1)</a>
+  
+    <a class="tag-item" href="/tags/gulp/" title="gulp">gulp (1)</a>
+  
+    <a class="tag-item" href="/tags/Xcode/" title="Xcode">Xcode (2)</a>
+  
+    <a class="tag-item" href="/tags/https/" title="https">https (1)</a>
+  
+    <a class="tag-item" href="/tags/gif/" title="gif">gif (1)</a>
+  
+    <a class="tag-item" href="/tags/mac/" title="mac">mac (1)</a>
+  
+    <a class="tag-item" href="/tags/环境/" title="环境">环境 (1)</a>
+  
+    <a class="tag-item" href="/tags/知识库/" title="知识库">知识库 (1)</a>
+  
+    <a class="tag-item" href="/tags/原理/" title="原理">原理 (1)</a>
+  
+</div>
+    </section>
+    
+
+    
+    <!-- 我的微博 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>我的微博</strong></h3>
+        <div class="widget-bd" style="position: relative">
+  <div id="myWeiboLoading" class="text-center" style="position:absolute;top:0;left:0;right:0;bottom:0;line-height:50px;font-size:12px;background-color:#fff;z-index:9">微博加载中...</div>
+  <iframe width="100%" height="550" class="share_self" frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&amp;width=0&amp;height=550&amp;fansRow=2&amp;ptype=1&amp;speed=0&amp;skin=4&amp;isTitle=1&amp;noborder=1&amp;isWeibo=1&amp;isFans=1&amp;uid=1831462560&amp;verifier=5192ec39&amp;dpc=1"></iframe>
+  <script>
+  (function () {
+    var oMyWeibo = document.getElementById('myWeibo');
+    var oMyWeiboLoading = document.getElementById('myWeiboLoading');
+    var isIE = /msie/i.test(navigator.userAgent) && !window.opera;
+    var timer = null;
+    if (isIE) {
+      oMyWeibo.onreadystatechange = function(){
+        if(oMyWeibo.readyState === 'loaded' || oMyWeibo.readyState === 'complete'){
+          timer = setTimeout(function () {
+            oMyWeiboLoading.parentNode.removeChild(oMyWeiboLoading);
+            timer = null;
+          }, 300);
+        }
+      };
+    } else {
+      oMyWeibo.onload = function () {
+        timer = setTimeout(function () {
+          oMyWeiboLoading.parentNode.removeChild(oMyWeiboLoading);
+          timer = null;
+        }, 300);
+      };
+    }
+  })();
+  </script>
+</div>
+    </section>
+    
+
+    
+    <!-- 友情链接 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>友情链接</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+        <li>
+            <a href="http://blog.csdn.net/xiangzhihong8/" target="_blank" title="csdn个人博客">csdn博客</a>
+        </li>
+    
+        <li>
+            <a href="https://yq.aliyun.com/u/xiangzhihong" target="_blank" title="阿里云技术博客">阿里云博客</a>
+        </li>
+    
+</ul>
+    </section>
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <footer class="footer">
+    &copy;
+    
+        2016-2017
+    
+
+    <a href="/">Jelon Loves You</a>
+</footer>
+<div class="back-to-top" id="JELON__backToTop" title="返回顶部">返回顶部</div>
+<!-- 添加百度自动推送 -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+    <!--博客js脚本 -->
+    <!-- 这里放网站js脚本 -->
+<script src="/js/main.js"></script>
+</body>

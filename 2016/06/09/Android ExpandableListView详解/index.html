@@ -1,0 +1,464 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8">
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya">
+    
+    <title>ExpandableListView实现商品列表折叠 | 向志洪</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
+    <meta name="keywords" content="前端, Web, 移动, 向志洪">
+    <meta name="description" content="">
+
+    
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <!--[if lt IE 9]>
+    <script src="/js/html5.js"></script>
+    <![endif]-->
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?fd459238242776d173cdc64918fb32f2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+    
+    <script>var yunModuleEnv = true;</script>
+    <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+    
+</head></html>
+<body class="home">
+    <!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="/">
+                <div class="cover">
+                    <span class="name">向志洪</span>
+                    <span class="description">个人技术博客</span>
+                </div>
+            </a>
+        </div>
+        <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
+        <ul class="menu hidden" id="JELON__menu">
+            
+            <li rel="/2016/06/09/Android ExpandableListView详解/index.html" class="item">
+                <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
+            </li>
+            
+            <li rel="/2016/06/09/Android ExpandableListView详解/index.html" class="item">
+                <a href="/archives/" title="文章列表" class="icon-lab">&nbsp;文章列表</a>
+            </li>
+            
+            <li rel="/2016/06/09/Android ExpandableListView详解/index.html" class="item">
+                <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
+            </li>
+            
+            <li rel="/2016/06/09/Android ExpandableListView详解/index.html" class="item">
+                <a href="/404/" title="留言" class="icon-comment">&nbsp;留言</a>
+            </li>
+            
+        </ul>
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        <a href="https://github.com/xiangzhihong" target="_blank">Github</a>
+                        |
+                    
+                        <a href="http://tongji.baidu.com/web/welcome/login" target="_blank">站长统计</a>
+                        |
+                    
+                        <a href="http://weibo.com/code_xzh" target="_blank">新浪微博</a>
+                        |
+                    
+                </p>
+                <p class="sns">
+                    
+                    <a href="javascript: void(0);" class="wechat">
+                        <b>■</b>
+                        公众号
+                        <span class="popover">
+                            <img src="/img/wechat_mp.jpg" width="120" height="120" alt="我的微信订阅号">
+                            <i class="arrow"></i>
+                        </span>
+                    </a>
+                </p>
+                
+            </div>
+            <div class="avatar fr">
+                <img src="http://ohe65w0xx.bkt.clouddn.com/avert.png" alt="avatar" title="Jelon">
+            </div>
+        </div>
+    </section>
+</header>
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+        <section class="content">
+            <div class="content-main widget">
+                <!-- 文章页 -->
+<!-- 文章 -->
+<article class="post article">
+    <header class="text-center">
+        <h3 class="post-title"><span>ExpandableListView实现商品列表折叠</span></h3>
+    </header>
+    <p class="post-meta text-center">
+        xiangzhihong 发表于
+        <time datetime="2016-06-08T16:00:00.000Z">2016-06-09</time>
+    </p>
+    <div class="post-content">
+        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>在日常的开发中，有可能会遇到需要一些可以展开的列表，比如QQ的好友列表，电商的购物车折叠显示。Android也给我们提供ExpandableListView类，完美实现这样类似的需求, 极大的方便了我们开发。结合之前的项目我们做一个简单的讲解。<br>首先懒看一下最终的实现效果：<br><img src="http://upload-images.jianshu.io/upload_images/2112446-0c0ff4aea2d67ffd.gif?imageMogr2/auto-orient/strip" alt="这里写图片描述"><br>使用到的第三方框架：<br><a href="https://github.com/hongyangAndroid/AndroidAutoLayout" target="_blank" rel="external">AndroidAutoLayout</a> 屏幕适配框架</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><p>首先是布局需要用一个ExpandableListView，配合adapter就能实现上面额效果，直接上代码。<br>activity_main.xml</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div></pre></td><td class="code"><pre><div class="line">&lt;com.zhy.autolayout.AutoLinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</div><div class="line">  android:layout_width=&quot;match_parent&quot;</div><div class="line">  android:layout_height=&quot;match_parent&quot;</div><div class="line">  android:orientation=&quot;vertical&quot;&gt;</div><div class="line"></div><div class="line">  &lt;android.support.design.widget.AppBarLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</div><div class="line">      xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;</div><div class="line">      android:layout_width=&quot;match_parent&quot;</div><div class="line">      android:layout_height=&quot;wrap_content&quot;&gt;</div><div class="line"></div><div class="line">      &lt;com.zhy.autolayout.AutoLinearLayout</div><div class="line">          android:id=&quot;@+id/ll_title_root&quot;</div><div class="line">          android:layout_width=&quot;match_parent&quot;</div><div class="line">          android:layout_height=&quot;wrap_content&quot;</div><div class="line">          android:background=&quot;#ec0f38&quot;</div><div class="line">          android:orientation=&quot;vertical&quot;&gt;</div><div class="line"></div><div class="line">          &lt;com.zhy.autolayout.AutoFrameLayout</div><div class="line">              android:layout_width=&quot;match_parent&quot;</div><div class="line">              android:layout_height=&quot;88px&quot;&gt;</div><div class="line"></div><div class="line">              &lt;TextView</div><div class="line">                  android:id=&quot;@+id/tv_title&quot;</div><div class="line">                  android:layout_width=&quot;wrap_content&quot;</div><div class="line">                  android:layout_height=&quot;fill_parent&quot;</div><div class="line">                  android:layout_gravity=&quot;center&quot;</div><div class="line">                  android:gravity=&quot;center&quot;</div><div class="line">                  android:text=&quot;优惠套餐&quot;</div><div class="line">                  android:textColor=&quot;#ffffff&quot;</div><div class="line">                  android:textSize=&quot;32px&quot; /&gt;</div><div class="line"></div><div class="line">              &lt;com.zhy.autolayout.AutoLinearLayout</div><div class="line">                  android:id=&quot;@+id/ll_back&quot;</div><div class="line">                  android:layout_width=&quot;100px&quot;</div><div class="line">                  android:layout_height=&quot;match_parent&quot;</div><div class="line">                  android:clickable=&quot;true&quot;</div><div class="line">                  android:gravity=&quot;center&quot;&gt;</div><div class="line"></div><div class="line">                  &lt;ImageView</div><div class="line">                      android:id=&quot;@+id/iv_back&quot;</div><div class="line">                      android:layout_width=&quot;44px&quot;</div><div class="line">                      android:layout_height=&quot;44px&quot;</div><div class="line">                      android:layout_gravity=&quot;center_vertical&quot;</div><div class="line">                      android:src=&quot;@mipmap/icon_back&quot; /&gt;</div><div class="line">              &lt;/com.zhy.autolayout.AutoLinearLayout&gt;</div><div class="line">          &lt;/com.zhy.autolayout.AutoFrameLayout&gt;</div><div class="line">      &lt;/com.zhy.autolayout.AutoLinearLayout&gt;</div><div class="line">  &lt;/android.support.design.widget.AppBarLayout&gt;</div><div class="line"></div><div class="line">  &lt;ExpandableListView</div><div class="line">      android:id=&quot;@+id/elv_collocation&quot;</div><div class="line">      android:layout_width=&quot;match_parent&quot;</div><div class="line">      android:layout_height=&quot;match_parent&quot;</div><div class="line">      android:background=&quot;#eeeff3&quot;</div><div class="line">      android:divider=&quot;#eeeff3&quot;</div><div class="line">      android:dividerHeight=&quot;0dp&quot;</div><div class="line">      android:groupIndicator=&quot;@null&quot;</div><div class="line">      android:listSelector=&quot;@null&quot; /&gt;</div><div class="line">&lt;/com.zhy.autolayout.AutoLinearLayout&gt;</div></pre></td></tr></table></figure>
+<p>MainActivity.java<br>默认展开第一个，collocation.expandGroup(0);当然更好的写法是将数据写到Controller中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">public class MainActivity extends AppCompatActivity &#123;</div><div class="line">  private ExpandableListView elv_collocation;</div><div class="line">  private List&lt;CollocationPackageBean&gt; collocationList;</div><div class="line"></div><div class="line">  @Override</div><div class="line">  protected void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">      super.onCreate(savedInstanceState);</div><div class="line">      setContentView(R.layout.activity_main);</div><div class="line">      elv_collocation = (ExpandableListView) findViewById(R.id.elv_collocation);</div><div class="line">      initData();</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  private void initData() &#123;</div><div class="line">      collocationList = new ArrayList&lt;&gt;();</div><div class="line">      CollocationPackageBean collocation_1 = new CollocationPackageBean();</div><div class="line">      CollocationPackageBean collocation_2 = new CollocationPackageBean();</div><div class="line"></div><div class="line">      collocation_1.setTotalPrice(new BigDecimal(897));</div><div class="line">      collocation_1.setDiscountFee(new BigDecimal(20));</div><div class="line">      collocation_1.setName(&quot;818国货套餐3&quot;);</div><div class="line">      List&lt;CollocationPackageBean.CollocationSkuBean&gt; goodsList_1 = new ArrayList&lt;&gt;();</div><div class="line">      goodsList_1.add(new CollocationPackageBean.CollocationSkuBean(&quot;Meizu/魅族 魅蓝 note3 全网通 手机 银白 16GB&quot;, &quot;http://img11.hqbcdn.com/product/07/0a/070ac7abd57c6d9251d89547f3d62501.jpg&quot;));</div><div class="line">      goodsList_1.add(new CollocationPackageBean.CollocationSkuBean(&quot;VR PLUS 智能眼镜vr虚拟现实头盔 3D沉浸式 暴风魔镜 vr plus 智能头盔 白色&quot;, &quot;http://img15.hqbcdn.com/product/c6/10/c610075082199955a8d5dcf2aa765b17.jpg&quot;));</div><div class="line">      collocation_1.setCollocationSkuDoList(goodsList_1);</div><div class="line"></div><div class="line">      collocation_2.setTotalPrice(new BigDecimal(1034));</div><div class="line">      collocation_2.setDiscountFee(new BigDecimal(26));</div><div class="line">      collocation_2.setName(&quot;超值套餐&quot;);</div><div class="line">      List&lt;CollocationPackageBean.CollocationSkuBean&gt; goodsList_2 = new ArrayList&lt;&gt;();</div><div class="line">      goodsList_2.add(new CollocationPackageBean.CollocationSkuBean(&quot;Meizu/魅族 魅蓝 note3 全网通 手机 银白 16GB&quot;, &quot;http://img11.hqbcdn.com/product/07/0a/070ac7abd57c6d9251d89547f3d62501.jpg&quot;));</div><div class="line">      goodsList_2.add(new CollocationPackageBean.CollocationSkuBean(&quot;Uka/优加 Meizu/魅族 魅蓝 note3全覆盖全屏钢化玻璃膜 白色&quot;, &quot;http://img8.hqbcdn.com/product/9c/15/9c15571aa92905ea1edafb0a288f1ebb.jpg&quot;));</div><div class="line">      goodsList_2.add(new CollocationPackageBean.CollocationSkuBean(&quot;SanDisk/闪迪 至尊高速MicroSDHC-TF移动存储卡 Class10-48MB/S 升级版 16G&quot;, &quot;http://img14.hqbcdn.com/product/29/cd/29cda69f5036b38454b6592f96fde774.jpg&quot;));</div><div class="line">      goodsList_2.add(new CollocationPackageBean.CollocationSkuBean(&quot;Huawei/华为 AM116 金属耳机 三键线控耳机 尊爵版&quot;, &quot;http://img9.hqbcdn.com/product/0a/90/0a905d9988c91fb0625d9ee44377c8e0.jpg&quot;));</div><div class="line">      goodsList_2.add(new CollocationPackageBean.CollocationSkuBean(&quot;Lesimo/梵简 初见系列10000毫安充电宝 手机平板通用 移动电源 黑色&quot;, &quot;http://img11.hqbcdn.com/product/67/3a/673ac0343758ce64e97c2d9986cbbef3.jpg&quot;));</div><div class="line">      collocation_2.setCollocationSkuDoList(goodsList_2);</div><div class="line"></div><div class="line">      collocationList.add(collocation_1);</div><div class="line">      collocationList.add(collocation_2);</div><div class="line">      elv_collocation.setAdapter(new CollocationListAdapter(this, elv_collocation, collocationList));</div><div class="line">      elv_collocation.expandGroup(0);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>CollocationListAdapter.java<br>CollocationListAdapter负责数据的填充，主要注意两个方法：getGroupView和getChildView</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div></pre></td><td class="code"><pre><div class="line">public class CollocationListAdapter extends BaseExpandableListAdapter &#123;</div><div class="line">    private LayoutInflater inflater;</div><div class="line">    private Context context;</div><div class="line">    private ExpandableListView elv_collocation;</div><div class="line">    private List&lt;CollocationPackageBean&gt; data;</div><div class="line"></div><div class="line">    public CollocationListAdapter(Context context, ExpandableListView elv_collocation, List&lt;CollocationPackageBean&gt; data) &#123;</div><div class="line">        this.context = context;</div><div class="line">        this.elv_collocation = elv_collocation;</div><div class="line">        this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);</div><div class="line">        this.data = data;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public int getGroupCount() &#123;</div><div class="line">        return data.size();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public int getChildrenCount(int groupPosition) &#123;</div><div class="line">        return data.get(groupPosition).getCollocationSkuDoList().size();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public Object getGroup(int groupPosition) &#123;</div><div class="line">        return data.get(groupPosition);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public Object getChild(int groupPosition, int childPosition) &#123;</div><div class="line">        return data.get(groupPosition).getCollocationSkuDoList().get(childPosition);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public long getGroupId(int groupPosition) &#123;</div><div class="line">        return groupPosition;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public long getChildId(int groupPosition, int childPosition) &#123;</div><div class="line">        return childPosition;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public boolean hasStableIds() &#123;</div><div class="line">        return true;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public boolean isChildSelectable(int groupPosition, int childPosition) &#123;</div><div class="line">        return true;//如果子条目需要响应click事件,必需返回true</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public View getGroupView(final int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) &#123;</div><div class="line">        ParentViewHolder parentViewHolder;</div><div class="line">        if (null == convertView) &#123;</div><div class="line">            convertView = inflater.inflate(R.layout.collocation_list_item_parent, parent, false);</div><div class="line">            parentViewHolder = new ParentViewHolder(convertView);</div><div class="line">            convertView.setTag(parentViewHolder);</div><div class="line">            AutoUtils.auto(convertView);</div><div class="line">        &#125; else &#123;</div><div class="line">            parentViewHolder = (ParentViewHolder) convertView.getTag();</div><div class="line">        &#125;</div><div class="line">        CollocationPackageBean collocationPackageBean = data.get(groupPosition);</div><div class="line">        parentViewHolder.tv_collocation_name.setText(TextUtils.isEmpty(collocationPackageBean.getName()) ? &quot;优惠套餐&quot; : collocationPackageBean.getName());</div><div class="line">        parentViewHolder.tv_save_text.setText(&quot;立省￥&quot; + collocationPackageBean.getDiscountFee());</div><div class="line">        parentViewHolder.iv_status.setImageResource(isExpanded ? R.mipmap.icon_top : R.mipmap.icon_bottom);</div><div class="line">        parentViewHolder.v_space.setVisibility(isExpanded ? View.GONE : View.VISIBLE);</div><div class="line">        parentViewHolder.hsv_goods_list.setVisibility(isExpanded ? View.GONE : View.VISIBLE);</div><div class="line">        parentViewHolder.hsv_goods_list.setFocusable(false);//设置后解决套餐无法正常展开的bug</div><div class="line">        if (!isExpanded) &#123;</div><div class="line">            //设置套餐折叠时显示套餐商品的图片</div><div class="line">            initGoodsImage(collocationPackageBean, parentViewHolder, groupPosition);</div><div class="line">        &#125;</div><div class="line">        return convertView;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public View getChildView(final int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) &#123;</div><div class="line">        ChildViewHolder childViewHolder;</div><div class="line">        if (null == convertView) &#123;</div><div class="line">            convertView = inflater.inflate(R.layout.collocation_list_item_child, parent, false);</div><div class="line">            childViewHolder = new ChildViewHolder(convertView);</div><div class="line">            convertView.setTag(childViewHolder);</div><div class="line">            AutoUtils.auto(convertView);</div><div class="line">        &#125; else &#123;</div><div class="line">            childViewHolder = (ChildViewHolder) convertView.getTag();</div><div class="line">        &#125;</div><div class="line">        final CollocationPackageBean.CollocationSkuBean collocationSkuBean = data.get(groupPosition).getCollocationSkuDoList().get(childPosition);</div><div class="line">        childViewHolder.sdv_goods_img.setImageURI(Uri.parse(collocationSkuBean.getImageMd5()));</div><div class="line">        childViewHolder.tv_goods_title.setText(collocationSkuBean.getSkuTitle());</div><div class="line">        childViewHolder.ll_root_view.setOnClickListener(new View.OnClickListener() &#123;</div><div class="line">            @Override</div><div class="line">            public void onClick(View v) &#123;</div><div class="line">                //进入商品详情页操作</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">        if (childPosition == data.get(groupPosition).getCollocationSkuDoList().size() - 1) &#123;</div><div class="line">            //当前套餐的最后一个商品</div><div class="line">            childViewHolder.ll_bottom.setVisibility(View.VISIBLE);</div><div class="line">            childViewHolder.tv_collocation_price.setText(data.get(groupPosition).getTotalPrice().toString());</div><div class="line">            childViewHolder.tv_add_cart.setOnClickListener(new View.OnClickListener() &#123;</div><div class="line">                @Override</div><div class="line">                public void onClick(View v) &#123;</div><div class="line">                    //把套餐商品加入购物车操作</div><div class="line">                &#125;</div><div class="line">            &#125;);</div><div class="line">        &#125; else &#123;</div><div class="line">            childViewHolder.ll_bottom.setVisibility(View.GONE);</div><div class="line">        &#125;</div><div class="line">        return convertView;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    class ParentViewHolder &#123;</div><div class="line">        private View v_space;</div><div class="line">        private ImageView iv_status;</div><div class="line">        private HorizontalScrollView hsv_goods_list;</div><div class="line">        private TextView tv_collocation_name, tv_save_text;</div><div class="line"></div><div class="line">        private ParentViewHolder (View view) &#123;</div><div class="line">            v_space = view.findViewById(R.id.v_space);</div><div class="line">            iv_status = (ImageView) view.findViewById(R.id.iv_status);</div><div class="line">            hsv_goods_list = (HorizontalScrollView) view.findViewById(R.id.hsv_goods_list);</div><div class="line">            tv_collocation_name = (TextView) view.findViewById(R.id.tv_collocation_name);</div><div class="line">            tv_save_text = (TextView) view.findViewById(R.id.tv_save_text);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private class ChildViewHolder &#123;</div><div class="line">        private SimpleDraweeView sdv_goods_img;</div><div class="line">        private LinearLayout ll_bottom, ll_root_view;</div><div class="line">        private TextView tv_add_cart, tv_goods_title, tv_collocation_price;</div><div class="line"></div><div class="line">        private ChildViewHolder (View view) &#123;</div><div class="line">            sdv_goods_img = (SimpleDraweeView) view.findViewById(R.id.sdv_goods_img);</div><div class="line">            ll_bottom = (LinearLayout) view.findViewById(R.id.ll_bottom);</div><div class="line">            ll_root_view = (LinearLayout) view.findViewById(R.id.ll_root_view);</div><div class="line">            tv_add_cart = (TextView) view.findViewById(R.id.tv_add_cart);</div><div class="line">            tv_goods_title = (TextView) view.findViewById(R.id.tv_goods_title);</div><div class="line">            tv_collocation_price = (TextView) view.findViewById(R.id.tv_collocation_price);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 初始化并设置套餐折叠时的所有商品图片</div><div class="line">     * @param collocationPackageBean</div><div class="line">     * @param parentViewHolder</div><div class="line">     * @param groupPosition</div><div class="line">     */</div><div class="line">    private void initGoodsImage(CollocationPackageBean collocationPackageBean,</div><div class="line">                                ParentViewHolder parentViewHolder, final int groupPosition) &#123;</div><div class="line">        View collocationView;</div><div class="line">        SimpleDraweeView sdv_cart_image;</div><div class="line">        RelativeLayout rl_middle;</div><div class="line">        LinearLayout rootview = new LinearLayout(context);</div><div class="line">        for (int i = 0, len = collocationPackageBean.getCollocationSkuDoList().size(); i &lt; len; i++) &#123;</div><div class="line">            collocationView = inflater.inflate(R.layout.item_gift_img, null);</div><div class="line">            sdv_cart_image = (SimpleDraweeView) collocationView.findViewById(R.id.sdv_cart_image);</div><div class="line">            rl_middle = (RelativeLayout) collocationView.findViewById(R.id.rl_middle);</div><div class="line">            sdv_cart_image.setImageURI(Uri.parse(collocationPackageBean.getCollocationSkuDoList().get(i).getImageMd5()));</div><div class="line">            rl_middle.setVisibility(View.INVISIBLE);</div><div class="line">            collocationView.setOnClickListener(new View.OnClickListener() &#123;</div><div class="line">                @Override</div><div class="line">                public void onClick(View v) &#123;</div><div class="line">                    //手动实现展开操作</div><div class="line">                    elv_collocation.expandGroup(groupPosition);</div><div class="line">                &#125;</div><div class="line">            &#125;);</div><div class="line">            AutoUtils.auto(collocationView);</div><div class="line">            rootview.addView(collocationView);</div><div class="line">        &#125;</div><div class="line">        parentViewHolder.hsv_goods_list.removeAllViews();</div><div class="line">        parentViewHolder.hsv_goods_list.addView(rootview);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>collocation_list_item_child.xml<br>子布局</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div></pre></td><td class="code"><pre><div class="line">&lt;com.zhy.autolayout.AutoLinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</div><div class="line">  xmlns:fresco=&quot;http://schemas.android.com/apk/res-auto&quot;</div><div class="line">  android:layout_width=&quot;match_parent&quot;</div><div class="line">  android:layout_height=&quot;match_parent&quot;</div><div class="line">  android:background=&quot;#ffffff&quot;</div><div class="line">  android:clickable=&quot;true&quot;</div><div class="line">  android:orientation=&quot;vertical&quot;&gt;</div><div class="line"></div><div class="line">  &lt;com.zhy.autolayout.AutoLinearLayout</div><div class="line">      android:id=&quot;@+id/ll_root_view&quot;</div><div class="line">      android:layout_width=&quot;match_parent&quot;</div><div class="line">      android:layout_height=&quot;wrap_content&quot;</div><div class="line">      android:background=&quot;@drawable/selector_me_bg_item&quot;</div><div class="line">      android:paddingBottom=&quot;28px&quot;</div><div class="line">      android:paddingLeft=&quot;24px&quot;</div><div class="line">      android:paddingRight=&quot;24px&quot;</div><div class="line">      android:paddingTop=&quot;30px&quot;&gt;</div><div class="line"></div><div class="line">      &lt;com.facebook.drawee.view.SimpleDraweeView</div><div class="line">          android:id=&quot;@+id/sdv_goods_img&quot;</div><div class="line">          android:layout_width=&quot;120px&quot;</div><div class="line">          android:layout_height=&quot;120px&quot;</div><div class="line">          android:background=&quot;@drawable/shape_cart_goods_border&quot;</div><div class="line">          android:padding=&quot;1dp&quot;</div><div class="line">          fresco:placeholderImage=&quot;@mipmap/icon_loading_bg&quot; /&gt;</div><div class="line"></div><div class="line">      &lt;TextView</div><div class="line">          android:id=&quot;@+id/tv_goods_title&quot;</div><div class="line">          android:layout_width=&quot;0dp&quot;</div><div class="line">          android:layout_height=&quot;wrap_content&quot;</div><div class="line">          android:layout_marginLeft=&quot;20px&quot;</div><div class="line">          android:layout_weight=&quot;1&quot;</div><div class="line">          android:ellipsize=&quot;end&quot;</div><div class="line">          android:maxLines=&quot;2&quot;</div><div class="line">          android:textColor=&quot;#222222&quot;</div><div class="line">          android:textSize=&quot;30px&quot; /&gt;</div><div class="line"></div><div class="line">      &lt;View</div><div class="line">          android:layout_width=&quot;118px&quot;</div><div class="line">          android:layout_height=&quot;1px&quot; /&gt;</div><div class="line"></div><div class="line">      &lt;ImageView</div><div class="line">          android:layout_width=&quot;18px&quot;</div><div class="line">          android:layout_height=&quot;28px&quot;</div><div class="line">          android:src=&quot;@mipmap/icon_right&quot; /&gt;</div><div class="line">  &lt;/com.zhy.autolayout.AutoLinearLayout&gt;</div><div class="line"></div><div class="line">  &lt;View</div><div class="line">      android:layout_width=&quot;match_parent&quot;</div><div class="line">      android:layout_height=&quot;1px&quot;</div><div class="line">      android:layout_marginLeft=&quot;24px&quot;</div><div class="line">      android:background=&quot;#dddddd&quot; /&gt;</div><div class="line"></div><div class="line">  &lt;com.zhy.autolayout.AutoLinearLayout</div><div class="line">      android:id=&quot;@+id/ll_bottom&quot;</div><div class="line">      android:layout_width=&quot;match_parent&quot;</div><div class="line">      android:layout_height=&quot;wrap_content&quot;</div><div class="line">      android:orientation=&quot;vertical&quot;&gt;</div><div class="line"></div><div class="line">      &lt;com.zhy.autolayout.AutoLinearLayout</div><div class="line">          android:layout_width=&quot;match_parent&quot;</div><div class="line">          android:layout_height=&quot;wrap_content&quot;</div><div class="line">          android:gravity=&quot;center_vertical&quot;</div><div class="line">          android:paddingLeft=&quot;24px&quot;</div><div class="line">          android:paddingRight=&quot;24px&quot;</div><div class="line">          android:paddingTop=&quot;20px&quot;&gt;</div><div class="line"></div><div class="line">          &lt;TextView</div><div class="line">              android:layout_width=&quot;wrap_content&quot;</div><div class="line">              android:layout_height=&quot;wrap_content&quot;</div><div class="line">              android:text=&quot;套餐价格:&quot;</div><div class="line">              android:textColor=&quot;#888888&quot;</div><div class="line">              android:textSize=&quot;30px&quot; /&gt;</div><div class="line"></div><div class="line">          &lt;TextView</div><div class="line">              android:layout_width=&quot;wrap_content&quot;</div><div class="line">              android:layout_height=&quot;wrap_content&quot;</div><div class="line">              android:layout_marginLeft=&quot;20px&quot;</div><div class="line">              android:text=&quot;￥&quot;</div><div class="line">              android:textColor=&quot;#ec0f38&quot;</div><div class="line">              android:textSize=&quot;22px&quot; /&gt;</div><div class="line"></div><div class="line">          &lt;TextView</div><div class="line">              android:id=&quot;@+id/tv_collocation_price&quot;</div><div class="line">              android:layout_width=&quot;wrap_content&quot;</div><div class="line">              android:layout_height=&quot;wrap_content&quot;</div><div class="line">              android:textColor=&quot;#ec0f38&quot;</div><div class="line">              android:textSize=&quot;30px&quot; /&gt;</div><div class="line"></div><div class="line">          &lt;View</div><div class="line">              android:layout_width=&quot;0dp&quot;</div><div class="line">              android:layout_height=&quot;0dp&quot;</div><div class="line">              android:layout_weight=&quot;1&quot; /&gt;</div><div class="line"></div><div class="line">          &lt;TextView</div><div class="line">              android:id=&quot;@+id/tv_add_cart&quot;</div><div class="line">              android:layout_width=&quot;180px&quot;</div><div class="line">              android:layout_height=&quot;50px&quot;</div><div class="line">              android:background=&quot;@drawable/selector_add_cart_red_btn&quot;</div><div class="line">              android:gravity=&quot;center&quot;</div><div class="line">              android:text=&quot;加入购物车&quot;</div><div class="line">              android:textColor=&quot;@drawable/selector_add_cart_red_tv&quot;</div><div class="line">              android:textSize=&quot;28px&quot; /&gt;</div><div class="line">      &lt;/com.zhy.autolayout.AutoLinearLayout&gt;</div><div class="line"></div><div class="line">      &lt;View</div><div class="line">          android:layout_width=&quot;match_parent&quot;</div><div class="line">          android:layout_height=&quot;20px&quot;</div><div class="line">          android:layout_marginTop=&quot;20px&quot;</div><div class="line">          android:background=&quot;#eeeff3&quot; /&gt;</div><div class="line">  &lt;/com.zhy.autolayout.AutoLinearLayout&gt;</div><div class="line">&lt;/com.zhy.autolayout.AutoLinearLayout&gt;</div></pre></td></tr></table></figure>
+<p>collocation_list_item_parent.xml<br>父布局</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div></pre></td><td class="code"><pre><div class="line">&lt;com.zhy.autolayout.AutoLinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</div><div class="line">  android:layout_width=&quot;match_parent&quot;</div><div class="line">  android:layout_height=&quot;match_parent&quot;</div><div class="line">  android:background=&quot;#ffffff&quot;</div><div class="line">  android:orientation=&quot;vertical&quot;</div><div class="line">  android:paddingTop=&quot;20px&quot;&gt;</div><div class="line"></div><div class="line">  &lt;com.zhy.autolayout.AutoLinearLayout</div><div class="line">      android:layout_width=&quot;match_parent&quot;</div><div class="line">      android:layout_height=&quot;50px&quot;</div><div class="line">      android:layout_marginBottom=&quot;30px&quot;</div><div class="line">      android:gravity=&quot;center_vertical&quot;</div><div class="line">      android:paddingLeft=&quot;24px&quot;</div><div class="line">      android:paddingRight=&quot;24px&quot;&gt;</div><div class="line"></div><div class="line">      &lt;TextView</div><div class="line">          android:id=&quot;@+id/tv_collocation_name&quot;</div><div class="line">          android:layout_width=&quot;wrap_content&quot;</div><div class="line">          android:layout_height=&quot;wrap_content&quot;</div><div class="line">          android:textColor=&quot;#222222&quot;</div><div class="line">          android:textSize=&quot;30px&quot; /&gt;</div><div class="line"></div><div class="line">      &lt;TextView</div><div class="line">          android:id=&quot;@+id/tv_save_text&quot;</div><div class="line">          android:layout_width=&quot;wrap_content&quot;</div><div class="line">          android:layout_height=&quot;40px&quot;</div><div class="line">          android:layout_marginLeft=&quot;20px&quot;</div><div class="line">          android:background=&quot;@drawable/shape_save_money&quot;</div><div class="line">          android:gravity=&quot;center&quot;</div><div class="line">          android:paddingLeft=&quot;18px&quot;</div><div class="line">          android:paddingRight=&quot;18px&quot;</div><div class="line">          android:textColor=&quot;#ffffff&quot;</div><div class="line">          android:textSize=&quot;24px&quot; /&gt;</div><div class="line"></div><div class="line">      &lt;View</div><div class="line">          android:layout_width=&quot;0dp&quot;</div><div class="line">          android:layout_height=&quot;1px&quot;</div><div class="line">          android:layout_weight=&quot;1&quot; /&gt;</div><div class="line"></div><div class="line">      &lt;ImageView</div><div class="line">          android:id=&quot;@+id/iv_status&quot;</div><div class="line">          android:layout_width=&quot;28px&quot;</div><div class="line">          android:layout_height=&quot;18px&quot;</div><div class="line">          android:layout_gravity=&quot;right|center_vertical&quot;</div><div class="line">          android:src=&quot;@mipmap/icon_top&quot; /&gt;</div><div class="line">  &lt;/com.zhy.autolayout.AutoLinearLayout&gt;</div><div class="line"></div><div class="line">  &lt;HorizontalScrollView</div><div class="line">      android:id=&quot;@+id/hsv_goods_list&quot;</div><div class="line">      android:layout_width=&quot;match_parent&quot;</div><div class="line">      android:layout_height=&quot;wrap_content&quot;</div><div class="line">      android:paddingLeft=&quot;24px&quot;</div><div class="line">      android:scrollbars=&quot;none&quot; /&gt;</div><div class="line"></div><div class="line">  &lt;View</div><div class="line">      android:id=&quot;@+id/v_space&quot;</div><div class="line">      android:layout_width=&quot;match_parent&quot;</div><div class="line">      android:layout_height=&quot;20px&quot;</div><div class="line">      android:layout_marginTop=&quot;20px&quot;</div><div class="line">      android:background=&quot;#eeeff3&quot;</div><div class="line">      android:visibility=&quot;gone&quot; /&gt;</div><div class="line">&lt;/com.zhy.autolayout.AutoLinearLayout&gt;</div></pre></td></tr></table></figure>
+<p>这样就基本实现了。<a href="http://download.csdn.net/detail/xiangzhihong8/9740942" target="_blank" rel="external">源码地址</a></p>
+    </div>
+    <p class="post-meta">
+        <span class="post-cat">分类：
+            <a class="cat-link" href="/categories/Android/">Android</a>
+        </span>
+        <span class="post-tags">
+            标签：
+            <a href="/tags/Android/" title="Android">Android</a> / 
+    
+        <a href="/tags/高仿/" title="高仿">高仿</a>
+        </span>
+    </p>
+</article>
+<div class="article-share clearfix text-center">
+    <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+</div>
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br>
+        <a href="/2016/06/15/Android7.0新特性/">
+            
+                android7.0新特性
+            
+        </a>
+    </span>
+    
+
+    
+    <span class="next fr">
+        下一篇<br>
+        <a href="/2016/06/05/Android ConstraintLayout约束控件使用介绍/">
+            
+                android7.0新特性
+            
+        </a>
+    </span>
+    
+</div>
+<!-- 文章评论 -->
+<div id="comments" class="comments cloud-tie-wrapper"></div>
+    <script>
+    var cloudTieConfig = {
+      url: document.location.href, 
+      sourceId: "Android ExpandableListView详解",
+      productKey: "c06bb9930e6f4b38a9997cb9bd17aba5",
+      target: "comments"
+    };
+    var yunManualLoad = true;
+    Tie.loader("aHR0cHM6Ly9hcGkuZ2VudGllLjE2My5jb20vcGMvbGl2ZXNjcmlwdC5odG1s", true);
+    </script>
+            </div>
+
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章分类</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+    <li>
+        <a href="/categories/Android/">Android</a>
+        <span class="badge">(10)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Android/系统/">系统</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Angular2/">Angular2</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/React-Native/">React Native</a>
+        <span class="badge">(9)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Java/">Java</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/前端/">前端</a>
+        <span class="badge">(6)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/VR/">VR</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Angular2/前端/">前端</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Spring/">Spring</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/ios/">ios</a>
+        <span class="badge">(7)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Google/">Google</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Google/VR/">VR</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/技术人生/">技术人生</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/小程序/">小程序</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/机器学习/">机器学习</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/android/">android</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/设计模式/">设计模式</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+</ul>
+    </section>
+
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="/tags/Android/" title="Android">Android (7)</a>
+  
+    <a class="tag-item" href="/tags/新特性/" title="新特性">新特性 (2)</a>
+  
+    <a class="tag-item" href="/tags/高仿/" title="高仿">高仿 (4)</a>
+  
+    <a class="tag-item" href="/tags/深入系统/" title="深入系统">深入系统 (1)</a>
+  
+    <a class="tag-item" href="/tags/系统服务/" title="系统服务">系统服务 (1)</a>
+  
+    <a class="tag-item" href="/tags/android/" title="android">android (4)</a>
+  
+    <a class="tag-item" href="/tags/混淆打包/" title="混淆打包">混淆打包 (1)</a>
+  
+    <a class="tag-item" href="/tags/Angular2/" title="Angular2">Angular2 (1)</a>
+  
+    <a class="tag-item" href="/tags/前端开发/" title="前端开发">前端开发 (3)</a>
+  
+    <a class="tag-item" href="/tags/硬件/" title="硬件">硬件 (1)</a>
+  
+    <a class="tag-item" href="/tags/React-Native/" title="React Native">React Native (7)</a>
+  
+    <a class="tag-item" href="/tags/FlexBox布局/" title="FlexBox布局">FlexBox布局 (1)</a>
+  
+    <a class="tag-item" href="/tags/Java/" title="Java">Java (2)</a>
+  
+    <a class="tag-item" href="/tags/垃圾回收/" title="垃圾回收">垃圾回收 (1)</a>
+  
+    <a class="tag-item" href="/tags/Node/" title="Node">Node (2)</a>
+  
+    <a class="tag-item" href="/tags/Google/" title="Google">Google (2)</a>
+  
+    <a class="tag-item" href="/tags/VR/" title="VR">VR (2)</a>
+  
+    <a class="tag-item" href="/tags/OpenGL/" title="OpenGL">OpenGL (1)</a>
+  
+    <a class="tag-item" href="/tags/Promise/" title="Promise">Promise (1)</a>
+  
+    <a class="tag-item" href="/tags/前端/" title="前端">前端 (4)</a>
+  
+    <a class="tag-item" href="/tags/调试/" title="调试">调试 (1)</a>
+  
+    <a class="tag-item" href="/tags/eact-Native/" title="eact Native">eact Native (1)</a>
+  
+    <a class="tag-item" href="/tags/打包/" title="打包">打包 (1)</a>
+  
+    <a class="tag-item" href="/tags/Spring/" title="Spring">Spring (2)</a>
+  
+    <a class="tag-item" href="/tags/入门/" title="入门">入门 (2)</a>
+  
+    <a class="tag-item" href="/tags/原生/" title="原生">原生 (1)</a>
+  
+    <a class="tag-item" href="/tags/ios/" title="ios">ios (7)</a>
+  
+    <a class="tag-item" href="/tags/swift/" title="swift">swift (1)</a>
+  
+    <a class="tag-item" href="/tags/Swift/" title="Swift">Swift (1)</a>
+  
+    <a class="tag-item" href="/tags/AR/" title="AR">AR (1)</a>
+  
+    <a class="tag-item" href="/tags/webpack/" title="webpack">webpack (1)</a>
+  
+    <a class="tag-item" href="/tags/gulp/" title="gulp">gulp (1)</a>
+  
+    <a class="tag-item" href="/tags/Xcode/" title="Xcode">Xcode (2)</a>
+  
+    <a class="tag-item" href="/tags/https/" title="https">https (1)</a>
+  
+    <a class="tag-item" href="/tags/gif/" title="gif">gif (1)</a>
+  
+    <a class="tag-item" href="/tags/mac/" title="mac">mac (1)</a>
+  
+    <a class="tag-item" href="/tags/环境/" title="环境">环境 (1)</a>
+  
+    <a class="tag-item" href="/tags/知识库/" title="知识库">知识库 (1)</a>
+  
+    <a class="tag-item" href="/tags/原理/" title="原理">原理 (1)</a>
+  
+</div>
+    </section>
+    
+
+    
+    <!-- 我的微博 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>我的微博</strong></h3>
+        <div class="widget-bd" style="position: relative">
+  <div id="myWeiboLoading" class="text-center" style="position:absolute;top:0;left:0;right:0;bottom:0;line-height:50px;font-size:12px;background-color:#fff;z-index:9">微博加载中...</div>
+  <iframe width="100%" height="550" class="share_self" frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&amp;width=0&amp;height=550&amp;fansRow=2&amp;ptype=1&amp;speed=0&amp;skin=4&amp;isTitle=1&amp;noborder=1&amp;isWeibo=1&amp;isFans=1&amp;uid=1831462560&amp;verifier=5192ec39&amp;dpc=1"></iframe>
+  <script>
+  (function () {
+    var oMyWeibo = document.getElementById('myWeibo');
+    var oMyWeiboLoading = document.getElementById('myWeiboLoading');
+    var isIE = /msie/i.test(navigator.userAgent) && !window.opera;
+    var timer = null;
+    if (isIE) {
+      oMyWeibo.onreadystatechange = function(){
+        if(oMyWeibo.readyState === 'loaded' || oMyWeibo.readyState === 'complete'){
+          timer = setTimeout(function () {
+            oMyWeiboLoading.parentNode.removeChild(oMyWeiboLoading);
+            timer = null;
+          }, 300);
+        }
+      };
+    } else {
+      oMyWeibo.onload = function () {
+        timer = setTimeout(function () {
+          oMyWeiboLoading.parentNode.removeChild(oMyWeiboLoading);
+          timer = null;
+        }, 300);
+      };
+    }
+  })();
+  </script>
+</div>
+    </section>
+    
+
+    
+    <!-- 友情链接 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>友情链接</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+        <li>
+            <a href="http://blog.csdn.net/xiangzhihong8/" target="_blank" title="csdn个人博客">csdn博客</a>
+        </li>
+    
+        <li>
+            <a href="https://yq.aliyun.com/u/xiangzhihong" target="_blank" title="阿里云技术博客">阿里云博客</a>
+        </li>
+    
+</ul>
+    </section>
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <footer class="footer">
+    &copy;
+    
+        2016-2017
+    
+
+    <a href="/">Jelon Loves You</a>
+</footer>
+<div class="back-to-top" id="JELON__backToTop" title="返回顶部">返回顶部</div>
+<!-- 添加百度自动推送 -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+    <!--博客js脚本 -->
+    <!-- 这里放网站js脚本 -->
+<script src="/js/main.js"></script>
+</body>

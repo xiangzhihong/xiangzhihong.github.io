@@ -1,304 +1,127 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
 <head>
-<!--[if lt IE 9]>
-        <style>body {display: none; background: none !important} </style>
-        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8">
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya">
+    
+    <title>Android仿京东、天猫商品详情页 | 向志洪</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
+    <meta name="keywords" content="前端, Web, 移动, 向志洪">
+    <meta name="description" content="">
+
+    
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <!--[if lt IE 9]>
+    <script src="/js/html5.js"></script>
     <![endif]-->
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<meta name="format-detection" content="telephone=no">
-<meta name="author" content="向志洪">
-
-
-
-<meta name="description" content="Android仿京东、天猫商品详情页">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Android仿京东、天猫商品详情页">
-<meta property="og:url" content="http://code.youmeek.com/2016/08/05/Android高仿天猫详情页/index.html">
-<meta property="og:site_name" content="向志洪">
-<meta property="og:description" content="Android仿京东、天猫商品详情页">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2112446-93a1db08d6cc99a5.gif?imageMogr2/auto-orient/strip">
-<meta property="og:image" content="http://img.blog.csdn.net/20170122155837922?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:image" content="http://img.blog.csdn.net/20170122160922761?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:updated_time" content="2017-03-02T11:46:43.918Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android仿京东、天猫商品详情页">
-<meta name="twitter:description" content="Android仿京东、天猫商品详情页">
-<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2112446-93a1db08d6cc99a5.gif?imageMogr2/auto-orient/strip">
-
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-
-
-    <link rel="alternate" href="/atom.xml" title="向志洪" type="application/atom+xml">
-
-
-
-    <link rel="shortcut icon" href="/favicon.png">
-
-
-
-    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
-
-
-
-    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
-
-
-
-    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
-    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
-
-
-<link rel="stylesheet" href="/css/style.css">
-
-
-
-<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
-
-
-<title>Android仿京东、天猫商品详情页 | 向志洪</title>
-
-<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
-<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
-
-<script>
-    var yiliaConfig = {
-        fancybox: true,
-        animate: true,
-        isHome: false,
-        isPost: true,
-        isArchive: false,
-        isTag: false,
-        isCategory: false,
-        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
-        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
-        search: undefined
-    }
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?fd459238242776d173cdc64918fb32f2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
 </script>
-
-
-    <script> yiliaConfig.jquery_ui = [false]; </script>
-
-
-
-    <script> yiliaConfig.rootUrl = "\/";</script>
-
-
-
-
-
-
+    
+    <script>var yunModuleEnv = true;</script>
+    <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+    
 </head></html>
-<body>
-  <div id="container">
-    <div class="left-col">
-    <div class="overlay"></div>
-<div class="intrude-less">
-    <header id="header" class="inner">
-        <a href="/" class="profilepic">
-            <img src="http://ohe65w0xx.bkt.clouddn.com/avert.png" class="animated zoomIn">
-        </a>
-        <hgroup>
-          <h1 class="header-author"><a href="/">向志洪</a></h1>
-        </hgroup>
+<body class="home">
+    <!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
 
-        
-        <p class="header-subtitle">这里只有代码相关，要了解更多 &gt;&gt;http://blog.csdn.net/xiangzhihong8</p>
-        
-
-        
-
-
-        
-            <div id="switch-btn" class="switch-btn">
-                <div class="icon">
-                    <div class="icon-ctn">
-                        <div class="icon-wrap icon-house" data-idx="0">
-                            <div class="birdhouse"></div>
-                            <div class="birdhouse_holes"></div>
-                        </div>
-                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
-                            <div class="ribbon"></div>
-                        </div>
-                        
-                        <div class="icon-wrap icon-link hide" data-idx="2">
-                            <div class="loopback_l"></div>
-                            <div class="loopback_r"></div>
-                        </div>
-                        
-                        
-                        <div class="icon-wrap icon-me hide" data-idx="3">
-                            <div class="user"></div>
-                            <div class="shoulder"></div>
-                        </div>
-                        
-                    </div>
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="/">
+                <div class="cover">
+                    <span class="name">向志洪</span>
+                    <span class="description">个人技术博客</span>
+                </div>
+            </a>
+        </div>
+        <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
+        <ul class="menu hidden" id="JELON__menu">
+            
+            <li rel="/2016/08/05/Android高仿天猫详情页/index.html" class="item">
+                <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
+            </li>
+            
+            <li rel="/2016/08/05/Android高仿天猫详情页/index.html" class="item">
+                <a href="/archives/" title="文章列表" class="icon-lab">&nbsp;文章列表</a>
+            </li>
+            
+            <li rel="/2016/08/05/Android高仿天猫详情页/index.html" class="item">
+                <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
+            </li>
+            
+            <li rel="/2016/08/05/Android高仿天猫详情页/index.html" class="item">
+                <a href="/404/" title="留言" class="icon-comment">&nbsp;留言</a>
+            </li>
+            
+        </ul>
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
                     
-                </div>
-                <div class="tips-box hide">
-                    <div class="tips-arrow"></div>
-                    <ul class="tips-inner">
-                        <li>菜单</li>
-                        <li>标签</li>
-                        
-                        <li>友情链接</li>
-                        
-                        
-                        <li>关于我</li>
-                        
-                    </ul>
-                </div>
+                        <a href="https://github.com/xiangzhihong" target="_blank">Github</a>
+                        |
+                    
+                        <a href="http://tongji.baidu.com/web/welcome/login" target="_blank">站长统计</a>
+                        |
+                    
+                        <a href="http://weibo.com/code_xzh" target="_blank">新浪微博</a>
+                        |
+                    
+                </p>
+                <p class="sns">
+                    
+                    <a href="javascript: void(0);" class="wechat">
+                        <b>■</b>
+                        公众号
+                        <span class="popover">
+                            <img src="/img/wechat_mp.jpg" width="120" height="120" alt="我的微信订阅号">
+                            <i class="arrow"></i>
+                        </span>
+                    </a>
+                </p>
+                
             </div>
-        
-
-        <div id="switch-area" class="switch-area">
-            <div class="switch-wrap">
-                <section class="switch-part switch-part1">
-                    <nav class="header-menu">
-                        <ul>
-                        
-                            <li><a href="/">主页</a></li>
-                        
-                            <li><a href="/archives/">所有文章</a></li>
-                        
-                            <li><a href="/tags/">标签云</a></li>
-                        
-                            <li><a href="/about/">关于我</a></li>
-                        
-                        </ul>
-                    </nav>
-                    <nav class="header-nav">
-                        <ul class="social">
-                            
-                                <a class="fa GitHub" href="https://github.com/xiangzhihong/" title="GitHub"></a>
-                            
-                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
-                            
-                                <a class="fa CSDN" href="http://blog.csdn.net/xiangzhihong8/" title="CSDN"></a>
-                            
-                                <a class="fa QQ" href="/1044817967" title="QQ"></a>
-                            
-                        </ul>
-                    </nav>
-                </section>
-                
-                
-                <section class="switch-part switch-part2">
-                    <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Angular2/">Angular2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google/">Google</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node/">Node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node入门/">Node入门</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenGL/">OpenGL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React-Native/">React Native</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VR/">VR</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WindowManager/">WindowManager</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xcode/">Xcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/">android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gif/">gif</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gulp/">gulp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/https/">https</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift/">swift</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/个人博客/">个人博客</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/入门/">入门</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端开发/">前端开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原理/">原理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大数据/">大数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/小程序/">小程序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微信/">微信</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建网站/">搭建网站</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/新特性/">新特性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/流量/">流量</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/深入理解/">深入理解</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/源码/">源码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/环境/">环境</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/知识库/">知识库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/硬件/">硬件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/系统服务/">系统服务</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/迭代子模式/">迭代子模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高仿/">高仿</a></li></ul>
-                    </div>
-                </section>
-                
-                
-                
-                <section class="switch-part switch-part3">
-                    <div id="js-friends">
-                    
-                      <a class="main-nav-link switch-friends-link" href="http://www.xiangzhihong.com/">Blog</a>
-                    
-                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
-                    
-                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
-                    
-                    </div>
-                </section>
-                
-
-                
-                
-                <section class="switch-part switch-part4">
-                
-                    <div id="js-aboutme">专注于前端</div>
-                </section>
-                
+            <div class="avatar fr">
+                <img src="http://ohe65w0xx.bkt.clouddn.com/avert.png" alt="avatar" title="Jelon">
             </div>
         </div>
-    </header>                
-</div>
-    </div>
-    <div class="mid-col">
-      <nav id="mobile-nav">
-      <div class="overlay">
-          <div class="slider-trigger"></div>
-          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">向志洪</a></h1>
-      </div>
-    <div class="intrude-less">
-        <header id="header" class="inner">
-            <a href="/" class="profilepic">
-                <img src="http://ohe65w0xx.bkt.clouddn.com/avert.png" class="animated zoomIn">
-            </a>
-            <hgroup>
-              <h1 class="header-author"><a href="/" title="回到主页">向志洪</a></h1>
-            </hgroup>
-            
-            <p class="header-subtitle">这里只有代码相关，要了解更多 &gt;&gt;http://blog.csdn.net/xiangzhihong8</p>
-            
-            <nav class="header-menu">
-                <ul>
-                
-                    <li><a href="/">主页</a></li>
-                
-                    <li><a href="/archives/">所有文章</a></li>
-                
-                    <li><a href="/tags/">标签云</a></li>
-                
-                    <li><a href="/about/">关于我</a></li>
-                
-                <div class="clearfix"></div>
-                </ul>
-            </nav>
-            <nav class="header-nav">
-                        <ul class="social">
-                            
-                                <a class="fa GitHub" target="_blank" href="https://github.com/xiangzhihong/" title="GitHub"></a>
-                            
-                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
-                            
-                                <a class="fa CSDN" target="_blank" href="http://blog.csdn.net/xiangzhihong8/" title="CSDN"></a>
-                            
-                                <a class="fa QQ" target="_blank" href="/1044817967" title="QQ"></a>
-                            
-                        </ul>
-            </nav>
-        </header>                
-    </div>
-    <link class="menu-list" tags="标签" friends="友情链接" about="关于我">
-</nav>
-      <div class="body-wrap"><article id="post-Android高仿天猫详情页" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/08/05/Android高仿天猫详情页/" class="article-date">
-      <time datetime="2016-08-04T16:00:00.000Z" itemprop="datePublished">2016-08-05</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        <h1 class="article-title" itemprop="name">
-      Android仿京东、天猫商品详情页
-    </h1>
-      </header>
-      
-      <div class="article-info article-info-post">
-        <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/博客/">博客</a>
-    </div>
-        <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/源码/">源码</a></li></ul>
-    </div>
-        <div class="clearfix"></div>
-      </div>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
+    </section>
+</header>
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+        <section class="content">
+            <div class="content-main widget">
+                <!-- 文章页 -->
+<!-- 文章 -->
+<article class="post article">
+    <header class="text-center">
+        <h3 class="post-title"><span>Android仿京东、天猫商品详情页</span></h3>
+    </header>
+    <p class="post-meta text-center">
+        xiangzhihong 发表于
+        <time datetime="2016-08-04T16:00:00.000Z">2016-08-05</time>
+    </p>
+    <div class="post-content">
         <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>前面在介绍控件<a href="http://blog.csdn.net/xiangzhihong8/article/details/52369483" target="_blank" rel="external">TabLayout控件</a>和CoordinatorLayout使用的时候说了下实现京东、天猫详情页面的效果，今天要说的是优化版，是我们线上实现的效果，首先看一下效果：<br><img src="http://upload-images.jianshu.io/upload_images/2112446-93a1db08d6cc99a5.gif?imageMogr2/auto-orient/strip" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20170122155837922?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
 <h2 id="项目结构分析"><a href="#项目结构分析" class="headerlink" title="项目结构分析"></a>项目结构分析</h2><p>首先我们来分析一下要实现上面的效果，我们需要怎么做。顶部是一个可以滑动切换Tab，可以用ViewPager+Fragment实现，也可以使用系统的TabLayout控件实现；而下面的 View是一个可以滑动拖动效果的View，可以采用网上一个叫做DragLayout的控件，我这里是自己实现了一个，主要是通过对View的事件分发的一些处理；然后滑动到下面就是一个图文详情的View（Fragment），本页面包含两个界面：详情页面和参数页面；最后是评价的View（Fragment）。经过上面的分析，我们的界面至少需要4个Fragement，首先来看一下项目结构：<br><img src="http://img.blog.csdn.net/20170122160922761?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
 <h1 id="代码讲解"><a href="#代码讲解" class="headerlink" title="代码讲解"></a>代码讲解</h1><p>代码比较多，这里只讲解几个核心的方法类。首先我们来看一下我们自己是的这个具有阻尼效果的View，我们知道要实现的效果，我们需要对View的事件做一个全面的实现。这里首先说一下View的事件分发的流程：onInterceptTouchEvent()–&gt;dispatchTouchEvent()–&gt;onTouchEvent();<br>首先我们需要对View传过来的事件做一个拦截：</p>
@@ -310,209 +133,331 @@
 <p>上下滑动也是涉及到两个界面：mFrontView和mBehindView，然后通过判断滑动事件来显示哪一个View。具体看代码：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div><div class="line">265</div><div class="line">266</div><div class="line">267</div><div class="line">268</div><div class="line">269</div><div class="line">270</div><div class="line">271</div><div class="line">272</div><div class="line">273</div><div class="line">274</div><div class="line">275</div><div class="line">276</div><div class="line">277</div><div class="line">278</div><div class="line">279</div><div class="line">280</div><div class="line">281</div><div class="line">282</div><div class="line">283</div><div class="line">284</div><div class="line">285</div><div class="line">286</div><div class="line">287</div><div class="line">288</div><div class="line">289</div><div class="line">290</div><div class="line">291</div><div class="line">292</div><div class="line">293</div><div class="line">294</div><div class="line">295</div><div class="line">296</div><div class="line">297</div><div class="line">298</div><div class="line">299</div><div class="line">300</div><div class="line">301</div><div class="line">302</div><div class="line">303</div><div class="line">304</div><div class="line">305</div><div class="line">306</div><div class="line">307</div><div class="line">308</div><div class="line">309</div><div class="line">310</div><div class="line">311</div><div class="line">312</div><div class="line">313</div><div class="line">314</div><div class="line">315</div><div class="line">316</div><div class="line">317</div><div class="line">318</div><div class="line">319</div><div class="line">320</div><div class="line">321</div><div class="line">322</div><div class="line">323</div><div class="line">324</div><div class="line">325</div><div class="line">326</div><div class="line">327</div><div class="line">328</div><div class="line">329</div><div class="line">330</div><div class="line">331</div><div class="line">332</div><div class="line">333</div><div class="line">334</div><div class="line">335</div><div class="line">336</div><div class="line">337</div><div class="line">338</div><div class="line">339</div><div class="line">340</div><div class="line">341</div><div class="line">342</div><div class="line">343</div><div class="line">344</div><div class="line">345</div><div class="line">346</div><div class="line">347</div><div class="line">348</div><div class="line">349</div><div class="line">350</div><div class="line">351</div><div class="line">352</div><div class="line">353</div><div class="line">354</div><div class="line">355</div><div class="line">356</div><div class="line">357</div><div class="line">358</div><div class="line">359</div><div class="line">360</div><div class="line">361</div><div class="line">362</div><div class="line">363</div><div class="line">364</div><div class="line">365</div><div class="line">366</div><div class="line">367</div><div class="line">368</div><div class="line">369</div><div class="line">370</div><div class="line">371</div><div class="line">372</div><div class="line">373</div><div class="line">374</div><div class="line">375</div><div class="line">376</div><div class="line">377</div><div class="line">378</div><div class="line">379</div><div class="line">380</div><div class="line">381</div><div class="line">382</div><div class="line">383</div><div class="line">384</div><div class="line">385</div><div class="line">386</div><div class="line">387</div><div class="line">388</div><div class="line">389</div><div class="line">390</div><div class="line">391</div><div class="line">392</div><div class="line">393</div><div class="line">394</div><div class="line">395</div><div class="line">396</div><div class="line">397</div><div class="line">398</div><div class="line">399</div><div class="line">400</div><div class="line">401</div><div class="line">402</div><div class="line">403</div><div class="line">404</div><div class="line">405</div><div class="line">406</div><div class="line">407</div><div class="line">408</div><div class="line">409</div><div class="line">410</div><div class="line">411</div><div class="line">412</div><div class="line">413</div><div class="line">414</div><div class="line">415</div><div class="line">416</div><div class="line">417</div><div class="line">418</div><div class="line">419</div><div class="line">420</div><div class="line">421</div><div class="line">422</div><div class="line">423</div><div class="line">424</div><div class="line">425</div><div class="line">426</div><div class="line">427</div><div class="line">428</div><div class="line">429</div><div class="line">430</div><div class="line">431</div><div class="line">432</div><div class="line">433</div><div class="line">434</div><div class="line">435</div><div class="line">436</div><div class="line">437</div><div class="line">438</div><div class="line">439</div><div class="line">440</div><div class="line">441</div><div class="line">442</div><div class="line">443</div><div class="line">444</div><div class="line">445</div><div class="line">446</div><div class="line">447</div><div class="line">448</div><div class="line">449</div><div class="line">450</div><div class="line">451</div><div class="line">452</div><div class="line">453</div><div class="line">454</div><div class="line">455</div><div class="line">456</div><div class="line">457</div><div class="line">458</div><div class="line">459</div><div class="line">460</div><div class="line">461</div><div class="line">462</div><div class="line">463</div><div class="line">464</div><div class="line">465</div><div class="line">466</div><div class="line">467</div><div class="line">468</div><div class="line">469</div><div class="line">470</div><div class="line">471</div><div class="line">472</div><div class="line">473</div><div class="line">474</div><div class="line">475</div><div class="line">476</div><div class="line">477</div><div class="line">478</div><div class="line">479</div><div class="line">480</div><div class="line">481</div><div class="line">482</div><div class="line">483</div><div class="line">484</div></pre></td><td class="code"><pre><div class="line">package com.xzh.gooddetail.view;</div><div class="line"></div><div class="line">import android.animation.Animator;</div><div class="line">import android.animation.AnimatorListenerAdapter;</div><div class="line">import android.animation.ValueAnimator;</div><div class="line">import android.content.Context;</div><div class="line">import android.content.res.TypedArray;</div><div class="line">import android.os.Parcel;</div><div class="line">import android.os.Parcelable;</div><div class="line">import android.support.v4.view.MotionEventCompat;</div><div class="line">import android.support.v4.view.ViewCompat;</div><div class="line">import android.util.AttributeSet;</div><div class="line">import android.view.MotionEvent;</div><div class="line">import android.view.View;</div><div class="line">import android.view.ViewConfiguration;</div><div class="line">import android.view.ViewGroup;</div><div class="line">import android.widget.AbsListView;</div><div class="line">import android.widget.FrameLayout;</div><div class="line">import android.widget.LinearLayout;</div><div class="line">import android.widget.RelativeLayout;</div><div class="line"></div><div class="line">import com.xzh.gooddetail.R;</div><div class="line"></div><div class="line">public class SlideDetailsLayout extends ViewGroup &#123;</div><div class="line"></div><div class="line">    public interface OnSlideDetailsListener &#123;</div><div class="line">        void onStatusChanged(Status status);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public enum Status &#123;</div><div class="line">        CLOSE,</div><div class="line">        OPEN;</div><div class="line"></div><div class="line">        public static Status valueOf(int stats) &#123;</div><div class="line">            if (0 == stats) &#123;</div><div class="line">                return CLOSE;</div><div class="line">            &#125; else if (1 == stats) &#123;</div><div class="line">                return OPEN;</div><div class="line">            &#125; else &#123;</div><div class="line">                return CLOSE;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private static final float DEFAULT_PERCENT = 0.2f;</div><div class="line">    private static final int DEFAULT_DURATION = 300;</div><div class="line"></div><div class="line">    private View mFrontView;</div><div class="line">    private View mBehindView;</div><div class="line"></div><div class="line">    private float mTouchSlop;</div><div class="line">    private float mInitMotionY;</div><div class="line">    private float mInitMotionX;</div><div class="line"></div><div class="line">    private View mTarget;</div><div class="line">    private float mSlideOffset;</div><div class="line">    private Status mStatus = Status.CLOSE;</div><div class="line">    private boolean isFirstShowBehindView = true;</div><div class="line">    private float mPercent = DEFAULT_PERCENT;</div><div class="line">    private long mDuration = DEFAULT_DURATION;</div><div class="line">    private int mDefaultPanel = 0;</div><div class="line"></div><div class="line">    private OnSlideDetailsListener mOnSlideDetailsListener;</div><div class="line"></div><div class="line">    public SlideDetailsLayout(Context context) &#123;</div><div class="line">        this(context, null);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public SlideDetailsLayout(Context context, AttributeSet attrs) &#123;</div><div class="line">        this(context, attrs, 0);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public SlideDetailsLayout(Context context, AttributeSet attrs, int defStyleAttr) &#123;</div><div class="line">        super(context, attrs, defStyleAttr);</div><div class="line"></div><div class="line">        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.SlideDetailsLayout, defStyleAttr, 0);</div><div class="line">        mPercent = a.getFloat(R.styleable.SlideDetailsLayout_percent, DEFAULT_PERCENT);</div><div class="line">        mDuration = a.getInt(R.styleable.SlideDetailsLayout_duration, DEFAULT_DURATION);</div><div class="line">        mDefaultPanel = a.getInt(R.styleable.SlideDetailsLayout_default_panel, 0);</div><div class="line">        a.recycle();</div><div class="line"></div><div class="line">        mTouchSlop = ViewConfiguration.get(getContext()).getScaledTouchSlop();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void setOnSlideDetailsListener(OnSlideDetailsListener listener) &#123;</div><div class="line">        this.mOnSlideDetailsListener = listener;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void smoothOpen(boolean smooth) &#123;</div><div class="line">        if (mStatus != Status.OPEN) &#123;</div><div class="line">            mStatus = Status.OPEN;</div><div class="line">            final float height = -getMeasuredHeight();</div><div class="line">            animatorSwitch(0, height, true, smooth ? mDuration : 0);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void smoothClose(boolean smooth) &#123;</div><div class="line">        if (mStatus != Status.CLOSE) &#123;</div><div class="line">            mStatus = Status.CLOSE;</div><div class="line">            final float height = -getMeasuredHeight();</div><div class="line">            animatorSwitch(height, 0, true, smooth ? mDuration : 0);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected LayoutParams generateDefaultLayoutParams() &#123;</div><div class="line">        return new MarginLayoutParams(MarginLayoutParams.WRAP_CONTENT, MarginLayoutParams.WRAP_CONTENT);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public LayoutParams generateLayoutParams(AttributeSet attrs) &#123;</div><div class="line">        return new MarginLayoutParams(getContext(), attrs);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected LayoutParams generateLayoutParams(LayoutParams p) &#123;</div><div class="line">        return new MarginLayoutParams(p);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onFinishInflate() &#123;</div><div class="line">        final int childCount = getChildCount();</div><div class="line">        if (1 &gt;= childCount) &#123;</div><div class="line">            throw new RuntimeException(&quot;SlideDetailsLayout only accept childs more than 1!!&quot;);</div><div class="line">        &#125;</div><div class="line">        mFrontView = getChildAt(0);</div><div class="line">        mBehindView = getChildAt(1);</div><div class="line">        if (mDefaultPanel == 1) &#123;</div><div class="line">            post(new Runnable() &#123;</div><div class="line">                @Override</div><div class="line">                public void run() &#123;</div><div class="line">                    smoothOpen(false);</div><div class="line">                &#125;</div><div class="line">            &#125;);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) &#123;</div><div class="line">        final int pWidth = MeasureSpec.getSize(widthMeasureSpec);</div><div class="line">        final int pHeight = MeasureSpec.getSize(heightMeasureSpec);</div><div class="line"></div><div class="line">        final int childWidthMeasureSpec =</div><div class="line">                MeasureSpec.makeMeasureSpec(pWidth, MeasureSpec.EXACTLY);</div><div class="line">        final int childHeightMeasureSpec =</div><div class="line">                MeasureSpec.makeMeasureSpec(pHeight, MeasureSpec.EXACTLY);</div><div class="line"></div><div class="line">        View child;</div><div class="line">        for (int i = 0; i &lt; getChildCount(); i++) &#123;</div><div class="line">            child = getChildAt(i);</div><div class="line">            if (child.getVisibility() == GONE) &#123;</div><div class="line">                continue;</div><div class="line">            &#125;</div><div class="line">            measureChild(child, childWidthMeasureSpec, childHeightMeasureSpec);</div><div class="line">        &#125;</div><div class="line">        setMeasuredDimension(pWidth, pHeight);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onLayout(boolean changed, int l, int t, int r, int b) &#123;</div><div class="line">        final int left = l;</div><div class="line">        final int right = r;</div><div class="line">        int top;</div><div class="line">        int bottom;</div><div class="line">        final int offset = (int) mSlideOffset;</div><div class="line">        View child;</div><div class="line">        for (int i = 0; i &lt; getChildCount(); i++) &#123;</div><div class="line">            child = getChildAt(i);</div><div class="line">            if (child.getVisibility() == GONE) &#123;</div><div class="line">                continue;</div><div class="line">            &#125;</div><div class="line">            if (child == mBehindView) &#123;</div><div class="line">                top = b + offset;</div><div class="line">                bottom = top + b - t;</div><div class="line">            &#125; else &#123;</div><div class="line">                top = t + offset;</div><div class="line">                bottom = b + offset;</div><div class="line">            &#125;</div><div class="line">            child.layout(left, top, right, bottom);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public boolean onInterceptTouchEvent(MotionEvent ev) &#123;</div><div class="line">        ensureTarget();</div><div class="line">        if (null == mTarget) &#123;</div><div class="line">            return false;</div><div class="line">        &#125;</div><div class="line">        if (!isEnabled()) &#123;</div><div class="line">            return false;</div><div class="line">        &#125;</div><div class="line">        final int aciton = MotionEventCompat.getActionMasked(ev);</div><div class="line">        boolean shouldIntercept = false;</div><div class="line">        switch (aciton) &#123;</div><div class="line">            case MotionEvent.ACTION_DOWN: &#123;</div><div class="line">                mInitMotionX = ev.getX();</div><div class="line">                mInitMotionY = ev.getY();</div><div class="line">                shouldIntercept = false;</div><div class="line">                break;</div><div class="line">            &#125;</div><div class="line">            case MotionEvent.ACTION_MOVE: &#123;</div><div class="line">                final float x = ev.getX();</div><div class="line">                final float y = ev.getY();</div><div class="line"></div><div class="line">                final float xDiff = x - mInitMotionX;</div><div class="line">                final float yDiff = y - mInitMotionY;</div><div class="line"></div><div class="line">                if (canChildScrollVertically((int) yDiff)) &#123;</div><div class="line">                    shouldIntercept = false;</div><div class="line">                &#125; else &#123;</div><div class="line">                    final float xDiffabs = Math.abs(xDiff);</div><div class="line">                    final float yDiffabs = Math.abs(yDiff);</div><div class="line"></div><div class="line">                    if (yDiffabs &gt; mTouchSlop &amp;&amp; yDiffabs &gt;= xDiffabs</div><div class="line">                            &amp;&amp; !(mStatus == Status.CLOSE &amp;&amp; yDiff &gt; 0</div><div class="line">                            || mStatus == Status.OPEN &amp;&amp; yDiff &lt; 0)) &#123;</div><div class="line">                        shouldIntercept = true;</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">                break;</div><div class="line">            &#125;</div><div class="line">            case MotionEvent.ACTION_UP:</div><div class="line">            case MotionEvent.ACTION_CANCEL: &#123;</div><div class="line">                shouldIntercept = false;</div><div class="line">                break;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return shouldIntercept;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public boolean onTouchEvent(MotionEvent ev) &#123;</div><div class="line">        ensureTarget();</div><div class="line">        if (null == mTarget) &#123;</div><div class="line">            return false;</div><div class="line">        &#125;</div><div class="line">        if (!isEnabled()) &#123;</div><div class="line">            return false;</div><div class="line">        &#125;</div><div class="line">        boolean wantTouch = true;</div><div class="line">        final int action = MotionEventCompat.getActionMasked(ev);</div><div class="line">        switch (action) &#123;</div><div class="line">            case MotionEvent.ACTION_DOWN: &#123;</div><div class="line">                if (mTarget instanceof View) &#123;</div><div class="line">                    wantTouch = true;</div><div class="line">                &#125;</div><div class="line">                break;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            case MotionEvent.ACTION_MOVE: &#123;</div><div class="line">                final float y = ev.getY();</div><div class="line">                final float yDiff = y - mInitMotionY;</div><div class="line">                if (canChildScrollVertically(((int) yDiff))) &#123;</div><div class="line">                    wantTouch = false;</div><div class="line">                &#125; else &#123;</div><div class="line">                    processTouchEvent(yDiff);</div><div class="line">                    wantTouch = true;</div><div class="line">                &#125;</div><div class="line">                break;</div><div class="line">            &#125;</div><div class="line">            case MotionEvent.ACTION_UP:</div><div class="line">            case MotionEvent.ACTION_CANCEL: &#123;</div><div class="line">                finishTouchEvent();</div><div class="line">                wantTouch = false;</div><div class="line">                break;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return wantTouch;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private void processTouchEvent(final float offset) &#123;</div><div class="line">        if (Math.abs(offset) &lt; mTouchSlop) &#123;</div><div class="line">            return;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        final float oldOffset = mSlideOffset;</div><div class="line">        if (mStatus == Status.CLOSE) &#123;</div><div class="line">            // reset if pull down</div><div class="line">            if (offset &gt;= 0) &#123;</div><div class="line">                mSlideOffset = 0;</div><div class="line">            &#125; else &#123;</div><div class="line">                mSlideOffset = offset;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            if (mSlideOffset == oldOffset) &#123;</div><div class="line">                return;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">        &#125; else if (mStatus == Status.OPEN) &#123;</div><div class="line">            final float pHeight = -getMeasuredHeight();</div><div class="line">            if (offset &lt;= 0) &#123;</div><div class="line">                mSlideOffset = pHeight;</div><div class="line">            &#125; else &#123;</div><div class="line">                final float newOffset = pHeight + offset;</div><div class="line">                mSlideOffset = newOffset;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            if (mSlideOffset == oldOffset) &#123;</div><div class="line">                return;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        requestLayout();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private void finishTouchEvent() &#123;</div><div class="line">        final int pHeight = getMeasuredHeight();</div><div class="line">        final int percent = (int) (pHeight * mPercent);</div><div class="line">        final float offset = mSlideOffset;</div><div class="line"></div><div class="line">        boolean changed = false;</div><div class="line"></div><div class="line">        if (Status.CLOSE == mStatus) &#123;</div><div class="line">            if (offset &lt;= -percent) &#123;</div><div class="line">                mSlideOffset = -pHeight;</div><div class="line">                mStatus = Status.OPEN;</div><div class="line">                changed = true;</div><div class="line">            &#125; else &#123;</div><div class="line">                mSlideOffset = 0;</div><div class="line">            &#125;</div><div class="line">        &#125; else if (Status.OPEN == mStatus) &#123;</div><div class="line">            if ((offset + pHeight) &gt;= percent) &#123;</div><div class="line">                mSlideOffset = 0;</div><div class="line">                mStatus = Status.CLOSE;</div><div class="line">                changed = true;</div><div class="line">            &#125; else &#123;</div><div class="line">                mSlideOffset = -pHeight;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        animatorSwitch(offset, mSlideOffset, changed);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private void animatorSwitch(final float start, final float end) &#123;</div><div class="line">        animatorSwitch(start, end, true, mDuration);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private void animatorSwitch(final float start, final float end, final long duration) &#123;</div><div class="line">        animatorSwitch(start, end, true, duration);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private void animatorSwitch(final float start, final float end, final boolean changed) &#123;</div><div class="line">        animatorSwitch(start, end, changed, mDuration);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private void animatorSwitch(final float start,</div><div class="line">                                final float end,</div><div class="line">                                final boolean changed,</div><div class="line">                                final long duration) &#123;</div><div class="line">        ValueAnimator animator = ValueAnimator.ofFloat(start, end);</div><div class="line">        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() &#123;</div><div class="line">            @Override</div><div class="line">            public void onAnimationUpdate(ValueAnimator animation) &#123;</div><div class="line">                mSlideOffset = (float) animation.getAnimatedValue();</div><div class="line">                requestLayout();</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">        animator.addListener(new AnimatorListenerAdapter() &#123;</div><div class="line">            @Override</div><div class="line">            public void onAnimationEnd(Animator animation) &#123;</div><div class="line">                super.onAnimationEnd(animation);</div><div class="line">                if (changed) &#123;</div><div class="line">                    if (mStatus == Status.OPEN) &#123;</div><div class="line">                        checkAndFirstOpenPanel();</div><div class="line">                    &#125;</div><div class="line"></div><div class="line">                    if (null != mOnSlideDetailsListener) &#123;</div><div class="line">                        mOnSlideDetailsListener.onStatusChanged(mStatus);</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">        animator.setDuration(duration);</div><div class="line">        animator.start();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private void checkAndFirstOpenPanel() &#123;</div><div class="line">        if (isFirstShowBehindView) &#123;</div><div class="line">            isFirstShowBehindView = false;</div><div class="line">            mBehindView.setVisibility(VISIBLE);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private void ensureTarget() &#123;</div><div class="line">        if (mStatus == Status.CLOSE) &#123;</div><div class="line">            mTarget = mFrontView;</div><div class="line">        &#125; else &#123;</div><div class="line">            mTarget = mBehindView;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    protected boolean canChildScrollVertically(int direction) &#123;</div><div class="line">        if (mTarget instanceof AbsListView) &#123;</div><div class="line">            return canListViewSroll((AbsListView) mTarget);</div><div class="line">        &#125; else if (mTarget instanceof FrameLayout ||</div><div class="line">                mTarget instanceof RelativeLayout ||</div><div class="line">                mTarget instanceof LinearLayout) &#123;</div><div class="line">            View child;</div><div class="line">            for (int i = 0; i &lt; ((ViewGroup) mTarget).getChildCount(); i++) &#123;</div><div class="line">                child = ((ViewGroup) mTarget).getChildAt(i);</div><div class="line">                if (child instanceof AbsListView) &#123;</div><div class="line">                    return canListViewSroll((AbsListView) child);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        if (android.os.Build.VERSION.SDK_INT &lt; 14) &#123;</div><div class="line">            return ViewCompat.canScrollVertically(mTarget, -direction) || mTarget.getScrollY() &gt; 0;</div><div class="line">        &#125; else &#123;</div><div class="line">            return ViewCompat.canScrollVertically(mTarget, -direction);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    protected boolean canListViewSroll(AbsListView absListView) &#123;</div><div class="line">        if (mStatus == Status.OPEN) &#123;</div><div class="line">            return absListView.getChildCount() &gt; 0</div><div class="line">                    &amp;&amp; (absListView.getFirstVisiblePosition() &gt; 0 || absListView.getChildAt(0)</div><div class="line">                    .getTop() &lt;</div><div class="line">                    absListView.getPaddingTop());</div><div class="line">        &#125; else &#123;</div><div class="line">            final int count = absListView.getChildCount();</div><div class="line">            return count &gt; 0</div><div class="line">                    &amp;&amp; (absListView.getLastVisiblePosition() &lt; count - 1</div><div class="line">                    || absListView.getChildAt(count - 1)</div><div class="line">                    .getBottom() &gt; absListView.getMeasuredHeight());</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected Parcelable onSaveInstanceState() &#123;</div><div class="line">        SavedState ss = new SavedState(super.onSaveInstanceState());</div><div class="line">        ss.offset = mSlideOffset;</div><div class="line">        ss.status = mStatus.ordinal();</div><div class="line">        return ss;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onRestoreInstanceState(Parcelable state) &#123;</div><div class="line">        SavedState ss = (SavedState) state;</div><div class="line">        super.onRestoreInstanceState(ss.getSuperState());</div><div class="line">        mSlideOffset = ss.offset;</div><div class="line">        mStatus = Status.valueOf(ss.status);</div><div class="line"></div><div class="line">        if (mStatus == Status.OPEN) &#123;</div><div class="line">            mBehindView.setVisibility(VISIBLE);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        requestLayout();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    static class SavedState extends BaseSavedState &#123;</div><div class="line"></div><div class="line">        private float offset;</div><div class="line">        private int status;</div><div class="line"></div><div class="line">        public SavedState(Parcel source) &#123;</div><div class="line">            super(source);</div><div class="line">            offset = source.readFloat();</div><div class="line">            status = source.readInt();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public SavedState(Parcelable superState) &#123;</div><div class="line">            super(superState);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        @Override</div><div class="line">        public void writeToParcel(Parcel out, int flags) &#123;</div><div class="line">            super.writeToParcel(out, flags);</div><div class="line">            out.writeFloat(offset);</div><div class="line">            out.writeInt(status);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public static final Creator&lt;SavedState&gt; CREATOR =</div><div class="line">                new Creator&lt;SavedState&gt;() &#123;</div><div class="line">                    public SavedState createFromParcel(Parcel in) &#123;</div><div class="line">                        return new SavedState(in);</div><div class="line">                    &#125;</div><div class="line"></div><div class="line">                    public SavedState[] newArray(int size) &#123;</div><div class="line">                        return new SavedState[size];</div><div class="line">                    &#125;</div><div class="line">                &#125;;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>接下来就是一些Fragment等的页面填充，也没啥好讲的，代码又很多可以优化的地方，在优化的地方，笔者也列出了优化的方案，大家可以根据自己的实际情况做页面级的优化。<br>附：<a href="http://download.csdn.net/detail/xiangzhihong8/9742874" target="_blank" rel="external">Android仿京东、天猫商品详情页源码</a></p>
-      
     </div>
+    <p class="post-meta">
+        <span class="post-cat">分类：
+            <a class="cat-link" href="/categories/Android/">Android</a>
+        </span>
+        <span class="post-tags">
+            标签：
+            <a href="/tags/高仿/" title="高仿">高仿</a> / 
     
-  </div>
-  
-    <div class="copyright">
-        <p><span>本文标题:</span><a href="/2016/08/05/Android高仿天猫详情页/">Android仿京东、天猫商品详情页</a></p>
-        <p><span>文章作者:</span><a href="/" title="回到主页">向志洪</a></p>
-        <p><span>发布时间:</span>2016-08-05, 00:00:00</p>
-        <p><span>最后更新:</span>2017-03-02, 19:46:43</p>
-        <p>
-            <span>原始链接:</span><a class="post-url" href="/2016/08/05/Android高仿天猫详情页/" title="Android仿京东、天猫商品详情页">http://code.youmeek.com/2016/08/05/Android高仿天猫详情页/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://code.youmeek.com/2016/08/05/Android高仿天猫详情页/　　作者: 向志洪" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
-            <script> var clipboard = new Clipboard('.copy-path'); </script>
-        </p>
-        <p>
-            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target="_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
-        </p>
-    </div>
-
-
-
-    <nav id="article-nav">
-        
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/08/05/Android7.0新特性/">
-                    android7.0新特性
-                </a>
-            </div>
-        
-        
-            <div id="article-nav-older" class="article-nav-title">
-                <a href="/2016/07/05/Xcode 8新功能介绍/">
-                    Xcode 8新功能介绍
-                </a>
-            </div>
-        
-    </nav>
-  
+        <a href="/tags/android/" title="android">android</a>
+        </span>
+    </p>
 </article>
-<div id="toc" class="toc-article">
-        <strong class="toc-title">文章目录</strong>
-        
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#项目结构分析"><span class="toc-number">1.1.</span> <span class="toc-text">项目结构分析</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#代码讲解"><span class="toc-number">2.</span> <span class="toc-text">代码讲解</span></a></li></ol>
-        
-    </div>
-    <style>
-        .left-col .switch-btn,
-        .left-col .switch-area {
-            display: none;
-        }
-        .toc-level-3 i,
-        .toc-level-3 ol {
-            display: none !important;
-        }
-    </style>
-
-    <input type="button" id="tocButton" value="隐藏目录" title="点击按钮隐藏或者显示文章目录">
-
-    <script>
-        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
-    </script>
-
-
-    <div class="share">
-    
-        <div class="bdsharebuttonbox">
-            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
-            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
-            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
-            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
-            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
-            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
-            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></a>
-        </div>
-        <script>
-            window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"Android仿京东、天猫商品详情页　| 向志洪　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
-        </script>
-    
-
-    
+<div class="article-share clearfix text-center">
+    <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
 </div>
 
+<!-- 上一篇/下一篇 -->
 
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br>
+        <a href="/2016/08/09/Java垃圾回收机制详解/">
+            
+                Java垃圾回收机制详解
+            
+        </a>
+    </span>
+    
 
     
-        <section class="youyan" id="comments">
+    <span class="next fr">
+        下一篇<br>
+        <a href="/2016/08/05/React Native调用原生系统相机/">
+            
+                React Native调用Android相机图库
+            
+        </a>
+    </span>
+    
+</div>
+<!-- 文章评论 -->
+<div id="comments" class="comments cloud-tie-wrapper"></div>
     <script>
-        var loadComment = function(){
-            var d = document, s = d.createElement('script');
-            s.src = 'http://v2.uyan.cc/code/uyan.js?uid=2120654';
-            (d.head || d.body).appendChild(s);
-        }
+    var cloudTieConfig = {
+      url: document.location.href, 
+      sourceId: "Android高仿天猫详情页",
+      productKey: "c06bb9930e6f4b38a9997cb9bd17aba5",
+      target: "comments"
+    };
+    var yunManualLoad = true;
+    Tie.loader("aHR0cHM6Ly9hcGkuZ2VudGllLjE2My5jb20vcGMvbGl2ZXNjcmlwdC5odG1s", true);
     </script>
-    <script> loadComment(); </script>
-    <div id="uyan_frame"></div>
-</section>
+            </div>
+
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章分类</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+    <li>
+        <a href="/categories/Android/">Android</a>
+        <span class="badge">(10)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Android/系统/">系统</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Angular2/">Angular2</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/React-Native/">React Native</a>
+        <span class="badge">(9)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Java/">Java</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/前端/">前端</a>
+        <span class="badge">(6)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/VR/">VR</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Angular2/前端/">前端</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Spring/">Spring</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/ios/">ios</a>
+        <span class="badge">(7)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Google/">Google</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Google/VR/">VR</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/技术人生/">技术人生</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/小程序/">小程序</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/机器学习/">机器学习</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/android/">android</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/设计模式/">设计模式</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+</ul>
+    </section>
+
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="/tags/Android/" title="Android">Android (7)</a>
+  
+    <a class="tag-item" href="/tags/新特性/" title="新特性">新特性 (2)</a>
+  
+    <a class="tag-item" href="/tags/高仿/" title="高仿">高仿 (4)</a>
+  
+    <a class="tag-item" href="/tags/深入系统/" title="深入系统">深入系统 (1)</a>
+  
+    <a class="tag-item" href="/tags/系统服务/" title="系统服务">系统服务 (1)</a>
+  
+    <a class="tag-item" href="/tags/android/" title="android">android (4)</a>
+  
+    <a class="tag-item" href="/tags/混淆打包/" title="混淆打包">混淆打包 (1)</a>
+  
+    <a class="tag-item" href="/tags/Angular2/" title="Angular2">Angular2 (1)</a>
+  
+    <a class="tag-item" href="/tags/前端开发/" title="前端开发">前端开发 (3)</a>
+  
+    <a class="tag-item" href="/tags/硬件/" title="硬件">硬件 (1)</a>
+  
+    <a class="tag-item" href="/tags/React-Native/" title="React Native">React Native (7)</a>
+  
+    <a class="tag-item" href="/tags/FlexBox布局/" title="FlexBox布局">FlexBox布局 (1)</a>
+  
+    <a class="tag-item" href="/tags/Java/" title="Java">Java (2)</a>
+  
+    <a class="tag-item" href="/tags/垃圾回收/" title="垃圾回收">垃圾回收 (1)</a>
+  
+    <a class="tag-item" href="/tags/Node/" title="Node">Node (2)</a>
+  
+    <a class="tag-item" href="/tags/Google/" title="Google">Google (2)</a>
+  
+    <a class="tag-item" href="/tags/VR/" title="VR">VR (2)</a>
+  
+    <a class="tag-item" href="/tags/OpenGL/" title="OpenGL">OpenGL (1)</a>
+  
+    <a class="tag-item" href="/tags/Promise/" title="Promise">Promise (1)</a>
+  
+    <a class="tag-item" href="/tags/前端/" title="前端">前端 (4)</a>
+  
+    <a class="tag-item" href="/tags/调试/" title="调试">调试 (1)</a>
+  
+    <a class="tag-item" href="/tags/eact-Native/" title="eact Native">eact Native (1)</a>
+  
+    <a class="tag-item" href="/tags/打包/" title="打包">打包 (1)</a>
+  
+    <a class="tag-item" href="/tags/Spring/" title="Spring">Spring (2)</a>
+  
+    <a class="tag-item" href="/tags/入门/" title="入门">入门 (2)</a>
+  
+    <a class="tag-item" href="/tags/原生/" title="原生">原生 (1)</a>
+  
+    <a class="tag-item" href="/tags/ios/" title="ios">ios (7)</a>
+  
+    <a class="tag-item" href="/tags/swift/" title="swift">swift (1)</a>
+  
+    <a class="tag-item" href="/tags/Swift/" title="Swift">Swift (1)</a>
+  
+    <a class="tag-item" href="/tags/AR/" title="AR">AR (1)</a>
+  
+    <a class="tag-item" href="/tags/webpack/" title="webpack">webpack (1)</a>
+  
+    <a class="tag-item" href="/tags/gulp/" title="gulp">gulp (1)</a>
+  
+    <a class="tag-item" href="/tags/Xcode/" title="Xcode">Xcode (2)</a>
+  
+    <a class="tag-item" href="/tags/https/" title="https">https (1)</a>
+  
+    <a class="tag-item" href="/tags/gif/" title="gif">gif (1)</a>
+  
+    <a class="tag-item" href="/tags/mac/" title="mac">mac (1)</a>
+  
+    <a class="tag-item" href="/tags/环境/" title="环境">环境 (1)</a>
+  
+    <a class="tag-item" href="/tags/知识库/" title="知识库">知识库 (1)</a>
+  
+    <a class="tag-item" href="/tags/原理/" title="原理">原理 (1)</a>
+  
+</div>
+    </section>
     
 
+    
+    <!-- 我的微博 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>我的微博</strong></h3>
+        <div class="widget-bd" style="position: relative">
+  <div id="myWeiboLoading" class="text-center" style="position:absolute;top:0;left:0;right:0;bottom:0;line-height:50px;font-size:12px;background-color:#fff;z-index:9">微博加载中...</div>
+  <iframe width="100%" height="550" class="share_self" frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&amp;width=0&amp;height=550&amp;fansRow=2&amp;ptype=1&amp;speed=0&amp;skin=4&amp;isTitle=1&amp;noborder=1&amp;isWeibo=1&amp;isFans=1&amp;uid=1831462560&amp;verifier=5192ec39&amp;dpc=1"></iframe>
+  <script>
+  (function () {
+    var oMyWeibo = document.getElementById('myWeibo');
+    var oMyWeiboLoading = document.getElementById('myWeiboLoading');
+    var isIE = /msie/i.test(navigator.userAgent) && !window.opera;
+    var timer = null;
+    if (isIE) {
+      oMyWeibo.onreadystatechange = function(){
+        if(oMyWeibo.readyState === 'loaded' || oMyWeibo.readyState === 'complete'){
+          timer = setTimeout(function () {
+            oMyWeiboLoading.parentNode.removeChild(oMyWeiboLoading);
+            timer = null;
+          }, 300);
+        }
+      };
+    } else {
+      oMyWeibo.onload = function () {
+        timer = setTimeout(function () {
+          oMyWeiboLoading.parentNode.removeChild(oMyWeiboLoading);
+          timer = null;
+        }, 300);
+      };
+    }
+  })();
+  </script>
+</div>
+    </section>
+    
 
-<div class="scroll" id="post-nav-button">
-        
-            <a href="/2016/08/05/Android7.0新特性/" title="上一篇: android7.0新特性">
-                <i class="fa fa-angle-left"></i>
-            </a>
-        
-
-        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
-
-        
-            <a href="/2016/07/05/Xcode 8新功能介绍/" title="下一篇: Xcode 8新功能介绍">
-                <i class="fa fa-angle-right"></i>
-            </a>
-        
+    
+    <!-- 友情链接 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>友情链接</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+        <li>
+            <a href="http://blog.csdn.net/xiangzhihong8/" target="_blank" title="csdn个人博客">csdn博客</a>
+        </li>
+    
+        <li>
+            <a href="https://yq.aliyun.com/u/xiangzhihong" target="_blank" title="阿里云技术博客">阿里云博客</a>
+        </li>
+    
+</ul>
+    </section>
+    
+</aside>
+<!-- / 侧栏部分 -->
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/06/29/vote/">vote</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/05/OpenGL ES简介/">OpenGL ES简介</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/28/前端知识库/">前端知识库</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/10/微信小程序尝鲜一个月现状分析/">微信小程序尝鲜一个月现状分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/05/Angular2入坑指南/">Angular2入坑指南</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/05/swift/">Swift基础语法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/05/gulp+webpack工具整合简介/">gulp+webpack工具整合简介</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/05/React Native的Navigator详解/">React Native的Navigator详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/05/Node.js基本工作原理/">node.js基本工作原理及流程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/03/Iterate/">迭代子模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/01/robot/">机器学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/05/Android ExpandableListView详解/">ExpandableListView实现商品列表折叠</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/05/webpack+react环境搭建/">webpack+react环境搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/05/iOS使用自签名证书实现HTTPS请求/">iOS使用自签名证书实现HTTPS请求</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/05/ios高仿斗鱼app/">高仿ios斗鱼界面</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/05/visitor/">Node入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/28/React 页面渲染原理/">深入理解React Native页面构建渲染原理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/13/深入理解Android渲染机制/">深入理解Android渲染机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/08/高仿网易云音乐/">Android仿网易云音乐播放界面</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/Spring Boot搭建Web应用/">Spring Boot入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/微信小程序/">刷博客等流量</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/node.js基本工作原理及流程/">Node.js原理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/React Native在Android平台运行gif的解决方法/">React Native在Android平台运行gif的解决方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/刷流量的几种方法/">刷博客等流量</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/Android WindowManager详解/">Android WindowManager详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/05/搭建网站/">搭建网站</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/05/Android线程池/">Android WindowManager详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/05/Android7.0新特性/">android7.0新特性</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/05/Android高仿天猫详情页/">Android仿京东、天猫商品详情页</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/Xcode 8新功能介绍/">Xcode 8新功能介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/Android硬件加速介绍与实现/">Android硬件加速介绍与实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/05/iOS 滚动视图的复用问题解决方案/">iOS 滚动视图的复用问题解决方案</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/05/Google VR技术大揭秘/">Google VR技术大揭秘</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/10/mac 搭建Android开发环境/">mac 搭建Android开发环境</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/05/ios gif图片加载框架介绍/">FLAnimatedImage -ios gif图片加载框架介绍</a></li></ul>
+    <!-- 博客底部 -->
+    <footer class="footer">
+    &copy;
+    
+        2016-2017
+    
 
-
-    <script>
-        
-    </script></div>
-      <footer id="footer">
-    <div class="outer">
-        <div id="footer-info">
-            <div class="footer-left">
-                <i class="fa fa-copyright"></i> 
-                2016-2017 向志洪
-            </div>
-            <div class="footer-right">
-                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
-            </div>
-        </div>
-        
-            <div class="visit">
-                
-                    <span id="busuanzi_container_site_pv" style="display:none">
-                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
-                        </span>
-                    </span>
-                
-                
-                    <span>| </span>
-                
-                
-                    <span id="busuanzi_container_page_pv" style="display:none">
-                        <span id="page-visit" title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
-                        </span>
-                    </span>
-                
-            </div>
-        
-    </div>
+    <a href="/">Jelon Loves You</a>
 </footer>
-    </div>
-    <script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+<div class="back-to-top" id="JELON__backToTop" title="返回顶部">返回顶部</div>
+<!-- 添加百度自动推送 -->
 <script>
-        $(document).ready(function() {
-            var iPad = window.navigator.userAgent.indexOf('iPad');
-            if (iPad > -1 || $(".left-col").css("display") === "none") {
-                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
-                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
-                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
-            }
-            else {
-                var backgroundnum = 5;
-                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
-                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
-            }
-        })
-    </script>
-
-
-
-<div class="scroll" id="scroll">
-    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
-    <a href="#comments" onclick="load$hide()" title="查看评论"><i class="fa fa-comments-o"></i></a>
-    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
-</div>
-<script>
-    // Open in New Window
-    
-        var oOpenInNew = {
-            
-            
-            
-            
-            
-            
-             archives: ".archive-article-title", 
-             miniArchives: "a.post-list-link", 
-            
-             friends: "#js-friends a", 
-             socail: ".social a" 
-        }
-        for (var x in oOpenInNew) {
-            $(oOpenInNew[x]).attr("target", "_blank");
-        }
-    
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
 </script>
-
-<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
-</script>
-  </div>
+    <!--博客js脚本 -->
+    <!-- 这里放网站js脚本 -->
+<script src="/js/main.js"></script>
 </body>

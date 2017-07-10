@@ -1,0 +1,478 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8">
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya">
+    
+    <title>React Native调用Android相机图库 | 向志洪</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
+    <meta name="keywords" content="前端, Web, 移动, 向志洪">
+    <meta name="description" content="">
+
+    
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <!--[if lt IE 9]>
+    <script src="/js/html5.js"></script>
+    <![endif]-->
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?fd459238242776d173cdc64918fb32f2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+    
+    <script>var yunModuleEnv = true;</script>
+    <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+    
+</head></html>
+<body class="home">
+    <!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="/">
+                <div class="cover">
+                    <span class="name">向志洪</span>
+                    <span class="description">个人技术博客</span>
+                </div>
+            </a>
+        </div>
+        <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
+        <ul class="menu hidden" id="JELON__menu">
+            
+            <li rel="/2016/08/05/React Native调用原生系统相机/index.html" class="item">
+                <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
+            </li>
+            
+            <li rel="/2016/08/05/React Native调用原生系统相机/index.html" class="item">
+                <a href="/archives/" title="文章列表" class="icon-lab">&nbsp;文章列表</a>
+            </li>
+            
+            <li rel="/2016/08/05/React Native调用原生系统相机/index.html" class="item">
+                <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
+            </li>
+            
+            <li rel="/2016/08/05/React Native调用原生系统相机/index.html" class="item">
+                <a href="/404/" title="留言" class="icon-comment">&nbsp;留言</a>
+            </li>
+            
+        </ul>
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        <a href="https://github.com/xiangzhihong" target="_blank">Github</a>
+                        |
+                    
+                        <a href="http://tongji.baidu.com/web/welcome/login" target="_blank">站长统计</a>
+                        |
+                    
+                        <a href="http://weibo.com/code_xzh" target="_blank">新浪微博</a>
+                        |
+                    
+                </p>
+                <p class="sns">
+                    
+                    <a href="javascript: void(0);" class="wechat">
+                        <b>■</b>
+                        公众号
+                        <span class="popover">
+                            <img src="/img/wechat_mp.jpg" width="120" height="120" alt="我的微信订阅号">
+                            <i class="arrow"></i>
+                        </span>
+                    </a>
+                </p>
+                
+            </div>
+            <div class="avatar fr">
+                <img src="http://ohe65w0xx.bkt.clouddn.com/avert.png" alt="avatar" title="Jelon">
+            </div>
+        </div>
+    </section>
+</header>
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+        <section class="content">
+            <div class="content-main widget">
+                <!-- 文章页 -->
+<!-- 文章 -->
+<article class="post article">
+    <header class="text-center">
+        <h3 class="post-title"><span>React Native调用Android相机图库</span></h3>
+    </header>
+    <p class="post-meta text-center">
+        xiangzhihong 发表于
+        <time datetime="2016-08-04T16:00:00.000Z">2016-08-05</time>
+    </p>
+    <div class="post-content">
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>在很多的React Native开发中，我们需要调用原生的api实现调用相机和图库的功能，网上用的最多的开源库如：<a href="https://github.com/react-community/react-native-image-picker" target="_blank" rel="external">react-native-image-picker</a>。关于react-native-image-picker的用法大家请看相关的文档。我们今天手动实现一份。</p>
+<h1 id="调用Android图库相机"><a href="#调用Android图库相机" class="headerlink" title="调用Android图库相机"></a>调用Android图库相机</h1><h2 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h2><p>执行命令 ：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">react-native init HeadImage</div></pre></td></tr></table></figure>
+<p>创建一个名为HeadImage的工程，可以使用命令先运行下Demo项目。<br>然后照一张图片，放到放到工程的 HeadImage\Android\app\src\main\res\drawable 目录下。然后打开webstorm选择工程根目录，修改index.android.js代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">export default class HeadImage extends Component &#123;</div><div class="line">    render() &#123;</div><div class="line">        return (</div><div class="line">            &lt;View style=&#123;styles.container&#125;&gt;</div><div class="line">                &lt;TouchableOpacity onPress=&#123;this._clickImage&#125;&gt;</div><div class="line">                    &lt;Image source=&#123;&#123;uri: &apos;head_default&apos;&#125;&#125; style=&#123;&#123;width:50,height:50&#125;&#125;/&gt;</div><div class="line">                &lt;/TouchableOpacity&gt;</div><div class="line">            &lt;/View&gt;</div><div class="line">        );</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    _clickImage()&#123;</div><div class="line">        console.log(&quot;click image...&quot;);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="添加React-Native和原生的交互"><a href="#添加React-Native和原生的交互" class="headerlink" title="添加React Native和原生的交互"></a>添加React Native和原生的交互</h2><p>新建两个类，HeadImageModule.Java和HeadImagePackage.java，分别继承ReactContextBaseJavaModule和ReactPackage，之后在MainApplication.java里面注册。代码如下：<br>HeadImageModule.java</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">public class HeadImageModule extends ReactContextBaseJavaModule &#123;</div><div class="line">    public HeadImageModule(ReactApplicationContext reactContext) &#123;</div><div class="line">        super(reactContext);</div><div class="line">    &#125;</div><div class="line">    @Override</div><div class="line">    public String getName() &#123;</div><div class="line">        return &quot;HeadImageModule&quot;; //注意这里的返回值</div><div class="line">    &#125;</div><div class="line">    @ReactMethod</div><div class="line">    public void callCamera() &#123; // 调用相机的方法</div><div class="line">        Log.d(&quot;&quot;,&quot;call camera...&quot;);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>HeadImagePackage.java</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">public class HeadImagePackage implements ReactPackage &#123;</div><div class="line">    @Override</div><div class="line">    public List&lt;NativeModule&gt; createNativeModules(ReactApplicationContext reactContext) &#123;</div><div class="line">        List&lt;NativeModule&gt; modules = new ArrayList&lt;&gt;();</div><div class="line">        modules.add(new HeadImageModule(reactContext));</div><div class="line">        return modules;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public List&lt;Class&lt;? extends JavaScriptModule&gt;&gt; createJSModules() &#123;</div><div class="line">        return Collections.emptyList();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public List&lt;ViewManager&gt; createViewManagers(ReactApplicationContext reactContext) &#123;</div><div class="line">        return Collections.emptyList();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在MainApplication注册模块<br>MainApplication.java</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">protected List&lt;ReactPackage&gt; getPackages() &#123;</div><div class="line">    return Arrays.&lt;ReactPackage&gt;asList(</div><div class="line">            new MainReactPackage(),</div><div class="line">            new HeadImagePackage()  //注册模块</div><div class="line">    );</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="js调用Java代码"><a href="#js调用Java代码" class="headerlink" title="js调用Java代码"></a>js调用Java代码</h2><p>在index.android.js的_clickImage方法调用Java方法。代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">_clickImage()&#123;</div><div class="line">    NativeModules.HeadImageModule.callCamera()</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>注：别忘了导包：import { NativeModules } from ‘react-native’;<br>到这里已经实现了js与原生的交互，接下来我们需要实现调用相机的具体逻辑了。在HeadImageModule.java里我们先定义几个常量：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">/ 保存图片的sd卡路径</div><div class="line">private static final String HEAD_IMAGE_PATH = Environment.getExternalStorageDirectory().getAbsolutePath() + &quot;/HeadImage/&quot;;</div><div class="line">// 保存图片的名称</div><div class="line">private static final String HEAD_IMAGE_NAME = &quot;head_image.png&quot;;</div><div class="line"></div><div class="line">// startActivityForResult 的 requestCode</div><div class="line">private static final int REQUEST_CODE_CAMERA = 0;</div><div class="line">private static final int REQUEST_CODE_GALLERY = 1;</div><div class="line">private static final int REQUEST_CODE_CROP = 2;</div></pre></td></tr></table></figure>
+<p>接下来实现callCamera方法（注：要让js可以调用必须加@ReactMethod，Promise），callCamera相关代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">@ReactMethod</div><div class="line">public void callCamera(Promise promise) &#123;</div><div class="line">    recursionDeleteFile(); // 删除目录下除了头像图片的其他临时图片</div><div class="line">    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);//启动相机的intent</div><div class="line">    if (isPathExists()) &#123; // 判断常量定义的路径是否存在，不存在就创建，然后返回true</div><div class="line">        mFullPath = HEAD_IMAGE_PATH + System.currentTimeMillis() + &quot;.png&quot;; // 临时图片</div><div class="line">        mUri = Uri.fromFile(new File(mFullPath));</div><div class="line">        intent.putExtra(MediaStore.EXTRA_OUTPUT, mUri);</div><div class="line">        Activity activity = getCurrentActivity();</div><div class="line">        if (activity != null) &#123;</div><div class="line">            mPromise = promise;</div><div class="line">            activity.startActivityForResult(intent, REQUEST_CODE_CAMERA);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>执行完这个方法就可以启动相机了，但是这样每次调用相机都会创建一个临时图片，为了不使sd卡存头像图片的文件夹越来越大，所以编写了recursionDeleteFile()方法每次做一次递归删除，删除临时图片。拍照点击完成之后，就该去onActivityResult里面处理了，rn提供了一个接口实现监听onActivityResult，在HeadImageModule.java构造方法里面添加如下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">reactContext.addActivityEventListener(new BaseActivityEventListener() &#123;</div><div class="line">    @Override</div><div class="line">    public void onActivityResult(Activity activity, int requestCode, int resultCode, Intent data) &#123;</div><div class="line">        if (requestCode == REQUEST_CODE_CAMERA) &#123; // 调用相机回调</div><div class="line">            if (resultCode == Activity.RESULT_OK) &#123; // *************1.拍照完成，将进入裁剪界面</div><div class="line">                activity.startActivityForResult(cropImage(mUri), REQUEST_CODE_CROP);// 启动裁剪界面</div><div class="line">            &#125; else if (resultCode == Activity.RESULT_CANCELED) &#123; // 拍照界面点击取消</div><div class="line">                mPromise.resolve(null);</div><div class="line">                // mFullPath就是callCamera里面定义的临时图片路径</div><div class="line">                // 如果没有取消拍照，那么就不执行这里，临时图片的删除将在下次调用相机的时候，所以与recursionDeleteFile()不重复</div><div class="line">                new File(mFullPath).delete();</div><div class="line">            &#125;</div><div class="line">        &#125; else if (requestCode == REQUEST_CODE_CROP) &#123; // ************2.裁剪完成</div><div class="line">            if (resultCode == Activity.RESULT_OK) &#123;</div><div class="line">                // uri存的是临时图片路径，返回给js代码，这里有个问题，稍后再说</div><div class="line">                mPromise.resolve(mUri.toString());</div><div class="line">                // 将临时图片复制一份，保存为最终的头像图片</div><div class="line">                saveHeadImage();</div><div class="line">            &#125; else if (resultCode == Activity.RESULT_CANCELED) &#123;</div><div class="line">                mPromise.resolve(null);</div><div class="line">                new File(mFullPath).delete();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>拍照完成之后就是本地裁剪图片了，这里不再讲解，后面大家直接看代码。裁剪完成之后，返回给js的图片是临时图片，而不是saveHeadImage()保存最终图片之后返回最终的图片。这里我们需要手动保存一份图片，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">if (resultCode == Activity.RESULT_OK) &#123;</div><div class="line">              mPromise.resolve(mUri.toString());</div><div class="line">              // 将临时图片复制一份，保存为最终的头像图片</div><div class="line">              saveHeadImage();</div><div class="line">          &#125;</div></pre></td></tr></table></figure>
+<p>到这里，头像图片已经成功的保存到sd卡上了，接下来就是js显示的实现了，js需要处理的图片包括三个：默认头像，sd卡存的临时头像，sd卡存的最终头像，至于显示的时候我们先取最终头像，然后取临时头像。<br>新建MyImage.js</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line">import React, &#123;Component, PropTypes&#125; from &apos;react&apos;;</div><div class="line">import &#123;</div><div class="line">    View,</div><div class="line">    StyleSheet,</div><div class="line">    Image,</div><div class="line">    NativeModules,</div><div class="line">&#125; from &apos;react-native&apos;;</div><div class="line"></div><div class="line">export default class MyImage extends Component &#123;</div><div class="line"></div><div class="line">    constructor(props) &#123;</div><div class="line">        super(props);</div><div class="line">        this.state = &#123;</div><div class="line">            uri: null,</div><div class="line">        &#125;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    static defaultProps = &#123;</div><div class="line">        uri: null,</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    static propTypes = &#123;</div><div class="line">        uri: PropTypes.string,</div><div class="line">        imageStyle: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    async componentWillReceiveProps() &#123;</div><div class="line">        let isExists = await NativeModules.HeadImageModule.isImageExists();</div><div class="line">        if (this.props.uri !== null) &#123;</div><div class="line">            this.setState(&#123;</div><div class="line">                uri: this.props.uri</div><div class="line">            &#125;);</div><div class="line">        &#125; else if (isExists) &#123;</div><div class="line">            this.setState(&#123;</div><div class="line">                uri: await NativeModules.HeadImageModule.getImageUri()</div><div class="line">            &#125;);</div><div class="line">        &#125; else &#123;</div><div class="line">            this.setState(&#123;</div><div class="line">                uri: &apos;head_default&apos;</div><div class="line">            &#125;);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    render() &#123;</div><div class="line">        return (</div><div class="line">            &lt;Image source=&#123;&#123;uri: this.state.uri&#125;&#125; style=&#123;this.props.imageStyle&#125;/&gt;</div><div class="line">        );</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>修改index.android.js代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">export default class HeadImage extends Component &#123;</div><div class="line"></div><div class="line">    constructor(props) &#123;</div><div class="line">        super(props);</div><div class="line">        this.state = &#123;</div><div class="line">            headImageUri: null,</div><div class="line">        &#125;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    render() &#123;</div><div class="line">        return (</div><div class="line">            &lt;View style=&#123;styles.container&#125;&gt;</div><div class="line">                &lt;TouchableOpacity onPress=&#123;this._clickImage.bind(this)&#125;&gt;</div><div class="line">                    &lt;MyImage uri=&#123;this.state.headImageUri&#125; imageStyle=&#123;&#123;width: 100,height: 100&#125;&#125;/&gt;</div><div class="line">                &lt;/TouchableOpacity&gt;</div><div class="line">            &lt;/View&gt;</div><div class="line">        );</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    async _clickImage() &#123;</div><div class="line">        this.setState(&#123;</div><div class="line">            headImageUri: await NativeModules.HeadImageModule.callCamera() // 相机拍照</div><div class="line">            // headImageUri: await NativeModules.HeadImageModule.callGallery() // 相册选择图片</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    componentDidMount() &#123;</div><div class="line">        this.setState(&#123;</div><div class="line">            code: this.props.code</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>附：<a href="https://github.com/developerzjy/react_native_android_headImage" target="_blank" rel="external">源码</a></p>
+    </div>
+    <p class="post-meta">
+        <span class="post-cat">分类：
+            <a class="cat-link" href="/categories/React-Native/">React Native</a>
+        </span>
+        <span class="post-tags">
+            标签：
+            <a href="/tags/React-Native/" title="React Native">React Native</a> / 
+    
+        <a href="/tags/原生/" title="原生">原生</a>
+        </span>
+    </p>
+</article>
+<div class="article-share clearfix text-center">
+    <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+</div>
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br>
+        <a href="/2016/08/05/Android高仿天猫详情页/">
+            
+                Android仿京东、天猫商品详情页
+            
+        </a>
+    </span>
+    
+
+    
+    <span class="next fr">
+        下一篇<br>
+        <a href="/2016/08/03/迭代模式/">
+            
+                迭代子模式
+            
+        </a>
+    </span>
+    
+</div>
+<!-- 文章评论 -->
+<div id="comments" class="comments cloud-tie-wrapper"></div>
+    <script>
+    var cloudTieConfig = {
+      url: document.location.href, 
+      sourceId: "React Native调用原生系统相机",
+      productKey: "c06bb9930e6f4b38a9997cb9bd17aba5",
+      target: "comments"
+    };
+    var yunManualLoad = true;
+    Tie.loader("aHR0cHM6Ly9hcGkuZ2VudGllLjE2My5jb20vcGMvbGl2ZXNjcmlwdC5odG1s", true);
+    </script>
+            </div>
+
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章分类</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+    <li>
+        <a href="/categories/Android/">Android</a>
+        <span class="badge">(10)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Android/系统/">系统</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Angular2/">Angular2</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/React-Native/">React Native</a>
+        <span class="badge">(9)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Java/">Java</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/前端/">前端</a>
+        <span class="badge">(6)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/VR/">VR</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Angular2/前端/">前端</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Spring/">Spring</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/ios/">ios</a>
+        <span class="badge">(7)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Google/">Google</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Google/VR/">VR</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/技术人生/">技术人生</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/小程序/">小程序</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/机器学习/">机器学习</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/android/">android</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/设计模式/">设计模式</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+</ul>
+    </section>
+
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="/tags/Android/" title="Android">Android (7)</a>
+  
+    <a class="tag-item" href="/tags/新特性/" title="新特性">新特性 (2)</a>
+  
+    <a class="tag-item" href="/tags/高仿/" title="高仿">高仿 (4)</a>
+  
+    <a class="tag-item" href="/tags/深入系统/" title="深入系统">深入系统 (1)</a>
+  
+    <a class="tag-item" href="/tags/系统服务/" title="系统服务">系统服务 (1)</a>
+  
+    <a class="tag-item" href="/tags/android/" title="android">android (4)</a>
+  
+    <a class="tag-item" href="/tags/混淆打包/" title="混淆打包">混淆打包 (1)</a>
+  
+    <a class="tag-item" href="/tags/Angular2/" title="Angular2">Angular2 (1)</a>
+  
+    <a class="tag-item" href="/tags/前端开发/" title="前端开发">前端开发 (3)</a>
+  
+    <a class="tag-item" href="/tags/硬件/" title="硬件">硬件 (1)</a>
+  
+    <a class="tag-item" href="/tags/React-Native/" title="React Native">React Native (7)</a>
+  
+    <a class="tag-item" href="/tags/FlexBox布局/" title="FlexBox布局">FlexBox布局 (1)</a>
+  
+    <a class="tag-item" href="/tags/Java/" title="Java">Java (2)</a>
+  
+    <a class="tag-item" href="/tags/垃圾回收/" title="垃圾回收">垃圾回收 (1)</a>
+  
+    <a class="tag-item" href="/tags/Node/" title="Node">Node (2)</a>
+  
+    <a class="tag-item" href="/tags/Google/" title="Google">Google (2)</a>
+  
+    <a class="tag-item" href="/tags/VR/" title="VR">VR (2)</a>
+  
+    <a class="tag-item" href="/tags/OpenGL/" title="OpenGL">OpenGL (1)</a>
+  
+    <a class="tag-item" href="/tags/Promise/" title="Promise">Promise (1)</a>
+  
+    <a class="tag-item" href="/tags/前端/" title="前端">前端 (4)</a>
+  
+    <a class="tag-item" href="/tags/调试/" title="调试">调试 (1)</a>
+  
+    <a class="tag-item" href="/tags/eact-Native/" title="eact Native">eact Native (1)</a>
+  
+    <a class="tag-item" href="/tags/打包/" title="打包">打包 (1)</a>
+  
+    <a class="tag-item" href="/tags/Spring/" title="Spring">Spring (2)</a>
+  
+    <a class="tag-item" href="/tags/入门/" title="入门">入门 (2)</a>
+  
+    <a class="tag-item" href="/tags/原生/" title="原生">原生 (1)</a>
+  
+    <a class="tag-item" href="/tags/ios/" title="ios">ios (7)</a>
+  
+    <a class="tag-item" href="/tags/swift/" title="swift">swift (1)</a>
+  
+    <a class="tag-item" href="/tags/Swift/" title="Swift">Swift (1)</a>
+  
+    <a class="tag-item" href="/tags/AR/" title="AR">AR (1)</a>
+  
+    <a class="tag-item" href="/tags/webpack/" title="webpack">webpack (1)</a>
+  
+    <a class="tag-item" href="/tags/gulp/" title="gulp">gulp (1)</a>
+  
+    <a class="tag-item" href="/tags/Xcode/" title="Xcode">Xcode (2)</a>
+  
+    <a class="tag-item" href="/tags/https/" title="https">https (1)</a>
+  
+    <a class="tag-item" href="/tags/gif/" title="gif">gif (1)</a>
+  
+    <a class="tag-item" href="/tags/mac/" title="mac">mac (1)</a>
+  
+    <a class="tag-item" href="/tags/环境/" title="环境">环境 (1)</a>
+  
+    <a class="tag-item" href="/tags/知识库/" title="知识库">知识库 (1)</a>
+  
+    <a class="tag-item" href="/tags/原理/" title="原理">原理 (1)</a>
+  
+</div>
+    </section>
+    
+
+    
+    <!-- 我的微博 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>我的微博</strong></h3>
+        <div class="widget-bd" style="position: relative">
+  <div id="myWeiboLoading" class="text-center" style="position:absolute;top:0;left:0;right:0;bottom:0;line-height:50px;font-size:12px;background-color:#fff;z-index:9">微博加载中...</div>
+  <iframe width="100%" height="550" class="share_self" frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&amp;width=0&amp;height=550&amp;fansRow=2&amp;ptype=1&amp;speed=0&amp;skin=4&amp;isTitle=1&amp;noborder=1&amp;isWeibo=1&amp;isFans=1&amp;uid=1831462560&amp;verifier=5192ec39&amp;dpc=1"></iframe>
+  <script>
+  (function () {
+    var oMyWeibo = document.getElementById('myWeibo');
+    var oMyWeiboLoading = document.getElementById('myWeiboLoading');
+    var isIE = /msie/i.test(navigator.userAgent) && !window.opera;
+    var timer = null;
+    if (isIE) {
+      oMyWeibo.onreadystatechange = function(){
+        if(oMyWeibo.readyState === 'loaded' || oMyWeibo.readyState === 'complete'){
+          timer = setTimeout(function () {
+            oMyWeiboLoading.parentNode.removeChild(oMyWeiboLoading);
+            timer = null;
+          }, 300);
+        }
+      };
+    } else {
+      oMyWeibo.onload = function () {
+        timer = setTimeout(function () {
+          oMyWeiboLoading.parentNode.removeChild(oMyWeiboLoading);
+          timer = null;
+        }, 300);
+      };
+    }
+  })();
+  </script>
+</div>
+    </section>
+    
+
+    
+    <!-- 友情链接 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>友情链接</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+        <li>
+            <a href="http://blog.csdn.net/xiangzhihong8/" target="_blank" title="csdn个人博客">csdn博客</a>
+        </li>
+    
+        <li>
+            <a href="https://yq.aliyun.com/u/xiangzhihong" target="_blank" title="阿里云技术博客">阿里云博客</a>
+        </li>
+    
+</ul>
+    </section>
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <footer class="footer">
+    &copy;
+    
+        2016-2017
+    
+
+    <a href="/">Jelon Loves You</a>
+</footer>
+<div class="back-to-top" id="JELON__backToTop" title="返回顶部">返回顶部</div>
+<!-- 添加百度自动推送 -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+    <!--博客js脚本 -->
+    <!-- 这里放网站js脚本 -->
+<script src="/js/main.js"></script>
+</body>

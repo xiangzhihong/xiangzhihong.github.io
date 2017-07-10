@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8">
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya">
+    
+    <title>Google VR技术大揭秘 | 向志洪</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
+    <meta name="keywords" content="前端, Web, 移动, 向志洪">
+    <meta name="description" content="">
+
+    
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <!--[if lt IE 9]>
+    <script src="/js/html5.js"></script>
+    <![endif]-->
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?fd459238242776d173cdc64918fb32f2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+    
+    <script>var yunModuleEnv = true;</script>
+    <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+    
+</head></html>
+<body class="home">
+    <!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="/">
+                <div class="cover">
+                    <span class="name">向志洪</span>
+                    <span class="description">个人技术博客</span>
+                </div>
+            </a>
+        </div>
+        <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
+        <ul class="menu hidden" id="JELON__menu">
+            
+            <li rel="/2016/07/25/Google VR技术大揭秘/index.html" class="item">
+                <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
+            </li>
+            
+            <li rel="/2016/07/25/Google VR技术大揭秘/index.html" class="item">
+                <a href="/archives/" title="文章列表" class="icon-lab">&nbsp;文章列表</a>
+            </li>
+            
+            <li rel="/2016/07/25/Google VR技术大揭秘/index.html" class="item">
+                <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
+            </li>
+            
+            <li rel="/2016/07/25/Google VR技术大揭秘/index.html" class="item">
+                <a href="/404/" title="留言" class="icon-comment">&nbsp;留言</a>
+            </li>
+            
+        </ul>
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        <a href="https://github.com/xiangzhihong" target="_blank">Github</a>
+                        |
+                    
+                        <a href="http://tongji.baidu.com/web/welcome/login" target="_blank">站长统计</a>
+                        |
+                    
+                        <a href="http://weibo.com/code_xzh" target="_blank">新浪微博</a>
+                        |
+                    
+                </p>
+                <p class="sns">
+                    
+                    <a href="javascript: void(0);" class="wechat">
+                        <b>■</b>
+                        公众号
+                        <span class="popover">
+                            <img src="/img/wechat_mp.jpg" width="120" height="120" alt="我的微信订阅号">
+                            <i class="arrow"></i>
+                        </span>
+                    </a>
+                </p>
+                
+            </div>
+            <div class="avatar fr">
+                <img src="http://ohe65w0xx.bkt.clouddn.com/avert.png" alt="avatar" title="Jelon">
+            </div>
+        </div>
+    </section>
+</header>
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+        <section class="content">
+            <div class="content-main widget">
+                <!-- 文章页 -->
+<!-- 文章 -->
+<article class="post article">
+    <header class="text-center">
+        <h3 class="post-title"><span>Google VR技术大揭秘</span></h3>
+    </header>
+    <p class="post-meta text-center">
+        xiangzhihong 发表于
+        <time datetime="2016-07-24T16:00:00.000Z">2016-07-25</time>
+    </p>
+    <div class="post-content">
+        <h1 id="VR"><a href="#VR" class="headerlink" title="VR"></a>VR</h1><p>虚拟现实（Virtual Reality）技术是一种可以创建和体验虚拟世界的计算机仿真系统，它利用计算机生成一种模拟环境，是一种多源信息融合的、交互式的三维动态视景和实体行为的系统仿真, 使用户沉浸到该环境中。</p>
+<p>附：<a href="https://en.wikipedia.org/wiki/Virtual_reality" target="_blank" rel="external">Wikipedia</a></p>
+<h2 id="VR产品"><a href="#VR产品" class="headerlink" title="VR产品"></a>VR产品</h2><p><a href="https://vr.google.com/" target="_blank" rel="external">Google VR</a><br><a href="https://www.oculus.com/" target="_blank" rel="external">Oculus</a><br><a href="https://www.vive.com/cn/" target="_blank" rel="external">HTC Vivi</a></p>
+<h1 id="Google-VR-for-Android"><a href="#Google-VR-for-Android" class="headerlink" title="Google VR for Android"></a>Google VR for Android</h1><p>Google VR SDK同时支持DayDream和CardBoard。 包含了一些用于创建App的简单API和支持DayDream手机、DayDream控制器的复杂API。同时涵盖了Android、iOS、Unity三大平台。</p>
+<h3 id="SDK下载"><a href="#SDK下载" class="headerlink" title="SDK下载"></a>SDK下载</h3><p>sdk地址：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone https://github.com/googlevr/gvr-android-sdk.git</div></pre></td></tr></table></figure></p>
+<h3 id="运行官网项目"><a href="#运行官网项目" class="headerlink" title="运行官网项目"></a>运行官网项目</h3><p>在使用之前，我们先运行下官网的项目。导入gvr-android-sdk到Android Studio, 同步的过程中需要下载很多库所以会比较耗时，另外可能出现build失败的情况，这时可以尝试使用本地的gradle来编译。<br>gradle版本最好为最新版本。<br><img src="http://img.blog.csdn.net/20170225095601116?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>项目展示了印加文明遗迹马丘比丘的全景图(Panorama)：<br><img src="http://upload-images.jianshu.io/upload_images/1609086-1d295079dae59411.gif?imageMogr2/auto-orient/strip" alt="这里写图片描述"></p>
+<p>在真机上运行时，会有一个Cardboard选项。点击上图红色框中的按钮即可进入Cardboard模式。<br><img src="http://upload-images.jianshu.io/upload_images/1609086-038dbc4a498c0078.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="这里写图片描述"></p>
+<p>Demo代码的主要逻辑就是加载一张全景图放入VrPanoramaView中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">panoOptions = new Options();</div><div class="line">panoOptions.inputType = Options.TYPE_STEREO_OVER_UNDER;//图像类型为立体图像</div><div class="line">istr = assetManager.open(&quot;andes.jpg&quot;);//加载assets目录下的全景图</div><div class="line">panoWidgetView.loadImageFromBitmap(BitmapFactory.decodeStream(istr), panoOptions);</div></pre></td></tr></table></figure>
+<p>全景图片andes是由两张图片组成，上面一张是给左眼看，下面一张是给右眼看。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1609086-2f18e2a4ac7ca942.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="这里写图片描述"></p>
+<p>Demo的声音的实现是加载assets目录下的congo.mp4视频到VrVideoView中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">videoWidgetView.loadVideoFromAsset(&quot;congo.mp4&quot;, options);</div></pre></td></tr></table></figure>
+<p>congo.mp4的视频内容也是分为上下部分，上面给左眼看，下面给右眼看。</p>
+<h4 id="treasurehunt"><a href="#treasurehunt" class="headerlink" title="treasurehunt"></a>treasurehunt</h4><p>treasurehunt展示了一个简单到离谱的寻宝游戏，当vr世界中矩形变成金黄色时，点击手机屏幕或者使用Daydream的控制器，即可完成寻宝。游戏还伴有音效。<br><img src="http://upload-images.jianshu.io/upload_images/1779681-eaf566fad4623cae.gif?imageMogr2/auto-orient/strip" alt="这里写图片描述"></p>
+<h3 id="controllerclient"><a href="#controllerclient" class="headerlink" title="controllerclient"></a>controllerclient</h3><p>接收DayDream控制器输入示例</p>
+<h3 id="videoplayer"><a href="#videoplayer" class="headerlink" title="videoplayer"></a>videoplayer</h3><p>使用Asynchronous Reprojection播放视频示例</p>
+<h2 id="全景图（PanoramaActivity）"><a href="#全景图（PanoramaActivity）" class="headerlink" title="全景图（PanoramaActivity）"></a>全景图（PanoramaActivity）</h2><h3 id="1-配置build-gradle"><a href="#1-配置build-gradle" class="headerlink" title="1. 配置build.gradle"></a>1. 配置build.gradle</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//修改minSDK为19</div><div class="line">minSdkVersion 19</div><div class="line">//添加依赖</div><div class="line">compile &apos;com.google.vr:sdk-panowidget:1.20.0&apos;</div></pre></td></tr></table></figure>
+<h3 id="2-配置AndroidManifest-xml"><a href="#2-配置AndroidManifest-xml" class="headerlink" title="2. 配置AndroidManifest.xml"></a>2. 配置AndroidManifest.xml</h3><p>由于全景图占内存较大，当加载多张全景图时可能存在内存溢出的情况，所以这里开启largeHeap。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;application android:largeHeap=&quot;true&quot;&gt;&lt;/application&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="3-加载全景图"><a href="#3-加载全景图" class="headerlink" title="3. 加载全景图"></a>3. 加载全景图</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">private class LoadPanoramaImageTask extends AsyncTask&lt;Void, Void, Bitmap&gt; &#123;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected Bitmap doInBackground(Void... params) &#123;</div><div class="line">        try &#123;</div><div class="line">            //加载assets目录下的全景图片</div><div class="line">            AssetManager assetManager = getAssets();</div><div class="line">            InputStream open = assetManager.open(&quot;andes.jpg&quot;);</div><div class="line">            return BitmapFactory.decodeStream(open);</div><div class="line">        &#125; catch (IOException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">        return null;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onPostExecute(Bitmap bitmap) &#123;</div><div class="line">        VrPanoramaView.Options options = new VrPanoramaView.Options();</div><div class="line">        //图片类型为立体图像</div><div class="line">        options.inputType = VrPanoramaView.Options.TYPE_STEREO_OVER_UNDER;</div><div class="line">        mVrPanoramaView.loadImageFromBitmap(bitmap, options);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="4-生命周期管理"><a href="#4-生命周期管理" class="headerlink" title="4. 生命周期管理"></a>4. 生命周期管理</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">protected void onPause() &#123;</div><div class="line">    mVrPanoramaView.pauseRendering();</div><div class="line">    super.onPause();</div><div class="line">&#125;</div><div class="line"></div><div class="line">@Override</div><div class="line">protected void onResume() &#123;</div><div class="line">    super.onResume();</div><div class="line">    mVrPanoramaView.resumeRendering();</div><div class="line">&#125;</div><div class="line"></div><div class="line">@Override</div><div class="line">protected void onDestroy() &#123;</div><div class="line">    // Destroy the widget and free memory.</div><div class="line">    mVrPanoramaView.shutdown();</div><div class="line">    // The background task has a 5 second timeout so it can potentially stay alive for 5 seconds</div><div class="line">    // after the activity is destroyed unless it is explicitly cancelled.</div><div class="line">    if (mLoadPanoramaImageTask != null) &#123;</div><div class="line">        mLoadPanoramaImageTask.cancel(true);</div><div class="line">    &#125;</div><div class="line">    super.onDestroy();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="5-事件监听"><a href="#5-事件监听" class="headerlink" title="5. 事件监听"></a>5. 事件监听</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">mVrPanoramaView.setEventListener(mVrPanoramaEventListener);</div><div class="line"></div><div class="line">private VrPanoramaEventListener mVrPanoramaEventListener = new VrPanoramaEventListener() &#123;</div><div class="line">    /**</div><div class="line">     * 点击回调</div><div class="line">     */</div><div class="line">    @Override</div><div class="line">    public void onClick() &#123;</div><div class="line">        super.onClick();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 加载数据成功回调</div><div class="line">     */</div><div class="line">    @Override</div><div class="line">    public void onLoadSuccess() &#123;</div><div class="line">        super.onLoadSuccess();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 加载数据失败回调</div><div class="line">     */</div><div class="line">    @Override</div><div class="line">    public void onLoadError(String errorMessage) &#123;</div><div class="line">        super.onLoadError(errorMessage);</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="360-视频"><a href="#360-视频" class="headerlink" title="360 视频"></a>360 视频</h2><h3 id="1-配置build-gradle-1"><a href="#1-配置build-gradle-1" class="headerlink" title="1. 配置build.gradle"></a>1. 配置build.gradle</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//添加依赖//</div><div class="line">minSdkVersion 19</div><div class="line">//已经配置则忽略</div><div class="line">compile &apos;com.google.vr:sdk-videowidget:1.20.0&apos;</div></pre></td></tr></table></figure>
+<h3 id="2-配置AndroidManifest-xml-已经配置则忽略"><a href="#2-配置AndroidManifest-xml-已经配置则忽略" class="headerlink" title="2. 配置AndroidManifest.xml (已经配置则忽略)"></a>2. 配置AndroidManifest.xml (已经配置则忽略)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;application android:largeHeap=&quot;true&quot;&gt;&lt;/application&gt;</div></pre></td></tr></table></figure>
+<h3 id="3-加载视频"><a href="#3-加载视频" class="headerlink" title="3. 加载视频"></a>3. 加载视频</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">VrVideoView.Options options = new VrVideoView.Options();</div><div class="line">//视频类型为立体视频</div><div class="line">options.inputType = VrVideoView.Options.TYPE_STEREO_OVER_UNDER;</div><div class="line">try &#123;</div><div class="line">    mVrVideoView.loadVideoFromAsset(&quot;congo.mp4&quot;, options);</div><div class="line">&#125; catch (IOException e) &#123;</div><div class="line">    e.printStackTrace();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="4-生命周期管理-1"><a href="#4-生命周期管理-1" class="headerlink" title="4. 生命周期管理"></a>4. 生命周期管理</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">protected void onPause() &#123;</div><div class="line">    super.onPause();</div><div class="line">    // Prevent the view from rendering continuously when in the background.</div><div class="line">    mVrVideoView.pauseRendering();</div><div class="line">    // If the video is playing when onPause() is called, the default behavior will be to pause</div><div class="line">    // the video and keep it paused when onResume() is called.</div><div class="line">    isPaused = true;</div><div class="line">&#125;</div><div class="line"></div><div class="line">@Override</div><div class="line">protected void onResume() &#123;</div><div class="line">    super.onResume();</div><div class="line">    mVrVideoView.resumeRendering();</div><div class="line">&#125;</div><div class="line"></div><div class="line">@Override</div><div class="line">protected void onDestroy() &#123;</div><div class="line">    // Destroy the widget and free memory.</div><div class="line">    mVrVideoView.shutdown();</div><div class="line">    super.onDestroy();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="5-事件监听-1"><a href="#5-事件监听-1" class="headerlink" title="5. 事件监听"></a>5. 事件监听</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">private VrVideoEventListener mVrEventListener = new VrVideoEventListener() &#123;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onLoadError(String errorMessage) &#123;</div><div class="line">        Toast.makeText(VrVideoActivity.this, &quot;onLoadError&quot;, Toast.LENGTH_SHORT).show();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onLoadSuccess() &#123;</div><div class="line">        Toast.makeText(VrVideoActivity.this, &quot;onLoadSuccess&quot;, Toast.LENGTH_SHORT).show();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onNewFrame() &#123;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onCompletion() &#123;</div><div class="line">        Toast.makeText(VrVideoActivity.this, &quot;onCompletion&quot;, Toast.LENGTH_SHORT).show();</div><div class="line">        mVrVideoView.seekTo(0);//播放结束后重新开始播放</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onClick() &#123;</div><div class="line">        togglePause();//点击暂停或者播放</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h1 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h1><p><img src="http://upload-images.jianshu.io/upload_images/1609086-1f2bbc34d0502abc.gif?imageMogr2/auto-orient/strip" alt="这里写图片描述"></p>
+<p>本demo实现一个全景图控制显示的效果。这里主要演示下VrPanoramaView控件的使用。</p>
+<h3 id="初始化VrPanoramaView"><a href="#初始化VrPanoramaView" class="headerlink" title="初始化VrPanoramaView"></a>初始化VrPanoramaView</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">private void initPanoramaView() &#123;</div><div class="line">    mVrPanoramaView = (VrPanoramaView) findViewById(R.id.vr_panorama_view);</div><div class="line">    //mVrPanoramaView.setDisplayMode(VrWidgetView.DisplayMode.FULLSCREEN_MONO);//全屏模式，弹出一个全屏的Dialog</div><div class="line">    mVrPanoramaView.setInfoButtonEnabled(false);//隐藏信息按钮</div><div class="line">    mVrPanoramaView.setStereoModeButtonEnabled(false);//隐藏cardboard按钮</div><div class="line">    mVrPanoramaView.setFullscreenButtonEnabled(false);//隐藏全屏按钮</div><div class="line">    mUrl = getIntent().getStringExtra(&quot;url&quot;);</div><div class="line">    OkGo.get(mUrl).cacheKey(mUrl).tag(mUrl).execute(new BitmapCallback() &#123;</div><div class="line"></div><div class="line">        @Override</div><div class="line">        public void onSuccess(Bitmap bitmap, Call call, Response response) &#123;</div><div class="line">            VrPanoramaView.Options options = new VrPanoramaView.Options();</div><div class="line">            //设置图片类型为单通道图片</div><div class="line">            options.inputType = VrPanoramaView.Options.TYPE_MONO;</div><div class="line">            mVrPanoramaView.loadImageFromBitmap(bitmap, options);</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="初始化MediaPlayer"><a href="#初始化MediaPlayer" class="headerlink" title="初始化MediaPlayer"></a>初始化MediaPlayer</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 如果有音乐数据则播放音乐</div><div class="line"> */</div><div class="line">private void initMediaPlayer() &#123;</div><div class="line">    String mp3 = getIntent().getStringExtra(&quot;mp3&quot;);</div><div class="line">    if (mp3 != null) &#123;</div><div class="line">        mMediaPlayer = new MediaPlayer();</div><div class="line">        try &#123;</div><div class="line">            mMediaPlayer.setDataSource(this, Uri.parse(mp3));</div><div class="line">            mMediaPlayer.setOnPreparedListener(mOnPreparedListener);</div><div class="line">            mMediaPlayer.prepareAsync();</div><div class="line">        &#125; catch (IOException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="生命周期管理"><a href="#生命周期管理" class="headerlink" title="生命周期管理"></a>生命周期管理</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">protected void onResume() &#123;</div><div class="line">    super.onResume();</div><div class="line">    mVrPanoramaView.resumeRendering();</div><div class="line">&#125;</div><div class="line"></div><div class="line">@Override</div><div class="line">protected void onPause() &#123;</div><div class="line">    super.onPause();</div><div class="line">    mVrPanoramaView.pauseRendering();</div><div class="line">    if (mMediaPlayer != null) &#123;</div><div class="line">        mMediaPlayer.pause();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">@Override</div><div class="line">protected void onDestroy() &#123;</div><div class="line">    super.onDestroy();</div><div class="line">    mVrPanoramaView.shutdown();</div><div class="line">    OkGo.getInstance().cancelTag(mUrl);//取消请求</div><div class="line">    if (mMediaPlayer != null) &#123;</div><div class="line">        mMediaPlayer.release();</div><div class="line">        mMediaPlayer = null;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="VR-View"><a href="#VR-View" class="headerlink" title="VR View"></a>VR View</h2><p>VR View允许开发者在网站或app中嵌入360度全景多媒体文件（图片和视频）。这个技术主要是提供给传统的开发者，可以通过在app中添加动态内容来提升用户体验。比如旅行或房地产类型的app，可以让用户足不出户就体验到虚拟场景。VR View同时支持web和Native app。<br>VR View同时支持单声道和立体声的图片和视频，但是图片和视频的存储格式必须为equirectangular-panoramic格式，这是一种常见的摄像头尺寸支持的格式。<br>VR view是客户端的显示技术，那么我们怎么去拍摄符合VR view要求的内容呢？</p>
+<h4 id="真实世界中的拍摄"><a href="#真实世界中的拍摄" class="headerlink" title="真实世界中的拍摄"></a>真实世界中的拍摄</h4><p><a href="https://play.google.com/store/apps/details?id=com.google.vr.cyclops&amp;hl=en" target="_blank" rel="external">Cardboard Camera App</a> ，用这个app可以和方便的拍摄360照片，拍摄完成后需要通过<a href="http://storage.googleapis.com/cardboard-camera-converter/index.html" target="_blank" rel="external">conversion tool</a>来创建一个立体声的360照片。</p>
+<p><a href="https://theta360.com/en/" target="_blank" rel="external">Ricoh Theta</a> 一个非常流行的，相对廉价的用来拍摄单声道相片和视频的设备。</p>
+<p>1，CG 拍摄<br>VR view的图片不仅仅限制在真实世界中拍摄。CGI（计算机合成图像）可以为所有的东西生成360度全景照片和视频，最流行拍摄解决方案如下：</p>
+<p><a href="https://www.assetstore.unity3d.com/en/#!/content/38755" target="_blank" rel="external">360 Panorama Capture for Unity</a> Unity插件<br><a href="https://www.unrealengine.com/" target="_blank" rel="external">Unreal</a> 虚幻引擎<br><a href="http://www.andrewhazelden.com/blog/2012/04/domemaster3d-stereoscopic-shader-for-autodesk-maya/" target="_blank" rel="external">Domemaster3D for Maya</a><br><a href="https://drive.google.com/drive/folders/0B0lYKpimsJgWfjFwa2xLQlVGNnJXcGxvbmNJbzIwUkRWQ2YtOHB5blNMNjlXSUlxbmJNVVU" target="_blank" rel="external">Renderman</a> 一个开源库<br><a href="https://developers.google.com/cardboard/jump/rendering-ods-content.pdf" target="_blank" rel="external">Rendering Omnidirectional Stereo Content</a> </p>
+<p>下面用伪代码展示如何用VrPanoramaView和VrVideoView展示360度图片和视频。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;com.google.vr.sdk.widgets.pano.VrPanoramaView</div><div class="line">            android:id=&quot;@+id/pano_view&quot;</div><div class="line">            android:layout_margin=&quot;5dip&quot;</div><div class="line">            android:layout_width=&quot;match_parent&quot;</div><div class="line">            android:scrollbars=&quot;@null&quot;</div><div class="line">            android:layout_height=&quot;250dip&quot;/&gt;</div><div class="line"></div><div class="line">&lt;com.google.vr.sdk.widgets.video.VrVideoView</div><div class="line">          android:id=&quot;@+id/video_view&quot;</div><div class="line">          android:layout_width=&quot;match_parent&quot;</div><div class="line">          android:scrollbars=&quot;@null&quot;</div><div class="line">          android:layout_height=&quot;250dip&quot;/&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div></pre></td><td class="code"><pre><div class="line">//展示全景图片</div><div class="line"> panoWidgetView = (VrPanoramaView) findViewById(R.id.pano_view);</div><div class="line">//图片加载结果回调</div><div class="line">private class ActivityEventListener extends VrPanoramaEventListener &#123;</div><div class="line">    /**</div><div class="line">     * Called by pano widget on the UI thread when it&apos;s done loading the image.</div><div class="line">     */</div><div class="line">    @Override</div><div class="line">    public void onLoadSuccess() &#123;</div><div class="line">      loadImageSuccessful = true;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * Called by pano widget on the UI thread on any asynchronous error.</div><div class="line">     */</div><div class="line">    @Override</div><div class="line">    public void onLoadError(String errorMessage) &#123;</div><div class="line">      loadImageSuccessful = false;</div><div class="line">      Toast.makeText(</div><div class="line">          SimpleVrPanoramaActivity.this, &quot;Error loading pano: &quot; + errorMessage, Toast.LENGTH_LONG)</div><div class="line">          .show();</div><div class="line">      Log.e(TAG, &quot;Error loading pano: &quot; + errorMessage);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">//设置图片加载监听</div><div class="line">    panoWidgetView.setEventListener(new ActivityEventListener());</div><div class="line"></div><div class="line">//加载图像的Bitmap数据 istr是一个文件输入流</div><div class="line">//VrPanoramaView.Options是用来配置图片格式的</div><div class="line">// TYPE_MONO 包含单一圆柱的全景图像</div><div class="line">// TYPE_STEREO_OVER_UNDER 图像包含了两个大小相等、垂直相交的圆柱全景图像。上图展示给左眼，下图展示给右眼。</div><div class="line">panoWidgetView.loadImageFromBitmap(BitmapFactory.decodeStream(istr), panoOptions);</div><div class="line"></div><div class="line"></div><div class="line">//展示全景视频</div><div class="line">videoWidgetView = (VrVideoView) findViewById(R.id.video_view);</div><div class="line">    videoWidgetView.setEventListener(new ActivityEventListener());</div><div class="line">//VrVideoEventListener同时对视频加载和操作的回调</div><div class="line">private class ActivityEventListener extends VrVideoEventListener  &#123;</div><div class="line">    /**</div><div class="line">     * Called by video widget on the UI thread when it&apos;s done loading the video.</div><div class="line">     */</div><div class="line">    @Override</div><div class="line">    public void onLoadSuccess() &#123;</div><div class="line">      Log.i(TAG, &quot;Sucessfully loaded video &quot; + videoWidgetView.getDuration());</div><div class="line">      loadVideoStatus = LOAD_VIDEO_STATUS_SUCCESS;</div><div class="line">      seekBar.setMax((int) videoWidgetView.getDuration());</div><div class="line">      updateStatusText();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * Called by video widget on the UI thread on any asynchronous error.</div><div class="line">     */</div><div class="line">    @Override</div><div class="line">    public void onLoadError(String errorMessage) &#123;</div><div class="line">      // An error here is normally due to being unable to decode the video format.</div><div class="line">      loadVideoStatus = LOAD_VIDEO_STATUS_ERROR;</div><div class="line">      Toast.makeText(</div><div class="line">          SimpleVrVideoActivity.this, &quot;Error loading video: &quot; + errorMessage, Toast.LENGTH_LONG)</div><div class="line">          .show();</div><div class="line">      Log.e(TAG, &quot;Error loading video: &quot; + errorMessage);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onClick() &#123;</div><div class="line">      togglePause();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * Update the UI every frame.</div><div class="line">     */</div><div class="line">    @Override</div><div class="line">    public void onNewFrame() &#123;</div><div class="line">      updateStatusText();</div><div class="line">      seekBar.setProgress((int) videoWidgetView.getCurrentPosition());</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * Make the video play in a loop. This method could also be used to move to the next video in</div><div class="line">     * a playlist.</div><div class="line">     */</div><div class="line">    @Override</div><div class="line">    public void onCompletion() &#123;</div><div class="line">      videoWidgetView.seekTo(0);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">//支持两种加载方式，从asset文件夹中或从一个uri中读取视频数据</div><div class="line">//VrVideoView.Options同样是用来配置视频格式的</div><div class="line">videoWidgetView.loadVideoFromAsset(&quot;congo.mp4&quot;, options);</div><div class="line">或</div><div class="line">videoWidgetView.loadVideo(fileInformation[0].first, fileInformation[0].second)</div><div class="line"></div><div class="line">//除此外还有一些控制渲染、播放的方法：</div><div class="line">videoWidgetView.pauseRendering();</div><div class="line">videoWidgetView.resumeRendering();</div><div class="line">videoWidgetView.shutdown();</div><div class="line">videoWidgetView.playVideo();</div><div class="line">videoWidgetView.pauseVideo();</div><div class="line"></div><div class="line">//shutdown()一定要在onDestroy()时调用，用来释放占用内存。</div></pre></td></tr></table></figure>
+<p>附：<a href="https://github.com/xiangzhihong/VRDemo" target="_blank" rel="external">VRDemo</a></p>
+    </div>
+    <p class="post-meta">
+        <span class="post-cat">分类：
+            <a class="cat-link" href="/categories/VR/">VR</a>
+        </span>
+        <span class="post-tags">
+            标签：
+            <a href="/tags/Google/" title="Google">Google</a> / 
+    
+        <a href="/tags/VR/" title="VR">VR</a>
+        </span>
+    </p>
+</article>
+<div class="article-share clearfix text-center">
+    <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+</div>
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br>
+        <a href="/2016/08/03/迭代模式/">
+            
+                迭代子模式
+            
+        </a>
+    </span>
+    
+
+    
+    <span class="next fr">
+        下一篇<br>
+        <a href="/2016/07/20/Flex布局/">
+            
+                FlexBox布局
+            
+        </a>
+    </span>
+    
+</div>
+<!-- 文章评论 -->
+<div id="comments" class="comments cloud-tie-wrapper"></div>
+    <script>
+    var cloudTieConfig = {
+      url: document.location.href, 
+      sourceId: "Google VR技术大揭秘",
+      productKey: "c06bb9930e6f4b38a9997cb9bd17aba5",
+      target: "comments"
+    };
+    var yunManualLoad = true;
+    Tie.loader("aHR0cHM6Ly9hcGkuZ2VudGllLjE2My5jb20vcGMvbGl2ZXNjcmlwdC5odG1s", true);
+    </script>
+            </div>
+
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章分类</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+    <li>
+        <a href="/categories/Android/">Android</a>
+        <span class="badge">(10)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Android/系统/">系统</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Angular2/">Angular2</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/React-Native/">React Native</a>
+        <span class="badge">(9)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Java/">Java</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/前端/">前端</a>
+        <span class="badge">(6)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/VR/">VR</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Angular2/前端/">前端</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Spring/">Spring</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/ios/">ios</a>
+        <span class="badge">(7)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Google/">Google</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Google/VR/">VR</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/技术人生/">技术人生</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/小程序/">小程序</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/机器学习/">机器学习</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/android/">android</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/设计模式/">设计模式</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+</ul>
+    </section>
+
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="/tags/Android/" title="Android">Android (7)</a>
+  
+    <a class="tag-item" href="/tags/新特性/" title="新特性">新特性 (2)</a>
+  
+    <a class="tag-item" href="/tags/高仿/" title="高仿">高仿 (4)</a>
+  
+    <a class="tag-item" href="/tags/深入系统/" title="深入系统">深入系统 (1)</a>
+  
+    <a class="tag-item" href="/tags/系统服务/" title="系统服务">系统服务 (1)</a>
+  
+    <a class="tag-item" href="/tags/android/" title="android">android (4)</a>
+  
+    <a class="tag-item" href="/tags/混淆打包/" title="混淆打包">混淆打包 (1)</a>
+  
+    <a class="tag-item" href="/tags/Angular2/" title="Angular2">Angular2 (1)</a>
+  
+    <a class="tag-item" href="/tags/前端开发/" title="前端开发">前端开发 (3)</a>
+  
+    <a class="tag-item" href="/tags/硬件/" title="硬件">硬件 (1)</a>
+  
+    <a class="tag-item" href="/tags/React-Native/" title="React Native">React Native (7)</a>
+  
+    <a class="tag-item" href="/tags/FlexBox布局/" title="FlexBox布局">FlexBox布局 (1)</a>
+  
+    <a class="tag-item" href="/tags/Java/" title="Java">Java (2)</a>
+  
+    <a class="tag-item" href="/tags/垃圾回收/" title="垃圾回收">垃圾回收 (1)</a>
+  
+    <a class="tag-item" href="/tags/Node/" title="Node">Node (2)</a>
+  
+    <a class="tag-item" href="/tags/Google/" title="Google">Google (2)</a>
+  
+    <a class="tag-item" href="/tags/VR/" title="VR">VR (2)</a>
+  
+    <a class="tag-item" href="/tags/OpenGL/" title="OpenGL">OpenGL (1)</a>
+  
+    <a class="tag-item" href="/tags/Promise/" title="Promise">Promise (1)</a>
+  
+    <a class="tag-item" href="/tags/前端/" title="前端">前端 (4)</a>
+  
+    <a class="tag-item" href="/tags/调试/" title="调试">调试 (1)</a>
+  
+    <a class="tag-item" href="/tags/eact-Native/" title="eact Native">eact Native (1)</a>
+  
+    <a class="tag-item" href="/tags/打包/" title="打包">打包 (1)</a>
+  
+    <a class="tag-item" href="/tags/Spring/" title="Spring">Spring (2)</a>
+  
+    <a class="tag-item" href="/tags/入门/" title="入门">入门 (2)</a>
+  
+    <a class="tag-item" href="/tags/原生/" title="原生">原生 (1)</a>
+  
+    <a class="tag-item" href="/tags/ios/" title="ios">ios (7)</a>
+  
+    <a class="tag-item" href="/tags/swift/" title="swift">swift (1)</a>
+  
+    <a class="tag-item" href="/tags/Swift/" title="Swift">Swift (1)</a>
+  
+    <a class="tag-item" href="/tags/AR/" title="AR">AR (1)</a>
+  
+    <a class="tag-item" href="/tags/webpack/" title="webpack">webpack (1)</a>
+  
+    <a class="tag-item" href="/tags/gulp/" title="gulp">gulp (1)</a>
+  
+    <a class="tag-item" href="/tags/Xcode/" title="Xcode">Xcode (2)</a>
+  
+    <a class="tag-item" href="/tags/https/" title="https">https (1)</a>
+  
+    <a class="tag-item" href="/tags/gif/" title="gif">gif (1)</a>
+  
+    <a class="tag-item" href="/tags/mac/" title="mac">mac (1)</a>
+  
+    <a class="tag-item" href="/tags/环境/" title="环境">环境 (1)</a>
+  
+    <a class="tag-item" href="/tags/知识库/" title="知识库">知识库 (1)</a>
+  
+    <a class="tag-item" href="/tags/原理/" title="原理">原理 (1)</a>
+  
+</div>
+    </section>
+    
+
+    
+    <!-- 我的微博 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>我的微博</strong></h3>
+        <div class="widget-bd" style="position: relative">
+  <div id="myWeiboLoading" class="text-center" style="position:absolute;top:0;left:0;right:0;bottom:0;line-height:50px;font-size:12px;background-color:#fff;z-index:9">微博加载中...</div>
+  <iframe width="100%" height="550" class="share_self" frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&amp;width=0&amp;height=550&amp;fansRow=2&amp;ptype=1&amp;speed=0&amp;skin=4&amp;isTitle=1&amp;noborder=1&amp;isWeibo=1&amp;isFans=1&amp;uid=1831462560&amp;verifier=5192ec39&amp;dpc=1"></iframe>
+  <script>
+  (function () {
+    var oMyWeibo = document.getElementById('myWeibo');
+    var oMyWeiboLoading = document.getElementById('myWeiboLoading');
+    var isIE = /msie/i.test(navigator.userAgent) && !window.opera;
+    var timer = null;
+    if (isIE) {
+      oMyWeibo.onreadystatechange = function(){
+        if(oMyWeibo.readyState === 'loaded' || oMyWeibo.readyState === 'complete'){
+          timer = setTimeout(function () {
+            oMyWeiboLoading.parentNode.removeChild(oMyWeiboLoading);
+            timer = null;
+          }, 300);
+        }
+      };
+    } else {
+      oMyWeibo.onload = function () {
+        timer = setTimeout(function () {
+          oMyWeiboLoading.parentNode.removeChild(oMyWeiboLoading);
+          timer = null;
+        }, 300);
+      };
+    }
+  })();
+  </script>
+</div>
+    </section>
+    
+
+    
+    <!-- 友情链接 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>友情链接</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+        <li>
+            <a href="http://blog.csdn.net/xiangzhihong8/" target="_blank" title="csdn个人博客">csdn博客</a>
+        </li>
+    
+        <li>
+            <a href="https://yq.aliyun.com/u/xiangzhihong" target="_blank" title="阿里云技术博客">阿里云博客</a>
+        </li>
+    
+</ul>
+    </section>
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <footer class="footer">
+    &copy;
+    
+        2016-2017
+    
+
+    <a href="/">Jelon Loves You</a>
+</footer>
+<div class="back-to-top" id="JELON__backToTop" title="返回顶部">返回顶部</div>
+<!-- 添加百度自动推送 -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+    <!--博客js脚本 -->
+    <!-- 这里放网站js脚本 -->
+<script src="/js/main.js"></script>
+</body>

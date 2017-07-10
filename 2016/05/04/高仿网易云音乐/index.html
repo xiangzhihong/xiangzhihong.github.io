@@ -1,0 +1,509 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8">
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya">
+    
+    <title>Android仿网易云音乐播放界面 | 向志洪</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
+    <meta name="keywords" content="前端, Web, 移动, 向志洪">
+    <meta name="description" content="">
+
+    
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <!--[if lt IE 9]>
+    <script src="/js/html5.js"></script>
+    <![endif]-->
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?fd459238242776d173cdc64918fb32f2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+    
+    <script>var yunModuleEnv = true;</script>
+    <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+    
+</head></html>
+<body class="home">
+    <!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="/">
+                <div class="cover">
+                    <span class="name">向志洪</span>
+                    <span class="description">个人技术博客</span>
+                </div>
+            </a>
+        </div>
+        <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
+        <ul class="menu hidden" id="JELON__menu">
+            
+            <li rel="/2016/05/04/高仿网易云音乐/index.html" class="item">
+                <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
+            </li>
+            
+            <li rel="/2016/05/04/高仿网易云音乐/index.html" class="item">
+                <a href="/archives/" title="文章列表" class="icon-lab">&nbsp;文章列表</a>
+            </li>
+            
+            <li rel="/2016/05/04/高仿网易云音乐/index.html" class="item">
+                <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
+            </li>
+            
+            <li rel="/2016/05/04/高仿网易云音乐/index.html" class="item">
+                <a href="/404/" title="留言" class="icon-comment">&nbsp;留言</a>
+            </li>
+            
+        </ul>
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        <a href="https://github.com/xiangzhihong" target="_blank">Github</a>
+                        |
+                    
+                        <a href="http://tongji.baidu.com/web/welcome/login" target="_blank">站长统计</a>
+                        |
+                    
+                        <a href="http://weibo.com/code_xzh" target="_blank">新浪微博</a>
+                        |
+                    
+                </p>
+                <p class="sns">
+                    
+                    <a href="javascript: void(0);" class="wechat">
+                        <b>■</b>
+                        公众号
+                        <span class="popover">
+                            <img src="/img/wechat_mp.jpg" width="120" height="120" alt="我的微信订阅号">
+                            <i class="arrow"></i>
+                        </span>
+                    </a>
+                </p>
+                
+            </div>
+            <div class="avatar fr">
+                <img src="http://ohe65w0xx.bkt.clouddn.com/avert.png" alt="avatar" title="Jelon">
+            </div>
+        </div>
+    </section>
+</header>
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+        <section class="content">
+            <div class="content-main widget">
+                <!-- 文章页 -->
+<!-- 文章 -->
+<article class="post article">
+    <header class="text-center">
+        <h3 class="post-title"><span>Android仿网易云音乐播放界面</span></h3>
+    </header>
+    <p class="post-meta text-center">
+        Jelon 发表于
+        <time datetime="2016-05-03T16:00:00.000Z">2016-05-04</time>
+    </p>
+    <div class="post-content">
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>网易云音乐是一款非常优秀的音乐播放器，尤其是播放界面，使用唱盘机风格，显得格外古典优雅。这里抛砖引玉，原文地址：<a href="http://www.jianshu.com/p/cb54990219d9" target="_blank" rel="external">http://www.jianshu.com/p/cb54990219d9</a><br>首先来看一下网易的播放效果。<br><img src="http://upload-images.jianshu.io/upload_images/3240261-8676c6c0d84f8eec.gif?imageMogr2/auto-orient/strip" alt="这里写图片描述"><br>要实现上面的功能，我们需要对界面进行一个拆分，拆分后大概包含如下结构：</p>
+<ul>
+<li>主界面布局设计</li>
+<li>唱盘布局设计</li>
+<li>动态布局</li>
+<li>唱盘控件DiscView对外接口及方法</li>
+<li>音乐状态控制时序图<h1 id="分析及实现"><a href="#分析及实现" class="headerlink" title="分析及实现"></a>分析及实现</h1><h2 id="主界面布局设计"><a href="#主界面布局设计" class="headerlink" title="主界面布局设计"></a>主界面布局设计</h2>主界面布局从上到下可以划分几大区域，如图：<br><img src="http://upload-images.jianshu.io/upload_images/3240261-0c5befe60db210e9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="这里写图片描述"><br>如图，由上到下主要分为：标题栏区、唱盘区域、时长显示区域、播放控制区域。<br><strong>标题栏</strong><br>使用ToolBar实现，字体可能需要自定义。<br><strong>唱盘区域</strong><br>唱盘区域包括唱盘、唱针、底盘、以及实现切换的ViewPager等控件，该布局比较复杂，本案例使用自定义控件实现唱盘区域。<br><strong>时长显示区域</strong><br>使用RelativeLayout作为根布局，进度条使用SeekBar实现。<br><strong>播放控制区域</strong><br>比较简单，使用LinearLayout作为根布局。<h2 id="唱盘布局实现（难点）"><a href="#唱盘布局实现（难点）" class="headerlink" title="唱盘布局实现（难点）"></a>唱盘布局实现（难点）</h2>唱盘区域由控件DiscView实现，以RelativeLayout为根布局，子控件包括：底盘、唱针、ViewPager等。其中，底盘和唱针均用ImageView实现，然后使用ViewPager加载ImageView实现唱片的切换。如图：<br><img src="http://upload-images.jianshu.io/upload_images/3240261-b7b82827b035741f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="这里写图片描述"><br>唱片布局如下：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">&lt;?ml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;com.achillesl.neteasedisc.widget.DiscView</div><div class="line">    mlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</div><div class="line">    android:layout_width=&quot;match_parent&quot;</div><div class="line">    android:layout_height=&quot;wrap_content&quot;&gt;</div><div class="line"></div><div class="line">    &lt;!--底盘--&gt;</div><div class="line">    &lt;ImageView</div><div class="line">        android:id=&quot;@+id/ivDiscBlackgound&quot;</div><div class="line">        android:layout_width=&quot;wrap_content&quot;</div><div class="line">        android:layout_height=&quot;wrap_content&quot;</div><div class="line">        android:layout_centerHorizontal=&quot;true&quot;</div><div class="line">        /&gt;</div><div class="line"></div><div class="line">    &lt;!--ViewPager实现唱片切换--&gt;</div><div class="line">    &lt;android.support.v4.view.ViewPager</div><div class="line">        android:id=&quot;@+id/vpDiscContain&quot;</div><div class="line">        android:layout_width=&quot;wrap_content&quot;</div><div class="line">        android:layout_height=&quot;wrap_content&quot;</div><div class="line">        android:layout_centerHorizontal=&quot;true&quot;</div><div class="line">        /&gt;</div><div class="line"></div><div class="line">    &lt;!--唱针--&gt;</div><div class="line">    &lt;ImageView</div><div class="line">        android:id=&quot;@+id/ivNeedle&quot;</div><div class="line">        android:layout_width=&quot;wrap_content&quot;</div><div class="line">        android:layout_height=&quot;wrap_content&quot;</div><div class="line">        android:src=&quot;@drawable/ic_needle&quot;/&gt;</div><div class="line"></div><div class="line">&lt;/com.achillesl.neteasedisc.widget.DiscView&gt;</div></pre></td></tr></table></figure>
+<p>这里面涉及到一个DiscView类，这个是一个复合类，我们来看一些主要的功能。<br>唱盘控件DiscView提供一个接口IPlayInfo，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">public interface IPlayInfo &#123;</div><div class="line">    /*用于更新标题栏变化*/</div><div class="line">    void onMusicInfoChanged(String musicName, String musicAuthor);</div><div class="line">    /*用于更新背景图片*/</div><div class="line">    void onMusicPicChanged(int musicPicRes);</div><div class="line">    /*用于更新音乐播放状态*/</div><div class="line">    void onMusicChanged(MusicChangedStatus musicChangedStatus);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这上面定义的三个函数作用：　分别用于更新标题栏（音乐名、作者名）、更新背景图片以及控制音乐播放状态（播放、暂停、上/下一首等）。<br>点击主界面播放/暂停、上/下一首按钮时，调用DiscView暴露的方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">public void onClick(View v) &#123;</div><div class="line">    if (v == mIvPlayOrPause) &#123;</div><div class="line">        mDisc.playOrPause();</div><div class="line">    &#125; else if (v == mIvNet) &#123;</div><div class="line">        mDisc.net();</div><div class="line">    &#125; else if (v == mIvLast) &#123;</div><div class="line">        mDisc.last();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>当主界面收到DiscView回调时，调用相关方法控制音乐播放，这样逻辑就会很清晰，各分职责：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">public void onMusicChanged(MusicChangedStatus musicChangedStatus) &#123;</div><div class="line">    switch (musicChangedStatus) &#123;</div><div class="line">        case PLAY:&#123;</div><div class="line">            play();</div><div class="line">            break;</div><div class="line">        &#125;</div><div class="line">        case PAUSE:&#123;</div><div class="line">            pause();</div><div class="line">            break;</div><div class="line">        &#125;</div><div class="line">        case NET:&#123;</div><div class="line">            net();</div><div class="line">            break;</div><div class="line">        &#125;</div><div class="line">        case LAST:&#123;</div><div class="line">            last();</div><div class="line">            break;</div><div class="line">        &#125;</div><div class="line">        case STOP:&#123;</div><div class="line">            stop();</div><div class="line">            break;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="音乐状态控制时序图"><a href="#音乐状态控制时序图" class="headerlink" title="音乐状态控制时序图"></a>音乐状态控制时序图</h2><p><img src="http://upload-images.jianshu.io/upload_images/3240261-9159b69ee9ab13a9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="这里写图片描述"><br>音乐控制状态时序如图3-3所示，点击Activity的按钮时，先调用DiscView的相关方法，并在合适的时机（如动画结束）再将状态回调到Activity，并通过广播发送指令到Service，实现音乐状态切换，最后通过广播更新UI状态。<br>这个状态的切换只有你仔细观察就会明白它的流程了。项目架构介绍到这里，接下来是部分视觉效果以及设计思路的介绍和项目的一些难点介绍。</p>
+<h2 id="解决加载大图OOM问题"><a href="#解决加载大图OOM问题" class="headerlink" title="解决加载大图OOM问题"></a>解决加载大图OOM问题</h2><p>解决大图加载一般有几种方案：</p>
+<ol>
+<li>设置largeHeap为true。</li>
+<li>根据图片类型选定解码格式。</li>
+<li>根据原始图片宽高及目标显示宽高，设置图片采样率。</li>
+</ol>
+<p>根据实际经验我们一般采用后两种，第一种虽然通过增加堆内存来延缓了oom的时机，但是治标不治本。这里我们整理一个类。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">private Bitmap getMusicPicBitmap(int musicPicSize, int musicPicRes) &#123;</div><div class="line">    BitmapFactory.Options options = new BitmapFactory.Options();</div><div class="line">    options.inJustDecodeBounds = true;</div><div class="line"></div><div class="line">    BitmapFactory.decodeResource(getResources(),musicPicRes,options);</div><div class="line">    int imageWidth = options.outWidth;</div><div class="line"></div><div class="line">    int sample = imageWidth / musicPicSize;</div><div class="line">    int dstSample = 1;</div><div class="line">    if (sample &gt; dstSample) &#123;</div><div class="line">        dstSample = sample;</div><div class="line">    &#125;</div><div class="line">    options.inJustDecodeBounds = false;</div><div class="line">    //设置图片采样率</div><div class="line">    options.inSampleSize = dstSample;</div><div class="line">    //设置图片解码格式</div><div class="line">    options.inPreferredConfig = Bitmap.Config.RGB_565;</div><div class="line"></div><div class="line">    return Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(),</div><div class="line">            musicPicRes, options), musicPicSize, musicPicSize, true);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我相信有过几年Java开发经验或Android经验的人都会知道这么一个常识：首先设置options.inJustDecodeBounds = true，这样BitmapFactory.decodeResource的时候仅仅会加载图片的一些信息，然后通过options.outWidth获取到图片的宽度，根据目标图片尺寸算出采样率。最后通过inPreferredConfig设置解码格式，才正式加载图片，这样有效的避免了图片的oom。</p>
+<h2 id="生成圆图最简单方式"><a href="#生成圆图最简单方式" class="headerlink" title="生成圆图最简单方式"></a>生成圆图最简单方式</h2><p>以前我们使用圆圈一般会自定义一个View，然后实现onDraw()，不过Android在android.support.v4.graphics.drawable 里面为我们实现了一个类RoundedBitmapDrawable。使用如下，我们可以对其做一个简单的封装：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">private Drawable getDiscBlackgroundDrawable() &#123;</div><div class="line">    int discSize = (int) (mScreenWidth * DisplayUtil.SCALE_DISC_SIZE);</div><div class="line">    Bitmap bitmapDisc = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R</div><div class="line">            .drawable.ic_disc_blackground), discSize, discSize, false);</div><div class="line">    RoundedBitmapDrawable roundDiscDrawable = RoundedBitmapDrawableFactory.create</div><div class="line">            (getResources(), bitmapDisc);</div><div class="line">    return roundDiscDrawable;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="使用LayerDrawable进行图片合成"><a href="#使用LayerDrawable进行图片合成" class="headerlink" title="使用LayerDrawable进行图片合成"></a>使用LayerDrawable进行图片合成</h2><p><strong>LayerDrawable介绍</strong><br>　　LayerDrawable也可包含一个Drawable数组，因此系统将会按这些Drawable对象的数组顺序来绘制它们，索引最大的Drawable对象将会被绘制在最上面。 LayerDrawable有点类似PhotoShop图层的概念。<br>      我们在分析唱片布局的时候发现原View包含两个ImageView，估计是一个用来显示唱盘，一个用来显示专辑图片。<br><img src="http://upload-images.jianshu.io/upload_images/3240261-dfd9f29c282b6b25.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="这里写图片描述"><br>使用LayerDrawable生成复合图片代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">private Drawable getDiscDrawable(int musicPicRes) &#123;</div><div class="line">    int discSize = (int) (mScreenWidth * DisplayUtil.SCALE_DISC_SIZE);</div><div class="line">    int musicPicSize = (int) (mScreenWidth * DisplayUtil.SCALE_MUSIC_PIC_SIZE);</div><div class="line"></div><div class="line">    Bitmap bitmapDisc = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R</div><div class="line">            .drawable.ic_disc), discSize, discSize, false);</div><div class="line">    Bitmap bitmapMusicPic = getMusicPicBitmap(musicPicSize,musicPicRes);</div><div class="line">    BitmapDrawable discDrawable = new BitmapDrawable(bitmapDisc);</div><div class="line">    RoundedBitmapDrawable roundMusicDrawable = RoundedBitmapDrawableFactory.create</div><div class="line">            (getResources(), bitmapMusicPic);</div><div class="line"></div><div class="line">    //抗锯齿</div><div class="line">    discDrawable.setAntiAlias(true);</div><div class="line">    roundMusicDrawable.setAntiAlias(true);</div><div class="line"></div><div class="line">    Drawable[] drawables = new Drawable[2];</div><div class="line">    drawables[0] = roundMusicDrawable;</div><div class="line">    drawables[1] = discDrawable;</div><div class="line"></div><div class="line">    LayerDrawable layerDrawable = new LayerDrawable(drawables);</div><div class="line">    int musicPicMargin = (int) ((DisplayUtil.SCALE_DISC_SIZE - DisplayUtil</div><div class="line">            .SCALE_MUSIC_PIC_SIZE) * mScreenWidth / 2);</div><div class="line">    //调整专辑图片的四周边距</div><div class="line">    layerDrawable.setLayerInset(0, musicPicMargin, musicPicMargin, musicPicMargin,</div><div class="line">            musicPicMargin);</div><div class="line"></div><div class="line">    return layerDrawable;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>　在上面代码中，我们先生成了唱盘对象BitmapDrawable，然后通过RoundedBitmapDrawable生成圆形专辑图片，然后存放到Drawable[]数组中，并用来初始化LayerDrawable对象。最后，我们用setLayerInset方法调整专辑图片的四周边距，让它显示在唱盘正中。</p>
+<h2 id="实现背景毛玻璃效果"><a href="#实现背景毛玻璃效果" class="headerlink" title="实现背景毛玻璃效果"></a>实现背景毛玻璃效果</h2><p>这个网上的资料很多，也有基于JNI实现的，这个使用JNI实现可以看一下我之前的博客<a href="http://www.jianshu.com/p/f8463b3bbffb" target="_blank" rel="external">JNI实现毛玻璃效果</a>，这里为了方便大家使用，我就直接使用工具类的方式，关于模糊化的实现逻辑大家可以搜索一下“BlurUtil”，考虑到这部分代码可能会阻塞UI线程，因此将其放着单独线程中执行。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">private void try2UpdateMusicPicBackground(final int musicPicRes) &#123;</div><div class="line">    if (mRootLayout.isNeed2UpdateBackground(musicPicRes)) &#123;</div><div class="line">        new Thread(new Runnable() &#123;</div><div class="line">            @Override</div><div class="line">            public void run() &#123;</div><div class="line">                final Drawable foregroundDrawable = getForegroundDrawable(musicPicRes);</div><div class="line">                runOnUiThread(new Runnable() &#123;</div><div class="line">                    @Override</div><div class="line">                    public void run() &#123;</div><div class="line">                        mRootLayout.setForeground(foregroundDrawable);</div><div class="line">                        mRootLayout.beginAnimation();</div><div class="line">                    &#125;</div><div class="line">                &#125;);</div><div class="line">            &#125;</div><div class="line">        &#125;).start();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="使用LayerDrawable与属性动画，实现背景切换时渐变效果"><a href="#使用LayerDrawable与属性动画，实现背景切换时渐变效果" class="headerlink" title="使用LayerDrawable与属性动画，实现背景切换时渐变效果"></a>使用LayerDrawable与属性动画，实现背景切换时渐变效果</h2><p>仔细观察网易云音乐，发现切换歌曲时，背景图也会随着变化。其实这种也很好做，可以使用LayerDrawable加属性动画来实现。<br>　思路如下：<br>　　1. 给LayerDrawable设置两个图层，第一图层是前一个背景，第二图层是准备显示的背景。<br>　　2. 先把准备显示的背景透明度设为0，因此完全透明，此时只显示前一个背景图。<br>　　3. 通过属性动画，动态将第二图层的透明度从0调整至100，并不断更新控件的背景。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line">public class BackgourndAnimationRelativeLayout etends RelativeLayout</div><div class="line"></div><div class="line">//初始化LayerDrawable对象</div><div class="line">private void initLayerDrawable() &#123;</div><div class="line">    Drawable backgroundDrawable = getContet().getDrawable(R.drawable.ic_blackground);</div><div class="line">    Drawable[] drawables = new Drawable[2];</div><div class="line"></div><div class="line">    /*初始化时先将前景与背景颜色设为一致*/</div><div class="line">    drawables[INDE_BACKGROUND] = backgroundDrawable;</div><div class="line">    drawables[INDE_FOREGROUND] = backgroundDrawable;</div><div class="line"></div><div class="line">    layerDrawable = new LayerDrawable(drawables);</div><div class="line">&#125;</div><div class="line"></div><div class="line">private void initObjectAnimator() &#123;</div><div class="line">    objectAnimator = ObjectAnimator.ofFloat(this, &quot;number&quot;, 0f, 1.0f);</div><div class="line">    objectAnimator.setDuration(DURATION_ANIMATION);</div><div class="line">    objectAnimator.setInterpolator(new AccelerateInterpolator());</div><div class="line">    objectAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() &#123;</div><div class="line">        @Override</div><div class="line">        public void onAnimationUpdate(ValueAnimator animation) &#123;</div><div class="line">            int foregroundAlpha = (int) ((float) animation.getAnimatedValue() * 255);</div><div class="line">            /*动态设置Drawable的透明度，让前景图逐渐显示*/</div><div class="line">            layerDrawable.getDrawable(INDE_FOREGROUND).setAlpha(foregroundAlpha);</div><div class="line">            BackgourndAnimationRelativeLayout.this.setBackground(layerDrawable);</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">    objectAnimator.addListener(new Animator.AnimatorListener() &#123;</div><div class="line">        @Override</div><div class="line">        public void onAnimationStart(Animator animation) &#123;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        @Override</div><div class="line">        public void onAnimationEnd(Animator animation) &#123;</div><div class="line">            /*动画结束后，记得将原来的背景图及时更新*/</div><div class="line">            layerDrawable.setDrawable(INDE_BACKGROUND, layerDrawable.getDrawable(</div><div class="line">                    INDE_FOREGROUND));</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        @Override</div><div class="line">        public void onAnimationCancel(Animator animation) &#123;</div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        @Override</div><div class="line">        public void onAnimationRepeat(Animator animation) &#123;</div><div class="line"></div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">//对外提供方法，用于播放渐变动画</div><div class="line">public void beginAnimation() &#123;</div><div class="line">    objectAnimator.start();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="唱针变化逻辑"><a href="#唱针变化逻辑" class="headerlink" title="唱针变化逻辑"></a>唱针变化逻辑</h2><p>我们来看一下唱针的变化，为了真实的模拟真实的场景，唱针主要有以下状态：</p>
+<ul>
+<li>初始状态为暂停/停止时，点击播放按钮，此时唱针移动到底部。</li>
+<li>初始状态为播放时，点击暂停按钮，此时唱针移到顶部。</li>
+<li>初始状态为播放时，手指按住唱盘并稍微偏移，等唱针未移到顶部时，立刻松开手指，此时唱针回到顶部后立刻再回到唱盘位置。</li>
+<li>初始状态为暂停/停止时，点击播放，此时唱针往下移动，当唱针还未移到底部，手指马上按住唱盘并偏移，此时唱针立刻往顶部移动。</li>
+<li>初始状态为播放/暂停/停止时，左右滑动唱片进行音乐切换，唱针动画未结束时，立刻点击上/下一首按钮，进行音乐切换，此时唱针状态不能出现混乱。</li>
+</ul>
+<p>初始状态为暂停/停止时，点击播放按钮，此时唱针移动到底部。<br><img src="http://upload-images.jianshu.io/upload_images/3240261-1ea7e25a1139f8e0.gif?imageMogr2/auto-orient/strip" alt="这里写图片描述"><br>初始状态为播放时，点击暂停按钮，此时唱针移到顶部。<br><img src="http://upload-images.jianshu.io/upload_images/3240261-d298744c7a9553a2.gif?imageMogr2/auto-orient/strip" alt="这里写图片描述"><br>初始状态为播放时，手指按住唱盘并稍微偏移，等唱针未移到顶部时，立刻松开手指，此时唱针回到顶部后立刻再回到唱盘位置。<br><img src="http://upload-images.jianshu.io/upload_images/3240261-d10a9206b303c189.gif?imageMogr2/auto-orient/strip" alt="这里写图片描述"><br>初始状态为暂停/停止时，点击播放，此时唱针往下移动，当唱针还未移到底部，手指马上按住唱盘并偏移，此时唱针立刻往顶部移动。<br><a href="http://upload-images.jianshu.io/upload_images/3240261-bc47abb2298a5c36.gif?imageMogr2/auto-orient/strip" target="_blank" rel="external">这里写链接内容</a><br>初始状态为播放/暂停/停止时，左右滑动唱片进行音乐切换，唱针动画未结束时，立刻点击上/下一首按钮，进行音乐切换，此时唱针状态不能出现混乱，反复做了步骤1的动作。<br><img src="http://upload-images.jianshu.io/upload_images/3240261-7ae16da08ca69c62.gif?imageMogr2/auto-orient/strip" alt="这里写图片描述"><br>我们队上面的图片仔细分析，然后结合ViewPager的原理我们来看看。<br><img src="http://upload-images.jianshu.io/upload_images/3240261-e99e774172afd536.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="这里写图片描述"><br>唱片(即ViewPager)的状态可以通过PageChangeListener得到。唱针的状态，笔者用枚举来表示，并且在动画的开始、结束时对唱针状态及时更新。那么我们很容易就想到case或者枚举。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">private enum NeedleAnimatorStatus &#123;</div><div class="line">       /*移动时：从唱盘往远处移动*/</div><div class="line">       TO_FAR_END,</div><div class="line">       /*移动时：从远处往唱盘移动*/</div><div class="line">       TO_NEAR_END,</div><div class="line">       /*静止时：离开唱盘*/</div><div class="line">       IN_FAR_END,</div><div class="line">       /*静止时：贴近唱盘*/</div><div class="line">       IN_NEAR_END</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<p>动画开始时，更新唱针状态：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">public void onAnimationStart(Animator animator) &#123;</div><div class="line">    /**</div><div class="line">     *根据动画开始前NeedleAnimatorStatus的状态，</div><div class="line">     *即可得出动画进行时NeedleAnimatorStatus的状态</div><div class="line">     **/</div><div class="line">    if (needleAnimatorStatus == NeedleAnimatorStatus.IN_FAR_END) &#123;</div><div class="line">        needleAnimatorStatus = NeedleAnimatorStatus.TO_NEAR_END;</div><div class="line">    &#125; else if (needleAnimatorStatus == NeedleAnimatorStatus.IN_NEAR_END) &#123;</div><div class="line">        needleAnimatorStatus = NeedleAnimatorStatus.TO_FAR_END;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>动画结束时，更新唱针状态：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">public void onAnimationEnd(Animator animator) &#123;</div><div class="line">    if (needleAnimatorStatus == NeedleAnimatorStatus.TO_NEAR_END) &#123;</div><div class="line">        needleAnimatorStatus = NeedleAnimatorStatus.IN_NEAR_END;</div><div class="line">        int inde = mVpContain.getCurrentItem();</div><div class="line">        playDiscAnimator(inde);</div><div class="line">    &#125; else if (needleAnimatorStatus == NeedleAnimatorStatus.TO_FAR_END) &#123;</div><div class="line">        needleAnimatorStatus = NeedleAnimatorStatus.IN_FAR_END;</div><div class="line">    &#125;</div><div class="line">｝</div></pre></td></tr></table></figure>
+<p>每种状态都定义清楚，每个动画负责的功能都拆分这样写起来就比较清楚了。<br>　比如需要播放动画时，就包含两个状态：　</p>
+<ul>
+<li>唱针动画暂停中，唱针处于远端。</li>
+<li><p>唱针动画播放中，唱针处于从近端往远端移动</p>
+<p>那么我们调用代码的时候就这么用：</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">/*播放动画*/</div><div class="line">private void playAnimator() &#123;</div><div class="line">    /*唱针处于远端时，直接播放动画*/</div><div class="line">    if (needleAnimatorStatus == NeedleAnimatorStatus.IN_FAR_END) &#123;</div><div class="line">        mNeedleAnimator.start();</div><div class="line">    &#125; </div><div class="line">    /*唱针处于往远端移动时，设置标记，等动画结束后再播放动画*/</div><div class="line">    else if (needleAnimatorStatus == NeedleAnimatorStatus.TO_FAR_END) &#123;</div><div class="line">        mIsNeed2StartPlayAnimator = true;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>至于其他的比较跨组件的界面更新，一般会使用广播，大家也可以使用事件总线（EventBus）.<br>附上源码，这里可能需要大家自己编译。<br>附：<a href="https://github.com/AchillesLzg/jianshu-neteasedisc" target="_blank" rel="external">仿网易云音乐界面源码</a></p>
+    </div>
+    <p class="post-meta">
+        <span class="post-cat">分类：
+            <a class="cat-link" href="/categories/Android/">Android</a>
+        </span>
+        <span class="post-tags">
+            标签：
+            <a href="/tags/Android/" title="Android">Android</a> / 
+    
+        <a href="/tags/高仿/" title="高仿">高仿</a>
+        </span>
+    </p>
+</article>
+<div class="article-share clearfix text-center">
+    <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+</div>
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br>
+        <a href="/2016/05/05/ios gif图片加载框架介绍/">
+            
+                FLAnimatedImage -ios gif图片加载框架介绍
+            
+        </a>
+    </span>
+    
+
+    
+    <span class="next fr">
+        下一篇<br>
+        <a href="/2016/05/01/搭建网站/">
+            
+                搭建网站
+            
+        </a>
+    </span>
+    
+</div>
+<!-- 文章评论 -->
+<div id="comments" class="comments cloud-tie-wrapper"></div>
+    <script>
+    var cloudTieConfig = {
+      url: document.location.href, 
+      sourceId: "高仿网易云音乐",
+      productKey: "c06bb9930e6f4b38a9997cb9bd17aba5",
+      target: "comments"
+    };
+    var yunManualLoad = true;
+    Tie.loader("aHR0cHM6Ly9hcGkuZ2VudGllLjE2My5jb20vcGMvbGl2ZXNjcmlwdC5odG1s", true);
+    </script>
+            </div>
+
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章分类</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+    <li>
+        <a href="/categories/Android/">Android</a>
+        <span class="badge">(10)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Android/系统/">系统</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Angular2/">Angular2</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/React-Native/">React Native</a>
+        <span class="badge">(9)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Java/">Java</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/前端/">前端</a>
+        <span class="badge">(6)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/VR/">VR</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Angular2/前端/">前端</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Spring/">Spring</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/ios/">ios</a>
+        <span class="badge">(7)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Google/">Google</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Google/VR/">VR</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/技术人生/">技术人生</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/小程序/">小程序</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/机器学习/">机器学习</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/android/">android</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/设计模式/">设计模式</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+</ul>
+    </section>
+
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="/tags/Android/" title="Android">Android (7)</a>
+  
+    <a class="tag-item" href="/tags/新特性/" title="新特性">新特性 (2)</a>
+  
+    <a class="tag-item" href="/tags/高仿/" title="高仿">高仿 (4)</a>
+  
+    <a class="tag-item" href="/tags/深入系统/" title="深入系统">深入系统 (1)</a>
+  
+    <a class="tag-item" href="/tags/系统服务/" title="系统服务">系统服务 (1)</a>
+  
+    <a class="tag-item" href="/tags/android/" title="android">android (4)</a>
+  
+    <a class="tag-item" href="/tags/混淆打包/" title="混淆打包">混淆打包 (1)</a>
+  
+    <a class="tag-item" href="/tags/Angular2/" title="Angular2">Angular2 (1)</a>
+  
+    <a class="tag-item" href="/tags/前端开发/" title="前端开发">前端开发 (3)</a>
+  
+    <a class="tag-item" href="/tags/硬件/" title="硬件">硬件 (1)</a>
+  
+    <a class="tag-item" href="/tags/React-Native/" title="React Native">React Native (7)</a>
+  
+    <a class="tag-item" href="/tags/FlexBox布局/" title="FlexBox布局">FlexBox布局 (1)</a>
+  
+    <a class="tag-item" href="/tags/Java/" title="Java">Java (2)</a>
+  
+    <a class="tag-item" href="/tags/垃圾回收/" title="垃圾回收">垃圾回收 (1)</a>
+  
+    <a class="tag-item" href="/tags/Node/" title="Node">Node (2)</a>
+  
+    <a class="tag-item" href="/tags/Google/" title="Google">Google (2)</a>
+  
+    <a class="tag-item" href="/tags/VR/" title="VR">VR (2)</a>
+  
+    <a class="tag-item" href="/tags/OpenGL/" title="OpenGL">OpenGL (1)</a>
+  
+    <a class="tag-item" href="/tags/Promise/" title="Promise">Promise (1)</a>
+  
+    <a class="tag-item" href="/tags/前端/" title="前端">前端 (4)</a>
+  
+    <a class="tag-item" href="/tags/调试/" title="调试">调试 (1)</a>
+  
+    <a class="tag-item" href="/tags/eact-Native/" title="eact Native">eact Native (1)</a>
+  
+    <a class="tag-item" href="/tags/打包/" title="打包">打包 (1)</a>
+  
+    <a class="tag-item" href="/tags/Spring/" title="Spring">Spring (2)</a>
+  
+    <a class="tag-item" href="/tags/入门/" title="入门">入门 (2)</a>
+  
+    <a class="tag-item" href="/tags/原生/" title="原生">原生 (1)</a>
+  
+    <a class="tag-item" href="/tags/ios/" title="ios">ios (7)</a>
+  
+    <a class="tag-item" href="/tags/swift/" title="swift">swift (1)</a>
+  
+    <a class="tag-item" href="/tags/Swift/" title="Swift">Swift (1)</a>
+  
+    <a class="tag-item" href="/tags/AR/" title="AR">AR (1)</a>
+  
+    <a class="tag-item" href="/tags/webpack/" title="webpack">webpack (1)</a>
+  
+    <a class="tag-item" href="/tags/gulp/" title="gulp">gulp (1)</a>
+  
+    <a class="tag-item" href="/tags/Xcode/" title="Xcode">Xcode (2)</a>
+  
+    <a class="tag-item" href="/tags/https/" title="https">https (1)</a>
+  
+    <a class="tag-item" href="/tags/gif/" title="gif">gif (1)</a>
+  
+    <a class="tag-item" href="/tags/mac/" title="mac">mac (1)</a>
+  
+    <a class="tag-item" href="/tags/环境/" title="环境">环境 (1)</a>
+  
+    <a class="tag-item" href="/tags/知识库/" title="知识库">知识库 (1)</a>
+  
+    <a class="tag-item" href="/tags/原理/" title="原理">原理 (1)</a>
+  
+</div>
+    </section>
+    
+
+    
+    <!-- 我的微博 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>我的微博</strong></h3>
+        <div class="widget-bd" style="position: relative">
+  <div id="myWeiboLoading" class="text-center" style="position:absolute;top:0;left:0;right:0;bottom:0;line-height:50px;font-size:12px;background-color:#fff;z-index:9">微博加载中...</div>
+  <iframe width="100%" height="550" class="share_self" frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&amp;width=0&amp;height=550&amp;fansRow=2&amp;ptype=1&amp;speed=0&amp;skin=4&amp;isTitle=1&amp;noborder=1&amp;isWeibo=1&amp;isFans=1&amp;uid=1831462560&amp;verifier=5192ec39&amp;dpc=1"></iframe>
+  <script>
+  (function () {
+    var oMyWeibo = document.getElementById('myWeibo');
+    var oMyWeiboLoading = document.getElementById('myWeiboLoading');
+    var isIE = /msie/i.test(navigator.userAgent) && !window.opera;
+    var timer = null;
+    if (isIE) {
+      oMyWeibo.onreadystatechange = function(){
+        if(oMyWeibo.readyState === 'loaded' || oMyWeibo.readyState === 'complete'){
+          timer = setTimeout(function () {
+            oMyWeiboLoading.parentNode.removeChild(oMyWeiboLoading);
+            timer = null;
+          }, 300);
+        }
+      };
+    } else {
+      oMyWeibo.onload = function () {
+        timer = setTimeout(function () {
+          oMyWeiboLoading.parentNode.removeChild(oMyWeiboLoading);
+          timer = null;
+        }, 300);
+      };
+    }
+  })();
+  </script>
+</div>
+    </section>
+    
+
+    
+    <!-- 友情链接 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>友情链接</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+        <li>
+            <a href="http://blog.csdn.net/xiangzhihong8/" target="_blank" title="csdn个人博客">csdn博客</a>
+        </li>
+    
+        <li>
+            <a href="https://yq.aliyun.com/u/xiangzhihong" target="_blank" title="阿里云技术博客">阿里云博客</a>
+        </li>
+    
+</ul>
+    </section>
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <footer class="footer">
+    &copy;
+    
+        2016-2017
+    
+
+    <a href="/">Jelon Loves You</a>
+</footer>
+<div class="back-to-top" id="JELON__backToTop" title="返回顶部">返回顶部</div>
+<!-- 添加百度自动推送 -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+    <!--博客js脚本 -->
+    <!-- 这里放网站js脚本 -->
+<script src="/js/main.js"></script>
+</body>

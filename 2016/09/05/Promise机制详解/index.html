@@ -1,0 +1,565 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8">
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya">
+    
+    <title>Promise机制详解 | 向志洪</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
+    <meta name="keywords" content="前端, Web, 移动, 向志洪">
+    <meta name="description" content="">
+
+    
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <!--[if lt IE 9]>
+    <script src="/js/html5.js"></script>
+    <![endif]-->
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?fd459238242776d173cdc64918fb32f2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+    
+    <script>var yunModuleEnv = true;</script>
+    <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+    
+</head></html>
+<body class="home">
+    <!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="/">
+                <div class="cover">
+                    <span class="name">向志洪</span>
+                    <span class="description">个人技术博客</span>
+                </div>
+            </a>
+        </div>
+        <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
+        <ul class="menu hidden" id="JELON__menu">
+            
+            <li rel="/2016/09/05/Promise机制详解/index.html" class="item">
+                <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
+            </li>
+            
+            <li rel="/2016/09/05/Promise机制详解/index.html" class="item">
+                <a href="/archives/" title="文章列表" class="icon-lab">&nbsp;文章列表</a>
+            </li>
+            
+            <li rel="/2016/09/05/Promise机制详解/index.html" class="item">
+                <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
+            </li>
+            
+            <li rel="/2016/09/05/Promise机制详解/index.html" class="item">
+                <a href="/404/" title="留言" class="icon-comment">&nbsp;留言</a>
+            </li>
+            
+        </ul>
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        <a href="https://github.com/xiangzhihong" target="_blank">Github</a>
+                        |
+                    
+                        <a href="http://tongji.baidu.com/web/welcome/login" target="_blank">站长统计</a>
+                        |
+                    
+                        <a href="http://weibo.com/code_xzh" target="_blank">新浪微博</a>
+                        |
+                    
+                </p>
+                <p class="sns">
+                    
+                    <a href="javascript: void(0);" class="wechat">
+                        <b>■</b>
+                        公众号
+                        <span class="popover">
+                            <img src="/img/wechat_mp.jpg" width="120" height="120" alt="我的微信订阅号">
+                            <i class="arrow"></i>
+                        </span>
+                    </a>
+                </p>
+                
+            </div>
+            <div class="avatar fr">
+                <img src="http://ohe65w0xx.bkt.clouddn.com/avert.png" alt="avatar" title="Jelon">
+            </div>
+        </div>
+    </section>
+</header>
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+        <section class="content">
+            <div class="content-main widget">
+                <!-- 文章页 -->
+<!-- 文章 -->
+<article class="post article">
+    <header class="text-center">
+        <h3 class="post-title"><span>Promise机制详解</span></h3>
+    </header>
+    <p class="post-meta text-center">
+        xiangzhihong 发表于
+        <time datetime="2016-09-04T16:00:00.000Z">2016-09-05</time>
+    </p>
+    <div class="post-content">
+        <p>Javascript 采用回调函数(callback)来处理异步编程。从同步编程到异步回调编程有一个适应的过程，但是如果出现多层回调嵌套，也就是我们常说的厄运的回调金字塔(Pyramid of Doom)，绝对是一种糟糕的编程体验。于是便有了 CommonJS 的 Promises/A 规范，用于解决回调金字塔问题。</p>
+<h3 id="回调金字塔"><a href="#回调金字塔" class="headerlink" title="回调金字塔"></a>回调金字塔</h3><p>那么何为回调金字塔呢？简单的讲就是回调里面嵌套回调。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">asyncOperation(function(data)&#123;</div><div class="line">  // 处理 `data`</div><div class="line">  anotherAsync(function(data2)&#123;</div><div class="line">      // 处理 `data2`</div><div class="line">      yetAnotherAsync(function()&#123;</div><div class="line">          // 完成</div><div class="line">      &#125;);</div><div class="line">  &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>#Promise简介<br>那么什么是Promise机制呢？Promise代表一个目前还不可用，但是在未来的某个时间点可以被解析的值，它允许以一种同步的方式来编写异步代码。例如，使用Promise API执行异步调用远程服务，但是在发起请求前你并不知道返回的数据对象是什么样子，你可以创建一个Promise对象作为未来某个时间返回的数据对象，在此期间， Promise对象扮演了真实数据的代理角色。<br>例如，使用Promise进行网络请求。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">this.AsyncFunction(para).then(</div><div class="line">            (para)=&gt;&#123;</div><div class="line">             // 处理成功的事件</div><div class="line">            &#125;</div><div class="line">        ).catch(</div><div class="line">            (error)=&gt;&#123;</div><div class="line">             // 处理失败的事件</div><div class="line">            &#125; )</div></pre></td></tr></table></figure>
+<p>Promises 将嵌套的 callback ，改造成一系列的.then的连缀调用，去除了层层缩进的糟糕代码风格。 Promises 不是一种解决具体问题的算法，而已一种更好的代码组织模式。接受新的组织模式同时，也逐渐以全新的视角来理解异步调用。</p>
+<h2 id="Then-方法"><a href="#Then-方法" class="headerlink" title="Then 方法"></a>Then 方法</h2><p>一个 promise 必须提供一个 then 方法以访问其当前值、终值和据因。promise 的 then 方法接受两个参数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">promise.then(onFulfilled, onRejected)</div></pre></td></tr></table></figure>
+<p>onFulfilled 和 onRejected 都是可选参数。如果 onFulfilled和onRejected 不是函数，其必须被忽略。onFulfilled和onRejected必须在执行后才能被调用，并且只能调用一次。</p>
+<p>then 方法可以被同一个 promise 调用多次。当 promise 成功执行时，所有 onFulfilled 需按照其注册顺序依次回调；当 promise 被拒绝执行时，所有的 onRejected 需按照其注册顺序依次回调。</p>
+<p>then 方法必须返回一个 promise 对象 。即：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">promise2 = promise1.then(onFulfilled, onRejected);</div></pre></td></tr></table></figure>
+<p>如果 onFulfilled 或者 onRejected 返回一个值 x ，则运行下面的 Promise 解决过程：<a href="promise2, x">[Resolve]</a>。</p>
+<h3 id="Promise-解决过程"><a href="#Promise-解决过程" class="headerlink" title="Promise 解决过程"></a>Promise 解决过程</h3><p>Promise 解决过程是一个抽象的操作，其需输入一个 promise 和一个值，我们表示为 <a href="promise, x">[Resolve]</a>，如果 x 有 then 方法且看上去像一个 Promise ，解决程序即尝试使 promise 接受 x 的状态；否则其用 x 的值来执行 promise 。</p>
+<p>这种 thenable 的特性使得 Promise 的实现更具有通用性：只要其暴露出一个遵循 Promise/A+ 协议的 then 方法即可；这同时也使遵循 Promise/A+ 规范的实现可以与那些不太规范但可用的实现能良好共存。</p>
+<p>运行 <a href="promise, x">[Resolve]</a> 需遵循以下步骤：</p>
+<h4 id="x-与-promise-相等"><a href="#x-与-promise-相等" class="headerlink" title="x 与 promise 相等"></a>x 与 promise 相等</h4><p>如果 promise 和 x 指向同一对象，以 TypeError 为据因拒绝执行 promise</p>
+<h4 id="x-为-Promise"><a href="#x-为-Promise" class="headerlink" title="x 为 Promise"></a>x 为 Promise</h4><p>如果 x 为 Promise ，则使 promise 接受 x 的状态 ：</p>
+<ul>
+<li>如果 x 处于等待态， promise 需保持为等待态直至 x 被执行或拒绝</li>
+<li>如果 x 处于执行态，用相同的值执行 promise</li>
+<li>如果 x 处于拒绝态，用相同的据因拒绝 promise x 为对象或函数</li>
+</ul>
+<h4 id="如果-x-为对象或者函数："><a href="#如果-x-为对象或者函数：" class="headerlink" title="如果 x 为对象或者函数："></a>如果 x 为对象或者函数：</h4><p>把 x.then 赋值给 then </p>
+<ul>
+<li>如果取 x.then 的值时抛出错误 e ，则以 e 为据因拒绝 promise</li>
+<li>如果 then 是函数，将 x 作为函数的作用域 this 调用之。传递两个回调函数作为参数，第一个参数叫做 resolvePromise<br>，第二个参数叫做 rejectPromise:</li>
+<li>如果 resolvePromise 以值 y 为参数被调用，则运行 <a href="promise, y">[Resolve]</a></li>
+<li>如果 rejectPromise 以据因 r 为参数被调用，则以据因 r 拒绝 promise</li>
+<li>如果 resolvePromise 和 rejectPromise 均被调用，或者被同一参数调用了多次，则优先采用首次调用并忽略剩下的调用<br>如果调用 then 方法抛出了异常 e：</li>
+<li>如果 resolvePromise 或 rejectPromise 已经被调用，则忽略之 否则以 e 为据因拒绝 promise</li>
+<li>如果 then 不是函数，以 x 为参数执行 promise</li>
+<li>如果 x 不为对象或者函数，以 x 为参数执行 promise</li>
+</ul>
+<p>如果一个 promise 被一个循环的 thenable 链中的对象解决，而 <a href="promise, thenable">[Resolve]</a> 的递归性质又使得其被再次调用，根据上述的算法将会陷入无限递归之中。算法虽不强制要求，但也鼓励施者检测这样的递归是否存在，若检测到存在则以一个可识别的 TypeError 为据因来拒绝 promise </p>
+<h1 id="Promises规范"><a href="#Promises规范" class="headerlink" title="Promises规范"></a>Promises规范</h1><p>到目前为止Promises指定了A、B、D、A+…版本。</p>
+<h2 id="Promises-A"><a href="#Promises-A" class="headerlink" title="Promises /A"></a>Promises /A</h2><p>promise 表示一个最终值，该值由操作完成时返回。<br>promise 有三种状态：未完成 (unfulfilled)，完成 (fulfilled) 和失败 (failed)。<br>promise 的状态只能由未完成转换成完成，或者未完成转换成失败 。<br>promise 的状态转换只发生一次。<br>promise 有一个 then 方法， then 方法可以接受 3 个函数作为参数。前两个函数对应 promise 的两种状态 fulfilled 和 rejected 的回调函数。第三个函数用于处理进度信息（对进度回调的支持是可选的）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">promiseSomething().then(function(fulfilled)&#123;</div><div class="line">        //当 promise 状态变成 fulfilled 时，调用此函数</div><div class="line">    &#125;,function(rejected)&#123;</div><div class="line">        //当 promise 状态变成 rejected 时，调用此函数</div><div class="line">    &#125;,function(progress)&#123;</div><div class="line">        //当返回进度信息时，调用此函数</div><div class="line">    &#125;);</div></pre></td></tr></table></figure>
+<h2 id="Promises-B"><a href="#Promises-B" class="headerlink" title="Promises/B"></a>Promises/B</h2><p>在 Promises/A 的基础上， Promises/B 定义了一组 promise 模块需要实现的 API：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">when(value, callback, errback_opt)</div></pre></td></tr></table></figure>
+<p>如果 value 不是一个 promise ，那么下一事件循环 callback 会被调用， value 作为 callback 的传入值。如果 value 是一个 promise ， promise 的状态已经完成或者变成完成时，那么下一事件循环 callback 会被调用， resolve 的值会被传入 callback ； promise 的状态已经失败或者变成失败时，那么下一事件循环 errback 会被调用， reason 会作为失败的理由传入 errback 。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">asap(value, callback, errback_opt)</div></pre></td></tr></table></figure>
+<p>与 when 最大的区别，如果 value 不是一个 promise ，会被立即执行，不会等到下一事件循环。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">enqueue(task Function)</div></pre></td></tr></table></figure>
+<p>尽可能快地在接下来的事件循环调用 task 方法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">get(object, name)</div></pre></td></tr></table></figure>
+<p>返回一个获得对象属性的 promise 。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">post(object, name, args)</div></pre></td></tr></table></figure>
+<p>返回一个调用对象方法的 promise 。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">put(object, name, value)</div></pre></td></tr></table></figure>
+<p>返回一个修改对象属性的 promise 。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">del(object, name)</div></pre></td></tr></table></figure>
+<p>返回一个删除对象属性的 promise 。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">makePromise(descriptor Object, fallback Function)</div></pre></td></tr></table></figure>
+<p>返回一个 promise 对象，该对象必须是一个可调用的函数，也可能是可被实例化的构造函数。</p>
+<p>综合示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">       &quot;when&quot;: function(errback)&#123;...&#125;,</div><div class="line">       &quot;get&quot;: function(name)&#123;...&#125;,</div><div class="line">       &quot;put&quot;: function(name, value)&#123;...&#125;,</div><div class="line">       &quot;post&quot;: function(name, args)&#123;...&#125;,</div><div class="line">       &quot;del&quot;: function(name)&#123;...&#125;,</div><div class="line">   &#125;</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">defer()</div></pre></td></tr></table></figure>
+<p>返回一个对象，该对象包含一个 resolve(value) 方法和一个 promise 属性。<br>当 resolve(value) 方法被第一次调用时， promise 属性的状态变成 完成，所有之前或之后观察该 promise 的 promise 的状态都被转变成 完成。 value 参数如果不是一个 promise ，会被包装成一个 promise 的 ref 。 resolve 方法会忽略之后的所有调用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">reject(reason String)</div></pre></td></tr></table></figure>
+<p>返回一个被标记为 失败 的 promise 。<br>一个失败的 promise 上被调用 when(message) 方法时，会采用如下两种方法之一</p>
+<ol>
+<li>如果存在 errback ， errback 会以 reason 作为参数被调用。 when 方法会将 errback 的返回值返回。</li>
+<li>如果不存在 errback ， when 方法返回一个新的 reject 状态的 promise 对象，以同一 reason 作为参数。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ref(value)</div></pre></td></tr></table></figure>
+<p>如果 value 是 promise 对象，返回 value 本身。否则，返回一个 resolved 的 promise ，携带如下 handle 。</p>
+<ol>
+<li>when(errback),忽略 errback ，返回 resolved 值</li>
+<li>get(name)，返回 resolved 值的对应属性。</li>
+<li>put(name, value) ，设置 resolved 值的对应属性。</li>
+<li>del(name)，删除 resolved 值的对应属性。</li>
+<li>post(name, args), 调用 resolved 值的对应方法。</li>
+<li>其他所有的调用都返回一个 reject ，并携带 “Promise does not handle NAME” 的理由。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">isPromise(value) Boolean</div></pre></td></tr></table></figure>
+<p>判断一个对象是否是 promise。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">method(name String)</div></pre></td></tr></table></figure>
+<p>获得一个返回 name 对应方法的 promise 。返回值是 “get”, “put”, “del” 和 “post” 对应的方法，但是会在下一事件循环返回。</p>
+<h2 id="Promises-D"><a href="#Promises-D" class="headerlink" title="Promises/D"></a>Promises/D</h2><p>为了增加不同 promise 实现之间的可互操作性， Promises/D 规范对 promise 对象和 Promises/B 规范做了进一步的约定。以达到鸭子类型的效果（ Duck-type Promise ）。简单来说 Promises/D 规范，做了两件事情：</p>
+<ol>
+<li>如何判断一个对象是 Promise 类型。</li>
+<li>对 Promises/B 规范进行细节补充。</li>
+</ol>
+<h3 id="判断Promise-对象"><a href="#判断Promise-对象" class="headerlink" title="判断Promise 对象"></a>判断Promise 对象</h3><p>Promise 对象必须是实现 promiseSend 方法。</p>
+<ol>
+<li>在 promise 库上下文中，如果对象包含 promiseSend 方法就可以甄别为 promise 对象</li>
+<li><p>promiseSend 方法必须接受一个操作名称，作为第一个参数 操作名称是一个可扩展的集合，下面是一些保留名称:</p>
+<p>when，此时第三个参数必须是 rejection 回调。<br>rejection 回调必须接受一个 rejection 原因(可以是任何值)作为第一个参数<br>get，此时第三个参数为属性名（字符串类型）<br>put，此时第三个参数为属性名（字符串类型）,第四个参数为新属性值。<br>del，此时第三个参数为属性名<br>post，此时第三个参数为方法的属性名，接下来的变参为方法的调用参数<br>isDef</p>
+</li>
+<li>promiseSend方法的第二个参数为 resolver 方法</li>
+<li>promiseSend方法可能接受变参</li>
+<li>promiseSend方法必须返回undefined</li>
+</ol>
+<h2 id="Promises-A-1"><a href="#Promises-A-1" class="headerlink" title="Promises/A+"></a>Promises/A+</h2><p>前面提到的 Promises/A/B/D 规范都是有 CommonJS 组织提出的， Promises/A+是有一个自称为Promises/A+ 组织发布的，该规范是以 Promises/A 作为基础进行补充和修订，旨在提高 promise 实现之间的可互操作性。</p>
+<p>Promises/A+ 对.then方法进行细致的补充，定义了细致的Promise Resolution Procedure流程，并且将.then方法作为 promise 的对象甄别方法。此外， Promises/A+ 还提供了兼容性测试工具，以确定各个实现的兼容性。</p>
+<h3 id="Promise判断"><a href="#Promise判断" class="headerlink" title="Promise判断"></a>Promise判断</h3><p><strong>状态机</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">var PENDING = 0;</div><div class="line">var FULFILLED = 1;</div><div class="line">var REJECTED = 2;</div><div class="line"></div><div class="line">function Promise() &#123;</div><div class="line">  // store state which can be PENDING, FULFILLED or REJECTED</div><div class="line">  var state = PENDING;</div><div class="line"></div><div class="line">  // store value or error once FULFILLED or REJECTED</div><div class="line">  var value = null;</div><div class="line"></div><div class="line">  // store sucess &amp; failure handlers attached by calling .then or .done</div><div class="line">  var handlers = [];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>状态变迁</strong><br>仅支持两种状态变迁， fulfill 和 reject。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">function Promise() &#123;</div><div class="line">    // ...</div><div class="line"></div><div class="line">  function fulfill(result) &#123;</div><div class="line">    state = FULFILLED;</div><div class="line">    value = result;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  function reject(error) &#123;</div><div class="line">    state = REJECTED;</div><div class="line">    value = error;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>fulfill 和 reject 方法较为底层，通常更高级的 resolve 方法开放给外部。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">function Promise() &#123;</div><div class="line"></div><div class="line">  // ...</div><div class="line"></div><div class="line">  function resolve(result) &#123;</div><div class="line">    try &#123;</div><div class="line">      var then = getThen(result);</div><div class="line">      if (then) &#123;</div><div class="line">        doResolve(then.bind(result), resolve, reject)</div><div class="line">        return</div><div class="line">      &#125;</div><div class="line">      fulfill(result);</div><div class="line">    &#125; catch (e) &#123;</div><div class="line">      reject(e);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>resolve 方法可以接受一个普通值或者另一个 promise 作为参数，如果接受一个 promise 作为参数，等待其完成。 promise 不允许被另一个 promise fulfill ，所以需要开放 resolve 方法。 resolve 方法依赖一些帮助方法定义如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">function getThen(value) &#123;</div><div class="line">  var t = typeof value;</div><div class="line">  if (value &amp;&amp; (t === &apos;object&apos; || t === &apos;function&apos;)) &#123;</div><div class="line">    var then = value.then;</div><div class="line">    if (typeof then === &apos;function&apos;) &#123;</div><div class="line">      return then;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  return null;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">function doResolve(fn, onFulfilled, onRejected) &#123;</div><div class="line">  var done = false;</div><div class="line">  try &#123;</div><div class="line">    fn(function (value) &#123;</div><div class="line">      if (done) return</div><div class="line">      done = true</div><div class="line">      onFulfilled(value)</div><div class="line">    &#125;, function (reason) &#123;</div><div class="line">      if (done) return</div><div class="line">      done = true</div><div class="line">      onRejected(reason)</div><div class="line">    &#125;)</div><div class="line">  &#125; catch (ex) &#123;</div><div class="line">    if (done) return</div><div class="line">    done = true</div><div class="line">    onRejected(ex)</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里 resolve 和 doResolve 之间的递归很巧妙，用来处理 promise 的层层嵌套（ promise 的 value 是一个 promise ）。</p>
+<p><strong>构造器</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">function Promise(fn) &#123;</div><div class="line">    // ...</div><div class="line">    doResolve(fn, resolve, reject);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>.done 方法</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">function Promise(fn) &#123;</div><div class="line">  // ...</div><div class="line"></div><div class="line">  function handle(handler) &#123;</div><div class="line">    if (state === PENDING) &#123;</div><div class="line">      handlers.push(handler);</div><div class="line">    &#125; else &#123;</div><div class="line">      if (state === FULFILLED &amp;&amp;</div><div class="line">        typeof handler.onFulfilled === &apos;function&apos;) &#123;</div><div class="line">        handler.onFulfilled(value);</div><div class="line">      &#125;</div><div class="line">      if (state === REJECTED &amp;&amp;</div><div class="line">        typeof handler.onRejected === &apos;function&apos;) &#123;</div><div class="line">        handler.onRejected(value);</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  this.done = function (onFulfilled, onRejected) &#123;</div><div class="line">    // ensure we are always asynchronous</div><div class="line">    setTimeout(function () &#123;</div><div class="line">      handle(&#123;</div><div class="line">        onFulfilled: onFulfilled,</div><div class="line">        onRejected: onRejected</div><div class="line">      &#125;);</div><div class="line">    &#125;, 0);</div><div class="line">  &#125;</div><div class="line">  // ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>.then 方法</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">function Promise(fn) &#123;</div><div class="line">    // ...</div><div class="line">    this.then = function (onFulfilled, onRejected) &#123;</div><div class="line">      var self = this;</div><div class="line">      return new Promise(function (resolve, reject) &#123;</div><div class="line">        return self.done(function (result) &#123;</div><div class="line">          if (typeof onFulfilled === &apos;function&apos;) &#123;</div><div class="line">            try &#123;</div><div class="line">              return resolve(onFulfilled(result));</div><div class="line">            &#125; catch (ex) &#123;</div><div class="line">              return reject(ex);</div><div class="line">            &#125;</div><div class="line">          &#125; else &#123;</div><div class="line">            return resolve(result);</div><div class="line">          &#125;</div><div class="line">        &#125;, function (error) &#123;</div><div class="line">          if (typeof onRejected === &apos;function&apos;) &#123;</div><div class="line">            try &#123;</div><div class="line">              return resolve(onRejected(error));</div><div class="line">            &#125; catch (ex) &#123;</div><div class="line">              return reject(ex);</div><div class="line">            &#125;</div><div class="line">          &#125; else &#123;</div><div class="line">            return reject(error);</div><div class="line">          &#125;</div><div class="line">        &#125;);</div><div class="line">      &#125;);</div><div class="line">    &#125;</div><div class="line">    // ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>jQuery 1.8 之前的版本， jQuery 的 then 方法只是一种可以同时调用 done 、 fail 和 progress 这三种回调的速写方法，而 Promises/A 规范的 then 在行为上更像是 jQuery 的 pipe 。 jQuery 1.8 修正了这个问题，使 then 成为 pipe 的同义词。不过，由于向后兼容的问题， jQuery 的 Promise 再如何对 Promises/A 示好也不太会招人待见。</p>
+<p>此外，在 Promises/A 规范中，由 then 方法生成的 Promise 对象是已执行还是已拒绝，取决于由 then 方法调用的那个回调是返回值还是抛出错误。在 JQuery 的 Promise 对象的回调中抛出错误是个糟糕的主意，因为错误不会被捕获。<br>最后一个例子揭示了，实现 Promise 的关键是实现好 doResolve 方法，在完事以后触发回调。而为了保证异步 setTimeout(fun, 0); 是关键一步。</p>
+<p>附：<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise" target="_blank" rel="external">Promise</a></p>
+    </div>
+    <p class="post-meta">
+        <span class="post-cat">分类：
+            <a class="cat-link" href="/categories/前端/">前端</a>
+        </span>
+        <span class="post-tags">
+            标签：
+            <a href="/tags/Promise/" title="Promise">Promise</a> / 
+    
+        <a href="/tags/前端/" title="前端">前端</a>
+        </span>
+    </p>
+</article>
+<div class="article-share clearfix text-center">
+    <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+</div>
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br>
+        <a href="/2016/09/06/React Native开发调试/">
+            
+                React Native程序调试
+            
+        </a>
+    </span>
+    
+
+    
+    <span class="next fr">
+        下一篇<br>
+        <a href="/2016/09/05/ios高仿斗鱼app/">
+            
+                高仿ios斗鱼界面
+            
+        </a>
+    </span>
+    
+</div>
+<!-- 文章评论 -->
+<div id="comments" class="comments cloud-tie-wrapper"></div>
+    <script>
+    var cloudTieConfig = {
+      url: document.location.href, 
+      sourceId: "Promise机制详解",
+      productKey: "c06bb9930e6f4b38a9997cb9bd17aba5",
+      target: "comments"
+    };
+    var yunManualLoad = true;
+    Tie.loader("aHR0cHM6Ly9hcGkuZ2VudGllLjE2My5jb20vcGMvbGl2ZXNjcmlwdC5odG1s", true);
+    </script>
+            </div>
+
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章分类</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+    <li>
+        <a href="/categories/Android/">Android</a>
+        <span class="badge">(10)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Android/系统/">系统</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Angular2/">Angular2</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/React-Native/">React Native</a>
+        <span class="badge">(9)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Java/">Java</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/前端/">前端</a>
+        <span class="badge">(6)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/VR/">VR</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Angular2/前端/">前端</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Spring/">Spring</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/ios/">ios</a>
+        <span class="badge">(7)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Google/">Google</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Google/VR/">VR</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/技术人生/">技术人生</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/小程序/">小程序</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/机器学习/">机器学习</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/android/">android</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/设计模式/">设计模式</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+</ul>
+    </section>
+
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="/tags/Android/" title="Android">Android (7)</a>
+  
+    <a class="tag-item" href="/tags/新特性/" title="新特性">新特性 (2)</a>
+  
+    <a class="tag-item" href="/tags/高仿/" title="高仿">高仿 (4)</a>
+  
+    <a class="tag-item" href="/tags/深入系统/" title="深入系统">深入系统 (1)</a>
+  
+    <a class="tag-item" href="/tags/系统服务/" title="系统服务">系统服务 (1)</a>
+  
+    <a class="tag-item" href="/tags/android/" title="android">android (4)</a>
+  
+    <a class="tag-item" href="/tags/混淆打包/" title="混淆打包">混淆打包 (1)</a>
+  
+    <a class="tag-item" href="/tags/Angular2/" title="Angular2">Angular2 (1)</a>
+  
+    <a class="tag-item" href="/tags/前端开发/" title="前端开发">前端开发 (3)</a>
+  
+    <a class="tag-item" href="/tags/硬件/" title="硬件">硬件 (1)</a>
+  
+    <a class="tag-item" href="/tags/React-Native/" title="React Native">React Native (7)</a>
+  
+    <a class="tag-item" href="/tags/FlexBox布局/" title="FlexBox布局">FlexBox布局 (1)</a>
+  
+    <a class="tag-item" href="/tags/Java/" title="Java">Java (2)</a>
+  
+    <a class="tag-item" href="/tags/垃圾回收/" title="垃圾回收">垃圾回收 (1)</a>
+  
+    <a class="tag-item" href="/tags/Node/" title="Node">Node (2)</a>
+  
+    <a class="tag-item" href="/tags/Google/" title="Google">Google (2)</a>
+  
+    <a class="tag-item" href="/tags/VR/" title="VR">VR (2)</a>
+  
+    <a class="tag-item" href="/tags/OpenGL/" title="OpenGL">OpenGL (1)</a>
+  
+    <a class="tag-item" href="/tags/Promise/" title="Promise">Promise (1)</a>
+  
+    <a class="tag-item" href="/tags/前端/" title="前端">前端 (4)</a>
+  
+    <a class="tag-item" href="/tags/调试/" title="调试">调试 (1)</a>
+  
+    <a class="tag-item" href="/tags/eact-Native/" title="eact Native">eact Native (1)</a>
+  
+    <a class="tag-item" href="/tags/打包/" title="打包">打包 (1)</a>
+  
+    <a class="tag-item" href="/tags/Spring/" title="Spring">Spring (2)</a>
+  
+    <a class="tag-item" href="/tags/入门/" title="入门">入门 (2)</a>
+  
+    <a class="tag-item" href="/tags/原生/" title="原生">原生 (1)</a>
+  
+    <a class="tag-item" href="/tags/ios/" title="ios">ios (7)</a>
+  
+    <a class="tag-item" href="/tags/swift/" title="swift">swift (1)</a>
+  
+    <a class="tag-item" href="/tags/Swift/" title="Swift">Swift (1)</a>
+  
+    <a class="tag-item" href="/tags/AR/" title="AR">AR (1)</a>
+  
+    <a class="tag-item" href="/tags/webpack/" title="webpack">webpack (1)</a>
+  
+    <a class="tag-item" href="/tags/gulp/" title="gulp">gulp (1)</a>
+  
+    <a class="tag-item" href="/tags/Xcode/" title="Xcode">Xcode (2)</a>
+  
+    <a class="tag-item" href="/tags/https/" title="https">https (1)</a>
+  
+    <a class="tag-item" href="/tags/gif/" title="gif">gif (1)</a>
+  
+    <a class="tag-item" href="/tags/mac/" title="mac">mac (1)</a>
+  
+    <a class="tag-item" href="/tags/环境/" title="环境">环境 (1)</a>
+  
+    <a class="tag-item" href="/tags/知识库/" title="知识库">知识库 (1)</a>
+  
+    <a class="tag-item" href="/tags/原理/" title="原理">原理 (1)</a>
+  
+</div>
+    </section>
+    
+
+    
+    <!-- 我的微博 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>我的微博</strong></h3>
+        <div class="widget-bd" style="position: relative">
+  <div id="myWeiboLoading" class="text-center" style="position:absolute;top:0;left:0;right:0;bottom:0;line-height:50px;font-size:12px;background-color:#fff;z-index:9">微博加载中...</div>
+  <iframe width="100%" height="550" class="share_self" frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&amp;width=0&amp;height=550&amp;fansRow=2&amp;ptype=1&amp;speed=0&amp;skin=4&amp;isTitle=1&amp;noborder=1&amp;isWeibo=1&amp;isFans=1&amp;uid=1831462560&amp;verifier=5192ec39&amp;dpc=1"></iframe>
+  <script>
+  (function () {
+    var oMyWeibo = document.getElementById('myWeibo');
+    var oMyWeiboLoading = document.getElementById('myWeiboLoading');
+    var isIE = /msie/i.test(navigator.userAgent) && !window.opera;
+    var timer = null;
+    if (isIE) {
+      oMyWeibo.onreadystatechange = function(){
+        if(oMyWeibo.readyState === 'loaded' || oMyWeibo.readyState === 'complete'){
+          timer = setTimeout(function () {
+            oMyWeiboLoading.parentNode.removeChild(oMyWeiboLoading);
+            timer = null;
+          }, 300);
+        }
+      };
+    } else {
+      oMyWeibo.onload = function () {
+        timer = setTimeout(function () {
+          oMyWeiboLoading.parentNode.removeChild(oMyWeiboLoading);
+          timer = null;
+        }, 300);
+      };
+    }
+  })();
+  </script>
+</div>
+    </section>
+    
+
+    
+    <!-- 友情链接 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>友情链接</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+        <li>
+            <a href="http://blog.csdn.net/xiangzhihong8/" target="_blank" title="csdn个人博客">csdn博客</a>
+        </li>
+    
+        <li>
+            <a href="https://yq.aliyun.com/u/xiangzhihong" target="_blank" title="阿里云技术博客">阿里云博客</a>
+        </li>
+    
+</ul>
+    </section>
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <footer class="footer">
+    &copy;
+    
+        2016-2017
+    
+
+    <a href="/">Jelon Loves You</a>
+</footer>
+<div class="back-to-top" id="JELON__backToTop" title="返回顶部">返回顶部</div>
+<!-- 添加百度自动推送 -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+    <!--博客js脚本 -->
+    <!-- 这里放网站js脚本 -->
+<script src="/js/main.js"></script>
+</body>

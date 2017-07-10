@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8">
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya">
+    
+    <title>搭建网站 | 向志洪</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
+    <meta name="keywords" content="前端, Web, 移动, 向志洪">
+    <meta name="description" content="">
+
+    
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <!--[if lt IE 9]>
+    <script src="/js/html5.js"></script>
+    <![endif]-->
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?fd459238242776d173cdc64918fb32f2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+    
+    <script>var yunModuleEnv = true;</script>
+    <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+    
+</head></html>
+<body class="home">
+    <!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="/">
+                <div class="cover">
+                    <span class="name">向志洪</span>
+                    <span class="description">个人技术博客</span>
+                </div>
+            </a>
+        </div>
+        <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
+        <ul class="menu hidden" id="JELON__menu">
+            
+            <li rel="/2016/05/01/搭建网站/index.html" class="item">
+                <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
+            </li>
+            
+            <li rel="/2016/05/01/搭建网站/index.html" class="item">
+                <a href="/archives/" title="文章列表" class="icon-lab">&nbsp;文章列表</a>
+            </li>
+            
+            <li rel="/2016/05/01/搭建网站/index.html" class="item">
+                <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
+            </li>
+            
+            <li rel="/2016/05/01/搭建网站/index.html" class="item">
+                <a href="/404/" title="留言" class="icon-comment">&nbsp;留言</a>
+            </li>
+            
+        </ul>
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        <a href="https://github.com/xiangzhihong" target="_blank">Github</a>
+                        |
+                    
+                        <a href="http://tongji.baidu.com/web/welcome/login" target="_blank">站长统计</a>
+                        |
+                    
+                        <a href="http://weibo.com/code_xzh" target="_blank">新浪微博</a>
+                        |
+                    
+                </p>
+                <p class="sns">
+                    
+                    <a href="javascript: void(0);" class="wechat">
+                        <b>■</b>
+                        公众号
+                        <span class="popover">
+                            <img src="/img/wechat_mp.jpg" width="120" height="120" alt="我的微信订阅号">
+                            <i class="arrow"></i>
+                        </span>
+                    </a>
+                </p>
+                
+            </div>
+            <div class="avatar fr">
+                <img src="http://ohe65w0xx.bkt.clouddn.com/avert.png" alt="avatar" title="Jelon">
+            </div>
+        </div>
+    </section>
+</header>
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+        <section class="content">
+            <div class="content-main widget">
+                <!-- 文章页 -->
+<!-- 文章 -->
+<article class="post article">
+    <header class="text-center">
+        <h3 class="post-title"><span>搭建网站</span></h3>
+    </header>
+    <p class="post-meta text-center">
+        xiangzhihong 发表于
+        <time datetime="2016-04-30T16:00:00.000Z">2016-05-01</time>
+    </p>
+    <div class="post-content">
+        <p>环境</p>
+<p>Windows 10（64 位）<br>Git-2.7.4-64-bit<br>node-v4.4.7-x64<br>如果上述软件已经安装的，跳过，没有安装的下载安装。<br>1，git下载安装（<a href="https://git-for-windows.github.io/）" target="_blank" rel="external">https://git-for-windows.github.io/）</a></p>
+<p>2，node下载安装（<a href="https://nodejs.org/en/）" target="_blank" rel="external">https://nodejs.org/en/）</a></p>
+<p>3.安装npm工具（这里可以先不安装，我是之前做RN，所以已经安装好了）<br>4，验证安装是否成功。<br>     为了验证是否安装成功，我们在dos桌面输入如下的命令：<br>     git –version<br>     node -v<br>     npm –v<br>   出现如下表示成功</p>
+<p>Github Pages</p>
+<p>Github Pages免费的静态站点，其特点：免费托管、自带主题、支持自制页面等。<br>创建Github Pages比较简单，只要你有一个github账号在创建一个仓库就行了，但是这个仓库是有规则的，其格式必须为：yourusername.github.io。然后根据提示一直下一步即可，非常简单。</p>
+<p>github项目创建完成，点击“Continue to layouts”，点击发布个人网站，我们网站就好了，不过这是一个github.io结尾的。</p>
+<p>Hexo<br>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。官网也是搭建在GitHub上。在电脑上新建一个blog文件夹,一般放在非c盘（非系统盘），该文件夹用于存放你的博客文件,然后右键单击选择“Git Bash”（你也可以打开hexo官网（<a href="https://hexo.io/zh-cn/）按提示的步骤来）。" target="_blank" rel="external">https://hexo.io/zh-cn/）按提示的步骤来）。</a></p>
+<p>•npm install hexo-cli -g<br>•hexo init blog<br>•cd blog<br>•npm install<br>•hexo server</p>
+<p>现在我们启动 hexo 本地服务，看下默认的博客是怎样的，命令：hexo server<br>现在用浏览器访问：<a href="http://localhost:4000/，效果如下图" target="_blank" rel="external">http://localhost:4000/，效果如下图</a></p>
+<p>选用其他主题</p>
+<p>由于默认主题太大众了，所以现在我们换个主题。你可以去这里找主题：</p>
+<p>exo-theme：<a href="https://hexo.io/themes/" target="_blank" rel="external">https://hexo.io/themes/</a><br>hexo-github-theme-list：<a href="https://github.com/hexojs/hexo/wiki/Themes" target="_blank" rel="external">https://github.com/hexojs/hexo/wiki/Themes</a><br>有那些好看的hexo主题？：<a href="http://www.zhihu.com/question/24422335" target="_blank" rel="external">http://www.zhihu.com/question/24422335</a></p>
+<p>我这里选择的 yelee：<a href="https://github.com/MOxFIVE/hexo-theme-yelee，如果你自己懂css.js，你可以自己写。输入命令：git" target="_blank" rel="external">https://github.com/MOxFIVE/hexo-theme-yelee，如果你自己懂css.js，你可以自己写。输入命令：git</a> clone <a href="https://github.com/MOxFIVE/hexo-theme-yelee.git" target="_blank" rel="external">https://github.com/MOxFIVE/hexo-theme-yelee.git</a> themes/yelee </p>
+<p>找到_config.yml，把对应的主题目录名改下。</p>
+<p>修改完成后，我们使用下面命令重新生成静态博客的所有内容：hexo generate，然后重启 hexo 本地服务：hexo server。</p>
+<p>部署代码到github pages</p>
+<p>创建好仓库之后，要本地生成 SSH 秘钥，方便电脑上的 git 软件好提交内容到 Github 上，其实也可以不生成本地的ssh，可以直接用命令或者工具上传代码（这个纯命令提交可以参考之前的博客点击打开链接），在 Git Bash 中，输入：ssh-keygen -t rsa -C “你的邮箱地址”，然后回车，回车，再回车，一共 3 次回车。</p>
+<p>访问：<a href="https://github.com/settings/ssh，添加新秘钥" target="_blank" rel="external">https://github.com/settings/ssh，添加新秘钥</a></p>
+<p>访接下来就是将本地的静态博客部署到gitHub上，要把本地的静态博客同步到 Github，我们还需要先安装两个跟部署相关的 hexo 插件，可以实现如下命令：<br>npm install hexo -server –save<br>npm install hexo-deployer-git –save<br>编辑全局 hexo 的配置文件：_config.yml，这块可以参照网上的。<br>编辑全局配置后我们需要重新部署：<br>先清除掉已经生成的旧文件：hexo clean<br>再生成一次静态文件：hexo generate<br>在本地预览下：hexo server<br>本地没问题之后，Ctrl + C 停掉本地预览，使用部署命令部署到 Github 上：hexo deploy，有弹出下面提示框，请输入：yes</p>
+<p>然后访问服务器地址进行检查：<a href="http://xiangzhihong.github.io" target="_blank" rel="external">http://xiangzhihong.github.io</a></p>
+<p>通过上面几次流程我们也就可以总结：以后，每次发表新文章要部署都按这样的流程来：<br>hexo clean<br>hexo generate<br>hexo deploy<br>github pages绑定域名</p>
+<p>绑定域名，这块比较坑，我参照网上很多的都没弄明白，这里是我摸索的一个方法。阿里云（万网）+github域名绑定。<br>购买域名</p>
+<p>首先是在阿里云上购买域名，大家也可以上其实的域名交易平台购买。</p>
+<p>域名解析</p>
+<p>在阿里云管理控制台中,选择【域名】》【域名列表】》【全部域名】中刚刚购买的域名,点击解析按钮<br>这时会提醒你选择解析到阿里云主机,或者其他主机,这时需要将你在Github上创建的Github Pages的域名 xxx.github.io进行查询,得到一个IP地址。<br>admindeMacBook-Pro:blog admin$ ping xxx.github.io<br>PING prod.github.map.fastlylb.net (151.101.100.133): 56 data bytes<br>Request timeout for icmp_seq 0<br>64 bytes from 151.101.100.133: icmp_seq=1 ttl=47 time=69.632 ms</p>
+<p>这里需要说明下，这里151.101.100.133是我的github的地址（就是xiangzhihong.github.io地址，你也可以ping自己的xx.github.io）.</p>
+<p>如果你不会填，直接点上门的新手引导设置就好了。<br>Github解析</p>
+<p>在Github的xxx.github.io项目,进入【Settings】标签页,在【Custom domain】功能中,将刚刚申请的域名写进去。</p>
+<p>备注：这里也可以用另一个工具去解析DNSPOD 。<br>设置好后，过一会就可以访问了，反正我的是很快，点击打开链接</p>
+<p>整合 IntelliJ IDEA 提高效率<br>为了提交写作效率，我个人建议使用 IntelliJ IDEA 作为 Markdown 编辑工具，这也是前端开发的一个利器。现在我们用 IntelliJ IDEA 打开我们本地目录。</p>
+<p>由于 IntelliJ IDEA 在 Windows 下的默认终端是 cmd 不好用，我们现在需要重新修改下 IntelliJ IDEA 的终端工具，把它指向我们习惯的 Git Bash，这样方便操作。</p>
+<p>为了更稳定地使用 IntelliJ IDEA，在不修改主题的情况下，我们还需要这样做，hexo 新文章内容的开头需要这样定义：<br>categories：表示文章所属分类<br>tags：表示文章所属标签</p>
+<h2 id="例如："><a href="#例如：" class="headerlink" title="例如："></a>例如：</h2><p>title: 这是文章标题<br>date: 2016-10-25 17:58:27<br>categories: [Hexo,IntelliJ IDEA]</p>
+<h2 id="tags-Hexo-IntelliJ-IDEA-Git-Github-Node-js"><a href="#tags-Hexo-IntelliJ-IDEA-Git-Github-Node-js" class="headerlink" title="tags: [Hexo,IntelliJ IDEA,Git,Github,Node.js]"></a>tags: [Hexo,IntelliJ IDEA,Git,Github,Node.js]</h2><p>打开项目的module（快捷键ctrl+shift+alt+s）</p>
+    </div>
+    <p class="post-meta">
+        <span class="post-cat">分类：
+            <a class="cat-link" href="/categories/技术人生/">技术人生</a>
+        </span>
+        <span class="post-tags">
+            标签：
+            <a href="/tags/个人博客/" title="个人博客">个人博客</a> / 
+    
+        <a href="/tags/搭建网站/" title="搭建网站">搭建网站</a>
+        </span>
+    </p>
+</article>
+<div class="article-share clearfix text-center">
+    <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+</div>
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br>
+        <a href="/2016/05/04/高仿网易云音乐/">
+            
+                Android仿网易云音乐播放界面
+            
+        </a>
+    </span>
+    
+
+    
+    <span class="next fr">
+        下一篇<br>
+        <a href="/2016/02/05/Android混淆打包详解/">
+            
+                Android资源混淆打包方案
+            
+        </a>
+    </span>
+    
+</div>
+<!-- 文章评论 -->
+<div id="comments" class="comments cloud-tie-wrapper"></div>
+    <script>
+    var cloudTieConfig = {
+      url: document.location.href, 
+      sourceId: "搭建网站",
+      productKey: "c06bb9930e6f4b38a9997cb9bd17aba5",
+      target: "comments"
+    };
+    var yunManualLoad = true;
+    Tie.loader("aHR0cHM6Ly9hcGkuZ2VudGllLjE2My5jb20vcGMvbGl2ZXNjcmlwdC5odG1s", true);
+    </script>
+            </div>
+
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章分类</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+    <li>
+        <a href="/categories/Android/">Android</a>
+        <span class="badge">(10)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Android/系统/">系统</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Angular2/">Angular2</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/React-Native/">React Native</a>
+        <span class="badge">(9)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Java/">Java</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/前端/">前端</a>
+        <span class="badge">(6)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/VR/">VR</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Angular2/前端/">前端</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Spring/">Spring</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/ios/">ios</a>
+        <span class="badge">(7)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Google/">Google</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Google/VR/">VR</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/技术人生/">技术人生</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/小程序/">小程序</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/机器学习/">机器学习</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/android/">android</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/设计模式/">设计模式</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+</ul>
+    </section>
+
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="/tags/Android/" title="Android">Android (7)</a>
+  
+    <a class="tag-item" href="/tags/新特性/" title="新特性">新特性 (2)</a>
+  
+    <a class="tag-item" href="/tags/高仿/" title="高仿">高仿 (4)</a>
+  
+    <a class="tag-item" href="/tags/深入系统/" title="深入系统">深入系统 (1)</a>
+  
+    <a class="tag-item" href="/tags/系统服务/" title="系统服务">系统服务 (1)</a>
+  
+    <a class="tag-item" href="/tags/android/" title="android">android (4)</a>
+  
+    <a class="tag-item" href="/tags/混淆打包/" title="混淆打包">混淆打包 (1)</a>
+  
+    <a class="tag-item" href="/tags/Angular2/" title="Angular2">Angular2 (1)</a>
+  
+    <a class="tag-item" href="/tags/前端开发/" title="前端开发">前端开发 (3)</a>
+  
+    <a class="tag-item" href="/tags/硬件/" title="硬件">硬件 (1)</a>
+  
+    <a class="tag-item" href="/tags/React-Native/" title="React Native">React Native (7)</a>
+  
+    <a class="tag-item" href="/tags/FlexBox布局/" title="FlexBox布局">FlexBox布局 (1)</a>
+  
+    <a class="tag-item" href="/tags/Java/" title="Java">Java (2)</a>
+  
+    <a class="tag-item" href="/tags/垃圾回收/" title="垃圾回收">垃圾回收 (1)</a>
+  
+    <a class="tag-item" href="/tags/Node/" title="Node">Node (2)</a>
+  
+    <a class="tag-item" href="/tags/Google/" title="Google">Google (2)</a>
+  
+    <a class="tag-item" href="/tags/VR/" title="VR">VR (2)</a>
+  
+    <a class="tag-item" href="/tags/OpenGL/" title="OpenGL">OpenGL (1)</a>
+  
+    <a class="tag-item" href="/tags/Promise/" title="Promise">Promise (1)</a>
+  
+    <a class="tag-item" href="/tags/前端/" title="前端">前端 (4)</a>
+  
+    <a class="tag-item" href="/tags/调试/" title="调试">调试 (1)</a>
+  
+    <a class="tag-item" href="/tags/eact-Native/" title="eact Native">eact Native (1)</a>
+  
+    <a class="tag-item" href="/tags/打包/" title="打包">打包 (1)</a>
+  
+    <a class="tag-item" href="/tags/Spring/" title="Spring">Spring (2)</a>
+  
+    <a class="tag-item" href="/tags/入门/" title="入门">入门 (2)</a>
+  
+    <a class="tag-item" href="/tags/原生/" title="原生">原生 (1)</a>
+  
+    <a class="tag-item" href="/tags/ios/" title="ios">ios (7)</a>
+  
+    <a class="tag-item" href="/tags/swift/" title="swift">swift (1)</a>
+  
+    <a class="tag-item" href="/tags/Swift/" title="Swift">Swift (1)</a>
+  
+    <a class="tag-item" href="/tags/AR/" title="AR">AR (1)</a>
+  
+    <a class="tag-item" href="/tags/webpack/" title="webpack">webpack (1)</a>
+  
+    <a class="tag-item" href="/tags/gulp/" title="gulp">gulp (1)</a>
+  
+    <a class="tag-item" href="/tags/Xcode/" title="Xcode">Xcode (2)</a>
+  
+    <a class="tag-item" href="/tags/https/" title="https">https (1)</a>
+  
+    <a class="tag-item" href="/tags/gif/" title="gif">gif (1)</a>
+  
+    <a class="tag-item" href="/tags/mac/" title="mac">mac (1)</a>
+  
+    <a class="tag-item" href="/tags/环境/" title="环境">环境 (1)</a>
+  
+    <a class="tag-item" href="/tags/知识库/" title="知识库">知识库 (1)</a>
+  
+    <a class="tag-item" href="/tags/原理/" title="原理">原理 (1)</a>
+  
+</div>
+    </section>
+    
+
+    
+    <!-- 我的微博 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>我的微博</strong></h3>
+        <div class="widget-bd" style="position: relative">
+  <div id="myWeiboLoading" class="text-center" style="position:absolute;top:0;left:0;right:0;bottom:0;line-height:50px;font-size:12px;background-color:#fff;z-index:9">微博加载中...</div>
+  <iframe width="100%" height="550" class="share_self" frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&amp;width=0&amp;height=550&amp;fansRow=2&amp;ptype=1&amp;speed=0&amp;skin=4&amp;isTitle=1&amp;noborder=1&amp;isWeibo=1&amp;isFans=1&amp;uid=1831462560&amp;verifier=5192ec39&amp;dpc=1"></iframe>
+  <script>
+  (function () {
+    var oMyWeibo = document.getElementById('myWeibo');
+    var oMyWeiboLoading = document.getElementById('myWeiboLoading');
+    var isIE = /msie/i.test(navigator.userAgent) && !window.opera;
+    var timer = null;
+    if (isIE) {
+      oMyWeibo.onreadystatechange = function(){
+        if(oMyWeibo.readyState === 'loaded' || oMyWeibo.readyState === 'complete'){
+          timer = setTimeout(function () {
+            oMyWeiboLoading.parentNode.removeChild(oMyWeiboLoading);
+            timer = null;
+          }, 300);
+        }
+      };
+    } else {
+      oMyWeibo.onload = function () {
+        timer = setTimeout(function () {
+          oMyWeiboLoading.parentNode.removeChild(oMyWeiboLoading);
+          timer = null;
+        }, 300);
+      };
+    }
+  })();
+  </script>
+</div>
+    </section>
+    
+
+    
+    <!-- 友情链接 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>友情链接</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+        <li>
+            <a href="http://blog.csdn.net/xiangzhihong8/" target="_blank" title="csdn个人博客">csdn博客</a>
+        </li>
+    
+        <li>
+            <a href="https://yq.aliyun.com/u/xiangzhihong" target="_blank" title="阿里云技术博客">阿里云博客</a>
+        </li>
+    
+</ul>
+    </section>
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <footer class="footer">
+    &copy;
+    
+        2016-2017
+    
+
+    <a href="/">Jelon Loves You</a>
+</footer>
+<div class="back-to-top" id="JELON__backToTop" title="返回顶部">返回顶部</div>
+<!-- 添加百度自动推送 -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+    <!--博客js脚本 -->
+    <!-- 这里放网站js脚本 -->
+<script src="/js/main.js"></script>
+</body>

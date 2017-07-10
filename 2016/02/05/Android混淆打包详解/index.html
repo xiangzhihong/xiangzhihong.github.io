@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8">
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya">
+    
+    <title>Android资源混淆打包方案 | 向志洪</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
+    <meta name="keywords" content="前端, Web, 移动, 向志洪">
+    <meta name="description" content="">
+
+    
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <!--[if lt IE 9]>
+    <script src="/js/html5.js"></script>
+    <![endif]-->
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?fd459238242776d173cdc64918fb32f2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+    
+    <script>var yunModuleEnv = true;</script>
+    <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+    
+</head></html>
+<body class="home">
+    <!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="/">
+                <div class="cover">
+                    <span class="name">向志洪</span>
+                    <span class="description">个人技术博客</span>
+                </div>
+            </a>
+        </div>
+        <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
+        <ul class="menu hidden" id="JELON__menu">
+            
+            <li rel="/2016/02/05/Android混淆打包详解/index.html" class="item">
+                <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
+            </li>
+            
+            <li rel="/2016/02/05/Android混淆打包详解/index.html" class="item">
+                <a href="/archives/" title="文章列表" class="icon-lab">&nbsp;文章列表</a>
+            </li>
+            
+            <li rel="/2016/02/05/Android混淆打包详解/index.html" class="item">
+                <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
+            </li>
+            
+            <li rel="/2016/02/05/Android混淆打包详解/index.html" class="item">
+                <a href="/404/" title="留言" class="icon-comment">&nbsp;留言</a>
+            </li>
+            
+        </ul>
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        <a href="https://github.com/xiangzhihong" target="_blank">Github</a>
+                        |
+                    
+                        <a href="http://tongji.baidu.com/web/welcome/login" target="_blank">站长统计</a>
+                        |
+                    
+                        <a href="http://weibo.com/code_xzh" target="_blank">新浪微博</a>
+                        |
+                    
+                </p>
+                <p class="sns">
+                    
+                    <a href="javascript: void(0);" class="wechat">
+                        <b>■</b>
+                        公众号
+                        <span class="popover">
+                            <img src="/img/wechat_mp.jpg" width="120" height="120" alt="我的微信订阅号">
+                            <i class="arrow"></i>
+                        </span>
+                    </a>
+                </p>
+                
+            </div>
+            <div class="avatar fr">
+                <img src="http://ohe65w0xx.bkt.clouddn.com/avert.png" alt="avatar" title="Jelon">
+            </div>
+        </div>
+    </section>
+</header>
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+        <section class="content">
+            <div class="content-main widget">
+                <!-- 文章页 -->
+<!-- 文章 -->
+<article class="post article">
+    <header class="text-center">
+        <h3 class="post-title"><span>Android资源混淆打包方案</span></h3>
+    </header>
+    <p class="post-meta text-center">
+        xiangzhihong 发表于
+        <time datetime="2016-02-04T16:00:00.000Z">2016-02-05</time>
+    </p>
+    <div class="post-content">
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>我们知道在Android的打包过程中，有一个步骤是压缩，也是为了减少apk包的大小，其中在压缩的过程中，很大一部分就是对资源的压缩，除了系统的压缩方案之外，我们今天讲另外两种压缩方案：<a href="https://github.com/shwenzhang/AndResGuard" target="_blank" rel="external">微信方案</a>和<a href="http://tech.meituan.com/mt-android-resource-obfuscation.html" target="_blank" rel="external">美团方案</a><br>微信的方案是通过修改aapt在处理资源文件相关的源码达到资源文件的替换；而后者指通过直接修改resources.arsc文件达到资源文件混淆的目的。相比之下，微信的方案更加优秀。</p>
+<h1 id="微信资源混淆方案"><a href="#微信资源混淆方案" class="headerlink" title="微信资源混淆方案"></a>微信资源混淆方案</h1><p>微信中的资源混淆工具主要为了混淆资源ID长度(例如将res/drawable/welcome.png混淆为r/s/a.png)，同时利用7z深度压缩，大大减少了安装包体积，同时也增加了逼格，提升了反破解难度。<br>具体源码与使用方法详细在github中：<a href="https://github.com/shwenzhang/AndResGuard" target="_blank" rel="external">https://github.com/shwenzhang/AndResGuard</a></p>
+<h2 id="技术演进"><a href="#技术演进" class="headerlink" title="技术演进"></a>技术演进</h2><p>资源混淆简单来说希望实现将res/drawable/icon,png变成res/drawable/a.png,或我们甚至可以将文件路径也同时混淆，改成r/s/a.png。形如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Proguard  -&gt; Resource Proguard</div><div class="line">R.string.name     -&gt; R.string.a   </div><div class="line">res/drawable/icon -&gt; res/drawable/ar/s/a</div></pre></td></tr></table></figure>
+<p>要实现上面的效果，我们可以想到以下几种方案：</p>
+<ol>
+<li>最简单的方法，我们按照Proguard的做法，直接在源码级别修改，将代码以及xml的R.string.name中替换到R.string.a，icon.png重命名为a.png，然后再交给Android编译。</li>
+<li>根据Android的编译流程，所有资源ID已经被编译成32位int值。这说明我们并不需要去修改xml与java，因为在编译过程已经被R.java所替换，我们直接修改resources.arsc的二进制数据，不改变打包程，只要在生成resources.arsc之后修改它，同时重命名资源文件。</li>
+<li>但是方案二看起来不错，但是它依然依赖了编译流程，不利于使用。其实我们可以做到直接处理安装包。不依赖源码，不依赖编译过程，仅仅输入一个安装包，得到一个混淆包。<br>上述方案的对比：<br><img src="http://img.blog.csdn.net/20170211223045782?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>综合对比，方案三能做到做到最大混淆，并且不依赖源码和编译过程。<h2 id="技术实现"><a href="#技术实现" class="headerlink" title="技术实现"></a>技术实现</h2>我们知道，resources.arsc一共有五种chunk类型，分别为TYPETABLE，TYPEPACKAGE，TYPE_STRING ,TYPETYPE，TYPECONFIG。<br><img src="http://img.blog.csdn.net/20170211223505367?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>说明：<br><strong>table</strong>，是整个reousces table的开始，它的chunksize即是整个文件的大小。</li>
+</ol>
+<p><strong>package</strong>，指的是一个package的开始，其实在resources,arsc是可以有多个package的。 而packageID即是资源resID的最高八位 ，一般来说系统android的是1(0x01)，普通的例如com.tencent.mm会是127(0x7f)，剩下的是从2开始起步。当然这个我们在aapt也是可以指定的(1-127即八位的合法空间,一些混合编译就是改这个packageID)。</p>
+<p><strong>string</strong>, 代表stringblock，我们一共有三种类型的stringblock。分别是table stringblock,typename stringblock, specsname stringblock。</p>
+<p><strong>type</strong>，这里讲的是typename stringblock里面我们用到的各种type(用到多少种类型的type,就有多少个type chunk)，例如attr, drawable, layout, id, color, anim等，Type ID是紧跟着Package ID。</p>
+<p><strong>config</strong>, 即是Android用来描述资源维度，例如横竖屏，屏幕密度，语言等。对于每一种type，它定义了多少种config，它后面就紧跟着多少个config chunk,例如我们定义了drawable-mdpi,drawable-hdpi,那后面就会有两个config。</p>
+<p><strong>entry</strong>，尽管没有entry这个chunk,但是每个config里面都会有很多的entry，例如drawable-mdpi中有icon1.png,icon2.png两个drawable,那在mdpi这个config中就存在两个entry。</p>
+<p>比如微信在压缩前后：<br><img src="http://img.blog.csdn.net/20170211223946762?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>具体实现方案如图：<br><img src="http://img.blog.csdn.net/20170211224222292?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>然后我们在与7z的极限压缩结合，同时我们也可以强制压缩类似resources.arsc、png、jpg等Android默认不会打包压缩的文件。最后把修改后的resources.arsc重打包即可。<br>通过上面的分析，我们来看一下微信压缩的完整流程：<br><img src="http://img.blog.csdn.net/20170211224527942?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h1 id="美团方案"><a href="#美团方案" class="headerlink" title="美团方案"></a>美团方案</h1><h2 id="Android查找资源的流程"><a href="#Android查找资源的流程" class="headerlink" title="Android查找资源的流程"></a>Android查找资源的流程</h2><p>在Android系统中，每一个应用程序一般都会配置很多资源，用来适配不同密度、大小和方向的屏幕，以及适配不同的国家、地区和语言等等。这些资源是在应用程序运行时自动根据设备的当前配置信息进行适配的。这也就是说，给定一个相同的资源ID，在不同的设备配置之下，查找到的可能是不同的资源。<br>这个查找过程对应用程序来说，是完全透明的，这个过程主要是靠Android资源管理框架来完成的，而Android资源管理框架实际是由AssetManager和Resources两个类来实现的。其中，Resources类可以根据ID来查找资源，而AssetManager类根据文件名来查找资源。事实上，如果一个资源ID对应的是一个文件，那么Resources类是先根据ID来找到资源文件名称，然后再将该文件名称交给AssetManager类来打开对应的文件的。<br>基本流程如下图：<br><img src="http://img.blog.csdn.net/20170211224951230?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>通过上图我们可以看到Resources是通过resources.arsc把Resource的ID转化成资源文件的名称，然后交由AssetManager来加载的。<br>而Resources.arsc这个文件是存放在APK包中的，他是由AAPT工具在打包过程中生成的，他本身是一个资源的索引表，里面维护者资源ID、Name、Path或者Value的对应关系，AssetManager通过这个索引表，就可以通过资源的ID找到这个资源对应的文件或者数据。</p>
+<h2 id="AAPT"><a href="#AAPT" class="headerlink" title="AAPT"></a>AAPT</h2><p>AAPT是Android Asset Packaging Tool的缩写，它存放在SDK的tools/目录下，AAPT的功能很强大，可以通过它查看查看、创建、更新压缩文件(如 .zip文件，.jar文件, .apk文件), 它也可以把资源编译为二进制文件，并生成resources.arsc, AAPT这个工具在APK打包过程中起到了非常重要作用，在打包过程中使用AAPT对APK中用到的资源进行打包，这里不对AAPT这个工具做过多的讨论，只看一下AAPT这个工具在打包过程中起到的作用，下图是AAPT打包的流程：<br><img src="http://img.blog.csdn.net/20170211225233204?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>AAPT这个工具在打包过程中主要做了下列工作：</p>
+<ol>
+<li>把”assets”和”res/raw”目录下的所有资源进行打包（会根据不同的文件后缀选择压缩或不压缩），而”res/“目录下的其他资源进行编译或者其他处理（具体处理方式视文件后缀不同而不同，例如：”.xml”会编译成二进制文件，”.png”文件会进行优化等等）后才进行打包；</li>
+<li>会对除了assets资源之外所有的资源赋予一个资源ID常量，并且会生成一个资源索引表resources.arsc；</li>
+<li>编译AndroidManifest.xml成二进制的XML文件；</li>
+<li>把上面3个步骤中生成结果保存在一个*.ap_文件，并把各个资源ID常量定义在一个R.java中；<h2 id="资源混淆"><a href="#资源混淆" class="headerlink" title="资源混淆"></a>资源混淆</h2>我们知道在系统的Proguard中，对APK中资源文件名使用简短无意义名称进行替换，给破解者制造困难，从而做到资源的相对安全。通过阅读AAPT编译资源的代码，我们发现修改AAPT在处理资源文件相关的源码是能够做到资源文件名的替换，下面是Resource.cpp中makeFileResources()的修改的代码片段：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line">static status_t makeFileResources(Bundle* bundle, const sp&lt;AaptAssets&gt;&amp; assets,</div><div class="line">                                      ResourceTable* table,</div><div class="line">                                      const sp&lt;ResourceTypeSet&gt;&amp; set,</div><div class="line">                                      const char* resType)</div><div class="line">    &#123;</div><div class="line">        String8 type8(resType);</div><div class="line">        String16 type16(resType);</div><div class="line"></div><div class="line">        bool hasErrors = false;</div><div class="line"></div><div class="line">        ResourceDirIterator it(set, String8(resType));</div><div class="line">        ssize_t res;</div><div class="line">        while ((res=it.next()) == NO_ERROR) &#123;</div><div class="line">            if (bundle-&gt;getVerbose()) &#123;</div><div class="line">                printf(&quot;    (new resource id %s from %s)\n&quot;,</div><div class="line">                       it.getBaseName().string(), it.getFile()-&gt;getPrintableSource().string());</div><div class="line">            &#125;</div><div class="line">            String16 baseName(it.getBaseName());</div><div class="line">            const char16_t* str = baseName.string();</div><div class="line">            const char16_t* const end = str + baseName.size();</div><div class="line">            while (str &lt; end) &#123;</div><div class="line">                if (!((*str &gt;= &apos;a&apos; &amp;&amp; *str &lt;= &apos;z&apos;)</div><div class="line">                        || (*str &gt;= &apos;0&apos; &amp;&amp; *str &lt;= &apos;9&apos;)</div><div class="line">                        || *str == &apos;_&apos; || *str == &apos;.&apos;)) &#123;</div><div class="line">                    fprintf(stderr, &quot;%s: Invalid file name: must contain only [a-z0-9_.]\n&quot;,</div><div class="line">                            it.getPath().string());</div><div class="line">                    hasErrors = true;</div><div class="line">                &#125;</div><div class="line">                str++;</div><div class="line">            &#125;</div><div class="line">            String8 resPath = it.getPath();</div><div class="line">            resPath.convertToResPath();</div><div class="line"></div><div class="line">            String8 obfuscationName;</div><div class="line">            String8 obfuscationPath = getObfuscationName(resPath, obfuscationName);</div><div class="line"></div><div class="line">            table-&gt;addEntry(SourcePos(it.getPath(), 0), String16(assets-&gt;getPackage()),</div><div class="line">                            type16,</div><div class="line">                            baseName, // String16(obfuscationName),</div><div class="line">                            String16(obfuscationPath), // resPath</div><div class="line">                            NULL,</div><div class="line">                            &amp;it.getParams());</div><div class="line">            assets-&gt;addResource(it.getLeafName(), obfuscationPath/*resPath*/, it.getFile(), type8);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        return hasErrors ? UNKNOWN_ERROR : NO_ERROR;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>上述代码是在ResourceTable和Assets中添加资源文件时， 对资源文件名称进行修改，这就能够做到资源文件名称的替换，这样通过使用修改过的AAPT编译资源并进行打包，从而达到保护资源的目的。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>微信的方案是通过修改aapt在处理资源文件相关的源码达到资源文件的替换；而美团主要通过直接修改resources.arsc文件达到资源文件混淆的目的。微信从aapt的原理上着手，而美团只是在已有的方案上优化，相比之下，微信的混淆更彻底。</p>
+    </div>
+    <p class="post-meta">
+        <span class="post-cat">分类：
+            <a class="cat-link" href="/categories/Android/">Android</a>
+        </span>
+        <span class="post-tags">
+            标签：
+            <a href="/tags/Android/" title="Android">Android</a> / 
+    
+        <a href="/tags/混淆打包/" title="混淆打包">混淆打包</a>
+        </span>
+    </p>
+</article>
+<div class="article-share clearfix text-center">
+    <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+</div>
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br>
+        <a href="/2016/05/01/搭建网站/">
+            
+                搭建网站
+            
+        </a>
+    </span>
+    
+
+    
+    <span class="next fr">
+        下一篇<br>
+        <a href="javascript: void(0);">没有下一篇了</a>
+    </span>
+    
+</div>
+<!-- 文章评论 -->
+<div id="comments" class="comments cloud-tie-wrapper"></div>
+    <script>
+    var cloudTieConfig = {
+      url: document.location.href, 
+      sourceId: "Android混淆打包详解",
+      productKey: "c06bb9930e6f4b38a9997cb9bd17aba5",
+      target: "comments"
+    };
+    var yunManualLoad = true;
+    Tie.loader("aHR0cHM6Ly9hcGkuZ2VudGllLjE2My5jb20vcGMvbGl2ZXNjcmlwdC5odG1s", true);
+    </script>
+            </div>
+
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章分类</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+    <li>
+        <a href="/categories/Android/">Android</a>
+        <span class="badge">(10)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Android/系统/">系统</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Angular2/">Angular2</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/React-Native/">React Native</a>
+        <span class="badge">(9)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Java/">Java</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/前端/">前端</a>
+        <span class="badge">(6)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/VR/">VR</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Angular2/前端/">前端</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Spring/">Spring</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/ios/">ios</a>
+        <span class="badge">(7)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Google/">Google</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Google/VR/">VR</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/技术人生/">技术人生</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/小程序/">小程序</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/机器学习/">机器学习</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/android/">android</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/设计模式/">设计模式</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+</ul>
+    </section>
+
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="/tags/Android/" title="Android">Android (7)</a>
+  
+    <a class="tag-item" href="/tags/新特性/" title="新特性">新特性 (2)</a>
+  
+    <a class="tag-item" href="/tags/高仿/" title="高仿">高仿 (4)</a>
+  
+    <a class="tag-item" href="/tags/深入系统/" title="深入系统">深入系统 (1)</a>
+  
+    <a class="tag-item" href="/tags/系统服务/" title="系统服务">系统服务 (1)</a>
+  
+    <a class="tag-item" href="/tags/android/" title="android">android (4)</a>
+  
+    <a class="tag-item" href="/tags/混淆打包/" title="混淆打包">混淆打包 (1)</a>
+  
+    <a class="tag-item" href="/tags/Angular2/" title="Angular2">Angular2 (1)</a>
+  
+    <a class="tag-item" href="/tags/前端开发/" title="前端开发">前端开发 (3)</a>
+  
+    <a class="tag-item" href="/tags/硬件/" title="硬件">硬件 (1)</a>
+  
+    <a class="tag-item" href="/tags/React-Native/" title="React Native">React Native (7)</a>
+  
+    <a class="tag-item" href="/tags/FlexBox布局/" title="FlexBox布局">FlexBox布局 (1)</a>
+  
+    <a class="tag-item" href="/tags/Java/" title="Java">Java (2)</a>
+  
+    <a class="tag-item" href="/tags/垃圾回收/" title="垃圾回收">垃圾回收 (1)</a>
+  
+    <a class="tag-item" href="/tags/Node/" title="Node">Node (2)</a>
+  
+    <a class="tag-item" href="/tags/Google/" title="Google">Google (2)</a>
+  
+    <a class="tag-item" href="/tags/VR/" title="VR">VR (2)</a>
+  
+    <a class="tag-item" href="/tags/OpenGL/" title="OpenGL">OpenGL (1)</a>
+  
+    <a class="tag-item" href="/tags/Promise/" title="Promise">Promise (1)</a>
+  
+    <a class="tag-item" href="/tags/前端/" title="前端">前端 (4)</a>
+  
+    <a class="tag-item" href="/tags/调试/" title="调试">调试 (1)</a>
+  
+    <a class="tag-item" href="/tags/eact-Native/" title="eact Native">eact Native (1)</a>
+  
+    <a class="tag-item" href="/tags/打包/" title="打包">打包 (1)</a>
+  
+    <a class="tag-item" href="/tags/Spring/" title="Spring">Spring (2)</a>
+  
+    <a class="tag-item" href="/tags/入门/" title="入门">入门 (2)</a>
+  
+    <a class="tag-item" href="/tags/原生/" title="原生">原生 (1)</a>
+  
+    <a class="tag-item" href="/tags/ios/" title="ios">ios (7)</a>
+  
+    <a class="tag-item" href="/tags/swift/" title="swift">swift (1)</a>
+  
+    <a class="tag-item" href="/tags/Swift/" title="Swift">Swift (1)</a>
+  
+    <a class="tag-item" href="/tags/AR/" title="AR">AR (1)</a>
+  
+    <a class="tag-item" href="/tags/webpack/" title="webpack">webpack (1)</a>
+  
+    <a class="tag-item" href="/tags/gulp/" title="gulp">gulp (1)</a>
+  
+    <a class="tag-item" href="/tags/Xcode/" title="Xcode">Xcode (2)</a>
+  
+    <a class="tag-item" href="/tags/https/" title="https">https (1)</a>
+  
+    <a class="tag-item" href="/tags/gif/" title="gif">gif (1)</a>
+  
+    <a class="tag-item" href="/tags/mac/" title="mac">mac (1)</a>
+  
+    <a class="tag-item" href="/tags/环境/" title="环境">环境 (1)</a>
+  
+    <a class="tag-item" href="/tags/知识库/" title="知识库">知识库 (1)</a>
+  
+    <a class="tag-item" href="/tags/原理/" title="原理">原理 (1)</a>
+  
+</div>
+    </section>
+    
+
+    
+    <!-- 我的微博 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>我的微博</strong></h3>
+        <div class="widget-bd" style="position: relative">
+  <div id="myWeiboLoading" class="text-center" style="position:absolute;top:0;left:0;right:0;bottom:0;line-height:50px;font-size:12px;background-color:#fff;z-index:9">微博加载中...</div>
+  <iframe width="100%" height="550" class="share_self" frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&amp;width=0&amp;height=550&amp;fansRow=2&amp;ptype=1&amp;speed=0&amp;skin=4&amp;isTitle=1&amp;noborder=1&amp;isWeibo=1&amp;isFans=1&amp;uid=1831462560&amp;verifier=5192ec39&amp;dpc=1"></iframe>
+  <script>
+  (function () {
+    var oMyWeibo = document.getElementById('myWeibo');
+    var oMyWeiboLoading = document.getElementById('myWeiboLoading');
+    var isIE = /msie/i.test(navigator.userAgent) && !window.opera;
+    var timer = null;
+    if (isIE) {
+      oMyWeibo.onreadystatechange = function(){
+        if(oMyWeibo.readyState === 'loaded' || oMyWeibo.readyState === 'complete'){
+          timer = setTimeout(function () {
+            oMyWeiboLoading.parentNode.removeChild(oMyWeiboLoading);
+            timer = null;
+          }, 300);
+        }
+      };
+    } else {
+      oMyWeibo.onload = function () {
+        timer = setTimeout(function () {
+          oMyWeiboLoading.parentNode.removeChild(oMyWeiboLoading);
+          timer = null;
+        }, 300);
+      };
+    }
+  })();
+  </script>
+</div>
+    </section>
+    
+
+    
+    <!-- 友情链接 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>友情链接</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+        <li>
+            <a href="http://blog.csdn.net/xiangzhihong8/" target="_blank" title="csdn个人博客">csdn博客</a>
+        </li>
+    
+        <li>
+            <a href="https://yq.aliyun.com/u/xiangzhihong" target="_blank" title="阿里云技术博客">阿里云博客</a>
+        </li>
+    
+</ul>
+    </section>
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <footer class="footer">
+    &copy;
+    
+        2016-2017
+    
+
+    <a href="/">Jelon Loves You</a>
+</footer>
+<div class="back-to-top" id="JELON__backToTop" title="返回顶部">返回顶部</div>
+<!-- 添加百度自动推送 -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+    <!--博客js脚本 -->
+    <!-- 这里放网站js脚本 -->
+<script src="/js/main.js"></script>
+</body>

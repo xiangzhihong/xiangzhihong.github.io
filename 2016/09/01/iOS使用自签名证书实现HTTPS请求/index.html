@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8">
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya">
+    
+    <title>iOS使用自签名证书实现HTTPS请求 | 向志洪</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
+    <meta name="keywords" content="前端, Web, 移动, 向志洪">
+    <meta name="description" content="">
+
+    
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <!--[if lt IE 9]>
+    <script src="/js/html5.js"></script>
+    <![endif]-->
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?fd459238242776d173cdc64918fb32f2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+    
+    <script>var yunModuleEnv = true;</script>
+    <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+    
+</head></html>
+<body class="home">
+    <!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="/">
+                <div class="cover">
+                    <span class="name">向志洪</span>
+                    <span class="description">个人技术博客</span>
+                </div>
+            </a>
+        </div>
+        <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
+        <ul class="menu hidden" id="JELON__menu">
+            
+            <li rel="/2016/09/01/iOS使用自签名证书实现HTTPS请求/index.html" class="item">
+                <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
+            </li>
+            
+            <li rel="/2016/09/01/iOS使用自签名证书实现HTTPS请求/index.html" class="item">
+                <a href="/archives/" title="文章列表" class="icon-lab">&nbsp;文章列表</a>
+            </li>
+            
+            <li rel="/2016/09/01/iOS使用自签名证书实现HTTPS请求/index.html" class="item">
+                <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
+            </li>
+            
+            <li rel="/2016/09/01/iOS使用自签名证书实现HTTPS请求/index.html" class="item">
+                <a href="/404/" title="留言" class="icon-comment">&nbsp;留言</a>
+            </li>
+            
+        </ul>
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        <a href="https://github.com/xiangzhihong" target="_blank">Github</a>
+                        |
+                    
+                        <a href="http://tongji.baidu.com/web/welcome/login" target="_blank">站长统计</a>
+                        |
+                    
+                        <a href="http://weibo.com/code_xzh" target="_blank">新浪微博</a>
+                        |
+                    
+                </p>
+                <p class="sns">
+                    
+                    <a href="javascript: void(0);" class="wechat">
+                        <b>■</b>
+                        公众号
+                        <span class="popover">
+                            <img src="/img/wechat_mp.jpg" width="120" height="120" alt="我的微信订阅号">
+                            <i class="arrow"></i>
+                        </span>
+                    </a>
+                </p>
+                
+            </div>
+            <div class="avatar fr">
+                <img src="http://ohe65w0xx.bkt.clouddn.com/avert.png" alt="avatar" title="Jelon">
+            </div>
+        </div>
+    </section>
+</header>
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+        <section class="content">
+            <div class="content-main widget">
+                <!-- 文章页 -->
+<!-- 文章 -->
+<article class="post article">
+    <header class="text-center">
+        <h3 class="post-title"><span>iOS使用自签名证书实现HTTPS请求</span></h3>
+    </header>
+    <p class="post-meta text-center">
+        xiangzhihong 发表于
+        <time datetime="2016-08-31T16:00:00.000Z">2016-09-01</time>
+    </p>
+    <div class="post-content">
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>在16年的WWDC中，Apple已表示将从2017年1月1日起，所有新提交的App必须强制性应用HTTPS协议来进行网络请求。<br>默认情况下非HTTPS的网络访问是禁止的并且不能再通过简单粗暴的向Info.plist中添加NSAllowsArbitraryLoads设置绕过ATS(App Transport Security)的限制（否则须在应用审核时进行说明并很可能会被拒）。所以还未进行相应配置的公司需要尽快将升级为HTTPS的事项提上进程了。</p>
+<h2 id="Https"><a href="#Https" class="headerlink" title="Https"></a>Https</h2><p>HTTPS就是HTTP协议上再加一层加密处理的SSL协议,即HTTP安全版。相比HTTP，HTTPS可以保证内容在传输过程中不会被第三方查看、及时发现被第三方篡改的传输内容、防止身份冒充，从而更有效的保证网络数据的安全。至于深层次的原理和介绍请查询相关资料和文档。<br>HTTPS客户端与服务器交互过程：<br>1、 客户端第一次请求时，服务器会返回一个包含公钥的数字证书给客户端；<br>2、 客户端生成对称加密密钥并用其得到的公钥对其加密后返回给服务器；<br>3、 服务器使用自己私钥对收到的加密数据解密，得到对称加密密钥并保存；<br>4、 然后双方通过对称加密的数据进行传输。<br><img src="http://img.blog.csdn.net/20161223160614593?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h2 id="数字证书"><a href="#数字证书" class="headerlink" title="数字证书"></a>数字证书</h2><p>在HTTPS客户端与服务器第一次交互时，服务端返回给客户端的数字证书是让客户端验证这个数字证书是不是服务端的，证书所有者是不是该服务器，确保数据由正确的服务端发来，没有被第三方篡改。数字证书可以保证数字证书里的公钥确实是这个证书的所有者(Subject)的，或者证书可以用来确认对方身份。证书由公钥、证书主题(Subject)、数字签名(digital signature)等内容组成。其中数字签名就是证书的防伪标签，目前使用最广泛的SHA-RSA加密。<br>证书一般分为两种：<br>一种是向权威认证机构购买的证书，服务端使用该种证书时，因为苹果系统内置了其受信任的签名根证书，所以客户端不需额外的配置。为了证书安全，在证书发布机构公布证书时，证书的指纹算法都会加密后再和证书放到一起公布以防止他人伪造数字证书。而证书机构使用自己的私钥对其指纹算法加密，可以用内置在操作系统里的机构签名根证书来解密，以此保证证书的安全。如x509、RSA。<br>另一种是自己制作的证书，即自签名证书。好处是不需要花钱购买，但使用这种证书是不会受信任的，所以需要我们在代码中将该证书配置为信任证书。这就是本文的主要目的。如12306官网的证书。</p>
+<h1 id="创建自定义证书"><a href="#创建自定义证书" class="headerlink" title="创建自定义证书"></a>创建自定义证书</h1><p>我们在使用自签名证书来实现HTTPS请求时，因为不像机构颁发的证书一样其签名根证书在系统中已经内置了，所以我们需要在App中内置自己服务器的签名根证书来验证数字证书。<br>首先将服务端生成的.cer格式的根证书添加到项目中，注意在添加证书要一定要记得勾选要添加的targets。这里有个地方要注意：苹果的ATS要求服务端必须支持TLS 1.2或以上版本；必须使用支持前向保密的密码；证书必须使用SHA-256或者更好的签名hash算法来签名，如果证书无效，则会导致连接失败。由于我在生成的根证书时签名hash算法低于其要求，在配置完请求时一直报NSURLErrorServerCertificateUntrusted = -1202错误，希望大家可以注意到这一点。<br>本文使用AFNetworking 3.0来配置证书校验。其中AFSecurityPolicy类中封装了证书校验的过程。<br>AFSecurityPolicy分三种验证模式：<br>1、AFSSLPinningModeNone：只验证证书是否在新人列表中<br>2、AFSSLPinningModeCertificate：验证证书是否在信任列表中，然后再对比服务端证书和客户端证书是否一致<br>3、 AFSSLPinningModePublicKey：只验证服务端与客户端证书的公钥是否一致<br>这里我们选第二种模式，并且对AFSecurityPolicy的allowInvalidCertificates和 validatesDomainName进行设置。</p>
+<h2 id="准备证书"><a href="#准备证书" class="headerlink" title="准备证书"></a>准备证书</h2><p>我这边使用的是xca来制作了根证书，制作流程请参考<a href="http://www.2cto.com/Article/201411/347512.html，由于xca无法导出.jsk的后缀，因此我们只要制作完根证书后以.p12的格式导出就行了，之后的证书制作由命令行来完成。自制一个批处理文件，添加如下命令：" target="_blank" rel="external">http://www.2cto.com/Article/201411/347512.html，由于xca无法导出.jsk的后缀，因此我们只要制作完根证书后以.p12的格式导出就行了，之后的证书制作由命令行来完成。自制一个批处理文件，添加如下命令：</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">set ip=%1%</div><div class="line">md %ip%</div><div class="line">keytool -importkeystore -srckeystore ca.p12 -srcstoretype PKCS12 -srcstorepass 123456 -destkeystore ca.jks -deststoretype JKS -deststorepass 123456</div><div class="line">keytool -genkeypair -alias server-%ip% -keyalg RSA -keystore ca.jks -storepass 123456 -keypass 123456 -validity 3650 -dname &quot;CN=%ip%, OU=ly, O=hik, L=hz, ST=zj, C=cn&quot;</div><div class="line">keytool -certreq -alias server-%ip% -storepass 123456 -file %ip%\server-%ip%.certreq -keystore ca.jks</div><div class="line">keytool -gencert -alias ca -storepass 123456 -infile %ip%\server-%ip%.certreq -outfile %ip%\server-%ip%.cer -validity 3650 -keystore ca.jks  </div><div class="line">keytool -importcert -trustcacerts -storepass 123456 -alias server-%ip% -file %ip%\server-%ip%.cer -keystore ca.jks</div><div class="line">keytool -delete -keystore ca.jks -alias ca -storepass 123456</div></pre></td></tr></table></figure>
+<p>将上面加粗的ca.p12改成你导出的.p12文件的名称，123456改为你创建证书的密码。<br>然后在文件夹空白处按住ctrl+shift点击右键，选择在此处打开命令窗口，在命令窗口中输入“start.bat ip/域名”来执行批处理文件，其中start.bat是添加了上述命令的批处理文件，ip/域名即你服务器的ip或者域名。执行成功后会生成一个.jks文件和一个以你的ip或域名命名的文件夹，文件夹中有一个.cer的证书，这边的.jks文件将在服务端使用.cer文件将在客户端使用，到这里证书的准备工作就完成了。</p>
+<h2 id="服务端配置"><a href="#服务端配置" class="headerlink" title="服务端配置"></a>服务端配置</h2><p>打开tomcat/conf目录下的server.xml文件将HTTPS的配置打开，并进行如下配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;Connector URIEncoding=&quot;UTF-8&quot; protocol=&quot;org.apache.coyote.http11.Http11NioProtocol&quot; port=&quot;8443&quot; maxThreads=&quot;200&quot; scheme=&quot;https&quot; secure=&quot;true&quot; SSLEnabled=&quot;true&quot; sslProtocol=&quot;TLSv1.2&quot; sslEnabledProtocols=&quot;TLSv1.2&quot; keystoreFile=&quot;$&#123;catalina.base&#125;/ca/ca.jks&quot; keystorePass=&quot;123456&quot; clientAuth=&quot;false&quot; SSLVerifyClient=&quot;off&quot; netZone=&quot;你的ip或域名&quot;/&gt;</div></pre></td></tr></table></figure>
+<p>keystoreFile是你.jks文件放置的目录，keystorePass是你制作证书时设置的密码，netZone填写你的ip或域名。注意苹果要求协议要TLSv1.2以上。</p>
+<h2 id="iOS端配置"><a href="#iOS端配置" class="headerlink" title="iOS端配置"></a>iOS端配置</h2><p>首先把前面生成的.cer文件添加到项目中，注意在添加的时候选择要添加的targets。</p>
+<h3 id="使用NSURLSession进行请求"><a href="#使用NSURLSession进行请求" class="headerlink" title="使用NSURLSession进行请求"></a>使用NSURLSession进行请求</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">NSString *urlString = @&quot;https://xxxxxxx&quot;;</div><div class="line">NSURL *url = [NSURL URLWithString:urlString];</div><div class="line">NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:10.0f];</div><div class="line">NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:self delegateQueue:[NSOperationQueue mainQueue]];</div><div class="line">NSURLSessionDataTask *task = [session dataTaskWithRequest:request];</div><div class="line">[task resume];</div></pre></td></tr></table></figure>
+<p>需要实现NSURLSessionDataDelegate中的URLSession:didReceiveChallenge:completionHandler:方法来进行证书的校验：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div></pre></td><td class="code"><pre><div class="line">- (void)URLSession:(NSURLSession *)session didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge</div><div class="line"> completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential * _Nullable credential))completionHandler &#123;</div><div class="line">    NSLog(@&quot;证书认证&quot;);</div><div class="line">    if ([[[challenge protectionSpace] authenticationMethod] isEqualToString: NSURLAuthenticationMethodServerTrust]) &#123;</div><div class="line">        do</div><div class="line">        &#123;</div><div class="line">            SecTrustRef serverTrust = [[challenge protectionSpace] serverTrust];</div><div class="line">            NSCAssert(serverTrust != nil, @&quot;serverTrust is nil&quot;);</div><div class="line">            if(nil == serverTrust)</div><div class="line">                break; /* failed */</div><div class="line">            /**</div><div class="line">             *  导入多张CA证书（Certification Authority，支持SSL证书以及自签名的CA），请替换掉你的证书名称</div><div class="line">             */</div><div class="line">            NSString *cerPath = [[NSBundle mainBundle] pathForResource:@&quot;ca&quot; ofType:@&quot;cer&quot;];//自签名证书</div><div class="line">            NSData* caCert = [NSData dataWithContentsOfFile:cerPath];</div><div class="line"></div><div class="line">            NSCAssert(caCert != nil, @&quot;caCert is nil&quot;);</div><div class="line">            if(nil == caCert)</div><div class="line">                break; /* failed */</div><div class="line">            </div><div class="line">            SecCertificateRef caRef = SecCertificateCreateWithData(NULL, (__bridge CFDataRef)caCert);</div><div class="line">            NSCAssert(caRef != nil, @&quot;caRef is nil&quot;);</div><div class="line">            if(nil == caRef)</div><div class="line">                break; /* failed */</div><div class="line">            </div><div class="line">            //可以添加多张证书</div><div class="line">            NSArray *caArray = @[(__bridge id)(caRef)];</div><div class="line">            </div><div class="line">            NSCAssert(caArray != nil, @&quot;caArray is nil&quot;);</div><div class="line">            if(nil == caArray)</div><div class="line">                break; /* failed */</div><div class="line">            </div><div class="line">            //将读取的证书设置为服务端帧数的根证书</div><div class="line">            OSStatus status = SecTrustSetAnchorCertificates(serverTrust, (__bridge CFArrayRef)caArray);</div><div class="line">            NSCAssert(errSecSuccess == status, @&quot;SecTrustSetAnchorCertificates failed&quot;);</div><div class="line">            if(!(errSecSuccess == status))</div><div class="line">                break; /* failed */</div><div class="line">            </div><div class="line">            SecTrustResultType result = -1;</div><div class="line">            //通过本地导入的证书来验证服务器的证书是否可信</div><div class="line">            status = SecTrustEvaluate(serverTrust, &amp;result);</div><div class="line">            if(!(errSecSuccess == status))</div><div class="line">                break; /* failed */</div><div class="line">            NSLog(@&quot;stutas:%d&quot;,(int)status);</div><div class="line">            NSLog(@&quot;Result: %d&quot;, result);</div><div class="line">            </div><div class="line">            BOOL allowConnect = (result == kSecTrustResultUnspecified) || (result == kSecTrustResultProceed);</div><div class="line">            if (allowConnect) &#123;</div><div class="line">                NSLog(@&quot;success&quot;);</div><div class="line">            &#125;else &#123;</div><div class="line">                NSLog(@&quot;error&quot;);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            /* kSecTrustResultUnspecified and kSecTrustResultProceed are success */</div><div class="line">            if(! allowConnect)</div><div class="line">            &#123;</div><div class="line">                break; /* failed */</div><div class="line">            &#125;</div><div class="line">            </div><div class="line">#if 0</div><div class="line">            /* Treat kSecTrustResultConfirm and kSecTrustResultRecoverableTrustFailure as success */</div><div class="line">            /*   since the user will likely tap-through to see the dancing bunnies */</div><div class="line">            if(result == kSecTrustResultDeny || result == kSecTrustResultFatalTrustFailure || result == kSecTrustResultOtherError)</div><div class="line">                break; /* failed to trust cert (good in this case) */</div><div class="line">#endif</div><div class="line">            </div><div class="line">            // The only good exit point</div><div class="line">            NSLog(@&quot;信任该证书&quot;);</div><div class="line">            </div><div class="line">            NSURLCredential *credential = [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust];</div><div class="line">            completionHandler(NSURLSessionAuthChallengeUseCredential,credential);</div><div class="line">            return [[challenge sender] useCredential: credential</div><div class="line">                          forAuthenticationChallenge: challenge];</div><div class="line">            </div><div class="line">        &#125;</div><div class="line">        while(0);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    // Bad dog</div><div class="line">    NSURLCredential *credential = [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust];</div><div class="line">    completionHandler(NSURLSessionAuthChallengeCancelAuthenticationChallenge,credential);</div><div class="line">    return [[challenge sender] cancelAuthenticationChallenge: challenge];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>此时即可成功请求到服务端。</p>
+<h3 id="使用AFNetworking进行请求"><a href="#使用AFNetworking进行请求" class="headerlink" title="使用AFNetworking进行请求"></a>使用AFNetworking进行请求</h3><p>AFNetworking首先需要配置AFSecurityPolicy类，AFSecurityPolicy类封装了证书校验的过程。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> AFSecurityPolicy分三种验证模式：</div><div class="line"> AFSSLPinningModeNone:只是验证证书是否在信任列表中</div><div class="line"> AFSSLPinningModeCertificate：该模式会验证证书是否在信任列表中，然后再对比服务端证书和客户端证书是否一致</div><div class="line"> AFSSLPinningModePublicKey：只验证服务端证书与客户端证书的公钥是否一致</div><div class="line">*/</div><div class="line"></div><div class="line">AFSecurityPolicy *securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeCertificate];</div><div class="line">    securityPolicy.allowInvalidCertificates = YES;//是否允许使用自签名证书</div><div class="line">    securityPolicy.validatesDomainName = NO;//是否需要验证域名，默认YES</div><div class="line"></div><div class="line">    AFHTTPSessionManager *_manager = [AFHTTPSessionManager manager];</div><div class="line">    _manager.responseSerializer = [AFHTTPResponseSerializer serializer];</div><div class="line">    _manager.securityPolicy = securityPolicy;</div><div class="line">    //设置超时</div><div class="line">    [_manager.requestSerializer willChangeValueForKey:@&quot;timeoutinterval&quot;];</div><div class="line">    _manager.requestSerializer.timeoutInterval = 20.f;</div><div class="line">    [_manager.requestSerializer didChangeValueForKey:@&quot;timeoutinterval&quot;];</div><div class="line">    _manager.requestSerializer.cachePolicy = NSURLRequestReloadIgnoringCacheData;</div><div class="line">    _manager.responseSerializer.acceptableContentTypes  = [NSSet setWithObjects:@&quot;application/xml&quot;,@&quot;text/xml&quot;,@&quot;text/plain&quot;,@&quot;application/json&quot;,nil];</div><div class="line"> </div><div class="line">    __weak typeof(self) weakSelf = self;</div><div class="line">    [_manager setSessionDidReceiveAuthenticationChallengeBlock:^NSURLSessionAuthChallengeDisposition(NSURLSession *session, NSURLAuthenticationChallenge *challenge, NSURLCredential *__autoreleasing *_credential) &#123;</div><div class="line">        </div><div class="line">        SecTrustRef serverTrust = [[challenge protectionSpace] serverTrust];</div><div class="line">        /**</div><div class="line">         *  导入多张CA证书</div><div class="line">         */</div><div class="line">        NSString *cerPath = [[NSBundle mainBundle] pathForResource:@&quot;ca&quot; ofType:@&quot;cer&quot;];//自签名证书</div><div class="line">        NSData* caCert = [NSData dataWithContentsOfFile:cerPath];</div><div class="line">        NSArray *cerArray = @[caCert];</div><div class="line">        weakSelf.manager.securityPolicy.pinnedCertificates = cerArray;</div><div class="line">        </div><div class="line">        SecCertificateRef caRef = SecCertificateCreateWithData(NULL, (__bridge CFDataRef)caCert);</div><div class="line">        NSCAssert(caRef != nil, @&quot;caRef is nil&quot;);</div><div class="line">        </div><div class="line">        NSArray *caArray = @[(__bridge id)(caRef)];</div><div class="line">        NSCAssert(caArray != nil, @&quot;caArray is nil&quot;);</div><div class="line">        </div><div class="line">        OSStatus status = SecTrustSetAnchorCertificates(serverTrust, (__bridge CFArrayRef)caArray);</div><div class="line">        SecTrustSetAnchorCertificatesOnly(serverTrust,NO);</div><div class="line">        NSCAssert(errSecSuccess == status, @&quot;SecTrustSetAnchorCertificates failed&quot;);</div><div class="line">        </div><div class="line">        NSURLSessionAuthChallengeDisposition disposition = NSURLSessionAuthChallengePerformDefaultHandling;</div><div class="line">        __autoreleasing NSURLCredential *credential = nil;</div><div class="line">        if ([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust]) &#123;</div><div class="line">            if ([weakSelf.manager.securityPolicy evaluateServerTrust:challenge.protectionSpace.serverTrust forDomain:challenge.protectionSpace.host]) &#123;</div><div class="line">                credential = [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust];</div><div class="line">                if (credential) &#123;</div><div class="line">                    disposition = NSURLSessionAuthChallengeUseCredential;</div><div class="line">                &#125; else &#123;</div><div class="line">                    disposition = NSURLSessionAuthChallengePerformDefaultHandling;</div><div class="line">                &#125;</div><div class="line">            &#125; else &#123;</div><div class="line">                disposition = NSURLSessionAuthChallengeCancelAuthenticationChallenge;</div><div class="line">            &#125;</div><div class="line">        &#125; else &#123;</div><div class="line">            disposition = NSURLSessionAuthChallengePerformDefaultHandling;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        return disposition;</div><div class="line">    &#125;];</div></pre></td></tr></table></figure>
+<p>由于服务端使用.jks是一个证书库，客户端获取到的证书可能不止一本，我这边获取到了两本，具体获取到基本可通过SecTrustGetCertificateCount方法获取证书个数，AFNetworking在evaluateServerTrust：forDomain：方法中，AFSSLPinningMode的类型为AFSSLPinningModeCertificate和AFSSLPinningModePublicKey的时候都有校验服务端的证书个数与客户端信任的证书数量是否一样，如果不一样的话无法请求成功，所以这边我就修改他的源码，当有一个校验成功时即算成功。<br>参考：<a href="http://www.jianshu.com/p/e6a26ecd84aa" target="_blank" rel="external">http://www.jianshu.com/p/e6a26ecd84aa</a></p>
+    </div>
+    <p class="post-meta">
+        <span class="post-cat">分类：
+            <a class="cat-link" href="/categories/ios/">ios</a>
+        </span>
+        <span class="post-tags">
+            标签：
+            <a href="/tags/ios/" title="ios">ios</a> / 
+    
+        <a href="/tags/https/" title="https">https</a>
+        </span>
+    </p>
+</article>
+<div class="article-share clearfix text-center">
+    <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+</div>
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br>
+        <a href="/2016/09/05/ios高仿斗鱼app/">
+            
+                高仿ios斗鱼界面
+            
+        </a>
+    </span>
+    
+
+    
+    <span class="next fr">
+        下一篇<br>
+        <a href="/2016/08/29/React Native的Navigator详解/">
+            
+                React Native的Navigator详解
+            
+        </a>
+    </span>
+    
+</div>
+<!-- 文章评论 -->
+<div id="comments" class="comments cloud-tie-wrapper"></div>
+    <script>
+    var cloudTieConfig = {
+      url: document.location.href, 
+      sourceId: "iOS使用自签名证书实现HTTPS请求",
+      productKey: "c06bb9930e6f4b38a9997cb9bd17aba5",
+      target: "comments"
+    };
+    var yunManualLoad = true;
+    Tie.loader("aHR0cHM6Ly9hcGkuZ2VudGllLjE2My5jb20vcGMvbGl2ZXNjcmlwdC5odG1s", true);
+    </script>
+            </div>
+
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章分类</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+    <li>
+        <a href="/categories/Android/">Android</a>
+        <span class="badge">(10)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Android/系统/">系统</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Angular2/">Angular2</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/React-Native/">React Native</a>
+        <span class="badge">(9)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Java/">Java</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/前端/">前端</a>
+        <span class="badge">(6)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/VR/">VR</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Angular2/前端/">前端</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Spring/">Spring</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/ios/">ios</a>
+        <span class="badge">(7)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Google/">Google</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Google/VR/">VR</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/技术人生/">技术人生</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/小程序/">小程序</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/机器学习/">机器学习</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/android/">android</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/设计模式/">设计模式</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+</ul>
+    </section>
+
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="/tags/Android/" title="Android">Android (7)</a>
+  
+    <a class="tag-item" href="/tags/新特性/" title="新特性">新特性 (2)</a>
+  
+    <a class="tag-item" href="/tags/高仿/" title="高仿">高仿 (4)</a>
+  
+    <a class="tag-item" href="/tags/深入系统/" title="深入系统">深入系统 (1)</a>
+  
+    <a class="tag-item" href="/tags/系统服务/" title="系统服务">系统服务 (1)</a>
+  
+    <a class="tag-item" href="/tags/android/" title="android">android (4)</a>
+  
+    <a class="tag-item" href="/tags/混淆打包/" title="混淆打包">混淆打包 (1)</a>
+  
+    <a class="tag-item" href="/tags/Angular2/" title="Angular2">Angular2 (1)</a>
+  
+    <a class="tag-item" href="/tags/前端开发/" title="前端开发">前端开发 (3)</a>
+  
+    <a class="tag-item" href="/tags/硬件/" title="硬件">硬件 (1)</a>
+  
+    <a class="tag-item" href="/tags/React-Native/" title="React Native">React Native (7)</a>
+  
+    <a class="tag-item" href="/tags/FlexBox布局/" title="FlexBox布局">FlexBox布局 (1)</a>
+  
+    <a class="tag-item" href="/tags/Java/" title="Java">Java (2)</a>
+  
+    <a class="tag-item" href="/tags/垃圾回收/" title="垃圾回收">垃圾回收 (1)</a>
+  
+    <a class="tag-item" href="/tags/Node/" title="Node">Node (2)</a>
+  
+    <a class="tag-item" href="/tags/Google/" title="Google">Google (2)</a>
+  
+    <a class="tag-item" href="/tags/VR/" title="VR">VR (2)</a>
+  
+    <a class="tag-item" href="/tags/OpenGL/" title="OpenGL">OpenGL (1)</a>
+  
+    <a class="tag-item" href="/tags/Promise/" title="Promise">Promise (1)</a>
+  
+    <a class="tag-item" href="/tags/前端/" title="前端">前端 (4)</a>
+  
+    <a class="tag-item" href="/tags/调试/" title="调试">调试 (1)</a>
+  
+    <a class="tag-item" href="/tags/eact-Native/" title="eact Native">eact Native (1)</a>
+  
+    <a class="tag-item" href="/tags/打包/" title="打包">打包 (1)</a>
+  
+    <a class="tag-item" href="/tags/Spring/" title="Spring">Spring (2)</a>
+  
+    <a class="tag-item" href="/tags/入门/" title="入门">入门 (2)</a>
+  
+    <a class="tag-item" href="/tags/原生/" title="原生">原生 (1)</a>
+  
+    <a class="tag-item" href="/tags/ios/" title="ios">ios (7)</a>
+  
+    <a class="tag-item" href="/tags/swift/" title="swift">swift (1)</a>
+  
+    <a class="tag-item" href="/tags/Swift/" title="Swift">Swift (1)</a>
+  
+    <a class="tag-item" href="/tags/AR/" title="AR">AR (1)</a>
+  
+    <a class="tag-item" href="/tags/webpack/" title="webpack">webpack (1)</a>
+  
+    <a class="tag-item" href="/tags/gulp/" title="gulp">gulp (1)</a>
+  
+    <a class="tag-item" href="/tags/Xcode/" title="Xcode">Xcode (2)</a>
+  
+    <a class="tag-item" href="/tags/https/" title="https">https (1)</a>
+  
+    <a class="tag-item" href="/tags/gif/" title="gif">gif (1)</a>
+  
+    <a class="tag-item" href="/tags/mac/" title="mac">mac (1)</a>
+  
+    <a class="tag-item" href="/tags/环境/" title="环境">环境 (1)</a>
+  
+    <a class="tag-item" href="/tags/知识库/" title="知识库">知识库 (1)</a>
+  
+    <a class="tag-item" href="/tags/原理/" title="原理">原理 (1)</a>
+  
+</div>
+    </section>
+    
+
+    
+    <!-- 我的微博 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>我的微博</strong></h3>
+        <div class="widget-bd" style="position: relative">
+  <div id="myWeiboLoading" class="text-center" style="position:absolute;top:0;left:0;right:0;bottom:0;line-height:50px;font-size:12px;background-color:#fff;z-index:9">微博加载中...</div>
+  <iframe width="100%" height="550" class="share_self" frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&amp;width=0&amp;height=550&amp;fansRow=2&amp;ptype=1&amp;speed=0&amp;skin=4&amp;isTitle=1&amp;noborder=1&amp;isWeibo=1&amp;isFans=1&amp;uid=1831462560&amp;verifier=5192ec39&amp;dpc=1"></iframe>
+  <script>
+  (function () {
+    var oMyWeibo = document.getElementById('myWeibo');
+    var oMyWeiboLoading = document.getElementById('myWeiboLoading');
+    var isIE = /msie/i.test(navigator.userAgent) && !window.opera;
+    var timer = null;
+    if (isIE) {
+      oMyWeibo.onreadystatechange = function(){
+        if(oMyWeibo.readyState === 'loaded' || oMyWeibo.readyState === 'complete'){
+          timer = setTimeout(function () {
+            oMyWeiboLoading.parentNode.removeChild(oMyWeiboLoading);
+            timer = null;
+          }, 300);
+        }
+      };
+    } else {
+      oMyWeibo.onload = function () {
+        timer = setTimeout(function () {
+          oMyWeiboLoading.parentNode.removeChild(oMyWeiboLoading);
+          timer = null;
+        }, 300);
+      };
+    }
+  })();
+  </script>
+</div>
+    </section>
+    
+
+    
+    <!-- 友情链接 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>友情链接</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+        <li>
+            <a href="http://blog.csdn.net/xiangzhihong8/" target="_blank" title="csdn个人博客">csdn博客</a>
+        </li>
+    
+        <li>
+            <a href="https://yq.aliyun.com/u/xiangzhihong" target="_blank" title="阿里云技术博客">阿里云博客</a>
+        </li>
+    
+</ul>
+    </section>
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <footer class="footer">
+    &copy;
+    
+        2016-2017
+    
+
+    <a href="/">Jelon Loves You</a>
+</footer>
+<div class="back-to-top" id="JELON__backToTop" title="返回顶部">返回顶部</div>
+<!-- 添加百度自动推送 -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+    <!--博客js脚本 -->
+    <!-- 这里放网站js脚本 -->
+<script src="/js/main.js"></script>
+</body>

@@ -4,34 +4,21 @@
 
     
   <url>
-    <loc>http://code.youmeek.com/2017/06/29/vote/</loc>
-    <lastmod>2017-06-29T01:58:38.336Z</lastmod>
+    <loc>http://code.youmeek.com/2016/05/01/%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99/</loc>
+    <lastmod>2017-07-10T01:54:24.976Z</lastmod>
     <data>
         <display>
-        <title></title>
-        <pubTime>2017-06-29T01:11:33.335Z</pubTime>
+        <title>搭建网站</title>
+        <pubTime>2016-04-30T16:00:00.000Z</pubTime>
         
+        <tag>个人博客</tag>
          
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://code.youmeek.com/2017/03/05/OpenGL%20ES%E7%AE%80%E4%BB%8B/</loc>
-    <lastmod>2017-03-23T07:07:26.523Z</lastmod>
-    <data>
-        <display>
-        <title>OpenGL ES简介</title>
-        <pubTime>2017-03-04T16:00:00.000Z</pubTime>
-        
-        <tag>OpenGL</tag>
+        <tag>搭建网站</tag>
          
          
            
              
-              <breadCrumb title="OpenGL" url="http://code.youmeek.com/categories/OpenGL/"/>
+              <breadCrumb title="技术人生" url="http://code.youmeek.com/categories/%E6%8A%80%E6%9C%AF%E4%BA%BA%E7%94%9F/"/>
           
         </display>
     </data>
@@ -39,21 +26,21 @@
 
     
   <url>
-    <loc>http://code.youmeek.com/2016/10/13/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Android%E6%B8%B2%E6%9F%93%E6%9C%BA%E5%88%B6/</loc>
-    <lastmod>2017-03-23T07:06:12.320Z</lastmod>
+    <loc>http://code.youmeek.com/2016/05/07/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E9%9B%86%E9%94%A6/</loc>
+    <lastmod>2017-07-10T01:45:28.000Z</lastmod>
     <data>
         <display>
-        <title>深入理解Android渲染机制</title>
-        <pubTime>2016-10-12T16:00:00.000Z</pubTime>
+        <title>机器学习算法集锦</title>
+        <pubTime>2016-05-06T16:00:00.000Z</pubTime>
         
-        <tag>android</tag>
+        <tag>机器学习</tag>
          
-        <tag>深入理解</tag>
+        <tag>算法</tag>
          
          
            
              
-              <breadCrumb title="android" url="http://code.youmeek.com/categories/android/"/>
+              <breadCrumb title="机器学习" url="http://code.youmeek.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
           
         </display>
     </data>
@@ -61,26 +48,19 @@
 
     
   <url>
-    <loc>http://code.youmeek.com/2016/05/10/mac%20%E6%90%AD%E5%BB%BAAndroid%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</loc>
-    <lastmod>2017-03-23T07:04:55.364Z</lastmod>
+    <loc>http://code.youmeek.com/2016/11/18/React%20Native%E5%92%8C%E5%8E%9F%E7%94%9Fapp%E9%80%9A%E4%BF%A1%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3/</loc>
+    <lastmod>2017-07-10T01:44:24.000Z</lastmod>
     <data>
         <display>
-        <title>mac 搭建Android开发环境</title>
-        <pubTime>2016-05-09T16:00:00.000Z</pubTime>
+        <title>React Native和原生app通信机制详解</title>
+        <pubTime>2016-11-17T16:00:00.000Z</pubTime>
         
-        <tag>android</tag>
-         
-        <tag>mac</tag>
-         
-        <tag>环境</tag>
+        <tag>eact Native</tag>
          
          
            
              
-              <breadCrumb title="mac" url="http://code.youmeek.com/categories/mac/"/>
-          
-             
-              <breadCrumb title="Android" url="http://code.youmeek.com/categories/mac/Android/"/>
+              <breadCrumb title="React Native" url="http://code.youmeek.com/categories/React-Native/"/>
           
         </display>
     </data>
@@ -88,12 +68,56 @@
 
     
   <url>
-    <loc>http://code.youmeek.com/2016/07/05/iOS%20%E6%BB%9A%E5%8A%A8%E8%A7%86%E5%9B%BE%E7%9A%84%E5%A4%8D%E7%94%A8%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</loc>
-    <lastmod>2017-03-02T12:14:24.748Z</lastmod>
+    <loc>http://code.youmeek.com/2016/10/18/StyleSheet%E6%A0%B7%E5%BC%8F%E8%A1%A8/</loc>
+    <lastmod>2017-07-10T01:41:50.000Z</lastmod>
     <data>
         <display>
-        <title>iOS 滚动视图的复用问题解决方案</title>
-        <pubTime>2016-07-04T16:00:00.000Z</pubTime>
+        <title>React Native之StyleSheet样式表</title>
+        <pubTime>2016-10-17T16:00:00.000Z</pubTime>
+        
+        <tag>Spring</tag>
+         
+        <tag>入门</tag>
+         
+         
+           
+             
+              <breadCrumb title="React Native" url="http://code.youmeek.com/categories/React-Native/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://code.youmeek.com/2016/06/09/Android%20ExpandableListView%E8%AF%A6%E8%A7%A3/</loc>
+    <lastmod>2017-07-10T01:38:50.000Z</lastmod>
+    <data>
+        <display>
+        <title>ExpandableListView实现商品列表折叠</title>
+        <pubTime>2016-06-08T16:00:00.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+        <tag>高仿</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://code.youmeek.com/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://code.youmeek.com/2016/09/28/Xcode%208%E6%96%B0%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D/</loc>
+    <lastmod>2017-07-10T01:37:28.000Z</lastmod>
+    <data>
+        <display>
+        <title>Xcode 8新功能介绍</title>
+        <pubTime>2016-09-27T16:00:00.000Z</pubTime>
         
         <tag>ios</tag>
          
@@ -110,8 +134,251 @@
 
     
   <url>
+    <loc>http://code.youmeek.com/2017/06/03/webpack+react%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</loc>
+    <lastmod>2017-07-10T01:35:08.000Z</lastmod>
+    <data>
+        <display>
+        <title>webpack+react环境搭建</title>
+        <pubTime>2017-06-02T16:00:00.000Z</pubTime>
+        
+        <tag>前端开发</tag>
+         
+        <tag>react</tag>
+         
+         
+           
+             
+              <breadCrumb title="前端" url="http://code.youmeek.com/categories/%E5%89%8D%E7%AB%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://code.youmeek.com/2016/08/21/Swift3.0%E4%BB%8B%E7%BB%8D/</loc>
+    <lastmod>2017-07-10T01:34:30.000Z</lastmod>
+    <data>
+        <display>
+        <title>Swift 3.0介绍</title>
+        <pubTime>2016-08-20T16:00:00.000Z</pubTime>
+        
+        <tag>ios</tag>
+         
+        <tag>Swift</tag>
+         
+         
+           
+             
+              <breadCrumb title="ios" url="http://code.youmeek.com/categories/ios/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://code.youmeek.com/2016/06/20/VR%E6%8A%80%E6%9C%AF%E5%A4%A7%E6%8F%AD%E7%A7%98/</loc>
+    <lastmod>2017-07-10T01:34:10.000Z</lastmod>
+    <data>
+        <display>
+        <title>Google VR技术大揭秘</title>
+        <pubTime>2016-06-19T16:00:00.000Z</pubTime>
+        
+        <tag>Google</tag>
+         
+        <tag>VR</tag>
+         
+        <tag>AR</tag>
+         
+         
+           
+             
+              <breadCrumb title="Google" url="http://code.youmeek.com/categories/Google/"/>
+          
+             
+              <breadCrumb title="VR" url="http://code.youmeek.com/categories/Google/VR/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://code.youmeek.com/2016/11/05/Swift/</loc>
+    <lastmod>2017-07-10T01:32:06.000Z</lastmod>
+    <data>
+        <display>
+        <title>Swift基础语法</title>
+        <pubTime>2016-11-04T16:00:00.000Z</pubTime>
+        
+        <tag>ios</tag>
+         
+        <tag>swift</tag>
+         
+         
+           
+             
+              <breadCrumb title="ios" url="http://code.youmeek.com/categories/ios/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://code.youmeek.com/2016/10/12/Spring%20Boot%E6%90%AD%E5%BB%BAWeb%E5%BA%94%E7%94%A8/</loc>
+    <lastmod>2017-07-10T01:30:48.000Z</lastmod>
+    <data>
+        <display>
+        <title>Spring Boot入门</title>
+        <pubTime>2016-10-11T16:00:00.000Z</pubTime>
+        
+        <tag>Spring</tag>
+         
+        <tag>入门</tag>
+         
+         
+           
+             
+              <breadCrumb title="Spring" url="http://code.youmeek.com/categories/Spring/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://code.youmeek.com/2016/12/01/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
+    <lastmod>2017-07-10T01:30:04.000Z</lastmod>
+    <data>
+        <display>
+        <title>机器学习</title>
+        <pubTime>2016-11-30T16:00:00.000Z</pubTime>
+        
+        <tag>机器学习</tag>
+         
+         
+           
+             
+              <breadCrumb title="机器学习" url="http://code.youmeek.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://code.youmeek.com/2016/10/08/React%20Native%E5%9C%A8Android%E5%B9%B3%E5%8F%B0%E8%BF%90%E8%A1%8Cgif%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</loc>
+    <lastmod>2017-07-10T01:28:30.000Z</lastmod>
+    <data>
+        <display>
+        <title>React Native在Android平台运行gif的解决方法</title>
+        <pubTime>2016-10-07T16:00:00.000Z</pubTime>
+        
+        <tag>android</tag>
+         
+        <tag>React Native</tag>
+         
+         
+           
+             
+              <breadCrumb title="React Native" url="http://code.youmeek.com/categories/React-Native/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://code.youmeek.com/2016/09/06/React%20Native%E5%BC%80%E5%8F%91%E8%B0%83%E8%AF%95/</loc>
+    <lastmod>2017-07-10T01:27:58.000Z</lastmod>
+    <data>
+        <display>
+        <title>React Native程序调试</title>
+        <pubTime>2016-09-05T16:00:00.000Z</pubTime>
+        
+        <tag>React Native</tag>
+         
+        <tag>调试</tag>
+         
+         
+           
+             
+              <breadCrumb title="React Native" url="http://code.youmeek.com/categories/React-Native/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://code.youmeek.com/2016/08/05/React%20Native%E8%B0%83%E7%94%A8%E5%8E%9F%E7%94%9F%E7%B3%BB%E7%BB%9F%E7%9B%B8%E6%9C%BA/</loc>
+    <lastmod>2017-07-10T01:26:58.000Z</lastmod>
+    <data>
+        <display>
+        <title>React Native调用Android相机图库</title>
+        <pubTime>2016-08-04T16:00:00.000Z</pubTime>
+        
+        <tag>React Native</tag>
+         
+        <tag>原生</tag>
+         
+         
+           
+             
+              <breadCrumb title="React Native" url="http://code.youmeek.com/categories/React-Native/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://code.youmeek.com/2016/08/29/React%20Native%E7%9A%84Navigator%E8%AF%A6%E8%A7%A3/</loc>
+    <lastmod>2017-07-10T01:26:04.000Z</lastmod>
+    <data>
+        <display>
+        <title>React Native的Navigator详解</title>
+        <pubTime>2016-08-28T16:00:00.000Z</pubTime>
+        
+        <tag>React Native</tag>
+         
+         
+           
+             
+              <breadCrumb title="React Native" url="http://code.youmeek.com/categories/React-Native/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://code.youmeek.com/2017/01/03/React%20Native%E6%89%93%E5%8C%85/</loc>
+    <lastmod>2017-07-10T01:25:16.000Z</lastmod>
+    <data>
+        <display>
+        <title>React Native打包</title>
+        <pubTime>2017-01-02T16:00:00.000Z</pubTime>
+        
+        <tag>React Native</tag>
+         
+        <tag>打包</tag>
+         
+         
+           
+             
+              <breadCrumb title="React Native" url="http://code.youmeek.com/categories/React-Native/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://code.youmeek.com/2016/10/28/React%20%E9%A1%B5%E9%9D%A2%E6%B8%B2%E6%9F%93%E5%8E%9F%E7%90%86/</loc>
-    <lastmod>2017-03-02T12:13:05.693Z</lastmod>
+    <lastmod>2017-07-10T01:23:48.000Z</lastmod>
     <data>
         <display>
         <title>深入理解React Native页面构建渲染原理</title>
@@ -132,16 +399,16 @@
 
     
   <url>
-    <loc>http://code.youmeek.com/2017/02/28/%E5%89%8D%E7%AB%AF%E7%9F%A5%E8%AF%86%E5%BA%93/</loc>
-    <lastmod>2017-03-02T12:10:14.646Z</lastmod>
+    <loc>http://code.youmeek.com/2016/09/05/Promise%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3/</loc>
+    <lastmod>2017-07-10T01:23:16.000Z</lastmod>
     <data>
         <display>
-        <title>前端知识库</title>
-        <pubTime>2017-02-27T16:00:00.000Z</pubTime>
+        <title>Promise机制详解</title>
+        <pubTime>2016-09-04T16:00:00.000Z</pubTime>
         
-        <tag>前端</tag>
+        <tag>Promise</tag>
          
-        <tag>知识库</tag>
+        <tag>前端</tag>
          
          
            
@@ -154,12 +421,142 @@
 
     
   <url>
-    <loc>http://code.youmeek.com/2016/11/05/iOS%E4%BD%BF%E7%94%A8%E8%87%AA%E7%AD%BE%E5%90%8D%E8%AF%81%E4%B9%A6%E5%AE%9E%E7%8E%B0HTTPS%E8%AF%B7%E6%B1%82/</loc>
-    <lastmod>2017-03-02T12:08:33.012Z</lastmod>
+    <loc>http://code.youmeek.com/2017/01/05/OpenGL%20ES%E7%AE%80%E4%BB%8B/</loc>
+    <lastmod>2017-07-10T01:22:48.000Z</lastmod>
+    <data>
+        <display>
+        <title>OpenGL ES简介</title>
+        <pubTime>2017-01-04T16:00:00.000Z</pubTime>
+        
+        <tag>OpenGL</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://code.youmeek.com/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://code.youmeek.com/2016/08/18/node.js%E5%9F%BA%E6%9C%AC%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E5%8F%8A%E6%B5%81%E7%A8%8B/</loc>
+    <lastmod>2017-07-10T01:22:30.000Z</lastmod>
+    <data>
+        <display>
+        <title>Node.js原理</title>
+        <pubTime>2016-08-17T16:00:00.000Z</pubTime>
+        
+        <tag>Node</tag>
+         
+        <tag>原理</tag>
+         
+         
+           
+             
+              <breadCrumb title="前端" url="http://code.youmeek.com/categories/%E5%89%8D%E7%AB%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://code.youmeek.com/2016/08/15/Node.js%E5%9F%BA%E6%9C%AC%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/</loc>
+    <lastmod>2017-07-10T01:21:44.000Z</lastmod>
+    <data>
+        <display>
+        <title>node.js基本工作原理及流程</title>
+        <pubTime>2016-08-14T16:00:00.000Z</pubTime>
+        
+        <tag>前端开发</tag>
+         
+        <tag>Node</tag>
+         
+         
+           
+             
+              <breadCrumb title="前端" url="http://code.youmeek.com/categories/%E5%89%8D%E7%AB%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://code.youmeek.com/2016/05/10/mac%20%E6%90%AD%E5%BB%BAAndroid%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</loc>
+    <lastmod>2017-07-10T01:15:26.000Z</lastmod>
+    <data>
+        <display>
+        <title>mac 搭建Android开发环境</title>
+        <pubTime>2016-05-09T16:00:00.000Z</pubTime>
+        
+        <tag>android</tag>
+         
+        <tag>mac</tag>
+         
+        <tag>环境</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://code.youmeek.com/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://code.youmeek.com/2016/08/09/Java%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3/</loc>
+    <lastmod>2017-07-10T01:13:50.000Z</lastmod>
+    <data>
+        <display>
+        <title>Java垃圾回收机制详解</title>
+        <pubTime>2016-08-08T16:00:00.000Z</pubTime>
+        
+        <tag>Java</tag>
+         
+        <tag>垃圾回收</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java" url="http://code.youmeek.com/categories/Java/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://code.youmeek.com/2016/08/03/%E8%BF%AD%E4%BB%A3%E6%A8%A1%E5%BC%8F/</loc>
+    <lastmod>2017-07-10T01:12:48.000Z</lastmod>
+    <data>
+        <display>
+        <title>迭代子模式</title>
+        <pubTime>2016-08-02T16:00:00.000Z</pubTime>
+        
+        <tag>设计模式</tag>
+         
+         
+           
+             
+              <breadCrumb title="设计模式" url="http://code.youmeek.com/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://code.youmeek.com/2016/09/01/iOS%E4%BD%BF%E7%94%A8%E8%87%AA%E7%AD%BE%E5%90%8D%E8%AF%81%E4%B9%A6%E5%AE%9E%E7%8E%B0HTTPS%E8%AF%B7%E6%B1%82/</loc>
+    <lastmod>2017-07-10T01:11:50.000Z</lastmod>
     <data>
         <display>
         <title>iOS使用自签名证书实现HTTPS请求</title>
-        <pubTime>2016-11-04T16:00:00.000Z</pubTime>
+        <pubTime>2016-08-31T16:00:00.000Z</pubTime>
         
         <tag>ios</tag>
          
@@ -168,7 +565,7 @@
          
            
              
-              <breadCrumb title="https" url="http://code.youmeek.com/categories/https/"/>
+              <breadCrumb title="ios" url="http://code.youmeek.com/categories/ios/"/>
           
         </display>
     </data>
@@ -176,11 +573,33 @@
 
     
   <url>
-    <loc>http://code.youmeek.com/2016/07/05/Xcode%208%E6%96%B0%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D/</loc>
-    <lastmod>2017-03-02T12:06:59.977Z</lastmod>
+    <loc>http://code.youmeek.com/2016/09/05/ios%E9%AB%98%E4%BB%BF%E6%96%97%E9%B1%BCapp/</loc>
+    <lastmod>2017-07-10T01:10:56.000Z</lastmod>
     <data>
         <display>
-        <title>Xcode 8新功能介绍</title>
+        <title>高仿ios斗鱼界面</title>
+        <pubTime>2016-09-04T16:00:00.000Z</pubTime>
+        
+        <tag>高仿</tag>
+         
+        <tag>ios</tag>
+         
+         
+           
+             
+              <breadCrumb title="ios" url="http://code.youmeek.com/categories/ios/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://code.youmeek.com/2016/07/05/iOS%20%E6%BB%9A%E5%8A%A8%E8%A7%86%E5%9B%BE%E7%9A%84%E5%A4%8D%E7%94%A8%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</loc>
+    <lastmod>2017-07-10T01:09:54.000Z</lastmod>
+    <data>
+        <display>
+        <title>iOS 滚动视图的复用问题解决方案</title>
         <pubTime>2016-07-04T16:00:00.000Z</pubTime>
         
         <tag>ios</tag>
@@ -199,7 +618,7 @@
     
   <url>
     <loc>http://code.youmeek.com/2016/05/05/ios%20gif%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD%E6%A1%86%E6%9E%B6%E4%BB%8B%E7%BB%8D/</loc>
-    <lastmod>2017-03-02T12:05:42.274Z</lastmod>
+    <lastmod>2017-07-10T01:09:28.000Z</lastmod>
     <data>
         <display>
         <title>FLAnimatedImage -ios gif图片加载框架介绍</title>
@@ -220,21 +639,23 @@
 
     
   <url>
-    <loc>http://code.youmeek.com/2016/10/05/node.js%E5%9F%BA%E6%9C%AC%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E5%8F%8A%E6%B5%81%E7%A8%8B/</loc>
-    <lastmod>2017-03-02T12:03:51.037Z</lastmod>
+    <loc>http://code.youmeek.com/2016/12/05/gulp+webpack%E5%B7%A5%E5%85%B7%E6%95%B4%E5%90%88%E7%AE%80%E4%BB%8B/</loc>
+    <lastmod>2017-07-10T01:08:04.000Z</lastmod>
     <data>
         <display>
-        <title>Node.js原理</title>
-        <pubTime>2016-10-04T16:00:00.000Z</pubTime>
+        <title>gulp+webpack工具整合简介</title>
+        <pubTime>2016-12-04T16:00:00.000Z</pubTime>
         
-        <tag>Node</tag>
+        <tag>前端</tag>
          
-        <tag>原理</tag>
+        <tag>webpack</tag>
+         
+        <tag>gulp</tag>
          
          
            
              
-              <breadCrumb title="Node" url="http://code.youmeek.com/categories/Node/"/>
+              <breadCrumb title="前端" url="http://code.youmeek.com/categories/%E5%89%8D%E7%AB%AF/"/>
           
         </display>
     </data>
@@ -242,100 +663,12 @@
 
     
   <url>
-    <loc>http://code.youmeek.com/2017/02/10/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%B0%9D%E9%B2%9C%E4%B8%80%E4%B8%AA%E6%9C%88%E7%8E%B0%E7%8A%B6%E5%88%86%E6%9E%90/</loc>
-    <lastmod>2017-03-02T12:01:42.277Z</lastmod>
-    <data>
-        <display>
-        <title>微信小程序尝鲜一个月现状分析</title>
-        <pubTime>2017-02-09T16:00:00.000Z</pubTime>
-        
-        <tag>小程序</tag>
-         
-        <tag>微信</tag>
-         
-         
-           
-             
-              <breadCrumb title="小程序" url="http://code.youmeek.com/categories/%E5%B0%8F%E7%A8%8B%E5%BA%8F/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://code.youmeek.com/2016/07/05/Android%E7%A1%AC%E4%BB%B6%E5%8A%A0%E9%80%9F%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%AE%9E%E7%8E%B0/</loc>
-    <lastmod>2017-03-02T12:00:17.783Z</lastmod>
-    <data>
-        <display>
-        <title>Android硬件加速介绍与实现</title>
-        <pubTime>2016-07-04T16:00:00.000Z</pubTime>
-        
-        <tag>Android</tag>
-         
-        <tag>硬件</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android" url="http://code.youmeek.com/categories/Android/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://code.youmeek.com/2016/10/05/React%20Native%E5%9C%A8Android%E5%B9%B3%E5%8F%B0%E8%BF%90%E8%A1%8Cgif%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</loc>
-    <lastmod>2017-03-02T11:58:44.025Z</lastmod>
-    <data>
-        <display>
-        <title>React Native在Android平台运行gif的解决方法</title>
-        <pubTime>2016-10-04T16:00:00.000Z</pubTime>
-        
-        <tag>android</tag>
-         
-        <tag>React Native</tag>
-         
-         
-           
-             
-              <breadCrumb title="React Native" url="http://code.youmeek.com/categories/React-Native/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://code.youmeek.com/2016/10/05/Spring%20Boot%E6%90%AD%E5%BB%BAWeb%E5%BA%94%E7%94%A8/</loc>
-    <lastmod>2017-03-02T11:57:34.528Z</lastmod>
-    <data>
-        <display>
-        <title>Spring Boot入门</title>
-        <pubTime>2016-10-04T16:00:00.000Z</pubTime>
-        
-        <tag>Spring</tag>
-         
-        <tag>入门</tag>
-         
-         
-           
-             
-              <breadCrumb title="Spring" url="http://code.youmeek.com/categories/Spring/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://code.youmeek.com/2016/06/05/Google%20VR%E6%8A%80%E6%9C%AF%E5%A4%A7%E6%8F%AD%E7%A7%98/</loc>
-    <lastmod>2017-03-02T11:56:14.848Z</lastmod>
+    <loc>http://code.youmeek.com/2016/07/25/Google%20VR%E6%8A%80%E6%9C%AF%E5%A4%A7%E6%8F%AD%E7%A7%98/</loc>
+    <lastmod>2017-07-10T01:06:34.000Z</lastmod>
     <data>
         <display>
         <title>Google VR技术大揭秘</title>
-        <pubTime>2016-06-04T16:00:00.000Z</pubTime>
+        <pubTime>2016-07-24T16:00:00.000Z</pubTime>
         
         <tag>Google</tag>
          
@@ -352,34 +685,16 @@
 
     
   <url>
-    <loc>http://code.youmeek.com/2016/10/08/%E9%AB%98%E4%BB%BF%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90/</loc>
-    <lastmod>2017-03-02T11:54:46.906Z</lastmod>
+    <loc>http://code.youmeek.com/2016/07/20/Flex%E5%B8%83%E5%B1%80/</loc>
+    <lastmod>2017-07-10T01:06:00.000Z</lastmod>
     <data>
         <display>
-        <title>Android仿网易云音乐播放界面</title>
-        <pubTime>2016-10-07T16:00:00.000Z</pubTime>
-        
-        <tag>高仿</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android" url="http://code.youmeek.com/categories/Android/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://code.youmeek.com/2016/12/05/React%20Native%E7%9A%84Navigator%E8%AF%A6%E8%A7%A3/</loc>
-    <lastmod>2017-03-02T11:53:37.695Z</lastmod>
-    <data>
-        <display>
-        <title>React Native的Navigator详解</title>
-        <pubTime>2016-12-04T16:00:00.000Z</pubTime>
+        <title>FlexBox布局</title>
+        <pubTime>2016-07-19T16:00:00.000Z</pubTime>
         
         <tag>React Native</tag>
+         
+        <tag>FlexBox布局</tag>
          
          
            
@@ -392,180 +707,8 @@
 
     
   <url>
-    <loc>http://code.youmeek.com/2016/11/05/Android%20ExpandableListView%E8%AF%A6%E8%A7%A3/</loc>
-    <lastmod>2017-03-02T11:52:15.462Z</lastmod>
-    <data>
-        <display>
-        <title>ExpandableListView实现商品列表折叠</title>
-        <pubTime>2016-11-04T16:00:00.000Z</pubTime>
-        
-        <tag>Android</tag>
-         
-        <tag>高仿</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android" url="http://code.youmeek.com/categories/Android/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://code.youmeek.com/2016/11/05/ios%E9%AB%98%E4%BB%BF%E6%96%97%E9%B1%BCapp/</loc>
-    <lastmod>2017-03-02T11:48:27.061Z</lastmod>
-    <data>
-        <display>
-        <title>高仿ios斗鱼界面</title>
-        <pubTime>2016-11-04T16:00:00.000Z</pubTime>
-        
-        <tag>高仿</tag>
-         
-        <tag>ios</tag>
-         
-         
-           
-             
-              <breadCrumb title="ios" url="http://code.youmeek.com/categories/ios/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://code.youmeek.com/2016/08/05/Android%E9%AB%98%E4%BB%BF%E5%A4%A9%E7%8C%AB%E8%AF%A6%E6%83%85%E9%A1%B5/</loc>
-    <lastmod>2017-03-02T11:46:43.918Z</lastmod>
-    <data>
-        <display>
-        <title>Android仿京东、天猫商品详情页</title>
-        <pubTime>2016-08-04T16:00:00.000Z</pubTime>
-        
-        <tag>android</tag>
-         
-        <tag>源码</tag>
-         
-         
-           
-             
-              <breadCrumb title="博客" url="http://code.youmeek.com/categories/%E5%8D%9A%E5%AE%A2/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://code.youmeek.com/2016/09/05/Android%E7%BA%BF%E7%A8%8B%E6%B1%A0/</loc>
-    <lastmod>2017-01-25T06:25:15.604Z</lastmod>
-    <data>
-        <display>
-        <title>Android WindowManager详解</title>
-        <pubTime>2016-09-04T16:00:00.000Z</pubTime>
-        
-        <tag>Android</tag>
-         
-        <tag>WindowManager</tag>
-         
-        <tag>系统服务</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android" url="http://code.youmeek.com/categories/Android/"/>
-          
-             
-              <breadCrumb title="WindowManager" url="http://code.youmeek.com/categories/Android/WindowManager/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://code.youmeek.com/2016/10/05/Android%20WindowManager%E8%AF%A6%E8%A7%A3/</loc>
-    <lastmod>2017-01-25T06:24:31.413Z</lastmod>
-    <data>
-        <display>
-        <title>Android WindowManager详解</title>
-        <pubTime>2016-10-04T16:00:00.000Z</pubTime>
-        
-        <tag>Android</tag>
-         
-        <tag>WindowManager</tag>
-         
-        <tag>系统服务</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android" url="http://code.youmeek.com/categories/Android/"/>
-          
-             
-              <breadCrumb title="WindowManager" url="http://code.youmeek.com/categories/Android/WindowManager/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://code.youmeek.com/2016/08/05/Android7.0%E6%96%B0%E7%89%B9%E6%80%A7/</loc>
-    <lastmod>2017-01-25T06:20:54.791Z</lastmod>
-    <data>
-        <display>
-        <title>android7.0新特性</title>
-        <pubTime>2016-08-04T16:00:00.000Z</pubTime>
-        
-        <tag>Android</tag>
-         
-        <tag>新特性</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android" url="http://code.youmeek.com/categories/Android/"/>
-          
-             
-              <breadCrumb title="系统" url="http://code.youmeek.com/categories/Android/%E7%B3%BB%E7%BB%9F/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://code.youmeek.com/2016/12/05/gulp+webpack%E5%B7%A5%E5%85%B7%E6%95%B4%E5%90%88%E7%AE%80%E4%BB%8B/</loc>
-    <lastmod>2017-01-25T03:06:59.264Z</lastmod>
-    <data>
-        <display>
-        <title>gulp+webpack工具整合简介</title>
-        <pubTime>2016-12-04T16:00:00.000Z</pubTime>
-        
-        <tag>前端开发</tag>
-         
-        <tag>webpack</tag>
-         
-        <tag>gulp</tag>
-         
-         
-           
-             
-              <breadCrumb title="gulp" url="http://code.youmeek.com/categories/gulp/"/>
-          
-             
-              <breadCrumb title="前端" url="http://code.youmeek.com/categories/gulp/%E5%89%8D%E7%AB%AF/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://code.youmeek.com/2016/12/05/Angular2%E5%85%A5%E5%9D%91%E6%8C%87%E5%8D%97/</loc>
-    <lastmod>2017-01-25T03:04:28.236Z</lastmod>
+    <lastmod>2017-07-10T01:05:06.000Z</lastmod>
     <data>
         <display>
         <title>Angular2入坑指南</title>
@@ -589,24 +732,21 @@
 
     
   <url>
-    <loc>http://code.youmeek.com/2016/12/05/Node.js%E5%9F%BA%E6%9C%AC%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/</loc>
-    <lastmod>2017-01-25T03:03:13.497Z</lastmod>
+    <loc>http://code.youmeek.com/2016/07/05/Android%E7%A1%AC%E4%BB%B6%E5%8A%A0%E9%80%9F%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%AE%9E%E7%8E%B0/</loc>
+    <lastmod>2017-07-09T13:05:00.000Z</lastmod>
     <data>
         <display>
-        <title>node.js基本工作原理及流程</title>
-        <pubTime>2016-12-04T16:00:00.000Z</pubTime>
+        <title>Android硬件加速介绍与实现</title>
+        <pubTime>2016-07-04T16:00:00.000Z</pubTime>
         
-        <tag>前端开发</tag>
+        <tag>Android</tag>
          
-        <tag>Node入门</tag>
+        <tag>硬件</tag>
          
          
            
              
-              <breadCrumb title="node" url="http://code.youmeek.com/categories/node/"/>
-          
-             
-              <breadCrumb title="前端" url="http://code.youmeek.com/categories/node/%E5%89%8D%E7%AB%AF/"/>
+              <breadCrumb title="Android" url="http://code.youmeek.com/categories/Android/"/>
           
         </display>
     </data>
@@ -614,16 +754,219 @@
 
     
   <url>
-    <loc>http://code.youmeek.com/2016/11/05/webpack+react%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</loc>
-    <lastmod>2017-01-25T03:02:38.061Z</lastmod>
+    <loc>http://code.youmeek.com/2016/02/05/Android%E6%B7%B7%E6%B7%86%E6%89%93%E5%8C%85%E8%AF%A6%E8%A7%A3/</loc>
+    <lastmod>2017-07-09T12:58:04.000Z</lastmod>
     <data>
         <display>
-        <title>webpack+react环境搭建</title>
-        <pubTime>2016-11-04T16:00:00.000Z</pubTime>
+        <title>Android资源混淆打包方案</title>
+        <pubTime>2016-02-04T16:00:00.000Z</pubTime>
         
-        <tag>前端开发</tag>
+        <tag>Android</tag>
          
-        <tag>react</tag>
+        <tag>混淆打包</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://code.youmeek.com/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://code.youmeek.com/2016/08/05/Android%E9%AB%98%E4%BB%BF%E5%A4%A9%E7%8C%AB%E8%AF%A6%E6%83%85%E9%A1%B5/</loc>
+    <lastmod>2017-07-09T12:57:18.000Z</lastmod>
+    <data>
+        <display>
+        <title>Android仿京东、天猫商品详情页</title>
+        <pubTime>2016-08-04T16:00:00.000Z</pubTime>
+        
+        <tag>高仿</tag>
+         
+        <tag>android</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://code.youmeek.com/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://code.youmeek.com/2016/10/05/Android%20WindowManager%E8%AF%A6%E8%A7%A3/</loc>
+    <lastmod>2017-07-09T12:56:10.000Z</lastmod>
+    <data>
+        <display>
+        <title>Android WindowManager详解</title>
+        <pubTime>2016-10-04T16:00:00.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+        <tag>深入系统</tag>
+         
+        <tag>系统服务</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://code.youmeek.com/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://code.youmeek.com/2016/06/15/Android7.0%E6%96%B0%E7%89%B9%E6%80%A7/</loc>
+    <lastmod>2017-07-09T12:54:40.000Z</lastmod>
+    <data>
+        <display>
+        <title>android7.0新特性</title>
+        <pubTime>2016-06-14T16:00:00.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+        <tag>新特性</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://code.youmeek.com/categories/Android/"/>
+          
+             
+              <breadCrumb title="系统" url="http://code.youmeek.com/categories/Android/%E7%B3%BB%E7%BB%9F/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://code.youmeek.com/2017/02/10/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%B0%9D%E9%B2%9C%E4%B8%80%E4%B8%AA%E6%9C%88%E7%8E%B0%E7%8A%B6%E5%88%86%E6%9E%90/</loc>
+    <lastmod>2017-07-09T12:50:10.000Z</lastmod>
+    <data>
+        <display>
+        <title>微信小程序尝鲜一个月现状分析</title>
+        <pubTime>2017-02-09T16:00:00.000Z</pubTime>
+        
+        <tag>小程序</tag>
+         
+        <tag>微信</tag>
+         
+         
+           
+             
+              <breadCrumb title="小程序" url="http://code.youmeek.com/categories/%E5%B0%8F%E7%A8%8B%E5%BA%8F/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://code.youmeek.com/2016/06/05/Android%20ConstraintLayout%E7%BA%A6%E6%9D%9F%E6%8E%A7%E4%BB%B6%E4%BD%BF%E7%94%A8%E4%BB%8B%E7%BB%8D/</loc>
+    <lastmod>2017-07-09T12:49:44.000Z</lastmod>
+    <data>
+        <display>
+        <title>android7.0新特性</title>
+        <pubTime>2016-06-04T16:00:00.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+        <tag>新特性</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://code.youmeek.com/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://code.youmeek.com/2016/05/17/%E5%88%B7%E6%B5%81%E9%87%8F%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95/</loc>
+    <lastmod>2017-07-09T12:48:32.000Z</lastmod>
+    <data>
+        <display>
+        <title>刷博客等流量</title>
+        <pubTime>2016-05-16T16:00:00.000Z</pubTime>
+        
+        <tag>个人博客</tag>
+         
+        <tag>流量</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术人生" url="http://code.youmeek.com/categories/%E6%8A%80%E6%9C%AF%E4%BA%BA%E7%94%9F/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://code.youmeek.com/2016/05/14/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E4%B9%8BJVM%E5%A0%86%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/</loc>
+    <lastmod>2017-07-09T12:45:06.000Z</lastmod>
+    <data>
+        <display>
+        <title>深入理解Java之JVM堆内存分配</title>
+        <pubTime>2016-05-13T16:00:00.000Z</pubTime>
+        
+        <tag>Java</tag>
+         
+        <tag>内存分配</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java" url="http://code.youmeek.com/categories/Java/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://code.youmeek.com/2016/05/13/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Android%E6%B8%B2%E6%9F%93%E6%9C%BA%E5%88%B6/</loc>
+    <lastmod>2017-07-09T05:35:56.000Z</lastmod>
+    <data>
+        <display>
+        <title>深入理解Android渲染机制</title>
+        <pubTime>2016-05-12T16:00:00.000Z</pubTime>
+        
+        <tag>android</tag>
+         
+        <tag>深入理解</tag>
+         
+         
+           
+             
+              <breadCrumb title="android" url="http://code.youmeek.com/categories/android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://code.youmeek.com/2016/05/11/%E5%89%8D%E7%AB%AF%E7%9F%A5%E8%AF%86%E5%BA%93/</loc>
+    <lastmod>2017-07-09T05:32:30.000Z</lastmod>
+    <data>
+        <display>
+        <title>前端知识库</title>
+        <pubTime>2016-05-10T16:00:00.000Z</pubTime>
+        
+        <tag>前端</tag>
+         
+        <tag>知识库</tag>
          
          
            
@@ -636,153 +979,21 @@
 
     
   <url>
-    <loc>http://code.youmeek.com/2016/12/05/swift/</loc>
-    <lastmod>2017-01-24T08:23:08.864Z</lastmod>
+    <loc>http://code.youmeek.com/2016/05/04/%E9%AB%98%E4%BB%BF%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90/</loc>
+    <lastmod>2017-07-09T05:00:58.000Z</lastmod>
     <data>
         <display>
-        <title>Swift基础语法</title>
-        <pubTime>2016-12-04T16:00:00.000Z</pubTime>
+        <title>Android仿网易云音乐播放界面</title>
+        <pubTime>2016-05-03T16:00:00.000Z</pubTime>
         
-        <tag>ios</tag>
+        <tag>Android</tag>
          
-        <tag>swift</tag>
+        <tag>高仿</tag>
          
          
            
              
-              <breadCrumb title="ios" url="http://code.youmeek.com/categories/ios/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://code.youmeek.com/2016/10/05/%E5%88%B7%E6%B5%81%E9%87%8F%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95/</loc>
-    <lastmod>2017-01-24T08:22:19.211Z</lastmod>
-    <data>
-        <display>
-        <title>刷博客等流量</title>
-        <pubTime>2016-10-04T16:00:00.000Z</pubTime>
-        
-        <tag>个人博客</tag>
-         
-        <tag>流量</tag>
-         
-         
-           
-             
-              <breadCrumb title="博客" url="http://code.youmeek.com/categories/%E5%8D%9A%E5%AE%A2/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://code.youmeek.com/2016/10/05/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/</loc>
-    <lastmod>2017-01-24T08:22:19.211Z</lastmod>
-    <data>
-        <display>
-        <title>刷博客等流量</title>
-        <pubTime>2016-10-04T16:00:00.000Z</pubTime>
-        
-        <tag>个人博客</tag>
-         
-        <tag>流量</tag>
-         
-         
-           
-             
-              <breadCrumb title="博客" url="http://code.youmeek.com/categories/%E5%8D%9A%E5%AE%A2/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://code.youmeek.com/2016/10/05/%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99/</loc>
-    <lastmod>2017-01-24T08:09:47.897Z</lastmod>
-    <data>
-        <display>
-        <title>搭建网站</title>
-        <pubTime>2016-10-04T16:00:00.000Z</pubTime>
-        
-        <tag>个人博客</tag>
-         
-        <tag>搭建网站</tag>
-         
-         
-           
-             
-              <breadCrumb title="网站" url="http://code.youmeek.com/categories/%E7%BD%91%E7%AB%99/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://code.youmeek.com/2016/11/05/visitor/</loc>
-    <lastmod>2017-01-24T08:06:38.307Z</lastmod>
-    <data>
-        <display>
-        <title>Node入门</title>
-        <pubTime>2016-11-04T16:00:00.000Z</pubTime>
-        
-        <tag>前端开发</tag>
-         
-        <tag>Node入门</tag>
-         
-         
-           
-             
-              <breadCrumb title="前端" url="http://code.youmeek.com/categories/%E5%89%8D%E7%AB%AF/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://code.youmeek.com/2016/12/03/Iterate/</loc>
-    <lastmod>2017-01-24T08:02:53.824Z</lastmod>
-    <data>
-        <display>
-        <title>迭代子模式</title>
-        <pubTime>2016-12-02T16:00:00.000Z</pubTime>
-        
-        <tag>迭代子模式</tag>
-         
-        <tag>设计模式</tag>
-         
-         
-           
-             
-              <breadCrumb title="设计模式" url="http://code.youmeek.com/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://code.youmeek.com/2016/12/01/robot/</loc>
-    <lastmod>2017-01-24T08:02:37.007Z</lastmod>
-    <data>
-        <display>
-        <title>机器学习</title>
-        <pubTime>2016-11-30T16:00:00.000Z</pubTime>
-        
-        <tag>大数据</tag>
-         
-        <tag>机器学习</tag>
-         
-         
-           
-             
-              <breadCrumb title="大数据" url="http://code.youmeek.com/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
+              <breadCrumb title="Android" url="http://code.youmeek.com/categories/Android/"/>
           
         </display>
     </data>
