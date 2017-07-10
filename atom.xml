@@ -4,9 +4,9 @@
   <subtitle>个人技术博客</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://code.youmeek.com/"/>
+  <link href="http://www.xiangzhihong.com/"/>
   <updated>2017-07-10T01:35:08.000Z</updated>
-  <id>http://code.youmeek.com/</id>
+  <id>http://www.xiangzhihong.com/</id>
   
   <author>
     <name>xiangzhihong</name>
@@ -17,8 +17,8 @@
   
   <entry>
     <title>webpack+react环境搭建</title>
-    <link href="http://code.youmeek.com/2017/06/03/webpack+react%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
-    <id>http://code.youmeek.com/2017/06/03/webpack+react环境搭建/</id>
+    <link href="http://www.xiangzhihong.com/2017/06/03/webpack+react%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
+    <id>http://www.xiangzhihong.com/2017/06/03/webpack+react环境搭建/</id>
     <published>2017-06-02T16:00:00.000Z</published>
     <updated>2017-07-10T01:35:08.000Z</updated>
     
@@ -71,19 +71,19 @@
     
     </summary>
     
-      <category term="前端" scheme="http://code.youmeek.com/categories/%E5%89%8D%E7%AB%AF/"/>
+      <category term="前端" scheme="http://www.xiangzhihong.com/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
-      <category term="前端开发" scheme="http://code.youmeek.com/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+      <category term="前端开发" scheme="http://www.xiangzhihong.com/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
     
-      <category term="react" scheme="http://code.youmeek.com/tags/react/"/>
+      <category term="react" scheme="http://www.xiangzhihong.com/tags/react/"/>
     
   </entry>
   
   <entry>
     <title>微信小程序尝鲜一个月现状分析</title>
-    <link href="http://code.youmeek.com/2017/02/10/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%B0%9D%E9%B2%9C%E4%B8%80%E4%B8%AA%E6%9C%88%E7%8E%B0%E7%8A%B6%E5%88%86%E6%9E%90/"/>
-    <id>http://code.youmeek.com/2017/02/10/微信小程序尝鲜一个月现状分析/</id>
+    <link href="http://www.xiangzhihong.com/2017/02/10/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%B0%9D%E9%B2%9C%E4%B8%80%E4%B8%AA%E6%9C%88%E7%8E%B0%E7%8A%B6%E5%88%86%E6%9E%90/"/>
+    <id>http://www.xiangzhihong.com/2017/02/10/微信小程序尝鲜一个月现状分析/</id>
     <published>2017-02-09T16:00:00.000Z</published>
     <updated>2017-07-09T12:50:10.000Z</updated>
     
@@ -103,19 +103,19 @@
     
     </summary>
     
-      <category term="小程序" scheme="http://code.youmeek.com/categories/%E5%B0%8F%E7%A8%8B%E5%BA%8F/"/>
+      <category term="小程序" scheme="http://www.xiangzhihong.com/categories/%E5%B0%8F%E7%A8%8B%E5%BA%8F/"/>
     
     
-      <category term="小程序" scheme="http://code.youmeek.com/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/"/>
+      <category term="小程序" scheme="http://www.xiangzhihong.com/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/"/>
     
-      <category term="微信" scheme="http://code.youmeek.com/tags/%E5%BE%AE%E4%BF%A1/"/>
+      <category term="微信" scheme="http://www.xiangzhihong.com/tags/%E5%BE%AE%E4%BF%A1/"/>
     
   </entry>
   
   <entry>
     <title>OpenGL ES简介</title>
-    <link href="http://code.youmeek.com/2017/01/05/OpenGL%20ES%E7%AE%80%E4%BB%8B/"/>
-    <id>http://code.youmeek.com/2017/01/05/OpenGL ES简介/</id>
+    <link href="http://www.xiangzhihong.com/2017/01/05/OpenGL%20ES%E7%AE%80%E4%BB%8B/"/>
+    <id>http://www.xiangzhihong.com/2017/01/05/OpenGL ES简介/</id>
     <published>2017-01-04T16:00:00.000Z</published>
     <updated>2017-07-10T01:22:48.000Z</updated>
     
@@ -206,17 +206,17 @@
     
     </summary>
     
-      <category term="Android" scheme="http://code.youmeek.com/categories/Android/"/>
+      <category term="Android" scheme="http://www.xiangzhihong.com/categories/Android/"/>
     
     
-      <category term="OpenGL" scheme="http://code.youmeek.com/tags/OpenGL/"/>
+      <category term="OpenGL" scheme="http://www.xiangzhihong.com/tags/OpenGL/"/>
     
   </entry>
   
   <entry>
     <title>React Native打包</title>
-    <link href="http://code.youmeek.com/2017/01/03/React%20Native%E6%89%93%E5%8C%85/"/>
-    <id>http://code.youmeek.com/2017/01/03/React Native打包/</id>
+    <link href="http://www.xiangzhihong.com/2017/01/03/React%20Native%E6%89%93%E5%8C%85/"/>
+    <id>http://www.xiangzhihong.com/2017/01/03/React Native打包/</id>
     <published>2017-01-02T16:00:00.000Z</published>
     <updated>2017-07-10T01:25:16.000Z</updated>
     
@@ -251,67 +251,19 @@
     
     </summary>
     
-      <category term="React Native" scheme="http://code.youmeek.com/categories/React-Native/"/>
+      <category term="React Native" scheme="http://www.xiangzhihong.com/categories/React-Native/"/>
     
     
-      <category term="React Native" scheme="http://code.youmeek.com/tags/React-Native/"/>
+      <category term="React Native" scheme="http://www.xiangzhihong.com/tags/React-Native/"/>
     
-      <category term="打包" scheme="http://code.youmeek.com/tags/%E6%89%93%E5%8C%85/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Angular2入坑指南</title>
-    <link href="http://code.youmeek.com/2016/12/05/Angular2%E5%85%A5%E5%9D%91%E6%8C%87%E5%8D%97/"/>
-    <id>http://code.youmeek.com/2016/12/05/Angular2入坑指南/</id>
-    <published>2016-12-04T16:00:00.000Z</published>
-    <updated>2017-07-10T01:05:06.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="序"><a href="#序" class="headerlink" title="序"></a>序</h1><p>对后端开发来说，前端是神秘的，眼花缭乱的技术，繁多的框架，出名的不出名的好几百种，看是“繁荣”，其实显得杂乱无章，但是我们在做开发的时候，技术选型还是主流的那么几个：浅析angular，react，vue.js Node.js。</p>
-<h2 id="node"><a href="#node" class="headerlink" title="node"></a>node</h2><p>官网：<a href="https://nodejs.org/" target="_blank" rel="external">https://nodejs.org/</a><br>nodejs不是一个js框架，千万不要认为是类似jquery的框架，nodejs是js运行时，运行环境，类比java中jvm。做前端的没用过nodejs都不好意思说自己是前端。nodejs是和jvm同等地位的js运行环境，打开了前端人员走向后端的道路。</p>
-<h2 id="react-js"><a href="#react-js" class="headerlink" title="react.js"></a>react.js</h2><p>官网：<a href="http://facebook.github.io/react/" target="_blank" rel="external">http://facebook.github.io/react/</a><br>react是facebook前不久出的一款框架，众前端膜拜之。类比Java中freemarker的宏。reactjs最大的作用就是用来开发ui组件，比如用它开发移动端页面，也是今年移动端前端化的推动者。</p>
-<h2 id="angular-js"><a href="#angular-js" class="headerlink" title="angular.js"></a>angular.js</h2><p>官网：<a href="http://www.apjs.net/" target="_blank" rel="external">http://www.apjs.net/</a><br>angular是一款优秀的前端JS框架，已经被用于Google的多款产品当中。AngularJS有着诸多特性，最为核心的是：MVC、模块化、自动化双向数据绑定、语义化标签、依赖注入等等。因为背靠google也收到了开发者的推崇。</p>
-<h1 id="概念与区别"><a href="#概念与区别" class="headerlink" title="概念与区别"></a>概念与区别</h1><p>本人也在React与Angular两大体系里纠结了好久，还使用React Native做了几个UI，彷徨于两大前端框架之前。<br>React缺点：</p>
-<ol>
-<li>Web Componet的MVC分离不够彻底。 JSX描述的页面模板与JS代码没有办法完全分开。<br>无法接受代码的同时还夹个HTML代码这样原始的方式。</li>
-<li>对UI的描述自成一体，而不是采用CSS或者SCSS。</li>
-<li>数据的传递不够直接还有一堆乱七八槽的属性</li>
-<li>Android与IOS的代码不够一致</li>
-<li>核心太小，一堆补充的库<br>Angular2的优点：<br>1、推荐TypeScript而不是原生的Javascript<br>2、类库特别多，概念也是特别多<br>3、体量大<br>4、成熟度相对偏低，版本2才刚发布<br>5、不兼容1.x<br>6、Router还不成熟<br>综合以上我最终决定选择Angular2作为我前端开发的首选框架。<br>同时还有以下几个Bonus：</li>
-<li>配置nativescript写原生应用，并且nativescript支持css子集，这一点比react要强一些，可以更小的降低学习成本与维护成本。<ol>
-<li>有官方的UI方案Material Design供选择</li>
-<li>官工具链相对于React要成熟 有angular-cli这个便利化的工具，并提供E2E的测试，用以方便测试，并保证项目的质量。</li>
-<li>维护团队强大<br>来看一张图：<br><img src="http://img.blog.csdn.net/20161225121233493?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><h1 id="Angular2快速安装与入门"><a href="#Angular2快速安装与入门" class="headerlink" title="Angular2快速安装与入门"></a>Angular2快速安装与入门</h1>安装angular-cli</li>
-</ol>
-</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g angular-cli</div></pre></td></tr></table></figure>
-<p>创建项目</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ng new PROJECT_NAMEcd PROJECT_NAMEng serve</div></pre></td></tr></table></figure>
-<p>就这么 简单，这时候你的项目已经运行起来了。<br><img src="http://img.blog.csdn.net/20161225121618854?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p>我们看一下项目结构<br><img src="http://img.blog.csdn.net/20161225121652321?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>然后打开localhost:4200就可以查看效果了。<br>附：<a href="https://github.com/angular/angular-cli" target="_blank" rel="external">angular-cli的教程与源码地址</a></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;序&quot;&gt;&lt;a href=&quot;#序&quot; class=&quot;headerlink&quot; title=&quot;序&quot;&gt;&lt;/a&gt;序&lt;/h1&gt;&lt;p&gt;对后端开发来说，前端是神秘的，眼花缭乱的技术，繁多的框架，出名的不出名的好几百种，看是“繁荣”，其实显得杂乱无章，但是我们在做开发的时候，技术选型还
-    
-    </summary>
-    
-      <category term="Angular2" scheme="http://code.youmeek.com/categories/Angular2/"/>
-    
-      <category term="前端" scheme="http://code.youmeek.com/categories/Angular2/%E5%89%8D%E7%AB%AF/"/>
-    
-    
-      <category term="Angular2" scheme="http://code.youmeek.com/tags/Angular2/"/>
-    
-      <category term="前端开发" scheme="http://code.youmeek.com/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+      <category term="打包" scheme="http://www.xiangzhihong.com/tags/%E6%89%93%E5%8C%85/"/>
     
   </entry>
   
   <entry>
     <title>gulp+webpack工具整合简介</title>
-    <link href="http://code.youmeek.com/2016/12/05/gulp+webpack%E5%B7%A5%E5%85%B7%E6%95%B4%E5%90%88%E7%AE%80%E4%BB%8B/"/>
-    <id>http://code.youmeek.com/2016/12/05/gulp+webpack工具整合简介/</id>
+    <link href="http://www.xiangzhihong.com/2016/12/05/gulp+webpack%E5%B7%A5%E5%85%B7%E6%95%B4%E5%90%88%E7%AE%80%E4%BB%8B/"/>
+    <id>http://www.xiangzhihong.com/2016/12/05/gulp+webpack工具整合简介/</id>
     <published>2016-12-04T16:00:00.000Z</published>
     <updated>2017-07-10T01:08:04.000Z</updated>
     
@@ -399,21 +351,69 @@
     
     </summary>
     
-      <category term="前端" scheme="http://code.youmeek.com/categories/%E5%89%8D%E7%AB%AF/"/>
+      <category term="前端" scheme="http://www.xiangzhihong.com/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
-      <category term="前端" scheme="http://code.youmeek.com/tags/%E5%89%8D%E7%AB%AF/"/>
+      <category term="前端" scheme="http://www.xiangzhihong.com/tags/%E5%89%8D%E7%AB%AF/"/>
     
-      <category term="webpack" scheme="http://code.youmeek.com/tags/webpack/"/>
+      <category term="webpack" scheme="http://www.xiangzhihong.com/tags/webpack/"/>
     
-      <category term="gulp" scheme="http://code.youmeek.com/tags/gulp/"/>
+      <category term="gulp" scheme="http://www.xiangzhihong.com/tags/gulp/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Angular2入坑指南</title>
+    <link href="http://www.xiangzhihong.com/2016/12/05/Angular2%E5%85%A5%E5%9D%91%E6%8C%87%E5%8D%97/"/>
+    <id>http://www.xiangzhihong.com/2016/12/05/Angular2入坑指南/</id>
+    <published>2016-12-04T16:00:00.000Z</published>
+    <updated>2017-07-10T01:05:06.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="序"><a href="#序" class="headerlink" title="序"></a>序</h1><p>对后端开发来说，前端是神秘的，眼花缭乱的技术，繁多的框架，出名的不出名的好几百种，看是“繁荣”，其实显得杂乱无章，但是我们在做开发的时候，技术选型还是主流的那么几个：浅析angular，react，vue.js Node.js。</p>
+<h2 id="node"><a href="#node" class="headerlink" title="node"></a>node</h2><p>官网：<a href="https://nodejs.org/" target="_blank" rel="external">https://nodejs.org/</a><br>nodejs不是一个js框架，千万不要认为是类似jquery的框架，nodejs是js运行时，运行环境，类比java中jvm。做前端的没用过nodejs都不好意思说自己是前端。nodejs是和jvm同等地位的js运行环境，打开了前端人员走向后端的道路。</p>
+<h2 id="react-js"><a href="#react-js" class="headerlink" title="react.js"></a>react.js</h2><p>官网：<a href="http://facebook.github.io/react/" target="_blank" rel="external">http://facebook.github.io/react/</a><br>react是facebook前不久出的一款框架，众前端膜拜之。类比Java中freemarker的宏。reactjs最大的作用就是用来开发ui组件，比如用它开发移动端页面，也是今年移动端前端化的推动者。</p>
+<h2 id="angular-js"><a href="#angular-js" class="headerlink" title="angular.js"></a>angular.js</h2><p>官网：<a href="http://www.apjs.net/" target="_blank" rel="external">http://www.apjs.net/</a><br>angular是一款优秀的前端JS框架，已经被用于Google的多款产品当中。AngularJS有着诸多特性，最为核心的是：MVC、模块化、自动化双向数据绑定、语义化标签、依赖注入等等。因为背靠google也收到了开发者的推崇。</p>
+<h1 id="概念与区别"><a href="#概念与区别" class="headerlink" title="概念与区别"></a>概念与区别</h1><p>本人也在React与Angular两大体系里纠结了好久，还使用React Native做了几个UI，彷徨于两大前端框架之前。<br>React缺点：</p>
+<ol>
+<li>Web Componet的MVC分离不够彻底。 JSX描述的页面模板与JS代码没有办法完全分开。<br>无法接受代码的同时还夹个HTML代码这样原始的方式。</li>
+<li>对UI的描述自成一体，而不是采用CSS或者SCSS。</li>
+<li>数据的传递不够直接还有一堆乱七八槽的属性</li>
+<li>Android与IOS的代码不够一致</li>
+<li>核心太小，一堆补充的库<br>Angular2的优点：<br>1、推荐TypeScript而不是原生的Javascript<br>2、类库特别多，概念也是特别多<br>3、体量大<br>4、成熟度相对偏低，版本2才刚发布<br>5、不兼容1.x<br>6、Router还不成熟<br>综合以上我最终决定选择Angular2作为我前端开发的首选框架。<br>同时还有以下几个Bonus：</li>
+<li>配置nativescript写原生应用，并且nativescript支持css子集，这一点比react要强一些，可以更小的降低学习成本与维护成本。<ol>
+<li>有官方的UI方案Material Design供选择</li>
+<li>官工具链相对于React要成熟 有angular-cli这个便利化的工具，并提供E2E的测试，用以方便测试，并保证项目的质量。</li>
+<li>维护团队强大<br>来看一张图：<br><img src="http://img.blog.csdn.net/20161225121233493?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><h1 id="Angular2快速安装与入门"><a href="#Angular2快速安装与入门" class="headerlink" title="Angular2快速安装与入门"></a>Angular2快速安装与入门</h1>安装angular-cli</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g angular-cli</div></pre></td></tr></table></figure>
+<p>创建项目</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ng new PROJECT_NAMEcd PROJECT_NAMEng serve</div></pre></td></tr></table></figure>
+<p>就这么 简单，这时候你的项目已经运行起来了。<br><img src="http://img.blog.csdn.net/20161225121618854?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>我们看一下项目结构<br><img src="http://img.blog.csdn.net/20161225121652321?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>然后打开localhost:4200就可以查看效果了。<br>附：<a href="https://github.com/angular/angular-cli" target="_blank" rel="external">angular-cli的教程与源码地址</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;序&quot;&gt;&lt;a href=&quot;#序&quot; class=&quot;headerlink&quot; title=&quot;序&quot;&gt;&lt;/a&gt;序&lt;/h1&gt;&lt;p&gt;对后端开发来说，前端是神秘的，眼花缭乱的技术，繁多的框架，出名的不出名的好几百种，看是“繁荣”，其实显得杂乱无章，但是我们在做开发的时候，技术选型还
+    
+    </summary>
+    
+      <category term="Angular2" scheme="http://www.xiangzhihong.com/categories/Angular2/"/>
+    
+      <category term="前端" scheme="http://www.xiangzhihong.com/categories/Angular2/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+      <category term="Angular2" scheme="http://www.xiangzhihong.com/tags/Angular2/"/>
+    
+      <category term="前端开发" scheme="http://www.xiangzhihong.com/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
     
   </entry>
   
   <entry>
     <title>机器学习</title>
-    <link href="http://code.youmeek.com/2016/12/01/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    <id>http://code.youmeek.com/2016/12/01/机器学习/</id>
+    <link href="http://www.xiangzhihong.com/2016/12/01/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    <id>http://www.xiangzhihong.com/2016/12/01/机器学习/</id>
     <published>2016-11-30T16:00:00.000Z</published>
     <updated>2017-07-10T01:30:04.000Z</updated>
     
@@ -461,17 +461,17 @@
     
     </summary>
     
-      <category term="机器学习" scheme="http://code.youmeek.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+      <category term="机器学习" scheme="http://www.xiangzhihong.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="机器学习" scheme="http://code.youmeek.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+      <category term="机器学习" scheme="http://www.xiangzhihong.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   
   <entry>
     <title>React Native和原生app通信机制详解</title>
-    <link href="http://code.youmeek.com/2016/11/18/React%20Native%E5%92%8C%E5%8E%9F%E7%94%9Fapp%E9%80%9A%E4%BF%A1%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3/"/>
-    <id>http://code.youmeek.com/2016/11/18/React Native和原生app通信机制详解/</id>
+    <link href="http://www.xiangzhihong.com/2016/11/18/React%20Native%E5%92%8C%E5%8E%9F%E7%94%9Fapp%E9%80%9A%E4%BF%A1%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3/"/>
+    <id>http://www.xiangzhihong.com/2016/11/18/React Native和原生app通信机制详解/</id>
     <published>2016-11-17T16:00:00.000Z</published>
     <updated>2017-07-10T01:44:24.000Z</updated>
     
@@ -508,17 +508,17 @@
     
     </summary>
     
-      <category term="React Native" scheme="http://code.youmeek.com/categories/React-Native/"/>
+      <category term="React Native" scheme="http://www.xiangzhihong.com/categories/React-Native/"/>
     
     
-      <category term="eact Native" scheme="http://code.youmeek.com/tags/eact-Native/"/>
+      <category term="eact Native" scheme="http://www.xiangzhihong.com/tags/eact-Native/"/>
     
   </entry>
   
   <entry>
     <title>Swift基础语法</title>
-    <link href="http://code.youmeek.com/2016/11/05/Swift/"/>
-    <id>http://code.youmeek.com/2016/11/05/Swift/</id>
+    <link href="http://www.xiangzhihong.com/2016/11/05/Swift/"/>
+    <id>http://www.xiangzhihong.com/2016/11/05/Swift/</id>
     <published>2016-11-04T16:00:00.000Z</published>
     <updated>2017-07-10T01:32:06.000Z</updated>
     
@@ -600,19 +600,19 @@
     
     </summary>
     
-      <category term="ios" scheme="http://code.youmeek.com/categories/ios/"/>
+      <category term="ios" scheme="http://www.xiangzhihong.com/categories/ios/"/>
     
     
-      <category term="ios" scheme="http://code.youmeek.com/tags/ios/"/>
+      <category term="ios" scheme="http://www.xiangzhihong.com/tags/ios/"/>
     
-      <category term="swift" scheme="http://code.youmeek.com/tags/swift/"/>
+      <category term="swift" scheme="http://www.xiangzhihong.com/tags/swift/"/>
     
   </entry>
   
   <entry>
     <title>深入理解React Native页面构建渲染原理</title>
-    <link href="http://code.youmeek.com/2016/10/28/React%20%E9%A1%B5%E9%9D%A2%E6%B8%B2%E6%9F%93%E5%8E%9F%E7%90%86/"/>
-    <id>http://code.youmeek.com/2016/10/28/React 页面渲染原理/</id>
+    <link href="http://www.xiangzhihong.com/2016/10/28/React%20%E9%A1%B5%E9%9D%A2%E6%B8%B2%E6%9F%93%E5%8E%9F%E7%90%86/"/>
+    <id>http://www.xiangzhihong.com/2016/10/28/React 页面渲染原理/</id>
     <published>2016-10-27T16:00:00.000Z</published>
     <updated>2017-07-10T01:23:48.000Z</updated>
     
@@ -675,19 +675,19 @@
     
     </summary>
     
-      <category term="React Native" scheme="http://code.youmeek.com/categories/React-Native/"/>
+      <category term="React Native" scheme="http://www.xiangzhihong.com/categories/React-Native/"/>
     
     
-      <category term="React Native" scheme="http://code.youmeek.com/tags/React-Native/"/>
+      <category term="React Native" scheme="http://www.xiangzhihong.com/tags/React-Native/"/>
     
-      <category term="前端" scheme="http://code.youmeek.com/tags/%E5%89%8D%E7%AB%AF/"/>
+      <category term="前端" scheme="http://www.xiangzhihong.com/tags/%E5%89%8D%E7%AB%AF/"/>
     
   </entry>
   
   <entry>
     <title>React Native之StyleSheet样式表</title>
-    <link href="http://code.youmeek.com/2016/10/18/StyleSheet%E6%A0%B7%E5%BC%8F%E8%A1%A8/"/>
-    <id>http://code.youmeek.com/2016/10/18/StyleSheet样式表/</id>
+    <link href="http://www.xiangzhihong.com/2016/10/18/StyleSheet%E6%A0%B7%E5%BC%8F%E8%A1%A8/"/>
+    <id>http://www.xiangzhihong.com/2016/10/18/StyleSheet样式表/</id>
     <published>2016-10-17T16:00:00.000Z</published>
     <updated>2017-07-10T01:41:50.000Z</updated>
     
@@ -722,19 +722,19 @@
     
     </summary>
     
-      <category term="React Native" scheme="http://code.youmeek.com/categories/React-Native/"/>
+      <category term="React Native" scheme="http://www.xiangzhihong.com/categories/React-Native/"/>
     
     
-      <category term="Spring" scheme="http://code.youmeek.com/tags/Spring/"/>
+      <category term="Spring" scheme="http://www.xiangzhihong.com/tags/Spring/"/>
     
-      <category term="入门" scheme="http://code.youmeek.com/tags/%E5%85%A5%E9%97%A8/"/>
+      <category term="入门" scheme="http://www.xiangzhihong.com/tags/%E5%85%A5%E9%97%A8/"/>
     
   </entry>
   
   <entry>
     <title>Spring Boot入门</title>
-    <link href="http://code.youmeek.com/2016/10/12/Spring%20Boot%E6%90%AD%E5%BB%BAWeb%E5%BA%94%E7%94%A8/"/>
-    <id>http://code.youmeek.com/2016/10/12/Spring Boot搭建Web应用/</id>
+    <link href="http://www.xiangzhihong.com/2016/10/12/Spring%20Boot%E6%90%AD%E5%BB%BAWeb%E5%BA%94%E7%94%A8/"/>
+    <id>http://www.xiangzhihong.com/2016/10/12/Spring Boot搭建Web应用/</id>
     <published>2016-10-11T16:00:00.000Z</published>
     <updated>2017-07-10T01:30:48.000Z</updated>
     
@@ -775,19 +775,19 @@
     
     </summary>
     
-      <category term="Spring" scheme="http://code.youmeek.com/categories/Spring/"/>
+      <category term="Spring" scheme="http://www.xiangzhihong.com/categories/Spring/"/>
     
     
-      <category term="Spring" scheme="http://code.youmeek.com/tags/Spring/"/>
+      <category term="Spring" scheme="http://www.xiangzhihong.com/tags/Spring/"/>
     
-      <category term="入门" scheme="http://code.youmeek.com/tags/%E5%85%A5%E9%97%A8/"/>
+      <category term="入门" scheme="http://www.xiangzhihong.com/tags/%E5%85%A5%E9%97%A8/"/>
     
   </entry>
   
   <entry>
     <title>React Native在Android平台运行gif的解决方法</title>
-    <link href="http://code.youmeek.com/2016/10/08/React%20Native%E5%9C%A8Android%E5%B9%B3%E5%8F%B0%E8%BF%90%E8%A1%8Cgif%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/"/>
-    <id>http://code.youmeek.com/2016/10/08/React Native在Android平台运行gif的解决方法/</id>
+    <link href="http://www.xiangzhihong.com/2016/10/08/React%20Native%E5%9C%A8Android%E5%B9%B3%E5%8F%B0%E8%BF%90%E8%A1%8Cgif%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/"/>
+    <id>http://www.xiangzhihong.com/2016/10/08/React Native在Android平台运行gif的解决方法/</id>
     <published>2016-10-07T16:00:00.000Z</published>
     <updated>2017-07-10T01:28:30.000Z</updated>
     
@@ -813,19 +813,19 @@
     
     </summary>
     
-      <category term="React Native" scheme="http://code.youmeek.com/categories/React-Native/"/>
+      <category term="React Native" scheme="http://www.xiangzhihong.com/categories/React-Native/"/>
     
     
-      <category term="android" scheme="http://code.youmeek.com/tags/android/"/>
+      <category term="android" scheme="http://www.xiangzhihong.com/tags/android/"/>
     
-      <category term="React Native" scheme="http://code.youmeek.com/tags/React-Native/"/>
+      <category term="React Native" scheme="http://www.xiangzhihong.com/tags/React-Native/"/>
     
   </entry>
   
   <entry>
     <title>Android WindowManager详解</title>
-    <link href="http://code.youmeek.com/2016/10/05/Android%20WindowManager%E8%AF%A6%E8%A7%A3/"/>
-    <id>http://code.youmeek.com/2016/10/05/Android WindowManager详解/</id>
+    <link href="http://www.xiangzhihong.com/2016/10/05/Android%20WindowManager%E8%AF%A6%E8%A7%A3/"/>
+    <id>http://www.xiangzhihong.com/2016/10/05/Android WindowManager详解/</id>
     <published>2016-10-04T16:00:00.000Z</published>
     <updated>2017-07-09T12:56:10.000Z</updated>
     
@@ -898,21 +898,21 @@
     
     </summary>
     
-      <category term="Android" scheme="http://code.youmeek.com/categories/Android/"/>
+      <category term="Android" scheme="http://www.xiangzhihong.com/categories/Android/"/>
     
     
-      <category term="Android" scheme="http://code.youmeek.com/tags/Android/"/>
+      <category term="Android" scheme="http://www.xiangzhihong.com/tags/Android/"/>
     
-      <category term="深入系统" scheme="http://code.youmeek.com/tags/%E6%B7%B1%E5%85%A5%E7%B3%BB%E7%BB%9F/"/>
+      <category term="深入系统" scheme="http://www.xiangzhihong.com/tags/%E6%B7%B1%E5%85%A5%E7%B3%BB%E7%BB%9F/"/>
     
-      <category term="系统服务" scheme="http://code.youmeek.com/tags/%E7%B3%BB%E7%BB%9F%E6%9C%8D%E5%8A%A1/"/>
+      <category term="系统服务" scheme="http://www.xiangzhihong.com/tags/%E7%B3%BB%E7%BB%9F%E6%9C%8D%E5%8A%A1/"/>
     
   </entry>
   
   <entry>
     <title>Xcode 8新功能介绍</title>
-    <link href="http://code.youmeek.com/2016/09/28/Xcode%208%E6%96%B0%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D/"/>
-    <id>http://code.youmeek.com/2016/09/28/Xcode 8新功能介绍/</id>
+    <link href="http://www.xiangzhihong.com/2016/09/28/Xcode%208%E6%96%B0%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D/"/>
+    <id>http://www.xiangzhihong.com/2016/09/28/Xcode 8新功能介绍/</id>
     <published>2016-09-27T16:00:00.000Z</published>
     <updated>2017-07-10T01:37:28.000Z</updated>
     
@@ -938,19 +938,19 @@
     
     </summary>
     
-      <category term="ios" scheme="http://code.youmeek.com/categories/ios/"/>
+      <category term="ios" scheme="http://www.xiangzhihong.com/categories/ios/"/>
     
     
-      <category term="ios" scheme="http://code.youmeek.com/tags/ios/"/>
+      <category term="ios" scheme="http://www.xiangzhihong.com/tags/ios/"/>
     
-      <category term="Xcode" scheme="http://code.youmeek.com/tags/Xcode/"/>
+      <category term="Xcode" scheme="http://www.xiangzhihong.com/tags/Xcode/"/>
     
   </entry>
   
   <entry>
     <title>React Native程序调试</title>
-    <link href="http://code.youmeek.com/2016/09/06/React%20Native%E5%BC%80%E5%8F%91%E8%B0%83%E8%AF%95/"/>
-    <id>http://code.youmeek.com/2016/09/06/React Native开发调试/</id>
+    <link href="http://www.xiangzhihong.com/2016/09/06/React%20Native%E5%BC%80%E5%8F%91%E8%B0%83%E8%AF%95/"/>
+    <id>http://www.xiangzhihong.com/2016/09/06/React Native开发调试/</id>
     <published>2016-09-05T16:00:00.000Z</published>
     <updated>2017-07-10T01:27:58.000Z</updated>
     
@@ -1018,19 +1018,19 @@
     
     </summary>
     
-      <category term="React Native" scheme="http://code.youmeek.com/categories/React-Native/"/>
+      <category term="React Native" scheme="http://www.xiangzhihong.com/categories/React-Native/"/>
     
     
-      <category term="React Native" scheme="http://code.youmeek.com/tags/React-Native/"/>
+      <category term="React Native" scheme="http://www.xiangzhihong.com/tags/React-Native/"/>
     
-      <category term="调试" scheme="http://code.youmeek.com/tags/%E8%B0%83%E8%AF%95/"/>
+      <category term="调试" scheme="http://www.xiangzhihong.com/tags/%E8%B0%83%E8%AF%95/"/>
     
   </entry>
   
   <entry>
     <title>Promise机制详解</title>
-    <link href="http://code.youmeek.com/2016/09/05/Promise%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3/"/>
-    <id>http://code.youmeek.com/2016/09/05/Promise机制详解/</id>
+    <link href="http://www.xiangzhihong.com/2016/09/05/Promise%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3/"/>
+    <id>http://www.xiangzhihong.com/2016/09/05/Promise机制详解/</id>
     <published>2016-09-04T16:00:00.000Z</published>
     <updated>2017-07-10T01:23:16.000Z</updated>
     
@@ -1154,19 +1154,19 @@
     
     </summary>
     
-      <category term="前端" scheme="http://code.youmeek.com/categories/%E5%89%8D%E7%AB%AF/"/>
+      <category term="前端" scheme="http://www.xiangzhihong.com/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
-      <category term="Promise" scheme="http://code.youmeek.com/tags/Promise/"/>
+      <category term="Promise" scheme="http://www.xiangzhihong.com/tags/Promise/"/>
     
-      <category term="前端" scheme="http://code.youmeek.com/tags/%E5%89%8D%E7%AB%AF/"/>
+      <category term="前端" scheme="http://www.xiangzhihong.com/tags/%E5%89%8D%E7%AB%AF/"/>
     
   </entry>
   
   <entry>
     <title>高仿ios斗鱼界面</title>
-    <link href="http://code.youmeek.com/2016/09/05/ios%E9%AB%98%E4%BB%BF%E6%96%97%E9%B1%BCapp/"/>
-    <id>http://code.youmeek.com/2016/09/05/ios高仿斗鱼app/</id>
+    <link href="http://www.xiangzhihong.com/2016/09/05/ios%E9%AB%98%E4%BB%BF%E6%96%97%E9%B1%BCapp/"/>
+    <id>http://www.xiangzhihong.com/2016/09/05/ios高仿斗鱼app/</id>
     <published>2016-09-04T16:00:00.000Z</published>
     <updated>2017-07-10T01:10:56.000Z</updated>
     
@@ -1197,19 +1197,19 @@
     
     </summary>
     
-      <category term="ios" scheme="http://code.youmeek.com/categories/ios/"/>
+      <category term="ios" scheme="http://www.xiangzhihong.com/categories/ios/"/>
     
     
-      <category term="高仿" scheme="http://code.youmeek.com/tags/%E9%AB%98%E4%BB%BF/"/>
+      <category term="高仿" scheme="http://www.xiangzhihong.com/tags/%E9%AB%98%E4%BB%BF/"/>
     
-      <category term="ios" scheme="http://code.youmeek.com/tags/ios/"/>
+      <category term="ios" scheme="http://www.xiangzhihong.com/tags/ios/"/>
     
   </entry>
   
   <entry>
     <title>iOS使用自签名证书实现HTTPS请求</title>
-    <link href="http://code.youmeek.com/2016/09/01/iOS%E4%BD%BF%E7%94%A8%E8%87%AA%E7%AD%BE%E5%90%8D%E8%AF%81%E4%B9%A6%E5%AE%9E%E7%8E%B0HTTPS%E8%AF%B7%E6%B1%82/"/>
-    <id>http://code.youmeek.com/2016/09/01/iOS使用自签名证书实现HTTPS请求/</id>
+    <link href="http://www.xiangzhihong.com/2016/09/01/iOS%E4%BD%BF%E7%94%A8%E8%87%AA%E7%AD%BE%E5%90%8D%E8%AF%81%E4%B9%A6%E5%AE%9E%E7%8E%B0HTTPS%E8%AF%B7%E6%B1%82/"/>
+    <id>http://www.xiangzhihong.com/2016/09/01/iOS使用自签名证书实现HTTPS请求/</id>
     <published>2016-08-31T16:00:00.000Z</published>
     <updated>2017-07-10T01:11:50.000Z</updated>
     
@@ -1238,19 +1238,19 @@
     
     </summary>
     
-      <category term="ios" scheme="http://code.youmeek.com/categories/ios/"/>
+      <category term="ios" scheme="http://www.xiangzhihong.com/categories/ios/"/>
     
     
-      <category term="ios" scheme="http://code.youmeek.com/tags/ios/"/>
+      <category term="ios" scheme="http://www.xiangzhihong.com/tags/ios/"/>
     
-      <category term="https" scheme="http://code.youmeek.com/tags/https/"/>
+      <category term="https" scheme="http://www.xiangzhihong.com/tags/https/"/>
     
   </entry>
   
   <entry>
     <title>React Native的Navigator详解</title>
-    <link href="http://code.youmeek.com/2016/08/29/React%20Native%E7%9A%84Navigator%E8%AF%A6%E8%A7%A3/"/>
-    <id>http://code.youmeek.com/2016/08/29/React Native的Navigator详解/</id>
+    <link href="http://www.xiangzhihong.com/2016/08/29/React%20Native%E7%9A%84Navigator%E8%AF%A6%E8%A7%A3/"/>
+    <id>http://www.xiangzhihong.com/2016/08/29/React Native的Navigator详解/</id>
     <published>2016-08-28T16:00:00.000Z</published>
     <updated>2017-07-10T01:26:04.000Z</updated>
     
@@ -1294,10 +1294,10 @@
     
     </summary>
     
-      <category term="React Native" scheme="http://code.youmeek.com/categories/React-Native/"/>
+      <category term="React Native" scheme="http://www.xiangzhihong.com/categories/React-Native/"/>
     
     
-      <category term="React Native" scheme="http://code.youmeek.com/tags/React-Native/"/>
+      <category term="React Native" scheme="http://www.xiangzhihong.com/tags/React-Native/"/>
     
   </entry>
   
