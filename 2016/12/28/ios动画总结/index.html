@@ -1,0 +1,531 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8">
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya">
+    
+    <title>ios动画 | 向志洪</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
+    <meta name="keywords" content="前端, Web, 移动, 向志洪">
+    <meta name="description" content="">
+
+    
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <!--[if lt IE 9]>
+    <script src="/js/html5.js"></script>
+    <![endif]-->
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?fd459238242776d173cdc64918fb32f2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+    
+    <script>var yunModuleEnv = true;</script>
+    <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+    
+</head></html>
+<body class="home">
+    <!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="/">
+                <div class="cover">
+                    <span class="name">向志洪</span>
+                    <span class="description">个人技术博客</span>
+                </div>
+            </a>
+        </div>
+        <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
+        <ul class="menu hidden" id="JELON__menu">
+            
+            <li rel="/2016/12/28/ios动画总结/index.html" class="item">
+                <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
+            </li>
+            
+            <li rel="/2016/12/28/ios动画总结/index.html" class="item">
+                <a href="/archives/" title="文章列表" class="icon-lab">&nbsp;文章列表</a>
+            </li>
+            
+            <li rel="/2016/12/28/ios动画总结/index.html" class="item">
+                <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
+            </li>
+            
+            <li rel="/2016/12/28/ios动画总结/index.html" class="item">
+                <a href="/404/" title="留言" class="icon-comment">&nbsp;留言</a>
+            </li>
+            
+        </ul>
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        <a href="https://github.com/xiangzhihong" target="_blank">Github</a>
+                        |
+                    
+                        <a href="http://tongji.baidu.com/web/welcome/login" target="_blank">站长统计</a>
+                        |
+                    
+                        <a href="http://weibo.com/code_xzh" target="_blank">新浪微博</a>
+                        |
+                    
+                </p>
+                <p class="sns">
+                    
+                    <a href="javascript: void(0);" class="wechat">
+                        <b>■</b>
+                        公众号
+                        <span class="popover">
+                            <img src="/img/wechat_mp.jpg" width="120" height="120" alt="我的微信订阅号">
+                            <i class="arrow"></i>
+                        </span>
+                    </a>
+                </p>
+                
+            </div>
+            <div class="avatar fr">
+                <img src="http://ohe65w0xx.bkt.clouddn.com/avert.png" alt="avatar" title="Jelon">
+            </div>
+        </div>
+    </section>
+</header>
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+        <section class="content">
+            <div class="content-main widget">
+                <!-- 文章页 -->
+<!-- 文章 -->
+<article class="post article">
+    <header class="text-center">
+        <h3 class="post-title"><span>ios动画</span></h3>
+    </header>
+    <p class="post-meta text-center">
+        xiangzhihong 发表于
+        <time datetime="2016-12-27T16:00:00.000Z">2016-12-28</time>
+    </p>
+    <div class="post-content">
+        <p>在iOS开发中，动画是提高用户体验重要的环节之一。一个设计严谨、精细的动画效果能给用户耳目一新的效果，这对于app而言是非常重要的。</p>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>iOS动画主要是指Core Animation框架。官方使用文档地址为：Core Animation Guide。Core Animation是iOS和macOS平台上负责图形渲染与动画的基础框架。Core Animation可以作用与动画视图或者其他可视元素，为你完成了动画所需的大部分绘帧工作。你只需要配置少量的动画参数（如开始点的位置和结束点的位置）即可使用Core Animation的动画效果。Core Animation将大部分实际的绘图任务交给了图形硬件来处理，图形硬件会加速图形渲染的速度。这种自动化的图形加速技术让动画拥有更高的帧率并且显示效果更加平滑，不会加重CPU的负担而影响程序的运行速度。</p>
+<h2 id="Core-Animation"><a href="#Core-Animation" class="headerlink" title="Core Animation"></a>Core Animation</h2><p>Core Animation是一组非常强大的动画处理API，它的子类主要有4个：CABasicAnimation、CAKeyframeAnimation、CATransition、CAAnimationGroup。<br>Core Animation类的继承关系图：<br><img src="http://img.blog.csdn.net/20170525215910865?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><p><font color="#DC143C">duration：</font>动画的持续时间</p>
+<p><font color="#DC143C">beginTime：</font>动画的开始时间</p>
+<p><font color="#DC143C">repeatCount：</font>动画的重复次数</p>
+<p><font color="#DC143C">autoreverses：</font>动画按照原动画返回执行</p>
+<p><font color="#DC143C">timingFunction：</font>控制动画的显示节奏系统提供五种值选择，分别是：</p>
+<ul>
+<li>kCAMediaTimingFunctionLinear 线性动画</li>
+<li>kCAMediaTimingFunctionEaseIn 先快后慢</li>
+<li>kCAMediaTimingFunctionEaseOut 先慢后快</li>
+<li>kCAMediaTimingFunctionEaseInEaseOut 先慢后快再慢</li>
+<li>kCAMediaTimingFunctionDefault 默认，也属于中间比较快</li>
+</ul>
+<p><font color="#DC143C">delegate：</font>动画代理。能够检测动画的执行和结束。</p>
+<p><font color="#DC143C">path：</font>帧动画中的执行路径</p>
+<p><font color="#DC143C">type：</font>过渡动画的动画类型。主要有以下4中类型：</p>
+<ul>
+<li>kCATransitionFade 渐变效果</li>
+<li>kCATransitionMoveIn 进入覆盖效果</li>
+<li>kCATransitionPush 推出效果</li>
+<li>kCATransitionReveal 离开效果</li>
+</ul>
+<p><font color="#DC143C">subtype：</font>过渡动画的动画方向。</p>
+<ul>
+<li>kCATransitionFromRight 从右侧进入</li>
+<li>kCATransitionFromLeft 从左侧进入</li>
+<li>kCATransitionFromTop 从顶部进入</li>
+<li>kCATransitionFromBottom 从底部进入</li>
+</ul>
+<h1 id="动画的使用"><a href="#动画的使用" class="headerlink" title="动画的使用"></a>动画的使用</h1><p>动画使用步骤：</p>
+<ol>
+<li>初始化一个动画对象(CAAnimation)并设置一些动画相关属性.</li>
+<li>添加动画对象到层(CALayer)中,开始执行动画.</li>
+</ol>
+<p>CALayer中很多属性都可以通过CAAnimation实现动画效果, 包括opacity, position, transform, bounds, contents等，具体可以在API文档中查找</p>
+<p>通过调用CALayer的addAnimation:forKey:增加动画到层(CALayer)中,这样就能触发动画了.通过调用removeAnimationForKey:可以停止层中的动画.</p>
+<h3 id="UIView"><a href="#UIView" class="headerlink" title="UIView"></a>UIView</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">_demoView.frame = CGRectMake(0, SCREEN_HEIGHT/2-50, 50, 50);</div><div class="line">[UIView animateWithDuration:1.0f animations:^&#123;</div><div class="line">_demoView.frame = CGRectMake(SCREEN_WIDTH, SCREEN_HEIGHT/2-50, 50, 50);</div><div class="line">&#125; completion:^(BOOL finished) &#123;</div><div class="line">_demoView.frame = CGRectMake(SCREEN_WIDTH/2-25, SCREEN_HEIGHT/2-50, 50, 50);</div><div class="line">&#125;];</div></pre></td></tr></table></figure>
+<h3 id="UIView-begin-commit"><a href="#UIView-begin-commit" class="headerlink" title="UIView [begin commit]"></a>UIView [begin commit]</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">_demoView.frame = CGRectMake(0, SCREEN_HEIGHT/2-50, 50, 50);</div><div class="line">[UIView beginAnimations:nil context:nil];</div><div class="line">[UIView setAnimationDuration:1.0f];</div><div class="line">_demoView.frame = CGRectMake(SCREEN_WIDTH, SCREEN_HEIGHT/2-50, 50, 50);</div><div class="line">[UIView commitAnimations];</div></pre></td></tr></table></figure>
+<h3 id="Core-Animation-1"><a href="#Core-Animation-1" class="headerlink" title="Core Animation"></a>Core Animation</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">CABasicAnimation *anima = [CABasicAnimation animationWithKeyPath:@&quot;position&quot;];</div><div class="line">anima.fromValue = [NSValue valueWithCGPoint:CGPointMake(0, SCREEN_HEIGHT/2-75)];</div><div class="line">anima.toValue = [NSValue valueWithCGPoint:CGPointMake(SCREEN_WIDTH, SCREEN_HEIGHT/2-75)];</div><div class="line">anima.duration = 1.0f;</div><div class="line">[_demoView.layer addAnimation:anima forKey:@&quot;positionAnimation&quot;];</div></pre></td></tr></table></figure>
+<h1 id="动画详解"><a href="#动画详解" class="headerlink" title="动画详解"></a>动画详解</h1><h2 id="CABaseAnimation"><a href="#CABaseAnimation" class="headerlink" title="CABaseAnimation"></a>CABaseAnimation</h2><p>基础动画主要提供了对于CALayer对象中的可变属性进行简单动画的操作。比如：位移、透明度、缩放、旋转、背景色等等。<br>主要提供如下属性：</p>
+<p><font color="#DC143C">fromValue：</font>keyPath对应的初始值</p>
+<p><font color="#DC143C">toValue：</font>keyPath对应的结束值<br>示例：<br><img src="http://img.blog.csdn.net/20170526082556756?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"> 1.呼吸动画</div><div class="line">    CABasicAnimation *animation =[CABasicAnimation animationWithKeyPath:@&quot;opacity&quot;];</div><div class="line">    animation.fromValue = [NSNumber numberWithFloat:1.0f];</div><div class="line">    animation.toValue = [NSNumber numberWithFloat:0.0f];</div><div class="line">    animation.autoreverses = YES;    //回退动画（动画可逆，即循环）</div><div class="line">    animation.duration = 1.0f;</div><div class="line">    animation.repeatCount = MAXFLOAT;</div><div class="line">    animation.removedOnCompletion = NO;</div><div class="line">    animation.fillMode = kCAFillModeForwards;//removedOnCompletion,fillMode配合使用保持动画完成效果</div><div class="line">    animation.timingFunction=[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];</div><div class="line">    [self.alphaTagButton.layer addAnimation:animation forKey:@&quot;aAlpha&quot;];  </div><div class="line"></div><div class="line">2.摇摆动画</div><div class="line">    //设置旋转原点</div><div class="line">    self.sharkTagButton.layer.anchorPoint = CGPointMake(0.5, 0);</div><div class="line">    CABasicAnimation* rotationAnimation = [CABasicAnimation animationWithKeyPath:@&quot;transform.rotation.z&quot;];</div><div class="line">    //角度转弧度（这里用1，-1简单处理一下）</div><div class="line">    rotationAnimation.toValue = [NSNumber numberWithFloat:1];</div><div class="line">    rotationAnimation.fromValue = [NSNumber numberWithFloat:-1];</div><div class="line">    rotationAnimation.duration = 1.0f;</div><div class="line">    rotationAnimation.repeatCount = MAXFLOAT;</div><div class="line">    rotationAnimation.removedOnCompletion = NO;</div><div class="line">    rotationAnimation.autoreverses = YES;</div><div class="line">    rotationAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];</div><div class="line">    rotationAnimation.fillMode = kCAFillModeForwards;</div><div class="line">    [self.sharkTagButton.layer addAnimation:rotationAnimation forKey:@&quot;revItUpAnimation&quot;];</div></pre></td></tr></table></figure>
+<p>注意：<br>如果fillMode=kCAFillModeForwards和removedOnComletion=NO，那么在动画执行完毕后，图层会保持显示动画执行后的状态。但在实质上，图层的属性值还是动画执行前的初始值，并没有真正被改变。这就相当于Android早期的View动画。</p>
+<h2 id="CAKeyframeAnimation"><a href="#CAKeyframeAnimation" class="headerlink" title="CAKeyframeAnimation"></a>CAKeyframeAnimation</h2><p>CAKeyframeAnimation和CABaseAnimation都属于CAPropertyAnimatin的子类。CABaseAnimation只能从一个数值（fromValue）变换成另一个数值（toValue）,而CAKeyframeAnimation则会使用一个NSArray保存一组关键帧。</p>
+<p>主要属性：</p>
+<p><font color="#DC143C">values：</font>就是上述的NSArray对象。里面的元素称为”关键帧”(keyframe)。动画对象会在指定的时间(duration)内，依次显示values数组中的每一个关键帧</p>
+<p><font color="#DC143C">path：</font>可以设置一个CGPathRef\CGMutablePathRef,让层跟着路径移动。path只对CALayer的anchorPoint和position起作用。如果你设置了path，那么values将被忽略。</p>
+<p><font color="#DC143C">keyTimes：</font>可以为对应的关键帧指定对应的时间点,其取值范围为0到1.0,keyTimes中的每一个时间值都对应values中的每一帧.当keyTimes没有设置的时候,各个关键帧的时间是平分的。<br>示例：<br><img src="http://img.blog.csdn.net/20170526083129200?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>values属性应用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">-(void)setUpCAKeyframeAnimationUseValues</div><div class="line">&#123;</div><div class="line"></div><div class="line">    CAKeyframeAnimation *animation = [CAKeyframeAnimation animation];</div><div class="line"></div><div class="line">    animation.keyPath = @&quot;position&quot;;</div><div class="line"></div><div class="line">    NSValue *value1 = [NSValue valueWithCGPoint:CGPointMake(50, 50)];</div><div class="line"></div><div class="line">    NSValue *value2 = [NSValue valueWithCGPoint:CGPointMake(kWindowWidth - 50, 50)];</div><div class="line"></div><div class="line">    NSValue *value3 = [NSValue valueWithCGPoint:CGPointMake(kWindowWidth - 50, kWindowHeight-50)];</div><div class="line"></div><div class="line">    NSValue *value4 = [NSValue valueWithCGPoint:CGPointMake(50, kWindowHeight-50)];</div><div class="line"></div><div class="line">    NSValue *value5 = [NSValue valueWithCGPoint:CGPointMake(50, 50)];</div><div class="line"></div><div class="line">    animation.values = @[value1,value2,value3,value4,value5];</div><div class="line">    animation.repeatCount = MAXFLOAT;</div><div class="line"></div><div class="line">    animation.removedOnCompletion = NO;</div><div class="line"></div><div class="line">    animation.fillMode = kCAFillModeForwards;</div><div class="line"></div><div class="line">    animation.duration = 6.0f;</div><div class="line"></div><div class="line">    animation.timingFunction=[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];</div><div class="line"></div><div class="line">    [self.keyButton.layer addAnimation:animation forKey:@&quot;values&quot;];</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>path方式应用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">-(void)setUpCAKeyframeAnimationUsePath</div><div class="line">&#123;</div><div class="line">    CAKeyframeAnimation *animation = [CAKeyframeAnimation animation];</div><div class="line"></div><div class="line">    animation.keyPath = @&quot;position&quot;;</div><div class="line"></div><div class="line">    CGMutablePathRef path = CGPathCreateMutable();</div><div class="line"></div><div class="line">    //矩形线路</div><div class="line">    CGPathAddRect(path, NULL, CGRectMake(50,50, kWindowWidth - 100,kWindowHeight - 100));</div><div class="line"></div><div class="line">    animation.path=path;</div><div class="line"></div><div class="line">    CGPathRelease(path);</div><div class="line"></div><div class="line">    animation.repeatCount = MAXFLOAT;</div><div class="line"></div><div class="line">    animation.removedOnCompletion = NO;</div><div class="line"></div><div class="line">    animation.fillMode = kCAFillModeForwards;</div><div class="line"></div><div class="line">    animation.duration = 10.0f;</div><div class="line"></div><div class="line">    animation.timingFunction=[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];</div><div class="line"></div><div class="line">    [self.keyButton.layer addAnimation:animation forKey:@&quot;path&quot;];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>keyTimes属性使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">-(void)setUpCAKeyframeAnimationUsekeyTimes</div><div class="line">&#123;</div><div class="line"></div><div class="line">    CAKeyframeAnimation *animation = [CAKeyframeAnimation animation];</div><div class="line"></div><div class="line">    animation.keyPath = @&quot;position.x&quot;;</div><div class="line">    animation.values = @[@0, @20, @-20, @20, @0];</div><div class="line">    animation.keyTimes = @[ @0, @(1 / 6.0), @(3 / 6.0), @(5 / 6.0), @1 ];</div><div class="line">    animation.duration = 0.5;</div><div class="line">    animation.additive = YES;</div><div class="line">    [self.sharkTagButton.layer addAnimation:animation forKey:@&quot;keyTimes&quot;];</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="CAAnimationGroup"><a href="#CAAnimationGroup" class="headerlink" title="CAAnimationGroup"></a>CAAnimationGroup</h2><p>CAAnimationGroup(组动画)是CAAnimation的子类，可以保存一组动画对象，将CAAnimationGroup对象加入层后，组中所有动画对象可以同时并发运行。有点类似于Android的帧动画，不过这里的组动画是将一些基础的动画拼接而成的，比如同时缩小、旋转、渐变。</p>
+<p>主要属性有：</p>
+<p><font color="#DC143C">animations：</font>用来保存一组动画对象的NSArray。<br>示例：<br><img src="http://img.blog.csdn.net/20170526090628858?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">CABasicAnimation * animationScale = [CABasicAnimation animation];</div><div class="line">    animationScale.keyPath = @&quot;transform.scale&quot;;</div><div class="line">    animationScale.toValue = @(0.1);</div><div class="line"></div><div class="line">    CABasicAnimation *animationRota = [CABasicAnimation animation];</div><div class="line">    animationRota.keyPath = @&quot;transform.rotation&quot;;</div><div class="line">    animationRota.toValue = @(M_PI_2);</div><div class="line"></div><div class="line">    CAAnimationGroup * group = [[CAAnimationGroup alloc] init];</div><div class="line">    group.duration = 3.0;</div><div class="line">    group.fillMode = kCAFillModeForwards;</div><div class="line">    group.removedOnCompletion = NO;</div><div class="line">    group.repeatCount = MAXFLOAT;</div><div class="line"></div><div class="line">    group.animations = @[animationScale,animationRota];</div><div class="line">    [self.groupButton.layer addAnimation:group forKey:nil];</div></pre></td></tr></table></figure>
+<h2 id="CATransition"><a href="#CATransition" class="headerlink" title="CATransition"></a>CATransition</h2><p>CAAnimation的子类，用于做过渡动画或者转场动画，能够为层提供移出屏幕和移入屏幕的动画效果。<br>重要属性有：</p>
+<p><font color="#DC143C">type：</font>动画过渡类型，官方提供了如下类型：</p>
+<ul>
+<li>kCATransitionFade 渐变效果</li>
+<li>kCATransitionMoveIn 进入覆盖效果</li>
+<li>kCATransitionPush 推出效果</li>
+<li>kCATransitionReveal 揭露离开效果</li>
+</ul>
+<p><font color="#DC143C">subtype：</font>动画过渡方向。</p>
+<ul>
+<li>kCATransitionFromRight 从右侧进入</li>
+<li>kCATransitionFromLeft 从左侧进入</li>
+<li>kCATransitionFromTop 从顶部进入</li>
+<li>kCATransitionFromBottom 从底部进入</li>
+<li>startProgress：动画起点(在整体动画的百分比)</li>
+<li>endProgress：动画终点(在整体动画的百分比)</li>
+</ul>
+<p><img src="http://img.blog.csdn.net/20170526091031364?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">MyViewController *myVC = [[MyViewController alloc]init];</div><div class="line"> CATransition *animation = [CATransition animation];</div><div class="line"> animation.timingFunction = UIViewAnimationCurveEaseInOut;</div><div class="line"> animation.type = @&quot;cube&quot;;</div><div class="line"> animation.duration =0.5f;</div><div class="line"> animation.subtype =kCATransitionFromRight;</div><div class="line"> //控制器间跳转动画</div><div class="line"> [[UIApplication sharedApplication].keyWindow.layer addAnimation:animation forKey:nil];</div><div class="line">[self presentViewController:myVC animated:NO completion:nil];</div></pre></td></tr></table></figure>
+<p>附：<a href="http://www.jianshu.com/p/a098f6e3617f" target="_blank" rel="external">http://www.jianshu.com/p/a098f6e3617f</a></p>
+    </div>
+    <p class="post-meta">
+        <span class="post-cat">分类：
+            <a class="cat-link" href="/categories/ios/">ios</a>
+        </span>
+        <span class="post-tags">
+            标签：
+            <a href="/tags/ios/" title="ios">ios</a>
+        </span>
+    </p>
+</article>
+<div class="article-share clearfix text-center">
+    <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+</div>
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br>
+        <a href="/2017/01/03/React Native打包/">
+            
+                React Native打包
+            
+        </a>
+    </span>
+    
+
+    
+    <span class="next fr">
+        下一篇<br>
+        <a href="/2016/12/25/React Native之轻量级存储AsyncStorage/">
+            
+                React Native之轻量级存储AsyncStorage
+            
+        </a>
+    </span>
+    
+</div>
+<!-- 文章评论 -->
+<div id="comments" class="comments cloud-tie-wrapper"></div>
+    <script>
+    var cloudTieConfig = {
+      url: document.location.href, 
+      sourceId: "ios动画总结",
+      productKey: "c06bb9930e6f4b38a9997cb9bd17aba5",
+      target: "comments"
+    };
+    var yunManualLoad = true;
+    Tie.loader("aHR0cHM6Ly9hcGkuZ2VudGllLjE2My5jb20vcGMvbGl2ZXNjcmlwdC5odG1s", true);
+    </script>
+            </div>
+
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章分类</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+    <li>
+        <a href="/categories/Android/">Android</a>
+        <span class="badge">(10)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Android/系统/">系统</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Angular2/">Angular2</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/前端/">前端</a>
+        <span class="badge">(7)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/React-Native/">React Native</a>
+        <span class="badge">(12)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Java/">Java</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/VR/">VR</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Angular2/前端/">前端</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Spring/">Spring</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/ios/">ios</a>
+        <span class="badge">(9)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Google/">Google</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Google/VR/">VR</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/技术人生/">技术人生</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/小程序/">小程序</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/机器学习/">机器学习</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/android/">android</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/设计模式/">设计模式</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+</ul>
+    </section>
+
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="/tags/Android/" title="Android">Android (7)</a>
+  
+    <a class="tag-item" href="/tags/新特性/" title="新特性">新特性 (2)</a>
+  
+    <a class="tag-item" href="/tags/深入系统/" title="深入系统">深入系统 (1)</a>
+  
+    <a class="tag-item" href="/tags/系统服务/" title="系统服务">系统服务 (1)</a>
+  
+    <a class="tag-item" href="/tags/高仿/" title="高仿">高仿 (4)</a>
+  
+    <a class="tag-item" href="/tags/硬件/" title="硬件">硬件 (1)</a>
+  
+    <a class="tag-item" href="/tags/混淆打包/" title="混淆打包">混淆打包 (1)</a>
+  
+    <a class="tag-item" href="/tags/Angular2/" title="Angular2">Angular2 (1)</a>
+  
+    <a class="tag-item" href="/tags/前端开发/" title="前端开发">前端开发 (3)</a>
+  
+    <a class="tag-item" href="/tags/android/" title="android">android (4)</a>
+  
+    <a class="tag-item" href="/tags/前端/" title="前端">前端 (5)</a>
+  
+    <a class="tag-item" href="/tags/React-Native/" title="React Native">React Native (10)</a>
+  
+    <a class="tag-item" href="/tags/FlexBox布局/" title="FlexBox布局">FlexBox布局 (1)</a>
+  
+    <a class="tag-item" href="/tags/Java/" title="Java">Java (2)</a>
+  
+    <a class="tag-item" href="/tags/垃圾回收/" title="垃圾回收">垃圾回收 (1)</a>
+  
+    <a class="tag-item" href="/tags/Google/" title="Google">Google (2)</a>
+  
+    <a class="tag-item" href="/tags/VR/" title="VR">VR (2)</a>
+  
+    <a class="tag-item" href="/tags/Node/" title="Node">Node (2)</a>
+  
+    <a class="tag-item" href="/tags/OpenGL/" title="OpenGL">OpenGL (1)</a>
+  
+    <a class="tag-item" href="/tags/Promise/" title="Promise">Promise (1)</a>
+  
+    <a class="tag-item" href="/tags/eact-Native/" title="eact Native">eact Native (1)</a>
+  
+    <a class="tag-item" href="/tags/调试/" title="调试">调试 (1)</a>
+  
+    <a class="tag-item" href="/tags/打包/" title="打包">打包 (1)</a>
+  
+    <a class="tag-item" href="/tags/原生/" title="原生">原生 (1)</a>
+  
+    <a class="tag-item" href="/tags/Spring/" title="Spring">Spring (2)</a>
+  
+    <a class="tag-item" href="/tags/入门/" title="入门">入门 (2)</a>
+  
+    <a class="tag-item" href="/tags/ios/" title="ios">ios (9)</a>
+  
+    <a class="tag-item" href="/tags/Swift/" title="Swift">Swift (1)</a>
+  
+    <a class="tag-item" href="/tags/swift/" title="swift">swift (1)</a>
+  
+    <a class="tag-item" href="/tags/AR/" title="AR">AR (1)</a>
+  
+    <a class="tag-item" href="/tags/Xcode/" title="Xcode">Xcode (3)</a>
+  
+    <a class="tag-item" href="/tags/webpack/" title="webpack">webpack (1)</a>
+  
+    <a class="tag-item" href="/tags/gulp/" title="gulp">gulp (1)</a>
+  
+    <a class="tag-item" href="/tags/https/" title="https">https (1)</a>
+  
+    <a class="tag-item" href="/tags/gif/" title="gif">gif (1)</a>
+  
+    <a class="tag-item" href="/tags/mac/" title="mac">mac (1)</a>
+  
+    <a class="tag-item" href="/tags/环境/" title="环境">环境 (1)</a>
+  
+    <a class="tag-item" href="/tags/原理/" title="原理">原理 (1)</a>
+  
+    <a class="tag-item" href="/tags/个人博客/" title="个人博客">个人博客 (2)</a>
+  
+</div>
+    </section>
+    
+
+    
+    <!-- 我的微博 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>我的微博</strong></h3>
+        <div class="widget-bd" style="position: relative">
+  <div id="myWeiboLoading" class="text-center" style="position:absolute;top:0;left:0;right:0;bottom:0;line-height:50px;font-size:12px;background-color:#fff;z-index:9">微博加载中...</div>
+  <iframe width="100%" height="550" class="share_self" frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&amp;width=0&amp;height=550&amp;fansRow=2&amp;ptype=1&amp;speed=0&amp;skin=4&amp;isTitle=1&amp;noborder=1&amp;isWeibo=1&amp;isFans=1&amp;uid=1831462560&amp;verifier=5192ec39&amp;dpc=1"></iframe>
+  <script>
+  (function () {
+    var oMyWeibo = document.getElementById('myWeibo');
+    var oMyWeiboLoading = document.getElementById('myWeiboLoading');
+    var isIE = /msie/i.test(navigator.userAgent) && !window.opera;
+    var timer = null;
+    if (isIE) {
+      oMyWeibo.onreadystatechange = function(){
+        if(oMyWeibo.readyState === 'loaded' || oMyWeibo.readyState === 'complete'){
+          timer = setTimeout(function () {
+            oMyWeiboLoading.parentNode.removeChild(oMyWeiboLoading);
+            timer = null;
+          }, 300);
+        }
+      };
+    } else {
+      oMyWeibo.onload = function () {
+        timer = setTimeout(function () {
+          oMyWeiboLoading.parentNode.removeChild(oMyWeiboLoading);
+          timer = null;
+        }, 300);
+      };
+    }
+  })();
+  </script>
+</div>
+    </section>
+    
+
+    
+    <!-- 友情链接 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>友情链接</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+        <li>
+            <a href="http://blog.csdn.net/xiangzhihong8/" target="_blank" title="csdn个人博客">csdn博客</a>
+        </li>
+    
+        <li>
+            <a href="https://yq.aliyun.com/u/xiangzhihong" target="_blank" title="阿里云技术博客">阿里云博客</a>
+        </li>
+    
+</ul>
+    </section>
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <footer class="footer">
+    &copy;
+    
+        2016-2017
+    
+
+    <a href="/">Jelon Loves You</a>
+</footer>
+<div class="back-to-top" id="JELON__backToTop" title="返回顶部">返回顶部</div>
+<!-- 添加百度自动推送 -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+    <!--博客js脚本 -->
+    <!-- 这里放网站js脚本 -->
+<script src="/js/main.js"></script>
+</body>

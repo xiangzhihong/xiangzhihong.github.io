@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8">
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya">
+    
+    <title>React Native之轻量级存储AsyncStorage | 向志洪</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
+    <meta name="keywords" content="前端, Web, 移动, 向志洪">
+    <meta name="description" content="">
+
+    
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <!--[if lt IE 9]>
+    <script src="/js/html5.js"></script>
+    <![endif]-->
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?fd459238242776d173cdc64918fb32f2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+    
+    <script>var yunModuleEnv = true;</script>
+    <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+    
+</head></html>
+<body class="home">
+    <!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="/">
+                <div class="cover">
+                    <span class="name">向志洪</span>
+                    <span class="description">个人技术博客</span>
+                </div>
+            </a>
+        </div>
+        <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
+        <ul class="menu hidden" id="JELON__menu">
+            
+            <li rel="/2016/12/25/React Native之轻量级存储AsyncStorage/index.html" class="item">
+                <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
+            </li>
+            
+            <li rel="/2016/12/25/React Native之轻量级存储AsyncStorage/index.html" class="item">
+                <a href="/archives/" title="文章列表" class="icon-lab">&nbsp;文章列表</a>
+            </li>
+            
+            <li rel="/2016/12/25/React Native之轻量级存储AsyncStorage/index.html" class="item">
+                <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
+            </li>
+            
+            <li rel="/2016/12/25/React Native之轻量级存储AsyncStorage/index.html" class="item">
+                <a href="/404/" title="留言" class="icon-comment">&nbsp;留言</a>
+            </li>
+            
+        </ul>
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        <a href="https://github.com/xiangzhihong" target="_blank">Github</a>
+                        |
+                    
+                        <a href="http://tongji.baidu.com/web/welcome/login" target="_blank">站长统计</a>
+                        |
+                    
+                        <a href="http://weibo.com/code_xzh" target="_blank">新浪微博</a>
+                        |
+                    
+                </p>
+                <p class="sns">
+                    
+                    <a href="javascript: void(0);" class="wechat">
+                        <b>■</b>
+                        公众号
+                        <span class="popover">
+                            <img src="/img/wechat_mp.jpg" width="120" height="120" alt="我的微信订阅号">
+                            <i class="arrow"></i>
+                        </span>
+                    </a>
+                </p>
+                
+            </div>
+            <div class="avatar fr">
+                <img src="http://ohe65w0xx.bkt.clouddn.com/avert.png" alt="avatar" title="Jelon">
+            </div>
+        </div>
+    </section>
+</header>
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+        <section class="content">
+            <div class="content-main widget">
+                <!-- 文章页 -->
+<!-- 文章 -->
+<article class="post article">
+    <header class="text-center">
+        <h3 class="post-title"><span>React Native之轻量级存储AsyncStorage</span></h3>
+    </header>
+    <p class="post-meta text-center">
+        xiangzhihong 发表于
+        <time datetime="2016-12-24T16:00:00.000Z">2016-12-25</time>
+    </p>
+    <div class="post-content">
+        <p>AsyncStorage是一个简单的、异步的、持久化的以键值对形式进行数据存储的存储系统，对于App来说是全局性的。它的作用等价于iOS的NSUserDefaluts或Android的SharedPreferences，使用AsyncStorage用来替换老旧的LocalStorage。</p>
+<h1 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h1><p>它有很多方法，每一个方法都有回调函数，第一个参数是错误对象，错了就是展示错误信息，否则为null。都会返回一个Promise对象。</p>
+<ul>
+<li>static getItem(key:string , callback:(error,result)):<br>根据键来获取值，获取的结果会在回调函数中。</li>
+<li>static setItem(key:string , value:string , callback:(error)): 设置键值对。</li>
+<li>static removeItem(key:string , callback:(error)): 将根据键移出一项</li>
+<li>static mergeItem:(key:string , value:string , callback:(error)):<br>合并现有的值和输入值。</li>
+<li>static clear(callback:(error)): 清除所有的项目。</li>
+<li>static getAllKeys(callback:(error)): 获取所有的键。</li>
+<li>static multiGet(keys,callback:(errors,result)):获取多项，其中keys是字符串数组。</li>
+<li>static<br>multiSet(keyValuePairs,callback:(errors)):设置多项，其中keyValuePairs是字符串的二维数组。</li>
+<li>static multiRemove(keys,callback(errors)):删除多项，其中keys是字符串数组。</li>
+<li>static multiMerge(keyValuePairs,callback:(errors)):多个键值合并，其中keyValuePairs是字符串中的二维数组。</li>
+</ul>
+<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><p>简单存储：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">setData(text)&#123;  </div><div class="line">  AsyncStorage.setItem(AsyncStorageKey,text,()=&gt;&#123;  </div><div class="line">    this.setState(&#123;  </div><div class="line">      data:text,  </div><div class="line">    &#125;);  </div><div class="line">  &#125;);  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>注意：</strong>可以设置一个回调，设置成功后，调用回调，修改状态机变量。</p>
+<p>删除指定的KEY值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">delData()&#123;  </div><div class="line">  // 读取key字段并将结果作为第二个参数传递给callback。  如果有任何错误发生，则会传递一个Error对象作为第一个参数。返回一个Promise对象。  </div><div class="line">  AsyncStorage.getItem(AsyncStorageKey,(error,text)=&gt;&#123;  </div><div class="line">    if(text=== null )&#123;  </div><div class="line">      alert(AsyncStorageKey +&quot;没有对应的值&quot;);  </div><div class="line">    &#125;else&#123;  </div><div class="line">      //删除数据  </div><div class="line">      AsyncStorage.removeItem(AsyncStorageKey,()=&gt;&#123;  </div><div class="line">        this.setState(&#123;  </div><div class="line">          data:&quot;&quot;,  </div><div class="line">        &#125;,()=&gt;&#123;  </div><div class="line">          alert(&apos;删除成功&apos;);  </div><div class="line">        &#125;);  </div><div class="line">      &#125;);  </div><div class="line">    &#125;  </div><div class="line">  &#125;);  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>完整代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div></pre></td><td class="code"><pre><div class="line">import React, &#123; Component &#125; from &apos;react&apos;;</div><div class="line">import &#123;</div><div class="line">  StyleSheet,</div><div class="line">  View,</div><div class="line">  Text,</div><div class="line">  TouchableHighlight,</div><div class="line">  Dimensions,</div><div class="line">  AsyncStorage</div><div class="line">&#125; from &apos;react-native&apos;;</div><div class="line"></div><div class="line">const &#123;width, height&#125; = Dimensions.get(&apos;window&apos;);</div><div class="line"></div><div class="line"></div><div class="line">var data = &quot;&quot;;</div><div class="line">const AsyncStorageKey = &quot;AS_&quot;;</div><div class="line">export default class AsyncStorageExample extends Component &#123;</div><div class="line"></div><div class="line">  constructor(props) &#123;</div><div class="line">    super(props);</div><div class="line">    this.state = &#123;</div><div class="line">      data:&quot;&quot;</div><div class="line">    &#125;;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  setData(text)&#123;</div><div class="line">    AsyncStorage.setItem(AsyncStorageKey,text,()=&gt;&#123;</div><div class="line">      this.setState(&#123;</div><div class="line">        data:text,</div><div class="line">      &#125;);</div><div class="line">    &#125;);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  delData()&#123;</div><div class="line">    // 读取key字段并将结果作为第二个参数传递给callback。</div><div class="line">    // 如果有任何错误发生，则会传递一个Error对象作为第一个参数。返回一个Promise对象。</div><div class="line">    AsyncStorage.getItem(AsyncStorageKey,(error,text)=&gt;&#123;</div><div class="line">      if(text=== null )&#123;</div><div class="line">        alert(AsyncStorageKey +&quot;没有对应的值&quot;);</div><div class="line">      &#125;else&#123;</div><div class="line">        //删除数据</div><div class="line">        AsyncStorage.removeItem(AsyncStorageKey,()=&gt;&#123;</div><div class="line">          this.setState(&#123;</div><div class="line">            data:&quot;&quot;,</div><div class="line">          &#125;,()=&gt;&#123;</div><div class="line">            alert(&apos;删除成功&apos;);</div><div class="line">          &#125;);</div><div class="line">        &#125;);</div><div class="line">      &#125;</div><div class="line">    &#125;);</div><div class="line">  &#125;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">  render() &#123;</div><div class="line">    return (</div><div class="line">      &lt;View style=&#123;styles.container&#125;&gt;</div><div class="line">          &lt;TouchableHighlight style=&#123;styles.itemView&#125; underlayColor=&quot;red&quot; onPress=&#123;this.setData.bind(this,&quot;我是小刀&quot;)&#125;&gt;</div><div class="line">              &lt;Text style=&#123;styles.itemText&#125;&gt;</div><div class="line">                1、存储数据</div><div class="line">              &lt;/Text&gt;</div><div class="line">          &lt;/TouchableHighlight&gt;</div><div class="line"></div><div class="line">          &lt;TouchableHighlight style=&#123;styles.itemView&#125; underlayColor=&quot;red&quot; onPress=&#123;this.delData.bind(this)&#125;&gt;</div><div class="line">              &lt;Text style=&#123;styles.itemText&#125;&gt;</div><div class="line">                2、删除数据</div><div class="line">              &lt;/Text&gt;</div><div class="line">          &lt;/TouchableHighlight&gt;</div><div class="line"></div><div class="line">          &lt;Text style=&#123;&#123;paddingTop:40&#125;&#125;&gt;</div><div class="line">            AsyncStorage存储的值是:&#123;this.state.data&#125;</div><div class="line">          &lt;/Text&gt;</div><div class="line">      &lt;/View&gt;</div><div class="line">    );</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">const styles = StyleSheet.create(&#123;</div><div class="line">  container: &#123;</div><div class="line">    flex: 1,</div><div class="line">    backgroundColor: &apos;#f2f2f2&apos;,</div><div class="line">    paddingTop:20,</div><div class="line">  &#125;,</div><div class="line">  itemView:&#123;</div><div class="line">    backgroundColor:&apos;grey&apos;,</div><div class="line">    height:44,</div><div class="line">    width:width,</div><div class="line">    justifyContent:&apos;center&apos;,</div><div class="line">    marginTop:10,</div><div class="line">  &#125;,</div><div class="line">  itemText:&#123;</div><div class="line">    fontSize:15,</div><div class="line">    color:&apos;#ffffff&apos;,</div><div class="line">    textAlign:&apos;left&apos;,</div><div class="line">    marginLeft:20,</div><div class="line">  &#125;,</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h2 id="购物车结算示例"><a href="#购物车结算示例" class="headerlink" title="购物车结算示例"></a>购物车结算示例</h2><p><img src="http://img.blog.csdn.net/20170518082304498?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>示例代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div><div class="line">265</div><div class="line">266</div><div class="line">267</div><div class="line">268</div><div class="line">269</div><div class="line">270</div><div class="line">271</div><div class="line">272</div><div class="line">273</div><div class="line">274</div><div class="line">275</div><div class="line">276</div><div class="line">277</div><div class="line">278</div><div class="line">279</div><div class="line">280</div><div class="line">281</div><div class="line">282</div><div class="line">283</div><div class="line">284</div><div class="line">285</div><div class="line">286</div><div class="line">287</div><div class="line">288</div><div class="line">289</div><div class="line">290</div><div class="line">291</div><div class="line">292</div><div class="line">293</div><div class="line">294</div><div class="line">295</div><div class="line">296</div><div class="line">297</div><div class="line">298</div><div class="line">299</div><div class="line">300</div><div class="line">301</div><div class="line">302</div><div class="line">303</div><div class="line">304</div><div class="line">305</div><div class="line">306</div><div class="line">307</div><div class="line">308</div><div class="line">309</div><div class="line">310</div><div class="line">311</div><div class="line">312</div><div class="line">313</div><div class="line">314</div><div class="line">315</div><div class="line">316</div><div class="line">317</div><div class="line">318</div><div class="line">319</div><div class="line">320</div><div class="line">321</div><div class="line">322</div><div class="line">323</div><div class="line">324</div><div class="line">325</div><div class="line">326</div><div class="line">327</div><div class="line">328</div><div class="line">329</div><div class="line">330</div><div class="line">331</div><div class="line">332</div><div class="line">333</div><div class="line">334</div><div class="line">335</div><div class="line">336</div><div class="line">337</div><div class="line">338</div><div class="line">339</div><div class="line">340</div><div class="line">341</div><div class="line">342</div><div class="line">343</div><div class="line">344</div><div class="line">345</div><div class="line">346</div><div class="line">347</div><div class="line">348</div><div class="line">349</div><div class="line">350</div><div class="line">351</div><div class="line">352</div><div class="line">353</div><div class="line">354</div><div class="line">355</div><div class="line">356</div><div class="line">357</div><div class="line">358</div><div class="line">359</div><div class="line">360</div><div class="line">361</div><div class="line">362</div><div class="line">363</div><div class="line">364</div><div class="line">365</div><div class="line">366</div><div class="line">367</div><div class="line">368</div><div class="line">369</div></pre></td><td class="code"><pre><div class="line">var React = require(&apos;react-native&apos;);</div><div class="line">var Dimensions = require(&apos;Dimensions&apos;);</div><div class="line">var &#123;</div><div class="line">  AppRegistry,</div><div class="line">  StyleSheet,</div><div class="line">  Text,</div><div class="line">  View,</div><div class="line">  Image,</div><div class="line">  ScrollView,</div><div class="line">  WebView,</div><div class="line">  NavigatorIOS,</div><div class="line">  AsyncStorage,</div><div class="line">  TouchableOpacity,</div><div class="line">&#125; = React;</div><div class="line"></div><div class="line"></div><div class="line">var Model = [</div><div class="line">    &#123;</div><div class="line">        id: &apos;1&apos;,</div><div class="line">        title:&apos;商品1&apos;,</div><div class="line">        desc:&apos;哎哟～不错哦&apos;,</div><div class="line">        price: 10000,</div><div class="line">        url:&apos;http://ww4.sinaimg.cn/thumb180/4d7f0a6dgw1f18crfemfog20b405mqv7.gif&apos;</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">        id: &apos;2&apos;,</div><div class="line">        title:&apos;商品2&apos;,</div><div class="line">        desc:&apos;哎哟～不错哦2&apos;,</div><div class="line">        price: 10330,</div><div class="line">        url:&apos;http://ww3.sinaimg.cn/thumb180/6aa09e8fgw1f18abnz36mg20b30697wj.gif&apos;</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">        id: &apos;3&apos;,</div><div class="line">        title:&apos;商品3&apos;,</div><div class="line">        desc:&apos;哎哟～不错3&apos;,</div><div class="line">        price: 100003,</div><div class="line">        url:&apos;http://ww4.sinaimg.cn/thumb180/6298156bgw1f18ydrmj4cj20hi0bhq5r.jpg&apos;</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">        id: &apos;4&apos;,</div><div class="line">        title:&apos;商品4&apos;,</div><div class="line">        desc:&apos;哎哟～不错哦4&apos;,</div><div class="line">        price: 100004,</div><div class="line">        url:&apos;http://ww1.sinaimg.cn/thumb180/a5d15efdgw1f18k8pu0cyj20jg0jbdja.jpg&apos;</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">        id: &apos;5&apos;,</div><div class="line">        title:&apos;商品5&apos;,</div><div class="line">        desc:&apos;哎哟～不错哦5&apos;,</div><div class="line">        price: 100005,</div><div class="line">        url:&apos;http://ww2.sinaimg.cn/thumb180/005yYQOngw1f18lqh7hx9j326r1gincv.jpg&apos;</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">        id: &apos;6&apos;,</div><div class="line">        title:&apos;商品6&apos;,</div><div class="line">        desc:&apos;哎哟～不错哦6&apos;,</div><div class="line">        price: 100006,</div><div class="line">        url:&apos;http://ww2.sinaimg.cn/thumb180/5ba8d1cbgw1f18hhiaj3jj21kw1kw10x.jpg&apos;</div><div class="line">    &#125;</div><div class="line">];</div><div class="line"></div><div class="line">var styles = StyleSheet.create(&#123;</div><div class="line">    container : &#123;</div><div class="line">        flex: 1</div><div class="line">    &#125;,</div><div class="line"></div><div class="line">    row : &#123;</div><div class="line">        flexDirection: &apos;row&apos;,</div><div class="line">        marginBottom: 10,</div><div class="line">    &#125;,</div><div class="line"></div><div class="line">    item : &#123;</div><div class="line">        flex: 1,</div><div class="line">        marginLeft:5,</div><div class="line">        borderWidth: 1,</div><div class="line">        borderColor: &apos;#ddd&apos;,</div><div class="line">        marginRight: 5,</div><div class="line">        height: 100,</div><div class="line">    &#125;,</div><div class="line"></div><div class="line">    img: &#123;</div><div class="line">        flex: 1,</div><div class="line">        backgroundColor: &apos;transparent&apos;,</div><div class="line">    &#125;,</div><div class="line"></div><div class="line">    item_text: &#123;</div><div class="line">        backgroundColor: &apos;#000&apos;,</div><div class="line">        opacity:0.7,</div><div class="line">        color:&apos;#fff&apos;,</div><div class="line">        height:25,</div><div class="line">        lineHeight:18,</div><div class="line">        textAlign:&apos;center&apos;,</div><div class="line">        marginTop:74</div><div class="line">    &#125;,</div><div class="line"></div><div class="line">    btn: &#123;</div><div class="line">        backgroundColor: &apos;#ff7200&apos;,</div><div class="line">        height: 33,</div><div class="line">        textAlign : &apos;center&apos;,</div><div class="line">        color: &apos;#fff&apos;,</div><div class="line">        marginLeft:10,</div><div class="line">        marginRight: 10,</div><div class="line">        lineHeight: 24,</div><div class="line">        marginTop: 40,</div><div class="line">        fontSize: 18,</div><div class="line">    &#125;,</div><div class="line"></div><div class="line">    list_item : &#123;</div><div class="line">        marginLeft: 5,</div><div class="line">        marginRight: 5,</div><div class="line">        padding:5 ,</div><div class="line">        borderWidth: 1,</div><div class="line">        height: 30,</div><div class="line">        borderRadius: 3,</div><div class="line">        borderColor: &apos;#ddd&apos;,</div><div class="line">    &#125;,</div><div class="line"></div><div class="line">    list_item_desc : &#123;</div><div class="line">        flex: 2,</div><div class="line">        fontSize: 15,</div><div class="line">    &#125;,</div><div class="line"></div><div class="line">    list_item_price: &#123;</div><div class="line">        flex: 1,</div><div class="line">        textAlign: &apos;right&apos;,</div><div class="line">        fontSize: 15,</div><div class="line">    &#125;,</div><div class="line"></div><div class="line">    clear: &#123;</div><div class="line">        marginTop : 10,</div><div class="line">        backgroundColor: &apos;#fff&apos;,</div><div class="line">        color: &apos;#000&apos;,</div><div class="line">        borderColor: &apos;#ddd&apos;,</div><div class="line">        borderWidth:1,</div><div class="line">        marginLeft: 10,</div><div class="line">        marginRight:10,</div><div class="line">        lineHeight: 24,</div><div class="line">        height:33,</div><div class="line">        fontSize: 18,</div><div class="line">        textAlign: &apos;center&apos;,</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;);</div><div class="line"></div><div class="line">//列表项组件</div><div class="line">var Item = React.createClass(&#123;</div><div class="line">    render:function()&#123;</div><div class="line">        return(</div><div class="line">            &lt;View style = &#123;styles.item&#125;&gt;</div><div class="line">                &lt;TouchableOpacity onPress = &#123;this.props.press&#125;&gt;</div><div class="line">                    &lt;Image</div><div class="line">                        resizeMode = &apos;contain&apos;</div><div class="line">                        style = &#123;styles.img&#125;</div><div class="line">                        source = &#123;&#123;uri:this.props.url&#125;&#125;&gt;</div><div class="line">                        &lt;Text numberLines = &#123;1&#125; style = &#123;styles.item_text&#125;&gt;</div><div class="line">                            &#123;this.props.title&#125;</div><div class="line">                        &lt;/Text&gt;</div><div class="line">                    &lt;/Image&gt;</div><div class="line">                &lt;/TouchableOpacity&gt;</div><div class="line">            &lt;/View&gt;</div><div class="line">            );</div><div class="line">    &#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">//列表组件</div><div class="line">var List = React.createClass(&#123;</div><div class="line">    getInitialState: function()&#123;</div><div class="line">        return&#123;</div><div class="line">            count: 0</div><div class="line">            &#125;;</div><div class="line">    &#125;,</div><div class="line"></div><div class="line">    componentDidMount: function() &#123;</div><div class="line">        var _that = this;</div><div class="line">        AsyncStorage.getAllKeys(function(err,keys)&#123;</div><div class="line">            if (err) &#123;</div><div class="line">                //TODO:存储取数据出错 ，给用户提示错误信息。</div><div class="line">            &#125;</div><div class="line">            //将存储的商品条数反应到按钮上</div><div class="line">            _that.setState(&#123;</div><div class="line">                count:keys.length</div><div class="line">            &#125;);</div><div class="line">        &#125;);</div><div class="line">    &#125;,</div><div class="line"></div><div class="line">    render: function()&#123;</div><div class="line">        var list = [];</div><div class="line">        for(var i in Model)&#123;</div><div class="line">            if (i % 2 ===0) &#123;</div><div class="line">                var row = (</div><div class="line">                    &lt;View style = &#123;styles.row&#125; key = &#123;i&#125;&gt;</div><div class="line">                        &lt;Item url=&#123;Model[i].url&#125;</div><div class="line">                        title = &#123;Model[i].title&#125;</div><div class="line">                        press = &#123;this.press.bind(this,Model[i])&#125;&gt;&lt;/Item&gt;</div><div class="line"></div><div class="line">                        &lt;Item url = &#123;Model[parseInt(i) + 1].url&#125;</div><div class="line">                        title = &#123;Model[parseInt(i) + 1].title&#125;</div><div class="line">                        press = &#123;this.press.bind(this,Model[parseInt(i) + 1])&#125;&gt;&lt;/Item&gt;</div><div class="line">                    &lt;/View&gt;</div><div class="line">                );</div><div class="line">                list.push(row);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        var counts = this.state.count;</div><div class="line">        var str = null;</div><div class="line"></div><div class="line">        if (counts) &#123;</div><div class="line">            str = &apos;,共&apos;+counts+&apos;件商品&apos;;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        return(</div><div class="line">            &lt;ScrollView style = &#123;&#123;marginTop:10&#125;&#125;&gt;</div><div class="line">                &#123;list&#125;</div><div class="line">                &lt;Text onPress = &#123;this.goGouWu&#125; style = &#123;styles.btn&#125;&gt;</div><div class="line">                    去结算&#123;str&#125;</div><div class="line">                &lt;/Text&gt;</div><div class="line">            &lt;/ScrollView&gt;</div><div class="line">        );</div><div class="line">    &#125;,</div><div class="line">    //前往购物车方法</div><div class="line">    goGouWu: function()&#123;</div><div class="line">        this.props.navigator.push(&#123;</div><div class="line">            component:GouWu,</div><div class="line">            title: &apos;购物车&apos;</div><div class="line">        &#125;);</div><div class="line">    &#125;,</div><div class="line"></div><div class="line">    //商品被选中方法</div><div class="line">    press: function(data)&#123;</div><div class="line">        var count = this.state.count;</div><div class="line">        count++;</div><div class="line">        //改变数字状态</div><div class="line">        this.setState(&#123;</div><div class="line">            count: count</div><div class="line">        &#125;);</div><div class="line">        //AsyncStorage 存储</div><div class="line">        AsyncStorage.setItem(&apos;SP-&apos;+this.genId() + &apos;-SP&apos;,JSON.stringify(data),function(err)&#123;</div><div class="line">            if (err) &#123;</div><div class="line">                //TODO:存储出错</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;,</div><div class="line">    genId: function()&#123;</div><div class="line">        return &apos;xxxxxxx-xxxx-2xxxx-bxxxxxxxxx&apos;.replace(/[xy]/g,function(c)&#123;</div><div class="line">            var r = Math.random() * 16|0,</div><div class="line">            v = c == &apos;x&apos;?r:(r &amp; 0x3 | 0x8);</div><div class="line">            return v.toString(16);</div><div class="line">        &#125;).toUpperCase();</div><div class="line">    &#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">var GouWu = React.createClass(&#123;</div><div class="line">    getInitialState:function()&#123;</div><div class="line">        return&#123;</div><div class="line">            data:[],</div><div class="line">            price:0</div><div class="line">        &#125;;</div><div class="line">    &#125;,</div><div class="line"></div><div class="line">    render:function()&#123;</div><div class="line">        var data = this.state.data;</div><div class="line">        var price = this.state.price;</div><div class="line">        var list = [];</div><div class="line">        for(var i in data)&#123;</div><div class="line">            price += parseFloat(data[i].price);</div><div class="line">            list.push(</div><div class="line">                &lt;View style = &#123;[styles.row,styles.list_item]&#125; key = &#123;i&#125;&gt;</div><div class="line">                    &lt;Text style = &#123;styles.list_item_desc&#125; &gt;</div><div class="line">                        &#123;data[i].title&#125;</div><div class="line">                        &#123;data[i].desc&#125;</div><div class="line">                    &lt;/Text&gt;</div><div class="line">                    &lt;Text style = &#123;styles.list_item_price&#125; &gt;$&#123;data[i].price&#125;&lt;/Text&gt;</div><div class="line">                &lt;/View&gt;</div><div class="line">            );</div><div class="line">        &#125;</div><div class="line"></div><div class="line"></div><div class="line">        var str = null;</div><div class="line">        if (price) &#123;</div><div class="line">            str = &apos;,共&apos;+ price.toFixed(1)+&apos;元&apos;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        return(</div><div class="line">            &lt;ScrollView style = &#123;&#123;marginTop:10&#125;&#125;&gt;</div><div class="line">                &#123;list&#125;</div><div class="line">                &lt;Text style = &#123;styles.btn&#125; onPress = &#123;this.paySuccess&#125;&gt;支付&#123;str&#125;&lt;/Text&gt;</div><div class="line">                &lt;Text style = &#123;styles.clear&#125; onPress = &#123;this.clearStorage&#125;&gt;清空购物车&lt;/Text&gt;</div><div class="line">            &lt;/ScrollView&gt;</div><div class="line">        )</div><div class="line">    &#125;,</div><div class="line"></div><div class="line">    componentDidMount: function() &#123;</div><div class="line">        var _that = this;</div><div class="line">        AsyncStorage.getAllKeys(function(err,keys)&#123;</div><div class="line">            if (err) &#123;</div><div class="line">                //TODO:存储取数据出错</div><div class="line">                //如果发生错误，这里直接返回（return）防止进入下面的逻辑</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            AsyncStorage.multiGet(keys,function(errs,result)&#123;</div><div class="line">                //TODO:错误处理</div><div class="line">                //得到的结果是二维数组</div><div class="line">                //result［i］［0］表示我们存储的键，result［i］［1］表示我们存储的值</div><div class="line">                var arr = [];</div><div class="line">                for(var i in result)&#123;</div><div class="line">                    arr.push(JSON.parse(result[i][1]));</div><div class="line">                &#125;</div><div class="line">                _that.setState(&#123;</div><div class="line">                    data:arr</div><div class="line">                &#125;);</div><div class="line">            &#125;);</div><div class="line"></div><div class="line">        &#125;)</div><div class="line">    &#125;,</div><div class="line">    clearStorage:function()&#123;</div><div class="line">        var _that = this;</div><div class="line">        AsyncStorage.clear(function(err)&#123;</div><div class="line">            if (!err) &#123;</div><div class="line">                _that.setState(&#123;</div><div class="line">                    data:[],</div><div class="line">                    price:0,</div><div class="line">                &#125;);</div><div class="line">                alert(&apos;购物车已经清空&apos;)</div><div class="line">            &#125;</div><div class="line">            //TODO:err</div><div class="line">        &#125;);</div><div class="line">    &#125;,</div><div class="line"></div><div class="line">    paySuccess: function()&#123;</div><div class="line">        var _that = this;</div><div class="line">        AsyncStorage.clear(function(err)&#123;</div><div class="line">            if (!err) &#123;</div><div class="line"></div><div class="line">                alert(&quot;支付成功！&quot;)</div><div class="line"></div><div class="line">                _that.props.navigator.pop();</div><div class="line"></div><div class="line"></div><div class="line">            &#125;</div><div class="line">            //TODO:err</div><div class="line">        &#125;);</div><div class="line"></div><div class="line">        _that.setState(&#123;</div><div class="line">                    data:[],</div><div class="line">                    price:0,</div><div class="line">                    count:0,</div><div class="line">                    str:&apos;去结算&apos;</div><div class="line">                &#125;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;);</div><div class="line">var wxsPrj = React.createClass(&#123;</div><div class="line">  render: function() &#123;</div><div class="line">    return (</div><div class="line">        &lt;NavigatorIOS style = &#123;styles.container&#125;</div><div class="line">                      initialRoute = &#123;</div><div class="line">                        &#123;</div><div class="line">                            component:List,</div><div class="line">                            title:&apos;商品列表&apos;,</div><div class="line">                        &#125;</div><div class="line">                      &#125;/&gt;</div><div class="line"></div><div class="line">    );</div><div class="line">    &#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">AppRegistry.registerComponent(&apos;wxsPrj&apos;, () =&gt; wxsPrj);</div></pre></td></tr></table></figure>
+<p>代码说明：<br>首先我们来看一下模块， 我们创建Model(数据源) styles(样式列表) Item(列表项组件) List(列表组件) GouWu(购物车组件)<br>前三个没有什么好说的，先来说一下List组件：<br>在List组件中，我们用Model数据源来渲染列表项。使用i％2 ＝＝0 来控制，每两个列表项目在一行中。<br>在press方法中我们让count＋1，并且使用AsynStorage.setItem将选中的商品数据添加到App本地存储中。这里之所以使用SP－为前缀，－SP为后缀，采用GUID为存储的键名的一部分，是为了区分其他数据，好处：</p>
+<p>可以缺粉用户数据，例如username信息。<br>可以放置key重复，保证同名商品都能被添加进购物车。<br>这样我们就把商品信息存储起来了。</p>
+<p>我们在componentDidMount方法中作了一个处理，在用户第二次进入的时候，如果没有支付，依旧会告诉用户购物车中的商品数。使用Asy ncStorage.getAllKeys获取数据的条数，<br>在去结算按钮中，我们注册了点击方法goGouWu事件。使用this.props.navigator.push将购物车组件加载。</p>
+    </div>
+    <p class="post-meta">
+        <span class="post-cat">分类：
+            <a class="cat-link" href="/categories/React-Native/">React Native</a>
+        </span>
+        <span class="post-tags">
+            标签：
+            <a href="/tags/React-Native/" title="React Native">React Native</a>
+        </span>
+    </p>
+</article>
+<div class="article-share clearfix text-center">
+    <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+</div>
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br>
+        <a href="/2016/12/28/ios动画总结/">
+            
+                ios动画
+            
+        </a>
+    </span>
+    
+
+    
+    <span class="next fr">
+        下一篇<br>
+        <a href="/2016/12/05/gulp+webpack工具整合简介/">
+            
+                gulp+webpack工具整合简介
+            
+        </a>
+    </span>
+    
+</div>
+<!-- 文章评论 -->
+<div id="comments" class="comments cloud-tie-wrapper"></div>
+    <script>
+    var cloudTieConfig = {
+      url: document.location.href, 
+      sourceId: "React Native之轻量级存储AsyncStorage",
+      productKey: "c06bb9930e6f4b38a9997cb9bd17aba5",
+      target: "comments"
+    };
+    var yunManualLoad = true;
+    Tie.loader("aHR0cHM6Ly9hcGkuZ2VudGllLjE2My5jb20vcGMvbGl2ZXNjcmlwdC5odG1s", true);
+    </script>
+            </div>
+
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章分类</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+    <li>
+        <a href="/categories/Android/">Android</a>
+        <span class="badge">(10)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Android/系统/">系统</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Angular2/">Angular2</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/前端/">前端</a>
+        <span class="badge">(7)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/React-Native/">React Native</a>
+        <span class="badge">(12)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Java/">Java</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/VR/">VR</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Angular2/前端/">前端</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Spring/">Spring</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/ios/">ios</a>
+        <span class="badge">(9)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Google/">Google</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Google/VR/">VR</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/技术人生/">技术人生</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/小程序/">小程序</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/机器学习/">机器学习</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/android/">android</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/设计模式/">设计模式</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+</ul>
+    </section>
+
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="/tags/Android/" title="Android">Android (7)</a>
+  
+    <a class="tag-item" href="/tags/新特性/" title="新特性">新特性 (2)</a>
+  
+    <a class="tag-item" href="/tags/深入系统/" title="深入系统">深入系统 (1)</a>
+  
+    <a class="tag-item" href="/tags/系统服务/" title="系统服务">系统服务 (1)</a>
+  
+    <a class="tag-item" href="/tags/高仿/" title="高仿">高仿 (4)</a>
+  
+    <a class="tag-item" href="/tags/硬件/" title="硬件">硬件 (1)</a>
+  
+    <a class="tag-item" href="/tags/混淆打包/" title="混淆打包">混淆打包 (1)</a>
+  
+    <a class="tag-item" href="/tags/Angular2/" title="Angular2">Angular2 (1)</a>
+  
+    <a class="tag-item" href="/tags/前端开发/" title="前端开发">前端开发 (3)</a>
+  
+    <a class="tag-item" href="/tags/android/" title="android">android (4)</a>
+  
+    <a class="tag-item" href="/tags/前端/" title="前端">前端 (5)</a>
+  
+    <a class="tag-item" href="/tags/React-Native/" title="React Native">React Native (10)</a>
+  
+    <a class="tag-item" href="/tags/FlexBox布局/" title="FlexBox布局">FlexBox布局 (1)</a>
+  
+    <a class="tag-item" href="/tags/Java/" title="Java">Java (2)</a>
+  
+    <a class="tag-item" href="/tags/垃圾回收/" title="垃圾回收">垃圾回收 (1)</a>
+  
+    <a class="tag-item" href="/tags/Google/" title="Google">Google (2)</a>
+  
+    <a class="tag-item" href="/tags/VR/" title="VR">VR (2)</a>
+  
+    <a class="tag-item" href="/tags/Node/" title="Node">Node (2)</a>
+  
+    <a class="tag-item" href="/tags/OpenGL/" title="OpenGL">OpenGL (1)</a>
+  
+    <a class="tag-item" href="/tags/Promise/" title="Promise">Promise (1)</a>
+  
+    <a class="tag-item" href="/tags/eact-Native/" title="eact Native">eact Native (1)</a>
+  
+    <a class="tag-item" href="/tags/调试/" title="调试">调试 (1)</a>
+  
+    <a class="tag-item" href="/tags/打包/" title="打包">打包 (1)</a>
+  
+    <a class="tag-item" href="/tags/原生/" title="原生">原生 (1)</a>
+  
+    <a class="tag-item" href="/tags/Spring/" title="Spring">Spring (2)</a>
+  
+    <a class="tag-item" href="/tags/入门/" title="入门">入门 (2)</a>
+  
+    <a class="tag-item" href="/tags/ios/" title="ios">ios (9)</a>
+  
+    <a class="tag-item" href="/tags/Swift/" title="Swift">Swift (1)</a>
+  
+    <a class="tag-item" href="/tags/swift/" title="swift">swift (1)</a>
+  
+    <a class="tag-item" href="/tags/AR/" title="AR">AR (1)</a>
+  
+    <a class="tag-item" href="/tags/Xcode/" title="Xcode">Xcode (3)</a>
+  
+    <a class="tag-item" href="/tags/webpack/" title="webpack">webpack (1)</a>
+  
+    <a class="tag-item" href="/tags/gulp/" title="gulp">gulp (1)</a>
+  
+    <a class="tag-item" href="/tags/https/" title="https">https (1)</a>
+  
+    <a class="tag-item" href="/tags/gif/" title="gif">gif (1)</a>
+  
+    <a class="tag-item" href="/tags/mac/" title="mac">mac (1)</a>
+  
+    <a class="tag-item" href="/tags/环境/" title="环境">环境 (1)</a>
+  
+    <a class="tag-item" href="/tags/原理/" title="原理">原理 (1)</a>
+  
+    <a class="tag-item" href="/tags/个人博客/" title="个人博客">个人博客 (2)</a>
+  
+</div>
+    </section>
+    
+
+    
+    <!-- 我的微博 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>我的微博</strong></h3>
+        <div class="widget-bd" style="position: relative">
+  <div id="myWeiboLoading" class="text-center" style="position:absolute;top:0;left:0;right:0;bottom:0;line-height:50px;font-size:12px;background-color:#fff;z-index:9">微博加载中...</div>
+  <iframe width="100%" height="550" class="share_self" frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&amp;width=0&amp;height=550&amp;fansRow=2&amp;ptype=1&amp;speed=0&amp;skin=4&amp;isTitle=1&amp;noborder=1&amp;isWeibo=1&amp;isFans=1&amp;uid=1831462560&amp;verifier=5192ec39&amp;dpc=1"></iframe>
+  <script>
+  (function () {
+    var oMyWeibo = document.getElementById('myWeibo');
+    var oMyWeiboLoading = document.getElementById('myWeiboLoading');
+    var isIE = /msie/i.test(navigator.userAgent) && !window.opera;
+    var timer = null;
+    if (isIE) {
+      oMyWeibo.onreadystatechange = function(){
+        if(oMyWeibo.readyState === 'loaded' || oMyWeibo.readyState === 'complete'){
+          timer = setTimeout(function () {
+            oMyWeiboLoading.parentNode.removeChild(oMyWeiboLoading);
+            timer = null;
+          }, 300);
+        }
+      };
+    } else {
+      oMyWeibo.onload = function () {
+        timer = setTimeout(function () {
+          oMyWeiboLoading.parentNode.removeChild(oMyWeiboLoading);
+          timer = null;
+        }, 300);
+      };
+    }
+  })();
+  </script>
+</div>
+    </section>
+    
+
+    
+    <!-- 友情链接 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>友情链接</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+        <li>
+            <a href="http://blog.csdn.net/xiangzhihong8/" target="_blank" title="csdn个人博客">csdn博客</a>
+        </li>
+    
+        <li>
+            <a href="https://yq.aliyun.com/u/xiangzhihong" target="_blank" title="阿里云技术博客">阿里云博客</a>
+        </li>
+    
+</ul>
+    </section>
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <footer class="footer">
+    &copy;
+    
+        2016-2017
+    
+
+    <a href="/">Jelon Loves You</a>
+</footer>
+<div class="back-to-top" id="JELON__backToTop" title="返回顶部">返回顶部</div>
+<!-- 添加百度自动推送 -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+    <!--博客js脚本 -->
+    <!-- 这里放网站js脚本 -->
+<script src="/js/main.js"></script>
+</body>

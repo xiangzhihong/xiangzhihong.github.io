@@ -1,0 +1,571 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8">
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya">
+    
+    <title>Google V8引擎 | 向志洪</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
+    <meta name="keywords" content="前端, Web, 移动, 向志洪">
+    <meta name="description" content="">
+
+    
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <!--[if lt IE 9]>
+    <script src="/js/html5.js"></script>
+    <![endif]-->
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?fd459238242776d173cdc64918fb32f2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+    
+    <script>var yunModuleEnv = true;</script>
+    <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+    
+</head></html>
+<body class="home">
+    <!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="/">
+                <div class="cover">
+                    <span class="name">向志洪</span>
+                    <span class="description">个人技术博客</span>
+                </div>
+            </a>
+        </div>
+        <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
+        <ul class="menu hidden" id="JELON__menu">
+            
+            <li rel="/2017/06/03/Google V8引擎/index.html" class="item">
+                <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
+            </li>
+            
+            <li rel="/2017/06/03/Google V8引擎/index.html" class="item">
+                <a href="/archives/" title="文章列表" class="icon-lab">&nbsp;文章列表</a>
+            </li>
+            
+            <li rel="/2017/06/03/Google V8引擎/index.html" class="item">
+                <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
+            </li>
+            
+            <li rel="/2017/06/03/Google V8引擎/index.html" class="item">
+                <a href="/404/" title="留言" class="icon-comment">&nbsp;留言</a>
+            </li>
+            
+        </ul>
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        <a href="https://github.com/xiangzhihong" target="_blank">Github</a>
+                        |
+                    
+                        <a href="http://tongji.baidu.com/web/welcome/login" target="_blank">站长统计</a>
+                        |
+                    
+                        <a href="http://weibo.com/code_xzh" target="_blank">新浪微博</a>
+                        |
+                    
+                </p>
+                <p class="sns">
+                    
+                    <a href="javascript: void(0);" class="wechat">
+                        <b>■</b>
+                        公众号
+                        <span class="popover">
+                            <img src="/img/wechat_mp.jpg" width="120" height="120" alt="我的微信订阅号">
+                            <i class="arrow"></i>
+                        </span>
+                    </a>
+                </p>
+                
+            </div>
+            <div class="avatar fr">
+                <img src="http://ohe65w0xx.bkt.clouddn.com/avert.png" alt="avatar" title="Jelon">
+            </div>
+        </div>
+    </section>
+</header>
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+        <section class="content">
+            <div class="content-main widget">
+                <!-- 文章页 -->
+<!-- 文章 -->
+<article class="post article">
+    <header class="text-center">
+        <h3 class="post-title"><span>Google V8引擎</span></h3>
+    </header>
+    <p class="post-meta text-center">
+        xiangzhihong 发表于
+        <time datetime="2017-06-02T16:00:00.000Z">2017-06-03</time>
+    </p>
+    <div class="post-content">
+        <h1 id="V8的前世今生"><a href="#V8的前世今生" class="headerlink" title="V8的前世今生"></a>V8的前世今生</h1><p>V8是JavaScript渲染引擎，第一个版本随着Chrome的发布而发布(具体时间为2008年9月2日)。在运行JavaScript之前，相比其它的JavaScript的引擎转换成字节码或解释执行，V8将其编译成原生机器码（IA-32, x86-64, ARM, or MIPS CPUs），并且使用了如内联缓存（inline caching）等方法来提高性能。V8可以独立运行，也可以嵌入到C++应用程序中运行。</p>
+<p>随着Web技术的快速发展，JavaScript所要承担的工作也越来越多，早就超越了“表单验证”的范畴，这就更需要快速的解析和执行JavaScript脚本。V8引擎就是为解决这一问题而生，在Node中也采用该引擎来解析JavaScript。</p>
+<p>那么，V8是如何使得实现对JavaScript的解析，又是如何实现高性能的呢？下面从几个方面来分析下V8是如何渲染页面的。</p>
+<h1 id="渲染引擎与网页渲染"><a href="#渲染引擎与网页渲染" class="headerlink" title="渲染引擎与网页渲染"></a>渲染引擎与网页渲染</h1><h3 id="编程分类"><a href="#编程分类" class="headerlink" title="编程分类"></a>编程分类</h3><p>编程语言分为编译型语言和解释型语言两类，编译型语言在执行之前要先进行完全编译，而解释型语言一边编译一边执行，很明显解释型语言的执行速度是慢于编译型语言的，而JavaScript就是一种解释型脚本语言，支持动态类型、弱类型、基于原型的语言，内置支持类型。</p>
+<h2 id="网页渲染"><a href="#网页渲染" class="headerlink" title="网页渲染"></a>网页渲染</h2><p>浏览器自从上世纪80年代后期90年代初期诞生以来，已经得到了长足的发展，其功能也越来越丰富，包括网络、资源管理、网页浏览、多页面管理、插件和扩展、书签管理、历史记录管理、设置管理、下载管理、账户和同步、安全机制、隐私管理、外观主题、开发者工具等。而在这之中，最重要的莫过于网页渲染。</p>
+<h3 id="渲染引擎"><a href="#渲染引擎" class="headerlink" title="渲染引擎"></a>渲染引擎</h3><p><strong>渲染引擎</strong>：所谓渲染引擎，就是将HTML/CSS/JavaScript等文本或图片等信息转换成图像结果的转换程序。在浏览器的发展过程中，不同的厂商开发了不同的渲染引擎，如Tridend(IE)、Gecko(FF)、WebKit(Safari,Chrome,Andriod浏览器)等。而在这里面不得不提下WebKit，一个由苹果发起的一个开源项目，如今它在移动端占据着垄断地位，更有基于WebKit的web操作系统不断涌现(如：Chrome OS、Web OS)。</p>
+<p>WebKit内部结构大体如下(来自网络)：</p>
+<p><img src="http://img.blog.csdn.net/20170711212539052?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>上图中实线框内模块是所有移植的共有部分，虚线框内不同的厂商可以自己实现。由上图可知，WebKit主要有操作系统、WebCore 、WebKit嵌入式接口和第三方库组成。</p>
+<ul>
+<li><strong>操作系统</strong>：是管理和控制计算机硬件与软件资源的计算机程序，是直接运行在“裸机”上的最基本的系统软件，任何其他软件都必须在操作系统的支持下才能运行。WebKit也是在操作系统上工作的。</li>
+<li><strong>WebCore</strong>：本部分包含各个浏览器使用的共享部分，包括HTML解析器、CSS解析器、DOM和SVG等。JavaScriptCore是WebKit的默认引擎，在谷歌系列产品中被替换为V8引擎。WebKit Ports是WebKit中的非共享部分，由于平台差异、第三方库和需求的不同等原因，导致不同浏览器性能和功能差异的关键部分。</li>
+<li><strong>WebKit嵌入式接口</strong>：该接口主要供浏览器调用，与移植密切相关，不同的移植有不同的接口规范。</li>
+<li><strong>第三方库</strong>：主要是诸如图形库、网络库、视频库、数据存储库等第三方库。</li>
+</ul>
+<h2 id="网页渲染流程简析"><a href="#网页渲染流程简析" class="headerlink" title="网页渲染流程简析"></a>网页渲染流程简析</h2><p>对于一个网页，要经历怎样的过程，才能呈现在用户面前呢？或许下面的一张图可以给你提供答案。<br><img src="http://img.blog.csdn.net/20170711213832415?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>首先，系统将网页输入到HTML解析器，HTML解析器解析，然后构建DOM树，在这期间如果遇到JavaScript代码则交给JavaScript引擎处理；如果遇到CSS样式信息，则构建一个内部绘图模型。该模型由布局模块计算模型内部各个元素的位置和大小信息，最后由绘图模块完成从该模型到图像的绘制。<br>对于网页的绘制过程，大体可以分为3个阶段：</p>
+<h4 id="1，从输入URL到生成DOM树"><a href="#1，从输入URL到生成DOM树" class="headerlink" title="1，从输入URL到生成DOM树"></a>1，从输入URL到生成DOM树</h4><p>在这个阶段中，主要会经历一下几个步骤：</p>
+<ol>
+<li>地址栏输入URL，WebKit调用资源加载器加载相应资源；</li>
+<li>加载器依赖网络模块建立连接，发送请求并接收答复；</li>
+<li>WebKit接收各种网页或者资源数据，其中某些资源可能同步或异步获取；</li>
+<li>网页交给HTML解析器转变为词语；</li>
+<li>解释器根据词语构建节点，形成DOM树；</li>
+<li>如果节点是JavaScript代码，调用JavaScript引擎解释并执行；</li>
+<li>JavaScript代码可能会修改DOM树结构；</li>
+<li>如果节点依赖其他资源，如图片、视频等，调用资源加载器加载它们，但这些是异步加载的，不会阻碍当前DOM树继续创建；如果是JavaScript资源URL（没有标记异步方式），则需要停止当前DOM树创建，直到JavaScript加载并被JavaScript引擎执行后才继续DOM树的创建。</li>
+</ol>
+<h4 id="2，从DOM树到构建WebKit绘图上下文"><a href="#2，从DOM树到构建WebKit绘图上下文" class="headerlink" title="2，从DOM树到构建WebKit绘图上下文"></a>2，从DOM树到构建WebKit绘图上下文</h4><p>在这个阶段，主要完成一下几个操作：</p>
+<ol>
+<li>CSS文件被CSS解释器解释成内部表示；</li>
+<li>CSS解释器完成工作后，在DOM树上附加样式信息，生成RenderObject树；</li>
+<li>RenderObject节点在创建的同时，WebKit会根据网页层次结构构建RenderLayer树，同时构建一个虚拟绘图上下文。</li>
+</ol>
+<h4 id="3，绘图上下文内容并呈现图像内容"><a href="#3，绘图上下文内容并呈现图像内容" class="headerlink" title="3，绘图上下文内容并呈现图像内容"></a>3，绘图上下文内容并呈现图像内容</h4><p>在这个阶段，主要完成一下操作：</p>
+<ol>
+<li>绘图上下文是一个与平台无关的抽象类，它将每个绘图操作桥接到不同的具体实现类，也就是绘图具体实现类；</li>
+<li>绘图实现类也可能有简单的实现，也可能有复杂的实现，软件渲染、硬件渲染、合成渲染等；</li>
+<li>绘图实现类将2D图形库或者3D图形库绘制结果保存，交给浏览器界面进行展示。</li>
+</ol>
+<p>##JavaScript引擎<br>JavaScript本质上是一种解释型语言，与编译型语言不同的是它需要一遍执行一边解析，而编译型语言在执行时已经完成编译。<br>那么对于JavaScript这种解释性语言来讲，如何提高解析速度就是当务之急。JavaScript引擎和渲染引擎的关系如下图所示.<br><img src="http://img.blog.csdn.net/20170711214942371?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>为了提高性能，JavaScript引入了Java虚拟机和C++编译器中的众多技术。而一个完整JavaScript引擎的执行过程大致流程如下：源代码-→抽象语法树-→字节码-→JIT-→本地代码。一个典型的抽象语法树如下图所示：<br><img src="http://img.blog.csdn.net/20170711215256338?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>为了节约将抽象语法树通过JIT技术转换成本地代码的时间，V8放弃了生成字节码阶段的性能优化。而通过Profiler采集一些信息，来优化本地代码。</p>
+<p>在2017年4月底，v8 发布了5.9 版本，在此版本中新增了一个 Ignition 字节码解释器，并默认开启。做出这一改变的原因为：（主要动机）减轻机器码占用的内存空间，即牺牲时间换空间；提高代码的启动速度；对 v8 的代码进行重构，降低 v8 的代码复杂度（详细介绍请查阅：<a href="https://cnodejs.org/topic/59084a9cbbaf2f3f569be482" target="_blank" rel="external">JS 引擎与字节码的不解之缘</a>）</p>
+<h1 id="V8引擎"><a href="#V8引擎" class="headerlink" title="V8引擎"></a>V8引擎</h1><p>前面，我们介绍了V8引擎的一些历史，下面我们重点来看看V8项目一些知识。首先，V8项目的结构如下：<br><img src="http://img.blog.csdn.net/20170711220207609?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h2 id="数据解析"><a href="#数据解析" class="headerlink" title="数据解析"></a>数据解析</h2><p>JavaScript作为一种无类型的语言，在编译时并不能准确知道变量的类型，只可以在运行时确定。而java、C++等静态类型语言，在编译时候就可以确切知道变量的类型。因而JavaScript运行效率比C++或Java低。</p>
+<p>在C++中，源代码需要经过编译才能执行，在生成本地代码的过程中，变量的地址和类型已经确定，运行本地代码时利用数组和位移就可以存取变量和方法的地址，不需要再进行额外的查找，几个机器指令即可完成，节省了确定类型和地址的时间。</p>
+<p>而对于JavaScript 来说，并不能像C++那样在执行时已经知道变量的类型和地址，所以在代码解析过程中，会产生很多的临时变量，而变量的存取是非常普遍和频繁的。</p>
+<p>对于传统的变量存取来说，使用少数的汇编指令就能完成变量存取。<br><img src="http://img.blog.csdn.net/20170711220958294?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>在JavaScript中，除boolean，number，string，null，undefined这个五个简单变量外，其他的数据都是对象，V8使用一种特殊的方式来表示它们，进而优化JavaScript的内部表示问题。</p>
+<p>JavaScript对象在V8中的实现包含三个部分：隐藏类指针，这是v8为JavaScript对象创建的隐藏类；属性值表指针，指向该对象包含的属性值；元素表指针，指向该对象包含的属性。</p>
+<p>在V8中，数据的内部表示由数据的实际内容和数据的句柄构成。数据的实际内容是变长的，类型也是不同的；句柄固定大小，包含指向数据的指针。这种设计可以方便V8进行垃圾回收和移动数据内容，如果直接使用指针的话就会出问题或者需要更大的开销，使用句柄的话，只需修改句柄中的指针即可，使用者使用的还是句柄，指针改动是对使用者透明的。</p>
+<p>除少数数据(如整型数据)由handle本身存储外，其他内容限于句柄大小和变长等原因，都存储在堆中。整数直接从value中取值，然后使用一个指针指向它，可以减少内存的占用并提高访问速度。一个句柄对象的大小是4字节(32位设备)或者8字节(64位设备)，而在JavaScriptCore中，使用的8个字节表示句柄。在堆中存放的对象都是4字节对齐的，所以它们指针的后两位是不需要的，V8用这两位表示数据的类型，00为整数，01为其他。</p>
+<h2 id="V8引擎渲染过程"><a href="#V8引擎渲染过程" class="headerlink" title="V8引擎渲染过程"></a>V8引擎渲染过程</h2><p>V8引擎在执行JavaScript的过程中，主要有两个阶段：编译和运行。</p>
+<p>在V8引擎中，源代码先被解析器转变为抽象语法树(AST)，然后使用JIT编译器的全代码生成器从AST直接生成本地可执行代码。这个过程不同于JAVA先生成字节码或中间表示，减少了AST到字节码的转换时间，提高了代码的执行速度。但由于缺少了转换为字节码这一中间过程，也就减少了优化代码的机会。</p>
+<p>V8引擎编译本地代码时使用的主要类如下所示：</p>
+<ul>
+<li><strong>Script</strong>：表示JavaScript代码，即包含源代码，又包含编译之后生成的本地代码，即是编译入口，又是运行入口；</li>
+<li><strong>Compiler</strong>：编译器类，辅组Script类来编译生成代码，调用解释器(Parser)来生成AST和全代码生成器，将AST转变为本地代码；</li>
+<li><strong>AstNode</strong>：抽象语法树节点类，是其他所有节点的基类，包含非常多的子类，后面会针对不同的子类生成不同的本地代码；</li>
+<li><strong>FullCodeGenerator</strong>：AstVisitor类的子类，通过遍历AST来为JavaScript生成本地可执行代码。</li>
+</ul>
+<h3 id="JavaScript代码编译过程"><a href="#JavaScript代码编译过程" class="headerlink" title="JavaScript代码编译过程"></a>JavaScript代码编译过程</h3><p>JavaScript代码编译的过程大致为：</p>
+<ol>
+<li>Script类调用Compiler类的Compile函数为其生成本地代码；</li>
+<li>Compile函数先使用Parser类生成AST，再使用FullCodeGenerator类来生成本地代码；</li>
+<li>本地代码与具体的硬件平台密切相关，FullCodeGenerator使用多个后端来生成与平台相匹配的本地汇编代码。</li>
+</ol>
+<p>大体的流程图如下所示：<br><img src="http://img.blog.csdn.net/20170711221739459?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>在执行编译之前，V8会构建众多全局对象并加载一些内置的库（如math库），来构建一个运行环境。但是，在JavaScript源代码中，并非所有的函数都被编译生成本地代码，而是采用在调用时才会编译的逻辑来动态编译。</p>
+<p>由于V8缺少了生成中间字节码这一环节，为了提升性能，V8会在生成本地代码后，使用数据分析器(profiler)采集一些信息，然后根据这些数据将本地代码进行优化，生成更高效的本地代码，这是一个逐步改进的过程。当发现优化后代码的性能还不如未优化的代码，V8将退回原来的代码，也就是优化回滚。</p>
+<p>在这一阶段涉及的类主要有：</p>
+<ul>
+<li><strong>Script</strong>：表示JavaScript代码，即包含源代码，又包含编译之后生成的本地代码，即是编译入口，又是运行入口；</li>
+<li><strong>Execution</strong>：运行代码的辅组类，包含一些重要函数，如Call函数，它辅组进入和执行Script代码；</li>
+<li><strong>JSFunction</strong>：需要执行的JavaScript函数表示类；</li>
+<li><strong>Runtime</strong>：运行这些本地代码的辅组类，主要提供运行时所需的辅组函数，如：属性访问、类型转换、编译、算术、位操作、比较、正则表达式等；</li>
+<li><strong>Heap</strong>：运行本地代码需要使用的内存堆类；</li>
+<li><strong>MarkCompactCollector</strong>：垃圾回收机制的主要实现类，用来标记、清除和整理等基本的垃圾回收过程；</li>
+<li><strong>SweeperThread</strong>：负责垃圾回收的线程。<br>本阶段大体流程如下如所示：</li>
+</ul>
+<p>在V8中，函数是一个基本单位，当某个JavaScript函数被调用时，V8会查找该函数是否已经生成本地代码，如果已经生成，则直接调用该函数。否则，V8引擎会生成属于该函数的本地代码。这样，对于那些不用的代码就可以减少执行时间。再次借助Runtime类中的辅组函数，将不用的空间进行标记清除和垃圾回收。</p>
+<h3 id="优化回滚"><a href="#优化回滚" class="headerlink" title="优化回滚"></a>优化回滚</h3><p>因为V8是基于AST直接生成本地代码，没有经过中间表示层的优化，所以本地代码尚未经过很好的优化。于是，在2010年，V8引入了新的编译器-Crankshaft，它主要针对热点函数进行优化，基于JavaScript源代码开始分析而非本地代码，同时构建Hydroger图并基于此来进行优化分析。</p>
+<p>Crankshaft编译器为了性能考虑，通常会做出比较乐观和大胆的预测—代码稳定且变量类型不变，所以可以生成高效的本地代码。但是，鉴于JavaScript的一个弱类型的语言，变量类型也可能在执行的过程中进行改变，鉴于这种情况，V8会将该编译器做的想当然的优化进行回滚，称为优化回滚。<br>例如，下面的示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">var counter = 0;</div><div class="line">function test(x, y) &#123;</div><div class="line">    counter++;</div><div class="line">    if (counter &lt; 1000000) &#123;</div><div class="line">        // do something</div><div class="line">        return &apos;jeri&apos;;</div><div class="line">    &#125;</div><div class="line">    var unknown = new Date();</div><div class="line">    console.log(unknown);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>该函数被调用多次之后，V8引擎可能会触发Crankshaft编译器对其进行优化，而优化代码认为示例代码的类型信息都已经被确定。当程序执行到new Date()这个地方，并未获取unknown这个变量的类型，V8只得将该部分代码进行回滚。</p>
+<p>优化回滚是一个很耗时的操作，在写代码过程中，尽量不要触发优化该操作。在最近发布的 V8 5.9 版本中，新增了一个 Ignition 字节码解释器，TurboFan 和 Ignition 结合起来共同完成JavaScript的编译。这个版本中消除 Cranshaft 这个旧的编译器，并让新的 Turbofan 直接从字节码来优化代码，并当需要进行反优化的时候直接反优化到字节码，而不需要再考虑 JS 源代码。</p>
+<h3 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h3><p>Node中通过JavaScript使用内存时就会发现只能使用部分内存（64位系统下约为1.4 GB，32位系统下约为0.7 GB），其深层原因是 V8 垃圾回收机制的限制所致（如果可使用内存太大，V8在进行垃圾回收时需耗费更多的资源和时间，严重影响JS的执行效率）。下面对内存管理进行介绍。<br>内存的管理组要由分配和回收两个部分构成。V8的内存划分如下：</p>
+<ul>
+<li><strong>Zone</strong>：管理小块内存。其先自己申请一块内存，然后管理和分配一些小内存，当一块小内存被分配之后，不能被Zone回收，只能一次性回收Zone分配的所有小内存。当一个过程需要很多内存，Zone将需要分配大量的内存，却又不能及时回收，会导致内存不足情况。</li>
+<li><strong>堆</strong>：管理JavaScript使用的数据、生成的代码、哈希表等。为方便实现垃圾回收，堆被分为三个部分(这和Java等的堆不一样)：</li>
+<li><strong>年轻分代</strong>：为新创建的对象分配内存空间，经常需要进行垃圾回收。为方便年轻分代中的内容回收，可再将年轻分代分为两半，一半用来分配，另一半在回收时负责将之前还需要保留的对象复制过来。<br><strong>年老分代</strong>：根据需要将年老的对象、指针、代码等数据保存起来，较少地进行垃圾回收。<br><strong>大对象</strong>：为那些需要使用较多内存对象分配内存，当然同样可能包含数据和代码等分配的内存，一个页面只分配一个对象。</li>
+</ul>
+<p>用一张图可以表示如下：<br><img src="http://img.blog.csdn.net/20170711230619391?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h3 id="垃圾回收"><a href="#垃圾回收" class="headerlink" title="垃圾回收"></a>垃圾回收</h3><p>V8 使用了分代和大数据的内存分配，在回收内存时使用精简整理的算法标记未引用的对象，然后消除没有标记的对象，最后整理和压缩那些还未保存的对象，即可完成垃圾回收。</p>
+<p>在V8中，使用较多的是年轻分代和年老分代。年轻分代中的对象垃圾回收主要通过Scavenge算法进行垃圾回收。在Scavenge的具体实现中，主要采用了Cheney算法。</p>
+<p>Cheney算法：通过复制的方式实现的垃圾回收算法。它将堆内存分为两个 semispace，一个处于使用中（From空间），另一个处于闲置状态（To空间）。当分配对象时，先是在From空间中进行分配。当开始进行垃圾回收时，会检查From空间中的存活对象，这些存活对象将被复制到To空间中，而非存活对象占用的空间将会被释放。完成复制后，From空间和To空间的角色发生对换。在垃圾回收的过程中，就是通过将存活对象在两个 semispace 空间之间进行复制。</p>
+<p>年轻分代中的对象有机会晋升为年老分代，条件主要有两个：一个是对象是否经历过Scavenge回收，一个是To空间的内存占用比超过限制。</p>
+<p>对于年老分代中的对象，由于存活对象占较大比重，再采用上面的方式会有两个问题：一个是存活对象较多，复制存活对象的效率将会很低；另一个问题依然是浪费一半空间的问题。为此，V8在年老分代中主要采用了Mark-Sweep（标记清除）标记清除和Mark-Compact（标记整理）相结合的方式进行垃圾回收。</p>
+<h3 id="快照"><a href="#快照" class="headerlink" title="快照"></a>快照</h3><p>在V8引擎启动时，需要构建JavaScript运行环境，需要加载很多内置对象，同时也需要建立内置的函数，如Array，String，Math等。为了使V8更加整洁，加载对象和建立函数等任务都是使用JavaScript文件来实现的，V8引擎负责提供机制来支持，就是在编译和执行JavaScript前先加载这些文件。</p>
+<p>V8引擎需要编译和执行这些内置的JavaScript代码，同时使用堆等来保存执行过程中创建的对象、代码等，这些都需要时间。为此，V8引入了快照机制，将这些内置的对象和函数加载之后的内存保存并序列化。经过快照机制的启动时间可以缩减几毫秒。</p>
+<h1 id="V8-VS-JavaScriptCore"><a href="#V8-VS-JavaScriptCore" class="headerlink" title="V8 VS JavaScriptCore"></a>V8 VS JavaScriptCore</h1><p>JavaScriptCore引擎是WebKit中默认的JavaScript引擎，也是苹果开源的一个项目，应用较为广泛。最初，性能不是很好，从2008年开始了一系列的优化，重新实现了编译器和字节码解释器，使得引擎的性能有较大的提升。随后内嵌缓存、基于正则表达式的JIT、简单的JIT及字节码解释器等技术引入进来，JavaScriptCore引擎也在不断的迭代和发展。</p>
+<p>V8引擎自诞生之日起就以性能优化作为目标，引入了众多新技术，极大了带动了整个业界JavaScript引擎性能的快速发展。总的来说，V8引擎较为激进，青睐可以提高性能的新技术，而JavaScriptCore引擎较为稳健，渐进式的改变着自己的性能。总的来说JavaScript引擎工作流程（包含v8和JavaScriptCore）如下所示：</p>
+<p><img src="http://img.blog.csdn.net/20170711231059978?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>JavaScriptCore 的大致流程为：源代码-→抽象语法树-→字节码-→JIT-→本地代码。</p>
+<p>JavaScriptCore与V8有一些不同之处，其中最大的不同就是新增了字节码的中间表示，并加入了多层JIT编译器（如：简单JIT编译器、DFG JIT编译器、LLVM等）优化性能，不停的对本地代码进行优化(在V8 的 5.9 版本中，新增了一个 Ignition 字节码解释器)。</p>
+<h2 id="功能扩展"><a href="#功能扩展" class="headerlink" title="功能扩展"></a>功能扩展</h2><p>JavaScript引擎的主要功能是解析和执行JavaScript代码，往往不能满足使用者多样化的需要，那么就可以增加扩展以提升它的能力。V8引擎有两种扩展机制：绑定和扩展。</p>
+<h3 id="绑定"><a href="#绑定" class="headerlink" title="绑定"></a>绑定</h3><p>使用IDL文件或接口文件生成绑定文件，将这些文件同V8引擎一起编译。WebKit中使用IDL来定义JavaScript，但又与IDL有所不同，有一些改变。定义一个新的接口的步骤大致如下：<br>1.定义新的接口文件，可以在JavaScript代码进行调用，如mymodule.MyObj.myAttr：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">module mymodule &#123;</div><div class="line">    interface [</div><div class="line">            InterfaceName = MyObject</div><div class="line">    ] MyObj &#123; </div><div class="line">        readonly attribute long myAttr;</div><div class="line">        DOMString myMethod (DOMString myArg);</div><div class="line">    &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>2.按照引擎定义的标准接口为基础实现接口类，生成JavaScript引擎所需的绑定文件。WebKit提供了工具帮助生成所需的绑定类，根据引擎不同和引擎开发语言的不同而有所差异。V8引擎会为上述示例代码生成 v8MyObj.h (MyObj类具体的实现代码)和 V8MyObj.cpp (桥接代码，辅组注册桥接的函数到V8引擎)两个绑定文件。</p>
+<p>JavaScript引擎绑定机制需要将扩展代码和JavaScript引擎一块编译和打包，不能根据需要在引擎启动后再动态注入这些本地代码。在实际WEB开发中，开发者都是基于现有浏览器的，根本不可能介入到JavaScript引擎的编译中，绑定机制有很大的局限性，但其非常高效，适用于对性能要求较高的场景。</p>
+<h3 id="Extension"><a href="#Extension" class="headerlink" title="Extension"></a>Extension</h3><p>通过V8的基类Extension进行能力扩展，无需和V8引擎一起编译，可以动态为引擎增加功能特性，具有很强的灵活性。</p>
+<p>Extension机制的大致思路就是，V8提供一个基类Extension和一个全局注册函数，要想扩展JavaScript能力，需要经过以下步骤：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">class MYExtension : public v8::Extension &#123;</div><div class="line">    public:</div><div class="line">        MYExtension() : v8::Extension(&quot;v8/My&quot;, &quot;native function my();&quot;) &#123;&#125;</div><div class="line">        virtual v8::Handle&lt;v8::FunctionTemplate&gt; GetNativeFunction (</div><div class="line">        v8::Handle&lt;v8::String&gt; name) &#123;</div><div class="line">            // 可以根据name来返回不同的函数</div><div class="line">            return v8::FunctionTemplate::New(MYExtention::MY);</div><div class="line">        &#125;</div><div class="line">        static v8::Handle&lt;v8::Value&gt; MY(const v8::Arguments&amp; args) &#123;</div><div class="line">            // Do sth here</div><div class="line">            return v8::Undefined();</div><div class="line">        &#125;</div><div class="line">&#125;;</div><div class="line">MYExtension extension;</div><div class="line">RegisterExtension(&amp;extension);</div></pre></td></tr></table></figure>
+<p>1.基于Extension基类构建一个它的子类，并实现它的虚函数—GetNativeFunction，根据参数name来决定返回实函数；<br>2.创建一个该子类的对象，并通过注册函数将该对象注册到V8引擎，当JavaScript调用’my’函数时就可被调用到。<br>Extension机制是调用V8的接口注入新函数，动态扩展非常方便，但没有绑定机制高效，适用于对性能要求不高的场景。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>作为一个提高JavaScript渲染的高效引擎，学习V8引擎应该重点掌握以下几个概念：</p>
+<ol>
+<li><strong>类型</strong>。对于函数，JavaScript是一种动态类型语言，JavaScriptCore和V8都使用隐藏类和内嵌缓存来提高性能，为了保证缓存命中率，一个函数应该使用较少的数据类型；对于数组，应尽量存放相同类型的数据，这样就可以通过偏移位置来访问。</li>
+<li><strong>数据表示</strong>。简单类型数据（如整型）直接保存在句柄中，可以减少寻址时间和内存占用，如果可以使用整数表示的，尽量不要用浮点类型。</li>
+<li><strong>内存</strong>。虽然JavaScript语言会自己进行垃圾回收，但我们也应尽量做到及时回收不用的内存，对不再使用的对象设置为null或使用delete方法来删除(使用delete方法删除会触发隐藏类新建，需要更多的额外操作)。</li>
+<li><strong>优化回滚</strong>。在执行多次之后，不要出现修改对象类型的语句，尽量不要触发优化回滚，否则会大幅度降低代码的性能。<br>新机制。使用JavaScript引擎或者渲染引擎提供的新机制和新接口提高性能。</li>
+</ol>
+    </div>
+    <p class="post-meta">
+        <span class="post-cat">分类：
+            <a class="cat-link" href="/categories/前端/">前端</a>
+        </span>
+        <span class="post-tags">
+            标签：
+            <a href="/tags/前端/" title="前端">前端</a>
+        </span>
+    </p>
+</article>
+<div class="article-share clearfix text-center">
+    <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+</div>
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br>
+        <a href="/2017/06/03/webpack+react环境搭建/">
+            
+                webpack+react环境搭建
+            
+        </a>
+    </span>
+    
+
+    
+    <span class="next fr">
+        下一篇<br>
+        <a href="/2017/05/18/React Native 自定义控件之验证码和Toast/">
+            
+                React Native 自定义控件专题
+            
+        </a>
+    </span>
+    
+</div>
+<!-- 文章评论 -->
+<div id="comments" class="comments cloud-tie-wrapper"></div>
+    <script>
+    var cloudTieConfig = {
+      url: document.location.href, 
+      sourceId: "Google V8引擎",
+      productKey: "c06bb9930e6f4b38a9997cb9bd17aba5",
+      target: "comments"
+    };
+    var yunManualLoad = true;
+    Tie.loader("aHR0cHM6Ly9hcGkuZ2VudGllLjE2My5jb20vcGMvbGl2ZXNjcmlwdC5odG1s", true);
+    </script>
+            </div>
+
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章分类</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+    <li>
+        <a href="/categories/Android/">Android</a>
+        <span class="badge">(10)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Android/系统/">系统</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Angular2/">Angular2</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/前端/">前端</a>
+        <span class="badge">(7)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/React-Native/">React Native</a>
+        <span class="badge">(12)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Java/">Java</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/VR/">VR</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Angular2/前端/">前端</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Spring/">Spring</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/ios/">ios</a>
+        <span class="badge">(9)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Google/">Google</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Google/VR/">VR</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/技术人生/">技术人生</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/小程序/">小程序</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/机器学习/">机器学习</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/android/">android</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/设计模式/">设计模式</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+</ul>
+    </section>
+
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="/tags/Android/" title="Android">Android (7)</a>
+  
+    <a class="tag-item" href="/tags/新特性/" title="新特性">新特性 (2)</a>
+  
+    <a class="tag-item" href="/tags/深入系统/" title="深入系统">深入系统 (1)</a>
+  
+    <a class="tag-item" href="/tags/系统服务/" title="系统服务">系统服务 (1)</a>
+  
+    <a class="tag-item" href="/tags/高仿/" title="高仿">高仿 (4)</a>
+  
+    <a class="tag-item" href="/tags/硬件/" title="硬件">硬件 (1)</a>
+  
+    <a class="tag-item" href="/tags/混淆打包/" title="混淆打包">混淆打包 (1)</a>
+  
+    <a class="tag-item" href="/tags/Angular2/" title="Angular2">Angular2 (1)</a>
+  
+    <a class="tag-item" href="/tags/前端开发/" title="前端开发">前端开发 (3)</a>
+  
+    <a class="tag-item" href="/tags/android/" title="android">android (4)</a>
+  
+    <a class="tag-item" href="/tags/前端/" title="前端">前端 (5)</a>
+  
+    <a class="tag-item" href="/tags/React-Native/" title="React Native">React Native (10)</a>
+  
+    <a class="tag-item" href="/tags/FlexBox布局/" title="FlexBox布局">FlexBox布局 (1)</a>
+  
+    <a class="tag-item" href="/tags/Java/" title="Java">Java (2)</a>
+  
+    <a class="tag-item" href="/tags/垃圾回收/" title="垃圾回收">垃圾回收 (1)</a>
+  
+    <a class="tag-item" href="/tags/Google/" title="Google">Google (2)</a>
+  
+    <a class="tag-item" href="/tags/VR/" title="VR">VR (2)</a>
+  
+    <a class="tag-item" href="/tags/Node/" title="Node">Node (2)</a>
+  
+    <a class="tag-item" href="/tags/OpenGL/" title="OpenGL">OpenGL (1)</a>
+  
+    <a class="tag-item" href="/tags/Promise/" title="Promise">Promise (1)</a>
+  
+    <a class="tag-item" href="/tags/eact-Native/" title="eact Native">eact Native (1)</a>
+  
+    <a class="tag-item" href="/tags/调试/" title="调试">调试 (1)</a>
+  
+    <a class="tag-item" href="/tags/打包/" title="打包">打包 (1)</a>
+  
+    <a class="tag-item" href="/tags/原生/" title="原生">原生 (1)</a>
+  
+    <a class="tag-item" href="/tags/Spring/" title="Spring">Spring (2)</a>
+  
+    <a class="tag-item" href="/tags/入门/" title="入门">入门 (2)</a>
+  
+    <a class="tag-item" href="/tags/ios/" title="ios">ios (9)</a>
+  
+    <a class="tag-item" href="/tags/Swift/" title="Swift">Swift (1)</a>
+  
+    <a class="tag-item" href="/tags/swift/" title="swift">swift (1)</a>
+  
+    <a class="tag-item" href="/tags/AR/" title="AR">AR (1)</a>
+  
+    <a class="tag-item" href="/tags/Xcode/" title="Xcode">Xcode (3)</a>
+  
+    <a class="tag-item" href="/tags/webpack/" title="webpack">webpack (1)</a>
+  
+    <a class="tag-item" href="/tags/gulp/" title="gulp">gulp (1)</a>
+  
+    <a class="tag-item" href="/tags/https/" title="https">https (1)</a>
+  
+    <a class="tag-item" href="/tags/gif/" title="gif">gif (1)</a>
+  
+    <a class="tag-item" href="/tags/mac/" title="mac">mac (1)</a>
+  
+    <a class="tag-item" href="/tags/环境/" title="环境">环境 (1)</a>
+  
+    <a class="tag-item" href="/tags/原理/" title="原理">原理 (1)</a>
+  
+    <a class="tag-item" href="/tags/个人博客/" title="个人博客">个人博客 (2)</a>
+  
+</div>
+    </section>
+    
+
+    
+    <!-- 我的微博 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>我的微博</strong></h3>
+        <div class="widget-bd" style="position: relative">
+  <div id="myWeiboLoading" class="text-center" style="position:absolute;top:0;left:0;right:0;bottom:0;line-height:50px;font-size:12px;background-color:#fff;z-index:9">微博加载中...</div>
+  <iframe width="100%" height="550" class="share_self" frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&amp;width=0&amp;height=550&amp;fansRow=2&amp;ptype=1&amp;speed=0&amp;skin=4&amp;isTitle=1&amp;noborder=1&amp;isWeibo=1&amp;isFans=1&amp;uid=1831462560&amp;verifier=5192ec39&amp;dpc=1"></iframe>
+  <script>
+  (function () {
+    var oMyWeibo = document.getElementById('myWeibo');
+    var oMyWeiboLoading = document.getElementById('myWeiboLoading');
+    var isIE = /msie/i.test(navigator.userAgent) && !window.opera;
+    var timer = null;
+    if (isIE) {
+      oMyWeibo.onreadystatechange = function(){
+        if(oMyWeibo.readyState === 'loaded' || oMyWeibo.readyState === 'complete'){
+          timer = setTimeout(function () {
+            oMyWeiboLoading.parentNode.removeChild(oMyWeiboLoading);
+            timer = null;
+          }, 300);
+        }
+      };
+    } else {
+      oMyWeibo.onload = function () {
+        timer = setTimeout(function () {
+          oMyWeiboLoading.parentNode.removeChild(oMyWeiboLoading);
+          timer = null;
+        }, 300);
+      };
+    }
+  })();
+  </script>
+</div>
+    </section>
+    
+
+    
+    <!-- 友情链接 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>友情链接</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+        <li>
+            <a href="http://blog.csdn.net/xiangzhihong8/" target="_blank" title="csdn个人博客">csdn博客</a>
+        </li>
+    
+        <li>
+            <a href="https://yq.aliyun.com/u/xiangzhihong" target="_blank" title="阿里云技术博客">阿里云博客</a>
+        </li>
+    
+</ul>
+    </section>
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <footer class="footer">
+    &copy;
+    
+        2016-2017
+    
+
+    <a href="/">Jelon Loves You</a>
+</footer>
+<div class="back-to-top" id="JELON__backToTop" title="返回顶部">返回顶部</div>
+<!-- 添加百度自动推送 -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+    <!--博客js脚本 -->
+    <!-- 这里放网站js脚本 -->
+<script src="/js/main.js"></script>
+</body>
