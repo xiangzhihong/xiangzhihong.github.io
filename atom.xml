@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.xiangzhihong.com/"/>
-  <updated>2017-07-10T01:35:08.000Z</updated>
+  <updated>2017-07-17T06:32:19.572Z</updated>
   <id>http://www.xiangzhihong.com/</id>
   
   <author>
@@ -14,71 +14,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>webpack+react环境搭建</title>
-    <link href="http://www.xiangzhihong.com/2017/06/03/webpack+react%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
-    <id>http://www.xiangzhihong.com/2017/06/03/webpack+react环境搭建/</id>
-    <published>2017-06-02T16:00:00.000Z</published>
-    <updated>2017-07-10T01:35:08.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>我们知道前端的框架纷繁复杂，各有各的优点。而我们选择使用React作为开发框架的时候，往往会选择Webpack+Babel+React来开始我们的项目。之前也讲过其他的前端框架，如<a href="http://blog.csdn.net/xiangzhihong8/article/details/53993980" target="_blank" rel="external"> gulp+webpack</a>，准确的说这不是一个框架，只是项目组织的形式而已。</p>
-<h1 id="Webpack-Babel-React环境搭建"><a href="#Webpack-Babel-React环境搭建" class="headerlink" title="Webpack+Babel+React环境搭建"></a>Webpack+Babel+React环境搭建</h1><h2 id="安装Webpack"><a href="#安装Webpack" class="headerlink" title="安装Webpack"></a>安装Webpack</h2><p>关于Webpack的介绍这里不讲解，大家可以看之前的讲解<a href="http://blog.csdn.net/xiangzhihong8/article/details/53993980" target="_blank" rel="external">webpack介绍</a>。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install webpack -g</div></pre></td></tr></table></figure>
-<h2 id="创建一个项目"><a href="#创建一个项目" class="headerlink" title="创建一个项目"></a>创建一个项目</h2><p>创建一个名叫learn-webpack项目，并进去项目目录。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mkdir learn-webpack </div><div class="line">cd learn-webpack</div></pre></td></tr></table></figure></p>
-<p><img src="http://img.blog.csdn.net/20170104224231893?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>接下来我们来创建2个文件:app.js和index.html，我们在也没上输出一个”Hello World”，<br>app.js：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">document.querySelector(&apos;#app&apos;).innerHTML = &apos;Hello World!&apos;;</div></pre></td></tr></table></figure></p>
-<p>index.html<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html lang=&quot;en&quot;&gt;</div><div class="line">&lt;head&gt;</div><div class="line">  &lt;meta charset=&quot;UTF-8&quot;&gt;</div><div class="line">  &lt;title&gt;Learn-webpack&lt;/title&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">  &lt;div id=&quot;app&quot;&gt;&lt;/div&gt;</div><div class="line">  &lt;script src=&quot;dist/bundle.js&quot;&gt;&lt;/script&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure></p>
-<p>然后在终端执行如下命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">webpack ./app.js ./dist/bundle.js</div></pre></td></tr></table></figure>
-<p>最后执行启动本地的http服务，我们这里用python：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">python -m SimpleHTTPServer</div></pre></td></tr></table></figure>
-<p>然后我们访问：<a href="http://localhost:8000就可以看到效果了。" target="_blank" rel="external">http://localhost:8000就可以看到效果了。</a></p>
-<h2 id="webpack文件配置"><a href="#webpack文件配置" class="headerlink" title="webpack文件配置"></a>webpack文件配置</h2><p>实际上每个项目下都应该包含一个webpack.config.js，用来告诉Webpack需要做些什么，这个我们之前文章也说过。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">module.exports = &#123;</div><div class="line">  entry: &quot;app.js&quot;,</div><div class="line">  output: &#123;</div><div class="line">    path: __dirname+&quot;/dist&quot;,</div><div class="line">    filename: &quot;bundle.js&quot;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>接下来我们在终端运行命令，看看是不是和之前输入 webpack ./app.js ./dist/bundle.js 的打包编译结果一样呢，答案是肯定的。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">webpack</div></pre></td></tr></table></figure>
-<p>注：<br><strong>entry：指定打包的入口文件</strong></p>
-<ul>
-<li>单个文件打包为单个输出文件，直接写该文件的名字，例如：entry:”main.js”</li>
-<li>多个文件打包为单个输出文件，将文件名放进一个数组，例如：entry:[‘main.js’,’xx.js’]</li>
-<li>多个文件打包为多个输出文件，将文件名放入一个键字对，例如：entry: {a:’main.js’,b:’xx.js’}<br><strong>output：配置打包结果</strong><br>path为定义输出文件夹，filename为打包结果文件的名称，如果指定打包入口文件为上面的1、2种情况，filename里面直接跟你想输出的文件名。若为第3种情况filename里面需写成[name].文件名.js，filename里面的[name]为entry中的键。<h3 id="监听变化自动打包"><a href="#监听变化自动打包" class="headerlink" title="监听变化自动打包"></a>监听变化自动打包</h3>当我们在不停的对代码进行变动的时候，为了不修改一次然后又手动去进行打包一次，可以使用webpack的watch功能。这也算是webpack的一个黑科技，以前做后端的时候必须重新部署，这个是很蛋疼的。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">webpack --watch 或者 webpack -w</div></pre></td></tr></table></figure>
-<p>或者我们可以直接在配置代码里面把watch设置为true。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">module.exports = &#123;</div><div class="line">  entry: &quot;app.js&quot;,</div><div class="line">  output: &#123;</div><div class="line">    path: __dirname+&quot;/dist&quot;,</div><div class="line">    filename: &quot;bundle.js&quot;</div><div class="line">  &#125;,</div><div class="line">  watch: true</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="Babel配置"><a href="#Babel配置" class="headerlink" title="Babel配置"></a>Babel配置</h2><p>Babel 是一个 JavaScript 编译器。使用它可以将ES6的语法转换为ES5的语法，以便在现在有的环境执行之前的代码。<br>首先安装basel。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install webpack babel-loader babel-core babel-preset-es2015 --save-dev</div></pre></td></tr></table></figure>
-<p>执行安装完成后需要将之前的webpack.config.js修改为:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">module.exports = &#123;</div><div class="line">  entry: &quot;./app.js&quot;,</div><div class="line">  output: &#123;</div><div class="line">    path: __dirname+&quot;/dist&quot;,</div><div class="line">    filename: &quot;bundle.js&quot;</div><div class="line">  &#125;,</div><div class="line">  module: &#123;</div><div class="line">    loaders: [</div><div class="line">      &#123;</div><div class="line">        test: /\.jsx?$/,</div><div class="line">        loader: &apos;babel-loader&apos;,</div><div class="line">        exclude: /node_modules/,</div><div class="line">        query: &#123;</div><div class="line">          presets: [&apos;es2015&apos;]</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">    ]</div><div class="line">  &#125;,</div><div class="line">  resolve: &#123;</div><div class="line">    extensions: [&apos;&apos;,&apos;.coffee&apos;,&apos;.js&apos;]</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>现在就能在文件里面以ES6的语法进行代码编写，如在app.js加入:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var func = str =&gt; &#123;</div><div class="line">  console.log(str);</div><div class="line">&#125;;</div><div class="line">func(&apos;Hello Babel!&apos;);</div></pre></td></tr></table></figure>
-<p>我们再次运行，如果看到输出，就说明配置成功了。这里有关Loader的知识和配置就不讲究了，大家可以网上补补。</p>
-<h2 id="与React结合"><a href="#与React结合" class="headerlink" title="与React结合"></a>与React结合</h2><p>终端输入以下代码对react和react-dom进行安装：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install react react-dom --save</div></pre></td></tr></table></figure>
-<p>安装Babel针对React的预设插件：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install babel-preset-react --save-dev</div></pre></td></tr></table></figure>
-<p>由于我们增加了react的预设插件，所以需要对webpack.config.js进行修改。将module -&gt; loaders下面的query修改如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">query: &#123;</div><div class="line">    presets: [&apos;es2015&apos;,&apos;react&apos;]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>接下来我们创建一个hello.js.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">import React from &quot;react&quot;;</div><div class="line"></div><div class="line">class Hello extends React.Component&#123;</div><div class="line">  render() &#123;</div><div class="line">    return (</div><div class="line">      &lt;div&gt;</div><div class="line">          Hello, World!</div><div class="line">      &lt;/div&gt;</div><div class="line">    )</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">export default Hello;</div></pre></td></tr></table></figure>
-<p>在app.js做一下配置：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">import React from &quot;react&quot;;</div><div class="line">import ReactDOM from &quot;react-dom&quot;;</div><div class="line">import Hello from &quot;./hello&quot;;</div><div class="line"></div><div class="line">ReactDOM.render(</div><div class="line">  &lt;Hello /&gt;,</div><div class="line">  document.querySelector(&apos;#app&apos;)</div><div class="line">);</div></pre></td></tr></table></figure>
-<p>哈哈哈，这里如果大家做过React Native的，这里是不是感觉很亲切，只不过React Native还是用的npm在做管理。我们同样启动服务在看看，如果看到Hello World!就说明环境配置成功。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;我们知道前端的框架纷繁复杂，各有各的优点。而我们选择使用React作为开发框架的时候，往往会选择Webpack+Babel+React来开始
-    
-    </summary>
-    
-      <category term="前端" scheme="http://www.xiangzhihong.com/categories/%E5%89%8D%E7%AB%AF/"/>
-    
-    
-      <category term="前端开发" scheme="http://www.xiangzhihong.com/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="react" scheme="http://www.xiangzhihong.com/tags/react/"/>
-    
-  </entry>
   
   <entry>
     <title>Google V8引擎</title>
@@ -219,6 +154,71 @@
     
     
       <category term="前端" scheme="http://www.xiangzhihong.com/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>webpack+react环境搭建</title>
+    <link href="http://www.xiangzhihong.com/2017/06/03/webpack+react%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
+    <id>http://www.xiangzhihong.com/2017/06/03/webpack+react环境搭建/</id>
+    <published>2017-06-02T16:00:00.000Z</published>
+    <updated>2017-07-10T01:35:08.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>我们知道前端的框架纷繁复杂，各有各的优点。而我们选择使用React作为开发框架的时候，往往会选择Webpack+Babel+React来开始我们的项目。之前也讲过其他的前端框架，如<a href="http://blog.csdn.net/xiangzhihong8/article/details/53993980" target="_blank" rel="external"> gulp+webpack</a>，准确的说这不是一个框架，只是项目组织的形式而已。</p>
+<h1 id="Webpack-Babel-React环境搭建"><a href="#Webpack-Babel-React环境搭建" class="headerlink" title="Webpack+Babel+React环境搭建"></a>Webpack+Babel+React环境搭建</h1><h2 id="安装Webpack"><a href="#安装Webpack" class="headerlink" title="安装Webpack"></a>安装Webpack</h2><p>关于Webpack的介绍这里不讲解，大家可以看之前的讲解<a href="http://blog.csdn.net/xiangzhihong8/article/details/53993980" target="_blank" rel="external">webpack介绍</a>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install webpack -g</div></pre></td></tr></table></figure>
+<h2 id="创建一个项目"><a href="#创建一个项目" class="headerlink" title="创建一个项目"></a>创建一个项目</h2><p>创建一个名叫learn-webpack项目，并进去项目目录。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mkdir learn-webpack </div><div class="line">cd learn-webpack</div></pre></td></tr></table></figure></p>
+<p><img src="http://img.blog.csdn.net/20170104224231893?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>接下来我们来创建2个文件:app.js和index.html，我们在也没上输出一个”Hello World”，<br>app.js：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">document.querySelector(&apos;#app&apos;).innerHTML = &apos;Hello World!&apos;;</div></pre></td></tr></table></figure></p>
+<p>index.html<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html lang=&quot;en&quot;&gt;</div><div class="line">&lt;head&gt;</div><div class="line">  &lt;meta charset=&quot;UTF-8&quot;&gt;</div><div class="line">  &lt;title&gt;Learn-webpack&lt;/title&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">  &lt;div id=&quot;app&quot;&gt;&lt;/div&gt;</div><div class="line">  &lt;script src=&quot;dist/bundle.js&quot;&gt;&lt;/script&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure></p>
+<p>然后在终端执行如下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">webpack ./app.js ./dist/bundle.js</div></pre></td></tr></table></figure>
+<p>最后执行启动本地的http服务，我们这里用python：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">python -m SimpleHTTPServer</div></pre></td></tr></table></figure>
+<p>然后我们访问：<a href="http://localhost:8000就可以看到效果了。" target="_blank" rel="external">http://localhost:8000就可以看到效果了。</a></p>
+<h2 id="webpack文件配置"><a href="#webpack文件配置" class="headerlink" title="webpack文件配置"></a>webpack文件配置</h2><p>实际上每个项目下都应该包含一个webpack.config.js，用来告诉Webpack需要做些什么，这个我们之前文章也说过。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">module.exports = &#123;</div><div class="line">  entry: &quot;app.js&quot;,</div><div class="line">  output: &#123;</div><div class="line">    path: __dirname+&quot;/dist&quot;,</div><div class="line">    filename: &quot;bundle.js&quot;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>接下来我们在终端运行命令，看看是不是和之前输入 webpack ./app.js ./dist/bundle.js 的打包编译结果一样呢，答案是肯定的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">webpack</div></pre></td></tr></table></figure>
+<p>注：<br><strong>entry：指定打包的入口文件</strong></p>
+<ul>
+<li>单个文件打包为单个输出文件，直接写该文件的名字，例如：entry:”main.js”</li>
+<li>多个文件打包为单个输出文件，将文件名放进一个数组，例如：entry:[‘main.js’,’xx.js’]</li>
+<li>多个文件打包为多个输出文件，将文件名放入一个键字对，例如：entry: {a:’main.js’,b:’xx.js’}<br><strong>output：配置打包结果</strong><br>path为定义输出文件夹，filename为打包结果文件的名称，如果指定打包入口文件为上面的1、2种情况，filename里面直接跟你想输出的文件名。若为第3种情况filename里面需写成[name].文件名.js，filename里面的[name]为entry中的键。<h3 id="监听变化自动打包"><a href="#监听变化自动打包" class="headerlink" title="监听变化自动打包"></a>监听变化自动打包</h3>当我们在不停的对代码进行变动的时候，为了不修改一次然后又手动去进行打包一次，可以使用webpack的watch功能。这也算是webpack的一个黑科技，以前做后端的时候必须重新部署，这个是很蛋疼的。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">webpack --watch 或者 webpack -w</div></pre></td></tr></table></figure>
+<p>或者我们可以直接在配置代码里面把watch设置为true。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">module.exports = &#123;</div><div class="line">  entry: &quot;app.js&quot;,</div><div class="line">  output: &#123;</div><div class="line">    path: __dirname+&quot;/dist&quot;,</div><div class="line">    filename: &quot;bundle.js&quot;</div><div class="line">  &#125;,</div><div class="line">  watch: true</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Babel配置"><a href="#Babel配置" class="headerlink" title="Babel配置"></a>Babel配置</h2><p>Babel 是一个 JavaScript 编译器。使用它可以将ES6的语法转换为ES5的语法，以便在现在有的环境执行之前的代码。<br>首先安装basel。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install webpack babel-loader babel-core babel-preset-es2015 --save-dev</div></pre></td></tr></table></figure>
+<p>执行安装完成后需要将之前的webpack.config.js修改为:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">module.exports = &#123;</div><div class="line">  entry: &quot;./app.js&quot;,</div><div class="line">  output: &#123;</div><div class="line">    path: __dirname+&quot;/dist&quot;,</div><div class="line">    filename: &quot;bundle.js&quot;</div><div class="line">  &#125;,</div><div class="line">  module: &#123;</div><div class="line">    loaders: [</div><div class="line">      &#123;</div><div class="line">        test: /\.jsx?$/,</div><div class="line">        loader: &apos;babel-loader&apos;,</div><div class="line">        exclude: /node_modules/,</div><div class="line">        query: &#123;</div><div class="line">          presets: [&apos;es2015&apos;]</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">    ]</div><div class="line">  &#125;,</div><div class="line">  resolve: &#123;</div><div class="line">    extensions: [&apos;&apos;,&apos;.coffee&apos;,&apos;.js&apos;]</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>现在就能在文件里面以ES6的语法进行代码编写，如在app.js加入:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var func = str =&gt; &#123;</div><div class="line">  console.log(str);</div><div class="line">&#125;;</div><div class="line">func(&apos;Hello Babel!&apos;);</div></pre></td></tr></table></figure>
+<p>我们再次运行，如果看到输出，就说明配置成功了。这里有关Loader的知识和配置就不讲究了，大家可以网上补补。</p>
+<h2 id="与React结合"><a href="#与React结合" class="headerlink" title="与React结合"></a>与React结合</h2><p>终端输入以下代码对react和react-dom进行安装：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install react react-dom --save</div></pre></td></tr></table></figure>
+<p>安装Babel针对React的预设插件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install babel-preset-react --save-dev</div></pre></td></tr></table></figure>
+<p>由于我们增加了react的预设插件，所以需要对webpack.config.js进行修改。将module -&gt; loaders下面的query修改如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">query: &#123;</div><div class="line">    presets: [&apos;es2015&apos;,&apos;react&apos;]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>接下来我们创建一个hello.js.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">import React from &quot;react&quot;;</div><div class="line"></div><div class="line">class Hello extends React.Component&#123;</div><div class="line">  render() &#123;</div><div class="line">    return (</div><div class="line">      &lt;div&gt;</div><div class="line">          Hello, World!</div><div class="line">      &lt;/div&gt;</div><div class="line">    )</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">export default Hello;</div></pre></td></tr></table></figure>
+<p>在app.js做一下配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">import React from &quot;react&quot;;</div><div class="line">import ReactDOM from &quot;react-dom&quot;;</div><div class="line">import Hello from &quot;./hello&quot;;</div><div class="line"></div><div class="line">ReactDOM.render(</div><div class="line">  &lt;Hello /&gt;,</div><div class="line">  document.querySelector(&apos;#app&apos;)</div><div class="line">);</div></pre></td></tr></table></figure>
+<p>哈哈哈，这里如果大家做过React Native的，这里是不是感觉很亲切，只不过React Native还是用的npm在做管理。我们同样启动服务在看看，如果看到Hello World!就说明环境配置成功。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;我们知道前端的框架纷繁复杂，各有各的优点。而我们选择使用React作为开发框架的时候，往往会选择Webpack+Babel+React来开始
+    
+    </summary>
+    
+      <category term="前端" scheme="http://www.xiangzhihong.com/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+      <category term="前端开发" scheme="http://www.xiangzhihong.com/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="react" scheme="http://www.xiangzhihong.com/tags/react/"/>
     
   </entry>
   
@@ -672,54 +672,6 @@
   </entry>
   
   <entry>
-    <title>Angular2入坑指南</title>
-    <link href="http://www.xiangzhihong.com/2016/12/05/Angular2%E5%85%A5%E5%9D%91%E6%8C%87%E5%8D%97/"/>
-    <id>http://www.xiangzhihong.com/2016/12/05/Angular2入坑指南/</id>
-    <published>2016-12-04T16:00:00.000Z</published>
-    <updated>2017-07-10T01:05:06.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="序"><a href="#序" class="headerlink" title="序"></a>序</h1><p>对后端开发来说，前端是神秘的，眼花缭乱的技术，繁多的框架，出名的不出名的好几百种，看是“繁荣”，其实显得杂乱无章，但是我们在做开发的时候，技术选型还是主流的那么几个：浅析angular，react，vue.js Node.js。</p>
-<h2 id="node"><a href="#node" class="headerlink" title="node"></a>node</h2><p>官网：<a href="https://nodejs.org/" target="_blank" rel="external">https://nodejs.org/</a><br>nodejs不是一个js框架，千万不要认为是类似jquery的框架，nodejs是js运行时，运行环境，类比java中jvm。做前端的没用过nodejs都不好意思说自己是前端。nodejs是和jvm同等地位的js运行环境，打开了前端人员走向后端的道路。</p>
-<h2 id="react-js"><a href="#react-js" class="headerlink" title="react.js"></a>react.js</h2><p>官网：<a href="http://facebook.github.io/react/" target="_blank" rel="external">http://facebook.github.io/react/</a><br>react是facebook前不久出的一款框架，众前端膜拜之。类比Java中freemarker的宏。reactjs最大的作用就是用来开发ui组件，比如用它开发移动端页面，也是今年移动端前端化的推动者。</p>
-<h2 id="angular-js"><a href="#angular-js" class="headerlink" title="angular.js"></a>angular.js</h2><p>官网：<a href="http://www.apjs.net/" target="_blank" rel="external">http://www.apjs.net/</a><br>angular是一款优秀的前端JS框架，已经被用于Google的多款产品当中。AngularJS有着诸多特性，最为核心的是：MVC、模块化、自动化双向数据绑定、语义化标签、依赖注入等等。因为背靠google也收到了开发者的推崇。</p>
-<h1 id="概念与区别"><a href="#概念与区别" class="headerlink" title="概念与区别"></a>概念与区别</h1><p>本人也在React与Angular两大体系里纠结了好久，还使用React Native做了几个UI，彷徨于两大前端框架之前。<br>React缺点：</p>
-<ol>
-<li>Web Componet的MVC分离不够彻底。 JSX描述的页面模板与JS代码没有办法完全分开。<br>无法接受代码的同时还夹个HTML代码这样原始的方式。</li>
-<li>对UI的描述自成一体，而不是采用CSS或者SCSS。</li>
-<li>数据的传递不够直接还有一堆乱七八槽的属性</li>
-<li>Android与IOS的代码不够一致</li>
-<li>核心太小，一堆补充的库<br>Angular2的优点：<br>1、推荐TypeScript而不是原生的Javascript<br>2、类库特别多，概念也是特别多<br>3、体量大<br>4、成熟度相对偏低，版本2才刚发布<br>5、不兼容1.x<br>6、Router还不成熟<br>综合以上我最终决定选择Angular2作为我前端开发的首选框架。<br>同时还有以下几个Bonus：</li>
-<li>配置nativescript写原生应用，并且nativescript支持css子集，这一点比react要强一些，可以更小的降低学习成本与维护成本。<ol>
-<li>有官方的UI方案Material Design供选择</li>
-<li>官工具链相对于React要成熟 有angular-cli这个便利化的工具，并提供E2E的测试，用以方便测试，并保证项目的质量。</li>
-<li>维护团队强大<br>来看一张图：<br><img src="http://img.blog.csdn.net/20161225121233493?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><h1 id="Angular2快速安装与入门"><a href="#Angular2快速安装与入门" class="headerlink" title="Angular2快速安装与入门"></a>Angular2快速安装与入门</h1>安装angular-cli</li>
-</ol>
-</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g angular-cli</div></pre></td></tr></table></figure>
-<p>创建项目</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ng new PROJECT_NAMEcd PROJECT_NAMEng serve</div></pre></td></tr></table></figure>
-<p>就这么 简单，这时候你的项目已经运行起来了。<br><img src="http://img.blog.csdn.net/20161225121618854?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p>我们看一下项目结构<br><img src="http://img.blog.csdn.net/20161225121652321?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>然后打开localhost:4200就可以查看效果了。<br>附：<a href="https://github.com/angular/angular-cli" target="_blank" rel="external">angular-cli的教程与源码地址</a></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;序&quot;&gt;&lt;a href=&quot;#序&quot; class=&quot;headerlink&quot; title=&quot;序&quot;&gt;&lt;/a&gt;序&lt;/h1&gt;&lt;p&gt;对后端开发来说，前端是神秘的，眼花缭乱的技术，繁多的框架，出名的不出名的好几百种，看是“繁荣”，其实显得杂乱无章，但是我们在做开发的时候，技术选型还
-    
-    </summary>
-    
-      <category term="Angular2" scheme="http://www.xiangzhihong.com/categories/Angular2/"/>
-    
-      <category term="前端" scheme="http://www.xiangzhihong.com/categories/Angular2/%E5%89%8D%E7%AB%AF/"/>
-    
-    
-      <category term="Angular2" scheme="http://www.xiangzhihong.com/tags/Angular2/"/>
-    
-      <category term="前端开发" scheme="http://www.xiangzhihong.com/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
-    
-  </entry>
-  
-  <entry>
     <title>gulp+webpack工具整合简介</title>
     <link href="http://www.xiangzhihong.com/2016/12/05/gulp+webpack%E5%B7%A5%E5%85%B7%E6%95%B4%E5%90%88%E7%AE%80%E4%BB%8B/"/>
     <id>http://www.xiangzhihong.com/2016/12/05/gulp+webpack工具整合简介/</id>
@@ -818,6 +770,54 @@
       <category term="webpack" scheme="http://www.xiangzhihong.com/tags/webpack/"/>
     
       <category term="gulp" scheme="http://www.xiangzhihong.com/tags/gulp/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Angular2入坑指南</title>
+    <link href="http://www.xiangzhihong.com/2016/12/05/Angular2%E5%85%A5%E5%9D%91%E6%8C%87%E5%8D%97/"/>
+    <id>http://www.xiangzhihong.com/2016/12/05/Angular2入坑指南/</id>
+    <published>2016-12-04T16:00:00.000Z</published>
+    <updated>2017-07-10T01:05:06.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="序"><a href="#序" class="headerlink" title="序"></a>序</h1><p>对后端开发来说，前端是神秘的，眼花缭乱的技术，繁多的框架，出名的不出名的好几百种，看是“繁荣”，其实显得杂乱无章，但是我们在做开发的时候，技术选型还是主流的那么几个：浅析angular，react，vue.js Node.js。</p>
+<h2 id="node"><a href="#node" class="headerlink" title="node"></a>node</h2><p>官网：<a href="https://nodejs.org/" target="_blank" rel="external">https://nodejs.org/</a><br>nodejs不是一个js框架，千万不要认为是类似jquery的框架，nodejs是js运行时，运行环境，类比java中jvm。做前端的没用过nodejs都不好意思说自己是前端。nodejs是和jvm同等地位的js运行环境，打开了前端人员走向后端的道路。</p>
+<h2 id="react-js"><a href="#react-js" class="headerlink" title="react.js"></a>react.js</h2><p>官网：<a href="http://facebook.github.io/react/" target="_blank" rel="external">http://facebook.github.io/react/</a><br>react是facebook前不久出的一款框架，众前端膜拜之。类比Java中freemarker的宏。reactjs最大的作用就是用来开发ui组件，比如用它开发移动端页面，也是今年移动端前端化的推动者。</p>
+<h2 id="angular-js"><a href="#angular-js" class="headerlink" title="angular.js"></a>angular.js</h2><p>官网：<a href="http://www.apjs.net/" target="_blank" rel="external">http://www.apjs.net/</a><br>angular是一款优秀的前端JS框架，已经被用于Google的多款产品当中。AngularJS有着诸多特性，最为核心的是：MVC、模块化、自动化双向数据绑定、语义化标签、依赖注入等等。因为背靠google也收到了开发者的推崇。</p>
+<h1 id="概念与区别"><a href="#概念与区别" class="headerlink" title="概念与区别"></a>概念与区别</h1><p>本人也在React与Angular两大体系里纠结了好久，还使用React Native做了几个UI，彷徨于两大前端框架之前。<br>React缺点：</p>
+<ol>
+<li>Web Componet的MVC分离不够彻底。 JSX描述的页面模板与JS代码没有办法完全分开。<br>无法接受代码的同时还夹个HTML代码这样原始的方式。</li>
+<li>对UI的描述自成一体，而不是采用CSS或者SCSS。</li>
+<li>数据的传递不够直接还有一堆乱七八槽的属性</li>
+<li>Android与IOS的代码不够一致</li>
+<li>核心太小，一堆补充的库<br>Angular2的优点：<br>1、推荐TypeScript而不是原生的Javascript<br>2、类库特别多，概念也是特别多<br>3、体量大<br>4、成熟度相对偏低，版本2才刚发布<br>5、不兼容1.x<br>6、Router还不成熟<br>综合以上我最终决定选择Angular2作为我前端开发的首选框架。<br>同时还有以下几个Bonus：</li>
+<li>配置nativescript写原生应用，并且nativescript支持css子集，这一点比react要强一些，可以更小的降低学习成本与维护成本。<ol>
+<li>有官方的UI方案Material Design供选择</li>
+<li>官工具链相对于React要成熟 有angular-cli这个便利化的工具，并提供E2E的测试，用以方便测试，并保证项目的质量。</li>
+<li>维护团队强大<br>来看一张图：<br><img src="http://img.blog.csdn.net/20161225121233493?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><h1 id="Angular2快速安装与入门"><a href="#Angular2快速安装与入门" class="headerlink" title="Angular2快速安装与入门"></a>Angular2快速安装与入门</h1>安装angular-cli</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g angular-cli</div></pre></td></tr></table></figure>
+<p>创建项目</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ng new PROJECT_NAMEcd PROJECT_NAMEng serve</div></pre></td></tr></table></figure>
+<p>就这么 简单，这时候你的项目已经运行起来了。<br><img src="http://img.blog.csdn.net/20161225121618854?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>我们看一下项目结构<br><img src="http://img.blog.csdn.net/20161225121652321?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>然后打开localhost:4200就可以查看效果了。<br>附：<a href="https://github.com/angular/angular-cli" target="_blank" rel="external">angular-cli的教程与源码地址</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;序&quot;&gt;&lt;a href=&quot;#序&quot; class=&quot;headerlink&quot; title=&quot;序&quot;&gt;&lt;/a&gt;序&lt;/h1&gt;&lt;p&gt;对后端开发来说，前端是神秘的，眼花缭乱的技术，繁多的框架，出名的不出名的好几百种，看是“繁荣”，其实显得杂乱无章，但是我们在做开发的时候，技术选型还
+    
+    </summary>
+    
+      <category term="Angular2" scheme="http://www.xiangzhihong.com/categories/Angular2/"/>
+    
+      <category term="前端" scheme="http://www.xiangzhihong.com/categories/Angular2/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+      <category term="Angular2" scheme="http://www.xiangzhihong.com/tags/Angular2/"/>
+    
+      <category term="前端开发" scheme="http://www.xiangzhihong.com/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
     
   </entry>
   
