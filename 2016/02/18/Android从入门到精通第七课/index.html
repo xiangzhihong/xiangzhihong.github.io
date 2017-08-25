@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8">
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya">
+    
+    <title>Fragment详解 | 向志洪</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
+    <meta name="keywords" content="前端, Web, 移动, 向志洪">
+    <meta name="description" content="">
+
+    
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <!--[if lt IE 9]>
+    <script src="/js/html5.js"></script>
+    <![endif]-->
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?fd459238242776d173cdc64918fb32f2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+    
+    <script>var yunModuleEnv = true;</script>
+    <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+    
+</head></html>
+<body class="home">
+    <!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="/">
+                <div class="cover">
+                    <span class="name">向志洪</span>
+                    <span class="description">个人技术博客</span>
+                </div>
+            </a>
+        </div>
+        <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
+        <ul class="menu hidden" id="JELON__menu">
+            
+            <li rel="/2016/02/18/Android从入门到精通第七课/index.html" class="item">
+                <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
+            </li>
+            
+            <li rel="/2016/02/18/Android从入门到精通第七课/index.html" class="item">
+                <a href="/archives/" title="文章列表" class="icon-lab">&nbsp;文章列表</a>
+            </li>
+            
+            <li rel="/2016/02/18/Android从入门到精通第七课/index.html" class="item">
+                <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
+            </li>
+            
+            <li rel="/2016/02/18/Android从入门到精通第七课/index.html" class="item">
+                <a href="/404/" title="留言" class="icon-comment">&nbsp;留言</a>
+            </li>
+            
+        </ul>
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        <a href="https://github.com/xiangzhihong" target="_blank">Github</a>
+                        |
+                    
+                        <a href="http://tongji.baidu.com/web/welcome/login" target="_blank">站长统计</a>
+                        |
+                    
+                        <a href="http://weibo.com/code_xzh" target="_blank">新浪微博</a>
+                        |
+                    
+                </p>
+                <p class="sns">
+                    
+                    <a href="javascript: void(0);" class="wechat">
+                        <b>■</b>
+                        公众号
+                        <span class="popover">
+                            <img src="/img/wechat_mp.jpg" width="120" height="120" alt="我的微信订阅号">
+                            <i class="arrow"></i>
+                        </span>
+                    </a>
+                </p>
+                
+            </div>
+            <div class="avatar fr">
+                <img src="http://ohe65w0xx.bkt.clouddn.com/avert.png" alt="avatar" title="Jelon">
+            </div>
+        </div>
+    </section>
+</header>
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+        <section class="content">
+            <div class="content-main widget">
+                <!-- 文章页 -->
+<!-- 文章 -->
+<article class="post article">
+    <header class="text-center">
+        <h3 class="post-title"><span>Fragment详解</span></h3>
+    </header>
+    <p class="post-meta text-center">
+        xiangzhihong 发表于
+        <time datetime="2016-02-17T16:00:00.000Z">2016-02-18</time>
+    </p>
+    <div class="post-content">
+        <p>##简介</p>
+<p>A Fragment is a piece of an application’s user interface or behavior that can be placed in an Activity.<br>Interaction with fragments is done through FragmentManager,<br>which can be obtained via Activity.getFragmentManager() and Fragment.getFragmentManager().</p>
+<p>The Fragment class can be used many ways to achieve a wide variety of results.<br>In its core, it represents a particular operation or interface that is running within a larger Activity.<br>A Fragment is closely tied to the Activity it is in, and can not be used apart from one.<br>Though Fragment defines its own lifecycle, that lifecycle is dependent on its activity: if the activity is stopped,<br>no fragments inside of it can be started; when the activity is destroyed, all fragments will be destroyed.</p>
+<p>All subclasses of Fragment must include a public no-argument constructor.<br>The framework will often re-instantiate a fragment class when needed, in particular during state restore,<br>and needs to be able to find this constructor to instantiate it.<br>If the no-argument constructor is not available, a runtime exception will occur in some cases during state restore.</p>
+<p>##生命周期</p>
+<p><code>onAttach()</code>(<code>Fragment</code>被绑定到<code>Activity</code>时调用) —&gt; <code>onCreate()</code>(<code>Fragment</code>创建) –&gt;<br><code>onCreateView()</code>(创建和<code>Fragment</code>关联的<code>View Hierarchy</code>时调用) –&gt; <code>onActivityCreated()</code>(<code>Activity</code>的<code>onCreate()</code>方法返回时调用)<br>–&gt; <code>onStart()</code> –&gt; <code>onResume()</code> –&gt; <code>onPause()</code> –&gt; <code>onStop()</code> –&gt; <code>onDestroyView()</code>当和<code>Fragment</code>关联的<code>view hierarchy</code>正在被移除时调用.<br>–&gt; <code>onDestroy()</code>(<code>Activity</code>的<code>onDestroy</code>执行后的回调), –&gt; <code>onDetach()</code>(当<code>Fragment</code>从<code>Activity</code>解除关联时被调用)        </p>
+<p><img src="https://raw.githubusercontent.com/CharonChui/Pictures/master/complete_android_fragment_lifecycle.png" alt="Image">    </p>
+<p>##使用</p>
+<ol>
+<li><p>布局添加</p>
+ <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">LinearLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></div><div class="line">	<span class="attr">android:orientation</span>=<span class="string">"horizontal"</span></div><div class="line">	<span class="attr">android:layout_width</span>=<span class="string">"fill_parent"</span></div><div class="line">	<span class="attr">android:layout_height</span>=<span class="string">"fill_parent"</span>&gt;</div><div class="line"></div><div class="line">	<span class="tag">&lt;<span class="name">fragment</span> <span class="attr">android:name</span>=<span class="string">"com.example.android.fragments.HeadlinesFragment"</span></span></div><div class="line">			  <span class="attr">android:id</span>=<span class="string">"@+id/headlines_fragment"</span></div><div class="line">			  <span class="attr">android:layout_weight</span>=<span class="string">"1"</span></div><div class="line">			  <span class="attr">android:layout_width</span>=<span class="string">"0dp"</span></div><div class="line">			  <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span> /&gt;</div><div class="line"></div><div class="line">	<span class="tag">&lt;<span class="name">fragment</span> <span class="attr">android:name</span>=<span class="string">"com.example.android.fragments.ArticleFragment"</span></span></div><div class="line">			  <span class="attr">android:id</span>=<span class="string">"@+id/article_fragment"</span></div><div class="line">			  <span class="attr">android:layout_weight</span>=<span class="string">"2"</span></div><div class="line">			  <span class="attr">android:layout_width</span>=<span class="string">"0dp"</span></div><div class="line">			  <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span> /&gt;</div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></div><div class="line"></div><div class="line">import android.support.v4.app.FragmentActivity;</div><div class="line"></div><div class="line">public class MainActivity extends FragmentActivity &#123;</div><div class="line">	@Override</div><div class="line">	protected void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">		super.onCreate(savedInstanceState);</div><div class="line">		setContentView(R.layout.fragment_layout);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p> <strong>每一个fragment 都需要一个唯一的标识,如果activity重启,系统可以用来恢复fragment(并且你也可以用来捕获fragment 来处理事务,例如移除它.)</strong><br> 有3 种方法来为一个<code>fragment</code> 提供一个标识:             </p>
+<pre><code>1. 为`android:id`属性提供一个唯一ID.
+2. 为`android:tag`属性提供一个唯一字符串.
+3. 如果以上2个你都没有提供,系统使用容器`view`的`ID`.
+</code></pre> <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ArticleFragment <span class="title">newInstance</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</div><div class="line">	ArticleFragment f = <span class="keyword">new</span> ArticleFragment();</div><div class="line"></div><div class="line">	<span class="comment">// Supply index input as an argument.</span></div><div class="line">	Bundle args = <span class="keyword">new</span> Bundle();</div><div class="line">	args.putInt(<span class="string">"index"</span>, index);</div><div class="line">	f.setArguments(args);</div><div class="line"></div><div class="line">	<span class="keyword">return</span> f;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol>
+<li>通过代码添加<br> 只需简单的指定一个需要放置<code>Fragment</code>的<code>ViewGroup</code>.为了在<code>Activity</code>中操作<code>Fragment</code>事务(例如添加、移除或代替),必须使用来自<code>FragmentTransaction</code>. <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">FragmentActivity</span> </span>&#123;</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">		<span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">		setContentView(R.layout.fragment_layout);</div><div class="line">		</div><div class="line">		 <span class="comment">// Check that the activity is using the layout version with</span></div><div class="line">		<span class="comment">// the fragment_container FrameLayout</span></div><div class="line">		<span class="keyword">if</span> (findViewById(R.id.fragment_container) != <span class="keyword">null</span>) &#123;</div><div class="line"></div><div class="line">			<span class="comment">// However, if we're being restored from a previous state,</span></div><div class="line">			<span class="comment">// then we don't need to do anything and should return or else</span></div><div class="line">			<span class="comment">// we could end up with overlapping fragments.</span></div><div class="line">			<span class="keyword">if</span> (savedInstanceState != <span class="keyword">null</span>) &#123;</div><div class="line">				<span class="keyword">return</span>;</div><div class="line">			&#125;</div><div class="line"></div><div class="line">			<span class="comment">// Create a new Fragment to be placed in the activity layout</span></div><div class="line">			HeadlinesFragment firstFragment = <span class="keyword">new</span> HeadlinesFragment();</div><div class="line">			</div><div class="line">			<span class="comment">// In case this activity was started with special instructions from an</span></div><div class="line">			<span class="comment">// Intent, pass the Intent's extras to the fragment as arguments</span></div><div class="line">			firstFragment.setArguments(getIntent().getExtras());</div><div class="line">			</div><div class="line">			<span class="comment">// Add the fragment to the 'fragment_container' FrameLayout</span></div><div class="line">			getSupportFragmentManager().beginTransaction()</div><div class="line">					.add(R.id.fragment_container, firstFragment).commit();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>##管理Fragment</p>
+<p>要在<code>activity</code>中管理<code>fragment</code>,需要使用<code>FragmentManager</code>. 通过调用<code>activity</code>的<code>getFragmentManager()</code>取得它的实例.<br>可以通过<code>FragmentManager</code>做一些事情, 包括:           </p>
+<pre><code>1. 使用findFragmentById() (用于在activitylayout 中提供一个UI 的fragment)或findFragmentByTag()(适用于有或没有UI 的fragment)获取activity 中存在的fragment      
+2. 将fragment 从后台堆栈中弹出, 使用popBackStack() (模拟用户按下BACK 命令).    
+3. 使用addOnBackStackChangeListener()注册一个监听后台堆栈变化的listener.   
+</code></pre><h2 id="处理Fragment事务"><a href="#处理Fragment事务" class="headerlink" title="处理Fragment事务"></a>处理Fragment事务</h2><p>每一个事务都是同时要执行的一套变化.可以在一个给定的事务中设置你想执行的所有变化,使用诸如<code>add()</code>, <code>remove()</code>,和<code>replace()</code>.<br>要给<code>activity</code>应用事务, 必须调用<code>commit()</code>.在调用<code>commit()</code>之前,<br>你可能想调用<code>addToBackStack()</code>,将事务添加到一个fragment 事务的<code>backstack</code><br>将一个fragment 替换为另一个, 并在后台堆栈中保留之前的状态:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Create new fragment and transaction</span></div><div class="line">Fragment newFragment = <span class="keyword">new</span> ExampleFragment();</div><div class="line">FragmentTransaction transaction = getFragmentManager().beginTransaction();</div><div class="line"><span class="comment">// Replace whatever is in the fragment_container view with this fragment,</span></div><div class="line"><span class="comment">// and add the transaction to the back stack</span></div><div class="line">transaction.replace(R.id.fragment_container, newFragment);</div><div class="line">transaction.addToBackStack(<span class="keyword">null</span>);</div><div class="line"><span class="comment">// Commit the transaction</span></div><div class="line">transaction.commit();</div></pre></td></tr></table></figure></p>
+<p><code>Fragment</code>通过调用<code>addToBackStack()</code>, <code>replace</code>事务被保存到<code>back stack</code>,因此用户可以回退事务,并通过按下<code>BACK</code>按键带回前一个<code>Fragment</code>.</p>
+<h2 id="Fragment真正的onPause以及onResume"><a href="#Fragment真正的onPause以及onResume" class="headerlink" title="Fragment真正的onPause以及onResume"></a>Fragment真正的onPause以及onResume</h2><p><code>Fragment</code>虽然有<code>onResume()</code>和<code>onPause()</code>方法，但是这两个方法是<code>Activity</code>的方法调用时机也与<code>Activity</code>相同，<br>和<code>ViewPager</code>搭配使用这个方法就很鸡肋了，根本不是你想要的效果，这里介绍一种方法。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUserVisibleHint</span><span class="params">(<span class="keyword">boolean</span> isVisibleToUser)</span> </span>&#123;</div><div class="line">	<span class="keyword">super</span>.setUserVisibleHint(isVisibleToUser);</div><div class="line">	<span class="keyword">if</span> (isVisibleToUser) &#123;</div><div class="line">		<span class="comment">//相当于Fragment的onResume</span></div><div class="line">	&#125; <span class="keyword">else</span> &#123;</div><div class="line">		<span class="comment">//相当于Fragment的onPause</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>通过阅读<code>ViewPager</code>和<code>PageAdapter</code>相关的代码，切换<code>Fragment</code>实际上就是通过设置<code>setUserVisibleHint</code>和<code>setMenuVisibility</code>来实现的，<br>调用这个方法时并不会释放掉<code>Fragment</code>（即不会执行<code>onDestoryView</code>）。</p>
+<p>##Fragment与ViewPager搭配<br><code>FragmentStatePagerAdapter</code>，会自动保存和恢复<code>Fragment</code>。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> android.support.v4.app.Fragment;</div><div class="line"><span class="keyword">import</span> android.support.v4.app.FragmentManager;</div><div class="line">...</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ScreenSlidePagerActivity</span> <span class="keyword">extends</span> <span class="title">FragmentActivity</span> </span>&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * The number of pages (wizard steps) to show in this demo.</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> NUM_PAGES = <span class="number">5</span>;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * The pager widget, which handles animation and allows swiping horizontally to access previous</div><div class="line">     * and next wizard steps.</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> ViewPager mPager;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * The pager adapter, which provides the pages to the view pager widget.</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> PagerAdapter mPagerAdapter;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_screen_slide);</div><div class="line"></div><div class="line">        <span class="comment">// Instantiate a ViewPager and a PagerAdapter.</span></div><div class="line">        mPager = (ViewPager) findViewById(R.id.pager);</div><div class="line">        mPagerAdapter = <span class="keyword">new</span> ScreenSlidePagerAdapter(getSupportFragmentManager());</div><div class="line">        mPager.setAdapter(mPagerAdapter);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onBackPressed</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (mPager.getCurrentItem() == <span class="number">0</span>) &#123;</div><div class="line">            <span class="comment">// If the user is currently looking at the first step, allow the system to handle the</span></div><div class="line">            <span class="comment">// Back button. This calls finish() on this activity and pops the back stack.</span></div><div class="line">            <span class="keyword">super</span>.onBackPressed();</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="comment">// Otherwise, select the previous step.</span></div><div class="line">            mPager.setCurrentItem(mPager.getCurrentItem() - <span class="number">1</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * A simple pager adapter that represents 5 ScreenSlidePageFragment objects, in</div><div class="line">     * sequence.</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">ScreenSlidePagerAdapter</span> <span class="keyword">extends</span> <span class="title">FragmentStatePagerAdapter</span> </span>&#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">ScreenSlidePagerAdapter</span><span class="params">(FragmentManager fm)</span> </span>&#123;</div><div class="line">            <span class="keyword">super</span>(fm);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> Fragment <span class="title">getItem</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">new</span> ScreenSlidePageFragment();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getCount</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">return</span> NUM_PAGES;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>如何给<code>ViewPager</code>切换时增加动画.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ViewPager mPager = (ViewPager) findViewById(R.id.pager);</div><div class="line">mPager.setPageTransformer(<span class="keyword">true</span>, <span class="keyword">new</span> DepthPageTransformer ());</div></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DepthPageTransformer</span> <span class="keyword">implements</span> <span class="title">ViewPager</span>.<span class="title">PageTransformer</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">float</span> MIN_SCALE = <span class="number">0.75f</span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">transformPage</span><span class="params">(View view, <span class="keyword">float</span> position)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> pageWidth = view.getWidth();</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (position &lt; -<span class="number">1</span>) &#123; <span class="comment">// [-Infinity,-1)</span></div><div class="line">            <span class="comment">// This page is way off-screen to the left.</span></div><div class="line">            view.setAlpha(<span class="number">0</span>);</div><div class="line"></div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (position &lt;= <span class="number">0</span>) &#123; <span class="comment">// [-1,0]</span></div><div class="line">            <span class="comment">// Use the default slide transition when moving to the left page</span></div><div class="line">            view.setAlpha(<span class="number">1</span>);</div><div class="line">            view.setTranslationX(<span class="number">0</span>);</div><div class="line">            view.setScaleX(<span class="number">1</span>);</div><div class="line">            view.setScaleY(<span class="number">1</span>);</div><div class="line"></div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (position &lt;= <span class="number">1</span>) &#123; <span class="comment">// (0,1]</span></div><div class="line">            <span class="comment">// Fade the page out.</span></div><div class="line">            view.setAlpha(<span class="number">1</span> - position);</div><div class="line"></div><div class="line">            <span class="comment">// Counteract the default slide transition</span></div><div class="line">            view.setTranslationX(pageWidth * -position);</div><div class="line"></div><div class="line">            <span class="comment">// Scale the page down (between MIN_SCALE and 1)</span></div><div class="line">            <span class="keyword">float</span> scaleFactor = MIN_SCALE</div><div class="line">                    + (<span class="number">1</span> - MIN_SCALE) * (<span class="number">1</span> - Math.abs(position));</div><div class="line">            view.setScaleX(scaleFactor);</div><div class="line">            view.setScaleY(scaleFactor);</div><div class="line"></div><div class="line">        &#125; <span class="keyword">else</span> &#123; <span class="comment">// (1,+Infinity]</span></div><div class="line">            <span class="comment">// This page is way off-screen to the right.</span></div><div class="line">            view.setAlpha(<span class="number">0</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<hr>
+    </div>
+    <p class="post-meta">
+        <span class="post-cat">分类：
+            <a class="cat-link" href="/categories/Android/">Android</a>
+        </span>
+        <span class="post-tags">
+            标签：
+            <a href="/tags/Android/" title="Android">Android</a>
+        </span>
+    </p>
+</article>
+<div class="article-share clearfix text-center">
+    <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+</div>
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br>
+        <a href="/2016/02/19/Android从入门到精通第八课/">
+            
+                HttpClient详解
+            
+        </a>
+    </span>
+    
+
+    
+    <span class="next fr">
+        下一篇<br>
+        <a href="/2016/02/15/Android从入门到精通第六课/">
+            
+                android 优化之Bitmap优化
+            
+        </a>
+    </span>
+    
+</div>
+<!-- 文章评论 -->
+<!-- <div id="comments" class="comments cloud-tie-wrapper"></div>
+    <script>
+    var cloudTieConfig = {
+      url: document.location.href, 
+      sourceId: "Android从入门到精通第七课",
+      productKey: "c06bb9930e6f4b38a9997cb9bd17aba5",
+      target: "comments"
+    };
+    var yunManualLoad = true;
+    Tie.loader("aHR0cHM6Ly9hcGkuZ2VudGllLjE2My5jb20vcGMvbGl2ZXNjcmlwdC5odG1s", true);
+    </script> -->
+	<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMDA2OS82NjI0">
+<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js 
+
+';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+</script>
+<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+            </div>
+
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章分类</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+    <li>
+        <a href="/categories/Android/">Android</a>
+        <span class="badge">(28)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Android/系统/">系统</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Angular2/">Angular2</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/React-Native/">React Native</a>
+        <span class="badge">(12)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/前端/">前端</a>
+        <span class="badge">(7)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/VR/">VR</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Angular2/前端/">前端</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Java/">Java</a>
+        <span class="badge">(5)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Spring/">Spring</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/ios/">ios</a>
+        <span class="badge">(9)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Google/">Google</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Google/VR/">VR</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/技术人生/">技术人生</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/资料库/">资料库</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/小程序/">小程序</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/机器学习/">机器学习</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/android/">android</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/设计模式/">设计模式</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+</ul>
+    </section>
+
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="/tags/Android/" title="Android">Android (25)</a>
+  
+    <a class="tag-item" href="/tags/新特性/" title="新特性">新特性 (2)</a>
+  
+    <a class="tag-item" href="/tags/深入系统/" title="深入系统">深入系统 (1)</a>
+  
+    <a class="tag-item" href="/tags/系统服务/" title="系统服务">系统服务 (1)</a>
+  
+    <a class="tag-item" href="/tags/android/" title="android">android (4)</a>
+  
+    <a class="tag-item" href="/tags/硬件/" title="硬件">硬件 (1)</a>
+  
+    <a class="tag-item" href="/tags/混淆打包/" title="混淆打包">混淆打包 (1)</a>
+  
+    <a class="tag-item" href="/tags/Angular2/" title="Angular2">Angular2 (1)</a>
+  
+    <a class="tag-item" href="/tags/前端开发/" title="前端开发">前端开发 (3)</a>
+  
+    <a class="tag-item" href="/tags/React-Native/" title="React Native">React Native (10)</a>
+  
+    <a class="tag-item" href="/tags/FlexBox布局/" title="FlexBox布局">FlexBox布局 (1)</a>
+  
+    <a class="tag-item" href="/tags/前端/" title="前端">前端 (5)</a>
+  
+    <a class="tag-item" href="/tags/Google/" title="Google">Google (2)</a>
+  
+    <a class="tag-item" href="/tags/VR/" title="VR">VR (2)</a>
+  
+    <a class="tag-item" href="/tags/Java/" title="Java">Java (5)</a>
+  
+    <a class="tag-item" href="/tags/Node/" title="Node">Node (2)</a>
+  
+    <a class="tag-item" href="/tags/OpenGL/" title="OpenGL">OpenGL (1)</a>
+  
+    <a class="tag-item" href="/tags/Promise/" title="Promise">Promise (1)</a>
+  
+    <a class="tag-item" href="/tags/eact-Native/" title="eact Native">eact Native (1)</a>
+  
+    <a class="tag-item" href="/tags/打包/" title="打包">打包 (1)</a>
+  
+    <a class="tag-item" href="/tags/调试/" title="调试">调试 (1)</a>
+  
+    <a class="tag-item" href="/tags/原生/" title="原生">原生 (1)</a>
+  
+    <a class="tag-item" href="/tags/Spring/" title="Spring">Spring (2)</a>
+  
+    <a class="tag-item" href="/tags/入门/" title="入门">入门 (2)</a>
+  
+    <a class="tag-item" href="/tags/ios/" title="ios">ios (9)</a>
+  
+    <a class="tag-item" href="/tags/swift/" title="swift">swift (1)</a>
+  
+    <a class="tag-item" href="/tags/AR/" title="AR">AR (1)</a>
+  
+    <a class="tag-item" href="/tags/垃圾回收/" title="垃圾回收">垃圾回收 (1)</a>
+  
+    <a class="tag-item" href="/tags/webpack/" title="webpack">webpack (1)</a>
+  
+    <a class="tag-item" href="/tags/gulp/" title="gulp">gulp (1)</a>
+  
+    <a class="tag-item" href="/tags/Xcode/" title="Xcode">Xcode (3)</a>
+  
+    <a class="tag-item" href="/tags/https/" title="https">https (1)</a>
+  
+    <a class="tag-item" href="/tags/gif/" title="gif">gif (1)</a>
+  
+    <a class="tag-item" href="/tags/mac/" title="mac">mac (1)</a>
+  
+    <a class="tag-item" href="/tags/环境/" title="环境">环境 (1)</a>
+  
+    <a class="tag-item" href="/tags/react/" title="react">react (1)</a>
+  
+    <a class="tag-item" href="/tags/个人博客/" title="个人博客">个人博客 (2)</a>
+  
+    <a class="tag-item" href="/tags/流量/" title="流量">流量 (1)</a>
+  
+    <a class="tag-item" href="/tags/知识库/" title="知识库">知识库 (1)</a>
+  
+</div>
+    </section>
+    
+
+    
+    <!-- 我的微博 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>我的微博</strong></h3>
+        <div class="widget-bd" style="position: relative">
+  <div id="myWeiboLoading" class="text-center" style="position:absolute;top:0;left:0;right:0;bottom:0;line-height:50px;font-size:12px;background-color:#fff;z-index:9">微博加载中...</div>
+  <iframe width="100%" height="550" class="share_self" frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&amp;width=0&amp;height=550&amp;fansRow=2&amp;ptype=1&amp;speed=0&amp;skin=4&amp;isTitle=1&amp;noborder=1&amp;isWeibo=1&amp;isFans=1&amp;uid=1831462560&amp;verifier=5192ec39&amp;dpc=1"></iframe>
+  <script>
+  (function () {
+    var oMyWeibo = document.getElementById('myWeibo');
+    var oMyWeiboLoading = document.getElementById('myWeiboLoading');
+    var isIE = /msie/i.test(navigator.userAgent) && !window.opera;
+    var timer = null;
+    if (isIE) {
+      oMyWeibo.onreadystatechange = function(){
+        if(oMyWeibo.readyState === 'loaded' || oMyWeibo.readyState === 'complete'){
+          timer = setTimeout(function () {
+            oMyWeiboLoading.parentNode.removeChild(oMyWeiboLoading);
+            timer = null;
+          }, 300);
+        }
+      };
+    } else {
+      oMyWeibo.onload = function () {
+        timer = setTimeout(function () {
+          oMyWeiboLoading.parentNode.removeChild(oMyWeiboLoading);
+          timer = null;
+        }, 300);
+      };
+    }
+  })();
+  </script>
+</div>
+    </section>
+    
+
+    
+    <!-- 友情链接 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>友情链接</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+        <li>
+            <a href="http://blog.csdn.net/xiangzhihong8/" target="_blank" title="csdn个人博客">csdn博客</a>
+        </li>
+    
+        <li>
+            <a href="https://yq.aliyun.com/u/xiangzhihong" target="_blank" title="阿里云技术博客">阿里云博客</a>
+        </li>
+    
+</ul>
+    </section>
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <footer class="footer">
+    &copy;
+    
+        2016-2017
+    
+
+    <a href="/">Jelon Loves You</a>
+</footer>
+<div class="back-to-top" id="JELON__backToTop" title="返回顶部">返回顶部</div>
+<!-- 添加百度自动推送 -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+    <!--博客js脚本 -->
+    <!-- 这里放网站js脚本 -->
+<script src="/js/main.js"></script>
+</body>

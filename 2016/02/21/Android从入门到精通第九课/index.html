@@ -1,0 +1,641 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8">
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya">
+    
+    <title>JNI基础 | 向志洪</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
+    <meta name="keywords" content="前端, Web, 移动, 向志洪">
+    <meta name="description" content="">
+
+    
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <!--[if lt IE 9]>
+    <script src="/js/html5.js"></script>
+    <![endif]-->
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?fd459238242776d173cdc64918fb32f2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+    
+    <script>var yunModuleEnv = true;</script>
+    <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+    
+</head></html>
+<body class="home">
+    <!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="/">
+                <div class="cover">
+                    <span class="name">向志洪</span>
+                    <span class="description">个人技术博客</span>
+                </div>
+            </a>
+        </div>
+        <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
+        <ul class="menu hidden" id="JELON__menu">
+            
+            <li rel="/2016/02/21/Android从入门到精通第九课/index.html" class="item">
+                <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
+            </li>
+            
+            <li rel="/2016/02/21/Android从入门到精通第九课/index.html" class="item">
+                <a href="/archives/" title="文章列表" class="icon-lab">&nbsp;文章列表</a>
+            </li>
+            
+            <li rel="/2016/02/21/Android从入门到精通第九课/index.html" class="item">
+                <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
+            </li>
+            
+            <li rel="/2016/02/21/Android从入门到精通第九课/index.html" class="item">
+                <a href="/404/" title="留言" class="icon-comment">&nbsp;留言</a>
+            </li>
+            
+        </ul>
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        <a href="https://github.com/xiangzhihong" target="_blank">Github</a>
+                        |
+                    
+                        <a href="http://tongji.baidu.com/web/welcome/login" target="_blank">站长统计</a>
+                        |
+                    
+                        <a href="http://weibo.com/code_xzh" target="_blank">新浪微博</a>
+                        |
+                    
+                </p>
+                <p class="sns">
+                    
+                    <a href="javascript: void(0);" class="wechat">
+                        <b>■</b>
+                        公众号
+                        <span class="popover">
+                            <img src="/img/wechat_mp.jpg" width="120" height="120" alt="我的微信订阅号">
+                            <i class="arrow"></i>
+                        </span>
+                    </a>
+                </p>
+                
+            </div>
+            <div class="avatar fr">
+                <img src="http://ohe65w0xx.bkt.clouddn.com/avert.png" alt="avatar" title="Jelon">
+            </div>
+        </div>
+    </section>
+</header>
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+        <section class="content">
+            <div class="content-main widget">
+                <!-- 文章页 -->
+<!-- 文章 -->
+<article class="post article">
+    <header class="text-center">
+        <h3 class="post-title"><span>JNI基础</span></h3>
+    </header>
+    <p class="post-meta text-center">
+        xiangzhihong 发表于
+        <time datetime="2016-02-20T16:00:00.000Z">2016-02-21</time>
+    </p>
+    <div class="post-content">
+        <h1 id="JNI基础"><a href="#JNI基础" class="headerlink" title="JNI基础"></a>JNI基础</h1><ol>
+<li><p>将java中的字符串转换成C中字符串的工具方法              </p>
+ <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">char</span>*   <span class="title">Jstring2CStr</span><span class="params">(JNIEnv*   env,   jstring   jstr)</span></span>&#123;</div><div class="line">     <span class="keyword">char</span>*   rtn   =   <span class="literal">NULL</span>;</div><div class="line">     jclass   clsstring   =   (*env)-&gt;FindClass(env,<span class="string">"java/lang/String"</span>);</div><div class="line">     jstring   strencode   =   (*env)-&gt;NewStringUTF(env,<span class="string">"GB2312"</span>);</div><div class="line">     jmethodID   mid   =   (*env)-&gt;GetMethodID(env,clsstring,   <span class="string">"getBytes"</span>,   <span class="string">"(Ljava/lang/String;)[B"</span>);</div><div class="line">     jbyteArray   barr=   (jbyteArray)(*env)-&gt;CallObjectMethod(env,jstr,mid,strencode); <span class="comment">// String .getByte("GB2312");</span></div><div class="line">     jsize   alen   =   (*env)-&gt;GetArrayLength(env,barr);</div><div class="line">     jbyte*   ba   =   (*env)-&gt;GetByteArrayElements(env,barr,JNI_FALSE);</div><div class="line">     <span class="keyword">if</span>(alen   &gt;   <span class="number">0</span>)</div><div class="line">     &#123;</div><div class="line">      rtn   =   (<span class="keyword">char</span>*)<span class="built_in">malloc</span>(alen+<span class="number">1</span>);         <span class="comment">//"\0"</span></div><div class="line">      <span class="built_in">memcpy</span>(rtn,ba,alen);</div><div class="line">      rtn[alen]=<span class="number">0</span>;</div><div class="line">     &#125;</div><div class="line">     (*env)-&gt;ReleaseByteArrayElements(env,barr,ba,<span class="number">0</span>);  <span class="comment">//</span></div><div class="line">     <span class="keyword">return</span> rtn;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>程序被运行要经历两个步骤(1.编译 2.链接)<br> 编译就是将源文件编译成二进制代码，而链接则是将二进制代码转换成可执行的文件如.exe等头文件.(函数的声明,函数的清单文件)作用: 给编译器看的.<br> 库函数: 头文件里面函数的实现.<br> 作用:给连接器看的.    </p>
+</li>
+<li><p>jni开发的常见错误:<br> 错误1: 忘记编写android.mk文件 unknown file: ./jni/Android.mk<br> Android NDK: Your APP_BUILD_SCRIPT points to an unknown file: ./jni/Android.mk<br> /cygdrive/c/android-ndk-r7b/build/core/add-application.mk:133: Android NDK: Aborting…    。 停止。          </p>
+<p> 错误2:  ndk-build 没有任何反应.<br> 忘记配置android.mk脚本       </p>
+<p> 错误3: $ ndk-build jni/Android.mk:4:  遗漏分隔符 。 停止。<br>中文的回车或者换行         </p>
+<p> 错误4:java.lang.UnsatisfiedLinkError: hello<br> 忘记加载了c代码的.so库 或者 函数的签名不正确,没有找到与之对应的c代码      </p>
+<p> 错误5:07-30 java.lang.UnsatisfiedLinkError: Library Hel1o not found<br> 没有找到对应的c代码库     </p>
+<p> 错误6: <strong><em> </em></strong> <strong><em> </em></strong> <strong><em> </em></strong> <strong><em> </em></strong> <strong><em> </em></strong> <strong><em> </em></strong> <strong><em> </em></strong> <strong><em> </em></strong><br> 07-30 11:53:17.898: INFO/DEBUG(31): Build fingerprint:<br> ‘generic/sdk/generic/:2.2/FRF91/43546:eng/test-keys’<br> c代码里面有严重的逻辑错误,产生内存的泄露.    </p>
+<p> 错误7:<br> make: <em>*</em> [obj/local/armeabi/objs/Hello/Hello.o] Error 1<br> 编译的时候 程序出现了问题,c语言的语法有问题<br> c语言代码编译错误的时候 先去解决第一个错误. </p>
+</li>
+<li><p>Java调用JNI的前提<br> 开发所使用的电脑(windows系统, x86的CPU)<br> 目标代码: android手机上运行的.( linux系统, arm的CPU)<br> 所以我们要模拟手机的系统,手机的处理器，生成手机上可以运行的二进制代码这就要用到交叉编译;<br> 根据运行的设备的不同，可以将cpu分为：          </p>
+<ul>
+<li>arm结构 ：主要在移动手持、嵌入式设备上。      </li>
+<li>x86结构 ： 主要在台式机、笔记本上使用。如Intel和AMD的CPU 。<br>交叉编译: 在一种操作系统平台或者cpu平台下 编译生成 另外一个平台(cpu)可以运行的二进制代码.(使用NDK中的ndk-build命令)     </li>
+</ul>
+</li>
+</ol>
+<ul>
+<li><p>工具一:  交叉编译的工具链: NDK<br>  NDK全称：Native Development Kit 。           </p>
+<ul>
+<li><p>NDK是一系列工具的集合，它有很多作用。          </p>
+<ul>
+<li>首先，NDK可以帮助开发者快速开发C(或C++)的动态库。      </li>
+<li>其次，NDK集成了交叉编译器。使用NDK，我们可以将要求高性能的应用逻辑使用C开发，从而提高应用程序的执行效率。     </li>
+</ul>
+<p>NDK工具是提供给Linux系统用的(随着版本的升级也可以直接在Windows下使用，但是现在仍不完善有bug)，<br>所以要在windows下使用ndk的工具,必须要提供一个工具(linux环境的模拟器)</p>
+</li>
+</ul>
+</li>
+<li><p>工具二:  cygwin(windows下linux系统环境的模拟器, 主要是为了能够运行ndk的工具)<br>  安装 devel shell<br>  <img src="https://raw.githubusercontent.com/CharonChui/Pictures/master/jni_cygwin.png?raw=true" alt="image"><br>  linux 特点:所有的设备 硬件 都是以文件的方式定义的.<br>  安装完后进入<code>cygwin</code>打印<code>make -v</code>命令如果能打印出<code>GNU Make ...</code>就说明安装木问题了。</p>
+</li>
+<li><p>工具三: cdt(c/c++ develop tools)  eclipse 的一个插件  用来让c\c++代码 语法高亮显示.<br>  adt(android develop tools)          </p>
+</li>
+<li><p>工具四：<br>  为了不用每次使用ndk-build命令都要进入到ndk的安装目录，这里要进行Path变量的配置。<br>  配置cygwin的环境变量: 在cygwin安装目录,etc目录,profile的文件 32行 添加ndk工具所在的目录.<br>  <code>PATH=&quot;/usr/local/bin:/usr/bin:/cygdrive/d/android-ndk-r7b:${PATH}&quot;</code>在这个后面加上:ndk-build的路径(注意：在linux中路径的分隔符不是分号而是冒号)，<br>  改成这样<br>  <code>PATH=&quot;/usr/local/bin:/usr/bin:${PATH}:/cygdrive/d/android-ndk-r7b&quot;</code>//注意这里的路径是在linux系统下的ndk路径而不是windows下的路径,/cygdrive/d/是在linux下看到的d盘。</p>
+</li>
+</ul>
+<p>###JNI开发步骤：</p>
+<ol>
+<li>创建一个android工程</li>
+<li>JAVA代码中写声明native 方法 public native String helloFromJNI();</li>
+<li>用javah工具生成头文件</li>
+<li>创建jni目录,引入头文件,根据头文件实现c代码</li>
+<li>编写Android.mk文件</li>
+<li>Ndk编译生成动态库</li>
+<li>Java代码load 动态库.调用native代码</li>
+</ol>
+<p>###JNI开发之Java中调用C代码步骤</p>
+<ol>
+<li><p>在java中定义一个要调用的C的方法(本地方法)<br> //1.定义一个native的方法<br> <code>public native String helloFromC();</code></p>
+</li>
+<li><p>在工程中新建一个jni文件夹(然后在这个文件夹中写c代码，在C中实现java里面定义的c方法默认的时候是自己手写c的方法名，<br> 但是很麻烦这里要参考七里面提供的方式，用javah编译后，然后拷贝h的头文件到jni文件夹中，在从h文件拷贝方法的名字，然后实现该方法).  </p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">	C:\Users\Administrator&gt;javah -help</div><div class="line">	用法:</div><div class="line">	  javah [options] &lt;classes&gt;</div><div class="line">	其中, [options] 包括:</div><div class="line">	  -o &lt;file&gt;                输出文件 (只能使用 -d 或 -o 之一)</div><div class="line">	  -d &lt;dir&gt;                 输出目录</div><div class="line">	  -v  -verbose             启用详细输出</div><div class="line">	  -h  --help  -?           输出此消息</div><div class="line">	  -version                 输出版本信息</div><div class="line">	  -jni                     生成 JNI 样式的标头文件 (默认值)</div><div class="line">	  -force                   始终写入输出文件</div><div class="line">	  -classpath &lt;path&gt;        从中加载类的路径</div><div class="line">	  -cp &lt;path&gt;               从中加载类的路径</div><div class="line">	  -bootclasspath &lt;path&gt;    从中加载引导类的路径</div><div class="line">	```	</div><div class="line">	`#include &lt;stdio.h&gt;`         </div><div class="line">	`#include &lt;jni.h&gt;`        </div><div class="line">	//这个方法的名字的写法固定Java_表示这个方法由Java调用,cn_itcast_ndk表示java的包名DemoActivity表示</div><div class="line">	//java中调用这个方法的类名helloFromC表示java中调用这个方法的方法名字</div><div class="line">	```java</div><div class="line">	jstring Java_cn_itcast_ndk_DemoActivity_helloFromC (JNIEnv* env , jobject obj)&#123;//这两个参数是固定必不可少的</div><div class="line">		   //return (*(*env)).NewStringUTF(env,&quot;hello from c!&quot;);//调用NewStringUTF这个方法new出来一个java中的String类型的字符串</div><div class="line">		   return (*env)-&gt;NewStringUTF(env,&quot;hello from c!&quot; );//这个写法和上面这个注释掉的一样，只是更简洁一点</div><div class="line">	&#125;</div><div class="line">	```	</div><div class="line">	</div><div class="line">3. 在jni文件夹中编写android.mk文件，在这个文件夹中声明要编译的c文件名以后编译后生成的文件名   </div><div class="line">	```c</div><div class="line">	LOCAL_PATH := $(call my-dir)  //将jni所在的目录返回去到LOCAL_PATH</div><div class="line">	#clear_vars 一个函数 初始化编译工具链的所有的变量.</div><div class="line">	#特点:清空所有的以LOCAL_开头的变量,但是不会清空LOCAL_PATH的变量</div><div class="line">	 include $(CLEAR_VARS)  </div><div class="line">	#指定编译后的文件的名称 符合linux系统下makefile的语法. </div><div class="line">	LOCAL_MODULE    := Hello</div><div class="line">	#指定编译的源文件的名称 ,编译器非常智能</div><div class="line">	LOCAL_SRC_FILES := Hello.c</div><div class="line">	  #指定编译后的文件的类型. 默认编译成动态库 BUILD_SHARED_LIBRARY 扩展名.so .so代码体积很小  </div><div class="line">	#                            静态库 BUILD_STATIC_LIBRARY 扩展名.a  .a代码体积很大</div><div class="line">	include $(BUILD_SHARED_LIBRARY)</div></pre></td></tr></table></figure>
+</li>
+<li><p>cmd进入到当前的工程的文件夹中(也可以进入到当前工程的jni目录中)，然后运行ndk-build工具就能将c文件编译成一个可执行的二进制文件. -&gt;.so，<br> 注意用ndk-build编译之后一定要刷新，不然eclipse会缓存旧的不加载新的进来<br> <img src="https://raw.githubusercontent.com/CharonChui/Pictures/master/ndk_build.png?raw=true" alt="image">    </p>
+</li>
+</ol>
+<ol>
+<li><p>刷新工程，就能看到多出了两个文件夹</p>
+</li>
+<li><p>在java中将要调用的c代码加载到java虚拟机中，通过静态代码块的方式</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DemoActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</div><div class="line">   <span class="comment">//1.定义一个native的方法</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">native</span> String <span class="title">helloFromC</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line">   <span class="keyword">static</span>&#123;</div><div class="line">		 <span class="comment">//5.把要调用的c代码 给加载到java虚拟机里面</span></div><div class="line">		System. loadLibrary(<span class="string">"Hello"</span>);<span class="comment">//注意写的是Hello不要加后缀</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol>
+<li><p>调用c代码            </p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">click</span><span class="params">(View view)</span></span>&#123;</div><div class="line">  <span class="comment">//调用c代码</span></div><div class="line">  Toast.makeText(<span class="keyword">this</span>, helloFromC(), <span class="number">1</span>).show();</div><div class="line">  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>利用jdk的工具javah动态生成c方法名<br> 在上面的调用c中的方法的时候，在c中区实现这个方法的时候的方法名字写起来很复杂，而且容易出去，在java在jdk中提供了一个工具javah，<br> 我们只要在windows的dos窗口cmd到classes目录下去执行javah 包名.类名就能够由class文件动态的生成一个c的h文件，在这个h文件中有该class文件中的native方法的名字<br> 我们只要拷贝这个h文件到自己工程的jni目录中，然后在c文件中引入这个h文件，并拷贝这个h文件中的方法去实现就可以了      </p>
+ <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">   #include &lt;stdio.h&gt;//这个&lt;&gt;是引入工具的h文件        </div><div class="line">   #include "cn_itcast_ndk2_DemoActivity.h" //对于自己工程中的h文件用""来引入或者引入#include &lt;jni.h&gt;也可以      </div><div class="line"></div><div class="line">JNIEXPORT jstring JNICALL Java_cn_itcast_ndk2_DemoActivity_hello_1_1_1from_1_1_1c //拷贝h文件中生成的方法名</div><div class="line">  (JNIEnv * env, jobject obj)&#123; </div><div class="line">	  return (*env)-&gt;NewStringUTF(env,"hello_from_c 2!" );</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p> 然后就和上面的步骤一样了</p>
+<p> 注意上面的这个javah的用法师在jdk1.6中用的，如果在jdk1.7中就不能这样用了<br> 对于jdk1.7在使用javah的工具的时候就不能够直接进入到classes目录下直接运行命令了，<br> 而是要将sdk中的platforms下的android版本中的android.jar这个路径加载到classPath的环境变量中(麻烦)，或者是直接进入到src目录下用javah包名.类名(简单常用)</p>
+</li>
+<li><p>如何在c中向logcat中打印日志<br> 如果想像logcat打印日志就要用到谷歌在ndk中提供的一个工具log.h的头文件<br> 步骤：</p>
+<ol>
+<li><p>在c文件的头上面导入文件，加入下面的这四行代码      </p>
+ <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;android/log.h&gt; //导入log.h</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> LOG_TAG <span class="meta-string">"clog"</span>  <span class="comment">//指定打印到logcat的Tag</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> LOGD(...) __android_log_print(ANDROID_LOG_DEBUG, LOG_TAG, __VA_ARGS__) <span class="comment">//对后面的这个打印日志的方法起一个别名是LOGD</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> LOGI(...) __android_log_print(ANDROID_LOG_INFO, LOG_TAG, __VA_ARGS__)</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>在android.mk中加载文件            </p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">LOCAL_PATH := $(call my-dir)</div><div class="line">include $(CLEAR_VARS)</div><div class="line"></div><div class="line">LOCAL_MODULE    := Hello</div><div class="line">LOCAL_SRC_FILES := Hello.c</div><div class="line">LOCAL_LDLIBS += -llog   //新增加这一句，作用是 #把c语言调用的log函数对应的函数库加入到编译的运行时里面 #liblog.so，如果还要加载其他的就在后面继续 -lXXX</div><div class="line">include $(BUILD_SHARED_LIBRARY)</div></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ol>
+<pre><code>3. 在c的代码中直接使用LOGD或者LOGI就能向logcat中输入打印信息
+    <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function">JNIEXPORT jint JNICALL <span class="title">Java_cn_itcast_ndk3_DataProvider_add</span></span></div><div class="line"><span class="params">(JNIEnv * env, jobject obj, jint x, jint y)</span>&#123;</div><div class="line">	LOGI( <span class="string">"x=%d"</span>,x);</div><div class="line">	LOGD( <span class="string">"y=%d"</span>,y);</div><div class="line">	<span class="keyword">int</span> result = x+y;</div><div class="line">	LOGD( <span class="string">"result=%d"</span>,result);</div><div class="line">	<span class="keyword">return</span> result;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</code></pre><ol>
+<li><p>如何将java的数据传递给c语言<br> 就是java在方法中传值，然后c通过参数得到数据处理后返回和上面的一样</p>
+</li>
+<li><p>将c中的字符串数组转成java中的string用到jni.h中的一个方法<br><code>jstring (*NewStringUTF)(JNIEnv*, const char*);</code></p>
+</li>
+<li><p>C中调用java<br>c语言回调java的场景.</p>
+<ol>
+<li>如果有一个操作已经有方便的java实现,才用c调用java可以避免重复发明一个轮子.</li>
+<li>想在c代码里面通知界面更新ui.     </li>
+</ol>
+<p>C调用java的 思想类似于java中的反射，我们在c中就是通过反射的c实现来找到java中的这个方法，<br>在getMethodID的第二个参数是一个方法的签名，这里我们可以通过jdk提供的一个工具javap，来到classes目录下，<br>然后用 javap -s 类名.方法名  来得到一个方法的签名，这样就能列出来所有方法的签名</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * env JNIEnv* java虚拟机环境的指针.</div><div class="line"> *</div><div class="line"> *jobject obj ,哪个对象调用的这个native的方法 , obj就代表的是哪个对象</div><div class="line"> */</div><div class="line"><span class="function">JNIEXPORT <span class="keyword">void</span> JNICALL <span class="title">Java_cn_itcast_ndk4_DataProvider_callmethod1</span></span></div><div class="line">  <span class="params">(JNIEnv * env, jobject obj)</span>&#123;</div><div class="line">	   <span class="comment">//思考 java中的反射</span></div><div class="line">	   <span class="comment">//1.找到某一个类的字节码</span></div><div class="line">	   <span class="comment">//   jclass      (*FindClass)(JNIEnv*, const char*);</span></div><div class="line">	  jclass jclazz = (*env)-&gt;FindClass(env,<span class="string">"cn/itcast/ndk4/DataProvider"</span> );</div><div class="line">	   <span class="keyword">if</span>(jclazz==<span class="number">0</span>)&#123;</div><div class="line">			LOGI( <span class="string">"LOAD CLAZZ ERROR"</span>);</div><div class="line">	  &#125; <span class="keyword">else</span>&#123;</div><div class="line">			LOGI( <span class="string">"LOAD CLAZZ success"</span> );</div><div class="line">	  &#125;</div><div class="line">	   <span class="comment">//2.找到类的字节码里面的方法.</span></div><div class="line">	   <span class="comment">// jmethodID   (*GetMethodID)(JNIEnv*, jclass, const char*, const char*);</span></div><div class="line"></div><div class="line">	  jmethodID  methodid = (*env)-&gt;GetMethodID(env,jclazz,<span class="string">"helloFromJava"</span>, <span class="string">"()V"</span>); <span class="comment">//最后一个参数是方法的签名</span></div><div class="line">	   <span class="keyword">if</span>(methodid==<span class="number">0</span>)&#123;</div><div class="line">			LOGI( <span class="string">"LOAD methodid ERROR"</span> );</div><div class="line">	  &#125; <span class="keyword">else</span>&#123;</div><div class="line">			LOGI( <span class="string">"LOAD methodid success"</span> );</div><div class="line">	  &#125;</div><div class="line"></div><div class="line">	   <span class="comment">//3.调用方法</span></div><div class="line">	   <span class="comment">//void        (*CallVoidMethod)(JNIEnv*, jobject, jmethodID, ...);</span></div><div class="line">	  (*env)-&gt;CallVoidMethod(env,obj,methodid);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>小知识      </p>
+<ol>
+<li><p>Android的API提供了SystemClock类，这个类中有一个方法<br> public static void sleep(long ms)，这个方法内部对Thread.sleep进行了封装对异常进行了try catch，平时用Thread.sleep还要自己进行捕捉，<br> 所以可以使用SystemColock.sleep()还简单</p>
+</li>
+<li><p>Java中通过java虚拟机来调用c的代码，首先将c的库加载到虚拟机中，但是其实这个c代码并不是运行在java虚拟机中的，而是运行在虚拟机之外的一个单独的进程中</p>
+</li>
+</ol>
+</li>
+<li><p>自定义一个View控件(用于表示锅炉的压力大小)       </p>
+<ol>
+<li>写一个类继承View(View是Android中所有能显示到界面上的东西全的父类)</li>
+<li>重写onDraw()方法，这个方法是该控件被画到桌面上的时候调用的方法。</li>
+</ol>
+</li>
+<li><p>C++与C代码的不同<br>C++文件的后缀是cpp<br>C++与C的不同就是C++提供了模板、继承、抽象等     </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//将java字符串转成C++字符串的工具方法</span></div><div class="line"><span class="function"><span class="keyword">char</span>*   <span class="title">Jstring2CStr</span><span class="params">(JNIEnv*   env,   jstring   jstr)</span></span></div><div class="line">&#123;</div><div class="line">	 <span class="keyword">char</span>*   rtn   =   <span class="literal">NULL</span>;</div><div class="line">	 jclass   clsstring   =   (env)-&gt;FindClass(<span class="string">"java/lang/String"</span>);</div><div class="line">	 jstring   strencode   =   (env)-&gt;NewStringUTF(<span class="string">"GB2312"</span>);</div><div class="line">	 jmethodID   mid   =   (env)-&gt;GetMethodID(clsstring,   <span class="string">"getBytes"</span>,   <span class="string">"(Ljava/lang/String;)[B"</span>);</div><div class="line">	 jbyteArray   barr=   (jbyteArray)(env)-&gt;CallObjectMethod(jstr,mid,strencode); <span class="comment">// String .getByte("GB2312");</span></div><div class="line">	 jsize   alen   =   (env)-&gt;GetArrayLength(barr);</div><div class="line">	 jbyte*   ba   =   (env)-&gt;GetByteArrayElements(barr,JNI_FALSE);</div><div class="line">	 <span class="keyword">if</span>(alen   &gt;   <span class="number">0</span>)</div><div class="line">	 &#123;</div><div class="line">	  rtn   =   (<span class="keyword">char</span>*)<span class="built_in">malloc</span>(alen+<span class="number">1</span>);         <span class="comment">//"\0"</span></div><div class="line">	  <span class="built_in">memcpy</span>(rtn,ba,alen);</div><div class="line">	  rtn[alen]=<span class="number">0</span>;</div><div class="line">	 &#125;</div><div class="line">	 (env)-&gt;ReleaseByteArrayElements(barr,ba,<span class="number">0</span>);  <span class="comment">//</span></div><div class="line">	 <span class="keyword">return</span> rtn;</div><div class="line">&#125;</div><div class="line"><span class="function">JNIEXPORT jstring JNICALL <span class="title">Java_cn_itcast_cpp_DemoActivity_HelloFromC</span></span></div><div class="line">  <span class="params">(JNIEnv * env, jobject obj)</span>&#123;</div><div class="line">	<span class="comment">//C代码</span></div><div class="line">	<span class="comment">//return (*env)-&gt;NewStringUTF(env,"haha from c"); 在C中env代表的是C中结构体的指针的指针</span></div><div class="line">	<span class="comment">//c++代码</span></div><div class="line">	<span class="keyword">return</span> env-&gt;NewStringUTF(<span class="string">"haha from cpp"</span>);<span class="comment">//在C++中env代表的是C++中结构体的指针</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol>
+<li><p>对于JNI中的中文乱码问题<br>老版本的ndk r7之前 r6 r5 r5 crystal r4(编译的时候 语言集 是iso-8859-1)<br>在使用老版本ndk 编译出来的so文件的时候 要手动的进行转码.先用iso8859-1解码，再用utf-8编码，在r7(包括)之后的我们只要将C文件的格式改为UTF-8就可以了</p>
+</li>
+<li><p>文件的格式及格式转换<br>格式转换的原理：                </p>
+<ol>
+<li>读取一段数据到内存     </li>
+<li>分析这一段数据</li>
+<li>修改里面的内容</li>
+<li>写到文件里面</li>
+</ol>
+<p>文件的格式：<br>文件的存储方式是二进制0101这样<br>那么怎么设别文件的类型呢？     </p>
+<ol>
+<li>根据扩展名</li>
+<li>根据文件的头信息(头信息才是一个文件的真正的格式)，有些文件我们修改了扩展名也可以打开，<br> 这是因为打开文件的程序区扫描了文件的头信息，并用头信息中的类型来打开了这个文件</li>
+</ol>
+</li>
+<li><p>C中读取数据    </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line">main()&#123;</div><div class="line"><span class="comment">//用  法: FILE *fopen(char *filename, char *type); //第二个参数是打开的方式 rt就是读文件， rb就是读二进制</span></div><div class="line">   FILE*    fp = fopen(<span class="string">"1.txt"</span>,<span class="string">"rt"</span>);</div><div class="line"><span class="comment">//用  法: int fread (void *ptr, int size, int nitems, FILE *stream); </span></div><div class="line">						<span class="comment">//ptr要读的数据 放在哪一块内存空间里面.</span></div><div class="line">						<span class="comment">//size 一次读的数据的长度.</span></div><div class="line">						<span class="comment">//nitems 读多少次</span></div><div class="line">						<span class="comment">//stream 从哪个文件里面 读</span></div><div class="line"> </div><div class="line">  <span class="keyword">char</span>* buffer = <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">char</span>)*<span class="number">12</span>);</div><div class="line"> <span class="keyword">int</span> len=   fread(buffer,<span class="keyword">sizeof</span>(<span class="keyword">char</span>),<span class="number">12</span>,fp);</div><div class="line"><span class="built_in">printf</span>(<span class="string">"读了%d个char\n"</span>,len);</div><div class="line">   <span class="built_in">printf</span>(<span class="string">"str=%s\n"</span>,buffer);</div><div class="line">   fclose(fp);  <span class="comment">//关闭掉流</span></div><div class="line"> </div><div class="line">  system(<span class="string">"pause"</span>);     </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol>
+<li><p>C中写文件</p>
+<pre><code class="c"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span>
+main(){
+<span class="comment">//用  法: FILE *fopen(char *filename, char *type);</span>
+   FILE*    fp = fopen(<span class="string">"1.txt"</span>,<span class="string">"wt"</span>);
+<span class="comment">//用  法: int fwrite(void *ptr, int size, int nitems, FILE *stream); </span>
+                        <span class="comment">//ptr要向文件写的是哪一块内存里面的数据</span>
+                        <span class="comment">//size 一次写的数据的长度.</span>
+                        <span class="comment">//nitems 写多少次</span>
+                        <span class="comment">//stream 写到哪个文件里面</span>
+   <span class="keyword">char</span>* str=<span class="string">"hello from c"</span>;
+   <span class="keyword">int</span> len = fwrite(str,<span class="keyword">sizeof</span>(<span class="keyword">char</span>),<span class="number">12</span>,fp);
+   <span class="built_in">printf</span>(<span class="string">"写了%d个char\n"</span>,len);
+   fclose(fp);  <span class="comment">//关闭掉流</span>
+
+   system(<span class="string">"pause"</span>);     
+}
+</code></pre>
+</li>
+<li><p>C语言文件操作模式<br>“rt” 只读打开一个文本文件，只允许读数据<br>“wt” 只写打开或建立一个文本文件，只允许写数据<br>“at” 追加打开一个文本文件，并在文件末尾写数据<br>“rb” 只读打开一个二进制文件，只允许读数据<br>“wb” 只写打开或建立一个二进制文件，只允许写数据<br>“ab” 追加打开一个二进制文件，并在文件末尾写数据<br>“rt+” 读写打开一个文本文件，允许读和写<br>“wt+” 读写打开或建立一个文本文件，允许读写<br>“at+” 读写打开一个文本文件，允许读，或在文件末追加数据<br>“rb+” 读写打开一个二进制文件，允许读和写<br>“wb+” 读写打开或建立一个二进制文件，允许读和写<br>“ab+” 读写打开一个二进制文件，允许读，或在文件末追加数据        </p>
+<p>对于文件使用方式有以下几点说明：<br>文件使用方式由r,w,a,t,b，+六个字符拼成，各字符的含义是： </p>
+<p>r(read): 读<br>w(write): 写<br>a(append): 追加<br>t(text): 文本文件，可省略不写<br>b(banary): 二进制文件        </p>
+</li>
+</ol>
+<hr>
+    </div>
+    <p class="post-meta">
+        <span class="post-cat">分类：
+            <a class="cat-link" href="/categories/Android/">Android</a>
+        </span>
+        <span class="post-tags">
+            标签：
+            <a href="/tags/Android/" title="Android">Android</a>
+        </span>
+    </p>
+</article>
+<div class="article-share clearfix text-center">
+    <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+</div>
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br>
+        <a href="/2016/02/22/Android从入门到精通第十课/">
+            
+                ListView专题
+            
+        </a>
+    </span>
+    
+
+    
+    <span class="next fr">
+        下一篇<br>
+        <a href="/2016/02/19/Android从入门到精通第八课/">
+            
+                HttpClient详解
+            
+        </a>
+    </span>
+    
+</div>
+<!-- 文章评论 -->
+<!-- <div id="comments" class="comments cloud-tie-wrapper"></div>
+    <script>
+    var cloudTieConfig = {
+      url: document.location.href, 
+      sourceId: "Android从入门到精通第九课",
+      productKey: "c06bb9930e6f4b38a9997cb9bd17aba5",
+      target: "comments"
+    };
+    var yunManualLoad = true;
+    Tie.loader("aHR0cHM6Ly9hcGkuZ2VudGllLjE2My5jb20vcGMvbGl2ZXNjcmlwdC5odG1s", true);
+    </script> -->
+	<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMDA2OS82NjI0">
+<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js 
+
+';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+</script>
+<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+            </div>
+
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章分类</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+    <li>
+        <a href="/categories/Android/">Android</a>
+        <span class="badge">(28)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Android/系统/">系统</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Angular2/">Angular2</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/React-Native/">React Native</a>
+        <span class="badge">(12)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/前端/">前端</a>
+        <span class="badge">(7)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/VR/">VR</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Angular2/前端/">前端</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Java/">Java</a>
+        <span class="badge">(5)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Spring/">Spring</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/ios/">ios</a>
+        <span class="badge">(9)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Google/">Google</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Google/VR/">VR</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/技术人生/">技术人生</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/资料库/">资料库</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/小程序/">小程序</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/机器学习/">机器学习</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/android/">android</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/设计模式/">设计模式</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+</ul>
+    </section>
+
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="/tags/Android/" title="Android">Android (25)</a>
+  
+    <a class="tag-item" href="/tags/新特性/" title="新特性">新特性 (2)</a>
+  
+    <a class="tag-item" href="/tags/深入系统/" title="深入系统">深入系统 (1)</a>
+  
+    <a class="tag-item" href="/tags/系统服务/" title="系统服务">系统服务 (1)</a>
+  
+    <a class="tag-item" href="/tags/android/" title="android">android (4)</a>
+  
+    <a class="tag-item" href="/tags/硬件/" title="硬件">硬件 (1)</a>
+  
+    <a class="tag-item" href="/tags/混淆打包/" title="混淆打包">混淆打包 (1)</a>
+  
+    <a class="tag-item" href="/tags/Angular2/" title="Angular2">Angular2 (1)</a>
+  
+    <a class="tag-item" href="/tags/前端开发/" title="前端开发">前端开发 (3)</a>
+  
+    <a class="tag-item" href="/tags/React-Native/" title="React Native">React Native (10)</a>
+  
+    <a class="tag-item" href="/tags/FlexBox布局/" title="FlexBox布局">FlexBox布局 (1)</a>
+  
+    <a class="tag-item" href="/tags/前端/" title="前端">前端 (5)</a>
+  
+    <a class="tag-item" href="/tags/Google/" title="Google">Google (2)</a>
+  
+    <a class="tag-item" href="/tags/VR/" title="VR">VR (2)</a>
+  
+    <a class="tag-item" href="/tags/Java/" title="Java">Java (5)</a>
+  
+    <a class="tag-item" href="/tags/Node/" title="Node">Node (2)</a>
+  
+    <a class="tag-item" href="/tags/OpenGL/" title="OpenGL">OpenGL (1)</a>
+  
+    <a class="tag-item" href="/tags/Promise/" title="Promise">Promise (1)</a>
+  
+    <a class="tag-item" href="/tags/eact-Native/" title="eact Native">eact Native (1)</a>
+  
+    <a class="tag-item" href="/tags/打包/" title="打包">打包 (1)</a>
+  
+    <a class="tag-item" href="/tags/调试/" title="调试">调试 (1)</a>
+  
+    <a class="tag-item" href="/tags/原生/" title="原生">原生 (1)</a>
+  
+    <a class="tag-item" href="/tags/Spring/" title="Spring">Spring (2)</a>
+  
+    <a class="tag-item" href="/tags/入门/" title="入门">入门 (2)</a>
+  
+    <a class="tag-item" href="/tags/ios/" title="ios">ios (9)</a>
+  
+    <a class="tag-item" href="/tags/swift/" title="swift">swift (1)</a>
+  
+    <a class="tag-item" href="/tags/AR/" title="AR">AR (1)</a>
+  
+    <a class="tag-item" href="/tags/垃圾回收/" title="垃圾回收">垃圾回收 (1)</a>
+  
+    <a class="tag-item" href="/tags/webpack/" title="webpack">webpack (1)</a>
+  
+    <a class="tag-item" href="/tags/gulp/" title="gulp">gulp (1)</a>
+  
+    <a class="tag-item" href="/tags/Xcode/" title="Xcode">Xcode (3)</a>
+  
+    <a class="tag-item" href="/tags/https/" title="https">https (1)</a>
+  
+    <a class="tag-item" href="/tags/gif/" title="gif">gif (1)</a>
+  
+    <a class="tag-item" href="/tags/mac/" title="mac">mac (1)</a>
+  
+    <a class="tag-item" href="/tags/环境/" title="环境">环境 (1)</a>
+  
+    <a class="tag-item" href="/tags/react/" title="react">react (1)</a>
+  
+    <a class="tag-item" href="/tags/个人博客/" title="个人博客">个人博客 (2)</a>
+  
+    <a class="tag-item" href="/tags/流量/" title="流量">流量 (1)</a>
+  
+    <a class="tag-item" href="/tags/知识库/" title="知识库">知识库 (1)</a>
+  
+</div>
+    </section>
+    
+
+    
+    <!-- 我的微博 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>我的微博</strong></h3>
+        <div class="widget-bd" style="position: relative">
+  <div id="myWeiboLoading" class="text-center" style="position:absolute;top:0;left:0;right:0;bottom:0;line-height:50px;font-size:12px;background-color:#fff;z-index:9">微博加载中...</div>
+  <iframe width="100%" height="550" class="share_self" frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&amp;width=0&amp;height=550&amp;fansRow=2&amp;ptype=1&amp;speed=0&amp;skin=4&amp;isTitle=1&amp;noborder=1&amp;isWeibo=1&amp;isFans=1&amp;uid=1831462560&amp;verifier=5192ec39&amp;dpc=1"></iframe>
+  <script>
+  (function () {
+    var oMyWeibo = document.getElementById('myWeibo');
+    var oMyWeiboLoading = document.getElementById('myWeiboLoading');
+    var isIE = /msie/i.test(navigator.userAgent) && !window.opera;
+    var timer = null;
+    if (isIE) {
+      oMyWeibo.onreadystatechange = function(){
+        if(oMyWeibo.readyState === 'loaded' || oMyWeibo.readyState === 'complete'){
+          timer = setTimeout(function () {
+            oMyWeiboLoading.parentNode.removeChild(oMyWeiboLoading);
+            timer = null;
+          }, 300);
+        }
+      };
+    } else {
+      oMyWeibo.onload = function () {
+        timer = setTimeout(function () {
+          oMyWeiboLoading.parentNode.removeChild(oMyWeiboLoading);
+          timer = null;
+        }, 300);
+      };
+    }
+  })();
+  </script>
+</div>
+    </section>
+    
+
+    
+    <!-- 友情链接 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>友情链接</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+        <li>
+            <a href="http://blog.csdn.net/xiangzhihong8/" target="_blank" title="csdn个人博客">csdn博客</a>
+        </li>
+    
+        <li>
+            <a href="https://yq.aliyun.com/u/xiangzhihong" target="_blank" title="阿里云技术博客">阿里云博客</a>
+        </li>
+    
+</ul>
+    </section>
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <footer class="footer">
+    &copy;
+    
+        2016-2017
+    
+
+    <a href="/">Jelon Loves You</a>
+</footer>
+<div class="back-to-top" id="JELON__backToTop" title="返回顶部">返回顶部</div>
+<!-- 添加百度自动推送 -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+    <!--博客js脚本 -->
+    <!-- 这里放网站js脚本 -->
+<script src="/js/main.js"></script>
+</body>

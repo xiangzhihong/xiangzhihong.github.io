@@ -4,6 +4,488 @@
 
     
   <url>
+    <loc>http://www.xiangzhihong.com/2015/04/05/Java%E5%9F%BA%E7%A1%80%E7%AC%AC%E4%B8%89%E8%AF%BE/</loc>
+    <lastmod>2017-08-25T07:49:37.660Z</lastmod>
+    <data>
+        <display>
+        <title>volatile和Synchronized区别</title>
+        <pubTime>2015-04-04T16:00:00.000Z</pubTime>
+        
+        <tag>Java</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java" url="http://www.xiangzhihong.com/categories/Java/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.xiangzhihong.com/2015/03/05/Java%E5%9F%BA%E7%A1%80%E7%AC%AC%E4%BA%8C%E8%AF%BE/</loc>
+    <lastmod>2017-08-25T07:47:59.384Z</lastmod>
+    <data>
+        <display>
+        <title>Java基础面试题</title>
+        <pubTime>2015-03-04T16:00:00.000Z</pubTime>
+        
+        <tag>Java</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java" url="http://www.xiangzhihong.com/categories/Java/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.xiangzhihong.com/2015/03/04/Java%E5%9F%BA%E7%A1%80%E7%AC%AC%E4%B8%80%E8%AF%BE/</loc>
+    <lastmod>2017-08-25T07:47:47.290Z</lastmod>
+    <data>
+        <display>
+        <title>HashMap实现原理分析</title>
+        <pubTime>2015-03-03T16:00:00.000Z</pubTime>
+        
+        <tag>Java</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java" url="http://www.xiangzhihong.com/categories/Java/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.xiangzhihong.com/2016/03/12/Android%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A%E7%AC%AC%E5%8D%81%E5%85%AB%E8%AF%BE/</loc>
+    <lastmod>2017-08-25T07:43:00.835Z</lastmod>
+    <data>
+        <display>
+        <title>音量及屏幕亮度调节</title>
+        <pubTime>2016-03-11T16:00:00.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://www.xiangzhihong.com/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.xiangzhihong.com/2016/03/09/Android%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A%E7%AC%AC%E5%8D%81%E4%B8%83%E8%AF%BE/</loc>
+    <lastmod>2017-08-25T07:41:42.726Z</lastmod>
+    <data>
+        <display>
+        <title>Android数据存储</title>
+        <pubTime>2016-03-08T16:00:00.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://www.xiangzhihong.com/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.xiangzhihong.com/2016/03/08/Android%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A%E7%AC%AC%E5%8D%81%E5%85%AD%E8%AF%BE/</loc>
+    <lastmod>2017-08-25T07:40:34.428Z</lastmod>
+    <data>
+        <display>
+        <title>多线程断点下载</title>
+        <pubTime>2016-03-07T16:00:00.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://www.xiangzhihong.com/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.xiangzhihong.com/2016/03/06/Android%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A%E7%AC%AC%E5%8D%81%E4%BA%94%E8%AF%BE/</loc>
+    <lastmod>2017-08-25T07:39:38.041Z</lastmod>
+    <data>
+        <display>
+        <title>任务管理器(ActivityManager)</title>
+        <pubTime>2016-03-05T16:00:00.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://www.xiangzhihong.com/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.xiangzhihong.com/2016/03/04/Android%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A%E7%AC%AC%E5%8D%81%E5%9B%9B%E8%AF%BE/</loc>
+    <lastmod>2017-08-25T07:38:12.622Z</lastmod>
+    <data>
+        <display>
+        <title>XmlPullParser</title>
+        <pubTime>2016-03-03T16:00:00.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://www.xiangzhihong.com/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.xiangzhihong.com/2016/03/02/Android%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A%E7%AC%AC%E5%8D%81%E4%B8%89%E8%AF%BE/</loc>
+    <lastmod>2017-08-25T07:37:05.446Z</lastmod>
+    <data>
+        <display>
+        <title>Widget简介</title>
+        <pubTime>2016-03-01T16:00:00.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://www.xiangzhihong.com/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.xiangzhihong.com/2016/03/01/Android%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A%E7%AC%AC%E5%8D%81%E4%BA%8C%E8%AF%BE/</loc>
+    <lastmod>2017-08-25T07:35:27.389Z</lastmod>
+    <data>
+        <display>
+        <title>Scroller简介</title>
+        <pubTime>2016-02-29T16:00:00.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://www.xiangzhihong.com/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.xiangzhihong.com/2016/02/23/Android%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A%E7%AC%AC%E5%8D%81%E4%B8%80%E8%AF%BE/</loc>
+    <lastmod>2017-08-25T07:34:29.492Z</lastmod>
+    <data>
+        <display>
+        <title>Selector使用</title>
+        <pubTime>2016-02-22T16:00:00.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://www.xiangzhihong.com/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.xiangzhihong.com/2016/02/22/Android%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A%E7%AC%AC%E5%8D%81%E8%AF%BE/</loc>
+    <lastmod>2017-08-25T07:33:15.249Z</lastmod>
+    <data>
+        <display>
+        <title>ListView专题</title>
+        <pubTime>2016-02-21T16:00:00.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://www.xiangzhihong.com/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.xiangzhihong.com/2016/02/19/Android%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A%E7%AC%AC%E5%85%AB%E8%AF%BE/</loc>
+    <lastmod>2017-08-25T07:29:18.174Z</lastmod>
+    <data>
+        <display>
+        <title>HttpClient详解</title>
+        <pubTime>2016-02-18T16:00:00.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://www.xiangzhihong.com/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.xiangzhihong.com/2016/02/21/Android%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A%E7%AC%AC%E4%B9%9D%E8%AF%BE/</loc>
+    <lastmod>2017-08-25T07:29:03.870Z</lastmod>
+    <data>
+        <display>
+        <title>JNI基础</title>
+        <pubTime>2016-02-20T16:00:00.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://www.xiangzhihong.com/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.xiangzhihong.com/2016/02/18/Android%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A%E7%AC%AC%E4%B8%83%E8%AF%BE/</loc>
+    <lastmod>2017-08-25T07:26:35.490Z</lastmod>
+    <data>
+        <display>
+        <title>Fragment详解</title>
+        <pubTime>2016-02-17T16:00:00.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://www.xiangzhihong.com/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.xiangzhihong.com/2016/02/15/Android%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A%E7%AC%AC%E5%85%AD%E8%AF%BE/</loc>
+    <lastmod>2017-08-25T07:23:24.072Z</lastmod>
+    <data>
+        <display>
+        <title>android 优化之Bitmap优化</title>
+        <pubTime>2016-02-14T16:00:00.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://www.xiangzhihong.com/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.xiangzhihong.com/2016/02/14/Android%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A%E7%AC%AC%E4%BA%94%E8%AF%BE/</loc>
+    <lastmod>2017-08-25T07:22:20.231Z</lastmod>
+    <data>
+        <display>
+        <title>Ant打包</title>
+        <pubTime>2016-02-13T16:00:00.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://www.xiangzhihong.com/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.xiangzhihong.com/2016/02/13/Android%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A%E7%AC%AC%E5%9B%9B%E8%AF%BE(Service)/</loc>
+    <lastmod>2017-08-25T07:20:47.985Z</lastmod>
+    <data>
+        <display>
+        <title>Android四大组件之Service</title>
+        <pubTime>2016-02-12T16:00:00.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://www.xiangzhihong.com/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.xiangzhihong.com/2016/02/12/Android%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A%E7%AC%AC%E4%B8%89%E8%AF%BE(ContentProvider)/</loc>
+    <lastmod>2017-08-25T07:17:04.600Z</lastmod>
+    <data>
+        <display>
+        <title>Android四大组件之ContentProvider</title>
+        <pubTime>2016-02-11T16:00:00.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://www.xiangzhihong.com/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.xiangzhihong.com/2016/02/11/Android%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A%E7%AC%AC%E4%BA%8C%E8%AF%BE(%E5%8A%A8%E7%94%BB)/</loc>
+    <lastmod>2017-08-25T07:15:24.668Z</lastmod>
+    <data>
+        <display>
+        <title>Android入门之动画</title>
+        <pubTime>2016-02-10T16:00:00.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://www.xiangzhihong.com/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.xiangzhihong.com/2016/02/10/Android%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A%E7%AC%AC%E4%B8%80%E8%AF%BE/</loc>
+    <lastmod>2017-08-25T07:12:50.133Z</lastmod>
+    <data>
+        <display>
+        <title>Android入门介绍</title>
+        <pubTime>2016-02-09T16:00:00.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://www.xiangzhihong.com/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.xiangzhihong.com/2017/05/13/%E5%B7%A5%E7%A8%8B%E5%B8%88%E8%B5%84%E6%96%99%E5%BA%93/</loc>
+    <lastmod>2017-08-21T05:41:36.163Z</lastmod>
+    <data>
+        <display>
+        <title>工程师资料库</title>
+        <pubTime>2017-05-12T16:00:00.000Z</pubTime>
+        
+        <tag>全栈</tag>
+         
+         
+           
+             
+              <breadCrumb title="资料库" url="http://www.xiangzhihong.com/categories/%E8%B5%84%E6%96%99%E5%BA%93/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.xiangzhihong.com/2016/06/05/Android%20ConstraintLayout%E7%BA%A6%E6%9D%9F%E6%8E%A7%E4%BB%B6%E4%BD%BF%E7%94%A8%E4%BB%8B%E7%BB%8D/</loc>
+    <lastmod>2017-08-09T02:08:04.445Z</lastmod>
+    <data>
+        <display>
+        <title>android7.0新特性</title>
+        <pubTime>2016-06-04T16:00:00.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+        <tag>新特性</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://www.xiangzhihong.com/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.xiangzhihong.com/2017/06/03/Google%20V8%E5%BC%95%E6%93%8E/</loc>
+    <lastmod>2017-08-09T01:59:22.843Z</lastmod>
+    <data>
+        <display>
+        <title>Google V8引擎</title>
+        <pubTime>2017-06-02T16:00:00.000Z</pubTime>
+        
+        <tag>前端</tag>
+         
+         
+           
+             
+              <breadCrumb title="前端" url="http://www.xiangzhihong.com/categories/%E5%89%8D%E7%AB%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.xiangzhihong.com/2016/06/09/Android%20ExpandableListView%E8%AF%A6%E8%A7%A3/</loc>
     <lastmod>2017-07-17T07:03:45.745Z</lastmod>
     <data>
@@ -97,26 +579,6 @@
            
              
               <breadCrumb title="React Native" url="http://www.xiangzhihong.com/categories/React-Native/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.xiangzhihong.com/2017/06/03/Google%20V8%E5%BC%95%E6%93%8E/</loc>
-    <lastmod>2017-07-17T06:32:19.572Z</lastmod>
-    <data>
-        <display>
-        <title>Google V8引擎</title>
-        <pubTime>2017-06-02T16:00:00.000Z</pubTime>
-        
-        <tag>前端</tag>
-         
-         
-           
-             
-              <breadCrumb title="前端" url="http://www.xiangzhihong.com/categories/%E5%89%8D%E7%AB%AF/"/>
           
         </display>
     </data>
@@ -564,9 +1026,9 @@
         <title>深入理解React Native页面构建渲染原理</title>
         <pubTime>2016-10-27T16:00:00.000Z</pubTime>
         
-        <tag>前端</tag>
-         
         <tag>React Native</tag>
+         
+        <tag>前端</tag>
          
          
            
@@ -998,28 +1460,6 @@
            
              
               <breadCrumb title="小程序" url="http://www.xiangzhihong.com/categories/%E5%B0%8F%E7%A8%8B%E5%BA%8F/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.xiangzhihong.com/2016/06/05/Android%20ConstraintLayout%E7%BA%A6%E6%9D%9F%E6%8E%A7%E4%BB%B6%E4%BD%BF%E7%94%A8%E4%BB%8B%E7%BB%8D/</loc>
-    <lastmod>2017-07-09T12:49:44.000Z</lastmod>
-    <data>
-        <display>
-        <title>android7.0新特性</title>
-        <pubTime>2016-06-04T16:00:00.000Z</pubTime>
-        
-        <tag>Android</tag>
-         
-        <tag>新特性</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android" url="http://www.xiangzhihong.com/categories/Android/"/>
           
         </display>
     </data>

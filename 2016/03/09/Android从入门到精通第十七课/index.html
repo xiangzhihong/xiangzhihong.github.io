@@ -1,0 +1,516 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8">
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya">
+    
+    <title>Android数据存储 | 向志洪</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
+    <meta name="keywords" content="前端, Web, 移动, 向志洪">
+    <meta name="description" content="">
+
+    
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <!--[if lt IE 9]>
+    <script src="/js/html5.js"></script>
+    <![endif]-->
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?fd459238242776d173cdc64918fb32f2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+    
+    <script>var yunModuleEnv = true;</script>
+    <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+    
+</head></html>
+<body class="home">
+    <!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="/">
+                <div class="cover">
+                    <span class="name">向志洪</span>
+                    <span class="description">个人技术博客</span>
+                </div>
+            </a>
+        </div>
+        <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
+        <ul class="menu hidden" id="JELON__menu">
+            
+            <li rel="/2016/03/09/Android从入门到精通第十七课/index.html" class="item">
+                <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
+            </li>
+            
+            <li rel="/2016/03/09/Android从入门到精通第十七课/index.html" class="item">
+                <a href="/archives/" title="文章列表" class="icon-lab">&nbsp;文章列表</a>
+            </li>
+            
+            <li rel="/2016/03/09/Android从入门到精通第十七课/index.html" class="item">
+                <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
+            </li>
+            
+            <li rel="/2016/03/09/Android从入门到精通第十七课/index.html" class="item">
+                <a href="/404/" title="留言" class="icon-comment">&nbsp;留言</a>
+            </li>
+            
+        </ul>
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        <a href="https://github.com/xiangzhihong" target="_blank">Github</a>
+                        |
+                    
+                        <a href="http://tongji.baidu.com/web/welcome/login" target="_blank">站长统计</a>
+                        |
+                    
+                        <a href="http://weibo.com/code_xzh" target="_blank">新浪微博</a>
+                        |
+                    
+                </p>
+                <p class="sns">
+                    
+                    <a href="javascript: void(0);" class="wechat">
+                        <b>■</b>
+                        公众号
+                        <span class="popover">
+                            <img src="/img/wechat_mp.jpg" width="120" height="120" alt="我的微信订阅号">
+                            <i class="arrow"></i>
+                        </span>
+                    </a>
+                </p>
+                
+            </div>
+            <div class="avatar fr">
+                <img src="http://ohe65w0xx.bkt.clouddn.com/avert.png" alt="avatar" title="Jelon">
+            </div>
+        </div>
+    </section>
+</header>
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+        <section class="content">
+            <div class="content-main widget">
+                <!-- 文章页 -->
+<!-- 文章 -->
+<article class="post article">
+    <header class="text-center">
+        <h3 class="post-title"><span>Android数据存储</span></h3>
+    </header>
+    <p class="post-meta text-center">
+        xiangzhihong 发表于
+        <time datetime="2016-03-08T16:00:00.000Z">2016-03-09</time>
+    </p>
+    <div class="post-content">
+        <h1 id="数据存储"><a href="#数据存储" class="headerlink" title="数据存储"></a>数据存储</h1><h2 id="Android数据存储的几种形式"><a href="#Android数据存储的几种形式" class="headerlink" title="Android数据存储的几种形式"></a><code>Android</code>数据存储的几种形式</h2><ol>
+<li><p><code>Internal Storage</code><br> <code>Store private data on the device memory.</code><br> 通过<code>mContext.getFilesDir()</code>来得到<code>data/data/包名/File</code>目录</p>
+</li>
+<li><p><code>External Storage</code><br> <code>Store public data on the shared external storage.</code>    </p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">TextView tv = (TextView) findViewById(R.id.tv_sdsize);</div><div class="line">File path = Environment.getExternalStorageDirectory();</div><div class="line">StatFs stat = <span class="keyword">new</span> StatFs(path.getPath());</div><div class="line"><span class="keyword">long</span> blockSize = stat.getBlockSize();</div><div class="line"><span class="keyword">long</span> availableBlocks = stat.getAvailableBlocks();</div><div class="line"><span class="keyword">long</span> sizeAvailSize = blockSize * availableBlocks;</div><div class="line">String str = Formatter.formatFileSize(<span class="keyword">this</span>, sizeAvailSize);</div><div class="line">tv.setText(str);</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol>
+<li><code>SharedPreferences</code><br> <code>Store private primitive data in key-value pairs.</code><br> 会在<code>data/data/包名/shared_prefes</code>里面去创建相应的<code>xml</code>文件，根节点是<code>Map</code>，其实内部就是将数据保存到<code>Map</code>集合中，<br> 然后将该集合中的数据写到<code>xml</code>文件中进行保存。 <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">map</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">string</span> <span class="attr">name</span>=<span class="string">"password"</span>&gt;</span>123<span class="tag">&lt;/<span class="name">string</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">boolean</span> <span class="attr">name</span>=<span class="string">"isLogin"</span> <span class="attr">value</span>=<span class="string">"false"</span>/&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">map</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<pre><code><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//获取系统的一个sharedpreference文件  名字叫sp</span></div><div class="line">SharedPreferences sp = context.getSharedPreferences(<span class="string">"sp"</span>, Context.MODE_WORLD_READABLE+Context.MODE_WORLD_WRITEABLE);</div><div class="line"><span class="comment">//创建一个编辑器 可以编辑 sp</span></div><div class="line">Editor editor = sp.edit();</div><div class="line">editor.putString(<span class="string">"name"</span>, name);</div><div class="line">editor.putString(<span class="string">"password"</span>, password);</div><div class="line">editor.putBoolean(<span class="string">"boolean"</span>, <span class="keyword">false</span>);</div><div class="line">editor.putInt(<span class="string">"int"</span>, <span class="number">8888</span>);</div><div class="line">editor.putFloat(<span class="string">"float"</span>,<span class="number">3.14159f</span>);</div><div class="line"><span class="comment">//注意:调用 commit 提交 数据到文件.</span></div><div class="line">editor.commit();</div><div class="line"><span class="comment">//editor.clear();</span></div></pre></td></tr></table></figure>
+</code></pre><ol>
+<li><code>SQLiteDatabase</code><br> <code>Store structured data in a private database.</code><br> <code>Android</code>平台中嵌入了一个关系型数据库<code>SQLite</code>，和其他数据库不同的是<code>SQLite</code>存储数据时不区分类型，例如一个字段声明为<code>Integer</code>类型，<br> 我们也可以将一个字符串存入，<br> 一个字段声明为布尔型，我们也可以存入浮点数。除非是主键被定义为<code>Integer</code>，这时只能存储64位整数创建数据库的表时可以不指定数据类型，例如：         <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function">CREATE TABLE <span class="title">person</span><span class="params">(id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(<span class="number">20</span>)</span>)  </span></div><div class="line">CREATE TABLE <span class="title">person</span><span class="params">(id INTEGER PRIMARY KEY AUTOINCREMENT, name)</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<pre><code>`SQLite`支持大部分标准`SQL`语句，增删改查语句都是通用的，分页查询语句和`MySQL`相同     
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">SELECT * FROM person LIMIT <span class="number">20</span> OFFSET <span class="number">10</span>       </div><div class="line">SELECT * FROM person LIMIT <span class="number">10</span>,<span class="number">20</span>    </div><div class="line">SELECT * FROM reading_history ORDER BY _id DESC LIMIT <span class="number">3</span>, <span class="number">4</span></div><div class="line"><span class="function">DELETE FROM test WHERE _id <span class="title">IN</span> <span class="params">(SELECT _id FROM test ORDER BY _id DESC LIMIT <span class="number">3</span>, <span class="number">20</span>)</span></span></div></pre></td></tr></table></figure>
+
+
+`SQLite`数据库的使用
+
+- 继承`SQLiteOpenHelper`
+    <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NoteSQLiteOpenHelper</span> <span class="keyword">extends</span> <span class="title">SQLiteOpenHelper</span> </span>&#123;</div><div class="line">					</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * name 数据库的名称 cursorfactory 游标工厂 一般设置null 默认游标工厂 version 数据库的版本</div><div class="line">	 * 版本号从1开始的</div><div class="line">	 * </div><div class="line">	 * <span class="doctag">@param</span> context</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">NoteSQLiteOpenHelper</span><span class="params">(Context context)</span> </span>&#123;</div><div class="line">		<span class="keyword">super</span>(context, <span class="string">"note.db"</span>, <span class="keyword">null</span>, <span class="number">1</span>);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * oncreate 方法 会在数据库第一创建的时候的是被调用 适合做数据库表结构的初始化</div><div class="line">	 */</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(SQLiteDatabase db)</span> </span>&#123;</div><div class="line">		db.execSQL(<span class="string">"create table account (id integer primary key autoincrement , name  varchar(20), money varchar(20) )"</span>);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onUpgrade</span><span class="params">(SQLiteDatabase db, <span class="keyword">int</span> arg1, <span class="keyword">int</span> arg2)</span> </span>&#123;</div><div class="line">		db.execSQL(<span class="string">"DROP TABLE IF EXISTS "</span> + account);</div><div class="line">		<span class="keyword">this</span>.onCreate(db);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+
+- 获取
+    <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NoteDao</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> NoteSQLiteOpenHelper helper;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">NoteDao</span><span class="params">(Context context)</span> </span>&#123;</div><div class="line">		helper = <span class="keyword">new</span> NoteSQLiteOpenHelper(context);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 添加一条账目信息 到数据库</div><div class="line">	 * </div><div class="line">	 * <span class="doctag">@param</span> name</div><div class="line">	 *            花销的名称</div><div class="line">	 * <span class="doctag">@param</span> money</div><div class="line">	 *            金额</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(String name, <span class="keyword">float</span> money)</span> </span>&#123;</div><div class="line">		SQLiteDatabase db = helper.getWritableDatabase();</div><div class="line">		db.execSQL(<span class="string">"insert into account (name,money) values (?,?)"</span>,</div><div class="line">				<span class="keyword">new</span> Object[] &#123; name, money &#125;);</div><div class="line">		<span class="comment">// 记住 关闭.</span></div><div class="line">		db.close();</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delete</span><span class="params">(<span class="keyword">int</span> id)</span> </span>&#123;</div><div class="line">		SQLiteDatabase db = helper.getWritableDatabase();</div><div class="line">		db.execSQL(<span class="string">"delete from account where id=?"</span>, <span class="keyword">new</span> Object[] &#123; id &#125;);</div><div class="line">		db.close();</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> id, <span class="keyword">float</span> newmoney)</span> </span>&#123;</div><div class="line">		SQLiteDatabase db = helper.getWritableDatabase();</div><div class="line">		db.execSQL(<span class="string">"update account set money =? where id=?"</span>, <span class="keyword">new</span> Object[] &#123;</div><div class="line">				newmoney, id &#125;);</div><div class="line">		db.close();</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 返回数据库所有的条目</div><div class="line">	 * </div><div class="line">	 * <span class="doctag">@return</span></div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> List&lt;NoteBean&gt; <span class="title">findAll</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="comment">// 得到可读的数据库</span></div><div class="line">		SQLiteDatabase db = helper.getReadableDatabase();</div><div class="line">		List&lt;NoteBean&gt; noteBeans = <span class="keyword">new</span> ArrayList&lt;NoteBean&gt;();</div><div class="line">		<span class="comment">// 获取到数据库查询的结果游标</span></div><div class="line">		Cursor cursor = db.rawQuery(<span class="string">"select id,money,name from account "</span>, <span class="keyword">null</span>);</div><div class="line">		<span class="keyword">while</span> (cursor.moveToNext()) &#123;</div><div class="line">			<span class="keyword">int</span> id = cursor.getInt(cursor.getColumnIndex(<span class="string">"id"</span>));</div><div class="line">			String name = cursor.getString(cursor.getColumnIndex(<span class="string">"name"</span>));</div><div class="line">			<span class="keyword">float</span> money = cursor.getFloat(cursor.getColumnIndex(<span class="string">"money"</span>));</div><div class="line">			NoteBean bean = <span class="keyword">new</span> NoteBean(id, money, name);</div><div class="line">			noteBeans.add(bean);</div><div class="line">			bean = <span class="keyword">null</span>;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		db.close();</div><div class="line">		<span class="keyword">return</span> noteBeans;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 模拟一个转账的操作. 使用数据库的事务</div><div class="line">	 * </div><div class="line">	 * <span class="doctag">@throws</span> Exception</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testTransaction</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">		<span class="comment">// 得到可写的数据库</span></div><div class="line">		SQLiteDatabase db = helper.getWritableDatabase();</div><div class="line">		db.beginTransaction(); <span class="comment">// 开始事务</span></div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			db.execSQL(<span class="string">"update account set money = money - 5 where id=? "</span>,</div><div class="line">					<span class="keyword">new</span> String[] &#123; <span class="string">"2"</span> &#125;);</div><div class="line">			db.execSQL(<span class="string">"update account set money = money + 5 where id=? "</span>,</div><div class="line">					<span class="keyword">new</span> String[] &#123; <span class="string">"3"</span> &#125;);</div><div class="line">			db.setTransactionSuccessful();</div><div class="line">		&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">			<span class="comment">// <span class="doctag">TODO:</span> handle exception</span></div><div class="line">		&#125; <span class="keyword">finally</span> &#123;</div><div class="line">			db.endTransaction();<span class="comment">//关闭事务.</span></div><div class="line">			db.close();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+
+    <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NoteDao2</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> NoteSQLiteOpenHelper helper;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">NoteDao2</span><span class="params">(Context context)</span> </span>&#123;</div><div class="line">		helper = <span class="keyword">new</span> NoteSQLiteOpenHelper(context);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 添加一条账目信息 到数据库</div><div class="line">	 * </div><div class="line">	 * <span class="doctag">@param</span> name</div><div class="line">	 *            花销的名称</div><div class="line">	 * <span class="doctag">@param</span> money</div><div class="line">	 *            金额</div><div class="line">	 * </div><div class="line">	 * <span class="doctag">@return</span> true 插入成功 false 失败</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">add</span><span class="params">(String name, <span class="keyword">float</span> money)</span> </span>&#123;</div><div class="line">		SQLiteDatabase db = helper.getWritableDatabase();</div><div class="line">		ContentValues values = <span class="keyword">new</span> ContentValues();</div><div class="line">		values.put(<span class="string">"name"</span>, name);</div><div class="line">		values.put(<span class="string">"money"</span>, money);</div><div class="line">		<span class="keyword">long</span> rawid = db.insert(<span class="string">"account"</span>, <span class="keyword">null</span>, values);</div><div class="line">		db.close();</div><div class="line">		<span class="keyword">if</span> (rawid &gt; <span class="number">0</span>) &#123;</div><div class="line">			<span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">		&#125; <span class="keyword">else</span> &#123;</div><div class="line">			<span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">delete</span><span class="params">(<span class="keyword">int</span> id)</span> </span>&#123;</div><div class="line">		SQLiteDatabase db = helper.getWritableDatabase();</div><div class="line">		<span class="keyword">int</span> result = db.delete(<span class="string">"account"</span>, <span class="string">"id=?"</span>, <span class="keyword">new</span> String[] &#123; id + <span class="string">""</span> &#125;);</div><div class="line">		db.close();</div><div class="line">		<span class="keyword">if</span> (result &gt; <span class="number">0</span>) &#123;</div><div class="line">			<span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">		&#125; <span class="keyword">else</span> &#123;</div><div class="line">			<span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> id, <span class="keyword">float</span> newmoney)</span> </span>&#123;</div><div class="line">		SQLiteDatabase db = helper.getWritableDatabase();</div><div class="line">		ContentValues values = <span class="keyword">new</span> ContentValues();</div><div class="line">		values.put(<span class="string">"id"</span>, id);</div><div class="line">		values.put(<span class="string">"money"</span>, newmoney);</div><div class="line">		<span class="keyword">int</span> result = db.update(<span class="string">"account"</span>, values, <span class="string">"id=?"</span>, <span class="keyword">new</span> String[] &#123; id</div><div class="line">				+ <span class="string">""</span> &#125;);</div><div class="line">		db.close();</div><div class="line">		<span class="keyword">if</span> (result &gt; <span class="number">0</span>) &#123;</div><div class="line">			<span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">		&#125; <span class="keyword">else</span> &#123;</div><div class="line">			<span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 返回数据库所有的条目</div><div class="line">	 * </div><div class="line">	 * <span class="doctag">@return</span></div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> List&lt;NoteBean&gt; <span class="title">findAll</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="comment">// 得到可读的数据库</span></div><div class="line">		SQLiteDatabase db = helper.getReadableDatabase();</div><div class="line">		List&lt;NoteBean&gt; noteBeans = <span class="keyword">new</span> ArrayList&lt;NoteBean&gt;();</div><div class="line">		Cursor cursor = db.query(<span class="string">"account"</span>, <span class="keyword">new</span> String[] &#123; <span class="string">"id"</span>, <span class="string">"name"</span>,</div><div class="line">				<span class="string">"money"</span> &#125;, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>);</div><div class="line">		<span class="keyword">while</span> (cursor.moveToNext()) &#123;</div><div class="line">			<span class="keyword">int</span> id = cursor.getInt(cursor.getColumnIndex(<span class="string">"id"</span>));</div><div class="line">			String name = cursor.getString(cursor.getColumnIndex(<span class="string">"name"</span>));</div><div class="line">			<span class="keyword">float</span> money = cursor.getFloat(cursor.getColumnIndex(<span class="string">"money"</span>));</div><div class="line">			NoteBean bean = <span class="keyword">new</span> NoteBean(id, money, name);</div><div class="line">			noteBeans.add(bean);</div><div class="line">			bean = <span class="keyword">null</span>;</div><div class="line">		&#125;</div><div class="line">		db.close();</div><div class="line">		<span class="keyword">return</span> noteBeans;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</code></pre><ol>
+<li><p><code>Network</code><br> <code>Store data on the web with your own network server.</code></p>
+</li>
+<li><p><code>/data/data/包名</code>下的apk在安装时提示解析失败。<br> 我们在更新或安装<code>apk</code>时一般将其放到外部存储设备中来进行安装，但是如果一个手机没有外部存储设备该怎么办呢？总不能就不给更新或者安装了。<br> 可能你会觉得很简单啊，我用<code>mContext.getCacheDir()</code>或者<code>mContext.getFilesDir()</code>等获取内部路径，把<code>apk</code>放到这里面进行安装，但是你会发现安装<br> 不了，提示解析失败。<br> 这是为什么呢？其实是权限的问题。安装应用的<code>app</code>是没有权限获取你应用的内部存储文件的，所以才会安装不上，那该怎么解决呢？    答案就是修改权限。</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">	InputStream is = getAssets().open(fileName);</div><div class="line">	File file;</div><div class="line">	<span class="keyword">if</span> (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) &#123;</div><div class="line">		file = <span class="keyword">new</span> File(Environment.getExternalStorageDirectory()</div><div class="line">				+ File.separator + fileName);</div><div class="line">	&#125; <span class="keyword">else</span> &#123;</div><div class="line">		file = <span class="keyword">new</span> File(mContext.getFilesDir()</div><div class="line">				+ File.separator + fileName);</div><div class="line">		String cmd = <span class="string">"chmod 777 "</span> + file.getPath();</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			Runtime.getRuntime().exec(cmd);</div><div class="line">		&#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">			<span class="keyword">return</span>;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	file.createNewFile();</div><div class="line">	FileOutputStream fos = <span class="keyword">new</span> FileOutputStream(file);</div><div class="line">	<span class="keyword">byte</span>[] temp = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</div><div class="line">	<span class="keyword">int</span> i = <span class="number">0</span>;</div><div class="line">	<span class="keyword">while</span> ((i = is.read(temp)) &gt; <span class="number">0</span>) &#123;</div><div class="line">		fos.write(temp, <span class="number">0</span>, i);</div><div class="line">	&#125;</div><div class="line">	fos.close();</div><div class="line">	is.close();</div><div class="line"></div><div class="line">	Intent intent = <span class="keyword">new</span> Intent(Intent.ACTION_VIEW);</div><div class="line">	intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);</div><div class="line">	intent.setDataAndType(Uri.parse(<span class="string">"file://"</span> + file),</div><div class="line">			<span class="string">"application/vnd.android.package-archive"</span>);</div><div class="line">	startActivity(intent);</div><div class="line">&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">	LogUtil.e(<span class="string">"@@@"</span>, e.toString());</div><div class="line">	e.printStackTrace();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>清除缓存&amp;清除数据<br> 清除数据会清除<code>/data/data/</code>包名中的所有文件<br> 清楚缓存会清楚<code>getCacheDir()</code>目录下的内容，也就是<code>/data/data/&lt;当前应用程序包名&gt;/cache/</code></p>
+</li>
+</ol>
+<hr>
+    </div>
+    <p class="post-meta">
+        <span class="post-cat">分类：
+            <a class="cat-link" href="/categories/Android/">Android</a>
+        </span>
+        <span class="post-tags">
+            标签：
+            <a href="/tags/Android/" title="Android">Android</a>
+        </span>
+    </p>
+</article>
+<div class="article-share clearfix text-center">
+    <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+</div>
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br>
+        <a href="/2016/03/12/Android从入门到精通第十八课/">
+            
+                音量及屏幕亮度调节
+            
+        </a>
+    </span>
+    
+
+    
+    <span class="next fr">
+        下一篇<br>
+        <a href="/2016/03/08/Android从入门到精通第十六课/">
+            
+                多线程断点下载
+            
+        </a>
+    </span>
+    
+</div>
+<!-- 文章评论 -->
+<!-- <div id="comments" class="comments cloud-tie-wrapper"></div>
+    <script>
+    var cloudTieConfig = {
+      url: document.location.href, 
+      sourceId: "Android从入门到精通第十七课",
+      productKey: "c06bb9930e6f4b38a9997cb9bd17aba5",
+      target: "comments"
+    };
+    var yunManualLoad = true;
+    Tie.loader("aHR0cHM6Ly9hcGkuZ2VudGllLjE2My5jb20vcGMvbGl2ZXNjcmlwdC5odG1s", true);
+    </script> -->
+	<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMDA2OS82NjI0">
+<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js 
+
+';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+</script>
+<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+            </div>
+
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章分类</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+    <li>
+        <a href="/categories/Android/">Android</a>
+        <span class="badge">(28)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Android/系统/">系统</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Angular2/">Angular2</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/React-Native/">React Native</a>
+        <span class="badge">(12)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/前端/">前端</a>
+        <span class="badge">(7)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/VR/">VR</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Angular2/前端/">前端</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Java/">Java</a>
+        <span class="badge">(5)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Spring/">Spring</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/ios/">ios</a>
+        <span class="badge">(9)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Google/">Google</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/Google/VR/">VR</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/技术人生/">技术人生</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/资料库/">资料库</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/小程序/">小程序</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/机器学习/">机器学习</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/android/">android</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/设计模式/">设计模式</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+</ul>
+    </section>
+
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="/tags/Android/" title="Android">Android (25)</a>
+  
+    <a class="tag-item" href="/tags/新特性/" title="新特性">新特性 (2)</a>
+  
+    <a class="tag-item" href="/tags/深入系统/" title="深入系统">深入系统 (1)</a>
+  
+    <a class="tag-item" href="/tags/系统服务/" title="系统服务">系统服务 (1)</a>
+  
+    <a class="tag-item" href="/tags/android/" title="android">android (4)</a>
+  
+    <a class="tag-item" href="/tags/硬件/" title="硬件">硬件 (1)</a>
+  
+    <a class="tag-item" href="/tags/混淆打包/" title="混淆打包">混淆打包 (1)</a>
+  
+    <a class="tag-item" href="/tags/Angular2/" title="Angular2">Angular2 (1)</a>
+  
+    <a class="tag-item" href="/tags/前端开发/" title="前端开发">前端开发 (3)</a>
+  
+    <a class="tag-item" href="/tags/React-Native/" title="React Native">React Native (10)</a>
+  
+    <a class="tag-item" href="/tags/FlexBox布局/" title="FlexBox布局">FlexBox布局 (1)</a>
+  
+    <a class="tag-item" href="/tags/前端/" title="前端">前端 (5)</a>
+  
+    <a class="tag-item" href="/tags/Google/" title="Google">Google (2)</a>
+  
+    <a class="tag-item" href="/tags/VR/" title="VR">VR (2)</a>
+  
+    <a class="tag-item" href="/tags/Java/" title="Java">Java (5)</a>
+  
+    <a class="tag-item" href="/tags/Node/" title="Node">Node (2)</a>
+  
+    <a class="tag-item" href="/tags/OpenGL/" title="OpenGL">OpenGL (1)</a>
+  
+    <a class="tag-item" href="/tags/Promise/" title="Promise">Promise (1)</a>
+  
+    <a class="tag-item" href="/tags/eact-Native/" title="eact Native">eact Native (1)</a>
+  
+    <a class="tag-item" href="/tags/打包/" title="打包">打包 (1)</a>
+  
+    <a class="tag-item" href="/tags/调试/" title="调试">调试 (1)</a>
+  
+    <a class="tag-item" href="/tags/原生/" title="原生">原生 (1)</a>
+  
+    <a class="tag-item" href="/tags/Spring/" title="Spring">Spring (2)</a>
+  
+    <a class="tag-item" href="/tags/入门/" title="入门">入门 (2)</a>
+  
+    <a class="tag-item" href="/tags/ios/" title="ios">ios (9)</a>
+  
+    <a class="tag-item" href="/tags/swift/" title="swift">swift (1)</a>
+  
+    <a class="tag-item" href="/tags/AR/" title="AR">AR (1)</a>
+  
+    <a class="tag-item" href="/tags/垃圾回收/" title="垃圾回收">垃圾回收 (1)</a>
+  
+    <a class="tag-item" href="/tags/webpack/" title="webpack">webpack (1)</a>
+  
+    <a class="tag-item" href="/tags/gulp/" title="gulp">gulp (1)</a>
+  
+    <a class="tag-item" href="/tags/Xcode/" title="Xcode">Xcode (3)</a>
+  
+    <a class="tag-item" href="/tags/https/" title="https">https (1)</a>
+  
+    <a class="tag-item" href="/tags/gif/" title="gif">gif (1)</a>
+  
+    <a class="tag-item" href="/tags/mac/" title="mac">mac (1)</a>
+  
+    <a class="tag-item" href="/tags/环境/" title="环境">环境 (1)</a>
+  
+    <a class="tag-item" href="/tags/react/" title="react">react (1)</a>
+  
+    <a class="tag-item" href="/tags/个人博客/" title="个人博客">个人博客 (2)</a>
+  
+    <a class="tag-item" href="/tags/流量/" title="流量">流量 (1)</a>
+  
+    <a class="tag-item" href="/tags/知识库/" title="知识库">知识库 (1)</a>
+  
+</div>
+    </section>
+    
+
+    
+    <!-- 我的微博 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>我的微博</strong></h3>
+        <div class="widget-bd" style="position: relative">
+  <div id="myWeiboLoading" class="text-center" style="position:absolute;top:0;left:0;right:0;bottom:0;line-height:50px;font-size:12px;background-color:#fff;z-index:9">微博加载中...</div>
+  <iframe width="100%" height="550" class="share_self" frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&amp;width=0&amp;height=550&amp;fansRow=2&amp;ptype=1&amp;speed=0&amp;skin=4&amp;isTitle=1&amp;noborder=1&amp;isWeibo=1&amp;isFans=1&amp;uid=1831462560&amp;verifier=5192ec39&amp;dpc=1"></iframe>
+  <script>
+  (function () {
+    var oMyWeibo = document.getElementById('myWeibo');
+    var oMyWeiboLoading = document.getElementById('myWeiboLoading');
+    var isIE = /msie/i.test(navigator.userAgent) && !window.opera;
+    var timer = null;
+    if (isIE) {
+      oMyWeibo.onreadystatechange = function(){
+        if(oMyWeibo.readyState === 'loaded' || oMyWeibo.readyState === 'complete'){
+          timer = setTimeout(function () {
+            oMyWeiboLoading.parentNode.removeChild(oMyWeiboLoading);
+            timer = null;
+          }, 300);
+        }
+      };
+    } else {
+      oMyWeibo.onload = function () {
+        timer = setTimeout(function () {
+          oMyWeiboLoading.parentNode.removeChild(oMyWeiboLoading);
+          timer = null;
+        }, 300);
+      };
+    }
+  })();
+  </script>
+</div>
+    </section>
+    
+
+    
+    <!-- 友情链接 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>友情链接</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+        <li>
+            <a href="http://blog.csdn.net/xiangzhihong8/" target="_blank" title="csdn个人博客">csdn博客</a>
+        </li>
+    
+        <li>
+            <a href="https://yq.aliyun.com/u/xiangzhihong" target="_blank" title="阿里云技术博客">阿里云博客</a>
+        </li>
+    
+</ul>
+    </section>
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <footer class="footer">
+    &copy;
+    
+        2016-2017
+    
+
+    <a href="/">Jelon Loves You</a>
+</footer>
+<div class="back-to-top" id="JELON__backToTop" title="返回顶部">返回顶部</div>
+<!-- 添加百度自动推送 -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+    <!--博客js脚本 -->
+    <!-- 这里放网站js脚本 -->
+<script src="/js/main.js"></script>
+</body>
