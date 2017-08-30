@@ -168,9 +168,9 @@
     
     <span class="prev fl">
         上一篇<br>
-        <a href="/2016/08/05/React Native调用原生系统相机/">
+        <a href="/2016/08/05/Android仿天猫详情页/">
             
-                React Native调用Android相机图库
+                Android仿京东、天猫商品详情页
             
         </a>
     </span>
@@ -199,26 +199,14 @@
     var yunManualLoad = true;
     Tie.loader("aHR0cHM6Ly9hcGkuZ2VudGllLjE2My5jb20vcGMvbGl2ZXNjcmlwdC5odG1s", true);
     </script> -->
-	<!-- 来必力City版安装代码 -->
-<div id="lv-container" data-id="city" data-uid="MTAyMC8zMDA2OS82NjI0">
-<script type="text/javascript">
-   (function(d, s) {
-       var j, e = d.getElementsByTagName(s)[0];
+	
 
-       if (typeof LivereTower === 'function') { return; }
 
-       j = d.createElement(s);
-       j.src = 'https://cdn-city.livere.com/js/embed.dist.js 
 
-';
-       j.async = true;
-
-       e.parentNode.insertBefore(j, e);
-   })(document, 'script');
-</script>
-<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
-</div>
-<!-- City版安装代码已完成 -->
+<!-- 来必力City版安装判断 -->
+{% elseif theme.livere_uid %}
+      <div id="lv-container" data-id="city" data-uid="{{ theme.livere_uid }}"></div>
+{% endif %}
             </div>
 
         </section>
@@ -250,11 +238,6 @@
     </li>
     
     <li>
-        <a href="/categories/前端/">前端</a>
-        <span class="badge">(7)</span>
-    </li>
-    
-    <li>
         <a href="/categories/VR/">VR</a>
         <span class="badge">(1)</span>
     </li>
@@ -265,8 +248,13 @@
     </li>
     
     <li>
+        <a href="/categories/前端/">前端</a>
+        <span class="badge">(7)</span>
+    </li>
+    
+    <li>
         <a href="/categories/Java/">Java</a>
-        <span class="badge">(5)</span>
+        <span class="badge">(7)</span>
     </li>
     
     <li>
@@ -290,13 +278,13 @@
     </li>
     
     <li>
-        <a href="/categories/技术人生/">技术人生</a>
-        <span class="badge">(2)</span>
+        <a href="/categories/资料库/">资料库</a>
+        <span class="badge">(1)</span>
     </li>
     
     <li>
-        <a href="/categories/资料库/">资料库</a>
-        <span class="badge">(1)</span>
+        <a href="/categories/技术人生/">技术人生</a>
+        <span class="badge">(2)</span>
     </li>
     
     <li>
@@ -338,31 +326,33 @@
   
     <a class="tag-item" href="/tags/android/" title="android">android (4)</a>
   
-    <a class="tag-item" href="/tags/硬件/" title="硬件">硬件 (1)</a>
-  
     <a class="tag-item" href="/tags/混淆打包/" title="混淆打包">混淆打包 (1)</a>
   
     <a class="tag-item" href="/tags/Angular2/" title="Angular2">Angular2 (1)</a>
   
     <a class="tag-item" href="/tags/前端开发/" title="前端开发">前端开发 (3)</a>
   
+    <a class="tag-item" href="/tags/硬件/" title="硬件">硬件 (1)</a>
+  
     <a class="tag-item" href="/tags/React-Native/" title="React Native">React Native (10)</a>
   
     <a class="tag-item" href="/tags/FlexBox布局/" title="FlexBox布局">FlexBox布局 (1)</a>
-  
-    <a class="tag-item" href="/tags/前端/" title="前端">前端 (5)</a>
   
     <a class="tag-item" href="/tags/Google/" title="Google">Google (2)</a>
   
     <a class="tag-item" href="/tags/VR/" title="VR">VR (2)</a>
   
-    <a class="tag-item" href="/tags/Java/" title="Java">Java (5)</a>
+    <a class="tag-item" href="/tags/前端/" title="前端">前端 (5)</a>
   
-    <a class="tag-item" href="/tags/Node/" title="Node">Node (2)</a>
+    <a class="tag-item" href="/tags/Java/" title="Java">Java (7)</a>
+  
+    <a class="tag-item" href="/tags/垃圾回收/" title="垃圾回收">垃圾回收 (1)</a>
+  
+    <a class="tag-item" href="/tags/Promise/" title="Promise">Promise (1)</a>
   
     <a class="tag-item" href="/tags/OpenGL/" title="OpenGL">OpenGL (1)</a>
   
-    <a class="tag-item" href="/tags/Promise/" title="Promise">Promise (1)</a>
+    <a class="tag-item" href="/tags/Node/" title="Node">Node (2)</a>
   
     <a class="tag-item" href="/tags/eact-Native/" title="eact Native">eact Native (1)</a>
   
@@ -380,15 +370,15 @@
   
     <a class="tag-item" href="/tags/swift/" title="swift">swift (1)</a>
   
+    <a class="tag-item" href="/tags/Swift/" title="Swift">Swift (1)</a>
+  
     <a class="tag-item" href="/tags/AR/" title="AR">AR (1)</a>
   
-    <a class="tag-item" href="/tags/垃圾回收/" title="垃圾回收">垃圾回收 (1)</a>
+    <a class="tag-item" href="/tags/Xcode/" title="Xcode">Xcode (3)</a>
   
     <a class="tag-item" href="/tags/webpack/" title="webpack">webpack (1)</a>
   
     <a class="tag-item" href="/tags/gulp/" title="gulp">gulp (1)</a>
-  
-    <a class="tag-item" href="/tags/Xcode/" title="Xcode">Xcode (3)</a>
   
     <a class="tag-item" href="/tags/https/" title="https">https (1)</a>
   
@@ -398,11 +388,9 @@
   
     <a class="tag-item" href="/tags/环境/" title="环境">环境 (1)</a>
   
+    <a class="tag-item" href="/tags/原理/" title="原理">原理 (1)</a>
+  
     <a class="tag-item" href="/tags/react/" title="react">react (1)</a>
-  
-    <a class="tag-item" href="/tags/个人博客/" title="个人博客">个人博客 (2)</a>
-  
-    <a class="tag-item" href="/tags/流量/" title="流量">流量 (1)</a>
   
     <a class="tag-item" href="/tags/知识库/" title="知识库">知识库 (1)</a>
   
