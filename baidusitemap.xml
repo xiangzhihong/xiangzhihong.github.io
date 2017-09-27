@@ -4,6 +4,92 @@
 
     
   <url>
+    <loc>http://www.xiangzhihong.com/2017/07/11/Vuejs%E5%92%8C%E5%85%B6%E4%BB%96%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6%E7%9A%84%E5%AF%B9%E6%AF%94/</loc>
+    <lastmod>2017-09-27T02:44:31.602Z</lastmod>
+    <data>
+        <display>
+        <title>Vuejs和其他前端框架的对比</title>
+        <pubTime>2017-07-10T16:00:00.000Z</pubTime>
+        
+        <tag>前端</tag>
+         
+        <tag>知识库</tag>
+         
+         
+           
+             
+              <breadCrumb title="前端" url="http://www.xiangzhihong.com/categories/%E5%89%8D%E7%AB%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.xiangzhihong.com/2017/02/10/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BDPython/</loc>
+    <lastmod>2017-09-27T02:42:06.903Z</lastmod>
+    <data>
+        <display>
+        <title>站在人工智能风口的Python程序员</title>
+        <pubTime>2017-02-09T16:00:00.000Z</pubTime>
+        
+        <tag>杂谈</tag>
+         
+         
+           
+             
+              <breadCrumb title="杂谈" url="http://www.xiangzhihong.com/categories/%E6%9D%82%E8%B0%88/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.xiangzhihong.com/2016/07/25/Google%20VR%E6%8A%80%E6%9C%AF%E5%A4%A7%E6%8F%AD%E7%A7%98/</loc>
+    <lastmod>2017-09-27T02:26:19.751Z</lastmod>
+    <data>
+        <display>
+        <title>Google VR技术大揭秘</title>
+        <pubTime>2016-07-24T16:00:00.000Z</pubTime>
+        
+        <tag>Google</tag>
+         
+        <tag>VR</tag>
+         
+         
+           
+             
+              <breadCrumb title="杂谈" url="http://www.xiangzhihong.com/categories/%E6%9D%82%E8%B0%88/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.xiangzhihong.com/2016/12/05/Angular2%E5%85%A5%E5%9D%91%E6%8C%87%E5%8D%97/</loc>
+    <lastmod>2017-09-27T02:25:48.303Z</lastmod>
+    <data>
+        <display>
+        <title>Angular2入坑指南</title>
+        <pubTime>2016-12-04T16:00:00.000Z</pubTime>
+        
+        <tag>Angular2</tag>
+         
+        <tag>前端开发</tag>
+         
+         
+           
+             
+              <breadCrumb title="前端" url="http://www.xiangzhihong.com/categories/%E5%89%8D%E7%AB%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.xiangzhihong.com/2015/06/05/Java%E5%9F%BA%E7%A1%80%E7%AC%AC%E4%BA%94%E8%AF%BE/</loc>
     <lastmod>2017-08-25T09:07:51.091Z</lastmod>
     <data>
@@ -25,7 +111,7 @@
     
   <url>
     <loc>http://www.xiangzhihong.com/2015/05/05/Java%E5%9F%BA%E7%A1%80%E7%AC%AC%E5%9B%9B%E8%AF%BE/</loc>
-    <lastmod>2017-08-25T09:06:44.698Z</lastmod>
+    <lastmod>2017-08-25T09:06:44.699Z</lastmod>
     <data>
         <display>
         <title>hashCode与equals的区别</title>
@@ -105,7 +191,7 @@
     
   <url>
     <loc>http://www.xiangzhihong.com/2016/03/12/Android%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A%E7%AC%AC%E5%8D%81%E5%85%AB%E8%AF%BE/</loc>
-    <lastmod>2017-08-25T07:43:00.835Z</lastmod>
+    <lastmod>2017-08-25T07:43:00.836Z</lastmod>
     <data>
         <display>
         <title>音量及屏幕亮度调节</title>
@@ -145,7 +231,7 @@
     
   <url>
     <loc>http://www.xiangzhihong.com/2016/03/08/Android%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A%E7%AC%AC%E5%8D%81%E5%85%AD%E8%AF%BE/</loc>
-    <lastmod>2017-08-25T07:40:34.428Z</lastmod>
+    <lastmod>2017-08-25T07:40:34.429Z</lastmod>
     <data>
         <display>
         <title>多线程断点下载</title>
@@ -165,7 +251,7 @@
     
   <url>
     <loc>http://www.xiangzhihong.com/2016/03/06/Android%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A%E7%AC%AC%E5%8D%81%E4%BA%94%E8%AF%BE/</loc>
-    <lastmod>2017-08-25T07:39:38.041Z</lastmod>
+    <lastmod>2017-08-25T07:39:38.042Z</lastmod>
     <data>
         <display>
         <title>任务管理器(ActivityManager)</title>
@@ -205,7 +291,7 @@
     
   <url>
     <loc>http://www.xiangzhihong.com/2016/03/02/Android%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A%E7%AC%AC%E5%8D%81%E4%B8%89%E8%AF%BE/</loc>
-    <lastmod>2017-08-25T07:37:05.446Z</lastmod>
+    <lastmod>2017-08-25T07:37:05.447Z</lastmod>
     <data>
         <display>
         <title>Widget简介</title>
@@ -285,7 +371,7 @@
     
   <url>
     <loc>http://www.xiangzhihong.com/2016/02/19/Android%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A%E7%AC%AC%E5%85%AB%E8%AF%BE/</loc>
-    <lastmod>2017-08-25T07:29:18.174Z</lastmod>
+    <lastmod>2017-08-25T07:29:18.175Z</lastmod>
     <data>
         <display>
         <title>HttpClient详解</title>
@@ -365,7 +451,7 @@
     
   <url>
     <loc>http://www.xiangzhihong.com/2016/02/14/Android%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A%E7%AC%AC%E4%BA%94%E8%AF%BE/</loc>
-    <lastmod>2017-08-25T07:22:20.231Z</lastmod>
+    <lastmod>2017-08-25T07:22:20.232Z</lastmod>
     <data>
         <display>
         <title>Ant打包</title>
@@ -425,7 +511,7 @@
     
   <url>
     <loc>http://www.xiangzhihong.com/2016/02/11/Android%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A%E7%AC%AC%E4%BA%8C%E8%AF%BE(%E5%8A%A8%E7%94%BB)/</loc>
-    <lastmod>2017-08-25T07:15:24.668Z</lastmod>
+    <lastmod>2017-08-25T07:15:24.669Z</lastmod>
     <data>
         <display>
         <title>Android入门之动画</title>
@@ -465,7 +551,7 @@
     
   <url>
     <loc>http://www.xiangzhihong.com/2017/05/13/%E5%B7%A5%E7%A8%8B%E5%B8%88%E8%B5%84%E6%96%99%E5%BA%93/</loc>
-    <lastmod>2017-08-21T05:41:36.163Z</lastmod>
+    <lastmod>2017-08-21T05:41:36.164Z</lastmod>
     <data>
         <display>
         <title>工程师资料库</title>
@@ -485,7 +571,7 @@
     
   <url>
     <loc>http://www.xiangzhihong.com/2016/06/05/Android%20ConstraintLayout%E7%BA%A6%E6%9D%9F%E6%8E%A7%E4%BB%B6%E4%BD%BF%E7%94%A8%E4%BB%8B%E7%BB%8D/</loc>
-    <lastmod>2017-08-09T02:08:04.445Z</lastmod>
+    <lastmod>2017-08-09T02:08:04.446Z</lastmod>
     <data>
         <display>
         <title>android7.0新特性</title>
@@ -527,7 +613,7 @@
     
   <url>
     <loc>http://www.xiangzhihong.com/2016/06/09/Android%20ExpandableListView%E8%AF%A6%E8%A7%A3/</loc>
-    <lastmod>2017-07-17T07:03:45.745Z</lastmod>
+    <lastmod>2017-07-17T07:03:45.746Z</lastmod>
     <data>
         <display>
         <title>ExpandableListView实现商品列表折叠</title>
@@ -587,7 +673,7 @@
     
   <url>
     <loc>http://www.xiangzhihong.com/2016/08/05/Android%E4%BB%BF%E5%A4%A9%E7%8C%AB%E8%AF%A6%E6%83%85%E9%A1%B5/</loc>
-    <lastmod>2017-07-17T06:58:53.795Z</lastmod>
+    <lastmod>2017-07-17T06:58:53.796Z</lastmod>
     <data>
         <display>
         <title>Android仿京东、天猫商品详情页</title>
@@ -607,7 +693,7 @@
     
   <url>
     <loc>http://www.xiangzhihong.com/2017/05/18/React%20Native%20%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8E%A7%E4%BB%B6%E4%B9%8B%E9%AA%8C%E8%AF%81%E7%A0%81%E5%92%8CToast/</loc>
-    <lastmod>2017-07-17T06:35:46.457Z</lastmod>
+    <lastmod>2017-07-17T06:35:46.458Z</lastmod>
     <data>
         <display>
         <title>React Native 自定义控件专题</title>
@@ -667,7 +753,7 @@
     
   <url>
     <loc>http://www.xiangzhihong.com/2016/11/15/iOS%20%E8%BD%BB%E9%87%8F%E7%BA%A7%E5%AD%98%E5%82%A8NSUserDefaults%20/</loc>
-    <lastmod>2017-07-17T06:09:28.915Z</lastmod>
+    <lastmod>2017-07-17T06:09:28.916Z</lastmod>
     <data>
         <display>
         <title>iOS 轻量级存储</title>
@@ -958,9 +1044,9 @@
         <title>React Native在Android平台运行gif的解决方法</title>
         <pubTime>2016-10-07T16:00:00.000Z</pubTime>
         
-        <tag>React Native</tag>
-         
         <tag>android</tag>
+         
+        <tag>React Native</tag>
          
          
            
@@ -1066,9 +1152,9 @@
         <title>深入理解React Native页面构建渲染原理</title>
         <pubTime>2016-10-27T16:00:00.000Z</pubTime>
         
-        <tag>React Native</tag>
-         
         <tag>前端</tag>
+         
+        <tag>React Native</tag>
          
          
            
@@ -1323,28 +1409,6 @@
 
     
   <url>
-    <loc>http://www.xiangzhihong.com/2016/07/25/Google%20VR%E6%8A%80%E6%9C%AF%E5%A4%A7%E6%8F%AD%E7%A7%98/</loc>
-    <lastmod>2017-07-10T01:06:34.000Z</lastmod>
-    <data>
-        <display>
-        <title>Google VR技术大揭秘</title>
-        <pubTime>2016-07-24T16:00:00.000Z</pubTime>
-        
-        <tag>Google</tag>
-         
-        <tag>VR</tag>
-         
-         
-           
-             
-              <breadCrumb title="VR" url="http://www.xiangzhihong.com/categories/VR/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://www.xiangzhihong.com/2016/07/20/Flex%E5%B8%83%E5%B1%80/</loc>
     <lastmod>2017-07-10T01:06:00.000Z</lastmod>
     <data>
@@ -1360,31 +1424,6 @@
            
              
               <breadCrumb title="React Native" url="http://www.xiangzhihong.com/categories/React-Native/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.xiangzhihong.com/2016/12/05/Angular2%E5%85%A5%E5%9D%91%E6%8C%87%E5%8D%97/</loc>
-    <lastmod>2017-07-10T01:05:06.000Z</lastmod>
-    <data>
-        <display>
-        <title>Angular2入坑指南</title>
-        <pubTime>2016-12-04T16:00:00.000Z</pubTime>
-        
-        <tag>Angular2</tag>
-         
-        <tag>前端开发</tag>
-         
-         
-           
-             
-              <breadCrumb title="Angular2" url="http://www.xiangzhihong.com/categories/Angular2/"/>
-          
-             
-              <breadCrumb title="前端" url="http://www.xiangzhihong.com/categories/Angular2/%E5%89%8D%E7%AB%AF/"/>
           
         </display>
     </data>

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.xiangzhihong.com/"/>
-  <updated>2017-08-09T01:59:22.843Z</updated>
+  <updated>2017-09-27T02:44:31.602Z</updated>
   <id>http://www.xiangzhihong.com/</id>
   
   <author>
@@ -14,6 +14,112 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Vuejs和其他前端框架的对比</title>
+    <link href="http://www.xiangzhihong.com/2017/07/11/Vuejs%E5%92%8C%E5%85%B6%E4%BB%96%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6%E7%9A%84%E5%AF%B9%E6%AF%94/"/>
+    <id>http://www.xiangzhihong.com/2017/07/11/Vuejs和其他前端框架的对比/</id>
+    <published>2017-07-10T16:00:00.000Z</published>
+    <updated>2017-09-27T02:44:31.602Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="React"><a href="#React" class="headerlink" title="React"></a>React</h1><p>React 和 Vue 有许多相似之处，它们都有：</p>
+<ul>
+<li>使用 Virtual DOM</li>
+<li>提供了响应式 (Reactive) 和组件化 (Composable) 的视图组件。</li>
+<li>将注意力集中保持在核心库，而将其他功能如路由和全局状态管理交给相关的库。</li>
+</ul>
+<p>由于有着众多的相似处，我们会用更多的时间在这一块进行比较。这里我们不只保证技术内容的准确性，同时也兼顾了平衡的考量。我们需要承认 React 比 Vue 更好的地方，比如更丰富的生态系统。</p>
+<h2 id="相似之处"><a href="#相似之处" class="headerlink" title="相似之处"></a>相似之处</h2><p>React与Vue存在很多相似之处，例如他们都是JavaScript的UI框架，专注于创造前端的富应用。不同于早期的JavaScript框架“功能齐全”，Reat与Vue只有框架的骨架，其他的功能如路由、状态管理等是框架分离的组件。</p>
+<h3 id="Virtual-DOM"><a href="#Virtual-DOM" class="headerlink" title="Virtual DOM"></a>Virtual DOM</h3><p>Vue.js(2.0版本)与React的其中最大一个相似之处，就是他们都使用了一种叫’Virtual DOM’的东西。所谓的Virtual DOM基本上说就是它名字的意思：虚拟DOM，DOM树的虚拟表现。它的诞生是基于这么一个概念：改变真实的DOM状态远比改变一个JavaScript对象的花销要大得多。</p>
+<p>简单来说，Virtual DOM是一个映射真实DOM的JavaScript对象，如果需要改变任何元素的状态，那么是先在Virtual DOM上进行改变，而不是直接改变真实的DOM。当有变化产生时，一个新的Virtual DOM对象会被创建并计算新旧Virtual DOM之间的差别。之后这些差别会应用在真实的DOM上。</p>
+<p>例子如下，我们可以看看下面这个列表在HTML中的代码是如何写的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;ul class=&quot;list&quot;&gt;</div><div class="line">  &lt;li&gt;item 1&lt;/li&gt;</div><div class="line">  &lt;li&gt;item 2&lt;/li&gt;</div><div class="line">&lt;/ul&gt;</div></pre></td></tr></table></figure>
+<p>而在JavaScript中，我们可以用对象简单地创造一个针对上面例子的映射：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    type: &apos;ul&apos;, </div><div class="line">    props: &#123;&apos;class&apos;: &apos;list&apos;&#125;, </div><div class="line">    children: [</div><div class="line">        &#123; type: &apos;li&apos;, props: &#123;&#125;, children: [&apos;item 1&apos;] &#125;,</div><div class="line">        &#123; type: &apos;li&apos;, props: &#123;&#125;, children: [&apos;item 2&apos;] &#125;</div><div class="line">    ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>真实的Virtual DOM会比上面的例子更复杂，但它本质上是一个嵌套着数组的原生对象。当新一项被加进去这个JavaScript对象时，一个函数会计算新旧Virtual DOM之间的差异并反应在真实的DOM上。计算差异的算法是高性能框架的秘密所在，React和Vue在实现上有点不同。</p>
+<p>Vue宣称可以<a href="https://cn.vuejs.org/v2/guide/comparison.html#React" target="_blank" rel="external">更快地计算出Virtual DOM</a>的差异，这是由于它在渲染过程中，会跟踪每一个组件的依赖关系，不需要重新渲染整个组件树。</p>
+<p>而对于React而言，<a href="https://facebook.github.io/react/docs/react-component.html?utm_source=caibaojian.com#shouldcomponentupdate" target="_blank" rel="external">每当应用的状态被改变时</a>，全部子组件都会重新渲染。当然，这可以通过shouldComponentUpdate这个生命周期方法来进行控制，但Vue将此视为默认的优化。</p>
+<h3 id="组件化"><a href="#组件化" class="headerlink" title="组件化"></a>组件化</h3><p>React与Vue都鼓励组件化应用。这本质上说，是建议你将你的应用分拆成一个个功能明确的模块，每个模块之间可以通过合适的方式互相联系。在Vue中，如果你遵守一定的规则，你可以使用<a href="https://vuejs.org/v2/guide/single-file-components.html?utm_source=caibaojian.com" target="_blank" rel="external">单文件组件</a>.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">//PastaItem.vue</div><div class="line"></div><div class="line">&lt;template&gt;</div><div class="line">&lt;li class=&quot;pasta-dish list-unstyled&quot;&gt;</div><div class="line">    &lt;div class=&quot;row&quot;&gt;</div><div class="line">        &lt;div class=&quot;col-md-3&quot;&gt;</div><div class="line">            &lt;img :src=&quot;this.item.image&quot; :alt=&quot;this.item.name&quot; /&gt;</div><div class="line">        &lt;/div&gt;</div><div class="line">        &lt;div class=&quot;col-md-9 text-left&quot;&gt;</div><div class="line">            &lt;h3&gt;&#123;&#123;this.item.name&#125;&#125;&lt;/h3&gt;</div><div class="line">            &lt;p&gt;</div><div class="line">                &#123;&#123;this.item.desc&#125;&#125;</div><div class="line">            &lt;/p&gt;</div><div class="line">            &lt;button v-on:click=&quot;addToOrderNew&quot; class=&quot;btn btn-primary&quot;&gt;Add to order&lt;/button&gt; &lt;mark&gt;&#123;&#123;this.orders&#125;&#125;&lt;/mark&gt;</div><div class="line">        &lt;/div&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">&lt;/li&gt;</div><div class="line">&lt;/template&gt;</div><div class="line"></div><div class="line">&lt;script&gt;</div><div class="line"></div><div class="line">export default &#123;</div><div class="line">    name: &apos;pasta-item&apos;,</div><div class="line">    props: [&apos;item&apos;],</div><div class="line">    data:  function()&#123;</div><div class="line">        return&#123;</div><div class="line">            orders: 0</div><div class="line">        &#125;</div><div class="line">    &#125;,</div><div class="line">    methods: &#123;</div><div class="line">        addToOrderNew: function(y)&#123;</div><div class="line">            this.orders += 1;</div><div class="line">            this.$emit(&apos;order&apos;);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">&lt;/script&gt;</div><div class="line"></div><div class="line">&lt;style src=&quot;./Pasta.css&quot;&gt;&lt;/style&gt;</div></pre></td></tr></table></figure>
+<p>正如上面你看到的例子中，HTML, JavaScript和CSS都写在一个文件之中，你不再需要在.vue组件文件中引入CSS。<br>而在React语法中，JavaScript与JSX被写入同一个组件文件中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">import React from &quot;react&quot;;</div><div class="line"></div><div class="line">class PastaItem extends React.Component &#123;</div><div class="line"></div><div class="line">    render() &#123;</div><div class="line">        const &#123; details, index &#125; = this.props;</div><div class="line"></div><div class="line">        return (</div><div class="line">            &lt;li className=&quot;pasta-dish list-unstyled&quot;&gt;</div><div class="line">                &lt;div className=&quot;row&quot;&gt;</div><div class="line">                    &lt;div className=&quot;col-md-3&quot;&gt;</div><div class="line">                        &lt;img src=&#123;details.image&#125; alt=&#123;details.name&#125; /&gt;</div><div class="line">                    &lt;/div&gt;</div><div class="line">                    &lt;div className=&quot;col-md-9 text-left&quot;&gt;</div><div class="line">                        &lt;h3&gt;&#123;details.name&#125;&lt;/h3&gt;</div><div class="line">                        &lt;p&gt;</div><div class="line">                            &#123;details.desc&#125;</div><div class="line">                        &lt;/p&gt;</div><div class="line">                        &lt;button onClick=&#123;() =&gt; this.props.addToOrder(index)&#125; className=&quot;btn btn-primary&quot;&gt;Add to order&lt;/button&gt; &lt;mark&gt;&#123;this.props.orders || 0&#125;&lt;/mark&gt;</div><div class="line">                    &lt;/div&gt;</div><div class="line">                &lt;/div&gt;</div><div class="line">            &lt;/li&gt;</div><div class="line">        );</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">export default PastaItem;</div></pre></td></tr></table></figure>
+<h3 id="Props"><a href="#Props" class="headerlink" title="Props"></a>Props</h3><p>在上面两个例子中，我们可以看到React和Vue都有’props’的概念，这是properties的简写。props在组件中是一个特殊的属性，允许父组件往子组件传送数据。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Object.keys(this.state.pastadishes).map(key =&gt;</div><div class="line">    &lt;PastaItem index=&#123;key&#125; key=&#123;key&#125; details=&#123;this.state.pastadishes[key]&#125; addToOrder=&#123;this.addToOrder&#125; orders=&#123;this.state.orders[key]&#125; /&gt;</div><div class="line">)</div></pre></td></tr></table></figure>
+<p>上面的JSX库组中，index, key, details, orders 与 addToOrder都是props，数据会被下传到子组件PastaItem中去。</p>
+<p>在React中，这是必须的，它依赖一个“单一数据源”作为它的“状态”。而在Vue中，props略有不同。它们一样是在组件中被定义，但Vue依赖于模板语法，你可以通过模板的循环函数更高效地展示传入的数据。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;pasta-item v-for=&quot;(item, key) in samplePasta&quot; :item=&quot;item&quot; :key=&quot;key&quot; @order=&quot;handleOrder(key)&quot;&gt;&lt;/pasta-item&gt;</div></pre></td></tr></table></figure>
+<h3 id="构建工具"><a href="#构建工具" class="headerlink" title="构建工具"></a>构建工具</h3><p>React和Vue都有自己的构建工具，你可以使用它快速搭建开发环境。React可以使用<a href="https://github.com/facebookincubator/create-react-app?utm_source=caibaojian.com" target="_blank" rel="external">Create React App (CRA)</a>，而Vue对应的则是<a href="https://github.com/vuejs/vue-cli?utm_source=caibaojian.com" target="_blank" rel="external">vue-cli</a>。两个工具都能让你得到一个根据最佳实践设置的项目模板。</p>
+<p>由于CRA有很多选项，使用起来会稍微麻烦一点。这个工具会逼迫你使用<a href="https://webpack.js.org/?utm_source=caibaojian.com" target="_blank" rel="external">Webpack</a>和<a href="https://babeljs.io/?utm_source=caibaojian.com" target="_blank" rel="external">Babel</a>。而vue-cli则有<a href="https://github.com/vuejs-templates?utm_source=caibaojian.com" target="_blank" rel="external">模板列表</a>可选，能按需创造不同模板，使用起来更灵活一点。</p>
+<p>事实上说，两个工具都非常好用，都能为你建立一个好环境。而且如果可以不配置Webpack的话，我和Jeff认为这是天大的好事。</p>
+<h3 id="Chrome-开发工具"><a href="#Chrome-开发工具" class="headerlink" title="Chrome 开发工具"></a>Chrome 开发工具</h3><p>React和Vue都有很好的Chrome扩展工具去帮助你找出bug。它们会检查你的应用，让你看到Vue或者React中的变化。你也可以看到应用中的状态，并实时看到更新。</p>
+<p>React的开发工具:<br><a href="https://cdn.deliciousbrains.com/content/uploads/2017/06/15151112/react-devtools.mp4" target="_blank" rel="external">https://cdn.deliciousbrains.com/content/uploads/2017/06/15151112/react-devtools.mp4</a></p>
+<p>Vue的开发工具:<br><a href="https://cdn.deliciousbrains.com/content/uploads/2017/06/15151111/vue-devtools.mp4" target="_blank" rel="external">https://cdn.deliciousbrains.com/content/uploads/2017/06/15151111/vue-devtools.mp4</a></p>
+<h2 id="主要区别"><a href="#主要区别" class="headerlink" title="主要区别"></a>主要区别</h2><p>Vue与React最后一个相似但略有不同之处是它们配套框架的处理方法。相同之处在于，两个框架都专注于UI层，其他的功能如路由、状态管理等都交由同伴框架进行处理。</p>
+<p>而不同之处是在于它们如何关联它们各自的配套框架。Vue的核心团队维护着<a href="https://github.com/vuejs/vue-router?utm_source=caibaojian.com" target="_blank" rel="external">vue-router</a>和<a href="https://github.com/vuejs/vuex?utm_source=caibaojian.com" target="_blank" rel="external">vuex</a>，它们都是作为官方推荐的存在。而React的<a href="https://github.com/ReactTraining/react-router?utm_source=caibaojian.com" target="_blank" rel="external">react-router</a>和<a href="http://redux.js.org/?utm_source=caibaojian.com" target="_blank" rel="external">react-redux</a>则是由社区成员维护，它们都不是官方维护的。</p>
+<h3 id="模板-vs-JSX"><a href="#模板-vs-JSX" class="headerlink" title="模板 vs JSX"></a>模板 vs JSX</h3><p>React与Vue最大的不同是模板的编写。Vue鼓励你去写近似常规HTML的模板。写起来很接近标准HTML元素，只是多了一些属性。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;ul&gt;</div><div class="line">    &lt;template v-for=&quot;item in items&quot;&gt;</div><div class="line">        &lt;li&gt;&#123;&#123; item.msg &#125;&#125;&lt;/li&gt;</div><div class="line">        &lt;li class=&quot;divider&quot;&gt;&lt;/li&gt;</div><div class="line">    &lt;/template&gt;</div><div class="line">&lt;/ul&gt;</div></pre></td></tr></table></figure>
+<p>这些属性也可以被使用在单文件组件中，尽管它需要在在<a href="https://vuejs.org/v2/guide/single-file-components.html?utm_source=caibaojian.com" target="_blank" rel="external">构建时</a>将组件转换为合法的JavaScript和HTML。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;ul&gt;</div><div class="line">  &lt;pasta-item v-for=&quot;(item, key) in samplePasta&quot; :item=&quot;item&quot; :key=&quot;key&quot; @order=&quot;handleOrder(key)&quot;&gt;&lt;/pasta-item&gt;</div><div class="line">&lt;/ul&gt;</div></pre></td></tr></table></figure>
+<p>Vue鼓励你去使用HTML模板去进行渲染，使用相似于Angular风格的方法去输出动态的内容。因此，通过把原有的模板整合成新的Vue模板，Vue很容易提供旧的应用的升级。这也让新来者很容易适应它的语法。</p>
+<p>React推荐你所有的模板通用JavaScript的语法扩展——<a href="https://facebook.github.io/react/docs/introducing-jsx.html?utm_source=caibaojian.com" target="_blank" rel="external">JSX</a>书写，不过这对于传统的前端开发人员需要相应的学习。同样的代码，用JSX书写的例子如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;ul className=&quot;pasta-list&quot;&gt;</div><div class="line">    &#123;</div><div class="line">        Object.keys(this.state.pastadishes).map(key =&gt;</div><div class="line">            &lt;PastaItem index=&#123;key&#125; key=&#123;key&#125; details=&#123;this.state.pastadishes[key]&#125; addToOrder=&#123;this.addToOrder&#125; orders=&#123;this.state.orders[key]&#125; /&gt;</div><div class="line">        )</div><div class="line">    &#125;</div><div class="line">&lt;/ul&gt;</div></pre></td></tr></table></figure>
+<p>React/JSX乍看之下，觉得非常啰嗦，但使用JavaScript而不是模板来开发，赋予了开发者许多编程能力。</p>
+<h3 id="状态管理-vs-对象属性"><a href="#状态管理-vs-对象属性" class="headerlink" title="状态管理 vs 对象属性"></a>状态管理 vs 对象属性</h3><p>如果你对React熟悉，你就会知道应用中的状态是（React）关键的概念。也有一些配套框架被设计为管理一个大的state对象，如Redux。此外，state对象在React应用中是不可变的，意味着它不能被直接改变，在React中你需要使用setState()方法去更新状态。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">addToOrder(key) &#123;</div><div class="line">       //Make a copy of this.state</div><div class="line">       const orders = &#123; ...this.state.orders &#125;;</div><div class="line"></div><div class="line">       //update or add</div><div class="line">       orders[ key ] = orders[ key ] + 1 || 1;</div><div class="line">       this.setState( &#123; orders &#125; );</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在Vue中，state对象并不是必须的，数据由data属性在Vue对象中进行管理。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">export default &#123;</div><div class="line">  name: &apos;app&apos;,</div><div class="line">  data() &#123;</div><div class="line">    return &#123;</div><div class="line">      samplePasta: samplePasta,</div><div class="line">      orders: &#123;&#125;</div><div class="line">    &#125;</div><div class="line">  &#125;,</div><div class="line">...</div><div class="line">  methods: &#123;</div><div class="line">    handleOrder: function (key) &#123;</div><div class="line"></div><div class="line">      if (!this.orders.hasOwnProperty(key)) &#123;</div><div class="line">        this.$set(this.orders, key, &#123; count: 0 &#125;);</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      this.orders[key].count += 1;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>而在Vue中，则不需要使用如setState()之类的方法去改变它的状态，在Vue对象中，data参数就是应用中数据的保存者。</p>
+<p>不过恶心的是React出了一个霸王条款：<a href="https://yq.aliyun.com/roundtable/59146?spm=5176.8217306.rtmain.26.ZEwc2t" target="_blank" rel="external">Facebook拒修改React开源许可</a></p>
+<h1 id="Angularjs"><a href="#Angularjs" class="headerlink" title="Angularjs"></a>Angularjs</h1><p>Vue 的一些语法和 AngularJS 的很相似 (例如 v-if vs ng-if)。因为 AngularJS 是 Vue 早期开发的灵感来源。然而，AngularJS 中存在的许多问题，在 Vue 中已经得到解决。</p>
+<h3 id="Angular"><a href="#Angular" class="headerlink" title="Angular"></a>Angular</h3><p>1，MVVM（Model）(View)(View-model)<br>2，模块化（Module）控制器（Contoller）依赖注入：<br>3，双向数据绑定：界面的操作能实时反映到数据，数据的变更能实时展现到界面。<br>4，指令(ng-click ng-model ng-href ng-src ng-if…)<br>5，服务Service($compile $filter $interval $timeout $http…)<br>其中双向数据绑定的实现使用了$scope变量的脏值检测，使用$scope.$watch（视图到模型），$scope.$apply(模型到视图)检测，内部调用的都是digest，当然也可以直接调用$scope.$digest进行脏检查。值得注意的是当数据变化十分频繁时，脏检测对浏览器性能的消耗将会很大，官方注明的最大检测脏值为2000个数据。</p>
+<h3 id="Vue"><a href="#Vue" class="headerlink" title="Vue"></a>Vue</h3><p>vue.js官网：是一套构建用户界面的 渐进式框架。与其他重量级框架不同的是，Vue 采用自底向上增量开发的设计。Vue 的核心库只关注视图层，并且非常容易学习，非常容易与其它库或已有项目整合。另一方面，Vue 完全有能力驱动采用单文件组件和 Vue 生态系统支持的库开发的复杂单页应用。</p>
+<p>Vue.js 的目标是通过尽可能简单的 API 实现响应的数据绑定和组合的视图组件。</p>
+<p>（1）模块化，目前最热的方式是在项目中直接使用ES6的模块化，结合Webpack进行项目打包<br>（2）组件化，创造单个component后缀为.vue的文件，包含template(html代码)，script(es6代码),style(css样式)<br>（3）路由，<br>vue非常小巧，压缩后min源码为72.9kb，gzip压缩后只有25.11kb，想比Angular为144kb，可以自驾搭配使用需要的库插件，类似路由插件(Vue-router)，Ajax插件(vue-resource)等</p>
+<p>下面从几个方面来比较一下Vue.js和Angular.js的区别</p>
+<h2 id="TypeScript"><a href="#TypeScript" class="headerlink" title="TypeScript"></a>TypeScript</h2><p>Angular 事实上必须用 TypeScript 来开发，因为它的文档和学习资源几乎全部是面向 TS 的。TS 有很多显而易见的好处 —— 静态类型检查在大规模的应用中非常有用，同时对于 Java 和 C# 背景的开发者也是非常提升开发效率的。<br>然而，并不是所有人都想用 TS —— 在中小型规模的项目中，引入 TS 可能并不会带来太多明显的优势。在这些情况下，用 Vue 会是更好的选择，因为在不用 TS 的情况下使用 Angular 会很有挑战性。<br>最后，虽然 Vue 和 TS 的整合可能不如 Angular 那么深入，我们也提供了官方的 类型声明 和 组件装饰器，并且知道有大量用户在生产环境中使用 Vue + TS 的组合。我们也和微软的 TS / VSCode 团队进行着积极的合作，目标是为 Vue + TS 用户提供更好的类型检查和 IDE 开发体验。</p>
+<p>##大小和性能</p>
+<p>在性能方面，这两个框架都非常的快，我们也没有足够的实际应用数据来下一个结论。如果你一定想看些数据的话，你可以参考这个<a href="http://stefankrause.net/js-frameworks-benchmark4/webdriver-ts/table.html" target="_blank" rel="external">第三方跑分</a>。单就这个跑分来看，Vue 似乎比 Angular 要更快一些。<br>在大小方面，最近的 Angular 版本中在使用了 AOT 和 tree-shaking 技术后使得最终的代码体积减小了许多。但即使如此，一个包含了 Vuex + Vue Router 的 Vue 项目 (30kb gzipped) 相比使用了这些优化的 angular-cli 生成的默认项目尺寸 (~130kb) 还是要小的多。<br>灵活性</p>
+<p>Vue 相比于 Angular 更加灵活，Vue 官方提供了构建工具来协助你构建项目，但它并不限制你去如何组织你的应用代码。有人可能喜欢有严格的代码组织规范，但也有开发者喜欢更灵活自由的方式。<br>学习曲线</p>
+<p>要学习 Vue，你只需要有良好的 HTML 和 JavaScript 基础。有了这些基本的技能，你就可以非常快速地通过阅读 指南 投入开发。<br>Angular 的学习曲线是非常陡峭的 —— 作为一个框架，它的 API 面积比起 Vue 要大得多，你也因此需要理解更多的概念才能开始有效率地工作。当然，Angular 本身的复杂度是因为它的设计目标就是只针对大型的复杂应用；但不可否认的是，这也使得它对于经验不甚丰富的开发者相当的不友好。</p>
+<p>不过就算有这么多好处，但是相比Angular2，Vue还是有很多的不足：</p>
+<ol>
+<li>Angular2原生Form支持： Angular2原生的Form模块功能相当强大。除了双向绑定之类的基本功能，还能通过programatic API 控制dom元素的表单行为。也有成型API提供自定义validator。这一点Vue只有v-model和第三方库。对于后台之类的重表单应用，还是Ng2有优势。</li>
+<li>依赖注入无论你喜不喜欢DI，这就是Angular2的强大功能之一。有DI可以在不改变代码结构的情况下完成功能替换。（如，在desktop和mobile有不同功能，可以通过注入不同service实现，而共用相同的template和directive）。Vue则需要程序员自己规划代码组织，用来支持共享组件。DI也可以用于类似module local state的功能。比如，一个视频播放控件有几个子组件完成，子组件需要分享一个状态。这一点Angular2有原生的service injection pattern。而Vue则没有官方推荐。</li>
+<li>对标准向后兼容Angular2在一些细节上对标准有更好的支持。比如 list differ 算法中 Angular2 可以支持实现了Symbol.iterator的对象，而Vue只能支持Array。对Observable和Promise，Angular2在应用的各个地方，甚至模板级别都有支持(async pipe)。而Vue需要vue-rx等第三方库支持。Angular2的组件有shadow dom的实现可以选择，而Vue目前还没有。</li>
+<li>测试Angular2一开始就设计好了如何对组件进行测试，而Vue组件虽然也很好写测试，但是没有官方推荐的唯一标准（当然，对视图是否需要测试还有待探讨）。除此以外，Angular2还有一些小功能比如检验模板的类型安全（即，模板里能在编译器保证没有引用model未定义的变量），不过AoT本身似乎还没有稳定，所以不能算优势。对TS的支持也是Angular好，当然前提是你喜欢TS。</li>
+</ol>
+<h1 id="Ember"><a href="#Ember" class="headerlink" title="Ember"></a>Ember</h1><p>Ember 是一个全能框架。它提供了大量的约定，一旦你熟悉了它们，开发会变得很高效。不过，这也意味着学习曲线较高，而且并不灵活。这意味着在框架和库 (加上一系列松散耦合的工具) 之间做权衡选择。后者会更自由，但是也要求你做更多架构上的决定。<br>也就是说，我们最好比较的是 Vue 内核和 Ember 的模板与数据模型层：</p>
+<ul>
+<li>Vue 在普通 JavaScript 对象上建立响应，提供自动化的计算属性。在 Ember 中需要将所有东西放在 Ember<br>对象内，并且手工为计算属性声明依赖。</li>
+<li>Vue 的模板语法可以用全功能的 JavaScript 表达式，而 Handlebars 的语法和帮助函数相比来说非常受限。</li>
+<li>在性能上，Vue 比 Ember 好很多，即使是 Ember 2.x 的最新 Glimmer 引擎。Vue 能够自动批量更新，而Ember 在关键性能场景时需要手动管理。</li>
+</ul>
+<h1 id="Knockout"><a href="#Knockout" class="headerlink" title="Knockout"></a>Knockout</h1><p>Knockout 是 MVVM 领域内的先驱，并且追踪依赖。它的响应系统和 Vue 也很相似。它在<a href="http://knockoutjs.com/documentation/browser-support.html" target="_blank" rel="external">浏览器支持</a>以及其他方面的表现也是让人印象深刻的。它最低能支持到 IE6，而 Vue 最低只能支持到 IE9。<br>随着时间的推移，Knockout 的发展已有所放缓，并且略显有点老旧了。比如，它的组件系统缺少完备的生命周期事件方法，尽管这些在现在是非常常见的。以及相比于 Vue 调用子组件的接口它的方法显得有点笨重。<br>如果你有兴趣研究，你还会发现二者在接口设计的理念上是不同的。这可以通过各自创建的 simple Todo List 体现出来。或许有点主观，但是很多人认为 Vue 的 API 接口更简单结构更优雅。</p>
+<h1 id="Polymer"><a href="#Polymer" class="headerlink" title="Polymer"></a>Polymer</h1><p>Polymer 是另一个由谷歌赞助的项目，事实上也是 Vue 的一个灵感来源。Vue 的组件可以粗略的类比于 Polymer 的自定义元素，并且两者具有相似的开发风格。最大的不同之处在于，Polymer 是基于最新版的 Web Components 标准之上，并且需要重量级的 polyfills 来帮助工作 (性能下降)，浏览器本身并不支持这些功能。相比而言，Vue 在支持到 IE9 的情况下并不需要依赖 polyfills 来工作。<br>在 Polymer 1.0 版本中，为了弥补性能，团队非常有限的使用数据绑定系统。例如，在 Polymer 中唯一支持的表达式只有布尔值否定和单一的方法调用，它的 computed 方法的实现也并不是很灵活。<br>Polymer 自定义的元素是用 HTML 文件来创建的，这会限制使用 JavaScript/CSS (和被现代浏览器普遍支持的语言特性)。相比之下，Vue 的单文件组件允许你非常容易的使用 ES2015 和你想用的 CSS 预编译处理器。<br>在部署生产环境时，Polymer 建议使用 HTML Imports 加载所有资源。而这要求服务器和客户端都支持 Http 2.0 协议，并且浏览器实现了此标准。这是否可行就取决于你的目标用户和部署环境了。如果状况不佳，你必须用 Vulcanizer 工具来打包 Polymer 元素。而在这方面，Vue 可以结合异步组件的特性和 Webpack 的代码分割特性来实现懒加载 (lazy-loaded)。这同时确保了对旧浏览器的兼容且又能更快加载。<br>而 Vue 和 Web Component 标准进行深层次的整合也是完全可行的，比如使用 Custom Elements、Shadow DOM 的样式封装。然而在我们做出严肃的实现承诺之前，我们目前仍在等待相关标准成熟，进而再广泛应用于主流的浏览器中。</p>
+<h1 id="Riot"><a href="#Riot" class="headerlink" title="Riot"></a>Riot</h1><p>Riot 2.0 提供了一个类似于基于组件的开发模型 (在 Riot 中称之为 Tag)，它提供了小巧精美的 API。Riot 和 Vue 在设计理念上可能有许多相似处。尽管相比 Riot ，Vue 要显得重一点，Vue 还是有很多显著优势的：</p>
+<ul>
+<li>过渡效果系统。Riot 现在还没有提供。</li>
+<li>功能更加强大的路由机制，Riot 的路由功能的 API 是极少的。</li>
+<li>更好的性能。Riot 使用了 遍历 DOM 树 而不是虚拟 DOM，但实际上用的还是脏检查机制，因此和 AngularJS患有相同的性能问题。</li>
+<li>更多成熟工具的支持。Vue 提供官方支持 webpack 和 Browserify，而 Riot 是依靠社区来建立集成系统。</li>
+</ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;React&quot;&gt;&lt;a href=&quot;#React&quot; class=&quot;headerlink&quot; title=&quot;React&quot;&gt;&lt;/a&gt;React&lt;/h1&gt;&lt;p&gt;React 和 Vue 有许多相似之处，它们都有：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;使用 Virtual DOM&lt;/li&gt;
+    
+    </summary>
+    
+      <category term="前端" scheme="http://www.xiangzhihong.com/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+      <category term="前端" scheme="http://www.xiangzhihong.com/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="知识库" scheme="http://www.xiangzhihong.com/tags/%E7%9F%A5%E8%AF%86%E5%BA%93/"/>
+    
+  </entry>
   
   <entry>
     <title>Google V8引擎</title>
@@ -227,7 +333,7 @@
     <link href="http://www.xiangzhihong.com/2017/05/18/React%20Native%20%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8E%A7%E4%BB%B6%E4%B9%8B%E9%AA%8C%E8%AF%81%E7%A0%81%E5%92%8CToast/"/>
     <id>http://www.xiangzhihong.com/2017/05/18/React Native 自定义控件之验证码和Toast/</id>
     <published>2017-05-17T16:00:00.000Z</published>
-    <updated>2017-07-17T06:35:46.457Z</updated>
+    <updated>2017-07-17T06:35:46.458Z</updated>
     
     <content type="html"><![CDATA[<p>React Native通过近两年的迭代和维护，最新版本已经到了0.45.1，关于最新版本的介绍请查看我之前的博客：<a href="http://blog.csdn.net/xiangzhihong8/article/details/72930431" target="_blank" rel="external">0.45新特性</a>。话说回来，尽管迭代的挺快，但还是有很多坑，很多基础的组件和API还是不完善。</p>
 <p>今天给大家带来的自定义小专题，其实对于React Native来说，自定义组件的过程更像是Android、iOS的组合控件。大体步骤有如下几个步骤（不完全准确，但是方向大体准确）：<br>1，定义构造函数constructor；<br>2，定义组件属性propTypes；<br>3，绘制界面；<br>4，添加更新界面逻辑等</p>
@@ -269,7 +375,7 @@
     <link href="http://www.xiangzhihong.com/2017/05/13/%E5%B7%A5%E7%A8%8B%E5%B8%88%E8%B5%84%E6%96%99%E5%BA%93/"/>
     <id>http://www.xiangzhihong.com/2017/05/13/工程师资料库/</id>
     <published>2017-05-12T16:00:00.000Z</published>
-    <updated>2017-08-21T05:41:36.163Z</updated>
+    <updated>2017-08-21T05:41:36.164Z</updated>
     
     <content type="html"><![CDATA[<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
 <li><a href="#语言无关">语言无关</a><ul>
@@ -956,6 +1062,34 @@
   </entry>
   
   <entry>
+    <title>站在人工智能风口的Python程序员</title>
+    <link href="http://www.xiangzhihong.com/2017/02/10/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BDPython/"/>
+    <id>http://www.xiangzhihong.com/2017/02/10/人工智能Python/</id>
+    <published>2017-02-09T16:00:00.000Z</published>
+    <updated>2017-09-27T02:42:06.903Z</updated>
+    
+    <content type="html"><![CDATA[<p>嗯，就是那么霸道。两会刚刚结束，“人工智能”首次被列入政府工作报告，随之而来的是人工智能板块领跑大盘涨势，无疑，这一切将刺激人工智能在多个领域的全面发展。</p>
+<p>大量融资的风口企业，绝对会把钱拿到招揽人才。而现在最流行的人工智能技术栈就是 TensorFlow 和 PyTorch，使用它们就是一份 Python 编程开发工作。一时间，python程序员成了人才市场的“抢手货”，工资待遇也水涨船高了。口说无凭，我们去工作搜索引擎jobui.com找看。一看吓一跳，首先是待遇啊：</p>
+<p>images</p>
+<p>最高待遇不过万不出奇啊！这还只是广州的情况，估计在北上深三个城市里，两者的差距还要大得多。除了待遇，跑到风口行业写Python，分分钟就是人工智能科学家的光环上身啊，估计大家都要跑得比西方记者还快了。</p>
+<p>乐了Python程序员，苦的就是公司是Python技术栈的传统IT业务的企业了。就别提一般的小企业，连豆瓣、知乎这样的都大受冲击了。豆瓣的洪强宁，也跑去创业做人工智能相关的应用了……</p>
+<p>没有人能够对抗趋势，风口企业这么有钱，能做的就只能是避开它们的锋芒。我觉得Python技术栈的企业应该考虑新的技术选型了。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;嗯，就是那么霸道。两会刚刚结束，“人工智能”首次被列入政府工作报告，随之而来的是人工智能板块领跑大盘涨势，无疑，这一切将刺激人工智能在多个领域的全面发展。&lt;/p&gt;
+&lt;p&gt;大量融资的风口企业，绝对会把钱拿到招揽人才。而现在最流行的人工智能技术栈就是 TensorFlow 和 
+    
+    </summary>
+    
+      <category term="杂谈" scheme="http://www.xiangzhihong.com/categories/%E6%9D%82%E8%B0%88/"/>
+    
+    
+      <category term="杂谈" scheme="http://www.xiangzhihong.com/tags/%E6%9D%82%E8%B0%88/"/>
+    
+  </entry>
+  
+  <entry>
     <title>微信小程序尝鲜一个月现状分析</title>
     <link href="http://www.xiangzhihong.com/2017/02/10/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%B0%9D%E9%B2%9C%E4%B8%80%E4%B8%AA%E6%9C%88%E7%8E%B0%E7%8A%B6%E5%88%86%E6%9E%90/"/>
     <id>http://www.xiangzhihong.com/2017/02/10/微信小程序尝鲜一个月现状分析/</id>
@@ -1392,7 +1526,7 @@
     <link href="http://www.xiangzhihong.com/2016/12/05/Angular2%E5%85%A5%E5%9D%91%E6%8C%87%E5%8D%97/"/>
     <id>http://www.xiangzhihong.com/2016/12/05/Angular2入坑指南/</id>
     <published>2016-12-04T16:00:00.000Z</published>
-    <updated>2017-07-10T01:05:06.000Z</updated>
+    <updated>2017-09-27T02:25:48.303Z</updated>
     
     <content type="html"><![CDATA[<h1 id="序"><a href="#序" class="headerlink" title="序"></a>序</h1><p>对后端开发来说，前端是神秘的，眼花缭乱的技术，繁多的框架，出名的不出名的好几百种，看是“繁荣”，其实显得杂乱无章，但是我们在做开发的时候，技术选型还是主流的那么几个：浅析angular，react，vue.js Node.js。</p>
 <h2 id="node"><a href="#node" class="headerlink" title="node"></a>node</h2><p>官网：<a href="https://nodejs.org/" target="_blank" rel="external">https://nodejs.org/</a><br>nodejs不是一个js框架，千万不要认为是类似jquery的框架，nodejs是js运行时，运行环境，类比java中jvm。做前端的没用过nodejs都不好意思说自己是前端。nodejs是和jvm同等地位的js运行环境，打开了前端人员走向后端的道路。</p>
@@ -1424,9 +1558,7 @@
     
     </summary>
     
-      <category term="Angular2" scheme="http://www.xiangzhihong.com/categories/Angular2/"/>
-    
-      <category term="前端" scheme="http://www.xiangzhihong.com/categories/Angular2/%E5%89%8D%E7%AB%AF/"/>
+      <category term="前端" scheme="http://www.xiangzhihong.com/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
       <category term="Angular2" scheme="http://www.xiangzhihong.com/tags/Angular2/"/>
@@ -1545,7 +1677,7 @@
     <link href="http://www.xiangzhihong.com/2016/11/15/iOS%20%E8%BD%BB%E9%87%8F%E7%BA%A7%E5%AD%98%E5%82%A8NSUserDefaults%20/"/>
     <id>http://www.xiangzhihong.com/2016/11/15/iOS 轻量级存储NSUserDefaults /</id>
     <published>2016-11-14T16:00:00.000Z</published>
-    <updated>2017-07-17T06:09:28.915Z</updated>
+    <updated>2017-07-17T06:09:28.916Z</updated>
     
     <content type="html"><![CDATA[<h1 id="NSUserDefaults简介"><a href="#NSUserDefaults简介" class="headerlink" title="NSUserDefaults简介"></a>NSUserDefaults简介</h1><p>在Android和ios都提供了本地轻量级数据存储，底层实现都是基于key-value的方式。Android里面的叫SharedPreferences，ios的叫NSUserDefaults，使用上也是非常的简单。我们先看一看NSUserDefaults的API。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#import &lt;Foundation/NSObject.h&gt;</div><div class="line"></div><div class="line">@class NSArray&lt;ObjectType&gt;, NSData, NSDictionary&lt;KeyValue, ObjectValue&gt;, NSMutableDictionary, NSString, NSURL;</div></pre></td></tr></table></figure>
@@ -1740,9 +1872,9 @@
       <category term="React Native" scheme="http://www.xiangzhihong.com/categories/React-Native/"/>
     
     
-      <category term="React Native" scheme="http://www.xiangzhihong.com/tags/React-Native/"/>
-    
       <category term="前端" scheme="http://www.xiangzhihong.com/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="React Native" scheme="http://www.xiangzhihong.com/tags/React-Native/"/>
     
   </entry>
   
@@ -1790,97 +1922,6 @@
       <category term="Spring" scheme="http://www.xiangzhihong.com/tags/Spring/"/>
     
       <category term="入门" scheme="http://www.xiangzhihong.com/tags/%E5%85%A5%E9%97%A8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Spring Boot入门</title>
-    <link href="http://www.xiangzhihong.com/2016/10/12/Spring%20Boot%E6%90%AD%E5%BB%BAWeb%E5%BA%94%E7%94%A8/"/>
-    <id>http://www.xiangzhihong.com/2016/10/12/Spring Boot搭建Web应用/</id>
-    <published>2016-10-11T16:00:00.000Z</published>
-    <updated>2017-07-10T01:30:48.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Spring-Boot简介"><a href="#Spring-Boot简介" class="headerlink" title="Spring Boot简介"></a>Spring Boot简介</h1><p>Spring Boot是由Pivotal团队提供的全新框架，其设计目的是用来简化新Spring应用的初始搭建以及开发过程。该框架使用了特定的方式来进行配置，从而使开发人员不再需要定义样板化的配置。通过这种方式,Spring Boot致力于在蓬勃发展的快速应用开发领域（rapid application development）成为领导者。<br>用一句话：不用自己做配置，搭建速度快，降低学习门槛。</p>
-<p>Spring Boot 在 Spring 生态中的位置：<br><img src="http://img.blog.csdn.net/20170221224730657?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h2 id="Spring-Boot的特点"><a href="#Spring-Boot的特点" class="headerlink" title="Spring Boot的特点"></a>Spring Boot的特点</h2><ul>
-<li>为所有Spring开发者更快的入门</li>
-<li>不用看那么一坨xml真的很神清气爽</li>
-<li>嵌入的Tomcat，无需部署WAR文件</li>
-<li>开箱即用，提供各种默认配置来简化项目配置</li>
-</ul>
-<p>如：快速在 Java 代码中测试和使用 Spring Boot 的方法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">import org.springframework.boot.*;</div><div class="line">import org.springframework.boot.autoconfigure.*;</div><div class="line">import org.springframework.web.bind.annotation.*;</div><div class="line"></div><div class="line">@RestController</div><div class="line">@EnableAutoConfiguration</div><div class="line">public class Example &#123;</div><div class="line"></div><div class="line">    @RequestMapping(&quot;/&quot;)</div><div class="line">    String home() &#123;</div><div class="line">        return &quot;Hello World!&quot;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public static void main(String[] args) throws Exception &#123;</div><div class="line">        SpringApplication.run(Example.class, args);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="Spring-Boot使用"><a href="#Spring-Boot使用" class="headerlink" title="Spring Boot使用"></a>Spring Boot使用</h2><p>打开网址：<a href="http://start.spring.io/" target="_blank" rel="external">http://start.spring.io/</a>，按照图中填写信息。<br><img src="http://img.blog.csdn.net/20170221225233050?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>点击Generate Project下载项目压缩包，解压项目包，并用IDE以Maven项目导入</p>
-<h2 id="导入Web模块："><a href="#导入Web模块：" class="headerlink" title="导入Web模块："></a>导入Web模块：</h2><p>在pom.xml中添加：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;dependency&gt;	&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;	&lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt; &lt;/dependency&gt;</div></pre></td></tr></table></figure>
-<p>编写Controller类：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">publicclassHelenController&#123; </div><div class="line">@RequestMapping(&quot;/hello&quot;) </div><div class="line">publicStringindex()</div><div class="line">&#123;</div><div class="line">return&quot;hello world&quot;;</div><div class="line">&#125; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这样一个入门的hello 就搭建好了。打开浏览器：<a href="http://localhost:8080/hello，你会发现输出：hello" target="_blank" rel="external">http://localhost:8080/hello，你会发现输出：hello</a> word<br>接下来我们要说说Thymeleaf模板。</p>
-<h1 id="引入Thymeleaf模板引擎开发web项目"><a href="#引入Thymeleaf模板引擎开发web项目" class="headerlink" title="引入Thymeleaf模板引擎开发web项目"></a>引入Thymeleaf模板引擎开发web项目</h1><h2 id="引入Maven依赖"><a href="#引入Maven依赖" class="headerlink" title="引入Maven依赖"></a>引入Maven依赖</h2><p><img src="http://img.blog.csdn.net/20170222215318842?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h2 id="Controller类及HTML页面"><a href="#Controller类及HTML页面" class="headerlink" title="Controller类及HTML页面"></a>Controller类及HTML页面</h2><p><img src="http://img.blog.csdn.net/20170222215340859?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20170222215429250?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>如上页面，直接打开html页面展现Hello World，但是启动程序后，访问<a href="http://localhost:8080/，则是展示Controller中host的值：从很小就坏，做到了不破坏HTML自身内容的数据逻辑分离。" target="_blank" rel="external">http://localhost:8080/，则是展示Controller中host的值：从很小就坏，做到了不破坏HTML自身内容的数据逻辑分离。</a></p>
-<h2 id="Thymeleaf模板"><a href="#Thymeleaf模板" class="headerlink" title="Thymeleaf模板"></a>Thymeleaf模板</h2><p>Thymeleaf是一个XML/XHTML/HTML5模板引擎，可用于Web与非Web环境中的应用开发。它是一个开源的Java库，基于Apache License 2.0许可，由Daniel Fernández创建，该作者还是Java加密库Jasypt的作者。<br>Thymeleaf提供了一个用于整合Spring MVC的可选模块，在应用开发中，你可以使用Thymeleaf来完全代替JSP或其他模板引擎，如Velocity、FreeMarker等。Thymeleaf的主要目标在于提供一种可被浏览器正确显示的、格式良好的模板创建方式，因此也可以用作静态建模。你可以使用它创建经过验证的XML与HTML模板。相对于编写逻辑或代码，开发者只需将标签属性添加到模板中即可。接下来，这些标签属性就会在DOM（文档对象模型）上执行预先制定好的逻辑。</p>
-<h1 id="Spring-Boot整合Spring-Security权限"><a href="#Spring-Boot整合Spring-Security权限" class="headerlink" title="Spring Boot整合Spring Security权限"></a>Spring Boot整合Spring Security权限</h1><p>整合Spring Security需要在pom.xml添加依赖<br><img src="http://img.blog.csdn.net/20170222215838814?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>Spring Security配置：<br><img src="http://img.blog.csdn.net/20170222215909881?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<ol>
-<li>通过@EnableWebSecurity注解开启Spring Security的功能</li>
-<li>继承WebSecurityConfigurerAdapter，并重写它的方法来设置一些web安全的细节</li>
-<li>configure(HttpSecurity<br>http)方法通过authorizeRequests()定义哪些URL需要被保护、哪些不需要被保护。例如以上代码指定了/和/home不需要任何认证就可以访问，其他的路径都必须通过身份验证。</li>
-<li>通过formLogin()定义当需要用户登录时候，转到的登录页面。</li>
-<li>configureGlobal(AuthenticationManagerBuilder<pre><code>auth)方法，在内存中创建了一个用户，该用户的名称为user，密码为password，用户角色为USER。
-</code></pre></li>
-</ol>
-<p>然后在Controller做拦截操作。<br><img src="http://img.blog.csdn.net/20170222220059820?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>结果页面<br><img src="http://img.blog.csdn.net/20170222220127196?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>最后启动<a href="http://localhost:8080/就可以啦" target="_blank" rel="external">http://localhost:8080/就可以啦</a></p>
-<p>附:<a href="http://www.thymeleaf.org/documentation.html" target="_blank" rel="external">thymeleaf 中文文档</a><br><a href="http://www.cnblogs.com/vinphy/p/4673918.html" target="_blank" rel="external">thymeleaf 基础教程</a></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Spring-Boot简介&quot;&gt;&lt;a href=&quot;#Spring-Boot简介&quot; class=&quot;headerlink&quot; title=&quot;Spring Boot简介&quot;&gt;&lt;/a&gt;Spring Boot简介&lt;/h1&gt;&lt;p&gt;Spring Boot是由Pivotal团队提供的全
-    
-    </summary>
-    
-      <category term="Spring" scheme="http://www.xiangzhihong.com/categories/Spring/"/>
-    
-    
-      <category term="Spring" scheme="http://www.xiangzhihong.com/tags/Spring/"/>
-    
-      <category term="入门" scheme="http://www.xiangzhihong.com/tags/%E5%85%A5%E9%97%A8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>React Native在Android平台运行gif的解决方法</title>
-    <link href="http://www.xiangzhihong.com/2016/10/08/React%20Native%E5%9C%A8Android%E5%B9%B3%E5%8F%B0%E8%BF%90%E8%A1%8Cgif%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/"/>
-    <id>http://www.xiangzhihong.com/2016/10/08/React Native在Android平台运行gif的解决方法/</id>
-    <published>2016-10-07T16:00:00.000Z</published>
-    <updated>2017-07-10T01:28:30.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>目前RN在Android平台上不支持gif格式的图片，而在ios平台是支持的，期待以后的版本中系统也是可以默认支持Android的。首先说下在ios平台怎么加载gif呢？</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;Image source= &#123;require(&apos;./img/loading.gif&apos;)&#125; style = &#123;styles.loading&#125;/&gt;</div></pre></td></tr></table></figure>
-<p>完整实例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">xport default class Loading extends React.Component &#123;  </div><div class="line">    render()&#123;  </div><div class="line">  </div><div class="line">        if (!this.props.isShow) &#123;  </div><div class="line">            return &lt;View /&gt;  </div><div class="line">        &#125;  </div><div class="line">  </div><div class="line">        return (  </div><div class="line">            &lt;View style = &#123;styles.container&#125;&gt;  </div><div class="line">                &lt;Image source= &#123;require(&apos;./img/loading.gif&apos;)&#125; style = &#123;styles.loading&#125;/&gt;  </div><div class="line">            &lt;/View&gt;  </div><div class="line">        )  </div><div class="line">    &#125;;  </div><div class="line">&#125;  </div><div class="line">  </div><div class="line">const styles = StyleSheet.create(&#123;  </div><div class="line">  container:&#123;  </div><div class="line">    backgroundColor: &apos;transparent&apos;,  </div><div class="line">    position: &apos;absolute&apos;,  </div><div class="line">    top: 0,  </div><div class="line">    left: 0,  </div><div class="line">    height: Util.screenSizeUtil.height,  </div><div class="line">    width: Util.screenSizeUtil.width,  </div><div class="line">    alignItems: &apos;center&apos;,  </div><div class="line">    justifyContent: &apos;center&apos;,  </div><div class="line">  </div><div class="line">  &#125;,  </div><div class="line">  loading:&#123;  </div><div class="line">    height:30,  </div><div class="line">    width:30,  </div><div class="line">  &#125;,  </div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-<h1 id="RN在Android平台的解决方法"><a href="#RN在Android平台的解决方法" class="headerlink" title="RN在Android平台的解决方法"></a>RN在Android平台的解决方法</h1><h2 id="facebook-fresco方法"><a href="#facebook-fresco方法" class="headerlink" title="facebook fresco方法"></a>facebook fresco方法</h2><p>要解决上面的问题，方法还是很多的，最简单的莫过于使用facebook的jar支持库，在android/app/build.gradle文件中新增</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">compile &apos;com.facebook.fresco:animated-gif:0.13.0&apos;</div></pre></td></tr></table></figure>
-<p>Fresco是一个强大的图片加载组件，Android 本身的图片库不支持此格式，但是Fresco支持。使用时，和往常一样，仅仅需要提供一个图片的URI即可，剩下的事情，Fresco会处理。<br>如我们运行一个名为loading.gif的图片：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;Image source=&#123;&#123;uri:loading&#125;&#125; style=&#123;&#123;width:20,height:20&#125;&#125;/&gt;</div></pre></td></tr></table></figure>
-<p>当然网上还有另外的方法，就是自己去实现读取gif图片，对图片资源做拆解，这有点类似于，在很久以前，Android平台也是不支持gif的，出现了自定义view对gif图片进行拆解，然后运行image的方案。有点类似于Android的帧动画，在xml定义图片数组，然后使用Animator来加载。不过这种方法性能差。</p>
-<h2 id="自定义组件实现"><a href="#自定义组件实现" class="headerlink" title="自定义组件实现"></a>自定义组件实现</h2><p>将gif切成15张png的图片，暂且命名为loading1、loading2…. loading15。</p>
-<h3 id="在构造方法中初始化图片数组"><a href="#在构造方法中初始化图片数组" class="headerlink" title="在构造方法中初始化图片数组"></a>在构造方法中初始化图片数组</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">//图片数组  </div><div class="line">var loading_imgs = new Array();  </div><div class="line">//最大图片张数  </div><div class="line">const imageLength = 15;  </div><div class="line">//动画使用的数组下标  </div><div class="line">const imageIndex = 0;  </div><div class="line">  </div><div class="line">  </div><div class="line">  constructor(props) &#123;  </div><div class="line">      super(props);  </div><div class="line">      this.state = &#123;  </div><div class="line">          dataSource: new ListView.DataSource(&#123;rowHasChanged: (r1, r2) =&gt; r1 !== r2,&#125;),    </div><div class="line">          ….  </div><div class="line">          imageIndex:imageIndex,  </div><div class="line">      &#125;;  </div><div class="line">        </div><div class="line">//组装图片数组   共15张图片  loading1  -&gt; loading15  </div><div class="line">      for( i=1;i&lt;= imageLength;i++)&#123;  </div><div class="line">        let loadingUri = &quot;loading&quot; + i;  </div><div class="line">        let img = &lt;Image source=&#123;&#123;uri:loadingUri&#125;&#125; key=&#123;i&#125; style=&#123;&#123;width:20,height:20&#125;&#125;/&gt;;  </div><div class="line">        loading_imgs.push(img);  </div><div class="line">      &#125;  </div><div class="line">  &#125;</div></pre></td></tr></table></figure>
-<h3 id="也没渲染"><a href="#也没渲染" class="headerlink" title="也没渲染"></a>也没渲染</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">render() &#123;  </div><div class="line">  return (  </div><div class="line">      &lt;View style=&#123;styles.container&#125;&gt;  </div><div class="line">          &lt;View style=&#123;&#123;position:&apos;absolute&apos;, top:-1000&#125;&#125;&gt;  </div><div class="line">            &#123;  </div><div class="line">              loading_imgs.map((item,i)=&gt; loading_imgs[i])  </div><div class="line">            &#125;  </div><div class="line">          &lt;/View&gt;  </div><div class="line">     &lt;/View&gt;  </div><div class="line">)&#125;;</div></pre></td></tr></table></figure>
-<h3 id="轮播图片"><a href="#轮播图片" class="headerlink" title="轮播图片"></a>轮播图片</h3><p>每隔100毫秒切换一张图片，当数据加载完毕，清楚定时任务，并且将图片置为第一张。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">图片轮播函数  </div><div class="line">  _loop() &#123;  </div><div class="line">    this.loopCount++;  </div><div class="line">    if (this.loopCount &lt; loading_imgs.length) &#123;  </div><div class="line">        this.setState(&#123;  </div><div class="line">            imageIndex: this.loopCount,  </div><div class="line">        &#125;);  </div><div class="line">    &#125;else &#123;  </div><div class="line">        this.loopCount = -1;  </div><div class="line">    &#125;  </div><div class="line">&#125;  </div><div class="line">  </div><div class="line">//轮播图片  </div><div class="line">this.timerPic = setInterval(this._loop.bind(this), 100);  </div><div class="line">  </div><div class="line">//清除图片轮播效果  </div><div class="line">this.timer1 &amp;&amp; clearInterval(this.timer1);  </div><div class="line">this.loopCount = -1;</div></pre></td></tr></table></figure></p>
-<p>这样就实现了自己实现对gif运行的实现，不过其性能确实太差，建议使用第一种。</p>
-<p>附：<a href="http://lib.csdn.net/xiangzhihong8/5375/chart/React%20Native" target="_blank" rel="external">RN知识库</a></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h1&gt;&lt;p&gt;目前RN在Android平台上不支持gif格式的图片，而在ios平台是支持的，期待以后的版本中系统也是可以默认支持Android的。首先说下
-    
-    </summary>
-    
-      <category term="React Native" scheme="http://www.xiangzhihong.com/categories/React-Native/"/>
-    
-    
-      <category term="React Native" scheme="http://www.xiangzhihong.com/tags/React-Native/"/>
-    
-      <category term="android" scheme="http://www.xiangzhihong.com/tags/android/"/>
     
   </entry>
   

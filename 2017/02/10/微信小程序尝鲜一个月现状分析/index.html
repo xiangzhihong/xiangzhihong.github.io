@@ -1,127 +1,136 @@
-<!doctype html>
-<html lang="zh-CN">
+<!DOCTYPE HTML>
+<html>
 <head>
+    <!--Setting-->
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8">
-    <meta name="baidu-site-verification" content="dIcXMeY8Ya">
-    
-    <title>微信小程序尝鲜一个月现状分析 | 向志洪</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
-    <meta name="keywords" content="前端, Web, 移动, 向志洪">
-    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no">
+    <link rel="dns-prefetch" href="//t11.baidu.com">
+    <!--SEO-->
 
+
+
+<meta name="robots" content="all">
+<meta name="google" content="all">
+<meta name="googlebot" content="all">
+<meta name="verify" content="all">
+    <!--Title-->
+
+
+<title>微信小程序尝鲜一个月现状分析 | 向志洪</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="向志洪" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css?rev=9.12.0">
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+    <div class="hide">
+    <script src="https://s4.cnzz.com/z_stat.php?id=1261768793&web_id=1263868967" language="JavaScript"></script>
+    </div>
     
-    
-    <link rel="shortcut icon" href="/favicon.ico">
-    
-    <link rel="stylesheet" href="/css/style.css">
-    <!--[if lt IE 9]>
-    <script src="/js/html5.js"></script>
-    <![endif]-->
-    <script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?6219063711b86bc2e6a7bf52df0f155b";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-    
-    <script>var yunModuleEnv = true;</script>
-    <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
     
 </head></html>
-<body class="home">
-    <!--[if lt IE 9]>
-    <div class="browsehappy">
-        当前网页 <strong>不支持</strong>
-        你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+<body>
+    <header class="main-header">
+    <div class="main-header-box">
+        <a class="branding" href="/" title="">
+            <img src="/img/header_logo.png" alt="Snippet 博客主题">
+        </a>
+        <h2 class="text-hide">Snippet主题</h2>
+        <img src="/img/header_logo.png" alt="Snippet 博客主题" class="hide">
     </div>
-    <![endif]-->
-
-    <!-- 博客头部 -->
-    <header class="header">
-    <section class="container header-main">
-        <div class="logo">
-            <a href="/">
-                <div class="cover">
-                    <span class="name">向志洪</span>
-                    <span class="description">个人技术博客</span>
-                </div>
-            </a>
-        </div>
-        <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
-        <ul class="menu hidden" id="JELON__menu">
-            
-            <li rel="/2017/02/10/微信小程序尝鲜一个月现状分析/index.html" class="item">
-                <a href="/" title="首页" class="icon-home">&nbsp;首页</a>
-            </li>
-            
-            <li rel="/2017/02/10/微信小程序尝鲜一个月现状分析/index.html" class="item">
-                <a href="/archives/" title="文章列表" class="icon-lab">&nbsp;文章列表</a>
-            </li>
-            
-            <li rel="/2017/02/10/微信小程序尝鲜一个月现状分析/index.html" class="item">
-                <a href="/about/" title="关于" class="icon-about">&nbsp;关于</a>
-            </li>
-            
-            <li rel="/2017/02/10/微信小程序尝鲜一个月现状分析/index.html" class="item">
-                <a href="/404/" title="留言" class="icon-comment">&nbsp;留言</a>
-            </li>
-            
-        </ul>
-        <div class="profile clearfix">
-            <div class="feeds fl">
-                
-                
-                <p class="links">
-                    
-                        <a href="https://github.com/xiangzhihong" target="_blank">Github</a>
-                        |
-                    
-                        <a href="http://tongji.baidu.com/web/welcome/login" target="_blank">站长统计</a>
-                        |
-                    
-                        <a href="http://weibo.com/code_xzh" target="_blank">新浪微博</a>
-                        |
-                    
-                </p>
-                <p class="sns">
-                    
-                    <a href="javascript: void(0);" class="wechat">
-                        <b>■</b>
-                        公众号
-                        <span class="popover">
-                            <img src="/img/wechat_mp.jpg" width="120" height="120" alt="我的微信订阅号">
-                            <i class="arrow"></i>
-                        </span>
-                    </a>
-                </p>
-                
-            </div>
-            <div class="avatar fr">
-                <img src="http://ohe65w0xx.bkt.clouddn.com/avert.png" alt="avatar" title="Jelon">
-            </div>
-        </div>
-    </section>
 </header>
-
-    <!-- 博客正文 -->
-    <div class="container body clearfix">
-        <section class="content">
-            <div class="content-main widget">
-                <!-- 文章页 -->
-<!-- 文章 -->
-<article class="post article">
-    <header class="text-center">
-        <h3 class="post-title"><span>微信小程序尝鲜一个月现状分析</span></h3>
-    </header>
-    <p class="post-meta text-center">
-        xiangzhihong 发表于
-        <time datetime="2017-02-09T16:00:00.000Z">2017-02-10</time>
-    </p>
-    <div class="post-content">
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only">Toggle navigation</span>
+                    <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class=""><a href="/">首页</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/前端/">前端</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/后端/">后端</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/Android/">Android</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/iOS/">iOS</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/小程序/">小程序</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/杂谈/">杂谈</a></li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="微信小程序尝鲜一个月现状分析">
+            
+            微信小程序尝鲜一个月现状分析
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <span>小程序</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            小程序
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta">2017/02/10</span>
+    </span>
+</div>
+            
+            
+    </div>
+    
+    <div class="post-body">
         <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>曾记得在微信小程序还没有上线的时候，大家都是翘首以待，希望在张小龙，在企鹅的带领下，走出区别于原生开发的另一条移动开发的道路，我也是一直关注着，知道1月9号，微信小程序终于对外开放了，作为第一批内测开发者，我也是在第一时间启动了微信小程序的开发。<br>其开发也确实相对简单，不过体验上嘛，可能和原生有一些差距，体验上有点类似于企业的x5渲染的webview。不过因为其高度依赖于微信这个平台，也限制了其开放性，所以我当时在csdn的内部群预言：微信小程序不会完全取代原生app，甚至都不可能威胁到原生app。<br>那么现在一个多月过去了，现状如何呢？</p>
 <h1 id="微信小程序现状"><a href="#微信小程序现状" class="headerlink" title="微信小程序现状"></a>微信小程序现状</h1><p>就在过年之前，其实好多之前的微信小程序都悄悄下线了，诸如最早入住微信的ota，在过完年不就都纷纷下线，各种股票交易类的小程序也在证监会的要求下纷纷暂停服务。究其原因，就是其转换率并不高。<br>你是否有这样的困扰：手机里装了几十个甚至上百个App，但平均每天都会用到的数量屈指可数，又或者地图、外卖等同类App不得不装好几个换着用，明知使用频率不高却耗电、占内存就是删不得？也因为有这样的用户痛点，当“微信之父”张小龙对外阐释小程序是一个不需要下载安装就可使用的用完即走应用后一直备受关注。<br>2017微信公开课PRO版上，张小龙也举了两个小程序的场景化例子，一个是在公交站，扫一下站牌的二维码就可以了解下一辆公交车的到站时间；一个是在汽车站，扫一下二维码就可以购买车票而不需要排长队。<br>这样的示例已经说明了微信团队对小程序的定位和理解，明显看出重心是要深入开拓线下的场景运营。现在不管是在地铁、公交站等线下场景，许多广告牌中都已加入了二维码等待被“扫一扫”。但张小龙认为，对企业来说，广告中嵌入二维码，被扫后应该能直接触达企业服务而不是消息订阅。<br>他强调，更多希望小程序的启动来自于扫二维码。并且，小程序坚持去中心化的思路，不会有类似应用商店的分类、排行和推荐等功能，也不能推送消息，不会有订阅关系和粉丝机制。<br>值得注意的是，尽管微信官方反复说明小程序并非应用商店的复刻版，但关于小程序可能冲击原有App体系及应用市场的观点依然存在。原因在于，相比苹果iOS系统下App Store的一统江湖，国内的安卓应用市场因某些原因百花齐放，多个第三方应用商店并存。与此同时，流量分散、用户需求和习惯的变化加上技术变迁，都使得应用市场本身面临转型。<br>就在笔者写这篇散文的时候，谷歌正式推出了“谷歌小程序（Android Instant Apps）”。<br>那么这里要八卦一些了，什么是谷歌小程序（Android Instant Apps）？</p>
 <h1 id="谷歌小程序"><a href="#谷歌小程序" class="headerlink" title="谷歌小程序"></a>谷歌小程序</h1><p>大家知道，不管是谷歌小程序还是微信小程序，都是一种轻量级的方法，其目的是：运行Android应用而无需安装、从任意位置访问应用。<br>在去年5月的Google I/O大会上，谷歌用了大约10分钟时间为我们介绍了Android Instant Apps，可理解为安卓“即时应用”，也就是无需安装可直接使用的应用，显然这跟微信推出的小程序非常类似，昨天，谷歌正式上线了一小批应用来测试这项功能。<br>上线的几款支持应用包括了BuzzFeed、Wish、Periscope以及Viki，Android Instant Apps并不是简单的网页浏览形式，通过Android Instant Apps，你其实就是打开了这个App的“简洁版”，经过一些媒体的测试，Android Instant Apps的加载速度也要比同等状况下的网页形式要快。<br>谷歌小程序工作原理：将App模块化了之后，Google Play只会在你点击了链接之后下载所需的那部分功能，这样你就相当于在一个简洁的模式下使用该App。对于开发者来说，他们也不必为此专门再去开发一个独立的App，它使用的还是同样的Android API和同样的源代码，开发者们只需要在原有App的基础上进行一下升级，接入Android Instant Apps的功能就可以了，对于一些开发者们来说，这个过程可能都用不了一天。<br>从这方面来说，由于google的全球影响力，加之在系统级别的多年耕耘，优势相对于微信小程序那可不是一点点。</p>
@@ -132,347 +141,110 @@ var _hmt = _hmt || [];
 <h2 id="开发市场"><a href="#开发市场" class="headerlink" title="开发市场"></a>开发市场</h2><p>在小程序开放之前，微信小程序的群满天飞，首先是ios、android的开发者加入到了小程序开发群中，然后是PM也加入了进来，再到后排搞PHP的也加入了进来。小程序开发成本并不高，把官方文档的代码复制过来基本就能用，所以大家都来一起搞。其结果是其转换率并不高，其市场定位只能成为Android，ios的补充和附属品。</p>
 <h1 id="小程序未来怎么走"><a href="#小程序未来怎么走" class="headerlink" title="小程序未来怎么走"></a>小程序未来怎么走</h1><p>独立互联网评论人洪波此前接受《每日经济新闻》记者采访时也认为，小程序毕竟是一个新东西，开发者可能会按照手机应用的流程去做小程序，这可能也是早期避免不了的。但小程序并不是免安装的手机应用，它最适合的场景是有一个明显的触发契机，大家需要对小程序应该怎么做、通过哪些场景触发等有个重新而且深入的思考。<br>虽然在推出当天，各类微信小程序一窝蜂的上线，但从推出后1个月的情况看，或许作为一个新思路的产品，没持续引发疯狂跟风反是个好信号，毕竟不管是对用户还是开发者来说，复制一个App生态体系意义不大，而思路和标准的改变跟产品开发都不能一蹴而就。<br>的确，作为线上的用户来说，小程序的设计似乎是如此不便，但换个角度来看，小程序或许本来就不是为被用户找到而设计的，或者说，致力于“勾连线下”的小程序，本身存在的价值或许是在特定的场景下找到特定的用户。</p>
     </div>
-    <p class="post-meta">
-        <span class="post-cat">分类：
-            <a class="cat-link" href="/categories/小程序/">小程序</a>
-        </span>
-        <span class="post-tags">
-            标签：
-            <a href="/tags/小程序/" title="小程序">小程序</a> / 
-    
-        <a href="/tags/微信/" title="微信">微信</a>
-        </span>
-    </p>
-</article>
-<div class="article-share clearfix text-center">
-    <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
-    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
-</div>
 
-<!-- 上一篇/下一篇 -->
-
-<div class="article-nav clearfix">
-    
-    <span class="prev fl">
-        上一篇<br>
-        <a href="/2017/04/03/React Native动画Animated详解/">
+    <div class="post-footer">   
+        <div>
             
-                React Native动画详解
+                转载声明: 商业转载请联系作者获得授权,非商业转载请注明出处 © Snippet
             
-        </a>
-    </span>
-    
-
-    
-    <span class="next fr">
-        下一篇<br>
-        <a href="/2017/01/05/OpenGL ES简介/">
+        </div>
+        <div>
             
-                OpenGL ES简介
+                版权声明: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+知识共享署名-非商业性使用-禁止演绎 3.0 未本地化版本许可协议（CC BY-NC-ND 3.0）
+</a>
             
-        </a>
-    </span>
-    
-</div>
-<!-- 文章评论 -->
-<div id="comments" class="comments cloud-tie-wrapper"></div>
-    <script>
-    var cloudTieConfig = {
-      url: document.location.href, 
-      sourceId: "微信小程序尝鲜一个月现状分析",
-      productKey: "c06bb9930e6f4b38a9997cb9bd17aba5",
-      target: "comments"
-    };
-    var yunManualLoad = true;
-    Tie.loader("aHR0cHM6Ly9hcGkuZ2VudGllLjE2My5jb20vcGMvbGl2ZXNjcmlwdC5odG1s", true);
-    </script>
-	
-<!-- 来必力City版安装判断 --> 
-<div id="lv-container" data-id="city" data-uid="{{ theme.livere_uid }}"></div>
-            </div>
-
-        </section>
-        <!-- 侧栏部分 -->
-<aside class="sidebar">
-    <section class="widget">
-        <h3 class="widget-hd"><strong>文章分类</strong></h3>
-        <!-- 文章分类 -->
-<ul class="widget-bd">
-    
-    <li>
-        <a href="/categories/Android/">Android</a>
-        <span class="badge">(28)</span>
-    </li>
-    
-    <li>
-        <a href="/categories/Android/系统/">系统</a>
-        <span class="badge">(1)</span>
-    </li>
-    
-    <li>
-        <a href="/categories/React-Native/">React Native</a>
-        <span class="badge">(12)</span>
-    </li>
-    
-    <li>
-        <a href="/categories/Angular2/">Angular2</a>
-        <span class="badge">(1)</span>
-    </li>
-    
-    <li>
-        <a href="/categories/VR/">VR</a>
-        <span class="badge">(1)</span>
-    </li>
-    
-    <li>
-        <a href="/categories/前端/">前端</a>
-        <span class="badge">(7)</span>
-    </li>
-    
-    <li>
-        <a href="/categories/Java/">Java</a>
-        <span class="badge">(7)</span>
-    </li>
-    
-    <li>
-        <a href="/categories/Angular2/前端/">前端</a>
-        <span class="badge">(1)</span>
-    </li>
-    
-    <li>
-        <a href="/categories/Spring/">Spring</a>
-        <span class="badge">(1)</span>
-    </li>
-    
-    <li>
-        <a href="/categories/ios/">ios</a>
-        <span class="badge">(9)</span>
-    </li>
-    
-    <li>
-        <a href="/categories/Google/">Google</a>
-        <span class="badge">(1)</span>
-    </li>
-    
-    <li>
-        <a href="/categories/Google/VR/">VR</a>
-        <span class="badge">(1)</span>
-    </li>
-    
-    <li>
-        <a href="/categories/技术人生/">技术人生</a>
-        <span class="badge">(2)</span>
-    </li>
-    
-    <li>
-        <a href="/categories/资料库/">资料库</a>
-        <span class="badge">(1)</span>
-    </li>
-    
-    <li>
-        <a href="/categories/小程序/">小程序</a>
-        <span class="badge">(1)</span>
-    </li>
-    
-    <li>
-        <a href="/categories/机器学习/">机器学习</a>
-        <span class="badge">(2)</span>
-    </li>
-    
-    <li>
-        <a href="/categories/android/">android</a>
-        <span class="badge">(1)</span>
-    </li>
-    
-    <li>
-        <a href="/categories/设计模式/">设计模式</a>
-        <span class="badge">(1)</span>
-    </li>
-    
-</ul>
-    </section>
-
-    
-    <section class="widget">
-        <h3 class="widget-hd"><strong>热门标签</strong></h3>
-        <!-- 文章标签 -->
-<div class="widget-bd tag-wrap">
-  
-    <a class="tag-item" href="/tags/Android/" title="Android">Android (25)</a>
-  
-    <a class="tag-item" href="/tags/新特性/" title="新特性">新特性 (2)</a>
-  
-    <a class="tag-item" href="/tags/深入系统/" title="深入系统">深入系统 (1)</a>
-  
-    <a class="tag-item" href="/tags/系统服务/" title="系统服务">系统服务 (1)</a>
-  
-    <a class="tag-item" href="/tags/混淆打包/" title="混淆打包">混淆打包 (1)</a>
-  
-    <a class="tag-item" href="/tags/硬件/" title="硬件">硬件 (1)</a>
-  
-    <a class="tag-item" href="/tags/React-Native/" title="React Native">React Native (10)</a>
-  
-    <a class="tag-item" href="/tags/FlexBox布局/" title="FlexBox布局">FlexBox布局 (1)</a>
-  
-    <a class="tag-item" href="/tags/Angular2/" title="Angular2">Angular2 (1)</a>
-  
-    <a class="tag-item" href="/tags/前端开发/" title="前端开发">前端开发 (3)</a>
-  
-    <a class="tag-item" href="/tags/Google/" title="Google">Google (2)</a>
-  
-    <a class="tag-item" href="/tags/VR/" title="VR">VR (2)</a>
-  
-    <a class="tag-item" href="/tags/前端/" title="前端">前端 (5)</a>
-  
-    <a class="tag-item" href="/tags/Java/" title="Java">Java (7)</a>
-  
-    <a class="tag-item" href="/tags/垃圾回收/" title="垃圾回收">垃圾回收 (1)</a>
-  
-    <a class="tag-item" href="/tags/OpenGL/" title="OpenGL">OpenGL (1)</a>
-  
-    <a class="tag-item" href="/tags/Node/" title="Node">Node (2)</a>
-  
-    <a class="tag-item" href="/tags/Promise/" title="Promise">Promise (1)</a>
-  
-    <a class="tag-item" href="/tags/eact-Native/" title="eact Native">eact Native (1)</a>
-  
-    <a class="tag-item" href="/tags/android/" title="android">android (4)</a>
-  
-    <a class="tag-item" href="/tags/调试/" title="调试">调试 (1)</a>
-  
-    <a class="tag-item" href="/tags/打包/" title="打包">打包 (1)</a>
-  
-    <a class="tag-item" href="/tags/原生/" title="原生">原生 (1)</a>
-  
-    <a class="tag-item" href="/tags/Spring/" title="Spring">Spring (2)</a>
-  
-    <a class="tag-item" href="/tags/入门/" title="入门">入门 (2)</a>
-  
-    <a class="tag-item" href="/tags/ios/" title="ios">ios (9)</a>
-  
-    <a class="tag-item" href="/tags/swift/" title="swift">swift (1)</a>
-  
-    <a class="tag-item" href="/tags/Swift/" title="Swift">Swift (1)</a>
-  
-    <a class="tag-item" href="/tags/Xcode/" title="Xcode">Xcode (3)</a>
-  
-    <a class="tag-item" href="/tags/AR/" title="AR">AR (1)</a>
-  
-    <a class="tag-item" href="/tags/webpack/" title="webpack">webpack (1)</a>
-  
-    <a class="tag-item" href="/tags/gulp/" title="gulp">gulp (1)</a>
-  
-    <a class="tag-item" href="/tags/https/" title="https">https (1)</a>
-  
-    <a class="tag-item" href="/tags/gif/" title="gif">gif (1)</a>
-  
-    <a class="tag-item" href="/tags/mac/" title="mac">mac (1)</a>
-  
-    <a class="tag-item" href="/tags/环境/" title="环境">环境 (1)</a>
-  
-    <a class="tag-item" href="/tags/react/" title="react">react (1)</a>
-  
-    <a class="tag-item" href="/tags/原理/" title="原理">原理 (1)</a>
-  
-    <a class="tag-item" href="/tags/个人博客/" title="个人博客">个人博客 (2)</a>
-  
-</div>
-    </section>
-    
-
-    
-    <!-- 我的微博 -->
-    <section class="widget">
-        <h3 class="widget-hd"><strong>我的微博</strong></h3>
-        <div class="widget-bd" style="position: relative">
-  <div id="myWeiboLoading" class="text-center" style="position:absolute;top:0;left:0;right:0;bottom:0;line-height:50px;font-size:12px;background-color:#fff;z-index:9">微博加载中...</div>
-  <iframe width="100%" height="550" class="share_self" frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&amp;width=0&amp;height=550&amp;fansRow=2&amp;ptype=1&amp;speed=0&amp;skin=4&amp;isTitle=1&amp;noborder=1&amp;isWeibo=1&amp;isFans=1&amp;uid=1831462560&amp;verifier=5192ec39&amp;dpc=1"></iframe>
-  <script>
-  (function () {
-    var oMyWeibo = document.getElementById('myWeibo');
-    var oMyWeiboLoading = document.getElementById('myWeiboLoading');
-    var isIE = /msie/i.test(navigator.userAgent) && !window.opera;
-    var timer = null;
-    if (isIE) {
-      oMyWeibo.onreadystatechange = function(){
-        if(oMyWeibo.readyState === 'loaded' || oMyWeibo.readyState === 'complete'){
-          timer = setTimeout(function () {
-            oMyWeiboLoading.parentNode.removeChild(oMyWeiboLoading);
-            timer = null;
-          }, 300);
-        }
-      };
-    } else {
-      oMyWeibo.onload = function () {
-        timer = setTimeout(function () {
-          oMyWeiboLoading.parentNode.removeChild(oMyWeiboLoading);
-          timer = null;
-        }, 300);
-      };
-    }
-  })();
-  </script>
-</div>
-    </section>
-    
-
-    
-    <!-- 友情链接 -->
-    <section class="widget">
-        <h3 class="widget-hd"><strong>友情链接</strong></h3>
-        <!-- 文章分类 -->
-<ul class="widget-bd">
-    
-        <li>
-            <a href="http://blog.csdn.net/xiangzhihong8/" target="_blank" title="csdn个人博客">csdn博客</a>
-        </li>
-    
-        <li>
-            <a href="https://yq.aliyun.com/u/xiangzhihong" target="_blank" title="阿里云技术博客">阿里云博客</a>
-        </li>
-    
-</ul>
-    </section>
-    
-</aside>
-<!-- / 侧栏部分 -->
+        </div>  
     </div>
+</article>
 
-    <!-- 博客底部 -->
-    <footer class="footer">
-    &copy;
+<div class="article-nav prev-next-wrap clearfix">
     
-        2016-2017
+        <a href="/2017/02/10/人工智能Python/" class="pre-post btn btn-default"><i class="fa fa-angle-left fa-fw"></i>上一篇</a>
     
+    
+        <a href="/2017/01/05/OpenGL ES简介/" class="next-post btn btn-default">下一篇<i class="fa fa-angle-right fa-fw"></i></a>
+    
+</div>
 
-    <a href="/">Jelon Loves You</a>
+
+    <div id="comments">
+        <div id="uyan_frame"></div>
+    <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1966422"></script>
+    </div>
+                </main>
+                <aside class="col-md-4 sidebar">
+        
+        <div class="widget notification">
+        <h3 class="title">网站公告</h3>
+        <div>
+            <p>主题Snippet v1.1.0版本即将上线，敬请期待~ <br>
+主题下载：<a href="https://github.com/shenliyang/hexo-theme-snippet" title="fork me" target="_blank">Snippet主题</a> <br>
+<hr>前端工程师一枚，专注于前端Node、React和移动端Android和Ios开发，欢迎骚扰。
+<br>联系方式：qq群:278792776（移动群）、515980159（React群）、188716429（猎头hr群）
+</p>
+        </div>
+    </div>
+        
+        <div class="widget">
+        <h3 class="title">分类</h3>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/"><i class="fa" aria-hidden="true">Android</i></a><span class="category-list-count">28</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/系统/"><i class="fa" aria-hidden="true">系统</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Google/"><i class="fa" aria-hidden="true">Google</i></a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Google/VR/"><i class="fa" aria-hidden="true">VR</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React-Native/"><i class="fa" aria-hidden="true">React Native</i></a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/"><i class="fa" aria-hidden="true">Spring</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android/"><i class="fa" aria-hidden="true">android</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ios/"><i class="fa" aria-hidden="true">ios</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/"><i class="fa" aria-hidden="true">前端</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/小程序/"><i class="fa" aria-hidden="true">小程序</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术人生/"><i class="fa" aria-hidden="true">技术人生</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/机器学习/"><i class="fa" aria-hidden="true">机器学习</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂谈/"><i class="fa" aria-hidden="true">杂谈</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/"><i class="fa" aria-hidden="true">设计模式</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/资料库/"><i class="fa" aria-hidden="true">资料库</i></a><span class="category-list-count">1</span></li></ul>
+    </div>
+        
+        <div class="widget">
+      <h3 class="title">归档</h3>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/"><i class="fa" aria-hidden="true">六月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/"><i class="fa" aria-hidden="true">五月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/"><i class="fa" aria-hidden="true">二月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/"><i class="fa" aria-hidden="true">一月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/"><i class="fa" aria-hidden="true">十二月 2016</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/"><i class="fa" aria-hidden="true">十一月 2016</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/"><i class="fa" aria-hidden="true">十月 2016</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/"><i class="fa" aria-hidden="true">九月 2016</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/"><i class="fa" aria-hidden="true">八月 2016</i></a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/"><i class="fa" aria-hidden="true">七月 2016</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/"><i class="fa" aria-hidden="true">六月 2016</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/"><i class="fa" aria-hidden="true">五月 2016</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/"><i class="fa" aria-hidden="true">三月 2016</i></a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/"><i class="fa" aria-hidden="true">二月 2016</i></a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/"><i class="fa" aria-hidden="true">六月 2015</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/"><i class="fa" aria-hidden="true">五月 2015</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/"><i class="fa" aria-hidden="true">四月 2015</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/"><i class="fa" aria-hidden="true">三月 2015</i></a><span class="archive-list-count">2</span></li></ul>
+    </div>
+        
+        <div class="widget">
+    <h3 class="title">标签云</h3>
+    <div class="content tag-cloud">
+      
+        <a href="/tags/ios/" style="font-size: 1em">ios</a> <a href="/tags/Android/" style="font-size: 1em">Android</a> <a href="/tags/系统服务/" style="font-size: 1em">系统服务</a> <a href="/tags/新特性/" style="font-size: 1em">新特性</a> <a href="/tags/混淆打包/" style="font-size: 1em">混淆打包</a> <a href="/tags/android/" style="font-size: 1em">android</a> <a href="/tags/硬件/" style="font-size: 1em">硬件</a> <a href="/tags/前端/" style="font-size: 1em">前端</a> <a href="/tags/React-Native/" style="font-size: 1em">React Native</a> <a href="/tags/FlexBox布局/" style="font-size: 1em">FlexBox布局</a> <a href="/tags/Angular2/" style="font-size: 1em">Angular2</a> <a href="/tags/前端开发/" style="font-size: 1em">前端开发</a> <a href="/tags/Google/" style="font-size: 1em">Google</a> <a href="/tags/VR/" style="font-size: 1em">VR</a> <a href="/tags/Java/" style="font-size: 1em">Java</a> <a href="/tags/垃圾回收/" style="font-size: 1em">垃圾回收</a> <a href="/tags/Node/" style="font-size: 1em">Node</a> <a href="/tags/Promise/" style="font-size: 1em">Promise</a> <a href="/tags/OpenGL/" style="font-size: 1em">OpenGL</a> <a href="/tags/eact-Native/" style="font-size: 1em">eact Native</a> <a href="/tags/调试/" style="font-size: 1em">调试</a> <a href="/tags/打包/" style="font-size: 1em">打包</a> <a href="/tags/原生/" style="font-size: 1em">原生</a> <a href="/tags/Spring/" style="font-size: 1em">Spring</a> <a href="/tags/入门/" style="font-size: 1em">入门</a> <a href="/tags/深入系统/" style="font-size: 1em">深入系统</a> <a href="/tags/swift/" style="font-size: 1em">swift</a> <a href="/tags/Swift/" style="font-size: 1em">Swift</a> <a href="/tags/AR/" style="font-size: 1em">AR</a> <a href="/tags/Xcode/" style="font-size: 1em">Xcode</a> <a href="/tags/知识库/" style="font-size: 1em">知识库</a> <a href="/tags/webpack/" style="font-size: 1em">webpack</a> <a href="/tags/gulp/" style="font-size: 1em">gulp</a> <a href="/tags/https/" style="font-size: 1em">https</a> <a href="/tags/gif/" style="font-size: 1em">gif</a> <a href="/tags/mac/" style="font-size: 1em">mac</a> <a href="/tags/环境/" style="font-size: 1em">环境</a> <a href="/tags/react/" style="font-size: 1em">react</a> <a href="/tags/杂谈/" style="font-size: 1em">杂谈</a> <a href="/tags/原理/" style="font-size: 1em">原理</a> <a href="/tags/个人博客/" style="font-size: 1em">个人博客</a> <a href="/tags/流量/" style="font-size: 1em">流量</a> <a href="/tags/小程序/" style="font-size: 1em">小程序</a> <a href="/tags/微信/" style="font-size: 1em">微信</a> <a href="/tags/全栈/" style="font-size: 1em">全栈</a> <a href="/tags/机器学习/" style="font-size: 1em">机器学习</a> <a href="/tags/搭建网站/" style="font-size: 1em">搭建网站</a> <a href="/tags/深入理解/" style="font-size: 1em">深入理解</a> <a href="/tags/算法/" style="font-size: 1em">算法</a> <a href="/tags/内存分配/" style="font-size: 1em">内存分配</a> <a href="/tags/设计模式/" style="font-size: 1em">设计模式</a>
+    </div>
+  </div>
+        
+        <div class="widget">
+        <h3 class="title">友链</h3>
+        <div class="content friends-link">
+        
+            <a href="/" class="fa" target="_blank">39</a>
+        
+            <a href="g" class="fa" target="_blank">41</a>
+        
+        </div>
+    </div>
+        
+    </aside>
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
 </footer>
-<div class="back-to-top" id="JELON__backToTop" title="返回顶部">返回顶部</div>
-<!-- 添加百度自动推送 -->
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
-</script>
-    <!--博客js脚本 -->
-    <!-- 这里放网站js脚本 -->
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <span>Copyright &copy; 2017 
+                </span> | 
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/assets/highlight.pack.js?rev=@@hash"></script>
+  <script>
+    hljs.initHighlightingOnLoad(); //初始化代码高亮 
+  </script>
 
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?6219063711b86bc2e6a7bf52df0f155b";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
+<script src="/js/app.js?rev=@@hash"></script>
 </body>
