@@ -1,0 +1,350 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no">
+    <link rel="dns-prefetch" href="//t11.baidu.com">
+    <!--SEO-->
+
+
+
+<meta name="robots" content="all">
+<meta name="google" content="all">
+<meta name="googlebot" content="all">
+<meta name="verify" content="all">
+    <!--Title-->
+
+
+<title>前端ThinkJS框架解析 | 向志洪</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="向志洪" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css?rev=9.12.0">
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+    <div class="hide">
+    <script src="https://s4.cnzz.com/z_stat.php?id=1261768793&web_id=1262140174" language="JavaScript"></script>
+    </div>
+    
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?13764659765";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head></html>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+<body>
+    <header class="main-header">
+    <div class="main-header-box">
+        <a class="branding" href="/" title="">
+            <img src="/img/header_logo.png" alt="Snippet 博客主题">
+        </a>
+        <h2 class="text-hide">Snippet主题</h2>
+        <img src="/img/header_logo.png" alt="Snippet 博客主题" class="hide">
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only">Toggle navigation</span>
+                    <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class=""><a href="/">首页</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/前端/">前端</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/后端/">后端</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/Android/">Android</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/iOS/">iOS</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/React Native/">React Native</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/小程序/">小程序</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/杂谈/">杂谈</a></li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="前端ThinkJS框架解析">
+            
+            前端ThinkJS框架解析
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <span>前端</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            前端
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta">2017/07/14</span>
+    </span>
+</div>
+            
+            
+    </div>
+    
+    <div class="post-body">
+        <p><a href="https://thinkjs.org/" target="_blank" rel="external">Thinkjs</a> 是一个快速、简单的基于MVC和面向对象的轻量级Node.js开发框架，遵循MIT协议发布。秉承简洁易用的设计原则，在保持出色的性能和至简的代码同时，注重开发体验和易用性，为WEB应用开发提供强有力的支持。</p>
+<p>Thinkjs里面很多特性来源于ThinkPHP，同时根据Node.js的特点，使用了Promise, WebSocket等特性，让代码更简洁、优雅。</p>
+<p>Thinkjs最大的特色是对目前比较潮的语法特性支持的特别好，比如es6、es7、typescript等，有了这些，对aysnc/await等特性支持，让代码更加fashion。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>安装命令行工具：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install -g thinkjs</div></pre></td></tr></table></figure>
+<p>然后使用thinkjs new demo创建一个新项目。为了确保用户错误操作导致现有文件被覆盖，thinkjs new 命令仅适用于文件夹不存在的，或者空文件夹。否则会报如下错误：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">path `/data/www/demo` is already a thinkjs project.</div></pre></td></tr></table></figure>
+<p>实现这一特性其实是依赖一个项目根目录下的隐藏文件 .thinkjsrc ，使用 ls -a 可以查看隐藏文件，打开这个文件可以看到如下内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  &quot;createAt&quot;: &quot;2017-02-12 19:08:38&quot;,</div><div class="line">  &quot;mode&quot;: &quot;module&quot;,</div><div class="line">  &quot;es&quot;: true</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>使用命令后，系统就开始构建项目了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div></pre></td><td class="code"><pre><div class="line">$ thinkjs new demo</div><div class="line">  create : demo</div><div class="line">  create : demo/package.json</div><div class="line">  create : demo/.babelrc</div><div class="line">  create : demo/.thinkjsrc</div><div class="line">  create : demo/nginx.conf</div><div class="line">  create : demo/pm2.json</div><div class="line">  create : demo/.gitignore</div><div class="line">  create : demo/README.md</div><div class="line">  create : demo/www</div><div class="line">  create : demo/www/development.js</div><div class="line">  create : demo/www/production.js</div><div class="line">  create : demo/www/testing.js</div><div class="line">  create : demo/www/README.md</div><div class="line">  create : demo/www/static</div><div class="line">  create : demo/www/static/js</div><div class="line">  create : demo/www/static/css</div><div class="line">  create : demo/www/static/img</div><div class="line">  create : demo/src</div><div class="line">  create : demo/src/common/bootstrap</div><div class="line">  create : demo/src/common/bootstrap/middleware.js</div><div class="line">  create : demo/src/common/bootstrap/global.js</div><div class="line">  create : demo/src/common/config</div><div class="line">  create : demo/src/common/config/config.js</div><div class="line">  create : demo/src/common/config/view.js</div><div class="line">  create : demo/src/common/config/db.js</div><div class="line">  create : demo/src/common/config/hook.js</div><div class="line">  create : demo/src/common/config/session.js</div><div class="line">  create : demo/src/common/config/error.js</div><div class="line">  create : demo/src/common/config/env</div><div class="line">  create : demo/src/common/config/env/development.js</div><div class="line">  create : demo/src/common/config/env/testing.js</div><div class="line">  create : demo/src/common/config/env/production.js</div><div class="line">  create : demo/src/common/config/locale</div><div class="line">  create : demo/src/common/config/locale/en.js</div><div class="line">  create : demo/src/common/controller</div><div class="line">  create : demo/src/common/controller/error.js</div><div class="line">  create : demo/view/common</div><div class="line">  create : demo/view/common/error_400.html</div><div class="line">  create : demo/view/common/error_403.html</div><div class="line">  create : demo/view/common/error_404.html</div><div class="line">  create : demo/view/common/error_500.html</div><div class="line">  create : demo/view/common/error_503.html</div><div class="line">  create : demo/src/home/config</div><div class="line">  create : demo/src/home/config/config.js</div><div class="line">  create : demo/src/home/controller</div><div class="line">  create : demo/src/home/controller/base.js</div><div class="line">  create : demo/src/home/controller/index.js</div><div class="line">  create : demo/src/home/logic</div><div class="line">  create : demo/src/home/logic/index.js</div><div class="line">  create : demo/src/home/model</div><div class="line">  create : demo/src/home/model/index.js</div><div class="line">  create : demo/view/home</div><div class="line">  create : demo/view/home/index_index.html</div><div class="line"></div><div class="line">  enter path:</div><div class="line">  $ cd demo</div><div class="line"></div><div class="line">  install dependencies:</div><div class="line">  $ npm install</div><div class="line"></div><div class="line">  run the app:</div><div class="line">  $ npm start</div></pre></td></tr></table></figure>
+<p>需要注意的是，新建项目的时候需要好多babel，所以项目的构建会比较慢，依赖的包主要有：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&quot;dependencies&quot;: &#123;</div><div class="line">   &quot;thinkjs&quot;: &quot;2.2.x&quot;,</div><div class="line">   &quot;babel-runtime&quot;: &quot;6.x.x&quot;,</div><div class="line">   &quot;source-map-support&quot;: &quot;0.4.0&quot;</div><div class="line"> &#125;,</div></pre></td></tr></table></figure>
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line">.</div><div class="line">├── README.md</div><div class="line">├── app</div><div class="line">│   ├── common</div><div class="line">│   │   ├── bootstrap</div><div class="line">│   │   ├── config</div><div class="line">│   │   └── controller</div><div class="line">│   └── home</div><div class="line">│       ├── config</div><div class="line">│       ├── controller</div><div class="line">│       ├── logic</div><div class="line">│       └── model</div><div class="line">├── nginx.conf</div><div class="line">├── package.json</div><div class="line">├── pm2.json</div><div class="line">├── src</div><div class="line">│   ├── common</div><div class="line">│   │   ├── bootstrap</div><div class="line">│   │   ├── config</div><div class="line">│   │   └── controller</div><div class="line">│   └── home</div><div class="line">│       ├── config</div><div class="line">│       ├── controller</div><div class="line">│       ├── logic</div><div class="line">│       └── model</div><div class="line">├── tree.txt</div><div class="line">├── view</div><div class="line">│   ├── common</div><div class="line">│   │   ├── error_400.html</div><div class="line">│   │   ├── error_403.html</div><div class="line">│   │   ├── error_404.html</div><div class="line">│   │   ├── error_500.html</div><div class="line">│   │   └── error_503.html</div><div class="line">│   └── home</div><div class="line">│       └── index_index.html</div><div class="line">└── www</div><div class="line">    ├── README.md</div><div class="line">    ├── development.js</div><div class="line">    ├── production.js</div><div class="line">    ├── static</div><div class="line">    │   ├── css</div><div class="line">    │   ├── img</div><div class="line">    │   └── js</div><div class="line">    └── testing.js</div><div class="line"></div><div class="line">388 directories, 1381 files</div></pre></td></tr></table></figure>
+<h2 id="启动流程分析"><a href="#启动流程分析" class="headerlink" title="启动流程分析"></a>启动流程分析</h2><p>1）启动命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm start</div></pre></td></tr></table></figure>
+<p>那使用start后系统做了什么呢？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&quot;scripts&quot;: &#123;</div><div class="line">   &quot;start&quot;: &quot;node www/development.js&quot;,</div><div class="line">   &quot;compile&quot;: &quot;babel src/ --out-dir app/&quot;,</div><div class="line">   &quot;watch-compile&quot;: &quot;node -e \&quot;console.log(&apos;&lt;npm run watch-compile&gt; no longer need, use &lt;npm start&gt; command direct.&apos;);console.log();\&quot;&quot;,</div><div class="line">   &quot;watch&quot;: &quot;npm run watch-compile&quot;</div><div class="line"> &#125;,</div></pre></td></tr></table></figure>
+<p>即使用Node执行www/development.js，这是env环境处理，thinkjs采用了3中env，比较常见的有：</p>
+<ul>
+<li>development 开发模式</li>
+<li>production 线上模式</li>
+<li>testing 测试模式</li>
+</ul>
+<p>thinkjs是把www当成node项目目录，而www下的static才是静态资源文件目录。<br>www/development.js目录如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">var instance = new thinkjs(&#123;</div><div class="line">  APP_PATH: rootPath + path.sep + &apos;app&apos;,</div><div class="line">  RUNTIME_PATH: rootPath + path.sep + &apos;runtime&apos;,</div><div class="line">  ROOT_PATH: rootPath,</div><div class="line">  RESOURCE_PATH: __dirname,</div><div class="line">  env: &apos;development&apos;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>当然，可以使用“tree src -L 3”  命令来查看项目的目录：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">$ tree src -L 3         </div><div class="line">src</div><div class="line">├── common</div><div class="line">│   ├── bootstrap</div><div class="line">│   │   ├── global.js</div><div class="line">│   │   └── middleware.js</div><div class="line">│   ├── config</div><div class="line">│   │   ├── config.js</div><div class="line">│   │   ├── db.js</div><div class="line">│   │   ├── env</div><div class="line">│   │   ├── error.js</div><div class="line">│   │   ├── hook.js</div><div class="line">│   │   ├── locale</div><div class="line">│   │   ├── session.js</div><div class="line">│   │   └── view.js</div><div class="line">│   └── controller</div><div class="line">│       └── error.js</div><div class="line">├── home</div><div class="line">│   ├── config</div><div class="line">│   │   └── config.js</div><div class="line">│   ├── controller</div><div class="line">│   │   ├── base.js</div><div class="line">│   │   └── index.js</div><div class="line">│   ├── logic</div><div class="line">│   │   └── index.js</div><div class="line">│   └── model</div><div class="line">│       └── index.js</div><div class="line"></div><div class="line"></div><div class="line">16 directories, 19 files</div></pre></td></tr></table></figure>
+<p>常见模块配置（后文会具体涉及）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">$ thinkjs module topic(能创建不能删除，略遗憾)</div><div class="line"></div><div class="line">  create : src/topic/config</div><div class="line">  create : src/topic/config/config.js</div><div class="line">  create : src/topic/controller</div><div class="line">  create : src/topic/controller/base.js</div><div class="line">  create : src/topic/controller/index.js</div><div class="line">  create : src/topic/logic</div><div class="line">  create : src/topic/logic/index.js</div><div class="line">  create : src/topic/model</div><div class="line">  create : src/topic/model/index.js</div><div class="line">  exist : /Users/sang/workspace/github/nodewebframework/demo/view/topic/index_index.html</div></pre></td></tr></table></figure>
+<p>此时目录结构如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">src</div><div class="line">├── common</div><div class="line">├── home</div><div class="line">└── topic</div></pre></td></tr></table></figure>
+<p>3）业务模块目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">├── home</div><div class="line">│   ├── config</div><div class="line">│   │   └── config.js</div><div class="line">│   ├── controller</div><div class="line">│   │   ├── base.js</div><div class="line">│   │   └── index.js</div><div class="line">│   ├── logic</div><div class="line">│   │   └── index.js</div><div class="line">│   └── model</div><div class="line">│       └── index.js</div></pre></td></tr></table></figure>
+<p>4）路由和view识别<br>路由识别，默认根据 模块/控制器/操作/参数1/参数1值/参数2/参数2值 其实就是一个约定。</p>
+<p>比如/解析为：</p>
+<ul>
+<li>默认模块是home</li>
+<li>控制是index</li>
+<li>操作是indexAction</li>
+</ul>
+<p>那如果再来一个呢？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">&apos;use strict&apos;;</div><div class="line"></div><div class="line">import Base from &apos;./base.js&apos;;</div><div class="line"></div><div class="line">export default class extends Base &#123;</div><div class="line">  /**</div><div class="line">   * index action</div><div class="line">   * @return &#123;Promise&#125; []</div><div class="line">   */</div><div class="line">  indexAction()&#123;</div><div class="line">    //auto render template file index_index.html</div><div class="line">    return this.display();</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  myAction()&#123;</div><div class="line">    //auto render template file index_index.html</div><div class="line">    return this.display();</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>增加myAction，报错[Error] Error: can’t find template file /Users/sang/workspace/github/nodewebframework/demo/view/home/index_my.html</p>
+<p>将view/home/index_index.html复制为view/home/index_my.html。原理是my要对应index_my.html模块。即index是controller，而my是action。</p>
+<p>理解了这个，你就会觉得index_index这样的命名也不是很怪异了。剩下的就是view编写之类的，此处就不在熬述。</p>
+<h2 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h2><p>前面提到了，开发阶段采用babel写的，所以效率不会很高。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">$ autocannon -c 100 -d 5 -p 10 localhost:8360</div><div class="line">Running 5s test @ http://localhost:8360</div><div class="line">100 connections with 10 pipelining factor</div><div class="line"></div><div class="line">Stat         Avg       Stdev    Max       </div><div class="line">Latency (ms) 108.9     201.32   866       </div><div class="line">Req/Sec      891.8     148.37   1000      </div><div class="line">Bytes/Sec    417.79 kB 50.76 kB 458.75 kB </div><div class="line"></div><div class="line">4k requests in 5s, 2.09 MB read</div></pre></td></tr></table></figure>
+<p>点惨，是吧？但是这是开发模式啊，我们肯定要拿线上的production模式来测试。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">$ npm run compile</div><div class="line">$ node www/production.js </div><div class="line">$ autocannon -c 100 -d 5 -p 10 localhost:8360</div><div class="line">Running 5s test @ http://localhost:8360</div><div class="line">100 connections with 10 pipelining factor</div><div class="line"></div><div class="line">Stat         Avg       Stdev     Max       </div><div class="line">Latency (ms) 61.76     124.71    763       </div><div class="line">Req/Sec      1567.2    734.94    1993      </div><div class="line">Bytes/Sec    679.12 kB 242.25 kB 884.74 kB </div><div class="line"></div><div class="line">8k requests in 5s, 3.4 MB read</div><div class="line"></div><div class="line">$ autocannon -c 100 -d 5 -p 10 localhost:8360</div><div class="line">Running 5s test @ http://localhost:8360</div><div class="line">100 connections with 10 pipelining factor</div><div class="line"></div><div class="line">Stat         Avg       Stdev     Max      </div><div class="line">Latency (ms) 54.65     105.47    707      </div><div class="line">Req/Sec      1813.4    368.21    1999     </div><div class="line">Bytes/Sec    807.73 kB 156.09 kB 917.5 kB </div><div class="line"></div><div class="line">9k requests in 5s, 4.09 MB read</div><div class="line"></div><div class="line">$ autocannon -c 100 -d 5 -p 10 localhost:8360</div><div class="line">Running 5s test @ http://localhost:8360</div><div class="line">100 connections with 10 pipelining factor</div><div class="line"></div><div class="line">Stat         Avg       Stdev     Max     </div><div class="line">Latency (ms) 54.14     89.81     465     </div><div class="line">Req/Sec      1816.4    319.14    2000    </div><div class="line">Bytes/Sec    914.23 kB 145.96 kB 1.05 MB </div><div class="line"></div><div class="line">9k requests in 5s, 4.55 MB read</div></pre></td></tr></table></figure>
+<p>下面以同样的功能express + ejs模板的方式。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">$ autocannon -c 100 -d 5 -p 10 localhost:3000</div><div class="line">Running 5s test @ http://localhost:3000</div><div class="line">100 connections with 10 pipelining factor</div><div class="line"></div><div class="line">Stat         Avg       Stdev     Max       </div><div class="line">Latency (ms) 53.85     177.72    1309      </div><div class="line">Req/Sec      1728      385.85    2075      </div><div class="line">Bytes/Sec    702.87 kB 159.56 kB 851.97 kB </div><div class="line"></div><div class="line">9k requests in 5s, 3.53 MB read</div><div class="line"></div><div class="line">$ autocannon -c 100 -d 5 -p 10 localhost:3000</div><div class="line">Running 5s test @ http://localhost:3000</div><div class="line">100 connections with 10 pipelining factor</div><div class="line"></div><div class="line">Stat         Avg       Stdev     Max       </div><div class="line">Latency (ms) 46.06     141.52    739       </div><div class="line">Req/Sec      2061.2    320.53    2275      </div><div class="line">Bytes/Sec    842.14 kB 134.95 kB 950.27 kB </div><div class="line"></div><div class="line">10k requests in 5s, 4.2 MB read</div><div class="line"></div><div class="line">$ autocannon -c 100 -d 5 -p 10 localhost:3000</div><div class="line">Running 5s test @ http://localhost:3000</div><div class="line">100 connections with 10 pipelining factor</div><div class="line"></div><div class="line">Stat         Avg       Stdev    Max       </div><div class="line">Latency (ms) 45.97     139.58   620       </div><div class="line">Req/Sec      2059.4    122.93   2167      </div><div class="line">Bytes/Sec    829.03 kB 52.43 kB 884.74 kB </div><div class="line"></div><div class="line">10k requests in 5s, 4.2 MB read</div></pre></td></tr></table></figure>
+<h2 id="模块分解"><a href="#模块分解" class="headerlink" title="模块分解"></a>模块分解</h2><p>创建项目之后，基本的代码框架已经建立起来了，其中默认的 home 和 common 肯定是无法满足要求的。我们需要给自己的项目建立起相关的层次结构。这里给大家列举一些常见的模块分类方式。仅供参考。</p>
+<h3 id="简单网站"><a href="#简单网站" class="headerlink" title="简单网站"></a>简单网站</h3><p>官方网站、博客、社区等，这类系统结构较为简单，通常一个前端一个后端管理即可满足要求。通常需要包含以下模块：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">src/</div><div class="line">src/common/  # 通用模块，放置主配置参数、boostrap adapter middleware service 等相关组件</div><div class="line">src/home/  # 前端默认模块</div><div class="line">src/backend/  # 后端管理模块</div><div class="line">src/util/  # 系统工具类</div></pre></td></tr></table></figure>
+<h3 id="电商平台"><a href="#电商平台" class="headerlink" title="电商平台"></a>电商平台</h3><p>电商平台系统主要考虑到入驻的商户、注册的客户、管理人员、运营人员等使用人群，还需要考虑到较大的功能模块切分（如果足够大到类似京东、天猫那种体量的系统，则需要进行数据、功能、服务、位置等角度的分割）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">src/</div><div class="line">src/common/</div><div class="line">src/home/</div><div class="line">src/sso/  # 单点登录、令牌管理等</div><div class="line">src/rest/  # 针对Wap、App等多客户端的 rest api</div><div class="line">src/goods/  # 商品管理及服务</div><div class="line">src/storage/  # 库存管理及服务</div><div class="line">src/cart/  # 购物车</div><div class="line">src/order/  # 订单</div><div class="line">src/delivery/  # 快递</div><div class="line">src/pay/  # 在线支付、空中支付</div><div class="line">src/member/  #</div><div class="line">src/coupon/  # 电子券</div><div class="line">src/promotion/  # 促销</div><div class="line">src/points/  # 积分</div><div class="line">src/merchant/  # 入驻商户</div><div class="line">src/shop/  # 商户门店</div><div class="line">src/finance/  # 财务核算及款项清算</div><div class="line">src/stat/</div><div class="line">src/log/</div><div class="line">src/monitor/</div><div class="line">src/util/</div><div class="line">src/task/</div><div class="line">src/message/  # 消息队列</div></pre></td></tr></table></figure>
+<h3 id="即时消息平台"><a href="#即时消息平台" class="headerlink" title="即时消息平台"></a>即时消息平台</h3><p>实时推送平台不仅仅要处理 WebSocket 连接和消息囤积发送，还要处理多用户购买相应服务套餐、统计连接数、统计下行流量、进行连接鉴权等。通常包含的模块如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">src/</div><div class="line">src/common/</div><div class="line">src/home/</div><div class="line">src/rest/</div><div class="line">src/storage/</div><div class="line">src/websocket/  # ws 或者 wss 服务</div><div class="line">src/webhook/  # 钩子服务</div><div class="line">src/middleware/  # 搭载中间件运行</div><div class="line">src/pay/</div><div class="line">src/member/</div><div class="line">src/stat/</div><div class="line">src/log/</div><div class="line">src/monitor/</div><div class="line">src/util/</div><div class="line">src/message/  # 消息队列</div></pre></td></tr></table></figure>
+<h3 id="在线教育、直播平台"><a href="#在线教育、直播平台" class="headerlink" title="在线教育、直播平台"></a>在线教育、直播平台</h3><p>在线教育或直播平台通常具备实时音视频上传、转码、存储、广播等硬性要求，因此系统除了管理相关课件、学生、教师、选课等，还要负责处理相关媒体文件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">src/</div><div class="line">src/common/</div><div class="line">src/home/</div><div class="line">src/rest/</div><div class="line">src/sso/  # 单点登录、令牌管理等</div><div class="line">src/media/  # 课件、音视频等媒体文件</div><div class="line">src/bulk/  # 流媒体</div><div class="line">src/process/  # 编解码处理</div><div class="line">src/storage/</div><div class="line">src/live/  # 直播</div><div class="line">src/pay/</div><div class="line">src/student/</div><div class="line">src/teacher/</div><div class="line">src/schedule/</div><div class="line">src/stat/</div><div class="line">src/log/</div><div class="line">src/monitor/</div><div class="line">src/util/</div><div class="line">src/task/</div><div class="line">src/message/  # 消息队列</div></pre></td></tr></table></figure>
+<h2 id="参数配置"><a href="#参数配置" class="headerlink" title="参数配置"></a>参数配置</h2><p>官网是这么描述配置文件加载顺序的：框架默认的配置 -&gt; 项目模式下框架配置 -&gt; 项目公共配置 -&gt; 项目模式下的公共配置 -&gt; 模块下的配置。</p>
+<p>第三个和第四个则是在不同的项目创建模式下的默认 config 配置文件夹，位置在：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"># normal mode</div><div class="line">thinkjs_normal/src/config/*</div><div class="line"># module mode</div><div class="line">thinkjs_module/src/common/config/*</div></pre></td></tr></table></figure>
+<p>最后一个是指的在 module mode 下的项目，每个 module 自己的 config，位置在：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">thinkjs_module/src/home/config/*</div></pre></td></tr></table></figure>
+<p>明白了多个地方多个配置文件的玩法之后，你可以创建多个 module，并给每个 module 配置自身独特的配置参数。</p>
+<p>需要注意的是：thinkjs 加载配置文件是有顺序的！！！多个配置文件最终会在 thinkjs 运行时被全部加载，并合并在一起。所以当存在多个配置文件时，需要注意配置参数的 key（即属性名）尽量不要重复，因为按照加载顺序，后加载的 key 的值会覆盖先加载的 key 的值，导致出现不希望的结果。</p>
+<p>举例来说，有两个配置文件 src/common/config/assets.js 和 src/home/config/assets.js，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">// src/common/config/assets.js</div><div class="line">export default &#123;</div><div class="line">  &quot;site_title&quot;: &quot;my site&quot;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">// src/home/config/assets.js</div><div class="line">export default &#123;</div><div class="line">  &quot;site_title&quot;: &quot;my test&quot;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">// src/home/controller/index.js</div><div class="line">let assets = this.config(&apos;assets&apos;);</div><div class="line">let siteTitle = assets[&apos;site_title&apos;];</div><div class="line">console.log(&apos;siteTitle is: &apos;, siteTitle); // my test</div></pre></td></tr></table></figure>
+<h2 id="Babel-编译时删除注释"><a href="#Babel-编译时删除注释" class="headerlink" title="Babel 编译时删除注释"></a>Babel 编译时删除注释</h2><p>开发时的工作代码都在 src 下面，运行时才会编译到 app 下面成为运行脚本（经过 Babel 编译），如果不想自己写的各种注释也出现在 app 下面的代码中，可以修改项目目录下的一个隐藏文件 .babelrc 增加相应 comments 参数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  &quot;presets&quot;: [</div><div class="line">    [&quot;es2015&quot;, &#123;&quot;loose&quot;: true&#125;],</div><div class="line">    &quot;stage-1&quot;</div><div class="line">  ],</div><div class="line">  &quot;plugins&quot;: [&quot;transform-runtime&quot;],</div><div class="line">  &quot;sourceMaps&quot;: true,</div><div class="line">  &quot;comments&quot;: false  # &lt;-- 就是这个参数</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="controller"><a href="#controller" class="headerlink" title="controller"></a>controller</h2><p>目前，thinkJs支持两种控制器：普通的控制器和多级控制器。<br>支持<strong>before和</strong>after这样的回调钩子，对于app和controller控制来说是非常实用的。使用co来实现也是可圈可点，此处如果使用koa可以更加优雅。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">class PathController extends BaseController &#123;</div><div class="line">  constructor(app, ctx, next) &#123;</div><div class="line">    super(app, ctx, next)</div><div class="line">    </div><div class="line">    this.path = &apos;/c&apos;</div><div class="line">    // this.global_filter.push(&apos;custom_filter&apos;)</div><div class="line">    this.post_filter = [this.log]</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  before() &#123;</div><div class="line">  </div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  log(ctx, next) &#123;</div><div class="line">    ctx.someText = &apos;some&apos;</div><div class="line">    // console.log(&apos;before&apos;)</div><div class="line">    return next().then(function()&#123;</div><div class="line">      // console.log(&apos;after&apos;)</div><div class="line">    &#125;)</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  post(req, res) &#123;</div><div class="line">    console.log(this.ctx.someText)</div><div class="line">    var a = this.reqbody.a</div><div class="line">    </div><div class="line">    return res.body = this.ctx.someText</div><div class="line">  &#125; </div><div class="line">  </div><div class="line">  after() &#123;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="修改-pm2-日志位置"><a href="#修改-pm2-日志位置" class="headerlink" title="修改 pm2 日志位置"></a>修改 pm2 日志位置</h2><p>pm2 （官网 <a href="http://pm2.keymetrics.io）是一个优秀的" target="_blank" rel="external">http://pm2.keymetrics.io）是一个优秀的</a> Node.js 进程管理器。thinkjs 推荐使用 pm2 来管理项目运行，并自动生成了 pm2 的配置文件 pm2.json 。</p>
+<p>它的强大之处在于不仅可以作为 Node.js 项目的守护进程，还具备可配置化启动、分布式支持、内存监控、热重载（优雅重载）、支持数据统计、运行日志记录、实时运行监控、API 和脚本支持等强大的特性。</p>
+<p>默认生成的 pm2 配置文件不含日志记录部分，如果不单独配置，pm2 的日志将会保存在安装目录中，查找起来很不方便。普遍的做法是：在项目目录下建立 logs 文件夹，用来放置 pm2 以及其他（诸如 log4js 等等）日志，打开 pm2.json ，给 apps[0] 增加如下几行配置参数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  &quot;apps&quot;: [&#123;</div><div class="line">    &quot;error_file&quot;      : &quot;/data/www/thinkjs_module/logs/pm2-err.log&quot;,</div><div class="line">    &quot;out_file&quot;        : &quot;/data/www/thinkjs_module/logs/pm2-out.log&quot;,</div><div class="line">    &quot;log_date_format&quot; : &quot;YYYY-MM-DD HH:mm:ss Z&quot;,</div><div class="line">    &quot;merge_logs&quot;      : false</div><div class="line">  &#125;]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>error_file pm2 捕捉到的致命错误记录在这里</li>
+<li>out_file pm2 接收到的 console 输出记录在这里</li>
+<li>log_date_format 日期和时间格式</li>
+<li>merge_logs 是否给日志文件增加进程id的后缀</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>主要优势：</p>
+<ul>
+<li>完全自己实现，对已有框架很少借鉴</li>
+<li>内置各种adapter，db，中间件，hook，插件，非常丰富，all in one 比组装更适合新手</li>
+<li>遵循mvc和coc</li>
+<li>使用最潮的es6/es7/ts特性，对aysnc函数，exports等都非常好的支持</li>
+<li>支持i18n等实用功能</li>
+<li>内置pm2和nginx集成，部署方便</li>
+<li>有自己的脚手架，稍弱</li>
+<li>性能不错，虽然比express稍弱，但功能强大许多</li>
+<li>测试丰富，代码质量有保障</li>
+<li>文档健全，是经过设计的，支持多语言</li>
+<li>背后有75团和李成银支持，最近一周内有更新，代码提交2600+，35人贡献，整体来说算健康</li>
+</ul>
+<p>附：<a href="https://thinkjs.org/doc/index.html" target="_blank" rel="external">ThinkJS官网文档</a></p>
+    </div>
+
+    <div class="post-footer">   
+        <div>
+            
+                转载声明: 商业转载请联系作者获得授权,非商业转载请注明出处 © Snippet
+            
+        </div>
+        <div>
+            
+                版权声明: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+知识共享署名-非商业性使用-禁止演绎 3.0 未本地化版本许可协议（CC BY-NC-ND 3.0）
+</a>
+            
+        </div>  
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/2017/08/05/Android热修复技术总结/" class="pre-post btn btn-default"><i class="fa fa-angle-left fa-fw"></i>上一篇</a>
+    
+    
+        <a href="/2017/07/11/Vuejs和其他前端框架的对比/" class="next-post btn btn-default">下一篇<i class="fa fa-angle-right fa-fw"></i></a>
+    
+</div>
+
+
+    <div id="comments">
+        <div id="uyan_frame"></div>
+    <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2120654"></script>
+    </div>
+                </main>
+                <aside class="col-md-4 sidebar">
+        
+        <div class="widget notification">
+        <h3 class="title">网站公告</h3>
+        <div>
+            <p>主题Snippet v1.1.0版本即将上线，敬请期待~ <br>
+主题下载：<a href="https://github.com/shenliyang/hexo-theme-snippet" title="fork me" target="_blank">Snippet主题</a> <br>
+<hr>前端工程师一枚，专注于前端Node、React和移动端Android和Ios开发，欢迎骚扰。
+<br>联系方式：qq群:278792776（移动群）、515980159（React群）、188716429（猎头hr群）
+</p>
+        </div>
+    </div>
+        
+        <div class="widget">
+        <h3 class="title">分类</h3>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/"><i class="fa" aria-hidden="true">Android</i></a><span class="category-list-count">32</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/系统/"><i class="fa" aria-hidden="true">系统</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Google/"><i class="fa" aria-hidden="true">Google</i></a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Google/VR/"><i class="fa" aria-hidden="true">VR</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React-Native/"><i class="fa" aria-hidden="true">React Native</i></a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/"><i class="fa" aria-hidden="true">Spring</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android/"><i class="fa" aria-hidden="true">android</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/"><i class="fa" aria-hidden="true">iOS</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ios/"><i class="fa" aria-hidden="true">ios</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/"><i class="fa" aria-hidden="true">前端</i></a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端/"><i class="fa" aria-hidden="true">后端</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/小程序/"><i class="fa" aria-hidden="true">小程序</i></a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术人生/"><i class="fa" aria-hidden="true">技术人生</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/机器学习/"><i class="fa" aria-hidden="true">机器学习</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂谈/"><i class="fa" aria-hidden="true">杂谈</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/"><i class="fa" aria-hidden="true">设计模式</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/资料库/"><i class="fa" aria-hidden="true">资料库</i></a><span class="category-list-count">1</span></li></ul>
+    </div>
+        
+        <div class="widget">
+      <h3 class="title">归档</h3>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/"><i class="fa" aria-hidden="true">八月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/"><i class="fa" aria-hidden="true">六月 2017</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/"><i class="fa" aria-hidden="true">五月 2017</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/"><i class="fa" aria-hidden="true">三月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/"><i class="fa" aria-hidden="true">二月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/"><i class="fa" aria-hidden="true">一月 2017</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/"><i class="fa" aria-hidden="true">十二月 2016</i></a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/"><i class="fa" aria-hidden="true">十一月 2016</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/"><i class="fa" aria-hidden="true">十月 2016</i></a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/"><i class="fa" aria-hidden="true">九月 2016</i></a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/"><i class="fa" aria-hidden="true">八月 2016</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/"><i class="fa" aria-hidden="true">七月 2016</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/"><i class="fa" aria-hidden="true">六月 2016</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/"><i class="fa" aria-hidden="true">五月 2016</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/"><i class="fa" aria-hidden="true">四月 2016</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/"><i class="fa" aria-hidden="true">三月 2016</i></a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/"><i class="fa" aria-hidden="true">二月 2016</i></a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/"><i class="fa" aria-hidden="true">六月 2015</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/"><i class="fa" aria-hidden="true">五月 2015</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/"><i class="fa" aria-hidden="true">四月 2015</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/"><i class="fa" aria-hidden="true">三月 2015</i></a><span class="archive-list-count">2</span></li></ul>
+    </div>
+        
+        <div class="widget">
+    <h3 class="title">标签云</h3>
+    <div class="content tag-cloud">
+      
+        <a href="/tags/AR/" style="font-size: 1em">AR</a> <a href="/tags/Android/" style="font-size: 1em">Android</a> <a href="/tags/系统服务/" style="font-size: 1em">系统服务</a> <a href="/tags/新特性/" style="font-size: 1em">新特性</a> <a href="/tags/android/" style="font-size: 1em">android</a> <a href="/tags/硬件/" style="font-size: 1em">硬件</a> <a href="/tags/混淆打包/" style="font-size: 1em">混淆打包</a> <a href="/tags/Angular2/" style="font-size: 1em">Angular2</a> <a href="/tags/前端开发/" style="font-size: 1em">前端开发</a> <a href="/tags/前端/" style="font-size: 1em">前端</a> <a href="/tags/React-Native/" style="font-size: 1em">React Native</a> <a href="/tags/FlexBox布局/" style="font-size: 1em">FlexBox布局</a> <a href="/tags/Google/" style="font-size: 1em">Google</a> <a href="/tags/VR/" style="font-size: 1em">VR</a> <a href="/tags/Java/" style="font-size: 1em">Java</a> <a href="/tags/垃圾回收/" style="font-size: 1em">垃圾回收</a> <a href="/tags/OpenGL/" style="font-size: 1em">OpenGL</a> <a href="/tags/Node/" style="font-size: 1em">Node</a> <a href="/tags/Promise/" style="font-size: 1em">Promise</a> <a href="/tags/eact-Native/" style="font-size: 1em">eact Native</a> <a href="/tags/调试/" style="font-size: 1em">调试</a> <a href="/tags/打包/" style="font-size: 1em">打包</a> <a href="/tags/原生/" style="font-size: 1em">原生</a> <a href="/tags/Spring/" style="font-size: 1em">Spring</a> <a href="/tags/入门/" style="font-size: 1em">入门</a> <a href="/tags/后端/" style="font-size: 1em">后端</a> <a href="/tags/深入系统/" style="font-size: 1em">深入系统</a> <a href="/tags/ios/" style="font-size: 1em">ios</a> <a href="/tags/Swift/" style="font-size: 1em">Swift</a> <a href="/tags/swift/" style="font-size: 1em">swift</a> <a href="/tags/知识库/" style="font-size: 1em">知识库</a> <a href="/tags/Xcode/" style="font-size: 1em">Xcode</a> <a href="/tags/webpack/" style="font-size: 1em">webpack</a> <a href="/tags/gulp/" style="font-size: 1em">gulp</a> <a href="/tags/https/" style="font-size: 1em">https</a> <a href="/tags/iOS/" style="font-size: 1em">iOS</a> <a href="/tags/gif/" style="font-size: 1em">gif</a> <a href="/tags/mac/" style="font-size: 1em">mac</a> <a href="/tags/环境/" style="font-size: 1em">环境</a> <a href="/tags/react/" style="font-size: 1em">react</a> <a href="/tags/原理/" style="font-size: 1em">原理</a> <a href="/tags/个人博客/" style="font-size: 1em">个人博客</a> <a href="/tags/流量/" style="font-size: 1em">流量</a> <a href="/tags/杂谈/" style="font-size: 1em">杂谈</a> <a href="/tags/小程序/" style="font-size: 1em">小程序</a> <a href="/tags/微信/" style="font-size: 1em">微信</a> <a href="/tags/全栈/" style="font-size: 1em">全栈</a> <a href="/tags/搭建网站/" style="font-size: 1em">搭建网站</a> <a href="/tags/机器学习/" style="font-size: 1em">机器学习</a> <a href="/tags/算法/" style="font-size: 1em">算法</a> <a href="/tags/深入理解/" style="font-size: 1em">深入理解</a> <a href="/tags/内存分配/" style="font-size: 1em">内存分配</a> <a href="/tags/设计模式/" style="font-size: 1em">设计模式</a>
+    </div>
+  </div>
+        
+        <div class="widget">
+        <h3 class="title">友链</h3>
+        <div class="content friends-link">
+        
+            <a href="http://blog.csdn.net/xiangzhihong8/" class="fa" target="_blank">作者博客</a>
+        
+            <a href="https://yq.aliyun.com/u/xiangzhihong" class="fa" target="_blank">阿里云博客</a>
+        
+        </div>
+    </div>
+        
+    </aside>
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <span>Copyright &copy; 2017 
+                </span> | 
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/assets/highlight.pack.js?rev=@@hash"></script>
+  <script>
+    hljs.initHighlightingOnLoad(); //初始化代码高亮 
+  </script>
+
+<script src="/js/app.js?rev=@@hash"></script>
+</body>

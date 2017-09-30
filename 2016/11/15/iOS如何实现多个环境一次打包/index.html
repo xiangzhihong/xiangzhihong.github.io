@@ -1,0 +1,317 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no">
+    <link rel="dns-prefetch" href="//t11.baidu.com">
+    <!--SEO-->
+
+
+
+<meta name="robots" content="all">
+<meta name="google" content="all">
+<meta name="googlebot" content="all">
+<meta name="verify" content="all">
+    <!--Title-->
+
+
+<title>iOS如何实现多个环境一次打包 | 向志洪</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="向志洪" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css?rev=9.12.0">
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+    <div class="hide">
+    <script src="https://s4.cnzz.com/z_stat.php?id=1261768793&web_id=1262140174" language="JavaScript"></script>
+    </div>
+    
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?13764659765";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head></html>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+<body>
+    <header class="main-header">
+    <div class="main-header-box">
+        <a class="branding" href="/" title="">
+            <img src="/img/header_logo.png" alt="Snippet 博客主题">
+        </a>
+        <h2 class="text-hide">Snippet主题</h2>
+        <img src="/img/header_logo.png" alt="Snippet 博客主题" class="hide">
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only">Toggle navigation</span>
+                    <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class=""><a href="/">首页</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/前端/">前端</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/后端/">后端</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/Android/">Android</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/iOS/">iOS</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/React Native/">React Native</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/小程序/">小程序</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/杂谈/">杂谈</a></li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="iOS如何实现多个环境一次打包">
+            
+            iOS如何实现多个环境一次打包
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <span>iOS</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            iOS
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta">2016/11/15</span>
+    </span>
+</div>
+            
+            
+            <p class="fa fa-exclamation-triangle warning">
+                本文于<strong>319</strong>天之前发表，文中内容可能已经过时。
+            </p>
+            
+    </div>
+    
+    <div class="post-body">
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>偶然看到一个很有趣的问题：如何在ios环境下实现多个环境同时打包。</p>
+<p>谈到多环境，我想大多公司都至少有2-3个环境，比如Test环境，UAT(User Acceptance Test)用户验收测试环境，Release环境等等。当需要开发打多个包的时候，一般常见做法就是直接代码里面修改环境变量，改完之后Archive一下就打包了。或者在App中内置一个切换的按钮，实现环境的切换。</p>
+<p>或者，你们公司已经搭建了Jenkins环境，利用Jenkins环境就可以给app来配置一下多个环境变量，之后Jenkins分别再不同环境下自动集成即可。</p>
+<p>那么如何实现ios的多环境打包呢？参照网上的一些方案这里做一个简单的总结。要实现多环境打包，现在主流的方案有三种(各有优劣)。<br>1.利用Build Configuration来配置多环境<br>2.利用xcconfig文件来配置多环境<br>3.利用Targets来配置多环境</p>
+<h1 id="Build-Configuration方式"><a href="#Build-Configuration方式" class="headerlink" title="Build Configuration方式"></a>Build Configuration方式</h1><p>做过ios开发的人都知道Build Configuration，系统默认提供2个环境，一个Debug，一个Release。这里，我们利用的就是Build Configuration给我们提供的配置功能来实现多环境打包。具体步骤如下：</p>
+<p> 1，新建Build Configuration<br>点击Project里面找到Configuration，然后选择添加一个Configuration，系统默认是2个，一个Debug，一个Release。这里我们需要选择是复制一个Debug还是Release。Release是不能调试程序，因为默认是屏蔽了可调试的一些参数。<br><img src="http://img.blog.csdn.net/20170717103707845?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>这里我们新增一套环境：Configuration。在这一套包含了一些编译参数的配置集合。如果此时项目里面有cocopods的话，打开Configuration Set就会发现是如下的样子。<br><img src="http://img.blog.csdn.net/20170717104056461?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>然后打开项目的pod文件，打开配置是会看到如下信息：<br><img src="http://img.blog.csdn.net/20170717104217603?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>说明：pod安装完成之后会自动生成xcconfig文件，如果你手动新建这个xcconfig，然后把原来的debug和release对应的pod xcconfig文件内容复制进来，这样做是无效的，需要pod自己去生成xcconfig文件才能被识别到。</p>
+<p>新建完Build Configuration，这个时候需要新建pod里面对应的Build Configuration，要不然一会编译会报错。如果没用pod，可以忽略一下这一段。</p>
+<p><img src="http://img.blog.csdn.net/20170717104400404?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>2，新建Scheme</p>
+<p><img src="http://img.blog.csdn.net/20170717104508168?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>新建完成之后，我们就可以编辑刚刚新建的Scheme，我们可以把Run模式和Archive都改成新建Scheme。<br><img src="http://img.blog.csdn.net/20170717104623591?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br><strong>注意</strong>：如果是使用了Git这些协同工具的同学这里还需要把刚刚新建的Scheme共享出去，否则其他人看不到这个Scheme。<br><img src="http://img.blog.csdn.net/20170717104714778?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>3，新建User-defined Build Settings<br>回到Project的Build Settings里面来，Add User-Defined Setting。<br><img src="http://img.blog.csdn.net/20170717105115264?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>CustomAppBundleld是为了之后打包可以分开打成多个包，这里需要3个不同的Id，建议是直接在原来的Bundleld加上Scheme的名字即可。CustomProductName为app显示在手机上的名字，建议直接按环境给予描述，例如：测试（debug），线上(relase)，UAT等。<br><img src="http://img.blog.csdn.net/20170717105322581?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>需要注意的是：Pods的Build_DIR这些目录其实是Pods自己生成好的，之前执行过Pod install 之后，这里默认都是配置好的，不需要再改动了。</p>
+<p>4，修改info.plist文件 和 Images.xcassets<br>打开info.plist文件。由于我们新添加了2个CustomAppBundleld 和 CustomProductName，这里我们需要把info.plist里面的Bundle display name修改成我们自定义的这个字典。编译过程中，编译器会根据我们设置好的Scheme去自己选择Debug，Release，TestRelease分别对应的ProductName。<br><img src="http://img.blog.csdn.net/20170717105518672?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20170717105614029?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>为了方便区分不同的环境，你还可以对不同环境下App Icon，名字等做一个修改。</p>
+<p>既然我们已经新建了这几个scheme，那接下来怎么把他们都打包成app呢？</p>
+<p>这里分享下实际打包过程中的一些经验。</p>
+<p><strong>每个环境都要设置好Debug 和 Release！！！</strong></p>
+<p>千万别认为线上的版本只设置Release就好，哪天需要调试线上版本，没有设置Debug就无从下手了。也千万别认为测试环境的版本只要设置Debug就好，万一哪天要发布一个测试环境需要发Release包，那又无从下手了。我的建议就是每个环境都配置Debug 和 Release。</p>
+<p>在打包的时候，一定要注意将Scheme的名字和编译方式区分开。选择一个Scheme，只是相当于选择了一个环境，并不是代表这Debug还是Release。<br><img src="http://img.blog.csdn.net/20170717110144760?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>配置好上述之后，就可以选择不同环境运行app了。可以在手机上生成不同的环境的app，可以同时安装。</p>
+<p><img src="http://img.blog.csdn.net/20170717110324703?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>接下来说几种动态配置环境变量的方法。</p>
+<h2 id="动态配置环境变量"><a href="#动态配置环境变量" class="headerlink" title="动态配置环境变量"></a>动态配置环境变量</h2><h3 id="使用GCC预编译头参数GCC-PREPROCESSOR-DEFINITIONS"><a href="#使用GCC预编译头参数GCC-PREPROCESSOR-DEFINITIONS" class="headerlink" title="使用GCC预编译头参数GCC_PREPROCESSOR_DEFINITIONS"></a>使用GCC预编译头参数GCC_PREPROCESSOR_DEFINITIONS</h3><p>进入到Build Settings里面，可以找到Apple LLVM Preprocessing，找到Preprocessor Macros，在这里我们是可以加一些环境变量的宏定义来标识符。Preprocessor Macros可以根据不同的环境预先制定不同定义的宏。<br><img src="http://img.blog.csdn.net/20170717110621421?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h2 id="使用plist文件动态配置环境变量"><a href="#使用plist文件动态配置环境变量" class="headerlink" title="使用plist文件动态配置环境变量"></a>使用plist文件动态配置环境变量</h2><p>首先，新建3个名字一样的plist作为3个环境的配置文件(新建三个配置文件，分别放在3个不同文件夹下面即可)。<br><img src="http://img.blog.csdn.net/20170717110945047?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>接下来我们要做的是在编译的时候(运行app前)，动态的copy Configuration.plist到app里面，这里需要设置一个copy脚本。<br><img src="http://img.blog.csdn.net/20170717111122742?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>进入到我们的Target里面，找到Build Phases，我们新建一个New Copy Files Phase，并且重命名为Copy Configuration Files。其中，脚本能保证我们的Configuration.plist 文件可以在编译的时候，选择其中一个打包进入app。再通过读取这个plist里面的信息就可以做到动态化。</p>
+<h2 id="使用单例来处理环境切换"><a href="#使用单例来处理环境切换" class="headerlink" title="使用单例来处理环境切换"></a>使用单例来处理环境切换</h2><p>当然使用一个单例也可以做到环境切换。新建一个单例，然后可以在设置菜单里面加入一个列表，里面列出所有的环境，然后用户选择以后，单例就初始化用户所选的环境。</p>
+<h1 id="利用xcconfig文件配置多环境"><a href="#利用xcconfig文件配置多环境" class="headerlink" title="利用xcconfig文件配置多环境"></a>利用xcconfig文件配置多环境</h1><p>提到xcconfig，就要先说说几个概念。Xcode Workspace、Xcode Scheme、Xcode Project、Xcode Target、Build Settings 。</p>
+<p><strong>Xcode Project</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">An Xcode project is a repository for all the files, resources, and information required to build one or more software products. A project contains all the elements used to build your products and maintains the relationships between those elements. It contains one or more targets, which specify how to build products. A project defines default build settings for all the targets in the project (each target can also specify its own build settings, which override the project build settings).</div></pre></td></tr></table></figure>
+<p>project就是一个个的仓库，里面会包含属于这个项目的所有文件，资源，以及生成一个或者多个软件产品的信息。每一个project会包含一个或者多个 targets，而每一个 target 告诉我们如何生产 products。project 会为所有 targets 定义了默认的 build settings，每一个 target 也能自定义自己的 build settings，且 target 的 build settings 会重写 project 的 build settings。</p>
+<p>Xcode Project 文件会包含以下信息，对资源文件的引用(源码.h和.m文件，frame，资源文件plist，bundle文件等，图片文件image.xcassets还有Interface Builder(nib)，storyboard文件)、文件结构导航中用来组织源文件的组、Project-level build configurations(Debug\Release)、Targets、可执行环境，该环境用于调试或者测试程序。</p>
+<p><strong>Xcode Target</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">A target specifies a product to build and contains the instructions for building the product from a set of files in a project or workspace. A target defines a single product; it organizes the inputs into the build system—the source files and instructions for processing those source files—required to build that product. Projects can contain one or more targets, each of which produces one product.</div></pre></td></tr></table></figure>
+<p>target 会有且唯一生成一个 product, 它将构建该 product 所需的文件和处理这些文件所需的指令集整合进 build system 中。Projects 会包含一个或者多个 targets,每一个 target 将会产出一个 product。需要注意的是， Project 可以包含多个 target, 但是在同一时刻，只会有一个 target 生效，可用 Xcode 的 scheme 来指定是哪一个 target 生效。</p>
+<p><strong>Build Settings</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">A build setting is a variable that contains information about how a particular aspect of a product’s build process should be performed. For example, the information in a build setting can specify which options Xcode passes to the compiler.</div></pre></td></tr></table></figure>
+<p>build setting 中包含了 product 生成过程中所需的参数信息。project的build settings会对于整个project 中的所有targets生效，而target的build settings是重写了Project的build settings，重写的配置以target为准。</p>
+<p>一个 build configaration 指定了一套 build settings 用于生成某一 target 的 product，例如Debug和Release就属于build configaration。</p>
+<p><strong>Xcode Scheme</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">An Xcode scheme defines a collection of targets to build, a configuration to use when building, and a collection of tests to execute.</div></pre></td></tr></table></figure>
+<p>一个Scheme就包含了一套targets(这些targets之间可能有依赖关系)，一个configuration，一套待执行的tests。</p>
+<h2 id="xcconfig使用"><a href="#xcconfig使用" class="headerlink" title="xcconfig使用"></a>xcconfig使用</h2><p>1，新建一个xcconfig文件,然后在project设置一下。<br><img src="http://img.blog.csdn.net/20170717121114511?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p><img src="http://img.blog.csdn.net/20170717121203902?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>接下来，把配置文件换成我们刚刚新建的文件。细心的读者可能发现，其实我们一直使用的cocopods就是用这个文件来配置编译参数的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Space-separated list of option specifications. Specifies preprocessor macros in the form foo (for a simple #define) or foo=1 (for a value definition). This list is passed to the compiler through the gcc -D option when compiling precompiled headers and implementation files.</div></pre></td></tr></table></figure>
+<p>GCC_PREPROCESSOR_DEFINITIONS 是 GCC 预编译头参数，通常我们可以在 Project 文件下的 Build Settings 对预编译宏定义进行默认赋值。</p>
+<p>在Build Settings里面的 Apple LLVM 7.X - Preprocessing - Preprocessor Macros 。<br><img src="http://img.blog.csdn.net/20170717121647562?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>Preprocessor Macros 其实是按照 Configuration 选项进行默认配置的, 它是可以根据不同的环境预先制定不同定义的宏，或者为不同环境下的相同变量定义不同的值。</p>
+<p>在xcconfig 我们可以写入不同的 Configuration 选项配置不同的文件。每一个 xcconfig 可以配置 Build Settings 里的属性值, 其实实质就是通过 xcconfig 去修改 GCC_PREPROCESSOR_DEFINITIONS 的值，这样我们就可以做到动态配置环境的需求了。</p>
+<p>现在本地有这么多配置，到底哪一个最终生效呢？打开Build 里面的level，优先级是从左往右，依次降低的。Resolved = target-level &gt; project-level &gt; 自定义配置文件 &gt; iOS 默认配置。<br><img src="http://img.blog.csdn.net/20170717121849444?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>除了上面的功能以为，还能利用xcconfig动态配置Build Settings里面的很多参数。这其实类似于cocopods的做法。详情资料请大家自行搜索。</p>
+<p>#利用Targets配置多环境<br>其实使用Scheme和xcconfig就可以实现多环境的功能，使用Targets反而显得更加麻烦。利用Targets可以瞬间大批量产生大量的app。相关使用可以查看：<a href="http://blog.devtang.com/2013/10/17/the-tech-detail-of-ape-client-1/" target="_blank" rel="external">使用多Target来构建大量相似App</a></p>
+<p>仅仅只用一套代码，就可以生产出7个app。7个app的证书都是不同的，配置也都不同，但是代码只需要维护一套代码，就可以完成维护7个app的目标。</p>
+<p>下面来看一下如何使用Targets来生成不同的app。<br><img src="http://img.blog.csdn.net/20170717140246032?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>一种方法是完全新建一个Targets，另外一种方法是复制原有的Targets。<br>其实第一种方法建立出Targets，之后看你需求是怎么样的。如果也想是做OEM这种，可以把新建出来的project删掉，本地还是维护一套代码，然后在新建的Targets 的Build Phases里面去把本地现有代码加上，参数自己可以随意配置。这样也是一套代码维护多个app。</p>
+<p>第二种方法就是复制一个原有的Targets，这种做法只用自己去改参数就可以了。<br>再来说说Targets的参数。<br>由于我们新建了Targets，相当于新建了一个app了。所以里面的所有的文件全部都可以更改。包括info.plist，源码引用，Build Settings……所有参数都可以改，这样就不仅仅局限于修改Scheme和xcconfig，所以之前说仅仅配置一个多环境用Targets有点兴师动众，但是它确实能完成目的。根据第二章里面我们也提到了，Targets相当于流水线，仅次于Project的地位，可以想象，有了Targets，我们没有什么不能修改的。</p>
+<p>关于Android如何批量打包和多环境打包请参考：<a href="http://www.jianshu.com/p/872dc6f89cb4" target="_blank" rel="external">Android多环境、多渠道打包</a></p>
+    </div>
+
+    <div class="post-footer">   
+        <div>
+            
+                转载声明: 商业转载请联系作者获得授权,非商业转载请注明出处 © Snippet
+            
+        </div>
+        <div>
+            
+                版权声明: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+知识共享署名-非商业性使用-禁止演绎 3.0 未本地化版本许可协议（CC BY-NC-ND 3.0）
+</a>
+            
+        </div>  
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/2016/11/18/React Native和原生app通信机制详解/" class="pre-post btn btn-default"><i class="fa fa-angle-left fa-fw"></i>上一篇</a>
+    
+    
+        <a href="/2016/11/15/iOS 轻量级存储NSUserDefaults /" class="next-post btn btn-default">下一篇<i class="fa fa-angle-right fa-fw"></i></a>
+    
+</div>
+
+
+    <div id="comments">
+        <div id="uyan_frame"></div>
+    <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2120654"></script>
+    </div>
+                </main>
+                <aside class="col-md-4 sidebar">
+        
+        <div class="widget notification">
+        <h3 class="title">网站公告</h3>
+        <div>
+            <p>主题Snippet v1.1.0版本即将上线，敬请期待~ <br>
+主题下载：<a href="https://github.com/shenliyang/hexo-theme-snippet" title="fork me" target="_blank">Snippet主题</a> <br>
+<hr>前端工程师一枚，专注于前端Node、React和移动端Android和Ios开发，欢迎骚扰。
+<br>联系方式：qq群:278792776（移动群）、515980159（React群）、188716429（猎头hr群）
+</p>
+        </div>
+    </div>
+        
+        <div class="widget">
+        <h3 class="title">分类</h3>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/"><i class="fa" aria-hidden="true">Android</i></a><span class="category-list-count">32</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/系统/"><i class="fa" aria-hidden="true">系统</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Google/"><i class="fa" aria-hidden="true">Google</i></a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Google/VR/"><i class="fa" aria-hidden="true">VR</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React-Native/"><i class="fa" aria-hidden="true">React Native</i></a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/"><i class="fa" aria-hidden="true">Spring</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android/"><i class="fa" aria-hidden="true">android</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/"><i class="fa" aria-hidden="true">iOS</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ios/"><i class="fa" aria-hidden="true">ios</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/"><i class="fa" aria-hidden="true">前端</i></a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端/"><i class="fa" aria-hidden="true">后端</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/小程序/"><i class="fa" aria-hidden="true">小程序</i></a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术人生/"><i class="fa" aria-hidden="true">技术人生</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/机器学习/"><i class="fa" aria-hidden="true">机器学习</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂谈/"><i class="fa" aria-hidden="true">杂谈</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/"><i class="fa" aria-hidden="true">设计模式</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/资料库/"><i class="fa" aria-hidden="true">资料库</i></a><span class="category-list-count">1</span></li></ul>
+    </div>
+        
+        <div class="widget">
+      <h3 class="title">归档</h3>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/"><i class="fa" aria-hidden="true">八月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/"><i class="fa" aria-hidden="true">六月 2017</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/"><i class="fa" aria-hidden="true">五月 2017</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/"><i class="fa" aria-hidden="true">三月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/"><i class="fa" aria-hidden="true">二月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/"><i class="fa" aria-hidden="true">一月 2017</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/"><i class="fa" aria-hidden="true">十二月 2016</i></a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/"><i class="fa" aria-hidden="true">十一月 2016</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/"><i class="fa" aria-hidden="true">十月 2016</i></a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/"><i class="fa" aria-hidden="true">九月 2016</i></a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/"><i class="fa" aria-hidden="true">八月 2016</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/"><i class="fa" aria-hidden="true">七月 2016</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/"><i class="fa" aria-hidden="true">六月 2016</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/"><i class="fa" aria-hidden="true">五月 2016</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/"><i class="fa" aria-hidden="true">四月 2016</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/"><i class="fa" aria-hidden="true">三月 2016</i></a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/"><i class="fa" aria-hidden="true">二月 2016</i></a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/"><i class="fa" aria-hidden="true">六月 2015</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/"><i class="fa" aria-hidden="true">五月 2015</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/"><i class="fa" aria-hidden="true">四月 2015</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/"><i class="fa" aria-hidden="true">三月 2015</i></a><span class="archive-list-count">2</span></li></ul>
+    </div>
+        
+        <div class="widget">
+    <h3 class="title">标签云</h3>
+    <div class="content tag-cloud">
+      
+        <a href="/tags/AR/" style="font-size: 1em">AR</a> <a href="/tags/Android/" style="font-size: 1em">Android</a> <a href="/tags/系统服务/" style="font-size: 1em">系统服务</a> <a href="/tags/新特性/" style="font-size: 1em">新特性</a> <a href="/tags/android/" style="font-size: 1em">android</a> <a href="/tags/硬件/" style="font-size: 1em">硬件</a> <a href="/tags/混淆打包/" style="font-size: 1em">混淆打包</a> <a href="/tags/Angular2/" style="font-size: 1em">Angular2</a> <a href="/tags/前端开发/" style="font-size: 1em">前端开发</a> <a href="/tags/前端/" style="font-size: 1em">前端</a> <a href="/tags/React-Native/" style="font-size: 1em">React Native</a> <a href="/tags/FlexBox布局/" style="font-size: 1em">FlexBox布局</a> <a href="/tags/Google/" style="font-size: 1em">Google</a> <a href="/tags/VR/" style="font-size: 1em">VR</a> <a href="/tags/Java/" style="font-size: 1em">Java</a> <a href="/tags/垃圾回收/" style="font-size: 1em">垃圾回收</a> <a href="/tags/OpenGL/" style="font-size: 1em">OpenGL</a> <a href="/tags/Node/" style="font-size: 1em">Node</a> <a href="/tags/Promise/" style="font-size: 1em">Promise</a> <a href="/tags/eact-Native/" style="font-size: 1em">eact Native</a> <a href="/tags/调试/" style="font-size: 1em">调试</a> <a href="/tags/打包/" style="font-size: 1em">打包</a> <a href="/tags/原生/" style="font-size: 1em">原生</a> <a href="/tags/Spring/" style="font-size: 1em">Spring</a> <a href="/tags/入门/" style="font-size: 1em">入门</a> <a href="/tags/后端/" style="font-size: 1em">后端</a> <a href="/tags/深入系统/" style="font-size: 1em">深入系统</a> <a href="/tags/ios/" style="font-size: 1em">ios</a> <a href="/tags/Swift/" style="font-size: 1em">Swift</a> <a href="/tags/swift/" style="font-size: 1em">swift</a> <a href="/tags/知识库/" style="font-size: 1em">知识库</a> <a href="/tags/Xcode/" style="font-size: 1em">Xcode</a> <a href="/tags/webpack/" style="font-size: 1em">webpack</a> <a href="/tags/gulp/" style="font-size: 1em">gulp</a> <a href="/tags/https/" style="font-size: 1em">https</a> <a href="/tags/iOS/" style="font-size: 1em">iOS</a> <a href="/tags/gif/" style="font-size: 1em">gif</a> <a href="/tags/mac/" style="font-size: 1em">mac</a> <a href="/tags/环境/" style="font-size: 1em">环境</a> <a href="/tags/react/" style="font-size: 1em">react</a> <a href="/tags/原理/" style="font-size: 1em">原理</a> <a href="/tags/个人博客/" style="font-size: 1em">个人博客</a> <a href="/tags/流量/" style="font-size: 1em">流量</a> <a href="/tags/杂谈/" style="font-size: 1em">杂谈</a> <a href="/tags/小程序/" style="font-size: 1em">小程序</a> <a href="/tags/微信/" style="font-size: 1em">微信</a> <a href="/tags/全栈/" style="font-size: 1em">全栈</a> <a href="/tags/搭建网站/" style="font-size: 1em">搭建网站</a> <a href="/tags/机器学习/" style="font-size: 1em">机器学习</a> <a href="/tags/算法/" style="font-size: 1em">算法</a> <a href="/tags/深入理解/" style="font-size: 1em">深入理解</a> <a href="/tags/内存分配/" style="font-size: 1em">内存分配</a> <a href="/tags/设计模式/" style="font-size: 1em">设计模式</a>
+    </div>
+  </div>
+        
+        <div class="widget">
+        <h3 class="title">友链</h3>
+        <div class="content friends-link">
+        
+            <a href="http://blog.csdn.net/xiangzhihong8/" class="fa" target="_blank">作者博客</a>
+        
+            <a href="https://yq.aliyun.com/u/xiangzhihong" class="fa" target="_blank">阿里云博客</a>
+        
+        </div>
+    </div>
+        
+    </aside>
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <span>Copyright &copy; 2017 
+                </span> | 
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/assets/highlight.pack.js?rev=@@hash"></script>
+  <script>
+    hljs.initHighlightingOnLoad(); //初始化代码高亮 
+  </script>
+
+<script src="/js/app.js?rev=@@hash"></script>
+</body>

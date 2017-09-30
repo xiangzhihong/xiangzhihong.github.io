@@ -1,0 +1,305 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no">
+    <link rel="dns-prefetch" href="//t11.baidu.com">
+    <!--SEO-->
+
+
+
+<meta name="robots" content="all">
+<meta name="google" content="all">
+<meta name="googlebot" content="all">
+<meta name="verify" content="all">
+    <!--Title-->
+
+
+<title>Scala入门 | 向志洪</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="向志洪" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css?rev=9.12.0">
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+    <div class="hide">
+    <script src="https://s4.cnzz.com/z_stat.php?id=1261768793&web_id=1262140174" language="JavaScript"></script>
+    </div>
+    
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?13764659765";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head></html>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+<body>
+    <header class="main-header">
+    <div class="main-header-box">
+        <a class="branding" href="/" title="">
+            <img src="/img/header_logo.png" alt="Snippet 博客主题">
+        </a>
+        <h2 class="text-hide">Snippet主题</h2>
+        <img src="/img/header_logo.png" alt="Snippet 博客主题" class="hide">
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only">Toggle navigation</span>
+                    <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class=""><a href="/">首页</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/前端/">前端</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/后端/">后端</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/Android/">Android</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/iOS/">iOS</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/React Native/">React Native</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/小程序/">小程序</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/杂谈/">杂谈</a></li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="Scala入门">
+            
+            Scala入门
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <span>后端</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            后端
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta">2017/08/11</span>
+    </span>
+</div>
+            
+            
+    </div>
+    
+    <div class="post-body">
+        <h1 id="Scala入门"><a href="#Scala入门" class="headerlink" title="Scala入门"></a>Scala入门</h1><h2 id="Scala简介"><a href="#Scala简介" class="headerlink" title="Scala简介"></a>Scala简介</h2><p>ps：在最新的薪资调查中，Scala程序员的工资是平均最高的<a href="https://yq.aliyun.com/roundtable/57909?spm=5176.8091938.0.0.020PfH" target="_blank" rel="external">Scala工资</a>。<br>Scala是一门多范式的编程语言，一种类似java的编程语言，设计初衷是实现可伸缩的语言 、并集成面向对象编程和函数式编程的各种特性。Scala的官网地址为：<a href="http://www.Scala-lang.org/" target="_blank" rel="external">http://www.Scala-lang.org/</a><br>Scala有几项关键特性表明了它的面向对象的本质。例如，Scala中的每个值都是一个对象，包括基本数据类型（即布尔值、数字等）在内，连函数也是对象。另外，类可以被子类化，而且Scala还提供了基于mixin的组合（mixin-based composition）。与只支持单继承的语言相比，Scala具有更广泛意义上的类重用。Scala还包含了若干函数式语言的关键概念，包括高阶函数（Higher-Order Function）、局部套用（Currying）、嵌套函数（Nested Function）、序列解读（Sequence Comprehensions）等等。</p>
+<p>Scala运行于Java平台（Java虚拟机），并兼容现有的Java程序。它也能运行于Java ME, CLDC（Java Platform, Micro Edition Connected Limited Device Configuration）上。还有另一.NET平台的实现，不过该版本更新有些滞后。Scala的编译模型（独立编译，动态类加载）与Java和C#一样，所以Scala代码可以调用Java类库（对于.NET实现则可调用.NET类库）。Scala包中包含了编译器和类库，以BSD许可证发布。</p>
+<h2 id="Scala发展历史"><a href="#Scala发展历史" class="headerlink" title="Scala发展历史"></a>Scala发展历史</h2><ol>
+<li>联邦理工学院洛桑（EPFL）的Martin Odersky于2001年基于Funnel的工作开始设计Scala。Funnel是把函数式编程思想和Petri网相结合的一种编程语言。Odersky先前的工作是Generic Java和javac（Sun Java编译器）。Java平台的Scala于2003年底/2004年初发布。.NET平台的Scala发布于2004年6月。该语言第二个版本，v2.0，发布于2006年3月。</li>
+<li>截至2009年9月，最新版本是版本2.7.6。Scala 2.8预计的特性包括重写的Scala类库（Scala collections library）、方法的命名参数和默认参数、包对象（package object），以及Continuation.</li>
+<li>2009年4月，Twitter宣布他们已经把大部分后端程序从Ruby迁移到Scala，其余部分也打算要迁移。此外，Wattzon已经公开宣称，其整个平台都已经是基于Scala基础设施编写的。</li>
+</ol>
+<h2 id="Scale语言特点"><a href="#Scale语言特点" class="headerlink" title="Scale语言特点"></a>Scale语言特点</h2><p><strong>快速实验</strong>:  Scala有交互式命令行(REPL),可以在上面快速的试各种语法和代码。这对学习新特性，或者实验新想法非常有用。</p>
+<p><strong>一致性</strong>:  尽管Scala融合了静态类型系统、面向对象、函数式编程等语言特性，但却很少能看出融合的痕迹。Scala是我见到融合最多语言特性而又不显得杂乱的编程语言之一。</p>
+<p><strong>类型安全</strong>： Scala创始人是教授，他先带领创建了java 5编译器，而后觉得Java有太多羁绊而发明了Scala。Scala编译器和类型系统非常强大，它的目标是尽量把软件错误消灭在编写过程中。Scala类型系统是图灵完备的，甚至可以在编译期间解决问题。</p>
+<p><strong>面向对象</strong>:  Scala是面向对象的编程语言，所有的变量和方法都封装在对象中，可以把信息封装起来供外部使用。</p>
+<p><strong>函数式编程</strong>： Scala同时又是函数式编程语言，函数可以独立存在，可以定义一个函数作为另一个函数的返回值，也可以接受函数作为函数的参数。这给组合函数带来了很大的便利。如何把面向对象编程形容成搭积木的话，函数式编程就像拼线条，更灵活和更有创意。</p>
+<p><strong>异步编程</strong>:  由于函数式编程提倡变量不可变，使异步编程变得非常容易。同时Scala提供的Future，和akka类库，使得异步编程变得非常容易。</p>
+<p><strong>基于JVM</strong>:  Scala会被编译成为jvm bytecode,所以Scala能无缝集成已有的Java类库。你可以非常自然的使用已经存在的非常庞大且稳定的Java类库，比如小巧好用的apache.common.*,或者Java上的各种工具类库。</p>
+<p><strong>静态类型</strong>:  Scala是具备类型系统，通过编译时的检查，保证代码的安全性和一致性。类型系统具体支持以下特性：泛型类，型变注释（Variance Annotation），类型继承结构的上限和下限，把类别和抽象类型作为对象成员，复合类型，引用自己时显式指定类型，视图，多态方法。</p>
+<p><strong>扩展性</strong>:  Scala的设计承认一个事实，即在实践中，某个领域特定的应用程序开发往往需要特定于该领域的语言扩展。Scala提供了许多独特的语言机制，可以以库的形式轻易无缝添加新的语言结构：任何方法可用作前缀或后缀操作符，可以根据预期类型自动构造闭包。联合使用以上两个特性，使你可以定义新的语句而无须扩展语法也无须使用宏之类的元编程特性。</p>
+<p>其他特定：更高层的并发模型Actor、轻量级的函数语法、高阶、嵌套、局部套用（Currying）、与Java无缝地互操作</p>
+<p>因为如此众多特性，用Scala可以优雅地编写简洁的代码，同时又能减少很多低级错误；能快速进行开发，又能保证系统性能、团队协作和长期维护。Scala的风格和特性已经吸引了大量的开发者。总而言之，Scala是一种函数式面向对象语言，它融汇了许多前所未有的特性，而同时又运行于JVM之上。随着开发者对Scala的兴趣日增，以及越来越多的工具支持，无疑Scala语言将成为你手上一件必不可少的工具。</p>
+<h1 id="Scala语法"><a href="#Scala语法" class="headerlink" title="Scala语法"></a>Scala语法</h1><h2 id="类"><a href="#类" class="headerlink" title="类"></a>类</h2><h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><p>构造函数不是特殊的方法，他们是除了类的方法定义之外的代码。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">class MyClass(x: Int, y: Int) &#123;           // Defines a new type MyClass with a constructor  </div><div class="line">  require(y &gt; 0, &quot;y must be positive&quot;)    // precondition, triggering an IllegalArgumentException if not met  </div><div class="line">  def this (x: Int) = &#123; ... &#125;             // auxiliary constructor   </div><div class="line">  def nb1 = x                             // public method computed every time it is called  </div><div class="line">  def nb2 = y  </div><div class="line">  private def test(a: Int): Int = &#123; ... &#125; // private method  </div><div class="line">  val nb3 = x + y                         // computed only once  </div><div class="line">  override def toString =                 // overridden method  </div><div class="line">      member1 + &quot;, &quot; + member2 </div><div class="line">  &#125;</div><div class="line"></div><div class="line">new MyClass(1, 2) // creates a new object of type</div></pre></td></tr></table></figure>
+<h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><p>继承和Java的语法类似。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">abstract class TopLevel &#123;     // abstract class  </div><div class="line">  def method1(x: Int): Int   // abstract method  </div><div class="line">  def method2(x: Int): Int = &#123; ... &#125;  </div><div class="line">&#125;</div><div class="line"></div><div class="line">class Level1 extends TopLevel &#123;  </div><div class="line">  def method1(x: Int): Int = &#123; ... &#125;  </div><div class="line">  override def method2(x: Int): Int = &#123; ...&#125; // TopLevel&apos;s method2 needs to be explicitly overridden  </div><div class="line">&#125;</div><div class="line"></div><div class="line">object MyObject extends TopLevel &#123; ... &#125; // defines a singleton object. No other instance can be created</div></pre></td></tr></table></figure></p>
+<h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><p>Scala 定义了两种类型的变量val和var，val类似于Java中的final变量，一旦初始化之后，不可以重新赋值。而var类似于一般的非final变量，可以任意重新赋值。<br>例如，定义一个字符串常变量：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">scala&gt; val msg=&quot;Hello,World&quot;</div><div class="line">msg:String= Hello,World</div></pre></td></tr></table></figure>
+<p>可以看到我们在定义这个变量时并不需要像Java一样定义其类型，Scala 可以根据赋值的内容推算出变量的类型。此外Scala语句也不需要以分号结尾。 如果在命令行中需要分多行输入，Scala解释器在新行前面显示|，表示该行接着上一行。例如，上面的代码可以改为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">scala&gt; val msg3=    </div><div class="line"></div><div class="line">           |&quot;Hello world 3rd time&quot;</div><div class="line"></div><div class="line">msg3:String= Hello world 3rd time</div></pre></td></tr></table></figure>
+<h2 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h2><p>scala类型系统以Any为根，分为AnyRef和AnyVal 两个分支体系，在AnyRef分支的最底层，有个Null类型的特殊类型，它被当作是所有AnyRef类型的子类型。更进一步在两个分支共同的最底层类型是Nothing类型，它被当作所有AnyRef和AnyVal类型的子类型。</p>
+<h3 id="数值类型"><a href="#数值类型" class="headerlink" title="数值类型"></a>数值类型</h3><p>Scala的数值类型包含：</p>
+<ul>
+<li>Byte 1字节</li>
+<li>Short 2</li>
+<li>Int 4</li>
+<li>Long 8</li>
+<li>Foat</li>
+<li>Double<br> 高精度类型 a = 低精度类型 b (同c自动转换)<br>低精度类型 b = 高精度类型 a (error :type mismatch)<h3 id="Boolen-类型"><a href="#Boolen-类型" class="headerlink" title="Boolen 类型"></a>Boolen 类型</h3></li>
+<li>false</li>
+<li>true</li>
+</ul>
+<h3 id="Null类型"><a href="#Null类型" class="headerlink" title="Null类型"></a>Null类型</h3><p>Null类型只有一个唯一的值：null，可以被赋给所有的AnyRef类型变量List(Null,Null,1)</p>
+<h2 id="Block代码块"><a href="#Block代码块" class="headerlink" title="Block代码块"></a>Block代码块</h2><p>Block 也是一个表达式,其最终的求得的值是最后一个表达式的结果。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&#123;exp1;exp2&#125;</div><div class="line"></div><div class="line">&#123;</div><div class="line">exp1</div><div class="line">exp2</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h2><p>第五步使用while来实现循环，和使用Java实现无太大差异，而Scala是面向函数的语言，更好的方法是采用“函数式”风格来编写代码。比如使用foreach方法来实现循环，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">args.foreach(arg =&gt; println(arg))</div></pre></td></tr></table></figure>
+<p>该表达式，调用args的foreach方法，传入一个参数，这个参数类型也是一个函数（lambda表达式，和C#中概念类似）。这段代码可以再写的精简些，你可以利用Scala支持的缩写形式，如果一个函数只有一个参数并且只包含一个表达式，那么你无需明确指明参数。因此，上面的表达式还可以简写为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">args.foreach( println)</div></pre></td></tr></table></figure>
+<p>而Scala的for循环比Java更加强大，例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">for( a &lt;- 1 to 10)&#123; </div><div class="line">         println( &quot;Value of a: &quot; + a );</div><div class="line">         </div><div class="line">//或者</div><div class="line">// for loop execution with a range</div><div class="line">for( a &lt;- 1 until 10)&#123; </div><div class="line">       println( &quot;Value of a: &quot; + a );      &#125;</div></pre></td></tr></table></figure>
+<h3 id="while-和-do-while"><a href="#while-和-do-while" class="headerlink" title="while 和 do while"></a>while 和 do while</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">var a = 10;</div><div class="line">     // while loop execution</div><div class="line">      while( a &lt; 20 )&#123;</div><div class="line">         println( &quot;Value of a: &quot; + a ); </div><div class="line">         a = a + 1;&#125;</div><div class="line"> // do loop execution</div><div class="line">do &#123;        </div><div class="line">        println( &quot;Value of a: &quot; + a );</div><div class="line">         a = a + 1;</div><div class="line">      &#125;</div><div class="line">      while( a &lt; 20 )   &#125;</div></pre></td></tr></table></figure>
+<h2 id="match表达式"><a href="#match表达式" class="headerlink" title="match表达式"></a>match表达式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">val alice = new Person(&quot;Alice&quot;, 25)</div><div class="line">val bob = new Person(&quot;Bob&quot;, 32)</div><div class="line">val charlie = new Person(&quot;Charlie&quot;, 32)</div><div class="line">for (person &lt;- List(alice, bob, charlie)) &#123;</div><div class="line"></div><div class="line">         person match &#123; </div><div class="line">            case Person(&quot;Alice&quot;, 25) =&gt; println(&quot;Hi Alice!&quot;)</div><div class="line">            case Person(&quot;Bob&quot;, 32) =&gt; println(&quot;Hi Bob!&quot;) </div><div class="line">            case Person(name, age) =&gt; println(</div><div class="line">               &quot;Age: &quot; + age + &quot; year, name: &quot; + name + &quot;?&quot;)</div><div class="line">         &#125;</div><div class="line">      &#125; </div><div class="line">   &#125;</div><div class="line">#这个类是特殊的用以比较的类</div><div class="line">case class Person(name: String, age: Int)</div><div class="line">&gt;&gt;&gt;</div><div class="line">Hi Alice!</div><div class="line">Hi Bob! </div><div class="line">Age: 32 year, name: Charlie?</div></pre></td></tr></table></figure>
+<h2 id="Traits"><a href="#Traits" class="headerlink" title="Traits"></a>Traits</h2><p>是一些字段和行为的集合，可以扩展或混入（mixin）你的类中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">trait Car &#123;</div><div class="line">  val brand: String</div><div class="line">&#125;</div><div class="line"></div><div class="line">trait Shiny &#123;</div><div class="line">  val shineRefraction: Int</div><div class="line">&#125;</div><div class="line">class BMW extends Car &#123;</div><div class="line">  val brand = &quot;BMW&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>通过with关键字，一个类可以扩展多个特质：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">class BMW extends Car with Shiny &#123;</div><div class="line">  val brand = &quot;BMW&quot;</div><div class="line">  val shineRefraction = 12</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="单例"><a href="#单例" class="headerlink" title="单例"></a>单例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">object IdFactory &#123;</div><div class="line">  private var counter = 0</div><div class="line">  def create(): Int = &#123;</div><div class="line">    counter += 1</div><div class="line">    counter</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">//获取单例实例</div><div class="line">val newId: Int = IdFactory.create()</div><div class="line">println(newId) // 1</div></pre></td></tr></table></figure>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>Scala语言的一个特点是支持面向函数编程，因此学习Scala的一个重要方面是改变之前的指令式编程思想（尤其是来自Java或C#背景的程序员），观念要向函数式编程转变。首先在看代码上要认识哪种是指令编程，哪种是函数式编程。一个简单的原则，如果代码中含有var类型的变量，这段代码就是传统的指令式编程，如果代码只有val变量，这段代码就很有可能是函数式代码，因此学会函数式编程关键是不使用vars来编写代码。更多Scala的知识请访问<a href="http://www.Scala-lang.org/" target="_blank" rel="external">官网</a>。</p>
+    </div>
+
+    <div class="post-footer">   
+        <div>
+            
+                转载声明: 商业转载请联系作者获得授权,非商业转载请注明出处 © Snippet
+            
+        </div>
+        <div>
+            
+                版权声明: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+知识共享署名-非商业性使用-禁止演绎 3.0 未本地化版本许可协议（CC BY-NC-ND 3.0）
+</a>
+            
+        </div>  
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/2017/09/13/美团iphone x留海适配/" class="pre-post btn btn-default"><i class="fa fa-angle-left fa-fw"></i>上一篇</a>
+    
+    
+        <a href="/2017/08/05/Android热修复技术总结/" class="next-post btn btn-default">下一篇<i class="fa fa-angle-right fa-fw"></i></a>
+    
+</div>
+
+
+    <div id="comments">
+        <div id="uyan_frame"></div>
+    <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2120654"></script>
+    </div>
+                </main>
+                <aside class="col-md-4 sidebar">
+        
+        <div class="widget notification">
+        <h3 class="title">网站公告</h3>
+        <div>
+            <p>主题Snippet v1.1.0版本即将上线，敬请期待~ <br>
+主题下载：<a href="https://github.com/shenliyang/hexo-theme-snippet" title="fork me" target="_blank">Snippet主题</a> <br>
+<hr>前端工程师一枚，专注于前端Node、React和移动端Android和Ios开发，欢迎骚扰。
+<br>联系方式：qq群:278792776（移动群）、515980159（React群）、188716429（猎头hr群）
+</p>
+        </div>
+    </div>
+        
+        <div class="widget">
+        <h3 class="title">分类</h3>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/"><i class="fa" aria-hidden="true">Android</i></a><span class="category-list-count">32</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/系统/"><i class="fa" aria-hidden="true">系统</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Google/"><i class="fa" aria-hidden="true">Google</i></a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Google/VR/"><i class="fa" aria-hidden="true">VR</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React-Native/"><i class="fa" aria-hidden="true">React Native</i></a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/"><i class="fa" aria-hidden="true">Spring</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android/"><i class="fa" aria-hidden="true">android</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/"><i class="fa" aria-hidden="true">iOS</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ios/"><i class="fa" aria-hidden="true">ios</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/"><i class="fa" aria-hidden="true">前端</i></a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端/"><i class="fa" aria-hidden="true">后端</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/小程序/"><i class="fa" aria-hidden="true">小程序</i></a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术人生/"><i class="fa" aria-hidden="true">技术人生</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/机器学习/"><i class="fa" aria-hidden="true">机器学习</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂谈/"><i class="fa" aria-hidden="true">杂谈</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/"><i class="fa" aria-hidden="true">设计模式</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/资料库/"><i class="fa" aria-hidden="true">资料库</i></a><span class="category-list-count">1</span></li></ul>
+    </div>
+        
+        <div class="widget">
+      <h3 class="title">归档</h3>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/"><i class="fa" aria-hidden="true">八月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/"><i class="fa" aria-hidden="true">六月 2017</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/"><i class="fa" aria-hidden="true">五月 2017</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/"><i class="fa" aria-hidden="true">三月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/"><i class="fa" aria-hidden="true">二月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/"><i class="fa" aria-hidden="true">一月 2017</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/"><i class="fa" aria-hidden="true">十二月 2016</i></a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/"><i class="fa" aria-hidden="true">十一月 2016</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/"><i class="fa" aria-hidden="true">十月 2016</i></a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/"><i class="fa" aria-hidden="true">九月 2016</i></a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/"><i class="fa" aria-hidden="true">八月 2016</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/"><i class="fa" aria-hidden="true">七月 2016</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/"><i class="fa" aria-hidden="true">六月 2016</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/"><i class="fa" aria-hidden="true">五月 2016</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/"><i class="fa" aria-hidden="true">四月 2016</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/"><i class="fa" aria-hidden="true">三月 2016</i></a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/"><i class="fa" aria-hidden="true">二月 2016</i></a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/"><i class="fa" aria-hidden="true">六月 2015</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/"><i class="fa" aria-hidden="true">五月 2015</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/"><i class="fa" aria-hidden="true">四月 2015</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/"><i class="fa" aria-hidden="true">三月 2015</i></a><span class="archive-list-count">2</span></li></ul>
+    </div>
+        
+        <div class="widget">
+    <h3 class="title">标签云</h3>
+    <div class="content tag-cloud">
+      
+        <a href="/tags/AR/" style="font-size: 1em">AR</a> <a href="/tags/Android/" style="font-size: 1em">Android</a> <a href="/tags/系统服务/" style="font-size: 1em">系统服务</a> <a href="/tags/新特性/" style="font-size: 1em">新特性</a> <a href="/tags/android/" style="font-size: 1em">android</a> <a href="/tags/硬件/" style="font-size: 1em">硬件</a> <a href="/tags/混淆打包/" style="font-size: 1em">混淆打包</a> <a href="/tags/Angular2/" style="font-size: 1em">Angular2</a> <a href="/tags/前端开发/" style="font-size: 1em">前端开发</a> <a href="/tags/前端/" style="font-size: 1em">前端</a> <a href="/tags/React-Native/" style="font-size: 1em">React Native</a> <a href="/tags/FlexBox布局/" style="font-size: 1em">FlexBox布局</a> <a href="/tags/Google/" style="font-size: 1em">Google</a> <a href="/tags/VR/" style="font-size: 1em">VR</a> <a href="/tags/Java/" style="font-size: 1em">Java</a> <a href="/tags/垃圾回收/" style="font-size: 1em">垃圾回收</a> <a href="/tags/OpenGL/" style="font-size: 1em">OpenGL</a> <a href="/tags/Node/" style="font-size: 1em">Node</a> <a href="/tags/Promise/" style="font-size: 1em">Promise</a> <a href="/tags/eact-Native/" style="font-size: 1em">eact Native</a> <a href="/tags/调试/" style="font-size: 1em">调试</a> <a href="/tags/打包/" style="font-size: 1em">打包</a> <a href="/tags/原生/" style="font-size: 1em">原生</a> <a href="/tags/Spring/" style="font-size: 1em">Spring</a> <a href="/tags/入门/" style="font-size: 1em">入门</a> <a href="/tags/后端/" style="font-size: 1em">后端</a> <a href="/tags/深入系统/" style="font-size: 1em">深入系统</a> <a href="/tags/ios/" style="font-size: 1em">ios</a> <a href="/tags/Swift/" style="font-size: 1em">Swift</a> <a href="/tags/swift/" style="font-size: 1em">swift</a> <a href="/tags/知识库/" style="font-size: 1em">知识库</a> <a href="/tags/Xcode/" style="font-size: 1em">Xcode</a> <a href="/tags/webpack/" style="font-size: 1em">webpack</a> <a href="/tags/gulp/" style="font-size: 1em">gulp</a> <a href="/tags/https/" style="font-size: 1em">https</a> <a href="/tags/iOS/" style="font-size: 1em">iOS</a> <a href="/tags/gif/" style="font-size: 1em">gif</a> <a href="/tags/mac/" style="font-size: 1em">mac</a> <a href="/tags/环境/" style="font-size: 1em">环境</a> <a href="/tags/react/" style="font-size: 1em">react</a> <a href="/tags/原理/" style="font-size: 1em">原理</a> <a href="/tags/个人博客/" style="font-size: 1em">个人博客</a> <a href="/tags/流量/" style="font-size: 1em">流量</a> <a href="/tags/杂谈/" style="font-size: 1em">杂谈</a> <a href="/tags/小程序/" style="font-size: 1em">小程序</a> <a href="/tags/微信/" style="font-size: 1em">微信</a> <a href="/tags/全栈/" style="font-size: 1em">全栈</a> <a href="/tags/搭建网站/" style="font-size: 1em">搭建网站</a> <a href="/tags/机器学习/" style="font-size: 1em">机器学习</a> <a href="/tags/算法/" style="font-size: 1em">算法</a> <a href="/tags/深入理解/" style="font-size: 1em">深入理解</a> <a href="/tags/内存分配/" style="font-size: 1em">内存分配</a> <a href="/tags/设计模式/" style="font-size: 1em">设计模式</a>
+    </div>
+  </div>
+        
+        <div class="widget">
+        <h3 class="title">友链</h3>
+        <div class="content friends-link">
+        
+            <a href="http://blog.csdn.net/xiangzhihong8/" class="fa" target="_blank">作者博客</a>
+        
+            <a href="https://yq.aliyun.com/u/xiangzhihong" class="fa" target="_blank">阿里云博客</a>
+        
+        </div>
+    </div>
+        
+    </aside>
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <span>Copyright &copy; 2017 
+                </span> | 
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/assets/highlight.pack.js?rev=@@hash"></script>
+  <script>
+    hljs.initHighlightingOnLoad(); //初始化代码高亮 
+  </script>
+
+<script src="/js/app.js?rev=@@hash"></script>
+</body>

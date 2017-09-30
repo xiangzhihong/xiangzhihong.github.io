@@ -1,0 +1,289 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no">
+    <link rel="dns-prefetch" href="//t11.baidu.com">
+    <!--SEO-->
+
+
+
+<meta name="robots" content="all">
+<meta name="google" content="all">
+<meta name="googlebot" content="all">
+<meta name="verify" content="all">
+    <!--Title-->
+
+
+<title>iOS自动布局框架之Masonry | 向志洪</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="向志洪" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css?rev=9.12.0">
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+    <div class="hide">
+    <script src="https://s4.cnzz.com/z_stat.php?id=1261768793&web_id=1262140174" language="JavaScript"></script>
+    </div>
+    
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?13764659765";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head></html>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+<body>
+    <header class="main-header">
+    <div class="main-header-box">
+        <a class="branding" href="/" title="">
+            <img src="/img/header_logo.png" alt="Snippet 博客主题">
+        </a>
+        <h2 class="text-hide">Snippet主题</h2>
+        <img src="/img/header_logo.png" alt="Snippet 博客主题" class="hide">
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only">Toggle navigation</span>
+                    <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class=""><a href="/">首页</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/前端/">前端</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/后端/">后端</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/Android/">Android</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/iOS/">iOS</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/React Native/">React Native</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/小程序/">小程序</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/杂谈/">杂谈</a></li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="iOS自动布局框架之Masonry">
+            
+            iOS自动布局框架之Masonry
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <span>iOS</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            iOS
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta">2017/05/28</span>
+    </span>
+</div>
+            
+            
+    </div>
+    
+    <div class="post-body">
+        <p>目前iOS开发中大多数页面都已经开始使用Interface Builder的方式进行UI开发了，但是在一些变化比较复杂的页面，还是需要通过代码来进行UI开发的。而且有很多比较老的项目，本身就还在采用纯代码的方式进行开发。而现在iPhone和iPad屏幕尺寸越来越多，虽然开发者只需要根据屏幕点进行开发，而不需要基于像素点进行UI开发。但如果在项目中根据不同屏幕尺寸进行各种判断，写死坐标的话，这样开发起来是很吃力的。所以一般用纯代码开发UI的话，一般都是配合一些自动化布局的框架进行屏幕适配。苹果为我们提供的适配框架有：VFL、UIViewAutoresizing、Auto Layout、Size Classes等。其中Auto Layout是使用频率最高的布局框架，但是其也有弊端。就是在使用UILayoutConstraint的时候，会发现代码量很多，而且大多都是重复性的代码，以至于好多人都不想用这个框架。<br>今天要给大家介绍的这个框架Masonry是基于UILayoutConstraint封装的。这个框架已经出来有三年了，现在也比较成熟了。Masonry开源地址<a href="https://github.com/SnapKit/Masonry" target="_blank" rel="external">Masonry</a>。</p>
+<h2 id="Masonry简介"><a href="#Masonry简介" class="headerlink" title="Masonry简介"></a>Masonry简介</h2><p>Masonry是一个对系统NSLayoutConstraint进行封装的第三方自动布局框架，采用链式编程的方式提供给开发者API。系统AutoLayout支持的操作，Masonry都支持，相比系统API功能来说，Masonry是有过之而无不及。</p>
+<p>Masonry采取了链式编程的方式，代码理解起来非常清晰易懂，而且写完之后代码量看起来非常少。之前用NSLayoutConstraint写很多代码才能实现的布局，用Masonry最少一行代码就可以搞定。</p>
+<p>Masonry是同时支持Mac和iOS两个平台的，在这两个平台上都可以使用Masonry进行自动布局。我们可以从MASUtilities.h文件中，看到下面的定义，这就是Masonry通过宏定义的方式，区分两个平台独有的一些关键字。</p>
+<p>通过CocoaPods，在项目中可以很容易的集成Masonry。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pod &apos;Masonry&apos;</div></pre></td></tr></table></figure>
+<h3 id="学习曲线"><a href="#学习曲线" class="headerlink" title="学习曲线"></a>学习曲线</h3><p>对于初学者学习纯代码AutoLayout，我建议还是先学会Interface Builder方式的AutoLayout，领悟苹果对自动布局的规则和思想，然后再把这套思想嵌套在纯代码上。这样学习起来更好入手，也可以避免踩好多坑。在项目中设置的AutoLayout约束，起到对视图布局的标记作用。设置好约束之后，程序运行过程中创建视图时，会根据设置好的约束计算frame，并渲染到视图上。</p>
+<h2 id="Masonry使用"><a href="#Masonry使用" class="headerlink" title="Masonry使用"></a>Masonry使用</h2><p>在正式使用Masonry之前,最后先学会AutoLayout。Masonry提供的的API有：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">mas_makeConstraints()    添加约束</div><div class="line">mas_remakeConstraints()  移除之前的约束，重新添加新的约束</div><div class="line">mas_updateConstraints()  更新约束</div><div class="line"> </div><div class="line">equalTo()       参数是对象类型，一般是视图对象或者mas_width这样的坐标系对象</div><div class="line">mas_equalTo()   和上面功能相同，参数可以传递基础数据类型对象，可以理解为比上面的API更强大</div><div class="line"> </div><div class="line">width()         用来表示宽度，例如代表view的宽度</div><div class="line">mas_width()     用来获取宽度的值。和上面的区别在于，一个代表某个坐标系对象，一个用来获取坐标系对象的值</div></pre></td></tr></table></figure>
+<p><strong>说明</strong>：上面例如equalTo或者width这样的，有时候需要涉及到使用mas<em>前缀，这在开发中需要注意作区分。如果在当前类引入#import “Masonry.h”之前，用下面两种宏定义声明一下，就不需要区分mas</em>前缀。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// 定义这个常量，就可以不用在开发过程中使用&quot;mas_&quot;前缀。</div><div class="line">#define MAS_SHORTHAND</div><div class="line">// 定义这个常量，就可以让Masonry帮我们自动把基础数据类型的数据，自动装箱为对象类型。</div><div class="line">#define MAS_SHORTHAND_GLOBALS</div></pre></td></tr></table></figure>
+<p>Masonry为了让代码使用和阅读更容易理解，所以直接通过点语法就可以调用，还添加了and和with两个方法。这两个方法内部实际上什么都没干，只是在内部将self直接返回，功能就是为了更加方便阅读，对代码执行没有实际作用。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">make.top.and.bottom.equalTo(self.containerView).with.offset(padding);</div></pre></td></tr></table></figure>
+<p>其内部代码实现，实际上就是直接将self返回。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">- (MASConstraint *)with &#123;</div><div class="line">    return self;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="约束和布局"><a href="#约束和布局" class="headerlink" title="约束和布局"></a>约束和布局</h3><p>关于更新约束布局相关的API，主要用以下四个API：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">- (void)updateConstraintsIfNeeded  调用此方法，如果有标记为需要重新布局的约束，则立即进行重新布局，内部会调用updateConstraints方法</div><div class="line">- (void)updateConstraints          重写此方法，内部实现自定义布局过程</div><div class="line">- (BOOL)needsUpdateConstraints     当前是否需要重新布局，内部会判断当前有没有被标记的约束</div><div class="line">- (void)setNeedsUpdateConstraints  标记需要进行重新布局</div></pre></td></tr></table></figure>
+<p>关于UIView重新布局相关的API，主要用以下三个API：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">- (void)setNeedsLayout  标记为需要重新布局</div><div class="line">- (void)layoutIfNeeded  查看当前视图是否被标记需要重新布局，有则在内部调用layoutSubviews方法进行重新布局</div><div class="line">- (void)layoutSubviews  重写当前方法，在内部完成重新布局操作</div></pre></td></tr></table></figure>
+<h3 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h3><p><strong>设置内边距</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[self.yellowView mas_makeConstraints:^(MASConstraintMaker *make) &#123;</div><div class="line">    make.left.equalTo(self.view).with.offset(10);</div><div class="line">    make.top.equalTo(self.view).with.offset(10);</div><div class="line">    make.right.equalTo(self.view).with.offset(-10);</div><div class="line">    make.bottom.equalTo(self.view).with.offset(-10);</div><div class="line">&#125;];</div></pre></td></tr></table></figure>
+<p>通过insets简化设置内边距的方式。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[self.blueView mas_makeConstraints:^(MASConstraintMaker *make) &#123;</div><div class="line">    // 下、右不需要写负号，insets方法中已经为我们做了取反的操作了。</div><div class="line">    make.edges.equalTo(self.view).with.insets(UIEdgeInsetsMake(10, 10, 10, 10));</div><div class="line">&#125;];</div></pre></td></tr></table></figure>
+<p>更新约束：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">[self.greenView mas_makeConstraints:^(MASConstraintMaker *make) &#123;</div><div class="line">    make.center.equalTo(self.view);</div><div class="line">    // 这里通过mas_equalTo给size设置了基础数据类型的参数，参数为CGSize的结构体</div><div class="line">    make.size.mas_equalTo(CGSizeMake(300, 300));</div><div class="line">&#125;];</div><div class="line"> </div><div class="line">// 为了更清楚的看出约束变化的效果，在显示两秒后更新约束。</div><div class="line">dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^&#123;</div><div class="line">    [self.greenView mas_updateConstraints:^(MASConstraintMaker *make) &#123;</div><div class="line">        make.centerX.equalTo(self.view).offset(100);</div><div class="line">        make.size.mas_equalTo(CGSizeMake(100, 100));</div><div class="line">    &#125;];</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>大于等于和小于等于某个值的约束。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">[self.textLabel mas_makeConstraints:^(MASConstraintMaker *make) &#123;</div><div class="line">    make.center.equalTo(self.view);</div><div class="line">    // 设置宽度小于等于200</div><div class="line">    make.width.lessThanOrEqualTo(@200);</div><div class="line">    // 设置高度大于等于10</div><div class="line">    make.height.greaterThanOrEqualTo(@(10));</div><div class="line">&#125;];</div></pre></td></tr></table></figure>
+<p>使用基础数据类型当做参数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[self.redView mas_makeConstraints:^(MASConstraintMaker *make) &#123;</div><div class="line">    make.center.equalTo(self.view);</div><div class="line">    make.width.mas_equalTo(100);</div><div class="line">    make.height.mas_equalTo(100);</div><div class="line">&#125;];</div></pre></td></tr></table></figure>
+<p>设置约束优先级：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">[self.redView mas_makeConstraints:^(MASConstraintMaker *make) &#123;</div><div class="line">    make.center.equalTo(self.view);</div><div class="line">    make.width.equalTo(self.view).priorityLow();</div><div class="line">    make.width.mas_equalTo(20).priorityHigh();</div><div class="line">    make.height.equalTo(self.view).priority(200);</div><div class="line">    make.height.mas_equalTo(100).priority(1000);</div><div class="line">&#125;];</div></pre></td></tr></table></figure>
+<p>设置约束比例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[self.redView mas_makeConstraints:^(MASConstraintMaker *make) &#123;</div><div class="line">    make.center.equalTo(self.view);</div><div class="line">    make.height.mas_equalTo(30);</div><div class="line">    make.width.equalTo(self.view).multipliedBy(0.2);</div><div class="line">&#125;];</div></pre></td></tr></table></figure>
+<h3 id="UITableView动态Cell高度"><a href="#UITableView动态Cell高度" class="headerlink" title="UITableView动态Cell高度"></a>UITableView动态Cell高度</h3><p>在iOS UI开发过程中，UITableView的动态Cell高度一直都是个问题。实现这样的需求，实现方式有很多种，只是实现起来复杂程度和性能的区别。在不考虑性能的情况下，tableView动态Cell高度，可以采取估算高度的方式。如果通过估算高度的方式实现的话，无论是纯代码还是Interface Builder，都只需要两行代码就可以完成Cell自动高度适配。</p>
+<p>需要设置tableView的rowHeight属性，这里设置为自动高度，告诉系统Cell的高度是不固定的，需要系统帮我们进行计算。然后设置tableView的estimatedRowHeight属性，设置一个估计的高度。(我这里用的代理方法，实际上都一样)。其原理是：在tableView被创建之后，系统会根据estimatedRowHeight属性设置的值，为tableView设置一个估计的值。然后在Cell显示的时候再获取Cell的高度，并刷新tableView的contentSize。涉及到的代码有：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">- (void)tableViewConstraints &#123;</div><div class="line">    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) &#123;</div><div class="line">        make.edges.equalTo(self.view);</div><div class="line">    &#125;];</div><div class="line">&#125;</div><div class="line"> </div><div class="line">- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section &#123;</div><div class="line">    return self.dataList.count;</div><div class="line">&#125;</div><div class="line"> </div><div class="line">- (MasonryTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath &#123;</div><div class="line">    MasonryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:LXZTableViewCellIdentifier];</div><div class="line">    [cell reloadViewWithText:self.dataList[indexPath.row]];</div><div class="line">    return cell;</div><div class="line">&#125;</div><div class="line"> </div><div class="line">// 需要注意的是，这个代理方法和直接返回当前Cell高度的代理方法并不一样。</div><div class="line">// 这个代理方法会将当前所有Cell的高度都预估出来，而不是只计算显示的Cell，所以这种方式对性能消耗还是很大的。</div><div class="line">// 所以通过设置estimatedRowHeight属性的方式，和这种代理方法的方式，最后性能消耗都是一样的。</div><div class="line">- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath &#123;</div><div class="line">    return 50.f;</div><div class="line">&#125;</div><div class="line"> </div><div class="line">- (UITableView *)tableView &#123;</div><div class="line">    if (!_tableView) &#123;</div><div class="line">        _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];</div><div class="line">        _tableView.delegate = self;</div><div class="line">        _tableView.dataSource = self;</div><div class="line">        // 设置tableView自动高度</div><div class="line">        _tableView.rowHeight = UITableViewAutomaticDimension;</div><div class="line">        [_tableView registerClass:[MasonryTableViewCell class] forCellReuseIdentifier:LXZTableViewCellIdentifier];</div><div class="line">        [self.view addSubview:_tableView];</div><div class="line">    &#125;</div><div class="line">    return _tableView;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="综合示例"><a href="#综合示例" class="headerlink" title="综合示例"></a>综合示例</h3><p><img src="http://img.blog.csdn.net/20170826112448503?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div></pre></td><td class="code"><pre><div class="line">- (void)setupFrame &#123;</div><div class="line">    __weak typeof(self) weakSelf = self;</div><div class="line"></div><div class="line">    //上传头像</div><div class="line">    UIButton *iconBtn = [[UIButton alloc]init];</div><div class="line">    [iconBtn setCornerRadius:45];</div><div class="line">    [iconBtn setBackgroundImage:[UIImage imageNamed:@&quot;huantouxiang&quot;] forState:UIControlStateNormal];</div><div class="line">    [iconBtn addTarget:self action:@selector(iconButton) forControlEvents:UIControlEventTouchDown];</div><div class="line">    [self.view addSubview:iconBtn];</div><div class="line">    self.iconBtn = iconBtn;</div><div class="line"></div><div class="line">    [self.iconBtn mas_makeConstraints:^(MASConstraintMaker *make) &#123;</div><div class="line">        make.size.mas_equalTo(CGSizeMake(90, 90));</div><div class="line">        make.centerX.equalTo(weakSelf.view);</div><div class="line">        make.top.width.offset(90);</div><div class="line">    &#125;];</div><div class="line">    </div><div class="line">    //上传社区头像文字提醒</div><div class="line">    UILabel *iconLabel = [[UILabel alloc]init];</div><div class="line">    iconLabel.textColor = c3;</div><div class="line">    iconLabel.text = @&quot;上传社团头像&quot;;</div><div class="line">    iconLabel.font = [UIFont systemFontOfSize:15];</div><div class="line">    [self.view addSubview:iconLabel];</div><div class="line">    </div><div class="line">    [iconLabel mas_makeConstraints:^(MASConstraintMaker *make) &#123;</div><div class="line">        make.centerX.equalTo(iconBtn);</div><div class="line">        make.top.equalTo(iconBtn.mas_bottom).with.offset(20);</div><div class="line">    &#125;];</div><div class="line">    </div><div class="line">    //社团编辑图标</div><div class="line">    UIImageView *editIcon = [[UIImageView alloc]init];</div><div class="line">    editIcon.image = [UIImage imageNamed:@&quot;bianxie&quot;];</div><div class="line">    [self.view addSubview:editIcon];</div><div class="line">    </div><div class="line">    [editIcon mas_makeConstraints:^(MASConstraintMaker *make) &#123;</div><div class="line">        make.size.mas_equalTo(CGSizeMake(25, 20));</div><div class="line">        make.left.equalTo(weakSelf.view).with.offset(10);</div><div class="line">        make.top.equalTo(iconLabel.mas_bottom).with.offset(30);</div><div class="line">    &#125;];</div><div class="line">    </div><div class="line">    //社团名</div><div class="line">    UITextField *nameText = [[UITextField alloc]init];</div><div class="line">    nameText.placeholder = @&quot;请填写社区名(社团名最多6个字)&quot;;</div><div class="line">    [self.view addSubview:nameText];</div><div class="line">    self.nameText = nameText;</div><div class="line">    </div><div class="line">    [nameText mas_makeConstraints:^(MASConstraintMaker *make) &#123;</div><div class="line">        make.height.mas_equalTo(@20);</div><div class="line">        make.centerY.equalTo(editIcon);</div><div class="line">        make.right.equalTo(weakSelf.view).with.offset(-10);</div><div class="line">        make.left.equalTo(editIcon.mas_right).with.offset(5);</div><div class="line">    &#125;];</div><div class="line">    </div><div class="line">    //分割线</div><div class="line">    UIImageView *xian = [[UIImageView alloc]init];</div><div class="line">    xian.backgroundColor = DBColor(226, 226, 226);</div><div class="line">    [self.view addSubview:xian];</div><div class="line">    </div><div class="line">    [xian mas_makeConstraints:^(MASConstraintMaker *make) &#123;</div><div class="line">        make.height.mas_equalTo(@1);</div><div class="line">        make.left.equalTo(weakSelf.view).with.offset(10);</div><div class="line">        make.right.equalTo(weakSelf.view).with.offset(-10);</div><div class="line">        make.top.equalTo(editIcon.mas_bottom).with.offset(5);</div><div class="line">    &#125;];</div><div class="line">    </div><div class="line">    //选择标签</div><div class="line">    UILabel *tagLabel = [[UILabel alloc]init];</div><div class="line">    tagLabel.text = @&quot;选择标签&quot;;</div><div class="line">    tagLabel.textColor = c3;</div><div class="line">    tagLabel.font = [UIFont systemFontOfSize:15];</div><div class="line">    [self.view addSubview:tagLabel];</div><div class="line">    </div><div class="line">    [tagLabel mas_makeConstraints:^(MASConstraintMaker *make) &#123;</div><div class="line">        make.height.mas_equalTo(@20);</div><div class="line">        make.width.mas_equalTo(@60);</div><div class="line">        make.left.equalTo(weakSelf.view).with.offset(10);</div><div class="line">        make.top.equalTo(xian).with.offset(35);</div><div class="line">    &#125;];</div><div class="line">    </div><div class="line">    //跳转标签选择</div><div class="line">    UITextField *tagText = [[UITextField alloc]init];</div><div class="line">    tagText.placeholder = @&quot;美容颜&quot;;</div><div class="line">    tagText.borderStyle=UITextBorderStyleRoundedRect;</div><div class="line">    tagText.delegate = self;</div><div class="line">    [tagText addTarget:self action:@selector(textTag) forControlEvents:UIControlEventTouchDown];</div><div class="line">    [self.view addSubview:tagText];</div><div class="line">    </div><div class="line">    [tagText mas_makeConstraints:^(MASConstraintMaker *make) &#123;</div><div class="line">        make.centerY.equalTo(tagLabel);</div><div class="line">        make.right.equalTo(weakSelf.view).with.offset(-10);</div><div class="line">        make.left.equalTo(tagLabel.mas_right).with.offset(5);</div><div class="line">    &#125;];</div><div class="line">    </div><div class="line">    //tagView</div><div class="line">    self.tagView = (&#123;</div><div class="line">        SKTagView *view = [SKTagView new];</div><div class="line">        view.backgroundColor = [UIColor clearColor];</div><div class="line">        view.padding    = UIEdgeInsetsMake(0, 0, 0, 0);</div><div class="line">        view.insets    = 15;</div><div class="line">        view.lineSpace = 10;</div><div class="line">        __weak SKTagView *weakView = view;</div><div class="line">        view.didClickTagAtIndex = ^(NSUInteger index)&#123;</div><div class="line">            //Remove tag</div><div class="line">            [weakView removeTagAtIndex:index];</div><div class="line">        &#125;;</div><div class="line">        view;</div><div class="line">    &#125;);</div><div class="line">    [self.view addSubview:self.tagView];</div><div class="line">    [self.tagView mas_makeConstraints:^(MASConstraintMaker *make) &#123;</div><div class="line">        make.left.equalTo(weakSelf.view).with.offset(10);</div><div class="line">        make.right.equalTo(weakSelf.view).with.offset(-10);</div><div class="line">        make.top.equalTo(tagText.mas_bottom).with.offset(10);</div><div class="line">    &#125;];</div><div class="line">    </div><div class="line">    //label标识语</div><div class="line">    UILabel *label = [[UILabel alloc]init];</div><div class="line">    label.font = [UIFont systemFontOfSize:13];</div><div class="line">    label.textColor = [UIColor redColor];</div><div class="line">    label.text = @&quot;PS:成员和视频越多得社团越容易被发现!&quot;;</div><div class="line">    [self.view addSubview:label];</div><div class="line">    </div><div class="line">    [label mas_makeConstraints:^(MASConstraintMaker *make) &#123;</div><div class="line">        make.left.equalTo(weakSelf.view).with.offset(10);</div><div class="line">        make.right.equalTo(weakSelf.view).with.offset(-10);</div><div class="line">        make.top.equalTo(self.tagView.mas_bottom).with.offset(20);</div><div class="line">    &#125;];</div><div class="line">    </div><div class="line">    UIButton *commitBtn = [[UIButton alloc]init];</div><div class="line">    [commitBtn setCornerRadius:5];</div><div class="line">    [commitBtn setBorderWidth:1 color:DBTextThemeColor];</div><div class="line">    [commitBtn setTitleColor:DBTextThemeColor forState:UIControlStateNormal];</div><div class="line">    commitBtn.titleLabel.font = [UIFont systemFontOfSize:15];</div><div class="line">    [commitBtn setTitle:@&quot;确认发布&quot; forState:UIControlStateNormal];</div><div class="line">    [commitBtn addTarget:self action:@selector(commitButton) forControlEvents:UIControlEventTouchDown];</div><div class="line">    [self.view addSubview:commitBtn];</div><div class="line">    </div><div class="line">    [commitBtn mas_makeConstraints:^(MASConstraintMaker *make) &#123;</div><div class="line">        make.height.mas_equalTo(@30);</div><div class="line">        make.left.equalTo(weakSelf.view).with.offset(10);</div><div class="line">        make.right.equalTo(weakSelf.view).with.offset(-10);</div><div class="line">        make.top.equalTo(label.mas_bottom).with.offset(50);</div><div class="line">    &#125;];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+    </div>
+
+    <div class="post-footer">   
+        <div>
+            
+                转载声明: 商业转载请联系作者获得授权,非商业转载请注明出处 © Snippet
+            
+        </div>
+        <div>
+            
+                版权声明: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+知识共享署名-非商业性使用-禁止演绎 3.0 未本地化版本许可协议（CC BY-NC-ND 3.0）
+</a>
+            
+        </div>  
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/2017/05/29/React-Native 组件之 Modal/" class="pre-post btn btn-default"><i class="fa fa-angle-left fa-fw"></i>上一篇</a>
+    
+    
+        <a href="/2017/05/18/React Native 自定义控件之验证码和Toast/" class="next-post btn btn-default">下一篇<i class="fa fa-angle-right fa-fw"></i></a>
+    
+</div>
+
+
+    <div id="comments">
+        <div id="uyan_frame"></div>
+    <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2120654"></script>
+    </div>
+                </main>
+                <aside class="col-md-4 sidebar">
+        
+        <div class="widget notification">
+        <h3 class="title">网站公告</h3>
+        <div>
+            <p>主题Snippet v1.1.0版本即将上线，敬请期待~ <br>
+主题下载：<a href="https://github.com/shenliyang/hexo-theme-snippet" title="fork me" target="_blank">Snippet主题</a> <br>
+<hr>前端工程师一枚，专注于前端Node、React和移动端Android和Ios开发，欢迎骚扰。
+<br>联系方式：qq群:278792776（移动群）、515980159（React群）、188716429（猎头hr群）
+</p>
+        </div>
+    </div>
+        
+        <div class="widget">
+        <h3 class="title">分类</h3>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/"><i class="fa" aria-hidden="true">Android</i></a><span class="category-list-count">32</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/系统/"><i class="fa" aria-hidden="true">系统</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Google/"><i class="fa" aria-hidden="true">Google</i></a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Google/VR/"><i class="fa" aria-hidden="true">VR</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React-Native/"><i class="fa" aria-hidden="true">React Native</i></a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/"><i class="fa" aria-hidden="true">Spring</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android/"><i class="fa" aria-hidden="true">android</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/"><i class="fa" aria-hidden="true">iOS</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ios/"><i class="fa" aria-hidden="true">ios</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/"><i class="fa" aria-hidden="true">前端</i></a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端/"><i class="fa" aria-hidden="true">后端</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/小程序/"><i class="fa" aria-hidden="true">小程序</i></a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术人生/"><i class="fa" aria-hidden="true">技术人生</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/机器学习/"><i class="fa" aria-hidden="true">机器学习</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂谈/"><i class="fa" aria-hidden="true">杂谈</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/"><i class="fa" aria-hidden="true">设计模式</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/资料库/"><i class="fa" aria-hidden="true">资料库</i></a><span class="category-list-count">1</span></li></ul>
+    </div>
+        
+        <div class="widget">
+      <h3 class="title">归档</h3>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/"><i class="fa" aria-hidden="true">八月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/"><i class="fa" aria-hidden="true">六月 2017</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/"><i class="fa" aria-hidden="true">五月 2017</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/"><i class="fa" aria-hidden="true">三月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/"><i class="fa" aria-hidden="true">二月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/"><i class="fa" aria-hidden="true">一月 2017</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/"><i class="fa" aria-hidden="true">十二月 2016</i></a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/"><i class="fa" aria-hidden="true">十一月 2016</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/"><i class="fa" aria-hidden="true">十月 2016</i></a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/"><i class="fa" aria-hidden="true">九月 2016</i></a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/"><i class="fa" aria-hidden="true">八月 2016</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/"><i class="fa" aria-hidden="true">七月 2016</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/"><i class="fa" aria-hidden="true">六月 2016</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/"><i class="fa" aria-hidden="true">五月 2016</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/"><i class="fa" aria-hidden="true">四月 2016</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/"><i class="fa" aria-hidden="true">三月 2016</i></a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/"><i class="fa" aria-hidden="true">二月 2016</i></a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/"><i class="fa" aria-hidden="true">六月 2015</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/"><i class="fa" aria-hidden="true">五月 2015</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/"><i class="fa" aria-hidden="true">四月 2015</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/"><i class="fa" aria-hidden="true">三月 2015</i></a><span class="archive-list-count">2</span></li></ul>
+    </div>
+        
+        <div class="widget">
+    <h3 class="title">标签云</h3>
+    <div class="content tag-cloud">
+      
+        <a href="/tags/AR/" style="font-size: 1em">AR</a> <a href="/tags/Android/" style="font-size: 1em">Android</a> <a href="/tags/系统服务/" style="font-size: 1em">系统服务</a> <a href="/tags/新特性/" style="font-size: 1em">新特性</a> <a href="/tags/android/" style="font-size: 1em">android</a> <a href="/tags/硬件/" style="font-size: 1em">硬件</a> <a href="/tags/混淆打包/" style="font-size: 1em">混淆打包</a> <a href="/tags/Angular2/" style="font-size: 1em">Angular2</a> <a href="/tags/前端开发/" style="font-size: 1em">前端开发</a> <a href="/tags/前端/" style="font-size: 1em">前端</a> <a href="/tags/React-Native/" style="font-size: 1em">React Native</a> <a href="/tags/FlexBox布局/" style="font-size: 1em">FlexBox布局</a> <a href="/tags/Google/" style="font-size: 1em">Google</a> <a href="/tags/VR/" style="font-size: 1em">VR</a> <a href="/tags/Java/" style="font-size: 1em">Java</a> <a href="/tags/垃圾回收/" style="font-size: 1em">垃圾回收</a> <a href="/tags/OpenGL/" style="font-size: 1em">OpenGL</a> <a href="/tags/Node/" style="font-size: 1em">Node</a> <a href="/tags/Promise/" style="font-size: 1em">Promise</a> <a href="/tags/eact-Native/" style="font-size: 1em">eact Native</a> <a href="/tags/调试/" style="font-size: 1em">调试</a> <a href="/tags/打包/" style="font-size: 1em">打包</a> <a href="/tags/原生/" style="font-size: 1em">原生</a> <a href="/tags/Spring/" style="font-size: 1em">Spring</a> <a href="/tags/入门/" style="font-size: 1em">入门</a> <a href="/tags/后端/" style="font-size: 1em">后端</a> <a href="/tags/深入系统/" style="font-size: 1em">深入系统</a> <a href="/tags/ios/" style="font-size: 1em">ios</a> <a href="/tags/Swift/" style="font-size: 1em">Swift</a> <a href="/tags/swift/" style="font-size: 1em">swift</a> <a href="/tags/知识库/" style="font-size: 1em">知识库</a> <a href="/tags/Xcode/" style="font-size: 1em">Xcode</a> <a href="/tags/webpack/" style="font-size: 1em">webpack</a> <a href="/tags/gulp/" style="font-size: 1em">gulp</a> <a href="/tags/https/" style="font-size: 1em">https</a> <a href="/tags/iOS/" style="font-size: 1em">iOS</a> <a href="/tags/gif/" style="font-size: 1em">gif</a> <a href="/tags/mac/" style="font-size: 1em">mac</a> <a href="/tags/环境/" style="font-size: 1em">环境</a> <a href="/tags/react/" style="font-size: 1em">react</a> <a href="/tags/原理/" style="font-size: 1em">原理</a> <a href="/tags/个人博客/" style="font-size: 1em">个人博客</a> <a href="/tags/流量/" style="font-size: 1em">流量</a> <a href="/tags/杂谈/" style="font-size: 1em">杂谈</a> <a href="/tags/小程序/" style="font-size: 1em">小程序</a> <a href="/tags/微信/" style="font-size: 1em">微信</a> <a href="/tags/全栈/" style="font-size: 1em">全栈</a> <a href="/tags/搭建网站/" style="font-size: 1em">搭建网站</a> <a href="/tags/机器学习/" style="font-size: 1em">机器学习</a> <a href="/tags/算法/" style="font-size: 1em">算法</a> <a href="/tags/深入理解/" style="font-size: 1em">深入理解</a> <a href="/tags/内存分配/" style="font-size: 1em">内存分配</a> <a href="/tags/设计模式/" style="font-size: 1em">设计模式</a>
+    </div>
+  </div>
+        
+        <div class="widget">
+        <h3 class="title">友链</h3>
+        <div class="content friends-link">
+        
+            <a href="http://blog.csdn.net/xiangzhihong8/" class="fa" target="_blank">作者博客</a>
+        
+            <a href="https://yq.aliyun.com/u/xiangzhihong" class="fa" target="_blank">阿里云博客</a>
+        
+        </div>
+    </div>
+        
+    </aside>
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <span>Copyright &copy; 2017 
+                </span> | 
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/assets/highlight.pack.js?rev=@@hash"></script>
+  <script>
+    hljs.initHighlightingOnLoad(); //初始化代码高亮 
+  </script>
+
+<script src="/js/app.js?rev=@@hash"></script>
+</body>

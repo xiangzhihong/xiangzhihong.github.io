@@ -1,0 +1,329 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no">
+    <link rel="dns-prefetch" href="//t11.baidu.com">
+    <!--SEO-->
+
+
+
+<meta name="robots" content="all">
+<meta name="google" content="all">
+<meta name="googlebot" content="all">
+<meta name="verify" content="all">
+    <!--Title-->
+
+
+<title>Android热修复技术总结 | 向志洪</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="向志洪" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css?rev=9.12.0">
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+    <div class="hide">
+    <script src="https://s4.cnzz.com/z_stat.php?id=1261768793&web_id=1262140174" language="JavaScript"></script>
+    </div>
+    
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?13764659765";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head></html>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+<body>
+    <header class="main-header">
+    <div class="main-header-box">
+        <a class="branding" href="/" title="">
+            <img src="/img/header_logo.png" alt="Snippet 博客主题">
+        </a>
+        <h2 class="text-hide">Snippet主题</h2>
+        <img src="/img/header_logo.png" alt="Snippet 博客主题" class="hide">
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only">Toggle navigation</span>
+                    <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class=""><a href="/">首页</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/前端/">前端</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/后端/">后端</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/Android/">Android</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/iOS/">iOS</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/React Native/">React Native</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/小程序/">小程序</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/杂谈/">杂谈</a></li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="Android热修复技术总结">
+            
+            Android热修复技术总结
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <span>Android</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            Android
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta">2017/08/05</span>
+    </span>
+</div>
+            
+            
+    </div>
+    
+    <div class="post-body">
+        <p>插件化和热修复技术是Android开发中比较高级的知识点，是中级开发人员通向高级开发中必须掌握的技能，插件化的知识可以查我我之前的介绍：<a href="http://blog.csdn.net/xiangzhihong8/article/details/52876440" target="_blank" rel="external">Android插件化</a>。本篇重点讲解热修复，并对当前流行的热修复技术做一个简单的总结。</p>
+<h1 id="热修复"><a href="#热修复" class="headerlink" title="热修复"></a>热修复</h1><h3 id="什么是热修复？"><a href="#什么是热修复？" class="headerlink" title="什么是热修复？"></a>什么是热修复？</h3><p>简单来讲，为了修复线上问题而提出的修补方案，程序修补过程无需重新发版！</p>
+<h3 id="技术背景"><a href="#技术背景" class="headerlink" title="技术背景"></a>技术背景</h3><p>在正常软件开发流程中，线下开发-&gt;上线-&gt;发现bug-&gt;紧急修复上线。不过对于这种方式代价太大。<br><img src="http://img.blog.csdn.net/20170830150512155?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>而热修复的开发流程显得更加灵活，无需重新发版，实时高效热修复，无需下载新的应用，代价小，最重要的是及时的修复了bug。<br><img src="http://img.blog.csdn.net/20170830150614435?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h3 id="当前热门的热修复技术"><a href="#当前热门的热修复技术" class="headerlink" title="当前热门的热修复技术"></a>当前热门的热修复技术</h3><p>当前热门的热修复技术有：</p>
+<ul>
+<li><a href="http://blog.csdn.net/asialiyazhou/article/details/70495589" target="_blank" rel="external">QQ空间超级补丁</a>、微信[Tinker]</li>
+<li><a href="https://help.aliyun.com/document_detail/53240.html" target="_blank" rel="external">阿里的Sophix</a>、<a href="http://baichuan.taobao.com/docs/doc.htm?spm=a3c0d.7629140.0.0.1EKYpC&amp;treeId=234&amp;articleId=105517&amp;docType=1" target="_blank" rel="external">阿里Hotfix</a></li>
+<li>饿了么<a href="https://github.com/eleme/Amigo" target="_blank" rel="external">Amigo</a></li>
+<li>美团<a href="https://github.com/Meituan-Dianping/Robust" target="_blank" rel="external">Robust</a></li>
+<li><p>360<a href="https://github.com/Qihoo360/RePlugin" target="_blank" rel="external">RePlugin</a></p>
+</li>
+<li><p>…</p>
+</li>
+</ul>
+<h2 id="热修复技术"><a href="#热修复技术" class="headerlink" title="热修复技术"></a>热修复技术</h2><p>要弄清热修复技术的原理，就要先弄清Android的ClassLoader机制，相关文章可以阅读之前的介绍：<a href="http://blog.csdn.net/xiangzhihong8/article/details/52880327" target="_blank" rel="external">ClassLoader类加载机制</a>。Android的ClassLoader分为PathClassLoader和DexClassLoader，它们都都继承自BaseDexClassLoader，其中PathClassLoader用来加载系统类和应用类；DexClassLoader用来加载jar、apk、dex文件。例如下面要介绍的阿里的Andfix和Sophix的原理如下：</p>
+<h3 id="AndFix"><a href="#AndFix" class="headerlink" title="AndFix"></a>AndFix</h3><p><strong>AndFix</strong>：由补丁类的classLoader加载补丁类，在native层针对不同Android架构中的不同的ArtMethod结构调用对应的replaceMethod方法按照定义好的ArtMethod结构一一替换方法的所有信息如所属类、访问权限、代码内存地址等。<br>稳定性较差，会受到国内ROM厂商对ArtMethod结构更改的影响,所以这正是AndFix不支持很多机型的原因。</p>
+<h3 id="Sophix"><a href="#Sophix" class="headerlink" title="Sophix"></a>Sophix</h3><p><strong>Sophix</strong>:由补丁类的classLoader加载补丁类，在native层直接memcpy(smeth,dmth,sizeof(ArtMethod))替换整个artMethod的结构。初始化类时会为这个类分配空间，AllocArtMethodArray会紧挨着的new出来放入art中的方法数组中。通过计算辅助类的前后两个方法的起始地址就可以计算出artMethod结构的大小了。<br>注：补丁类初始化时，也会分配自己的artMethod空间，拿这个修复过的新ArtMethod去替换旧ArtMethod的内容，不用管ArtMethod的结构。稳定性大大提高！</p>
+<h1 id="java"><a href="#java" class="headerlink" title="java"></a>java</h1><h2 id="内部类编译"><a href="#内部类编译" class="headerlink" title="内部类编译"></a>内部类编译</h2><h3 id="静态内部类-非静态内部类区别"><a href="#静态内部类-非静态内部类区别" class="headerlink" title="静态内部类/非静态内部类区别"></a>静态内部类/非静态内部类区别</h3><p>内部类会被编译器生成同外部类一样的顶级类。只不过非静态内部类会持有外部类的引用。这也是Android性能优化建议Handler使用静态内部类，防止外部类Activity不能被回收导致造成OOM。</p>
+<p>###内部类和外部类互相访问<br>内部类和外部类互相访问private方法和字段时，会自动在对应类为对方生成public的access&amp;**方法。</p>
+<h3 id="热部署解决方案"><a href="#热部署解决方案" class="headerlink" title="热部署解决方案"></a>热部署解决方案</h3><p>外部类如果有内部类把所有的field/method的private访问权限改成proteced或者public内部类将所有的field/method的private访问权限改成proteced或者public。</p>
+<h2 id="匿名内部类编译"><a href="#匿名内部类编译" class="headerlink" title="匿名内部类编译"></a>匿名内部类编译</h2><h3 id="匿名内部类命名规则"><a href="#匿名内部类命名规则" class="headerlink" title="匿名内部类命名规则"></a>匿名内部类命名规则</h3><p>外部类&amp;number。number即编译器根据匿名内部类出现在外部类中的顺序，依次累加。</p>
+<h3 id="热部署解决方案-1"><a href="#热部署解决方案-1" class="headerlink" title="热部署解决方案"></a>热部署解决方案</h3><p>新增/减少匿名内部类对热部署是无解的，因为补丁修复工具拿到的是class文件，无法区别DexFileDemo&amp;1和DexFileDemo&amp;2，会导致类的顺序乱套。如果匿名内部类插入到末尾则是允许。</p>
+<h2 id="域编译"><a href="#域编译" class="headerlink" title="域编译"></a>域编译</h2><h3 id="静态field-非静态field编译"><a href="#静态field-非静态field编译" class="headerlink" title="静态field,非静态field编译"></a>静态field,非静态field编译</h3><p>热部署不支持field/method增加和删除和 clinit方法的修改，静态field的初始化和静态代码块会被编译在编译器合成的方法clinit中，非静态字段的初始化会被编译在编译器生成的init无参构造函数中，</p>
+<h3 id="静态field-静态代码块"><a href="#静态field-静态代码块" class="headerlink" title="静态field,静态代码块"></a>静态field,静态代码块</h3><p>clinit方法会在类加载阶段的类初始化时调用，clinit中静态field和静态代码块的出现顺序就是二者在源码中出现的顺序。因为类已经加载过了，所以就算修复了clinit方法也不会生效了。<br>dvmResolveClass-&gt;dvmLinkClass-&gt;dvmInitClass,然后执行clinit方法<br>以下情况会去加载一个类<br>1.new 一个类的对象时new instance<br>2.调用类的静态方法（invoke static）<br>3.获取类的静态域的值（sget）</p>
+<h3 id="非静态field-非静态代码块"><a href="#非静态field-非静态代码块" class="headerlink" title="非静态field,非静态代码块"></a>非静态field,非静态代码块</h3><p>类的构造函数会被编译器翻译成init方法，会先进行非静态field和非静态代码块的初始化。它们出现的顺序也是和在源码中出现的顺序一样。<br>执行new instance指令时，如果类没有加载过，就尝试加载类。然后对对象内存分配，再然后执行invoke direct指令调用类的init构造函数进行初始化</p>
+<h3 id="热部署解决方案-2"><a href="#热部署解决方案-2" class="headerlink" title="热部署解决方案"></a>热部署解决方案</h3><p>不支持对静态字段和静态代码块的修改，会导致热部署失败，只能冷启动生效。支持非静态字段和非静态代码块修改，热部署只是将init构造函数作为普通的方法变更。</p>
+<h2 id="final-static-域编译"><a href="#final-static-域编译" class="headerlink" title="final static 域编译"></a>final static 域编译</h2><h3 id="final-static-域编译规则"><a href="#final-static-域编译规则" class="headerlink" title="final static 域编译规则"></a>final static 域编译规则</h3><p>final static引用类型初始化仍在clinit中final static基本类型和String类型，类加载初始化dvminitClass在执行clinit方法之前，先执行initSFields，这个方法为static域赋予默认值。引用类型默认NULL，final static修饰的基本类型和String类型会在这里初始化赋值。</p>
+<h3 id="final-static-域优化原理"><a href="#final-static-域优化原理" class="headerlink" title="final static 域优化原理"></a>final static 域优化原理</h3><p>final static基本类型执行const/4指令,操作数在dex中的位置(encoded_array_item)就是在opcode后一个字节。<br>final static String类型执行const-string指令，本质同上只不过拿到的是字符串常量在dex文件结构中字符串常量区的索引id。dex文件有一块区域存储所有的字符串常量会被完整的加载到虚拟机内存中-字符串常量区。<br>final static引用类型执行sget指令,首先调用dvmDexGetResolveField看这个域是否之前解析过，没有的话调用dvmDexResolveField尝试解析域，如果这个静态域所在的类没有解析过，尝试调用dvmResolveClass,拿到这个sField，然后通过dvmDexGetResolveField(sField)获取这个静态值。</p>
+<h3 id="热部署解决方案-3"><a href="#热部署解决方案-3" class="headerlink" title="热部署解决方案"></a>热部署解决方案</h3><p>final static基本类型/string类型最终引用的类型会被热部署替换掉。<br>final static引用类型因为会被翻译到clinit方法中，热部署失败。</p>
+<h2 id="泛型编译"><a href="#泛型编译" class="headerlink" title="泛型编译"></a>泛型编译</h2><h3 id="为什么需要泛型"><a href="#为什么需要泛型" class="headerlink" title="为什么需要泛型"></a>为什么需要泛型</h3><p>Java泛型完全有编译器实现，由编译器执行类型检查和类型推断，生成非泛型字节码，称之为擦除。<br>没有泛型之前想要实现类泛型，利用所有类的父类时Object进行强转，这完全依赖程序员的自主性，很容易出现ClassCastException。泛型的出现解决了类型检查和类型推断的问题。</p>
+<h3 id="泛型类型擦除"><a href="#泛型类型擦除" class="headerlink" title="泛型类型擦除"></a>泛型类型擦除</h3><p>Java字节码中不包含泛型类型信息，想要区别类型定义可以限定泛型类型 <t extends="" number=""></t></p>
+<h3 id="类型擦除与多态的冲突和解决"><a href="#类型擦除与多态的冲突和解决" class="headerlink" title="类型擦除与多态的冲突和解决"></a>类型擦除与多态的冲突和解决</h3><p>父类是泛型类有setNumber(T value),子类想override setNumber(Number value)。然而实际父类的方法实际是setNumber(Object value),子类想重写却变成了重载，这就出现了类型擦除和多态之间的冲突。然而编译器自动帮我们合成了Bridge方法实现了重载，在子类中生成了相同签名bridge方法，内部实际调用子类的重写方法。</p>
+<h3 id="泛型类型转换"><a href="#泛型类型转换" class="headerlink" title="泛型类型转换"></a>泛型类型转换</h3><p>编译器如果发现变量声明加上了泛型信息，编译器自动加上了check-cast的强制转换，因为编译器会为泛型做类型检查，所以自动的强制转换不会出现ClassCastException。</p>
+<h3 id="热部署解决方案-4"><a href="#热部署解决方案-4" class="headerlink" title="热部署解决方案"></a>热部署解决方案</h3><p>如果父类补丁变成了增加了泛型则会增加Bridge方法，造成热部署失败。<br>将方法从void get(B t) 变成 B extends Number void get(B t)方法逻辑不会发生变化，但是方法的签名会发生变化，这种情况热修复没有意义，需要避免这种情况的发生。</p>
+<h2 id="Lambda表达式编译"><a href="#Lambda表达式编译" class="headerlink" title="Lambda表达式编译"></a>Lambda表达式编译</h2><h3 id="Lambda表达式编译规则"><a href="#Lambda表达式编译规则" class="headerlink" title="Lambda表达式编译规则"></a>Lambda表达式编译规则</h3><p>Lamda表达式具有函数式编程的特点，是Java中最接近闭包的概念。函数式接口：一个接口具有唯一一个抽象方法<br>Java中的Runable和Comparator都是典型的函数式接口</p>
+<p>Lamada表达式和匿名内部类的区别：<br>1.this关键字指包围Lamada表达式的类而不是指向匿名内部类自己<br>2.编译方式，Java编译器将Lamda表达式编译成类的私有方法，使用了Java7的invokedynamic动态绑定这个私有方法。而匿名内部类则是生成外部类&amp;number的新类.编译器都会在类下生成lamda$main$<em>*{ </em> }私有静态方法，这个方法实现了lamda表达式的逻辑，引用的变量都会变成方法的参数。</p>
+<p>在HostSpot VM下解释class文件的lamda表达式：<br>invokeDynamic指令调用java/lang/invoke/LamdaMetafactory的metafactory这个静态方法。这个方法会在运行时生成实现函数式接口的具体类，这个具体类会调用那个静态私有方法。<br>在Android虚拟机下解释dex文件中的lamda表达式：则是在优化成dex文件的时候就生成了这个具体类。</p>
+<h3 id="热部署解决方案-5"><a href="#热部署解决方案-5" class="headerlink" title="热部署解决方案"></a>热部署解决方案</h3><p>新增lamada表达式会导致外部类新增一个辅助方法。修改的lamda表达式逻辑引用了外部变量，会导致辅助类持有了外部对象，会新增这个外部对象的变量。也是会导致热修复失败。</p>
+<p>#Sophix与QQ超级补丁和Tinker技术比较<br>针对现在市面上比较流行的热修复方案，这里选择Sophix、QQ超级补丁和Tinker进行简单的介绍。前面说过，类似于qq空间和微信的实现方式都需要重新启动才能修复bug，而阿里的Sophix采用的是非浸入式的方式不需要冷启动。</p>
+<h2 id="QQ空间超级补丁"><a href="#QQ空间超级补丁" class="headerlink" title="QQ空间超级补丁"></a>QQ空间超级补丁</h2><p>QQ空间超级补丁采用的插桩方式，入侵打包流程，单独放一个帮助类在独立的dex中让其他类调用，阻止类在dexopt时被打伤CLASS_ISPREVERIFIED标记。其原理如下图：<br><img src="http://img.blog.csdn.net/20170830155305761?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>加载补丁dex得到dexFile对象作为参数构建一个Element对象插入到dexElement数组最前面。<br>Tinker提供差量包，整体替换dex的方案。将patch.dex与应用的class.dex合并生成一个完整的dex，加载完整的dex得到dexFile对象为参数构建一个Element对象替换dexElements数组。<br>官方multiDex没有补丁查询更新，下载补丁待下次启动时生效。<br>其流程可以总结为如下图所示：<br><img src="http://img.blog.csdn.net/20170830155426086?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>不过细心的读者会发现，QQ空间超级补丁在使用 过程中还存在如下问题：<br>1.不支持即时生效，必须通过重启才能生效。</p>
+<p>2.为了实现修复这个过程，必须在应用中加入两个dex!dalvikhack.dex中只有一个类，对性能影响不大，但是对于patch.dex来说，修复的类到了一定数量，就需要花不少的时间加载。对手淘这种航母级应用来说，启动耗时增加2s以上是不能够接受的事。</p>
+<p>3.在ART模式下，如果类修改了结构，就会出现内存错乱的问题。为了解决这个问题，就必须把所有相关的调用类、父类子类等等全部加载到patch.dex中，导致补丁包异常的大，进一步增加应用启动加载的时候，耗时更加严重。</p>
+<p>针对上面的问题，腾讯出了QFix方案。<br>在native层提前调用dvmResolveClass，是的在dvmResolve中调用dvmDexGetResolve不为null，也避免了校验一致性的问题。<br>这个方案要求传递的在多dex情况下，referrer类必须跟patch类是同一个dex。fromUnverifiedConstant必须为true。referrer必须提前加载。<br>这方案还要一些问题，在dexopt之后绕过，但是dexopt会改变很多原先的逻辑，许多odex层面的优化会写死字段和访问方法的偏移。这会造成很严重的BUG。</p>
+<h2 id="微信Tinker"><a href="#微信Tinker" class="headerlink" title="微信Tinker"></a>微信Tinker</h2><p>微信针对QQ空间超级补丁技术的不足提出了一个提供DEX差量包，整体替换DEX的方案。主要的原理是与QQ空间超级补丁技术基本相同，区别在于不再将patch.dex增加到elements数组中，而是差量的方式给出patch.dex，然后将patch.dex与应用的classes.dex合并，然后整体替换掉旧的DEX文件，以达到修复的目的。其原理图如下：<br><img src="http://img.blog.csdn.net/20170830160319806?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>微信的热修复的流程如图所示：<br><img src="http://img.blog.csdn.net/20170830160404197?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>不过微信的方案仍然会有如下问题：</p>
+<p>1.与超级补丁技术一样，不支持即时生效，必须通过重启应用的方式才能生效。</p>
+<p>2.需要给应用开启新的进程才能进行合并，并且很容易因为内存消耗等原因合并失败。</p>
+<p>3.合并时占用额外磁盘空间，对于多DEX的应用来说，如果修改了多个DEX文件，就需要下发多个patch.dex与对应的classes.dex进行合并操作时这种情况会更严重，因此合并过程的失败率也会更高。</p>
+<h2 id="HotFix"><a href="#HotFix" class="headerlink" title="HotFix"></a>HotFix</h2><p>阿里的HotFix方案，相对于QQ空间超级补丁技术和微信Tinker来说，定位于紧急BUG修复的场景下，能够最及时的修复BUG，下拉补丁立即生效无需等待。<br><img src="http://img.blog.csdn.net/20170830160645779?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>AndFix不同于QQ空间超级补丁技术和微信Tinker通过增加或替换整个DEX的方案，提供了一种运行时在Native修改Filed指针的方式，实现方法的替换，达到即时生效无需重启，对应用无性能消耗的目的。其原理如下：<br><img src="http://img.blog.csdn.net/20170830160828982?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>对于实现方法的替换，需要在Native层操作，主要经过三个步骤：<br><img src="http://img.blog.csdn.net/20170830160953982?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>不过HotFix也有不足：<br>1.不支持新增字段，以及修改方法，也不支持对资源的替换。</p>
+<p>2.由于厂商的自定义ROM，对少数机型暂不支持。兼容性差。<br>综上，对于上面的几种框架技术总结如下：<br><img src="http://img.blog.csdn.net/20170830161151595?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h1 id="热修复方案总结"><a href="#热修复方案总结" class="headerlink" title="热修复方案总结"></a>热修复方案总结</h1><p>代码修复有两大主要方案：一种是阿里系的底层替换方案，另一种是腾讯系的类加载方案。底层替换方案限制颇多，但时效性最好，加载轻快，立即见效。类加载方案时效性差，需要重新冷启动才能见效，但修复范围广，限制少。</p>
+<h2 id="底层替换方案"><a href="#底层替换方案" class="headerlink" title="底层替换方案"></a>底层替换方案</h2><p>底层替换方案是在已经加载了的类中直接替换掉原有方法，是在原来类的基础上进行修改的。因而无法实现对与原有类进行方法和字段的增减，因为这样将破坏原有类的结构。</p>
+<p>一旦补丁类中出现了方法的增加和减少，就会导致这个类以及整个Dex的方法数的变化。方法数的变化伴随着方法索引的变化，这样在访问方法时就无法正常地索引到正确的方法了。</p>
+<p>如果字段发生了增加和减少，和方法变化的情况一样，所有字段的索引都会发生变化。并且更严重的问题是，如果在程序运行中间某个类突然增加了一个字段，那么对于原先已经产生的这个类的实例，它们还是原来的结构，这是无法改变的。而新方法使用到这些老的实例对象时，访问新增字段就会产生不可预期的结果。</p>
+<p>这是这类方案的固有限制，而底层替换方案最为人诟病的地方，在于底层替换的不稳定性。</p>
+<p>传统的底层替换方式，不论是Dexposed、Andfix或者其他安全界的Hook方案，都是直接依赖修改虚拟机方法实体的具体字段。例如，改Dalvik方法的jni函数指针、改类或方法的访问权限等等。这样就带来一个很严重的问题，由于Android是开源的，各个手机厂商都可以对代码进行改造，而Andfix里ArtMethod的结构是根据公开的Android源码中的结构写死的。如果某个厂商对这个ArtMethod结构体进行了修改，就和原先开源代码里的结构不一致，那么在这个修改过了的设备上，通用性的替换机制就会出问题。这便是不稳定的根源。</p>
+<p>而我们也对代码的底层替换原理重新进行了深入思考，从克服其限制和兼容性入手，以一种更加优雅的替换思路，实现了即时生效的代码热修复。sophix实现的是一种无视底层具体结构的替换方式，也就是把原先这样的逐一替换：</p>
+<p>这么一来，我们不仅解决了兼容性问题，并且由于忽略了底层ArtMethod结构的差异，对于所有的Android版本都不再需要区分，代码量大大减少。即使以后的Android版本不断修改ArtMethod的成员，只要保证ArtMethod数组仍是以线性结构排列，就能直接适用于将来的Android 8.0、9.0等新版本，无需再针对新的系统版本进行适配了。</p>
+<h2 id="类加载方案"><a href="#类加载方案" class="headerlink" title="类加载方案"></a>类加载方案</h2><p>类加载方案的原理是在app重新启动后让Classloader去加载新的类。因为在app运行到一半的时候，所有需要发生变更的类已经被加载过了，在Android上是无法对一个类进行卸载的。如果不重启，原来的类还在虚拟机中，就无法加载新类。因此，只有在下次重启的时候，在还没走到业务逻辑之前抢先加载补丁中的新类，这样后续访问这个类时，就会Resolve为新类。从而达到热修复的目的。</p>
+<p>再来看看腾讯系三大类加载方案的实现原理。QQ空间方案会侵入打包流程，并且为了hack添加一些无用的信息，实现起来很不优雅。而QFix的方案，需要获取底层虚拟机的函数，不够稳定可靠，并且有个比较大的问题是无法新增public函数。</p>
+<p>微信的Tinker方案是完整的全量dex加载，并且可谓是将补丁合成做到了极致，然而我们发现，精密的武器并非适用于所有战场。Tinker的合成方案，是从dex的方法和指令维度进行全量合成，整个过程都是自己研发的。</p>
+<p>虽然可以很大地节省空间，但由于对dex内容的比较粒度过细，实现较为复杂，性能消耗比较严重。实际上，dex的大小占整个apk的比例是比较低的，一个app里面的dex文件大小并不是主要部分，而占空间大的主要还是资源文件。因此，Tinker方案的时空代价转换的性价比不高。</p>
+<p>其实，dex比较的最佳粒度，应该是在类的维度。它既不像方法和指令维度那样的细微，也不像bsbiff比较那般的粗糙。在类的维度，可以达到时间和空间平衡的最佳效果。基于这个准则，我们另辟蹊径，实现了一种完全不同的全量dex替换方案。</p>
+<p>sophix采用的也是全量合成dex的技术，这个技术是从手淘插件化框架Atlas汲取的。直接利用Android原先的类查找和合成机制，快速合成新的全量dex。这么一来，我们既不需要处理合成时方法数超过的情况，对于dex的结构也不用进行破坏性重构。</p>
+<p><img src="http://img.blog.csdn.net/20170830163628022?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>从图中可以看到，我们重新编排了包中dex的顺序。这样，在虚拟机查找类的时候，会优先找到classes.dex中的类，然后才是classes2.dex、classes3.dex，也可以看做是dex文件级别的类插桩方案。这个方式十分巧妙，它对旧包与补丁包中classes.dex的顺序进行了打破与重组，最终使得系统可以自然地识别到这个顺序，以实现类覆盖的目的。这将会大大减少合成补丁的开销。</p>
+<h2 id="资源修复"><a href="#资源修复" class="headerlink" title="资源修复"></a>资源修复</h2><p>在Android热修复的过程中，不仅需要对错误的代码进行修复，还需要对资源文件进行修复。目前市面上的资源热修复方案基本上都是参考<a href="http://blog.csdn.net/xiangzhihong8/article/details/64906131" target="_blank" rel="external">Instant Run</a>的实现。Instant Run实现过程大概分为两部：<br>1、构造一个新的AssetManager,并通过反射条用addAssetPath,把这个完整的新资源包加入到AssetManager中。这样就得到了一个含有所有新资源的AssetManager。</p>
+<p>2、找到所有之前引用到原AssetManager的地方，通过反射，把引用处替换为AssetManager</p>
+<p>这种方式下发完整的包很占用空间。而像有些方案，是先进行对资源包做差量，在运行时合成完整包再加载。这样确实减少包的体积，但是在运行时多了合成的操作，耗费了运行时间喝内存。合成后的包也是完整的包，仍旧会占磁盘空间。</p>
+<h2 id="so库修复"><a href="#so库修复" class="headerlink" title="so库修复"></a>so库修复</h2><p>so库的修复本质上是对native方法的修复和替换。我们知道在JNI编程中，native方法可以通过动态注册和静态注册两种方式进行。动态注册的native方法必须实现<code>JNI_OnLoad</code>方法，同时实现一个<code>JNINativeMethod[]</code>数组，静态注册的native方法必须是<code>Java+类完整路径+方法名</code>的格式。</p>
+<p><img src="http://img.blog.csdn.net/20170830164521841?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>动态注册的native方法映射通过加载so库过程中调用JNI_OnLoad方法调用完成，静态注册的native方法映射是在该native方法第一次执行的时候才完成映射，当然前提是该so库已经load过。</p>
+<p>我们采用的是类似类修复反射注入方式。把补丁so库的路径插入到nativeLibraryDirectories数组的最前面，就能够达到加载so库的时候是补丁so库，而不是原来so库的目录，从而达到修复的目的。</p>
+<p><img src="http://img.blog.csdn.net/20170830164634717?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>参考：<a href="http://www.jianshu.com/p/ed03e8e4b08f" target="_blank" rel="external">http://www.jianshu.com/p/ed03e8e4b08f</a><br><a href="http://tinkerpatch.com/Docs/SDK" target="_blank" rel="external">Tinker集成</a><br><a href="https://help.aliyun.com/document_detail/53240.html" target="_blank" rel="external">Sophix集成</a></p>
+    </div>
+
+    <div class="post-footer">   
+        <div>
+            
+                转载声明: 商业转载请联系作者获得授权,非商业转载请注明出处 © Snippet
+            
+        </div>
+        <div>
+            
+                版权声明: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+知识共享署名-非商业性使用-禁止演绎 3.0 未本地化版本许可协议（CC BY-NC-ND 3.0）
+</a>
+            
+        </div>  
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/2017/08/11/Scala入门笔记/" class="pre-post btn btn-default"><i class="fa fa-angle-left fa-fw"></i>上一篇</a>
+    
+    
+        <a href="/2017/07/14/前端ThinkJS框架解析/" class="next-post btn btn-default">下一篇<i class="fa fa-angle-right fa-fw"></i></a>
+    
+</div>
+
+
+    <div id="comments">
+        <div id="uyan_frame"></div>
+    <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2120654"></script>
+    </div>
+                </main>
+                <aside class="col-md-4 sidebar">
+        
+        <div class="widget notification">
+        <h3 class="title">网站公告</h3>
+        <div>
+            <p>主题Snippet v1.1.0版本即将上线，敬请期待~ <br>
+主题下载：<a href="https://github.com/shenliyang/hexo-theme-snippet" title="fork me" target="_blank">Snippet主题</a> <br>
+<hr>前端工程师一枚，专注于前端Node、React和移动端Android和Ios开发，欢迎骚扰。
+<br>联系方式：qq群:278792776（移动群）、515980159（React群）、188716429（猎头hr群）
+</p>
+        </div>
+    </div>
+        
+        <div class="widget">
+        <h3 class="title">分类</h3>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/"><i class="fa" aria-hidden="true">Android</i></a><span class="category-list-count">32</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/系统/"><i class="fa" aria-hidden="true">系统</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Google/"><i class="fa" aria-hidden="true">Google</i></a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Google/VR/"><i class="fa" aria-hidden="true">VR</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React-Native/"><i class="fa" aria-hidden="true">React Native</i></a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/"><i class="fa" aria-hidden="true">Spring</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android/"><i class="fa" aria-hidden="true">android</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/"><i class="fa" aria-hidden="true">iOS</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ios/"><i class="fa" aria-hidden="true">ios</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/"><i class="fa" aria-hidden="true">前端</i></a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端/"><i class="fa" aria-hidden="true">后端</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/小程序/"><i class="fa" aria-hidden="true">小程序</i></a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术人生/"><i class="fa" aria-hidden="true">技术人生</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/机器学习/"><i class="fa" aria-hidden="true">机器学习</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂谈/"><i class="fa" aria-hidden="true">杂谈</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/"><i class="fa" aria-hidden="true">设计模式</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/资料库/"><i class="fa" aria-hidden="true">资料库</i></a><span class="category-list-count">1</span></li></ul>
+    </div>
+        
+        <div class="widget">
+      <h3 class="title">归档</h3>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/"><i class="fa" aria-hidden="true">八月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/"><i class="fa" aria-hidden="true">六月 2017</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/"><i class="fa" aria-hidden="true">五月 2017</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/"><i class="fa" aria-hidden="true">三月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/"><i class="fa" aria-hidden="true">二月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/"><i class="fa" aria-hidden="true">一月 2017</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/"><i class="fa" aria-hidden="true">十二月 2016</i></a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/"><i class="fa" aria-hidden="true">十一月 2016</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/"><i class="fa" aria-hidden="true">十月 2016</i></a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/"><i class="fa" aria-hidden="true">九月 2016</i></a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/"><i class="fa" aria-hidden="true">八月 2016</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/"><i class="fa" aria-hidden="true">七月 2016</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/"><i class="fa" aria-hidden="true">六月 2016</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/"><i class="fa" aria-hidden="true">五月 2016</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/"><i class="fa" aria-hidden="true">四月 2016</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/"><i class="fa" aria-hidden="true">三月 2016</i></a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/"><i class="fa" aria-hidden="true">二月 2016</i></a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/"><i class="fa" aria-hidden="true">六月 2015</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/"><i class="fa" aria-hidden="true">五月 2015</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/"><i class="fa" aria-hidden="true">四月 2015</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/"><i class="fa" aria-hidden="true">三月 2015</i></a><span class="archive-list-count">2</span></li></ul>
+    </div>
+        
+        <div class="widget">
+    <h3 class="title">标签云</h3>
+    <div class="content tag-cloud">
+      
+        <a href="/tags/AR/" style="font-size: 1em">AR</a> <a href="/tags/Android/" style="font-size: 1em">Android</a> <a href="/tags/系统服务/" style="font-size: 1em">系统服务</a> <a href="/tags/新特性/" style="font-size: 1em">新特性</a> <a href="/tags/android/" style="font-size: 1em">android</a> <a href="/tags/硬件/" style="font-size: 1em">硬件</a> <a href="/tags/混淆打包/" style="font-size: 1em">混淆打包</a> <a href="/tags/Angular2/" style="font-size: 1em">Angular2</a> <a href="/tags/前端开发/" style="font-size: 1em">前端开发</a> <a href="/tags/前端/" style="font-size: 1em">前端</a> <a href="/tags/React-Native/" style="font-size: 1em">React Native</a> <a href="/tags/FlexBox布局/" style="font-size: 1em">FlexBox布局</a> <a href="/tags/Google/" style="font-size: 1em">Google</a> <a href="/tags/VR/" style="font-size: 1em">VR</a> <a href="/tags/Java/" style="font-size: 1em">Java</a> <a href="/tags/垃圾回收/" style="font-size: 1em">垃圾回收</a> <a href="/tags/OpenGL/" style="font-size: 1em">OpenGL</a> <a href="/tags/Node/" style="font-size: 1em">Node</a> <a href="/tags/Promise/" style="font-size: 1em">Promise</a> <a href="/tags/eact-Native/" style="font-size: 1em">eact Native</a> <a href="/tags/调试/" style="font-size: 1em">调试</a> <a href="/tags/打包/" style="font-size: 1em">打包</a> <a href="/tags/原生/" style="font-size: 1em">原生</a> <a href="/tags/Spring/" style="font-size: 1em">Spring</a> <a href="/tags/入门/" style="font-size: 1em">入门</a> <a href="/tags/后端/" style="font-size: 1em">后端</a> <a href="/tags/深入系统/" style="font-size: 1em">深入系统</a> <a href="/tags/ios/" style="font-size: 1em">ios</a> <a href="/tags/Swift/" style="font-size: 1em">Swift</a> <a href="/tags/swift/" style="font-size: 1em">swift</a> <a href="/tags/知识库/" style="font-size: 1em">知识库</a> <a href="/tags/Xcode/" style="font-size: 1em">Xcode</a> <a href="/tags/webpack/" style="font-size: 1em">webpack</a> <a href="/tags/gulp/" style="font-size: 1em">gulp</a> <a href="/tags/https/" style="font-size: 1em">https</a> <a href="/tags/iOS/" style="font-size: 1em">iOS</a> <a href="/tags/gif/" style="font-size: 1em">gif</a> <a href="/tags/mac/" style="font-size: 1em">mac</a> <a href="/tags/环境/" style="font-size: 1em">环境</a> <a href="/tags/react/" style="font-size: 1em">react</a> <a href="/tags/原理/" style="font-size: 1em">原理</a> <a href="/tags/个人博客/" style="font-size: 1em">个人博客</a> <a href="/tags/流量/" style="font-size: 1em">流量</a> <a href="/tags/杂谈/" style="font-size: 1em">杂谈</a> <a href="/tags/小程序/" style="font-size: 1em">小程序</a> <a href="/tags/微信/" style="font-size: 1em">微信</a> <a href="/tags/全栈/" style="font-size: 1em">全栈</a> <a href="/tags/搭建网站/" style="font-size: 1em">搭建网站</a> <a href="/tags/机器学习/" style="font-size: 1em">机器学习</a> <a href="/tags/算法/" style="font-size: 1em">算法</a> <a href="/tags/深入理解/" style="font-size: 1em">深入理解</a> <a href="/tags/内存分配/" style="font-size: 1em">内存分配</a> <a href="/tags/设计模式/" style="font-size: 1em">设计模式</a>
+    </div>
+  </div>
+        
+        <div class="widget">
+        <h3 class="title">友链</h3>
+        <div class="content friends-link">
+        
+            <a href="http://blog.csdn.net/xiangzhihong8/" class="fa" target="_blank">作者博客</a>
+        
+            <a href="https://yq.aliyun.com/u/xiangzhihong" class="fa" target="_blank">阿里云博客</a>
+        
+        </div>
+    </div>
+        
+    </aside>
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <span>Copyright &copy; 2017 
+                </span> | 
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/assets/highlight.pack.js?rev=@@hash"></script>
+  <script>
+    hljs.initHighlightingOnLoad(); //初始化代码高亮 
+  </script>
+
+<script src="/js/app.js?rev=@@hash"></script>
+</body>

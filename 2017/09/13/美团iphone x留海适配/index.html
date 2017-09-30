@@ -1,0 +1,348 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no">
+    <link rel="dns-prefetch" href="//t11.baidu.com">
+    <!--SEO-->
+
+
+
+<meta name="robots" content="all">
+<meta name="google" content="all">
+<meta name="googlebot" content="all">
+<meta name="verify" content="all">
+    <!--Title-->
+
+
+<title>58 同城 iOS 客户端 iOS11 及 iPhone X 适配实践 | 向志洪</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="向志洪" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css?rev=9.12.0">
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+    <div class="hide">
+    <script src="https://s4.cnzz.com/z_stat.php?id=1261768793&web_id=1262140174" language="JavaScript"></script>
+    </div>
+    
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?13764659765";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head></html>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+<body>
+    <header class="main-header">
+    <div class="main-header-box">
+        <a class="branding" href="/" title="">
+            <img src="/img/header_logo.png" alt="Snippet 博客主题">
+        </a>
+        <h2 class="text-hide">Snippet主题</h2>
+        <img src="/img/header_logo.png" alt="Snippet 博客主题" class="hide">
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only">Toggle navigation</span>
+                    <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class=""><a href="/">首页</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/前端/">前端</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/后端/">后端</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/Android/">Android</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/iOS/">iOS</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/React Native/">React Native</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/小程序/">小程序</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/杂谈/">杂谈</a></li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="58 同城 iOS 客户端 iOS11 及 iPhone X 适配实践">
+            
+            58 同城 iOS 客户端 iOS11 及 iPhone X 适配实践
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <span>iOS</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            iOS
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta">2017/09/13</span>
+    </span>
+</div>
+            
+            
+    </div>
+    
+    <div class="post-body">
+        <p>一、前言</p>
+<p>前段时间 WWDC 大会上苹果推出了 iOS11 系统 和 iPhone X 新机型，相信各个 iOS 团队的开发者都已经在计划新系统和新机型的适配工作了。不得不说，新系统和新机型的发布确实是给 iOS 开发者带来了不小的工作量，因此有必要将 58 同城 iOS 客户端适配过程中遇到的问题跟大家分享一下。</p>
+<p>二、iOS 11 UIKit</p>
+<p>在适配 iOS 11 之前，我们首先要弄清楚 iOS 11 做了哪些改动，哪些改动会对我们现有的应用产生影响，这样有助于我们分析现象。建议大家看下 WWDC 的官方视频，视频中提到了如何适配 iOS 11 及如何设计和适配 iPhoneX 新机型：</p>
+<p>Updating Your App for iOS 11<br>Building Apps for iPhone X<br>Designing for iPhone X</p>
+<ol>
+<li>UIKit’sBars</li>
+</ol>
+<p>图 1 UIKit’sBar 提供 size 的方法截图<br>iOS11 UIKit’sBar 改动很大，对现有的应用来说 UINavigationBar 的 titleView 适配应该是最大的问题，LargeTitle 虽然看起来似乎是很大的改动，但是实际上对现有的应用没有太多的影响。iOS11 之后 UINavigationBar 和 UIToolbar 支持 Auto Layout ，开发者必须要提供自定义视图的 size。如果自定义 titleView 中使用了 Auto Layout，那么通过设置自定义 titleView 的 frame 的方式来设定 size 在某些场景下可能就不再合适了，开发者应该着重注意下自定义 view 内部的约束（具体案例将在下文中阐述）。如图 1 所示，我们可以通过以下三种方式来提供 size：</p>
+<p>约束自身宽高；<br>实现 intrinsicContentSize 方法；<br>利用子视图宽高及间距来约束 titleView；</p>
+<ol>
+<li>UIScrollView</li>
+</ol>
+<p>图 2 安全区域示意图<br>iOS11 引入了安全区域的概念，默认情况下安全区域是指 NavigationBar 以下 TabBar 以上的区域（iPhoneX 则不包括底部的虚拟 Home 区域），也就是说 StatusBar、NavigationBar、TabBar、虚拟 Home 都不是安全区域（可参见图 2）。为了帮助开发者判断各个 view 与安全区域的距离关系，iOS11 在 UIView 加入了一个属性：</p>
+<p>需要注意的是这个属性是描述 view 与页面安全区域的距离关系，如果 view 的某个方向超过了安全区域则这个方向的数值为正数，如果 view 完全在安全区域内则 safeAreaInsets 的值全为 0。如在图 3 所示一个空白页面中。</p>
+<p>图3 安全区域测试图<br>红、蓝 view 是父子视图的关系，且蓝色子视图完全在红色视图内，由于红、蓝两个 view 顶部超过安全区域 44 点（状态栏 44 高度），所以它们的 safeAreaInsets 都为 {44, 0, 0, 0}，也就是说在同一个控制器中，他们的安全区域是一致的，与视图层级无关。在一个控制器中，安全区域并不是固定不变的，可以通过 ViewController 的 additionalSafeAreaInsets 方法来修改页面的安全区域，如果此时将安全区域上延 11 个点。</p>
+<p>那么它们的 safeAreaInsets 都会变为 {33, 0, 0, 0}。</p>
+<p>我们再来看 UIScrollView 新增加的两个很重要的属性：</p>
+<p>iOS 11 中 adjustedContentInset 是用来调整 scrollView 内容边距的属性，这个属性实际上是 contentInset 和 safeAreaInsets 在各个方向上的加和，即 contentInset+safeAreaInsets。contentInsetAdjustmentBehavior 是控制采取何种策略来控制调整边距的属性，默认为 UIScrollViewContentInsetAdjustmentAutomatic。在 iOS 11 之前，控制是否自动调整内边距的属性是 UIViewController 的 automaticallyAdjustsScrollViewInsets，但是这个属性现在已经废弃，取而代之的是 UIScrollView 的 contentInsetAdjustmentBehavior 。contentInsetAdjustmentBehavior 共有四种设置，如图 4 所示：</p>
+<p>图 4 contentInsetAdjustmentBehavior<br>如果 UIScrollView 需要调整内容边距则加上安全区域的偏移，即 adjustedContentInset = contentInset+safeAreaInsets，如果不调整则 safeAreaInsets 不参与到计算中，即 adjustedContentInset = contentInset。简而言之，contentInsetAdjustmentBehavior 就是告诉 UIScrollView 在计算 adjustedContentInset 时要不要加上 safeAreaInsets。</p>
+<ol>
+<li>UITableView</li>
+</ol>
+<p>UITableView 除了继承自 UIScrollView 的特性外，还有自身 API 的变动。新系统中，UITableView 开启了估算行高，estimatedRowHeight、 estimatedSectionHeaderHeight、estimatedSectionFooterHeight 不再默认是 0，而是 UITableViewAutomaticDimension（这个值打印输出是 -1），这一举措旨在帮助开发者提高性能，减少 heightForRowAtIndexPath: 方法的的调用次数，但是这样会导致 API 执行顺序发生变化。在没有开启估算行高之前 tableView 总是先执行：</p>
+<p>再执行</p>
+<p>API 调用顺序如图 5 所示：</p>
+<p>图 5 关闭预估高度方法执行顺序打印<br>而开启估算行高之后 tableView 会先执行：</p>
+<p>再执行：</p>
+<p>方法调用次数减少且调用顺序变为如图 6 所示：</p>
+<p>图 6 开启预估高度方法执行顺序打印<br>由此可见：</p>
+<p>的调用次数大大减少。但是如果开发者实现：</p>
+<p>方法，那么无论是否关闭 estimatedRowHeight，API 的调用顺序和调用次数都是一样的，如图 7 所示。</p>
+<p>图 7 实现预估高度方法后方法执行顺序打印<br>因此我们要注意新系统中 API 执行顺序和执行次数的变化。</p>
+<p>除此之外我们还应该注意在开启预估高度tableView.estimatedSectionHeaderHeight = UITableViewAutomaticDimension; 的情况下，如果不实现</p>
+<p>和</p>
+<p>那么</p>
+<p>和</p>
+<p>是不会被执行的。</p>
+<p>三、58 同城的实战经历</p>
+<p>适配 iPhoneX 首先要添加一个 1125x2436 的启动图，否则会在屏幕的上方和下方留下两道黑框。在适配开始前先简单介绍下 58 同城 iOS 客户端的页面结构，因为页面结构不同可能遇到的问题会不尽相同。58 同城 iOS 客户端的 key window 的 rootViewController 是一个导航控制器，而不是 UITabBarController。导航控制器的 rootViewController 是一个 UITabBarController 样式（非 UITabBarController）的 ViewController。了解了应用的结构之后，下面介绍下 58 同城 iOS 客户端适配过程中遇到的比较典型的问题：</p>
+<ol>
+<li>首页</li>
+</ol>
+<p>先看下适配之前的首页，如图 8 所示：</p>
+<p>图 8 适配前首页图<br>适配前，首页主要存在的问题有 3 个：</p>
+<p>顶部的天气与状态栏有重叠；<br>首页的动画默认已经进行了一部分；<br>底部的 tabBar 在非安全区域内。<br>先看问题 1，产生问题 1 的原因是由于 iPhoneX 的状态栏高度产生了变化，由 20 变成了 44，天气组件的位置没有预留出新增的 24 点，导致与状态栏重叠。解决的办法是对顶部 view 进行重新布局约束，根据机型来判断是够需要增加 24 点。机型的判断由于没有真机验证，我们无法准确地获取到设备名称，因此暂时采用设备高度来判断机型。如果屏幕高度为 812，则暂时可以认为是 iPhoneX：</p>
+<p>问题 2 的原因是 tableView 的安全区域的引起的。由于首页 tableView 的 contentInsetAdjustmentBehavior 默认为 UIScrollViewContentInsetAdjustmentAutomatic， 在隐藏导航栏的情况下 tableView 的内容偏移为安全区域的 44 点，因此 tableView 自动偏移了 44 点，看起来像动画进行了一半。解决方法是将 contentInsetAdjustmentBehavior 设置为 never 忽略安全区域偏移。</p>
+<p>问题 3 的原因是 iPhoneX 新增了 34 点高度的虚拟 home 区域替代了 home 实体键。虚拟 home 区域并不是安全区域，因此需要在 iPhoneX 的机型上，屏幕底部预留出 34 点高度。</p>
+<p>适配后首页在 iPhoneX 上的效果如图 9：</p>
+<p>图 9 适配后首页图</p>
+<ol>
+<li>列表</li>
+</ol>
+<p>在适配过程中，我们发现在二手物品列表，上拉加载数据时底部自定义的 tabBar 会来回反复地进行显示隐藏，tabBar 为下图蓝框内区域，如图 10 所示：</p>
+<p>图 10 带有 tab 的列表图<br>经过排查我们发现 tableView 的 contentOffset 在有新的内容被添加进来的时候会产生跳动，如：不断上拉的一个列表，列表的 contentOffset 的 Y 值会不断增大，如果上拉过程中触发网络请求添加了新的内容到列表中，那么列表的 contentOffset 会产生一个跳动。如图 11 所示，在 contentOffset 的 Y 值为 9000 左右的时候列表新增了一页数据，导致 contentOffset 的 Y 值变为 3000 左右。</p>
+<p>图 11 上拉加载更多时 scrollView 的偏移量 Y 值打印图<br>当下拉返回顶部时，contentOffset 的 Y 值会产生一系列不连续的跳动，如当前 contentOffset 的 Y 值为 3600，下拉后变为 3500 左右然后又变为 3600 左右，如图 12 打印所示：</p>
+<p>图 12 下拉返回时 scrollView 的偏移量 Y 值打印图<br>如果利用 contentOffset 的 Y 值变化判断滑动方向的话，那么现在会判断为方向时而向上时而向下，导致底部的 tabBar 反复隐藏显示。</p>
+<p>问题根本原因是由于</p>
+<p>方法中获取 aScrollView 的偏移量会存在跳动的现象。具体的解决办法与各自的实现逻辑有较强的关联，在此不进行详细阐述。</p>
+<ol>
+<li>IM</li>
+</ol>
+<p>在使用 iOS11 beta 版时我们发现 IM 会话页的很多消息都变成了未识别消息类型，图 13 中左侧为适配前效果，右侧为适配后效果：</p>
+<p>图 13 IM 会话页适配前后对比图<br>当消息滑出屏幕再滑回来时消息才被正确解析出来。最开始以为是 Xcode9 beta 版的 bug，因为只有 Xcode 9 打包安装的应用才会出现这种问题，而通过 Xcode8 正式版打包后安装到 iOS11 的手机上并不会出现这种问题。不过随着 beta 版的不断稳定，这种现象并没有随之消失，因此我们觉得有必要查看下消息不识别的具体原因。经过排查后我们发现，异常情况出现的原 l 因是由于 tableView 没有取到可重用的 cell，代码如图 14：</p>
+<p>图 14 tableView 获取 Cell 的方法图<br>会话页将未取到 cell 作为一种异常情况进行了处理，处理方式是将这种情况当做未识别消息展示，处理逻辑如图 15 所示：</p>
+<p>图 15 IM 会话列表异常处理代码<br>经过分析，取不到 cell 很有可能是因为 cell 没有被注册，而之前代码中注册 cell 的逻辑在</p>
+<p>方法中。由于 iOS11 默认开启了 estimatedRowHeight，导致</p>
+<p>方法先执行，</p>
+<p>后执行，因此 cell 没有被注册成功，代码走进了异常处理逻辑。为了尽量不修改之前的业务逻辑，我们采用的适配方式的将估算高度关闭。</p>
+<p>除此之外，IM 还存在适配安全区域的问题。未适配之前，IM 会话页面的输入框在 iPhoneX 的非安全区域内，见图 16 标注区域。</p>
+<p>图 16 IM 会话页底部输入未适配前图<br>因此页面的底部需要设置 34 点的边距。iPhoneX 与其他手机很明显的不同就是键盘的高度，iPhoneX 的键盘高度为 333，这个键盘是从屏幕底部抬起并跨过了底部的虚拟 home 区域，键盘在安全区域内的高度为（333-34）。因此在监听键盘的事件中要注意对抬起高度的处理，以 IM 会话页为例，在非 iPhoneX 手机上输入框会上升 keyboardHeight 的高度，但是在 iPhoneX 上则只需要上升 keyboardHeight-34 点的高度。在 iPhoneX 手机上我们要格外注意键盘高度和安全区域结合带来的潜在问题。</p>
+<ol>
+<li>发布</li>
+</ol>
+<p>在适配发布页面的时候，我们发现小区搜索页面的 titleView 在 iOS11 手机上变得很小，没有完全展开，效果如图 17 所示：</p>
+<p>图 17 小区选择未适配前图<br>图 16 中的导航栏的 titleView 是 WBPUBSearchBar 类型的。由于自定义的 WBPUBSearchBar 是原来是通过 initWithFrame: 来创建并指明宽高的，WBPUBSearchBar 内部布局是依赖 Masonry 的，但是布局并没有设置 textFiled 和 button 的宽度，仅仅指明了 textFiled 和 button 各自的左右间距。在此情况下，自定义的 titleView 无法依赖内部子视图的约束得到正确的宽度，因此 titleView 的宽度并不正确。因此需要实现方法：</p>
+<p>向外界提供自身的 size。当然除了实现 intrinsicContentSize 方法外也可以通过添加自身约束的方式来设置自身的正确合理的 size。</p>
+<ol>
+<li>视频</li>
+</ol>
+<p>58 同城的二手房详情页支持视频展示房源，当全屏播放视频的时候会导致虚拟 home 条遮挡住视频内容，适配前视频全屏播放效果如图 18。</p>
+<p>图 18 房源视频全屏播放图<br>由于在播放视频的时候有交互较少，苹果允许开发者在当前页面隐藏虚拟 home 条。因此可以在视频播放控制器中实现下述方法来隐藏虚拟 home 条：</p>
+<p>在适当时机刷新虚拟 home。</p>
+<p>实现 prefersHomeIndicatorAutoHidden 方法,返回是否需要隐藏虚拟 home。</p>
+<p>当用户触碰屏幕时虚拟 home 会再次出现。这样就可以解决横屏虚拟 home 遮挡屏幕的问题。</p>
+<ol>
+<li>宠物</li>
+</ol>
+<p>在使用 iOS11 beta 版时我们发现导航栏的自定义返回按钮距离屏幕左侧过远。这种情况只有在 Xcode9 编译时才会出现，Xcode8 编译打包在 iOS11 beta 的手机上运行并不会出现这种问题。对比导航栏的视图层级结构我们发现导航栏的层级做了很大的变动。</p>
+<p>图 19 iOS 11 前导航栏层级结构和实际展示图</p>
+<p>图 20 iOS11 导航栏层级结构和实际展示图<br>在 iOS11 下设置 UIBarButtonItem 时，系统新增了 _UINavigationBarContentView 和 _UIButtonBarStackView 两层 View，新增的两层 frame 是有偏移的，而且布局采用的是约束方式。因此需要遍历层级找到 _UIButtonBarStackView 这层视图并修改它与 _UINavigationBarContentView 间的约束，修改约束的时机放自定义导航控制器的在 viewDidLayoutSubviews 方法中。修改约束关键代码如图 21 所示：</p>
+<p>图 21 修改约束关键代码<br>四、总结</p>
+<p>总结一下，58 同城 iOS 客户端在适配过程中遇到了以下问题：</p>
+<p>由于安全区域的引入，引起了 UIScrollView 的偏移。安全区域引起的 UIScrollView 偏移导致的问题非常多，文中仅仅以首页为例向大家展示了 58 同城的解决方式。当然，解决方式有很多种，只要了解问题的原因，那么解决方式可以根据自己的场景自由决定。文中没有提及 RN 和 web 的适配方式，主要原因是 RN 和 web 的适配方式与 Native 的适配方式类似，最主要的工作仍然是适配安全区域。</p>
+<p>tableView 的变化总体而言还是很大的，因此需要我们仔细观察现象排查代码。</p>
+<p>对于导航栏的适配，我们应该注意 titleView 的内部约束，返回按钮的适配需要注意的是修改约束的时机。</p>
+<p>键盘抬起本身并不会引起适配问题，但是涉及到安全区域的适配可能就会导致 UI 处理不正确。</p>
+<p>开发者应该根据场景来控制虚拟 home 的显示和隐藏。</p>
+<p>以上是 58 同城 iOS 客户端在适配过程中遇到的问题。当然，实际适配过程中遇到的问题远比文中描述的多，且情况要更为复杂。文中只是列出了一些比较典型的问题，希望对读者有所帮助。</p>
+    </div>
+
+    <div class="post-footer">   
+        <div>
+            
+                转载声明: 商业转载请联系作者获得授权,非商业转载请注明出处 © Snippet
+            
+        </div>
+        <div>
+            
+                版权声明: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+知识共享署名-非商业性使用-禁止演绎 3.0 未本地化版本许可协议（CC BY-NC-ND 3.0）
+</a>
+            
+        </div>  
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+    
+        <a href="/2017/08/11/Scala入门笔记/" class="next-post btn btn-default">下一篇<i class="fa fa-angle-right fa-fw"></i></a>
+    
+</div>
+
+
+    <div id="comments">
+        <div id="uyan_frame"></div>
+    <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2120654"></script>
+    </div>
+                </main>
+                <aside class="col-md-4 sidebar">
+        
+        <div class="widget notification">
+        <h3 class="title">网站公告</h3>
+        <div>
+            <p>主题Snippet v1.1.0版本即将上线，敬请期待~ <br>
+主题下载：<a href="https://github.com/shenliyang/hexo-theme-snippet" title="fork me" target="_blank">Snippet主题</a> <br>
+<hr>前端工程师一枚，专注于前端Node、React和移动端Android和Ios开发，欢迎骚扰。
+<br>联系方式：qq群:278792776（移动群）、515980159（React群）、188716429（猎头hr群）
+</p>
+        </div>
+    </div>
+        
+        <div class="widget">
+        <h3 class="title">分类</h3>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/"><i class="fa" aria-hidden="true">Android</i></a><span class="category-list-count">32</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/系统/"><i class="fa" aria-hidden="true">系统</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Google/"><i class="fa" aria-hidden="true">Google</i></a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Google/VR/"><i class="fa" aria-hidden="true">VR</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React-Native/"><i class="fa" aria-hidden="true">React Native</i></a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/"><i class="fa" aria-hidden="true">Spring</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android/"><i class="fa" aria-hidden="true">android</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/"><i class="fa" aria-hidden="true">iOS</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ios/"><i class="fa" aria-hidden="true">ios</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/"><i class="fa" aria-hidden="true">前端</i></a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端/"><i class="fa" aria-hidden="true">后端</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/小程序/"><i class="fa" aria-hidden="true">小程序</i></a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术人生/"><i class="fa" aria-hidden="true">技术人生</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/机器学习/"><i class="fa" aria-hidden="true">机器学习</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂谈/"><i class="fa" aria-hidden="true">杂谈</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/"><i class="fa" aria-hidden="true">设计模式</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/资料库/"><i class="fa" aria-hidden="true">资料库</i></a><span class="category-list-count">1</span></li></ul>
+    </div>
+        
+        <div class="widget">
+      <h3 class="title">归档</h3>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/"><i class="fa" aria-hidden="true">八月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/"><i class="fa" aria-hidden="true">六月 2017</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/"><i class="fa" aria-hidden="true">五月 2017</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/"><i class="fa" aria-hidden="true">三月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/"><i class="fa" aria-hidden="true">二月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/"><i class="fa" aria-hidden="true">一月 2017</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/"><i class="fa" aria-hidden="true">十二月 2016</i></a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/"><i class="fa" aria-hidden="true">十一月 2016</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/"><i class="fa" aria-hidden="true">十月 2016</i></a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/"><i class="fa" aria-hidden="true">九月 2016</i></a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/"><i class="fa" aria-hidden="true">八月 2016</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/"><i class="fa" aria-hidden="true">七月 2016</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/"><i class="fa" aria-hidden="true">六月 2016</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/"><i class="fa" aria-hidden="true">五月 2016</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/"><i class="fa" aria-hidden="true">四月 2016</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/"><i class="fa" aria-hidden="true">三月 2016</i></a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/"><i class="fa" aria-hidden="true">二月 2016</i></a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/"><i class="fa" aria-hidden="true">六月 2015</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/"><i class="fa" aria-hidden="true">五月 2015</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/"><i class="fa" aria-hidden="true">四月 2015</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/"><i class="fa" aria-hidden="true">三月 2015</i></a><span class="archive-list-count">2</span></li></ul>
+    </div>
+        
+        <div class="widget">
+    <h3 class="title">标签云</h3>
+    <div class="content tag-cloud">
+      
+        <a href="/tags/AR/" style="font-size: 1em">AR</a> <a href="/tags/Android/" style="font-size: 1em">Android</a> <a href="/tags/系统服务/" style="font-size: 1em">系统服务</a> <a href="/tags/新特性/" style="font-size: 1em">新特性</a> <a href="/tags/android/" style="font-size: 1em">android</a> <a href="/tags/硬件/" style="font-size: 1em">硬件</a> <a href="/tags/混淆打包/" style="font-size: 1em">混淆打包</a> <a href="/tags/Angular2/" style="font-size: 1em">Angular2</a> <a href="/tags/前端开发/" style="font-size: 1em">前端开发</a> <a href="/tags/前端/" style="font-size: 1em">前端</a> <a href="/tags/React-Native/" style="font-size: 1em">React Native</a> <a href="/tags/FlexBox布局/" style="font-size: 1em">FlexBox布局</a> <a href="/tags/Google/" style="font-size: 1em">Google</a> <a href="/tags/VR/" style="font-size: 1em">VR</a> <a href="/tags/Java/" style="font-size: 1em">Java</a> <a href="/tags/垃圾回收/" style="font-size: 1em">垃圾回收</a> <a href="/tags/OpenGL/" style="font-size: 1em">OpenGL</a> <a href="/tags/Node/" style="font-size: 1em">Node</a> <a href="/tags/Promise/" style="font-size: 1em">Promise</a> <a href="/tags/eact-Native/" style="font-size: 1em">eact Native</a> <a href="/tags/调试/" style="font-size: 1em">调试</a> <a href="/tags/打包/" style="font-size: 1em">打包</a> <a href="/tags/原生/" style="font-size: 1em">原生</a> <a href="/tags/Spring/" style="font-size: 1em">Spring</a> <a href="/tags/入门/" style="font-size: 1em">入门</a> <a href="/tags/后端/" style="font-size: 1em">后端</a> <a href="/tags/深入系统/" style="font-size: 1em">深入系统</a> <a href="/tags/ios/" style="font-size: 1em">ios</a> <a href="/tags/Swift/" style="font-size: 1em">Swift</a> <a href="/tags/swift/" style="font-size: 1em">swift</a> <a href="/tags/知识库/" style="font-size: 1em">知识库</a> <a href="/tags/Xcode/" style="font-size: 1em">Xcode</a> <a href="/tags/webpack/" style="font-size: 1em">webpack</a> <a href="/tags/gulp/" style="font-size: 1em">gulp</a> <a href="/tags/https/" style="font-size: 1em">https</a> <a href="/tags/iOS/" style="font-size: 1em">iOS</a> <a href="/tags/gif/" style="font-size: 1em">gif</a> <a href="/tags/mac/" style="font-size: 1em">mac</a> <a href="/tags/环境/" style="font-size: 1em">环境</a> <a href="/tags/react/" style="font-size: 1em">react</a> <a href="/tags/原理/" style="font-size: 1em">原理</a> <a href="/tags/个人博客/" style="font-size: 1em">个人博客</a> <a href="/tags/流量/" style="font-size: 1em">流量</a> <a href="/tags/杂谈/" style="font-size: 1em">杂谈</a> <a href="/tags/小程序/" style="font-size: 1em">小程序</a> <a href="/tags/微信/" style="font-size: 1em">微信</a> <a href="/tags/全栈/" style="font-size: 1em">全栈</a> <a href="/tags/搭建网站/" style="font-size: 1em">搭建网站</a> <a href="/tags/机器学习/" style="font-size: 1em">机器学习</a> <a href="/tags/算法/" style="font-size: 1em">算法</a> <a href="/tags/深入理解/" style="font-size: 1em">深入理解</a> <a href="/tags/内存分配/" style="font-size: 1em">内存分配</a> <a href="/tags/设计模式/" style="font-size: 1em">设计模式</a>
+    </div>
+  </div>
+        
+        <div class="widget">
+        <h3 class="title">友链</h3>
+        <div class="content friends-link">
+        
+            <a href="http://blog.csdn.net/xiangzhihong8/" class="fa" target="_blank">作者博客</a>
+        
+            <a href="https://yq.aliyun.com/u/xiangzhihong" class="fa" target="_blank">阿里云博客</a>
+        
+        </div>
+    </div>
+        
+    </aside>
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <span>Copyright &copy; 2017 
+                </span> | 
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/assets/highlight.pack.js?rev=@@hash"></script>
+  <script>
+    hljs.initHighlightingOnLoad(); //初始化代码高亮 
+  </script>
+
+<script src="/js/app.js?rev=@@hash"></script>
+</body>
