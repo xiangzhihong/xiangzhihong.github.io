@@ -1,0 +1,341 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no">
+    <link rel="dns-prefetch" href="//t11.baidu.com">
+    <!--SEO-->
+
+
+
+<meta name="robots" content="all">
+<meta name="google" content="all">
+<meta name="googlebot" content="all">
+<meta name="verify" content="all">
+    <!--Title-->
+
+
+<title>React 动画框架简介 | 向志洪</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="向志洪" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css?rev=9.12.0">
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+    <div class="hide">
+    <script src="https://s4.cnzz.com/z_stat.php?id=1261768793&web_id=1262140174" language="JavaScript"></script>
+    </div>
+    
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?13764659765";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head></html>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+<body>
+    <header class="main-header">
+    <div class="main-header-box">
+        <a class="branding" href="/" title="">
+            <img src="/img/header_logo.png" alt="Snippet 博客主题">
+        </a>
+        <h2 class="text-hide">Snippet主题</h2>
+        <img src="/img/header_logo.png" alt="Snippet 博客主题" class="hide">
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only">Toggle navigation</span>
+                    <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class=""><a href="/">首页</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/前端/">前端</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/后端/">后端</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/编程语言/">编程语言</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/Android/">Android</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/iOS/">iOS</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/React Native/">React Native</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/小程序/">小程序</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/杂谈/">杂谈</a></li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="React 动画框架简介">
+            
+            React 动画框架简介
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <span>前端</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            前端
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta">2017/03/03</span>
+    </span>
+</div>
+            
+            
+    </div>
+    
+    <div class="post-body">
+        <p>由于 React 加持了虚拟 DOM 等诸多特性，所以在 React 上实现常规的动画效果有一些特别之处。本文不会深入探讨 React 对动画的处理逻辑，只会简单地演示如何使用 React 创建动画效果。</p>
+<h1 id="React-插件"><a href="#React-插件" class="headerlink" title="React 插件"></a>React 插件</h1><p>React 官方提供了两个插件用于处理动画效果：一个是偏底层的 react-addons-transition-group，一个是在前者基础上进一步封装的 react-addons-css-transition-group。在使用它们之前，需要先检查下你使用的是哪种类型的 React 版本，一般通过 npm 安装的 React 默认不会安装这两个插件，需要手动安装它们：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">npm install --save react-addons-transition-group </div><div class="line">react-addons-css-transition-group</div></pre></td></tr></table></figure>
+<p>在这里先介绍 react-addons-css-transition-group 的使用方式，使用它可以快速利用 CSS 的能力实现组件的入场和出场动画。使用该插件实现 React 动画需要两个部分的协作，首先是 JS 部分的组件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">// 非完整代码</div><div class="line">class App extends React.Component &#123;</div><div class="line">    state = &#123;</div><div class="line">        itemList: [&#123;</div><div class="line">            key: getRandomKey(),</div><div class="line">            color: colorSet[getRandomIndex(0, 10)]</div><div class="line">        &#125;]</div><div class="line">    &#125;;</div><div class="line">    render () &#123;</div><div class="line">        const &#123; itemList &#125; = this.state;</div><div class="line">        let itemNodeList = [];</div><div class="line">        itemList.forEach((item) =&gt; &#123;</div><div class="line">            itemNodeList.push(</div><div class="line">                &lt;div</div><div class="line">                    // 重点：CSSTransitionGroup 的直接子组件必须有一个独一无二的 key 值</div><div class="line">                 key=&#123;item.key&#125;</div><div class="line">                    className=&quot;item&quot;</div><div class="line">                    style=&#123;&#123; backgroundColor: `$&#123;item.color&#125;` &#125;&#125;</div><div class="line">                    onClick=&#123;() =&gt; this.handleRemove(item.key)&#125;&gt;</div><div class="line">                    &#123;item.key&#125;</div><div class="line">                &lt;/div&gt;</div><div class="line">            );</div><div class="line">        &#125;);</div><div class="line">        return (</div><div class="line">            &lt;div id=&quot;color-wrapper&quot;&gt;</div><div class="line">                &lt;button onClick=&#123;this.handleAdd&#125;&gt;ADD&lt;/button&gt;</div><div class="line">              &lt;CSSTransitionGroup</div><div class="line">                 component=&quot;div&quot;</div><div class="line">                 className=&quot;color-set&quot;</div><div class="line">                transitionName=&quot;todo&quot;</div><div class="line">                transitionAppear=&#123;true&#125;</div><div class="line">                 transitionAppearTimeout=&#123;500&#125;</div><div class="line">                 transitionEnterTimeout=&#123;500&#125;                          transitionLeaveTimeout=&#123;300&#125;&gt;</div><div class="line">                  &#123;itemNodeList&#125;</div><div class="line">              &lt;/CSSTransitionGroup&gt;</div><div class="line">            &lt;/div&gt;</div><div class="line">        );</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在 CSSTransitionGroup 组件上，我们声明了一堆以 transition 开头的属性，这些属性被用来控制动画效果：</p>
+<ul>
+<li>transitionName，写样式时的前缀，比如这里的值为 todo，那么 CSS 的类型就应该是todo-enter、todo-leave 等等</li>
+<li>transitionAppear，布尔值，是否在所有组件挂载时触发动画</li>
+<li>transitionEnterTimeout，控制入场动画的时长</li>
+<li>transitionLeaveTimeout，控制退场动画的时长</li>
+<li>transitionAppearTimeout，控制所有组件挂载的动画时长</li>
+</ul>
+<p>默认情况下，CSSTransitionGroup 组件会被渲染为 span 标签，如果你想修改标签类型，可以使用 component 属性进行修改。其次是 CSS 部分的样式，CSS 中类选择器遵循类似 ${transitionName}-appear 的命名格式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">.todo-appear &#123;</div><div class="line">    opacity: 0.01;</div><div class="line">    transform: translateY(-50px);</div><div class="line">&#125;</div><div class="line">.todo-appear.todo-appear-active &#123;</div><div class="line">    opacity: 1;</div><div class="line">    transform: translateY(0px);</div><div class="line">    transition: all 500ms ease-in;</div><div class="line">&#125;</div><div class="line">.todo-enter &#123;</div><div class="line">    opacity: 0.01;</div><div class="line">    transform: translateY(-50px);</div><div class="line">&#125;</div><div class="line">.todo-enter.todo-enter-active &#123;</div><div class="line">    opacity: 1;</div><div class="line">    transform: translateY(0px);</div><div class="line">    transition: all 500ms ease-in;</div><div class="line">&#125;</div><div class="line">.todo-leave &#123;</div><div class="line">    opacity: 1;</div><div class="line">    transform: translateY(0px);</div><div class="line">&#125;</div><div class="line">.todo-leave.todo-leave-active &#123;</div><div class="line">    opacity: 0.01;</div><div class="line">    transform: translateY(-50px);</div><div class="line">    transition: all 300ms ease-in;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>通过上述两部分的结合，当我们删除 itemNodeList 中的某个组件时，React 会立即通过 key 找到这个组件，然后为其添加 todo-leave 类名，并瞬间添加 todo-leave-active 类名，在 500 毫秒之后移出该组件。</p>
+<p>这种动画处理方式的优点如下：</p>
+<ul>
+<li>简单快速，与 React 的融合性好，性能有保障</li>
+<li>可以使用 Sass、Less 等预处理器，提高开发效率</li>
+<li>易于上手，无第三方依赖，也就是无门的动画处理模块，这里的插件只是将类选择器应用到相关的节点上</li>
+</ul>
+<p>不过缺点也很多：</p>
+<ul>
+<li>只有入场和出场动画，无法实现复杂动画</li>
+<li>组件之间的动画效果是独立的，无互动，动画效果生硬 要求和限制条件多</li>
+<li>使用 CSS Modules 需要硬编码，也就是使用CSSTransitionGroup 组件自定义类名的功能</li>
+</ul>
+<p>最后，列出使用 React 插件开发动画的几点要求：</p>
+<ul>
+<li>组件必须挂载才能实现动画</li>
+<li>组件必须设定独一无二的 key 值</li>
+<li>transitionName 必须与 CSS 中的样式类名保持一致</li>
+</ul>
+<p>从上面的示例可以看出，CSSTransitionGroup 组件主要用来在组件入场和出场时给 DOM 节点添加类名，相当于是与 CSS 的结合，那么我们是否能够通过 JS 生成行内样式，然后添加到 DOM 节点，实现更加灵活的动画效果呢？答案是可以的，React 提供了 ReactTransitionGroup 组件供开发者在以下六个阶段向 DOM 节点注入数据：</p>
+<ul>
+<li>componentWillAppear(callback)</li>
+<li>componentDidAppear()</li>
+<li>componentWillEnter(callback)</li>
+<li>componentDidEnter()</li>
+<li>componentWillLeave(callback)</li>
+<li>componentDidLeave()</li>
+</ul>
+<h1 id="React-Motion"><a href="#React-Motion" class="headerlink" title="React Motion"></a>React Motion</h1><p>使用react-motion之前需要先安装库，安装命令如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install --save react-motion</div></pre></td></tr></table></figure>
+<p><img src="http://img.blog.csdn.net/20170927201623772?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>对于绝大多数的动画组件，我们往往不希望对动画属性（宽高、颜色等）的变化时间做硬编码处理，react-motion 提供的 spring 函数就是用来解决这一需求的，它可以逼真地模仿真实的物理效果，也就是我们常见的各类缓动效果。react-motion 一共提供了五个 API 接口，其中前两个是辅助类函数，后三个是具体的动画组件：</p>
+<ul>
+<li>spring，声明动画的缓动效果，比如 spring(10, {stiffness: 120, damping: 17})，10是目标值，stiffness 是弹性动画的刚度值，影响弹性，damping 是弹性动画的阻尼；</li>
+<li>presets，预置的缓动效果，比如 spring(10, preset.gentle)；</li>
+<li>Motion，该动画组件内部往往只有一个直接子组件，也就是只有一个动画目标；</li>
+<li>StaggerdMotion，该动画组件内部有一个或多个直接子组件，多个子组件之间的动画效果由关联性；</li>
+<li>TransitionMotion，该动画组件内部的一个或多个组件可以卸载或挂载，提供 Enter 和 Leave 动画效果；</li>
+</ul>
+<p>示例代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;Motion </div><div class="line">    defaultStyle=&#123;&#123;x: 0&#125;&#125; </div><div class="line">    style=&#123;&#123;x: spring(10)&#125;&#125;</div><div class="line">    onRest=&#123;() =&gt; void&#125;&gt;</div><div class="line">    &#123;</div><div class="line">        interpolatingStyle =&gt; (</div><div class="line">            &lt;div style=&#123;interpolatingStyle&#125;&gt;&#123;interpolatingStyle.x&#125;&lt;/div&gt;</div><div class="line">        )</div><div class="line">    &#125;</div><div class="line">&lt;/Motion&gt;</div></pre></td></tr></table></figure>
+<p>上面代码演示了 Motion 组件的最基础使用方法。</p>
+<ul>
+<li>defaultStyle?: PlainStyle，可选参数，PlainStyle 指的就是 React 常用作行内样式的对象类型的 {width: ‘10px’, height: ‘10px’ }，见名知意，为动画设定初始值</li>
+<li>style: Style，必选参数，指定动画完成的目标值，并设定动画的变化类型，实际上是一种数据驱动的形式</li>
+<li>onRest?: () =&gt; void，可选参数，在动画完成后调用</li>
+<li>children: (interpolatedStyle: PlainStyle) =&gt;ReactElement，必选函数，接收一个从初始值到目标值中间的值，这个值不断变化，用于渲染子组件的样式</li>
+</ul>
+<p>关于 StaggerdMotion 组件和 TransitionMotion 组件这里就不多做介绍了，有兴趣的话请阅读<a href="https://github.com/chenglou/react-motion" target="_blank" rel="external">官方文档</a>。</p>
+<h1 id="GSAP"><a href="#GSAP" class="headerlink" title="GSAP"></a>GSAP</h1><p>GSAP 是一个老牌的专业级动画库，从古老的 Flash 动画时代一直兴盛至今，它是一个商业产品，虽然开发者可以免费下载源代码，但如果要在商业活动中使用它，请购买相关的会员。如果你没有使用过 GSAP，建议阅读<a href="http://www.w3cplus.com/blog/tags/524.html" target="_blank" rel="external">GSAP</a>，接下来，我们尝试将 GSAP 融入到 React 的开发中。</p>
+<p>将 GSAP 与 React 结合最简单的方式是，使用 ref 或 findDOMNode()。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">// 导入通过 NPM 安装的 GSAP </div><div class="line">import TweenMax from &apos;gsap&apos;;</div><div class="line">// 保存 ref 指向的真实节点</div><div class="line">let refNode;</div><div class="line">class App extends React.Component &#123;</div><div class="line">    componentDidMount () &#123;</div><div class="line">        TweenMax.to(refNode, 2, &#123;</div><div class="line">            x: &apos;+=200px&apos;,</div><div class="line">            backgroundColor: &apos;#2196f3&apos;</div><div class="line">        &#125;);</div><div class="line">        // TweenMax 可以做什么？</div><div class="line">        // 暂停</div><div class="line">        tween.pause();</div><div class="line">        // 继续播放</div><div class="line">        tween.resume();</div><div class="line">        // 反转播放</div><div class="line">        tween.reverse();</div><div class="line">        // 跳转到1s进度处开始播放</div><div class="line">        tween.seek(1);</div><div class="line">        // 重播</div><div class="line">        tween.restart();</div><div class="line">        // 动画变为三倍速</div><div class="line">        tween.timeScale(3);</div><div class="line">    &#125;</div><div class="line">    render () &#123;</div><div class="line">        return (</div><div class="line">            &lt;div</div><div class="line">                id=&quot;ball&quot;</div><div class="line">                ref=&#123;c =&gt; (refNode = c)&#125;</div><div class="line">                style=&#123;&#123;</div><div class="line">                    width: &apos;100px&apos;,</div><div class="line">                    height: &apos;100px&apos;,</div><div class="line">                    margin: &apos;100px&apos;,</div><div class="line">                    borderRadius: &apos;50%&apos;,</div><div class="line">                    backgroundColor: &apos;red&apos;</div><div class="line">                &#125;&#125;&gt;</div><div class="line">            &lt;/div&gt;</div><div class="line">        );</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>TweenMax 的强大在于多年的动画开发经验所积累的技术底蕴，非一朝一夕可以被替代，上面简单演示了 TweenMax 的一小部分功能，像是 Timeline 的用法就没有介绍，当需要组织的元素越来越多时，其灵活性就会越加凸显。</p>
+<p><img src="http://img.blog.csdn.net/20170927204411730?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>GSAP 与 React 结合的另一种方式是使用 ReactTransitionGroup 组件，ReactTransitionGroup 组件提供了六个生命周期方法：</p>
+<ul>
+<li>componentWillAppear(callback)</li>
+<li>componnetDidAppear()</li>
+<li>componentWillEnter(callback)</li>
+<li>componnetDidEnter()</li>
+<li>componentWillLeave(callback)</li>
+<li>componnetDidLeave()</li>
+</ul>
+<p>示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line">class Box extends React.Component &#123;</div><div class="line">    componentWillEnter (callback) &#123;</div><div class="line">        const el = ReactDOM.findDOMNode(this);</div><div class="line">        TweenMax.fromTo(el, 0.3, &#123;y: 100, opacity: 0&#125;, &#123;y: 0, opacity: 1, onComplete: callback&#125;);</div><div class="line">    &#125;</div><div class="line">    componentWillLeave (callback) &#123;</div><div class="line">        const el = ReactDOM.findDOMNode(this);</div><div class="line">        TweenMax.fromTo(el, 0.3, &#123;y: 0, opacity: 1&#125;, &#123;y: -100, opacity: 0, onComplete: callback&#125;);</div><div class="line">    &#125;</div><div class="line">    render () &#123;</div><div class="line">        return (</div><div class="line">            &lt;div</div><div class="line">                style=&#123;&#123;</div><div class="line">                    width: &apos;100px&apos;,</div><div class="line">                    height: &apos;100px&apos;,</div><div class="line">                    margin: &apos;100px&apos;,</div><div class="line">                    borderRadius: &apos;50%&apos;,</div><div class="line">                    backgroundColor: &apos;red&apos;</div><div class="line">                &#125;&#125;&gt;</div><div class="line">            &lt;/div&gt;</div><div class="line">        );</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">class App extends React.Component &#123;</div><div class="line">    state = &#123;</div><div class="line">        show: true</div><div class="line">    &#125;</div><div class="line">    handleToggle = () =&gt; &#123;</div><div class="line">        this.setState(&#123;</div><div class="line">            show: !this.state.show</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line">    render () &#123;</div><div class="line">        return (</div><div class="line">            &lt;div className=&quot;wrapper&quot;&gt;</div><div class="line">                &lt;button onClick=&#123;this.handleToggle&#125;&gt;Toggle&lt;/button&gt;</div><div class="line">                &lt;TransitionGroup&gt;</div><div class="line">                    &#123; this.state.show &amp;&amp; &lt;Box key=&quot;a&quot;&gt;&lt;/Box&gt; &#125;</div><div class="line">                &lt;/TransitionGroup&gt;</div><div class="line">            &lt;/div&gt;</div><div class="line">        );</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>对于上面提到的几个动画框架，做一个简单的对比：</p>
+<ul>
+<li>易用性：CSSTransitionGroup &gt;= React Motion &gt; GSAP</li>
+<li>可维护性：看代码量和技术能力，CSSTransitionGroup 最简单</li>
+<li>用户体验：GSAP &gt;= React Motion &gt; CSSTransitionGroup</li>
+<li>对复杂动画的支持程度：GSAP &gt; React Motion &gt; CSSTransitionGroup</li>
+</ul>
+<p><img src="http://img.blog.csdn.net/20170927204934877?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>参考资料<br><a href="https://facebook.github.io/react/docs/animation.html" target="_blank" rel="external">React Animation</a><br><a href="https://github.com/chenglou/react-motion" target="_blank" rel="external">React Motion</a><br><a href="https://css-tricks.com/comparison-animation-technologies/" target="_blank" rel="external">A Comparison of Animation Technologies</a><br><a href="http://acgtofe.com/posts/2016/05/gsap-for-animation-pro" target="_blank" rel="external">GSAP，专业的Web动画库</a><br><a href="https://github.com/azazdeaz/react-gsap-enhancer" target="_blank" rel="external">React GSAP Enhancer</a><br><a href="https://medium.com/@cheapsteak/animations-with-reacttransitiongroup-4972ad7da286#.o7ta17de0" target="_blank" rel="external">Animations with ReactTransitionGroup</a><br><a href="http://www.shanemielke.com/archives/usopen-sessions/" target="_blank" rel="external">GSAP Examples</a></p>
+    </div>
+
+    <div class="post-footer">   
+        <div>
+            
+                转载声明: 商业转载请联系作者获得授权,非商业转载请注明出处 © Snippet
+            
+        </div>
+        <div>
+            
+                版权声明: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+知识共享署名-非商业性使用-禁止演绎 3.0 未本地化版本许可协议（CC BY-NC-ND 3.0）
+</a>
+            
+        </div>  
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/2017/03/09/Kotlin之基本语法/" class="pre-post btn btn-default"><i class="fa fa-angle-left fa-fw"></i>上一篇</a>
+    
+    
+        <a href="/2017/02/10/微信小程序尝鲜一个月现状分析/" class="next-post btn btn-default">下一篇<i class="fa fa-angle-right fa-fw"></i></a>
+    
+</div>
+
+
+    <div id="comments">
+        <div id="uyan_frame"></div>
+    <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2120654"></script>
+    </div>
+                </main>
+                <aside class="col-md-4 sidebar">
+        
+        <div class="widget notification">
+        <h3 class="title">网站公告</h3>
+        <div>
+            <p>主题Snippet v1.1.0版本即将上线，敬请期待~ <br>
+主题下载：<a href="https://github.com/shenliyang/hexo-theme-snippet" title="fork me" target="_blank">Snippet主题</a> <br>
+<hr>前端工程师一枚，专注于前端Node、React和移动端Android和Ios开发，欢迎骚扰。
+<br>联系方式：qq群:278792776（移动群）、515980159（React群）、188716429（猎头hr群）
+</p>
+        </div>
+    </div>
+        
+        <div class="widget">
+        <h3 class="title">分类</h3>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/"><i class="fa" aria-hidden="true">Android</i></a><span class="category-list-count">36</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/系统/"><i class="fa" aria-hidden="true">系统</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Google/"><i class="fa" aria-hidden="true">Google</i></a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Google/VR/"><i class="fa" aria-hidden="true">VR</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React-Native/"><i class="fa" aria-hidden="true">React Native</i></a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/"><i class="fa" aria-hidden="true">Spring</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android/"><i class="fa" aria-hidden="true">android</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/"><i class="fa" aria-hidden="true">iOS</i></a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ios/"><i class="fa" aria-hidden="true">ios</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/"><i class="fa" aria-hidden="true">前端</i></a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端/"><i class="fa" aria-hidden="true">后端</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/小程序/"><i class="fa" aria-hidden="true">小程序</i></a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术人生/"><i class="fa" aria-hidden="true">技术人生</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/机器学习/"><i class="fa" aria-hidden="true">机器学习</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂谈/"><i class="fa" aria-hidden="true">杂谈</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程语言/"><i class="fa" aria-hidden="true">编程语言</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/"><i class="fa" aria-hidden="true">设计模式</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/资料库/"><i class="fa" aria-hidden="true">资料库</i></a><span class="category-list-count">1</span></li></ul>
+    </div>
+        
+        <div class="widget">
+      <h3 class="title">归档</h3>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/"><i class="fa" aria-hidden="true">十月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/"><i class="fa" aria-hidden="true">八月 2017</i></a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/"><i class="fa" aria-hidden="true">六月 2017</i></a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/"><i class="fa" aria-hidden="true">五月 2017</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/"><i class="fa" aria-hidden="true">三月 2017</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/"><i class="fa" aria-hidden="true">二月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/"><i class="fa" aria-hidden="true">一月 2017</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/"><i class="fa" aria-hidden="true">十二月 2016</i></a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/"><i class="fa" aria-hidden="true">十一月 2016</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/"><i class="fa" aria-hidden="true">十月 2016</i></a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/"><i class="fa" aria-hidden="true">九月 2016</i></a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/"><i class="fa" aria-hidden="true">八月 2016</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/"><i class="fa" aria-hidden="true">七月 2016</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/"><i class="fa" aria-hidden="true">六月 2016</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/"><i class="fa" aria-hidden="true">五月 2016</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/"><i class="fa" aria-hidden="true">四月 2016</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/"><i class="fa" aria-hidden="true">三月 2016</i></a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/"><i class="fa" aria-hidden="true">二月 2016</i></a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/"><i class="fa" aria-hidden="true">六月 2015</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/"><i class="fa" aria-hidden="true">五月 2015</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/"><i class="fa" aria-hidden="true">四月 2015</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/"><i class="fa" aria-hidden="true">三月 2015</i></a><span class="archive-list-count">2</span></li></ul>
+    </div>
+        
+        <div class="widget">
+    <h3 class="title">标签云</h3>
+    <div class="content tag-cloud">
+      
+        <a href="/tags/ios/" style="font-size: 1em">ios</a> <a href="/tags/Android/" style="font-size: 1em">Android</a> <a href="/tags/深入系统/" style="font-size: 1em">深入系统</a> <a href="/tags/系统服务/" style="font-size: 1em">系统服务</a> <a href="/tags/android/" style="font-size: 1em">android</a> <a href="/tags/混淆打包/" style="font-size: 1em">混淆打包</a> <a href="/tags/Angular2/" style="font-size: 1em">Angular2</a> <a href="/tags/前端开发/" style="font-size: 1em">前端开发</a> <a href="/tags/硬件/" style="font-size: 1em">硬件</a> <a href="/tags/前端/" style="font-size: 1em">前端</a> <a href="/tags/React-Native/" style="font-size: 1em">React Native</a> <a href="/tags/FlexBox布局/" style="font-size: 1em">FlexBox布局</a> <a href="/tags/Google/" style="font-size: 1em">Google</a> <a href="/tags/VR/" style="font-size: 1em">VR</a> <a href="/tags/Java/" style="font-size: 1em">Java</a> <a href="/tags/垃圾回收/" style="font-size: 1em">垃圾回收</a> <a href="/tags/编程语言/" style="font-size: 1em">编程语言</a> <a href="/tags/Node/" style="font-size: 1em">Node</a> <a href="/tags/OpenGL/" style="font-size: 1em">OpenGL</a> <a href="/tags/Promise/" style="font-size: 1em">Promise</a> <a href="/tags/eact-Native/" style="font-size: 1em">eact Native</a> <a href="/tags/打包/" style="font-size: 1em">打包</a> <a href="/tags/调试/" style="font-size: 1em">调试</a> <a href="/tags/原生/" style="font-size: 1em">原生</a> <a href="/tags/后端/" style="font-size: 1em">后端</a> <a href="/tags/Spring/" style="font-size: 1em">Spring</a> <a href="/tags/入门/" style="font-size: 1em">入门</a> <a href="/tags/新特性/" style="font-size: 1em">新特性</a> <a href="/tags/swift/" style="font-size: 1em">swift</a> <a href="/tags/Swift/" style="font-size: 1em">Swift</a> <a href="/tags/AR/" style="font-size: 1em">AR</a> <a href="/tags/知识库/" style="font-size: 1em">知识库</a> <a href="/tags/Xcode/" style="font-size: 1em">Xcode</a> <a href="/tags/webpack/" style="font-size: 1em">webpack</a> <a href="/tags/gulp/" style="font-size: 1em">gulp</a> <a href="/tags/https/" style="font-size: 1em">https</a> <a href="/tags/iOS/" style="font-size: 1em">iOS</a> <a href="/tags/gif/" style="font-size: 1em">gif</a> <a href="/tags/mac/" style="font-size: 1em">mac</a> <a href="/tags/环境/" style="font-size: 1em">环境</a> <a href="/tags/原理/" style="font-size: 1em">原理</a> <a href="/tags/react/" style="font-size: 1em">react</a> <a href="/tags/杂谈/" style="font-size: 1em">杂谈</a> <a href="/tags/个人博客/" style="font-size: 1em">个人博客</a> <a href="/tags/流量/" style="font-size: 1em">流量</a> <a href="/tags/小程序/" style="font-size: 1em">小程序</a> <a href="/tags/微信/" style="font-size: 1em">微信</a> <a href="/tags/全栈/" style="font-size: 1em">全栈</a> <a href="/tags/搭建网站/" style="font-size: 1em">搭建网站</a> <a href="/tags/机器学习/" style="font-size: 1em">机器学习</a> <a href="/tags/算法/" style="font-size: 1em">算法</a> <a href="/tags/深入理解/" style="font-size: 1em">深入理解</a> <a href="/tags/内存分配/" style="font-size: 1em">内存分配</a> <a href="/tags/设计模式/" style="font-size: 1em">设计模式</a>
+    </div>
+  </div>
+        
+        <div class="widget">
+        <h3 class="title">友链</h3>
+        <div class="content friends-link">
+        
+            <a href="http://blog.csdn.net/xiangzhihong8/" class="fa" target="_blank">作者博客</a>
+        
+            <a href="https://yq.aliyun.com/u/xiangzhihong" class="fa" target="_blank">阿里云博客</a>
+        
+        </div>
+    </div>
+        
+    </aside>
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <span>Copyright &copy; 2017 
+                </span> | 
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/assets/highlight.pack.js?rev=@@hash"></script>
+  <script>
+    hljs.initHighlightingOnLoad(); //初始化代码高亮 
+  </script>
+
+<script src="/js/app.js?rev=@@hash"></script>
+</body>

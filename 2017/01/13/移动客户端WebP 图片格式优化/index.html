@@ -1,0 +1,280 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no">
+    <link rel="dns-prefetch" href="//t11.baidu.com">
+    <!--SEO-->
+
+
+
+<meta name="robots" content="all">
+<meta name="google" content="all">
+<meta name="googlebot" content="all">
+<meta name="verify" content="all">
+    <!--Title-->
+
+
+<title>移动客户端WebP 图片格式优化 | 向志洪</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="向志洪" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css?rev=9.12.0">
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+    <div class="hide">
+    <script src="https://s4.cnzz.com/z_stat.php?id=1261768793&web_id=1262140174" language="JavaScript"></script>
+    </div>
+    
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?13764659765";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head></html>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+<body>
+    <header class="main-header">
+    <div class="main-header-box">
+        <a class="branding" href="/" title="">
+            <img src="/img/header_logo.png" alt="Snippet 博客主题">
+        </a>
+        <h2 class="text-hide">Snippet主题</h2>
+        <img src="/img/header_logo.png" alt="Snippet 博客主题" class="hide">
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only">Toggle navigation</span>
+                    <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class=""><a href="/">首页</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/前端/">前端</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/后端/">后端</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/编程语言/">编程语言</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/Android/">Android</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/iOS/">iOS</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/React Native/">React Native</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/小程序/">小程序</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/杂谈/">杂谈</a></li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="移动客户端WebP 图片格式优化">
+            
+            移动客户端WebP 图片格式优化
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <span>前端</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            前端
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta">2017/01/13</span>
+    </span>
+</div>
+            
+            
+            <p class="fa fa-exclamation-triangle warning">
+                本文于<strong>311</strong>天之前发表，文中内容可能已经过时。
+            </p>
+            
+    </div>
+    
+    <div class="post-body">
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在移动端，图片一直是流量大头，一些商品列表和详情等页面，图片大小动不动就以几百K，当然在某些比较大的公司会根据具体情况去加载相应尺寸的图片，这就意味着服务器必须提供多套尺寸的图片。而对传统的JPEG、PNG 和 GIF 这些图片格式的优化几乎已经达到了极致，而 Google在这个时候给了开发者一个新选择：WebP。在Google 的明星产品如 Youtube、Gmail、Google Play 中都可以看到 WebP 的身影，而 Chrome 网上商店甚至已完全使用了 WebP。国外公司如 Facebook、ebay 和国内公司如腾讯、淘宝、美团等也早已尝鲜。目前 WebP 也在我厂很多的项目中得到应用，如腾讯新闻客户端、腾讯网、QQ空间等。在2015年的时候，笔者曾经工作过的公司开始大规模使用WebP。<br>目前浏览器支持情况：<br><img src="http://img.blog.csdn.net/20170914214604083?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h1 id="webP"><a href="#webP" class="headerlink" title="webP"></a>webP</h1><p>WebP格式，谷歌（google）开发的一种旨在加快图片加载速度的图片格式。图片压缩体积大约只有JPEG的2/3，并能节省大量的服务器带宽资源和数据空间。据谷歌官方的介绍：</p>
+<ul>
+<li>WebP 无损压缩的图片可以比同样大小的 PNG 小 26%；</li>
+<li>WebP 有损压缩的图片可以比同样大小的 JPEG 小 25-34%；</li>
+<li>WebP 支持无损的透明图层通道，代价只需增加 22% 的字节存储空间；</li>
+<li>WebP 有损透明图像可以比同样大小的 PNG 图像小3倍。</li>
+</ul>
+<h1 id="WebP使用"><a href="#WebP使用" class="headerlink" title="WebP使用"></a>WebP使用</h1><p>目前前端客户端基本都支持WebP图片格式，关于WebP格式的图片和其他图片格式的比较，直接看图例介绍：<a href="https://isparta.github.io/compare-webp/index.html#12345" target="_blank" rel="external">https://isparta.github.io/compare-webp/index.html#12345</a><br>下面分别介绍使用方法。</p>
+<h2 id="html"><a href="#html" class="headerlink" title="html"></a>html</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;body&gt;</div><div class="line">     &lt;img src=&quot;&quot; alt=&quot;&quot; data-url=&quot;11.jpg&quot; data-original=&quot;11.webp&quot;/&gt;</div><div class="line">     &lt;img src=&quot;&quot; alt=&quot;&quot; data-url=&quot;21.jpg&quot; data-original=&quot;21.webp&quot;/&gt;</div><div class="line">&lt;/body&gt;</div></pre></td></tr></table></figure>
+<h2 id="js"><a href="#js" class="headerlink" title="js"></a>js</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">var userAgent = navigator.userAgent;</div><div class="line">    var Android = userAgent.indexOf(&quot;Android&quot;);</div><div class="line">    var AppleWebKit=userAgent.indexOf(&apos;AppleWebKit&apos;);</div><div class="line">    var androidVersion = parseFloat(userAgent.slice(Android+8));</div><div class="line">    var $img=document.getElementsByTagName(&apos;img&apos;);</div><div class="line">    window.onload= function () &#123;</div><div class="line">        if(Android &gt;= 0 &amp;&amp; AppleWebKit&gt;=0&amp;&amp;androidVersion&gt;=4)&#123;</div><div class="line">            forImg(&apos;data-original&apos;);</div><div class="line">        &#125;else&#123;</div><div class="line">            forImg(&apos;data-url&apos;);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    function forImg(data)&#123;</div><div class="line">        for(var i=0;i&lt;$img.length;i++)&#123;</div><div class="line">            $img[i].setAttribute(&apos;src&apos;,$img[i].getAttribute(data));</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h2 id="Android"><a href="#Android" class="headerlink" title="Android"></a>Android</h2><p>Android很早之前就支持WebP图片格式，可以直接使用ImageView组件即可加载。</p>
+<h2 id="iOS"><a href="#iOS" class="headerlink" title="iOS"></a>iOS</h2><p>今天重点要说的就是iOS平台怎么添加加载WebP格式的图片。由于OS X不支持原生WebP解码，所以，可以先安装一个工具。打开Homebrew，输入如下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install webp</div></pre></td></tr></table></figure>
+<p>目前iOS的图片加载框架<a href="https://github.com/rs/SDWebImage" target="_blank" rel="external">SDWebImage</a>里面有个webP 框架，可以支持WebP的图片格式。SDWebImage 可以直接转换为UIImage 即可使用。</p>
+<p><a href="http://downloads.webmproject.org/releases/webp/index.html" target="_blank" rel="external">google webP官网</a>下载最新webP代码选择其中的iOS开头的文件，mac的话需要自己生成framewok，找到对应的版本下载即可；</p>
+<ol>
+<li>SDWebImage中加载webp格式的图片时需要定义SD_WEBP=1的宏，为了方便，我直接将SDWebImage库拖到项目中。</li>
+<li>target－&gt;build setting－&gt;搜索preprocessor 添加SD_WEBP=1<br><img src="http://img.blog.csdn.net/20170914231616093?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>添加后整体项目结构如下：<br><img src="http://img.blog.csdn.net/20170914231900033?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></li>
+<li>使用UIImageView加载网络WebP格式图片，并在info.list中增加网络访问的权限(依次选择App Transport Security Settings 增加 Allow Arbitrary Loads即可)；<br>相关代码如下：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">UIImageView * testImage = [[UIImageView alloc] initWithFrame:CGRectMake(100, 100, 200, 200)];</div><div class="line">    [testImage sd_setImageWithURL:[NSURL URLWithString:@&quot;https://isparta.github.io/compare-webp/image/png_webp/webp_lossless/1.webp&quot;]];</div><div class="line">    //    testImage.backgroundColor = [UIColor orangeColor];</div><div class="line">    [self.view addSubview:testImage];</div></pre></td></tr></table></figure>
+<p>运行效果：<br><img src="http://img.blog.csdn.net/20170914231724506?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+    </div>
+
+    <div class="post-footer">   
+        <div>
+            
+                转载声明: 商业转载请联系作者获得授权,非商业转载请注明出处 © Snippet
+            
+        </div>
+        <div>
+            
+                版权声明: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+知识共享署名-非商业性使用-禁止演绎 3.0 未本地化版本许可协议（CC BY-NC-ND 3.0）
+</a>
+            
+        </div>  
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/2017/01/14/微信小程序实例之摇一摇抽奖/" class="pre-post btn btn-default"><i class="fa fa-angle-left fa-fw"></i>上一篇</a>
+    
+    
+        <a href="/2017/01/09/React Native仿美团下拉菜单/" class="next-post btn btn-default">下一篇<i class="fa fa-angle-right fa-fw"></i></a>
+    
+</div>
+
+
+    <div id="comments">
+        <div id="uyan_frame"></div>
+    <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2120654"></script>
+    </div>
+                </main>
+                <aside class="col-md-4 sidebar">
+        
+        <div class="widget notification">
+        <h3 class="title">网站公告</h3>
+        <div>
+            <p>主题Snippet v1.1.0版本即将上线，敬请期待~ <br>
+主题下载：<a href="https://github.com/shenliyang/hexo-theme-snippet" title="fork me" target="_blank">Snippet主题</a> <br>
+<hr>前端工程师一枚，专注于前端Node、React和移动端Android和Ios开发，欢迎骚扰。
+<br>联系方式：qq群:278792776（移动群）、515980159（React群）、188716429（猎头hr群）
+</p>
+        </div>
+    </div>
+        
+        <div class="widget">
+        <h3 class="title">分类</h3>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/"><i class="fa" aria-hidden="true">Android</i></a><span class="category-list-count">36</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/系统/"><i class="fa" aria-hidden="true">系统</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Google/"><i class="fa" aria-hidden="true">Google</i></a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Google/VR/"><i class="fa" aria-hidden="true">VR</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React-Native/"><i class="fa" aria-hidden="true">React Native</i></a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/"><i class="fa" aria-hidden="true">Spring</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android/"><i class="fa" aria-hidden="true">android</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/"><i class="fa" aria-hidden="true">iOS</i></a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ios/"><i class="fa" aria-hidden="true">ios</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/"><i class="fa" aria-hidden="true">前端</i></a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端/"><i class="fa" aria-hidden="true">后端</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/小程序/"><i class="fa" aria-hidden="true">小程序</i></a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术人生/"><i class="fa" aria-hidden="true">技术人生</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/机器学习/"><i class="fa" aria-hidden="true">机器学习</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂谈/"><i class="fa" aria-hidden="true">杂谈</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程语言/"><i class="fa" aria-hidden="true">编程语言</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/"><i class="fa" aria-hidden="true">设计模式</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/资料库/"><i class="fa" aria-hidden="true">资料库</i></a><span class="category-list-count">1</span></li></ul>
+    </div>
+        
+        <div class="widget">
+      <h3 class="title">归档</h3>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/"><i class="fa" aria-hidden="true">十月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/"><i class="fa" aria-hidden="true">八月 2017</i></a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/"><i class="fa" aria-hidden="true">六月 2017</i></a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/"><i class="fa" aria-hidden="true">五月 2017</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/"><i class="fa" aria-hidden="true">三月 2017</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/"><i class="fa" aria-hidden="true">二月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/"><i class="fa" aria-hidden="true">一月 2017</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/"><i class="fa" aria-hidden="true">十二月 2016</i></a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/"><i class="fa" aria-hidden="true">十一月 2016</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/"><i class="fa" aria-hidden="true">十月 2016</i></a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/"><i class="fa" aria-hidden="true">九月 2016</i></a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/"><i class="fa" aria-hidden="true">八月 2016</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/"><i class="fa" aria-hidden="true">七月 2016</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/"><i class="fa" aria-hidden="true">六月 2016</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/"><i class="fa" aria-hidden="true">五月 2016</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/"><i class="fa" aria-hidden="true">四月 2016</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/"><i class="fa" aria-hidden="true">三月 2016</i></a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/"><i class="fa" aria-hidden="true">二月 2016</i></a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/"><i class="fa" aria-hidden="true">六月 2015</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/"><i class="fa" aria-hidden="true">五月 2015</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/"><i class="fa" aria-hidden="true">四月 2015</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/"><i class="fa" aria-hidden="true">三月 2015</i></a><span class="archive-list-count">2</span></li></ul>
+    </div>
+        
+        <div class="widget">
+    <h3 class="title">标签云</h3>
+    <div class="content tag-cloud">
+      
+        <a href="/tags/ios/" style="font-size: 1em">ios</a> <a href="/tags/Android/" style="font-size: 1em">Android</a> <a href="/tags/深入系统/" style="font-size: 1em">深入系统</a> <a href="/tags/系统服务/" style="font-size: 1em">系统服务</a> <a href="/tags/android/" style="font-size: 1em">android</a> <a href="/tags/混淆打包/" style="font-size: 1em">混淆打包</a> <a href="/tags/Angular2/" style="font-size: 1em">Angular2</a> <a href="/tags/前端开发/" style="font-size: 1em">前端开发</a> <a href="/tags/硬件/" style="font-size: 1em">硬件</a> <a href="/tags/前端/" style="font-size: 1em">前端</a> <a href="/tags/React-Native/" style="font-size: 1em">React Native</a> <a href="/tags/FlexBox布局/" style="font-size: 1em">FlexBox布局</a> <a href="/tags/Google/" style="font-size: 1em">Google</a> <a href="/tags/VR/" style="font-size: 1em">VR</a> <a href="/tags/Java/" style="font-size: 1em">Java</a> <a href="/tags/垃圾回收/" style="font-size: 1em">垃圾回收</a> <a href="/tags/编程语言/" style="font-size: 1em">编程语言</a> <a href="/tags/Node/" style="font-size: 1em">Node</a> <a href="/tags/OpenGL/" style="font-size: 1em">OpenGL</a> <a href="/tags/Promise/" style="font-size: 1em">Promise</a> <a href="/tags/eact-Native/" style="font-size: 1em">eact Native</a> <a href="/tags/打包/" style="font-size: 1em">打包</a> <a href="/tags/调试/" style="font-size: 1em">调试</a> <a href="/tags/原生/" style="font-size: 1em">原生</a> <a href="/tags/后端/" style="font-size: 1em">后端</a> <a href="/tags/Spring/" style="font-size: 1em">Spring</a> <a href="/tags/入门/" style="font-size: 1em">入门</a> <a href="/tags/新特性/" style="font-size: 1em">新特性</a> <a href="/tags/swift/" style="font-size: 1em">swift</a> <a href="/tags/Swift/" style="font-size: 1em">Swift</a> <a href="/tags/AR/" style="font-size: 1em">AR</a> <a href="/tags/知识库/" style="font-size: 1em">知识库</a> <a href="/tags/Xcode/" style="font-size: 1em">Xcode</a> <a href="/tags/webpack/" style="font-size: 1em">webpack</a> <a href="/tags/gulp/" style="font-size: 1em">gulp</a> <a href="/tags/https/" style="font-size: 1em">https</a> <a href="/tags/iOS/" style="font-size: 1em">iOS</a> <a href="/tags/gif/" style="font-size: 1em">gif</a> <a href="/tags/mac/" style="font-size: 1em">mac</a> <a href="/tags/环境/" style="font-size: 1em">环境</a> <a href="/tags/原理/" style="font-size: 1em">原理</a> <a href="/tags/react/" style="font-size: 1em">react</a> <a href="/tags/杂谈/" style="font-size: 1em">杂谈</a> <a href="/tags/个人博客/" style="font-size: 1em">个人博客</a> <a href="/tags/流量/" style="font-size: 1em">流量</a> <a href="/tags/小程序/" style="font-size: 1em">小程序</a> <a href="/tags/微信/" style="font-size: 1em">微信</a> <a href="/tags/全栈/" style="font-size: 1em">全栈</a> <a href="/tags/搭建网站/" style="font-size: 1em">搭建网站</a> <a href="/tags/机器学习/" style="font-size: 1em">机器学习</a> <a href="/tags/算法/" style="font-size: 1em">算法</a> <a href="/tags/深入理解/" style="font-size: 1em">深入理解</a> <a href="/tags/内存分配/" style="font-size: 1em">内存分配</a> <a href="/tags/设计模式/" style="font-size: 1em">设计模式</a>
+    </div>
+  </div>
+        
+        <div class="widget">
+        <h3 class="title">友链</h3>
+        <div class="content friends-link">
+        
+            <a href="http://blog.csdn.net/xiangzhihong8/" class="fa" target="_blank">作者博客</a>
+        
+            <a href="https://yq.aliyun.com/u/xiangzhihong" class="fa" target="_blank">阿里云博客</a>
+        
+        </div>
+    </div>
+        
+    </aside>
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <span>Copyright &copy; 2017 
+                </span> | 
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/assets/highlight.pack.js?rev=@@hash"></script>
+  <script>
+    hljs.initHighlightingOnLoad(); //初始化代码高亮 
+  </script>
+
+<script src="/js/app.js?rev=@@hash"></script>
+</body>

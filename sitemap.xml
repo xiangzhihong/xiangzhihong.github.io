@@ -2,6 +2,139 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.xiangzhihong.com/2017/06/26/mac%E7%8E%AF%E5%A2%83%E4%B8%8Bmongodb%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/</loc>
+    
+    <lastmod>2017-11-20T02:23:43.022Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.xiangzhihong.com/2017/10/16/%E8%85%BE%E8%AE%AF%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98%E9%9B%86%E9%94%A6/</loc>
+    
+    <lastmod>2017-11-20T02:22:27.696Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.xiangzhihong.com/2017/10/09/%E4%B8%80%E4%B8%AAClassLoader%E5%BC%95%E8%B5%B7%E7%9A%84JNI%E9%93%BE%E6%8E%A5%E9%94%99%E8%AF%AF/</loc>
+    
+    <lastmod>2017-11-20T02:21:18.863Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.xiangzhihong.com/2017/06/16/Kotlin%E5%92%8Canko%E8%9E%8D%E5%90%88%E8%BF%9B%E8%A1%8CAndroid%E5%BC%80%E5%8F%91/</loc>
+    
+    <lastmod>2017-11-20T02:20:14.369Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.xiangzhihong.com/2017/07/25/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%BD%93%E9%81%93%EF%BC%8C%E4%BD%A0%E7%A6%BB%E5%A4%B1%E4%B8%9A%E8%BF%98%E6%9C%89%E5%A4%9A%E8%BF%9C/</loc>
+    
+    <lastmod>2017-11-20T02:18:50.186Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.xiangzhihong.com/2017/09/16/Vue.js%202.5%E6%96%B0%E7%89%B9%E6%80%A7%E4%BB%8B%E7%BB%8D/</loc>
+    
+    <lastmod>2017-11-20T02:17:31.358Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.xiangzhihong.com/2017/04/16/Android%E4%BB%BF%E6%8B%BC%E5%A4%9A%E5%A4%9A%E6%8B%BC%E5%9B%A2%E5%A0%86%E5%8F%A0%E5%A4%B4%E5%83%8F/</loc>
+    
+    <lastmod>2017-11-20T02:16:14.766Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.xiangzhihong.com/2017/08/16/Kotlin%20%E5%96%A7%E5%9A%A3%E8%BF%87%E5%90%8E%EF%BC%8CJava%20%E7%A8%8B%E5%BA%8F%E5%91%98%E6%9C%AA%E6%9D%A5%E5%9C%A8%E5%93%AA%E9%87%8C/</loc>
+    
+    <lastmod>2017-11-20T02:15:12.053Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.xiangzhihong.com/2017/09/16/Kotlin%E6%9E%81%E7%AE%80%E6%95%99%E7%A8%8B(%E7%AC%AC%E4%B8%80%E7%AB%A0%20Kotlin%E7%AE%80%E4%BB%8B)/</loc>
+    
+    <lastmod>2017-11-20T02:14:16.939Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.xiangzhihong.com/2017/09/13/%E8%A7%A3%E5%86%B3%E4%BD%8E%E7%89%88%E6%9C%ACXcode%E4%B8%8D%E6%94%AF%E6%8C%81%E9%AB%98%E7%89%88%E6%9C%ACiOS%E7%9C%9F%E6%9C%BA%E8%B0%83%E8%AF%95%E7%9A%84%E9%97%AE%E9%A2%98/</loc>
+    
+    <lastmod>2017-11-20T02:07:34.693Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.xiangzhihong.com/2017/08/18/%E4%B8%AD%E5%9B%BDAR%E8%A1%8C%E4%B8%9A%E4%B8%93%E9%A2%98%E7%A0%94%E7%A9%B6%E6%8A%A5%E5%91%8A/</loc>
+    
+    <lastmod>2017-11-20T02:06:37.600Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.xiangzhihong.com/2017/08/13/iOS%E5%BC%80%E5%8F%91%E8%AF%81%E4%B9%A6%E7%AE%A1%E7%90%86/</loc>
+    
+    <lastmod>2017-11-20T02:05:33.081Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.xiangzhihong.com/2017/07/13/Android%20%E8%BF%9B%E7%A8%8B%E5%9B%9E%E6%94%B6%E4%B9%8BLowMemoryKiller%E5%8E%9F%E7%90%86%E7%AF%87/</loc>
+    
+    <lastmod>2017-11-20T02:04:30.948Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.xiangzhihong.com/2017/01/13/%E7%A7%BB%E5%8A%A8%E5%AE%A2%E6%88%B7%E7%AB%AFWebP%20%E5%9B%BE%E7%89%87%E6%A0%BC%E5%BC%8F%E4%BC%98%E5%8C%96/</loc>
+    
+    <lastmod>2017-11-20T02:03:25.018Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.xiangzhihong.com/2017/06/13/%E8%B0%B7%E6%AD%8C%E5%A2%9E%E5%BC%BA%E7%8E%B0%E5%AE%9E%E6%8A%80%E6%9C%AFARCore/</loc>
+    
+    <lastmod>2017-11-20T02:02:16.753Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.xiangzhihong.com/2017/08/13/Vue.js%E4%B8%8E%E5%85%B6%E4%BB%96%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6%E7%9A%84%E5%AF%B9%E6%AF%94/</loc>
+    
+    <lastmod>2017-11-20T02:00:52.200Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.xiangzhihong.com/2017/03/03/React%20%E5%8A%A8%E7%94%BB%E6%A1%86%E6%9E%B6%E7%AE%80%E4%BB%8B/</loc>
+    
+    <lastmod>2017-11-20T01:59:52.549Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.xiangzhihong.com/2017/07/13/%E4%BD%BF%E7%94%A8Gitbook%E5%86%99%E7%94%B5%E5%AD%90%E4%B9%A6/</loc>
+    
+    <lastmod>2017-11-20T01:58:25.480Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.xiangzhihong.com/2017/06/13/Vue.js%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/</loc>
+    
+    <lastmod>2017-11-20T01:56:34.042Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.xiangzhihong.com/2017/07/14/%E5%89%8D%E7%AB%AFThinkJS%E6%A1%86%E6%9E%B6%E8%A7%A3%E6%9E%90/</loc>
     
     <lastmod>2017-09-30T02:35:08.956Z</lastmod>

@@ -1,0 +1,298 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no">
+    <link rel="dns-prefetch" href="//t11.baidu.com">
+    <!--SEO-->
+
+
+
+<meta name="robots" content="all">
+<meta name="google" content="all">
+<meta name="googlebot" content="all">
+<meta name="verify" content="all">
+    <!--Title-->
+
+
+<title>Vue.js简介 | 向志洪</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="向志洪" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css?rev=9.12.0">
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+    <div class="hide">
+    <script src="https://s4.cnzz.com/z_stat.php?id=1261768793&web_id=1262140174" language="JavaScript"></script>
+    </div>
+    
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?13764659765";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head></html>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+<body>
+    <header class="main-header">
+    <div class="main-header-box">
+        <a class="branding" href="/" title="">
+            <img src="/img/header_logo.png" alt="Snippet 博客主题">
+        </a>
+        <h2 class="text-hide">Snippet主题</h2>
+        <img src="/img/header_logo.png" alt="Snippet 博客主题" class="hide">
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only">Toggle navigation</span>
+                    <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class=""><a href="/">首页</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/前端/">前端</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/后端/">后端</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/编程语言/">编程语言</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/Android/">Android</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/iOS/">iOS</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/React Native/">React Native</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/小程序/">小程序</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/杂谈/">杂谈</a></li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="Vue.js简介">
+            
+            Vue.js简介
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <span>前端</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            前端
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta">2017/06/13</span>
+    </span>
+</div>
+            
+            
+    </div>
+    
+    <div class="post-body">
+        <h1 id="Vue-js简介"><a href="#Vue-js简介" class="headerlink" title="Vue.js简介"></a>Vue.js简介</h1><p><a href="https://github.com/vuejs/vue/releases" target="_blank" rel="external">Vue.js</a>（读音 /vjuː/, 类似于view）是一套构建用户界面的渐进式框架。与其他重量级框架不同的是，Vue 采用自底向上增量开发的设计。Vue 的核心库只关注视图层，并且非常容易学习，非常容易与其它库或已有项目整合。另一方面，Vue 完全有能力驱动采用单文件组件和Vue生态系统支持的库开发的复杂单页应用。Vue.js 的目标是通过尽可能简单的 API 实现响应的数据绑定和组合的视图组件。</p>
+<p>作为前端的三大框架之一（其他两个是Angular、React），Vue得到了大多前端开发者的青睐，最新版本为2.4.4 。和其他框架对比，也是各有优劣，相关的介绍，读者可以参考笔者之前的文章：<a href="http://blog.csdn.net/xiangzhihong8/article/details/78069983" target="_blank" rel="external">VueJs与其他框架的对比</a>。</p>
+<p>总的来说，可以总结为如下：</p>
+<p><strong>优点</strong>：</p>
+<ul>
+<li>简单：官方文档很清晰，比 Angular 简单易学。</li>
+<li>快速：异步批处理方式更新 DOM。</li>
+<li>组合：用解耦的、可复用的组件组合你的应用程序。</li>
+<li>紧凑：~18kb min+gzip，且无依赖。</li>
+<li>强大：表达式 &amp; 无需声明依赖的可推导属性 (computed properties)。</li>
+<li>对模块友好：可以通过 NPM、Bower 或 Duo 安装，不强迫你所有的代码都遵循 Angular 的各种规定，使用场景更加灵活。</li>
+</ul>
+<p><strong>缺点</strong></p>
+<ul>
+<li>大而全：学习起来有难度，对于我来讲学习曲线很曲折，比较难理解一些。</li>
+<li>推翻重写：Vue重写了部分底层，等于是说在2.0版本又需要从头开始学习，对于习惯了1.x的开发者来说又需要重新学习。</li>
+<li>不支持IE8以下，因为Vue使用ES5书写。</li>
+</ul>
+<h2 id="MVVM模式"><a href="#MVVM模式" class="headerlink" title="MVVM模式"></a>MVVM模式</h2><p>Vue.js 可以说是MVVM 架构的最佳实践，专注于 MVVM 中的 ViewModel，不仅做到了数据双向绑定，而且也是一款相对比较轻量级的JS 库，API 简洁，很容易上手。</p>
+<p>所谓MVVM市值Model-View-ViewModel三者的关系。这里可以见到的介绍下MVVM框架：</p>
+<ul>
+<li><strong>Observer</strong> 数据监听器，能够对数据对象的所有属性进行监听，如有变动可拿到最新值并通知订阅者，内部采用Object.defineProperty的getter和setter来实现。</li>
+<li><strong>Compile</strong> 指令解析器，它的作用对每个元素节点的指令进行扫描和解析，根据指令模板替换数据，以及绑定相应的更新函数。</li>
+<li><strong>Watcher</strong> 订阅者， 作为连接 Observer 和 Compile 的桥梁，能够订阅并收到每个属性变动的通知，执行指令绑定的相应回调函数。</li>
+<li><strong>Dep</strong> 消息订阅器，内部维护了一个数组，用来收集订阅者（Watcher），数据变动触发notify 函数，再调用订阅者的 update 方法。</li>
+</ul>
+<p>而在Vue框架中，ViewModel是Vue.js的核心，它是一个Vue实例。Vue实例是作用于某一个HTML元素上的，这个元素可以是HTML的body元素，也可以是指定了id的某个元素。那么ViewModel是如何实现双向绑定的呢？</p>
+<p><img src="http://img.blog.csdn.net/20170929162825246?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>Vue.js 是采用 Object.defineProperty 的 getter 和 setter，并结合观察者模式来实现数据绑定的。当把一个普通 Javascript 对象传给 Vue 实例来作为它的 data 选项时，Vue 将遍历它的属性，用 Object.defineProperty 将它们转为 getter/setter。用户看不到 getter/setter，但是在内部它们让 Vue 追踪依赖，在属性被访问和修改时通知变化。</p>
+<p>从图中可以看出，当执行 new Vue() 时，Vue 就进入了初始化阶段，一方面Vue 会遍历 data 选项中的属性，并用 Object.defineProperty 将它们转为 getter/setter，实现数据变化监听功能；另一方面，Vue 的指令编译器Compile 对元素节点的指令进行扫描和解析，初始化视图，并订阅Watcher 来更新视图， 此时Wather 会将自己添加到消息订阅器中(Dep),初始化完毕。当数据发生变化时，Observer 中的 setter 方法被触发，setter 会立即调用Dep.notify()，Dep 开始遍历所有的订阅者，并调用订阅者的 update 方法，订阅者收到通知后对视图进行相应的更新。</p>
+<h1 id="Vue-js环境搭建"><a href="#Vue-js环境搭建" class="headerlink" title="Vue.js环境搭建"></a>Vue.js环境搭建</h1><p>本文教程以macOS为准，window上搭建类似。</p>
+<h2 id="1，安装Node环境"><a href="#1，安装Node环境" class="headerlink" title="1，安装Node环境"></a>1，安装Node环境</h2><p>Vue项目通常通过webpack工具来构建，而webpack命令的执行是依赖node.js的环境的，所以首先要安装node.js。node.js的官方地址为：<a href="https://nodejs.org/en/download/，下载相应版本安装即可。" target="_blank" rel="external">https://nodejs.org/en/download/，下载相应版本安装即可。</a></p>
+<p>安装完毕之后，在命令行下验证是否安装成功：输入npm -v  ，显示版本信息就表示安装成功。</p>
+<h2 id="2，安装cnpm"><a href="#2，安装cnpm" class="headerlink" title="2，安装cnpm"></a>2，安装cnpm</h2><p>安装完node之后，npm包含的很多依赖包是部署在国外的，为了加快依赖包的加载速度，开发中一般选择使用国内的镜像。cnpm是淘宝对npm的镜像服务器，安装命令如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g cnpm --registry=https://registry.npm.taobao.org</div></pre></td></tr></table></figure>
+<h2 id="3，vue-cli安装"><a href="#3，vue-cli安装" class="headerlink" title="3，vue-cli安装"></a>3，vue-cli安装</h2><p>vue-cli是vue官方提供的一个命令行工具，可用于快速搭建大型单页应用。该工具提供开箱即用的构建工具配置，带来现代化的前端开发流程。只需一分钟即可启动带热重载、保存时静态检查以及可用于生产环境的构建配置的项目。安装命令如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cnpm install -g vue-cli</div></pre></td></tr></table></figure>
+<p>安装完后，检查是否安装成功，输入vue(或者使用vue -v查看版本信息)，出现相关的帮助信息则说明安装成功。</p>
+<h2 id="4，新建项目"><a href="#4，新建项目" class="headerlink" title="4，新建项目"></a>4，新建项目</h2><p>新建一个项目文件夹（如 vue），cd到此文件夹，输入init命令新建一个vue项目:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vue init webpack vue-demo</div></pre></td></tr></table></figure>
+<p>说明：我们暂时不适用模板提供的测试框架，如Karma + Mocha，以及Nightwatch。</p>
+<p>初始化的项目的目录如下：<br><img src="http://img.blog.csdn.net/20170929165324407?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>关于目录结构的介绍后面会专门给大家介绍。接下来，cd到vue-demo 文件夹下，执行命令安装项目依赖包：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cnmp install</div></pre></td></tr></table></figure>
+<p>接下来，在命令行里输入命令： cnpm run dev，执行完成后启动项目，浏览器出现以下接结果，说明启动成功。<br><img src="http://img.blog.csdn.net/20170929172230652?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+    </div>
+
+    <div class="post-footer">   
+        <div>
+            
+                转载声明: 商业转载请联系作者获得授权,非商业转载请注明出处 © Snippet
+            
+        </div>
+        <div>
+            
+                版权声明: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+知识共享署名-非商业性使用-禁止演绎 3.0 未本地化版本许可协议（CC BY-NC-ND 3.0）
+</a>
+            
+        </div>  
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/2017/06/14/微信小程序之picker组件/" class="pre-post btn btn-default"><i class="fa fa-angle-left fa-fw"></i>上一篇</a>
+    
+    
+        <a href="/2017/06/13/谷歌增强现实技术ARCore/" class="next-post btn btn-default">下一篇<i class="fa fa-angle-right fa-fw"></i></a>
+    
+</div>
+
+
+    <div id="comments">
+        <div id="uyan_frame"></div>
+    <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2120654"></script>
+    </div>
+                </main>
+                <aside class="col-md-4 sidebar">
+        
+        <div class="widget notification">
+        <h3 class="title">网站公告</h3>
+        <div>
+            <p>主题Snippet v1.1.0版本即将上线，敬请期待~ <br>
+主题下载：<a href="https://github.com/shenliyang/hexo-theme-snippet" title="fork me" target="_blank">Snippet主题</a> <br>
+<hr>前端工程师一枚，专注于前端Node、React和移动端Android和Ios开发，欢迎骚扰。
+<br>联系方式：qq群:278792776（移动群）、515980159（React群）、188716429（猎头hr群）
+</p>
+        </div>
+    </div>
+        
+        <div class="widget">
+        <h3 class="title">分类</h3>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/"><i class="fa" aria-hidden="true">Android</i></a><span class="category-list-count">36</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/系统/"><i class="fa" aria-hidden="true">系统</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Google/"><i class="fa" aria-hidden="true">Google</i></a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Google/VR/"><i class="fa" aria-hidden="true">VR</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React-Native/"><i class="fa" aria-hidden="true">React Native</i></a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/"><i class="fa" aria-hidden="true">Spring</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android/"><i class="fa" aria-hidden="true">android</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/"><i class="fa" aria-hidden="true">iOS</i></a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ios/"><i class="fa" aria-hidden="true">ios</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/"><i class="fa" aria-hidden="true">前端</i></a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端/"><i class="fa" aria-hidden="true">后端</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/小程序/"><i class="fa" aria-hidden="true">小程序</i></a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术人生/"><i class="fa" aria-hidden="true">技术人生</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/机器学习/"><i class="fa" aria-hidden="true">机器学习</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂谈/"><i class="fa" aria-hidden="true">杂谈</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程语言/"><i class="fa" aria-hidden="true">编程语言</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/"><i class="fa" aria-hidden="true">设计模式</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/资料库/"><i class="fa" aria-hidden="true">资料库</i></a><span class="category-list-count">1</span></li></ul>
+    </div>
+        
+        <div class="widget">
+      <h3 class="title">归档</h3>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/"><i class="fa" aria-hidden="true">十月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/"><i class="fa" aria-hidden="true">八月 2017</i></a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/"><i class="fa" aria-hidden="true">六月 2017</i></a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/"><i class="fa" aria-hidden="true">五月 2017</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/"><i class="fa" aria-hidden="true">三月 2017</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/"><i class="fa" aria-hidden="true">二月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/"><i class="fa" aria-hidden="true">一月 2017</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/"><i class="fa" aria-hidden="true">十二月 2016</i></a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/"><i class="fa" aria-hidden="true">十一月 2016</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/"><i class="fa" aria-hidden="true">十月 2016</i></a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/"><i class="fa" aria-hidden="true">九月 2016</i></a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/"><i class="fa" aria-hidden="true">八月 2016</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/"><i class="fa" aria-hidden="true">七月 2016</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/"><i class="fa" aria-hidden="true">六月 2016</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/"><i class="fa" aria-hidden="true">五月 2016</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/"><i class="fa" aria-hidden="true">四月 2016</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/"><i class="fa" aria-hidden="true">三月 2016</i></a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/"><i class="fa" aria-hidden="true">二月 2016</i></a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/"><i class="fa" aria-hidden="true">六月 2015</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/"><i class="fa" aria-hidden="true">五月 2015</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/"><i class="fa" aria-hidden="true">四月 2015</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/"><i class="fa" aria-hidden="true">三月 2015</i></a><span class="archive-list-count">2</span></li></ul>
+    </div>
+        
+        <div class="widget">
+    <h3 class="title">标签云</h3>
+    <div class="content tag-cloud">
+      
+        <a href="/tags/ios/" style="font-size: 1em">ios</a> <a href="/tags/Android/" style="font-size: 1em">Android</a> <a href="/tags/深入系统/" style="font-size: 1em">深入系统</a> <a href="/tags/系统服务/" style="font-size: 1em">系统服务</a> <a href="/tags/android/" style="font-size: 1em">android</a> <a href="/tags/混淆打包/" style="font-size: 1em">混淆打包</a> <a href="/tags/Angular2/" style="font-size: 1em">Angular2</a> <a href="/tags/前端开发/" style="font-size: 1em">前端开发</a> <a href="/tags/硬件/" style="font-size: 1em">硬件</a> <a href="/tags/前端/" style="font-size: 1em">前端</a> <a href="/tags/React-Native/" style="font-size: 1em">React Native</a> <a href="/tags/FlexBox布局/" style="font-size: 1em">FlexBox布局</a> <a href="/tags/Google/" style="font-size: 1em">Google</a> <a href="/tags/VR/" style="font-size: 1em">VR</a> <a href="/tags/Java/" style="font-size: 1em">Java</a> <a href="/tags/垃圾回收/" style="font-size: 1em">垃圾回收</a> <a href="/tags/编程语言/" style="font-size: 1em">编程语言</a> <a href="/tags/Node/" style="font-size: 1em">Node</a> <a href="/tags/OpenGL/" style="font-size: 1em">OpenGL</a> <a href="/tags/Promise/" style="font-size: 1em">Promise</a> <a href="/tags/eact-Native/" style="font-size: 1em">eact Native</a> <a href="/tags/打包/" style="font-size: 1em">打包</a> <a href="/tags/调试/" style="font-size: 1em">调试</a> <a href="/tags/原生/" style="font-size: 1em">原生</a> <a href="/tags/后端/" style="font-size: 1em">后端</a> <a href="/tags/Spring/" style="font-size: 1em">Spring</a> <a href="/tags/入门/" style="font-size: 1em">入门</a> <a href="/tags/新特性/" style="font-size: 1em">新特性</a> <a href="/tags/swift/" style="font-size: 1em">swift</a> <a href="/tags/Swift/" style="font-size: 1em">Swift</a> <a href="/tags/AR/" style="font-size: 1em">AR</a> <a href="/tags/知识库/" style="font-size: 1em">知识库</a> <a href="/tags/Xcode/" style="font-size: 1em">Xcode</a> <a href="/tags/webpack/" style="font-size: 1em">webpack</a> <a href="/tags/gulp/" style="font-size: 1em">gulp</a> <a href="/tags/https/" style="font-size: 1em">https</a> <a href="/tags/iOS/" style="font-size: 1em">iOS</a> <a href="/tags/gif/" style="font-size: 1em">gif</a> <a href="/tags/mac/" style="font-size: 1em">mac</a> <a href="/tags/环境/" style="font-size: 1em">环境</a> <a href="/tags/原理/" style="font-size: 1em">原理</a> <a href="/tags/react/" style="font-size: 1em">react</a> <a href="/tags/杂谈/" style="font-size: 1em">杂谈</a> <a href="/tags/个人博客/" style="font-size: 1em">个人博客</a> <a href="/tags/流量/" style="font-size: 1em">流量</a> <a href="/tags/小程序/" style="font-size: 1em">小程序</a> <a href="/tags/微信/" style="font-size: 1em">微信</a> <a href="/tags/全栈/" style="font-size: 1em">全栈</a> <a href="/tags/搭建网站/" style="font-size: 1em">搭建网站</a> <a href="/tags/机器学习/" style="font-size: 1em">机器学习</a> <a href="/tags/算法/" style="font-size: 1em">算法</a> <a href="/tags/深入理解/" style="font-size: 1em">深入理解</a> <a href="/tags/内存分配/" style="font-size: 1em">内存分配</a> <a href="/tags/设计模式/" style="font-size: 1em">设计模式</a>
+    </div>
+  </div>
+        
+        <div class="widget">
+        <h3 class="title">友链</h3>
+        <div class="content friends-link">
+        
+            <a href="http://blog.csdn.net/xiangzhihong8/" class="fa" target="_blank">作者博客</a>
+        
+            <a href="https://yq.aliyun.com/u/xiangzhihong" class="fa" target="_blank">阿里云博客</a>
+        
+        </div>
+    </div>
+        
+    </aside>
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <span>Copyright &copy; 2017 
+                </span> | 
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/assets/highlight.pack.js?rev=@@hash"></script>
+  <script>
+    hljs.initHighlightingOnLoad(); //初始化代码高亮 
+  </script>
+
+<script src="/js/app.js?rev=@@hash"></script>
+</body>

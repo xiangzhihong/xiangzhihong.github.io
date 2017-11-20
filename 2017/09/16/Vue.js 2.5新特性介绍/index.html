@@ -1,0 +1,331 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no">
+    <link rel="dns-prefetch" href="//t11.baidu.com">
+    <!--SEO-->
+
+
+
+<meta name="robots" content="all">
+<meta name="google" content="all">
+<meta name="googlebot" content="all">
+<meta name="verify" content="all">
+    <!--Title-->
+
+
+<title>Vue.js 2.5新特性介绍 | 向志洪</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="向志洪" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css?rev=9.12.0">
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+    <div class="hide">
+    <script src="https://s4.cnzz.com/z_stat.php?id=1261768793&web_id=1262140174" language="JavaScript"></script>
+    </div>
+    
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?13764659765";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head></html>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+<body>
+    <header class="main-header">
+    <div class="main-header-box">
+        <a class="branding" href="/" title="">
+            <img src="/img/header_logo.png" alt="Snippet 博客主题">
+        </a>
+        <h2 class="text-hide">Snippet主题</h2>
+        <img src="/img/header_logo.png" alt="Snippet 博客主题" class="hide">
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only">Toggle navigation</span>
+                    <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class=""><a href="/">首页</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/前端/">前端</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/后端/">后端</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/编程语言/">编程语言</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/Android/">Android</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/iOS/">iOS</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/React Native/">React Native</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/小程序/">小程序</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/杂谈/">杂谈</a></li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="Vue.js 2.5新特性介绍">
+            
+            Vue.js 2.5新特性介绍
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <span>前端</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            前端
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta">2017/09/16</span>
+    </span>
+</div>
+            
+            
+    </div>
+    
+    <div class="post-body">
+        <h1 id="TypeScript"><a href="#TypeScript" class="headerlink" title="TypeScript"></a>TypeScript</h1><p>TypeScript是一种由微软开发的自由和开源的编程语言。它是JavaScript的一个超集，而且本质上向这个语言添加了可选的静态类型和基于类的面向对象编程。2012年十月份，微软发布了首个公开版本的TypeScript，在2013年6月19日，微软发布了TypeScript 0.9的正式版本，到目前为止，TypeScript已发展到2.x版本，相关资料可以查看<a href="https://www.w3cschool.cn/typescript/typescript-tutorial.html" target="_blank" rel="external">W3C TypeScript入门</a></p>
+<h2 id="安装TypeScript"><a href="#安装TypeScript" class="headerlink" title="安装TypeScript"></a>安装TypeScript</h2><p>安装TypeScript主要有两种方式：</p>
+<ul>
+<li>通过npm方式安装（Node.js包管理器）</li>
+<li>安装TypeScript的Visual Studio插件<br>说明：Visual Studio2016和Visual Studio 2013 Update 2默认包含了TypeScript。npm安装的命令如下：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g typescript</div></pre></td></tr></table></figure>
+<p>##创建TypeScript文件<br>在编辑器中新建一个greeter.ts文件，并输入以下JavaScript代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">function greeter(person) &#123;</div><div class="line">    return &quot;Hello, &quot; + person;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var user = &quot;Jane User&quot;;</div><div class="line"></div><div class="line">document.body.innerHTML = greeter(user);</div></pre></td></tr></table></figure>
+<p>上面的代码直接输出“hello Jane User”。</p>
+<h2 id="编译代码"><a href="#编译代码" class="headerlink" title="编译代码"></a>编译代码</h2><p>在在命令行中运行TypeScript编译器即可编译代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tsc greeter.ts</div></pre></td></tr></table></figure>
+<h2 id="运行TypeScript-web程序"><a href="#运行TypeScript-web程序" class="headerlink" title="运行TypeScript web程序"></a>运行TypeScript web程序</h2><p>现在在greeter.html中输入以下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html&gt;</div><div class="line">    &lt;head&gt;&lt;title&gt;TypeScript Greeter&lt;/title&gt;&lt;/head&gt;</div><div class="line">    &lt;body&gt;</div><div class="line">        &lt;script src=&quot;greeter.js&quot;&gt;&lt;/script&gt;</div><div class="line">    &lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+<p>在浏览器中打开greeter.html即可去运行第一个TypeScript web应用程序demo！<br>关于更多的介绍请查看<a href="https://www.w3cschool.cn/typescript/typescript-tutorial.html" target="_blank" rel="external">TypeScript</a></p>
+<h1 id="Vue-js-2-5新特性"><a href="#Vue-js-2-5新特性" class="headerlink" title="Vue.js 2.5新特性"></a>Vue.js 2.5新特性</h1><p>Vue 2.5 Level E 已发布，在原来2.x的基础上做了很多相应改进和对 bug 的修复，目前 2.5 系列最新的版本为 2.5.2。如果读者希望全面的了解Vue 2.5的内容，可以通过查看<a href="https://github.com/vuejs/vue/releases/tag/v2.5.0" target="_blank" rel="external">Vue 2.5发布说明</a>来获取详细的介绍。针对官方的介绍和网上搜集的资料，本次2.5版本主要做了如下几方面的改进：</p>
+<ul>
+<li>更好的 TypeScript 集成</li>
+<li>更好的错误处理</li>
+<li>更好地支持单文件组件中的功能组件</li>
+<li>与环境无关的服务端渲染</li>
+</ul>
+<p>读者可以通过下面的链接查看原文介绍：<br><strong>TypeScript 声明改进</strong><br>further improve Vue type declarations for canonical usage (<a href="https://github.com/vuejs/vue/pull/6391" target="_blank" rel="external">#6391</a>) <a href="https://github.com/vuejs/vue/commit/db138e2254d71f6b96e033acf66ba43ad269841a" target="_blank" rel="external">db138e2</a></p>
+<p><strong>错误处理和报告</strong><br>improve error handling with new errorCaptured hook <a href="https://github.com/vuejs/vue/commit/b3cd9bc3940eb1e01da7081450929557d9c1651e" target="_blank" rel="external">b3cd9bc [Details]</a></p>
+<p>improve template expression error message <a href="https://github.com/vuejs/vue/commit/e38d0067521eee85febedc5f3ed3c24b5454c3a9" target="_blank" rel="external">e38d006</a>, closes <a href="https://github.com/vuejs/vue/issues/6771" target="_blank" rel="external">#6771</a></p>
+<p>improve option type checks <a href="https://github.com/vuejs/vue/commit/b7105ae8c9093e36ec89a470caa3b78bda3ef467" target="_blank" rel="external">b7105ae</a></p>
+<p><strong>功能组件</strong><br>compiled templates for functional component support <a href="https://github.com/vuejs/vue/commit/ea0d227d2ddfa5fc5e1112acf9cd485b4eae62cb" target="_blank" rel="external">ea0d227</a></p>
+<p>scoped CSS support for functional components <a href="https://github.com/vuejs/vue/commit/050bb33f9b02589357c037623ea8cbf8ff13555b" target="_blank" rel="external">050bb33</a></p>
+<p><strong>服务器端渲染</strong></p>
+<p>renderToString now returns a Promise if no callback is passed <a href="https://github.com/vuejs/vue/commit/f881dd175a6764f6f80077df20f950dba63ca447" target="_blank" rel="external">f881dd1</a>, closes <a href="https://github.com/vuejs/vue/issues/6160" target="_blank" rel="external">#6160</a></p>
+<p>add shouldPrefetch option (same signature as shouldPreload) <a href="https://github.com/vuejs/vue/commit/7bc899ce0ec10be3fbd4bd7e78b66dd357249c81" target="_blank" rel="external">7bc899c</a>, closes <a href="https://github.com/vuejs/vue/issues/5964" target="_blank" rel="external">#5964</a></p>
+<p>auto-remove initial state embed script if in production (<a href="https://github.com/vuejs/vue/pull/6763" target="_blank" rel="external">#6763</a>) <a href="https://github.com/vuejs/vue/commit/2d32b5d1b663fa331ec256b73e937af15eb6e3d5" target="_blank" rel="external">2d32b5d</a>, closes <a href="https://github.com/vuejs/vue/issues/6761" target="_blank" rel="external">#6761</a></p>
+<p>now ships an environment-agnostic build of the server renderer in vue-server-renderer/basic.jsc<a href="https://github.com/vuejs/vue/commit/c5d0fa0503631b53338e5255bc8640da4b2fd4cb" target="_blank" rel="external">5d0fa0</a> <a href="https://gist.github.com/yyx990803/9bdff05e5468a60ced06c29c39114c6b#environment-agnostic-ssr" target="_blank" rel="external">Details</a></p>
+<h2 id="TypeScript改进"><a href="#TypeScript改进" class="headerlink" title="TypeScript改进"></a>TypeScript改进</h2><p>自Vue2.0发布以来，一直有开发者提出请求，希望能更好地集成TypeScript。从那时起，我们已经为大多数核心库（vue，vue - routervuex）加入了官方的TypeScript类型声明。然而，当使用开箱即用的Vue API时，目前的集成还是有所欠缺。例如：TypeScript不能轻易地推断出Vue使用的默认基于对象的API中的this类型。为了使我们的Vue代码与TypeScript更好地协作，我们需要使用vue-class-component装饰器，它允许我们使用基于类的语法来写Vue组件。</p>
+<p>对于喜欢基于类的API的用户，这可能够好了，但还是有点不足，只是为了类型判断，用户就得使用不同的API。这也使得现有的Vue代码库迁移到TypeScript更加困难。</p>
+<p>今年的早些时候，TypeScript引入了一些新特性，能使TypeScript更好地理解基于对象字面量的API，这也使得改进Vue的类型声明更具可能。来自TypeScript团队的Daniel Rosenwasser发起了一个雄心勃勃的PR计划。使用TypeScript后，将会有如下的好处：</p>
+<ul>
+<li>使用默认的Vue API时，对this的正确类型推断。在单文件组件中同样有效！</li>
+<li>基于组件的props配置的的props的类型推断。</li>
+<li>更重要的是，这些改进也会使原生JavaScript用户受益！，如果你正在使用VSCode且安装了优秀的Vetur扩展，在Vue组件中使用原生JavaScript时，你会获得十分完善的自动补全提示甚至是类型提示！这是因为vue-language-server，这个分析Vue组件的内部包，可以利用TypeScript编译器来提取关于你代码的更多信息。此外，任何支持语言服务协议的的编辑器都可以利用vue-language-server来提供类似的功能。</li>
+</ul>
+<p>说明：注意：TypeScript 用户还应将以下包更新为最新版本从而兼容类型声明：vue-router，vuex，vuex-router-sync 和 vue-class-component。</p>
+<p><img src="http://img.blog.csdn.net/20171017223855281?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h2 id="错误提示"><a href="#错误提示" class="headerlink" title="错误提示"></a>错误提示</h2><p>在2.4及更早版本中，通常使用全局 config.errorHandleroption 来处理应用程序中的意外错误。当然，还可以使用renderError 组件选项来处理渲染函数中的错误。</p>
+<p>而在新版本中，vue引入了errorCaptured 钩子，具有此钩子的组件捕获其子组件树（不包括其自身）中的所有错误（不包括在异步回调中调用的那些）。这和React的思想是一致的。</p>
+<p>要利用 errorCaputerd，可以封装一个通用组件，来包含其他的业务组件，来捕获业务组件内的异常，并做对应的展示处理。下面列一个官方给的简单示例，封装一个通用组件(ErrorBoundary)来包含和处理其他业务组件(another component)的异常。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">Vue.component(&apos;ErrorBoundary&apos;, &#123;</div><div class="line">  data: () =&gt; (&#123; error: null &#125;),</div><div class="line">  errorCaptured (err, vm, info) &#123;    </div><div class="line">    this.error = `$&#123;err.stack&#125;\n\nfound in $&#123;info&#125; of component`</div><div class="line">    return false</div><div class="line">  &#125;,</div><div class="line">  render (h) &#123;    </div><div class="line">    if (this.error) &#123;      </div><div class="line">      return h(&apos;pre&apos;, &#123; style: &#123; color: &apos;red&apos; &#125;&#125;, this.error)</div><div class="line">    &#125;    </div><div class="line">    // ignoring edge cases for the sake of demonstration</div><div class="line">    return this.$slots.default[0]</div><div class="line">  &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;error-boundary&gt;</div><div class="line">  &lt;another-component /&gt;</div><div class="line">&lt;/error-boundary&gt;</div></pre></td></tr></table></figure>
+<p>errorCaputed参数传递主要有如下的特性：</p>
+<ul>
+<li>如果定义了全局的 errorHandler，所有的异常还是会传递给 errorHadnler，如果没有定义<br>errorHandler，这些异常仍然可以报告给一个单独的分析服务。</li>
+<li>如果一个组件上通过继承或父组件定义了多个 errorCapured 钩子函数，这些钩子函数都会收到同样的异常信息。</li>
+<li>可以在 errorCapured 钩子内 return false 来阻止异常传播，表示：该异常已经被处理，可忽略。而且，也会阻止其他的 errorCapured 钩子函数和全局的 errorHandler 函数触发这个异常。<h2 id="SFC-函数式组件"><a href="#SFC-函数式组件" class="headerlink" title="SFC 函数式组件"></a>SFC 函数式组件</h2></li>
+</ul>
+<p>通过 vue-loader v13.3.0 或以上版本，支持在单文件组件内定义一个“函数式组件”，且支持模板编译、作用域 CSS 和 热部署等功能。</p>
+<p>函数式组件的定义，需要在 template 标签上定义 functional 属性来声明。且模板内的表达式的执行上下文是 函数式声明上下文，所以要访问组件的属性，需要使用 props.xxx 来获取。例子见下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;template functional&gt;</div><div class="line">  &lt;div&gt;&#123;&#123; props.msg &#125;&#125;&lt;/div&gt;</div><div class="line">&lt;/template&gt;</div></pre></td></tr></table></figure>
+<h2 id="与环境无关的服务端渲染（SSR-环境）"><a href="#与环境无关的服务端渲染（SSR-环境）" class="headerlink" title="与环境无关的服务端渲染（SSR 环境）"></a>与环境无关的服务端渲染（SSR 环境）</h2><p>使用 vue-server-renderer 来构建 SSR 应用时，默认是需要一个 Node.js 环境的，使得一些像 php-v8js 或 Nashorn 这样的 JavaScript 运行环境下无法运行。v2.5 中对此进行了完善，使得上述环境下都可以正常运行 SSR 应用。</p>
+<p>在 php-v8js 和 Nashorn 中，在环境的准备阶段需要模拟 global 和 process 全局对象，并且需要单独设置 process 的环境变量。需要设置 process.env.VUE_ENV 为 “server”，设置 process.env.NODE_ENV 为 “development” 或 “production”。</p>
+<p>另外，在 Nashorn 中，还需要用 Java 原生的 timers 为 Promise 和 settimeout 提供一个 polyfill。官方给出了一个在 php-v8js 中的使用示例，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line">$vue_source = file_get_contents(&apos;/path/to/vue.js&apos;);</div><div class="line">$renderer_source = file_get_contents(&apos;/path/to/vue-server-renderer/basic.js&apos;);</div><div class="line">$app_source = file_get_contents(&apos;/path/to/app.js&apos;);</div><div class="line">$v8 = new V8Js();</div><div class="line">$v8-&gt;executeString(&apos;var process = &#123; env: &#123; VUE_ENV: &quot;server&quot;, NODE_ENV: &quot;production&quot; &#125;&#125;; this.global = &#123; process: process &#125;;&apos;);</div><div class="line">$v8-&gt;executeString($vue_source);</div><div class="line">$v8-&gt;executeString($renderer_source);</div><div class="line">$v8-&gt;executeString($app_source);</div><div class="line">?&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">// app.js</div><div class="line">var vm = new Vue(&#123;</div><div class="line">  template: `&lt;div&gt;&#123;&#123; msg &#125;&#125;&lt;/div&gt;`,</div><div class="line">  data: &#123;</div><div class="line">    msg: &apos;hello&apos;</div><div class="line">  &#125;</div><div class="line">&#125;)</div><div class="line"></div><div class="line">// exposed by vue-server-renderer/basic.js</div><div class="line">renderVueComponentToString(vm, (err, res) =&gt; &#123;</div><div class="line">  print(res)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>Vue.js 这款渐进式的 JavaScript 框架自 2013 年发布至今，其简洁的语法设计、轻量快速的特点深受技术社区喜爱，在国内外都获得了非常广泛的应用及拓展，比如饿了么的开源组件库 Element UI 即是 根据Vue 开发的，而阿里巴巴的 Weex 与 Vue 也多有合作，而美团点评的mpVue也是比较出色的一款框架。</p>
+<h1 id="v-on-修饰符"><a href="#v-on-修饰符" class="headerlink" title="v-on 修饰符"></a>v-on 修饰符</h1><h2 id="键值-key-自动修饰符"><a href="#键值-key-自动修饰符" class="headerlink" title="键值 key 自动修饰符"></a>键值 key 自动修饰符</h2><p>在 Vue v2.5 之前的版本中，如果要在 v-on 中使用没有内置别名的键盘键值，要么直接使用 keyCode 当修饰符（@keyup.13=”foo”），要么需要使用 config.keyCodes 来为键值注册别名。在 v2.5中，你可以直接使用合法的键值 key 值（参考MDN中的 KeyboardEvent.key）作为修饰符来串联使用它。如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;input @keyup.page-down=&quot;onPageDown&quot;&gt;</div></pre></td></tr></table></figure>
+<p>上述例子中，事件处理函数只会在 $event.key === ‘PageDown’ 时被调用。<br>注意：现有键值修饰符仍然可用。在IE9中，一些键值（.esc 和 方向键的 key）不是一致的值，如果要兼容 IE9，需要按 IE9 中内置的别名来处理。</p>
+<h2 id="exact-修饰符"><a href="#exact-修饰符" class="headerlink" title=".exact 修饰符"></a>.exact 修饰符</h2><p>新增了一个 .exact 修饰符，该修饰符应该和其他系统修饰符(.ctrl, .alt, .shift and .meta)结合使用，可用用来区分一些强制多个修饰符结合按下才会触发事件处理函数。如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 当 Alt 或 Shift 被按下也会触发处理函数 --&gt;</div><div class="line">&lt;button @click.ctrl=&quot;onClick&quot;&gt;A&lt;/button&gt;</div><div class="line"></div><div class="line">&lt;!-- 只有当 Ctrl 被按下，才会触发处理函数 --&gt;</div><div class="line">&lt;button @click.ctrl.exact=&quot;onCtrlClick&quot;&gt;A&lt;/button&gt;</div></pre></td></tr></table></figure>
+<h2 id="简化-Scoped-Slots-的使用"><a href="#简化-Scoped-Slots-的使用" class="headerlink" title="简化 Scoped Slots 的使用"></a>简化 Scoped Slots 的使用</h2><p>之前，如果要在 template 标签上使用 scope 属性定义一个 scoped slot，可以像下面这样定义：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;comp&gt;</div><div class="line">  &lt;template scope=&quot;props&quot;&gt;</div><div class="line">    &lt;div&gt;&#123;&#123; props.msg &#125;&#125;&lt;/div&gt;</div><div class="line">  &lt;/template&gt;</div><div class="line">&lt;/comp&gt;</div></pre></td></tr></table></figure>
+<p>在 v2.5 中，scope 属性已被弃用（仍然可用，但是会爆出一个警告，就像本文文首的那样），我们使用 slot-scope 属性替代 scope 属性来表示一个 scoped slot，且 slot-scope 属性除了可以被用在 template 上，还可以用在标签元素和组件上。如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;comp&gt;</div><div class="line">  &lt;div slot-scope=&quot;props&quot;&gt;</div><div class="line">    &#123;&#123; props.msg &#125;&#125;</div><div class="line">  &lt;/div&gt;</div><div class="line">&lt;/comp&gt;</div></pre></td></tr></table></figure>
+<p>注意：这次的调整，表示 slot-scope 已经是一个保留属性了，不能再被单独用在组件属性上了。</p>
+<h2 id="Inject-新增默认值选项"><a href="#Inject-新增默认值选项" class="headerlink" title="Inject 新增默认值选项"></a>Inject 新增默认值选项</h2><p>本次调整中，Injections 可以作为可选配置，并且可以声明默认值。也可以用 from 来表示原属性。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">export default &#123;</div><div class="line">  inject: &#123;</div><div class="line">    foo: &#123;</div><div class="line">      from: &apos;bar&apos;,</div><div class="line">      default: &apos;foo&apos;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>与属性类似，数组和对象的默认值需要使用一个工厂函数返回。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">export default &#123;</div><div class="line">  inject: &#123;</div><div class="line">    foo: &#123;</div><div class="line">      from: &apos;bar&apos;,</div><div class="line">      default: () =&gt; [1, 2, 3]</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>附：<a href="http://blog.csdn.net/csdnnews/article/details/78252848" target="_blank" rel="external">美团小程序框架mpVue</a></p>
+    </div>
+
+    <div class="post-footer">   
+        <div>
+            
+                转载声明: 商业转载请联系作者获得授权,非商业转载请注明出处 © Snippet
+            
+        </div>
+        <div>
+            
+                版权声明: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+知识共享署名-非商业性使用-禁止演绎 3.0 未本地化版本许可协议（CC BY-NC-ND 3.0）
+</a>
+            
+        </div>  
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/2017/10/09/一个ClassLoader引起的JNI链接错误/" class="pre-post btn btn-default"><i class="fa fa-angle-left fa-fw"></i>上一篇</a>
+    
+    
+        <a href="/2017/09/16/Kotlin极简教程(第一章 Kotlin简介)/" class="next-post btn btn-default">下一篇<i class="fa fa-angle-right fa-fw"></i></a>
+    
+</div>
+
+
+    <div id="comments">
+        <div id="uyan_frame"></div>
+    <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2120654"></script>
+    </div>
+                </main>
+                <aside class="col-md-4 sidebar">
+        
+        <div class="widget notification">
+        <h3 class="title">网站公告</h3>
+        <div>
+            <p>主题Snippet v1.1.0版本即将上线，敬请期待~ <br>
+主题下载：<a href="https://github.com/shenliyang/hexo-theme-snippet" title="fork me" target="_blank">Snippet主题</a> <br>
+<hr>前端工程师一枚，专注于前端Node、React和移动端Android和Ios开发，欢迎骚扰。
+<br>联系方式：qq群:278792776（移动群）、515980159（React群）、188716429（猎头hr群）
+</p>
+        </div>
+    </div>
+        
+        <div class="widget">
+        <h3 class="title">分类</h3>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/"><i class="fa" aria-hidden="true">Android</i></a><span class="category-list-count">36</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/系统/"><i class="fa" aria-hidden="true">系统</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Google/"><i class="fa" aria-hidden="true">Google</i></a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Google/VR/"><i class="fa" aria-hidden="true">VR</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React-Native/"><i class="fa" aria-hidden="true">React Native</i></a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/"><i class="fa" aria-hidden="true">Spring</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android/"><i class="fa" aria-hidden="true">android</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/"><i class="fa" aria-hidden="true">iOS</i></a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ios/"><i class="fa" aria-hidden="true">ios</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/"><i class="fa" aria-hidden="true">前端</i></a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端/"><i class="fa" aria-hidden="true">后端</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/小程序/"><i class="fa" aria-hidden="true">小程序</i></a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术人生/"><i class="fa" aria-hidden="true">技术人生</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/机器学习/"><i class="fa" aria-hidden="true">机器学习</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂谈/"><i class="fa" aria-hidden="true">杂谈</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程语言/"><i class="fa" aria-hidden="true">编程语言</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/"><i class="fa" aria-hidden="true">设计模式</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/资料库/"><i class="fa" aria-hidden="true">资料库</i></a><span class="category-list-count">1</span></li></ul>
+    </div>
+        
+        <div class="widget">
+      <h3 class="title">归档</h3>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/"><i class="fa" aria-hidden="true">十月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/"><i class="fa" aria-hidden="true">八月 2017</i></a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/"><i class="fa" aria-hidden="true">六月 2017</i></a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/"><i class="fa" aria-hidden="true">五月 2017</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/"><i class="fa" aria-hidden="true">三月 2017</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/"><i class="fa" aria-hidden="true">二月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/"><i class="fa" aria-hidden="true">一月 2017</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/"><i class="fa" aria-hidden="true">十二月 2016</i></a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/"><i class="fa" aria-hidden="true">十一月 2016</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/"><i class="fa" aria-hidden="true">十月 2016</i></a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/"><i class="fa" aria-hidden="true">九月 2016</i></a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/"><i class="fa" aria-hidden="true">八月 2016</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/"><i class="fa" aria-hidden="true">七月 2016</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/"><i class="fa" aria-hidden="true">六月 2016</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/"><i class="fa" aria-hidden="true">五月 2016</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/"><i class="fa" aria-hidden="true">四月 2016</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/"><i class="fa" aria-hidden="true">三月 2016</i></a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/"><i class="fa" aria-hidden="true">二月 2016</i></a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/"><i class="fa" aria-hidden="true">六月 2015</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/"><i class="fa" aria-hidden="true">五月 2015</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/"><i class="fa" aria-hidden="true">四月 2015</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/"><i class="fa" aria-hidden="true">三月 2015</i></a><span class="archive-list-count">2</span></li></ul>
+    </div>
+        
+        <div class="widget">
+    <h3 class="title">标签云</h3>
+    <div class="content tag-cloud">
+      
+        <a href="/tags/ios/" style="font-size: 1em">ios</a> <a href="/tags/Android/" style="font-size: 1em">Android</a> <a href="/tags/深入系统/" style="font-size: 1em">深入系统</a> <a href="/tags/系统服务/" style="font-size: 1em">系统服务</a> <a href="/tags/android/" style="font-size: 1em">android</a> <a href="/tags/混淆打包/" style="font-size: 1em">混淆打包</a> <a href="/tags/Angular2/" style="font-size: 1em">Angular2</a> <a href="/tags/前端开发/" style="font-size: 1em">前端开发</a> <a href="/tags/硬件/" style="font-size: 1em">硬件</a> <a href="/tags/前端/" style="font-size: 1em">前端</a> <a href="/tags/React-Native/" style="font-size: 1em">React Native</a> <a href="/tags/FlexBox布局/" style="font-size: 1em">FlexBox布局</a> <a href="/tags/Google/" style="font-size: 1em">Google</a> <a href="/tags/VR/" style="font-size: 1em">VR</a> <a href="/tags/Java/" style="font-size: 1em">Java</a> <a href="/tags/垃圾回收/" style="font-size: 1em">垃圾回收</a> <a href="/tags/编程语言/" style="font-size: 1em">编程语言</a> <a href="/tags/Node/" style="font-size: 1em">Node</a> <a href="/tags/OpenGL/" style="font-size: 1em">OpenGL</a> <a href="/tags/Promise/" style="font-size: 1em">Promise</a> <a href="/tags/eact-Native/" style="font-size: 1em">eact Native</a> <a href="/tags/打包/" style="font-size: 1em">打包</a> <a href="/tags/调试/" style="font-size: 1em">调试</a> <a href="/tags/原生/" style="font-size: 1em">原生</a> <a href="/tags/后端/" style="font-size: 1em">后端</a> <a href="/tags/Spring/" style="font-size: 1em">Spring</a> <a href="/tags/入门/" style="font-size: 1em">入门</a> <a href="/tags/新特性/" style="font-size: 1em">新特性</a> <a href="/tags/swift/" style="font-size: 1em">swift</a> <a href="/tags/Swift/" style="font-size: 1em">Swift</a> <a href="/tags/AR/" style="font-size: 1em">AR</a> <a href="/tags/知识库/" style="font-size: 1em">知识库</a> <a href="/tags/Xcode/" style="font-size: 1em">Xcode</a> <a href="/tags/webpack/" style="font-size: 1em">webpack</a> <a href="/tags/gulp/" style="font-size: 1em">gulp</a> <a href="/tags/https/" style="font-size: 1em">https</a> <a href="/tags/iOS/" style="font-size: 1em">iOS</a> <a href="/tags/gif/" style="font-size: 1em">gif</a> <a href="/tags/mac/" style="font-size: 1em">mac</a> <a href="/tags/环境/" style="font-size: 1em">环境</a> <a href="/tags/原理/" style="font-size: 1em">原理</a> <a href="/tags/react/" style="font-size: 1em">react</a> <a href="/tags/杂谈/" style="font-size: 1em">杂谈</a> <a href="/tags/个人博客/" style="font-size: 1em">个人博客</a> <a href="/tags/流量/" style="font-size: 1em">流量</a> <a href="/tags/小程序/" style="font-size: 1em">小程序</a> <a href="/tags/微信/" style="font-size: 1em">微信</a> <a href="/tags/全栈/" style="font-size: 1em">全栈</a> <a href="/tags/搭建网站/" style="font-size: 1em">搭建网站</a> <a href="/tags/机器学习/" style="font-size: 1em">机器学习</a> <a href="/tags/算法/" style="font-size: 1em">算法</a> <a href="/tags/深入理解/" style="font-size: 1em">深入理解</a> <a href="/tags/内存分配/" style="font-size: 1em">内存分配</a> <a href="/tags/设计模式/" style="font-size: 1em">设计模式</a>
+    </div>
+  </div>
+        
+        <div class="widget">
+        <h3 class="title">友链</h3>
+        <div class="content friends-link">
+        
+            <a href="http://blog.csdn.net/xiangzhihong8/" class="fa" target="_blank">作者博客</a>
+        
+            <a href="https://yq.aliyun.com/u/xiangzhihong" class="fa" target="_blank">阿里云博客</a>
+        
+        </div>
+    </div>
+        
+    </aside>
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <span>Copyright &copy; 2017 
+                </span> | 
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/assets/highlight.pack.js?rev=@@hash"></script>
+  <script>
+    hljs.initHighlightingOnLoad(); //初始化代码高亮 
+  </script>
+
+<script src="/js/app.js?rev=@@hash"></script>
+</body>

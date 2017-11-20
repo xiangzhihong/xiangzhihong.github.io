@@ -1,0 +1,299 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no">
+    <link rel="dns-prefetch" href="//t11.baidu.com">
+    <!--SEO-->
+
+
+
+<meta name="robots" content="all">
+<meta name="google" content="all">
+<meta name="googlebot" content="all">
+<meta name="verify" content="all">
+    <!--Title-->
+
+
+<title>谷歌增强现实技术ARCore | 向志洪</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="向志洪" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css?rev=9.12.0">
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+    <div class="hide">
+    <script src="https://s4.cnzz.com/z_stat.php?id=1261768793&web_id=1262140174" language="JavaScript"></script>
+    </div>
+    
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?13764659765";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head></html>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+<body>
+    <header class="main-header">
+    <div class="main-header-box">
+        <a class="branding" href="/" title="">
+            <img src="/img/header_logo.png" alt="Snippet 博客主题">
+        </a>
+        <h2 class="text-hide">Snippet主题</h2>
+        <img src="/img/header_logo.png" alt="Snippet 博客主题" class="hide">
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only">Toggle navigation</span>
+                    <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class=""><a href="/">首页</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/前端/">前端</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/后端/">后端</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/编程语言/">编程语言</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/Android/">Android</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/iOS/">iOS</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/React Native/">React Native</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/小程序/">小程序</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/杂谈/">杂谈</a></li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="谷歌增强现实技术ARCore">
+            
+            谷歌增强现实技术ARCore
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <span>杂谈</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            杂谈
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta">2017/06/13</span>
+    </span>
+</div>
+            
+            
+    </div>
+    
+    <div class="post-body">
+        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>随着，今年苹果在6月的WWDC 2017上发布的ARKit，谷歌也在前不久（8月29日），发布了用于Android平台的AR SDK——ARCore。这弥补了AR在Android市场上的空缺，让无数Android用户激动不已，要知道Android拥有超过20亿活跃设备，如果说ARKit是苹果AR的起点，那么说ARCore掀起了移动AR市场的狂潮，ARCore的横空出世意味着AR进入手机大群体用户的生活成为可能。</p>
+<p>大约3年前，Google曾发布一个Tango AR，而ARCore也可以看做是Tango的升级版本。据了解，目前Google ARCore只支持Google Pixel和Samsung Galaxy S8两种型号的设备，谷歌表示，他们正在积极与三星、华硕、LG、华为等厂商开展合作，预计今年11月份，将会有超过1亿的Android用户可以访问ARCore的应用程序。</p>
+<p><img src="http://img.blog.csdn.net/20170918101409748?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>AR今年还只是起步阶段，有很多权威机构预测2018年将是AR技术快速发展的一年。</p>
+<h2 id="ARCore工作原理"><a href="#ARCore工作原理" class="headerlink" title="ARCore工作原理"></a>ARCore工作原理</h2><p>要理解ARCore的工作原理，首先需要理解以下的物理概念：</p>
+<ol>
+<li><strong>运动跟踪</strong>：它利用IMU传感器和设备的相机来发现空间的特征点，由此确定Android设备的位置和方向。此外，使用VPS,可以让AR物体每次看起来似乎都在同一位置。</li>
+<li><strong>环境感知</strong>：虚拟物体一般都是放置于平坦平面上的，用ARCore可以检测物体的水平表面，建立环境认知感，以保证虚拟的对象可以准确放置，然后让您看到放置在这些表面上的AR物体。</li>
+<li><strong>光线预测</strong>：ARCore根据环境的光强度，使开发人员可以与周围环境相匹配的方式点亮虚拟对象。此外，最近的一个实验发现，虚拟阴影在真实环境光照下的调整功能也是如此，这样就可以使AR物体的外观更为逼真。</li>
+</ol>
+<h2 id="ARCore与Tango对比"><a href="#ARCore与Tango对比" class="headerlink" title="ARCore与Tango对比"></a>ARCore与Tango对比</h2><p>ARCore和Tango两者的性能都很强大，但最突出的差别是对硬件的要求，ARCore不需要额外的硬件就能在Android上运行，而Tango需要专属的定制硬件联想PHAB 2 PRO或华硕Zenfone AR上才能运行，这两款硬件产品的处理器配置低、巨大的边框设计和不良的电池寿命让用户牺牲了很多体验。在这一点上，ARCore比Tango升级不少。</p>
+<h2 id="ARCore与ARKit对比"><a href="#ARCore与ARKit对比" class="headerlink" title="ARCore与ARKit对比"></a>ARCore与ARKit对比</h2><p>ARKit是2017年6月6日，苹果发布iOS11系统所新增框架,它能够帮助我们以最简单快捷的方式实现AR技术功能。为了体验ARKit的新功能，笔者特意将相关环境做了升级。随着相关模型的完善，以及开发示例的完善，相信ARKit一定能加强app的相关体验。<br>ARCore与ARKit对比有如下的相同点和异同点：</p>
+<h3 id="相同点"><a href="#相同点" class="headerlink" title="相同点"></a>相同点</h3><ol>
+<li>ARKit在iOS中的工作原理与ARCore上述的原理大致相同。两者都是使用现有手机的单个摄像头来感知并跟踪您的手机相对于现实世界的运动，并能调整虚拟物体与现实世界的匹配程度。</li>
+<li>两者都能与Java/OpenGL，Unity和Unreal配合使用，并且都不需要其他特制硬件就可以在手机系统上运行。</li>
+<li>两者都是先面向开发者，后面向消费者，他们希望开发人员能够轻松创建AR应用程序，理论上可以在现有的数亿手机上应用。</li>
+</ol>
+<h3 id="不同点"><a href="#不同点" class="headerlink" title="不同点"></a>不同点</h3><p>ARKit可以将AR应用程序运行在任何具有A9处理器的iOS 11系统以上，这意味着任何iPhone 6S或更高版本或任何iPad Pro都将能运行这些AR应用程序，但是对Android来说，由于不同厂商的手机型号会有兼容性的问题以及摄像头的不同，这在很大程度上限制ARCore在Android的推广，为此，Google还需做大量的工作。</p>
+<h1 id="ARCore-上手"><a href="#ARCore-上手" class="headerlink" title="ARCore 上手"></a>ARCore 上手</h1><h2 id="支持设备"><a href="#支持设备" class="headerlink" title="支持设备"></a>支持设备</h2><p>ARCore 被设计用来支持数量广大的 Android 设备，要求系统不低于 Android N。在当前，主要支持Google Pixel/Pixel X和Samsung Galaxy S8 (SM-G950U, SM-G950N, SM-G950F, SM-G950FD, SM-G950W, SM-G950U1)。</p>
+<h2 id="快速上手"><a href="#快速上手" class="headerlink" title="快速上手"></a>快速上手</h2><h3 id="Android-上手"><a href="#Android-上手" class="headerlink" title="Android 上手"></a>Android 上手</h3><p><img src="http://img.blog.csdn.net/20170918110447050?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>安装版本 2.3 或更高的 Android Studio，内含版本 7.0（API 等级 24）或更高的 Android SDK Platform。并且需要使用上面提到的能支持 ARCore 的 Android 设备。开发AR你还需要具备OpenGL<a href="https://developer.android.cn/training/graphics/opengl/index.html" target="_blank" rel="external">OpenGL官网</a>相关的知识。</p>
+<p>由于AR用到了很多的传感器，所以模拟器是不支持测试的。要测试开发的程序，启用开发者选项，启用 USB debugging，然后在设备上安装 ARCore Service。当然，读者可以使用<a href="https://github.com/google-ar/arcore-android-sdk/releases/download/sdk-preview/arcore-preview.apk" target="_blank" rel="external">arcore体验apk</a>。</p>
+<p><strong>打开示例项目：</strong><br>在 Android Studio 中，找到 <arcore sdk="" folder="">/samples/java_arcore_hello_ar，并打开 HelloAR 示例项目。示例项目依赖于特定版本的软件，如 Gradle 和 Android SDK 等。如果所需的依赖项未能安装，Android Studio 将请求在您的开发机上对其进行下载和安装。然后点击运行即可。<br><img src="http://img.blog.csdn.net/20170918111112016?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></arcore></p>
+<p><img src="http://img.blog.csdn.net/20170918111205951?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>随着设备的移动，应用会自动侦测到水平表面，并绘制出棱形网格。点击网格即可在平面上放置 Android 机器人即可完成移动。之后，您可以通过 “添加为依赖项” 的方式，将 ARCore AAR Library 整合至现有的项目中。您的应用的 minSDKVersion 必须为 19 或更高。</p>
+<h3 id="Unity-上手"><a href="#Unity-上手" class="headerlink" title="Unity 上手"></a>Unity 上手</h3><p><img src="http://img.blog.csdn.net/20170918111642318?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>Unity环境下使用ARCore需要如下的环境支持：</p>
+<ul>
+<li>安装版本 7.0（API 等级 24）或更高的 Android SDK。</li>
+<li>安装 Unity 2017.2 Beta 9，并附加 Android Build Support 组件。</li>
+<li>下载 SDK Preview for Unity 并解压</li>
+</ul>
+<p><strong>创建项目</strong></p>
+<ol>
+<li>在 Unity 中选择 “文件” &gt; “新项目”。将您的项目命名为HelloAR，保留 3D 模式的选中状态，并点击 “创建项目”。</li>
+<li>导入 arcore-unity-sdk-preview.unitypackage：在 Unity 里点击菜单 “资源” &gt; “导入包” &gt; “全部”，导入 Unity 包的全部内容。</li>
+<li>点击 “文件” &gt; “Build 设置” 以打开 Build Settings 窗口，配置相关环境。<br><img src="http://img.blog.csdn.net/20170918112044527?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></li>
+<li>将目标平台更改为 Android 并点击 Switch Platform；<br>点击 Player Settings 打开 Android Player Settings，随后更改以下设置：Other Settings &gt; Multithreaded Rendering: 关闭；<br>Other Settings &gt; Package Name: 改为一个独特的应用 ID，看起来像是 JAVA 包的名称，如：com.example.helloAR；<br>XR Settings &gt; Tango Supported: 开启；<br>当然，‍你还可以设置场景，在项目窗口中通过 Assets &gt; GoogleARCore &gt; HelloARExample &gt; Scenes 选中场景。<br>然后，点击 “编译并运行”即可。<br><img src="http://img.blog.csdn.net/20170918112359769?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></li>
+</ol>
+<h3 id="web上手"><a href="#web上手" class="headerlink" title="web上手"></a>web上手</h3><p> Google为了扩大AR的使用范围，占领市场，AR 引入Web，认为其是“AR未来的关键组成部分”， 并发布了两个实验性的浏览器——以AR为重点的Chromium浏览器版本：一个是在Android的基础上，可使用ARCore的浏览器；一个是基于iOS，可使用ARKit的浏览器。</p>
+<p>今天的 Web 上并没有适用于 AR 的标准，开发者们可以使用网络工具进行实验，利用 AR 来增强网络体验，手段包括 Java 代码库、three.ar.js 以及适用于 ARCore on Android 和 ARKit on iOS 的试验型浏览器等。</p>
+<p><img src="http://img.blog.csdn.net/20170918112936088?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>⚠ 请注意：WebARonARCore 和 WebARonARKit 不是全功能的网络浏览器。它们基于的 Java API 或是不够标准，或是不在标准化路径上。它们的意义仅限于供网络开发者来完成自己的实验。</p>
+<p>请遵循下面链接中的指令来在您所选择的平台上下载并安装应用：<br>WebARonARCore (Android, <a href="https://github.com/google-ar/WebARonARCore" target="_blank" rel="external">https://github.com/google-ar/WebARonARCore</a>)<br>WebARonARKit (iOS, <a href="https://github.com/google-ar/WebARonARKit" target="_blank" rel="external">https://github.com/google-ar/WebARonARKit</a>)</p>
+<p>下面的示例要求 WebARonARCore 或 WebARonARKit，使用 three.ar.js 进行搭建，three.ar.js 是为 three.js 所准备的 helper 库：<br>SpawnAtCamera (<a href="https://google-ar.github.io/three.ar.js/examples/spawn-at-camera.html" target="_blank" rel="external">https://google-ar.github.io/three.ar.js/examples/spawn-at-camera.html</a>)<br>SpawnAtSurface (<a href="https://google-ar.github.io/three.ar.js/examples/spawn-at-surface.html" target="_blank" rel="external">https://google-ar.github.io/three.ar.js/examples/spawn-at-surface.html</a>)<br>Reticle (<a href="https://google-ar.github.io/three.ar.js/examples/reticle.html" target="_blank" rel="external">https://google-ar.github.io/three.ar.js/examples/reticle.html</a>)<br>Boilerplate (<a href="https://googlear.github.io/three.ar.js/examples/boilerplate.html" target="_blank" rel="external">https://googlear.github.io/three.ar.js/examples/boilerplate.html</a>)</p>
+<p>想要为 WebARonARCore 和 WebARonARKit 搭建属于自己的 AR 体验，请遵循 three.ar.js的操作指引：<br><a href="https://github.com/google-ar/three.ar.js#threearjs" target="_blank" rel="external">https://github.com/google-ar/three.ar.js#threearjs</a></p>
+    </div>
+
+    <div class="post-footer">   
+        <div>
+            
+                转载声明: 商业转载请联系作者获得授权,非商业转载请注明出处 © Snippet
+            
+        </div>
+        <div>
+            
+                版权声明: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+知识共享署名-非商业性使用-禁止演绎 3.0 未本地化版本许可协议（CC BY-NC-ND 3.0）
+</a>
+            
+        </div>  
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/2017/06/13/Vue.js快速入门/" class="pre-post btn btn-default"><i class="fa fa-angle-left fa-fw"></i>上一篇</a>
+    
+    
+        <a href="/2017/06/03/Google V8引擎/" class="next-post btn btn-default">下一篇<i class="fa fa-angle-right fa-fw"></i></a>
+    
+</div>
+
+
+    <div id="comments">
+        <div id="uyan_frame"></div>
+    <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2120654"></script>
+    </div>
+                </main>
+                <aside class="col-md-4 sidebar">
+        
+        <div class="widget notification">
+        <h3 class="title">网站公告</h3>
+        <div>
+            <p>主题Snippet v1.1.0版本即将上线，敬请期待~ <br>
+主题下载：<a href="https://github.com/shenliyang/hexo-theme-snippet" title="fork me" target="_blank">Snippet主题</a> <br>
+<hr>前端工程师一枚，专注于前端Node、React和移动端Android和Ios开发，欢迎骚扰。
+<br>联系方式：qq群:278792776（移动群）、515980159（React群）、188716429（猎头hr群）
+</p>
+        </div>
+    </div>
+        
+        <div class="widget">
+        <h3 class="title">分类</h3>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/"><i class="fa" aria-hidden="true">Android</i></a><span class="category-list-count">36</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/系统/"><i class="fa" aria-hidden="true">系统</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Google/"><i class="fa" aria-hidden="true">Google</i></a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Google/VR/"><i class="fa" aria-hidden="true">VR</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React-Native/"><i class="fa" aria-hidden="true">React Native</i></a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/"><i class="fa" aria-hidden="true">Spring</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android/"><i class="fa" aria-hidden="true">android</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/"><i class="fa" aria-hidden="true">iOS</i></a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ios/"><i class="fa" aria-hidden="true">ios</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/"><i class="fa" aria-hidden="true">前端</i></a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端/"><i class="fa" aria-hidden="true">后端</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/小程序/"><i class="fa" aria-hidden="true">小程序</i></a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术人生/"><i class="fa" aria-hidden="true">技术人生</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/机器学习/"><i class="fa" aria-hidden="true">机器学习</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂谈/"><i class="fa" aria-hidden="true">杂谈</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程语言/"><i class="fa" aria-hidden="true">编程语言</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/"><i class="fa" aria-hidden="true">设计模式</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/资料库/"><i class="fa" aria-hidden="true">资料库</i></a><span class="category-list-count">1</span></li></ul>
+    </div>
+        
+        <div class="widget">
+      <h3 class="title">归档</h3>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/"><i class="fa" aria-hidden="true">十月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/"><i class="fa" aria-hidden="true">八月 2017</i></a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/"><i class="fa" aria-hidden="true">六月 2017</i></a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/"><i class="fa" aria-hidden="true">五月 2017</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/"><i class="fa" aria-hidden="true">三月 2017</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/"><i class="fa" aria-hidden="true">二月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/"><i class="fa" aria-hidden="true">一月 2017</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/"><i class="fa" aria-hidden="true">十二月 2016</i></a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/"><i class="fa" aria-hidden="true">十一月 2016</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/"><i class="fa" aria-hidden="true">十月 2016</i></a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/"><i class="fa" aria-hidden="true">九月 2016</i></a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/"><i class="fa" aria-hidden="true">八月 2016</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/"><i class="fa" aria-hidden="true">七月 2016</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/"><i class="fa" aria-hidden="true">六月 2016</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/"><i class="fa" aria-hidden="true">五月 2016</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/"><i class="fa" aria-hidden="true">四月 2016</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/"><i class="fa" aria-hidden="true">三月 2016</i></a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/"><i class="fa" aria-hidden="true">二月 2016</i></a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/"><i class="fa" aria-hidden="true">六月 2015</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/"><i class="fa" aria-hidden="true">五月 2015</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/"><i class="fa" aria-hidden="true">四月 2015</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/"><i class="fa" aria-hidden="true">三月 2015</i></a><span class="archive-list-count">2</span></li></ul>
+    </div>
+        
+        <div class="widget">
+    <h3 class="title">标签云</h3>
+    <div class="content tag-cloud">
+      
+        <a href="/tags/ios/" style="font-size: 1em">ios</a> <a href="/tags/Android/" style="font-size: 1em">Android</a> <a href="/tags/深入系统/" style="font-size: 1em">深入系统</a> <a href="/tags/系统服务/" style="font-size: 1em">系统服务</a> <a href="/tags/android/" style="font-size: 1em">android</a> <a href="/tags/混淆打包/" style="font-size: 1em">混淆打包</a> <a href="/tags/Angular2/" style="font-size: 1em">Angular2</a> <a href="/tags/前端开发/" style="font-size: 1em">前端开发</a> <a href="/tags/硬件/" style="font-size: 1em">硬件</a> <a href="/tags/前端/" style="font-size: 1em">前端</a> <a href="/tags/React-Native/" style="font-size: 1em">React Native</a> <a href="/tags/FlexBox布局/" style="font-size: 1em">FlexBox布局</a> <a href="/tags/Google/" style="font-size: 1em">Google</a> <a href="/tags/VR/" style="font-size: 1em">VR</a> <a href="/tags/Java/" style="font-size: 1em">Java</a> <a href="/tags/垃圾回收/" style="font-size: 1em">垃圾回收</a> <a href="/tags/编程语言/" style="font-size: 1em">编程语言</a> <a href="/tags/Node/" style="font-size: 1em">Node</a> <a href="/tags/OpenGL/" style="font-size: 1em">OpenGL</a> <a href="/tags/Promise/" style="font-size: 1em">Promise</a> <a href="/tags/eact-Native/" style="font-size: 1em">eact Native</a> <a href="/tags/打包/" style="font-size: 1em">打包</a> <a href="/tags/调试/" style="font-size: 1em">调试</a> <a href="/tags/原生/" style="font-size: 1em">原生</a> <a href="/tags/后端/" style="font-size: 1em">后端</a> <a href="/tags/Spring/" style="font-size: 1em">Spring</a> <a href="/tags/入门/" style="font-size: 1em">入门</a> <a href="/tags/新特性/" style="font-size: 1em">新特性</a> <a href="/tags/swift/" style="font-size: 1em">swift</a> <a href="/tags/Swift/" style="font-size: 1em">Swift</a> <a href="/tags/AR/" style="font-size: 1em">AR</a> <a href="/tags/知识库/" style="font-size: 1em">知识库</a> <a href="/tags/Xcode/" style="font-size: 1em">Xcode</a> <a href="/tags/webpack/" style="font-size: 1em">webpack</a> <a href="/tags/gulp/" style="font-size: 1em">gulp</a> <a href="/tags/https/" style="font-size: 1em">https</a> <a href="/tags/iOS/" style="font-size: 1em">iOS</a> <a href="/tags/gif/" style="font-size: 1em">gif</a> <a href="/tags/mac/" style="font-size: 1em">mac</a> <a href="/tags/环境/" style="font-size: 1em">环境</a> <a href="/tags/原理/" style="font-size: 1em">原理</a> <a href="/tags/react/" style="font-size: 1em">react</a> <a href="/tags/杂谈/" style="font-size: 1em">杂谈</a> <a href="/tags/个人博客/" style="font-size: 1em">个人博客</a> <a href="/tags/流量/" style="font-size: 1em">流量</a> <a href="/tags/小程序/" style="font-size: 1em">小程序</a> <a href="/tags/微信/" style="font-size: 1em">微信</a> <a href="/tags/全栈/" style="font-size: 1em">全栈</a> <a href="/tags/搭建网站/" style="font-size: 1em">搭建网站</a> <a href="/tags/机器学习/" style="font-size: 1em">机器学习</a> <a href="/tags/算法/" style="font-size: 1em">算法</a> <a href="/tags/深入理解/" style="font-size: 1em">深入理解</a> <a href="/tags/内存分配/" style="font-size: 1em">内存分配</a> <a href="/tags/设计模式/" style="font-size: 1em">设计模式</a>
+    </div>
+  </div>
+        
+        <div class="widget">
+        <h3 class="title">友链</h3>
+        <div class="content friends-link">
+        
+            <a href="http://blog.csdn.net/xiangzhihong8/" class="fa" target="_blank">作者博客</a>
+        
+            <a href="https://yq.aliyun.com/u/xiangzhihong" class="fa" target="_blank">阿里云博客</a>
+        
+        </div>
+    </div>
+        
+    </aside>
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <span>Copyright &copy; 2017 
+                </span> | 
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/assets/highlight.pack.js?rev=@@hash"></script>
+  <script>
+    hljs.initHighlightingOnLoad(); //初始化代码高亮 
+  </script>
+
+<script src="/js/app.js?rev=@@hash"></script>
+</body>
