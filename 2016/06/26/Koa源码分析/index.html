@@ -1,0 +1,396 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no">
+    <link rel="dns-prefetch" href="//t11.baidu.com">
+    <!--SEO-->
+
+
+
+<meta name="robots" content="all">
+<meta name="google" content="all">
+<meta name="googlebot" content="all">
+<meta name="verify" content="all">
+    <!--Title-->
+
+
+<title>Koa源码分析 | 向志洪</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="向志洪" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css?rev=9.12.0">
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+    <div class="hide">
+    <script src="https://s4.cnzz.com/z_stat.php?id=1261768793&web_id=1262140174" language="JavaScript"></script>
+    </div>
+    
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?13764659765";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+	
+	<script src="https://cdn1.lncld.net/static/js/av-min-1.2.1.js"></script>
+    <script>AV.initialize("aj42pgqDHRSVhMknqDb3JMeg-gzGzoHsz", "qbRaoHOP9NMWPOow8PandkH3");</script>
+</head></html>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+<body>
+    <header class="main-header">
+    <div class="main-header-box">
+        <a class="branding" href="/" title="">
+            <img src="/img/header_logo.png" alt="Snippet 博客主题">
+        </a>
+        <h2 class="text-hide">Snippet主题</h2>
+        <img src="/img/header_logo.png" alt="Snippet 博客主题" class="hide">
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only">Toggle navigation</span>
+                    <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class=""><a href="/">首页</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/前端/">前端</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/后端/">后端</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/编程语言/">编程语言</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/Android/">Android</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/iOS/">iOS</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/React Native/">React Native</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/小程序/">小程序</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/杂谈/">杂谈</a></li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="Koa源码分析">
+            
+            Koa源码分析
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <span>后端</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            后端
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta">2016/06/26</span>
+    </span>
+</div>
+            
+            
+            <p class="fa fa-exclamation-triangle warning">
+                本文于<strong>529</strong>天之前发表，文中内容可能已经过时。
+            </p>
+            
+    </div>
+    
+    <div class="post-body">
+        <p>Koa 是一个类似于 Express 的Web开发框架，创始人也都是TJ。Koa 的主要特点是，使用了 ES6 的 Generator 函数，进行了架构的重新设计。Koa 的原理和内部结构很像 Express，但是语法和内部结构进行了升级。</p>
+<p>创建Koa应用</p>
+<p>创建一个 koa 非常简单：</p>
+<p>var koa = require(‘koa’);</p>
+<p>var app = koa();</p>
+<p>app.listen(3000);<br>或者可以酱紫：</p>
+<p>var koa = require(‘koa’);<br>var http = require(‘http’);</p>
+<p>var app = koa();</p>
+<p>http.createServer(app.callback()).listen(4000);<br>这两种方式在 koa 内部是等价的，在 Application 模块中， listen 就会调用自身的 callback：</p>
+<p>//listen的实现<br>app.listen = function(){<br>  debug(‘listen’);<br>  var server = http.createServer(this.callback());<br>  return server.listen.apply(server, arguments);<br>};<br>callback 返回的函数会作为 server 的回调：</p>
+<p>app.callback = function(){</p>
+<p>  /**</p>
+<ul>
+<li><p>省略的代码<br>**/</p>
+<p>return function(req, res){<br>res.statusCode = 404;<br>var ctx = self.createContext(req, res);<br>onFinished(res, ctx.onerror);<br>fn.call(ctx).then(function () {<br>  respond.call(ctx);<br>}).catch(ctx.onerror);<br>}<br>};<br>callback 也会将多个中间件转成了一个 fn，在构建服务器函数时方便调用。状态码默认是 404，即没有任何中间件修改过就是 404。</p>
+</li>
+</ul>
+<p>每个请求都会通过 createContext 创建一个上下文对象，其参数则分别是 Node 的 request 对象和 response 对象：</p>
+<p>app.createContext = function(req, res){<br>  var context = Object.create(this.context);<br>  var request = context.request = Object.create(this.request);<br>  var response = context.response = Object.create(this.response);<br>  context.app = request.app = response.app = this;<br>  context.req = request.req = response.req = req;<br>  context.res = request.res = response.res = res;<br>  request.ctx = response.ctx = context;<br>  request.response = response;<br>  response.request = request;<br>  context.onerror = context.onerror.bind(context);<br>  context.originalUrl = request.originalUrl = req.url;<br>  context.cookies = new Cookies(req, res, {<br>    keys: this.keys,<br>    secure: request.secure<br>  });<br>  context.accept = request.accept = accepts(req);<br>  context.state = {};<br>  return context;<br>};<br>对于接收的参数，在返回上下文 context 之前，koa 会将参数注入到自身的 request 对象和 response 对象上，ctx.request 和 ctx.response 返回的是 koa 的对应对象，ctx.req 和 ctx.res 返回的是 Node 的对应对象；同时也会将 app 注册到 context/respose/request 对象上，方便在各自的模块中调用：</p>
+<p>var app = Application.prototype;</p>
+<p>module.exports = Application;</p>
+<p>function Application() {<br>  if (!(this instanceof Application)) return new Application;<br>  this.env = process.env.NODE_ENV || ‘development’;  //环境变量<br>  this.subdomainOffset = 2;  //子域偏移量<br>  this.middleware = [];     //中间件数组<br>  this.proxy = false;  //是否信任头字段 proxy<br>  this.context = Object.create(context);  // koa的上下文(this)<br>  this.request = Object.create(request);  //koa的request对象<br>  this.response = Object.create(response); //koa 的reponse对象<br>}<br>上下文：context</p>
+<p>context 对象是 Koa context 模块扩展出来的，添加了诸如 state、cookie、req、res 等属性。</p>
+<p>onFinished 是一个第三方函数，用于监听 http response 的结束事件，执行回调。如果找到 context.onerror 方法，这是 koa默认的错误处理函数，它处理的是错误导致的异常结束。错误的处理是在 callback 中监听的：</p>
+<p>// callback<br>if (!this.listeners(‘error’).length) this.on(‘error’, this.onerror);<br>koa 本身是没有定义事件处理机制的，其事件处理机制继承自 Node 的 events：</p>
+<p>var Emitter = require(‘events’).EventEmitter;<br>Object.setPrototypeOf(Application.prototype, Emitter.prototype);<br>默认的错误分发是在 Context 模块中：</p>
+<p>onerror : function(err){<br>    //some code<br>    this.app.emit(‘error’, err, this);<br>    //some code<br>}<br>此外，在 Context 模块中，还将 request 对象和 response 对象的一些方法和属性委托给了 context 对象：</p>
+<p>//response委托<br>delegate(proto, ‘response’)<br>  .method(‘attachment’)<br>  .method(‘append’)<br>  .access(‘status’)<br>  .access(‘body’)<br>  .getter(‘headerSent’)<br>  .getter(‘writable’);<br>  …..</p>
+<p>  //request委托<br>  delegate(proto, ‘request’)<br>  .method(‘acceptsLanguages’)<br>  .method(‘get’)<br>  .method(‘is’)<br>  .access(‘querystring’)<br>  .access(‘url’)<br>  .getter(‘origin’)<br>  .getter(‘href’)<br>  .getter(‘subdomains’)<br>  .getter(‘protocol’)<br>  .getter(‘host’)<br>  ….<br>通过第三方模块 delegate 将 koa 在 Response 模块和 Request 模块中定义的方法委托到了 context 对象上，所以以下的一些写法是等价的：</p>
+<p>//在每次请求中，this 用于指代此次请求创建的上下文 context(ctx)<br>this.body ==&gt; this.response.body<br>this.status ==&gt; this.response.status<br>this.href ==&gt; this.request.href<br>this.host ==&gt; this.request.host<br>…..<br>在 createContext 方法中，还给 context 定义了重要属性 state</p>
+<p>context.state = {}<br>这个属性可以被各个中间件共享，用于在中间件之间传递数据，这也是 koa 推荐的方式：</p>
+<p>this.state.user = yield User.find(id);<br>中间件</p>
+<p>中间件是对 HTTP 请求进行处理的函数，对于每一个请求，都会通过中间件进行处理。在 koa 中，中间件通过 use 进行注册，且必须是一个 Generator 函数(未开启 this.experimental)：</p>
+<p>app.use(function* f1(next) {<br>    console.log(‘f1: pre next’);<br>    yield next;<br>    this.body = ‘hello koa’;<br>    console.log(‘f1: post next’);<br>});</p>
+<p>app.use(function* f2(next) {<br>    console.log(‘  f2: pre next’);<br>    console.log(‘  f2: post next’);<br>});<br>输出如下：</p>
+<p>f1: pre next<br>  f2: pre next<br>  f2: post next<br>f1: post next<br>与 Express 的中间件顺序执行不同，在koa中，中间件是所谓的“洋葱模型”或级联式（Cascading）的结构，也就是说，属于是层层调用，第一个中间件调用第二个中间件，第二个调用第三个，以此类推。上游的中间件必须等到下游的中间件返回结果，才会继续执行。</p>
+<p>koa 对中间件的数量并没有限制，可以随意注册多个中间件。但如果有多个中间件，只要有一个中间件缺少 yield next 语句，后面的中间件都不会执行：</p>
+<p>app.use(function *(next){<br>  console.log(‘&gt;&gt; one’);<br>  yield next;<br>  console.log(‘&lt;&lt; one’);<br>});</p>
+<p>app.use(function *(next){<br>  console.log(‘&gt;&gt; two’);<br>  this.body = ‘two’;<br>  console.log(‘&lt;&lt; two’);<br>});</p>
+<p>app.use(function *(next){<br>  console.log(‘&gt;&gt; three’);<br>  yield next;<br>  console.log(‘&lt;&lt; three’);<br>});<br>上面代码中，因为第二个中间件少了yield next语句，第三个中间件并不会执行。</p>
+<p>如果想跳过一个中间件，可以直接在该中间件的第一行语句写上return yield next：</p>
+<p>app.use(function* (next) {<br>  if (skip) return yield next;<br>})<br>koa中，中间件唯一的参数就是 next。如果要传入其他参数，必须另外写一个返回 Generator 函数的函数。</p>
+<p>this.experimental 是为了判断是否支持es7，开启这个属性之后，中间件可以传入async函数：</p>
+<p>app.use(async function (next){<br>  await next;<br>  this.body = body;<br>});<br>但 koa 默认是不支持 es7 的，如果想支持，需要在代码中明确指定 this.experimental = true</p>
+<p>app.use = function(fn){<br>  if (!this.experimental) {<br>    // es7 async functions are not allowed,<br>    // so we have to make sure that <code>fn</code> is a generator function<br>    assert(fn &amp;&amp; ‘GeneratorFunction’ == fn.constructor.name, ‘app.use() requires a generator function’);<br>  }<br>  debug(‘use %s’, fn._name || fn.name || ‘-‘);<br>  this.middleware.push(fn);<br>  return this;<br>};<br>在 callback 中输出错误信息：</p>
+<p>app.callback = function(){<br>  if (this.experimental) {<br>    console.error(‘Experimental ES7 Async Function support is deprecated. Please look into Koa v2 as the middleware signature has changed.’)<br>  }<br>  var fn = this.experimental<br>    ? compose_es7(this.middleware)<br>    : co.wrap(compose(this.middleware));<br>  //省略<br>};<br>compose 的全名叫 koa-compose，它的作用是把一个个不相干的中间件串联在一起：</p>
+<p>// 有3个中间件<br>this.middlewares = [function <em>m1() {}, function </em>m2() {}, function *m3() {}];</p>
+<p>// 通过compose转换<br>var middleware = compose(this.middlewares);</p>
+<p>// 转换后得到的middleware是这个样子的<br>function <em>() {<br>  yield </em>m1(m2(m3(noop())))<br>}<br>从上述的 use 的实现可知，由于 use 的每次调用均会返回 this，因而可以进行链式调用：</p>
+<p>app.use(function <em>m1() {}).use(function </em>m2() {}).use(function *m3() {})<br>路由处理</p>
+<p>koa自身有 request 对象和 response 对象来处理路由，一个简单的路由处理如下：</p>
+<p>app.use(function* () {<br>    if(this.path == ‘/‘){<br>        this.body = ‘hello koa’;<br>    } else if(this.path == ‘/get’){<br>        this.body = ‘get’;<br>    } else {<br>        this.body = ‘404’;<br>    }<br>});<br>也可以通过 this.request.headers 来获取请求头。由于没有对响应头做设置，默认响应头类型是 text/plain，可以通过 response.set来设置：</p>
+<p>app.use(function* (next) {<br>    if(this.path == ‘/‘){<br>        this.body = ‘hello koa’;<br>    } else if(this.path == ‘/get’){<br>        this.body = ‘get’;<br>    } else {<br>        yield next;<br>    }<br>});</p>
+<p>app.use(function* () {<br>    this.response.set(‘content-type’, ‘application/json;charset=utf-8’);<br>    return this.body = {message: ‘ok’, statusCode: 200};<br>});<br>上面代码中，每一个中间件负责部分路径，如果路径不符合，就传递给下一个中间件。</p>
+<p>复杂的路由需要安装 koa-router：</p>
+<p>var app = require(‘koa’)();<br>var Router = require(‘koa-router’);</p>
+<p>var myRouter = new Router();</p>
+<p>myRouter.get(‘/‘, function *(next) {<br>  this.response.body = ‘Hello World!’;<br>});</p>
+<p>app.use(myRouter.routes());</p>
+<p>app.listen(4000);<br>由于 koa 使用 generator 作为中间件，所以 myRouter.routes() 返回的是一个 generator，并等同于 myRouter.middleware：</p>
+<p>Router.prototype.routes = Router.prototype.middleware = function () {<br>  var router = this;</p>
+<p>  var dispatch = function *dispatch(next) {<br>        //code<br>    }<br>   //省略<br>  return dispatch;<br>};<br>koa-router 提供了一系列于 HTTP 动词对应的方法：</p>
+<p>router.get()<br>router.post()<br>router.put()<br>router.del()<br>router.patch()<br>del 是 delete 的别名：</p>
+<p>// Alias for <code>router.delete()</code> because delete is a reserved word<br>Router.prototype.del = Router.prototype[‘delete’];<br>这些动词方法可以接受两个参数，第一个是路径模式，第二个是对应的控制器方法（中间件），定义用户请求该路径时服务器行为。</p>
+<p>注意，路径匹配的时候，不会把查询字符串考虑在内。比如，/index?param=xyz 匹配路径 /index。</p>
+<p>关于 koa-router 的更多细节，且听下回分解。</p>
+    </div>
+
+    <div class="post-footer">   
+        <div>
+            
+                转载声明: 商业转载请联系作者获得授权,非商业转载请注明出处 © Snippet
+            
+        </div>
+        <div>
+            
+                版权声明: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+知识共享署名-非商业性使用-禁止演绎 3.0 未本地化版本许可协议（CC BY-NC-ND 3.0）
+</a>
+            
+        </div>  
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/2016/07/05/Android硬件加速介绍与实现/" class="pre-post btn btn-default"><i class="fa fa-angle-left fa-fw"></i>上一篇</a>
+    
+    
+        <a href="/2016/06/20/VR技术大揭秘/" class="next-post btn btn-default">下一篇<i class="fa fa-angle-right fa-fw"></i></a>
+    
+</div>
+
+
+    <div id="comments">
+        <div id="uyan_frame"></div>
+    <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2120654"></script>
+    </div>
+                </main>
+                <aside class="col-md-4 sidebar">
+        
+        <div class="widget notification">
+        <h3 class="title">网站公告</h3>
+        <div>
+            <p>主题Snippet v1.1.0版本即将上线，敬请期待~ <br>
+主题下载：<a href="https://github.com/shenliyang/hexo-theme-snippet" title="fork me" target="_blank">Snippet主题</a> <br>
+<hr>前端工程师一枚，专注于前端Node、React和移动端Android和Ios开发，欢迎骚扰。
+<br>联系方式：qq群:278792776（移动群）、515980159（React群）、188716429（猎头hr群）
+</p>
+        </div>
+    </div>
+        
+        <div class="widget">
+        <h3 class="title">分类</h3>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/"><i class="fa" aria-hidden="true">Android</i></a><span class="category-list-count">36</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/系统/"><i class="fa" aria-hidden="true">系统</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Google/"><i class="fa" aria-hidden="true">Google</i></a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Google/VR/"><i class="fa" aria-hidden="true">VR</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Kotlin/"><i class="fa" aria-hidden="true">Kotlin</i></a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React-Native/"><i class="fa" aria-hidden="true">React Native</i></a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/"><i class="fa" aria-hidden="true">Spring</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android/"><i class="fa" aria-hidden="true">android</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/"><i class="fa" aria-hidden="true">iOS</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ios/"><i class="fa" aria-hidden="true">ios</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/人工智能/"><i class="fa" aria-hidden="true">人工智能</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/"><i class="fa" aria-hidden="true">前端</i></a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端/"><i class="fa" aria-hidden="true">后端</i></a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/小程序/"><i class="fa" aria-hidden="true">小程序</i></a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术人生/"><i class="fa" aria-hidden="true">技术人生</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/机器学习/"><i class="fa" aria-hidden="true">机器学习</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂谈/"><i class="fa" aria-hidden="true">杂谈</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程语言/"><i class="fa" aria-hidden="true">编程语言</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/"><i class="fa" aria-hidden="true">设计模式</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/资料库/"><i class="fa" aria-hidden="true">资料库</i></a><span class="category-list-count">1</span></li></ul>
+    </div>
+        
+        <div class="widget">
+      <h3 class="title">归档</h3>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/"><i class="fa" aria-hidden="true">十一月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/"><i class="fa" aria-hidden="true">十月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/"><i class="fa" aria-hidden="true">八月 2017</i></a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/"><i class="fa" aria-hidden="true">六月 2017</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/"><i class="fa" aria-hidden="true">五月 2017</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/"><i class="fa" aria-hidden="true">三月 2017</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/"><i class="fa" aria-hidden="true">二月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/"><i class="fa" aria-hidden="true">一月 2017</i></a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/"><i class="fa" aria-hidden="true">十二月 2016</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/"><i class="fa" aria-hidden="true">十一月 2016</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/"><i class="fa" aria-hidden="true">十月 2016</i></a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/"><i class="fa" aria-hidden="true">九月 2016</i></a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/"><i class="fa" aria-hidden="true">八月 2016</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/"><i class="fa" aria-hidden="true">七月 2016</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/"><i class="fa" aria-hidden="true">六月 2016</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/"><i class="fa" aria-hidden="true">五月 2016</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/"><i class="fa" aria-hidden="true">四月 2016</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/"><i class="fa" aria-hidden="true">三月 2016</i></a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/"><i class="fa" aria-hidden="true">二月 2016</i></a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/"><i class="fa" aria-hidden="true">九月 2015</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/"><i class="fa" aria-hidden="true">六月 2015</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/"><i class="fa" aria-hidden="true">五月 2015</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/"><i class="fa" aria-hidden="true">四月 2015</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/"><i class="fa" aria-hidden="true">三月 2015</i></a><span class="archive-list-count">2</span></li></ul>
+    </div>
+        
+        <div class="widget">
+    <h3 class="title">标签云</h3>
+    <div class="content tag-cloud">
+      
+        <a href="/tags/ios/" style="font-size: 1em">ios</a> <a href="/tags/Android/" style="font-size: 1em">Android</a> <a href="/tags/深入系统/" style="font-size: 1em">深入系统</a> <a href="/tags/系统服务/" style="font-size: 1em">系统服务</a> <a href="/tags/android/" style="font-size: 1em">android</a> <a href="/tags/混淆打包/" style="font-size: 1em">混淆打包</a> <a href="/tags/硬件/" style="font-size: 1em">硬件</a> <a href="/tags/Angular2/" style="font-size: 1em">Angular2</a> <a href="/tags/前端开发/" style="font-size: 1em">前端开发</a> <a href="/tags/前端/" style="font-size: 1em">前端</a> <a href="/tags/React-Native/" style="font-size: 1em">React Native</a> <a href="/tags/FlexBox布局/" style="font-size: 1em">FlexBox布局</a> <a href="/tags/Google/" style="font-size: 1em">Google</a> <a href="/tags/VR/" style="font-size: 1em">VR</a> <a href="/tags/后端/" style="font-size: 1em">后端</a> <a href="/tags/Java/" style="font-size: 1em">Java</a> <a href="/tags/垃圾回收/" style="font-size: 1em">垃圾回收</a> <a href="/tags/Kotlin/" style="font-size: 1em">Kotlin</a> <a href="/tags/编程语言/" style="font-size: 1em">编程语言</a> <a href="/tags/Node/" style="font-size: 1em">Node</a> <a href="/tags/OpenGL/" style="font-size: 1em">OpenGL</a> <a href="/tags/Promise/" style="font-size: 1em">Promise</a> <a href="/tags/eact-Native/" style="font-size: 1em">eact Native</a> <a href="/tags/调试/" style="font-size: 1em">调试</a> <a href="/tags/打包/" style="font-size: 1em">打包</a> <a href="/tags/原生/" style="font-size: 1em">原生</a> <a href="/tags/Spring/" style="font-size: 1em">Spring</a> <a href="/tags/入门/" style="font-size: 1em">入门</a> <a href="/tags/新特性/" style="font-size: 1em">新特性</a> <a href="/tags/swift/" style="font-size: 1em">swift</a> <a href="/tags/AR/" style="font-size: 1em">AR</a> <a href="/tags/Swift/" style="font-size: 1em">Swift</a> <a href="/tags/知识库/" style="font-size: 1em">知识库</a> <a href="/tags/Xcode/" style="font-size: 1em">Xcode</a> <a href="/tags/webpack/" style="font-size: 1em">webpack</a> <a href="/tags/gulp/" style="font-size: 1em">gulp</a> <a href="/tags/https/" style="font-size: 1em">https</a> <a href="/tags/iOS/" style="font-size: 1em">iOS</a> <a href="/tags/gif/" style="font-size: 1em">gif</a> <a href="/tags/mac/" style="font-size: 1em">mac</a> <a href="/tags/环境/" style="font-size: 1em">环境</a> <a href="/tags/原理/" style="font-size: 1em">原理</a> <a href="/tags/react/" style="font-size: 1em">react</a> <a href="/tags/杂谈/" style="font-size: 1em">杂谈</a> <a href="/tags/个人博客/" style="font-size: 1em">个人博客</a> <a href="/tags/流量/" style="font-size: 1em">流量</a> <a href="/tags/小程序/" style="font-size: 1em">小程序</a> <a href="/tags/微信/" style="font-size: 1em">微信</a> <a href="/tags/全栈/" style="font-size: 1em">全栈</a> <a href="/tags/搭建网站/" style="font-size: 1em">搭建网站</a> <a href="/tags/机器学习/" style="font-size: 1em">机器学习</a> <a href="/tags/算法/" style="font-size: 1em">算法</a> <a href="/tags/深入理解/" style="font-size: 1em">深入理解</a> <a href="/tags/内存分配/" style="font-size: 1em">内存分配</a> <a href="/tags/人工智能/" style="font-size: 1em">人工智能</a> <a href="/tags/设计模式/" style="font-size: 1em">设计模式</a>
+    </div>
+  </div>
+        
+        <div class="widget">
+        <h3 class="title">友链</h3>
+        <div class="content friends-link">
+        
+            <a href="http://blog.csdn.net/xiangzhihong8/" class="fa" target="_blank">作者博客</a>
+        
+            <a href="https://yq.aliyun.com/u/xiangzhihong" class="fa" target="_blank">阿里云博客</a>
+        
+        </div>
+    </div>
+        
+    </aside>
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<!--page counter part-->
+<script>
+function addCount (Counter) {
+        url=$('.article-date').attr('href').trim();
+        title = $('.article-title').text().trim();
+        var query=new AV.Query(Counter);
+        //use url as unique idnetfication
+        query.equalTo("url",url);
+        query.find({
+            success: function(results){
+                if(results.length>0)
+                {
+                    var counter=results[0];
+                    counter.fetchWhenSave(true); //get recent result
+                    counter.increment("time");
+                    counter.save();
+                }
+                else
+                {
+                    var newcounter=new Counter();
+                    newcounter.set("title",title);
+                    newcounter.set("url",url);
+                    newcounter.set("time",1);
+                    newcounter.save(null,{
+                        success: function(newcounter){
+                        //alert('New object created');
+                        },
+                        error: function(newcounter,error){
+                        alert('Failed to create');
+                        }
+                        });
+                }
+            },
+            error: function(error){
+                //find null is not a error
+                alert('Error:'+error.code+" "+error.message);
+            }
+        });
+}
+$(function(){
+        var Counter=AV.Object.extend("Counter");
+        //only increse visit counting when intering a page
+        if ($('.article-title').length == 1)
+           addCount(Counter);
+        var query=new AV.Query(Counter);
+        query.descending("time");
+        // the sum of popular posts
+        query.limit(10); 
+        query.find({
+            success: function(results){
+                    for(var i=0;i<results.length;i++)    
+                    {
+                        var counter=results[i];
+                        title=counter.get("title");
+                        url=counter.get("url");
+                        time=counter.get("time");
+                        // add to the popularlist widget
+                        showcontent=title+" ("+time+")";
+                        //notice the "" in href
+                        $('.popularlist').append('<li><a href="'+url+'">'+showcontent+'</a></li>');
+                    }
+                },
+            error: function(error){
+                alert("Error:"+error.code+" "+error.message);
+            }
+            }
+        )
+        });
+</script>
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <span>Copyright &copy; 2017 
+                </span> | 
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/assets/highlight.pack.js?rev=@@hash"></script>
+  <script>
+    hljs.initHighlightingOnLoad(); //初始化代码高亮 
+  </script>
+
+<script src="/js/app.js?rev=@@hash"></script>
+</body>
