@@ -1,0 +1,630 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no">
+    <link rel="dns-prefetch" href="//t11.baidu.com">
+    <!--SEO-->
+
+
+
+<meta name="robots" content="all">
+<meta name="google" content="all">
+<meta name="googlebot" content="all">
+<meta name="verify" content="all">
+    <!--Title-->
+
+
+<title>30个有关Python的小技巧 | 向志洪</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="向志洪" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css?rev=9.12.0">
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+    <div class="hide">
+    <script src="https://s4.cnzz.com/z_stat.php?id=1261768793&web_id=1262140174" language="JavaScript"></script>
+    </div>
+    
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?13764659765";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+	
+	<script src="https://cdn1.lncld.net/static/js/av-min-1.2.1.js"></script>
+    <script>AV.initialize("aj42pgqDHRSVhMknqDb3JMeg-gzGzoHsz", "qbRaoHOP9NMWPOow8PandkH3");</script>
+</head></html>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+<body>
+    <header class="main-header">
+    <div class="main-header-box">
+        <a class="branding" href="/" title="">
+            <img src="/img/header_logo.png" alt="Snippet 博客主题">
+        </a>
+        <h2 class="text-hide">Snippet主题</h2>
+        <img src="/img/header_logo.png" alt="Snippet 博客主题" class="hide">
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only">Toggle navigation</span>
+                    <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class=""><a href="/">首页</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/前端/">前端</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/后端/">后端</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/Java/">Java</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/Python/">Python</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/Android/">Android</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/iOS/">iOS</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/React Native/">React Native</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/小程序/">小程序</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/杂谈/">杂谈</a></li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="30个有关Python的小技巧">
+            
+            30个有关Python的小技巧
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <span>Python</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            Python
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta">2016/01/22</span>
+    </span>
+</div>
+            
+            
+            <p class="fa fa-exclamation-triangle warning">
+                本文于<strong>687</strong>天之前发表，文中内容可能已经过时。
+            </p>
+            
+    </div>
+    
+    <div class="post-body">
+        <p>从我开始学习python的时候，我就开始自己总结一个python小技巧的集合。后来当我什么时候在Stack Overflow<br>或者在某个开源软件里看到一段很酷代码的时候，我就很惊讶：原来还能这么做！，当时我会努力的自己尝试一下这段代码，直到我懂了它的整体思路以后，我就把这段代码加到我的集合里。这篇博客其实就是这个集合整理后一部分的公开亮相。如果你已经是个python大牛，那么基本上你应该知道这里面的大多数用法了，但我想你应该也能发现一些你不知道的新技巧。而如果你之前是一个c,c++,java的程序员，同时在学习python，或者干脆就是一个刚刚学习编程的新手，那么你应该会看到很多特别有用能让你感到惊奇的实用技巧，就像我当初一样。</p>
+<p>每一个技巧和语言用法都会在一个个实例中展示给大家，也不需要有其他的说明。我已经尽力把每个例子弄的通俗易懂，但是因为读者对python的熟悉程度不同，仍然可能难免有一些晦涩的地方。所以如果这些例子本身无法让你读懂，至少这个例子的标题在你后面去google搜索的时候会帮到你。</p>
+<p>整个集合大概是按照难易程度排序，简单常见的在前面，比较少见的在最后。</p>
+<p>1.1 拆箱<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>a, b, c = 1, 2, 3<br>a, b, c<br>(1, 2, 3)<br>a, b, c = [1, 2, 3]<br>a, b, c<br>(1, 2, 3)<br>a, b, c = (2 * i + 1 for i in range(3))<br>a, b, c<br>(1, 3, 5)<br>a, (b, c), d = [1, (2, 3), 4]<br>a<br>1<br>b<br>2<br>c<br>3<br>d<br>4</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>1.2 拆箱变量交换<br>1<br>2<br>3<br>4</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>a, b = 1, 2<br>a, b = b, a<br>a, b<br>(2, 1)</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>1.3 扩展拆箱（只兼容python3）<br>1<br>2<br>3<br>4<br>5<br>6<br>7</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>a, *b, c = [1, 2, 3, 4, 5]<br>a<br>1<br>b<br>[2, 3, 4]<br>c<br>5</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>1.4 负数索引<br>1<br>2<br>3<br>4<br>5</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>a = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]<br>a[-1]<br>10<br>a[-3]<br>8</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>1.5 切割列表<br>1<br>2<br>3</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>a = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]<br>a[2:8]<br>[2, 3, 4, 5, 6, 7]</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>1.6 负数索引切割列表<br>1<br>2<br>3</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>a = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]<br>a[-4:-2]<br>[7, 8]</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>1.7指定步长切割列表<br>1<br>2<br>3<br>4<br>5<br>6<br>7</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>a = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]<br>a[::2]<br>[0, 2, 4, 6, 8, 10]<br>a[::3]<br>[0, 3, 6, 9]<br>a[2:8:2]<br>[2, 4, 6]</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>1.8 负数步长切割列表<br>1<br>2<br>3<br>4<br>5</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>a = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]<br>a[::-1]<br>[10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]<br>a[::-2]<br>[10, 8, 6, 4, 2, 0]</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>1.9 列表切割赋值<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>a = [1, 2, 3, 4, 5]<br>a[2:3] = [0, 0]<br>a<br>[1, 2, 0, 0, 4, 5]<br>a[1:1] = [8, 9]<br>a<br>[1, 8, 9, 2, 0, 0, 4, 5]<br>a[1:-1] = []<br>a<br>[1, 5]</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>1.10 命名列表切割方式<br>1<br>2<br>3<br>4<br>5<br>6</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>a = [0, 1, 2, 3, 4, 5]<br>LASTTHREE = slice(-3, None)<br>LASTTHREE<br>slice(-3, None, None)<br>a[LASTTHREE]<br>[3, 4, 5]</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>1.11 列表以及迭代器的压缩和解压缩<br>1<br>2<br>3<br>4<br>5<br>6<br>7</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>a = [1, 2, 3]<br>b = [‘a’, ‘b’, ‘c’]<br>z = zip(a, b)<br>z<br>[(1, ‘a’), (2, ‘b’), (3, ‘c’)]<br>zip(*z)<br>[(1, 2, 3), (‘a’, ‘b’, ‘c’)]</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>1.12 列表相邻元素压缩器<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br>21<br>22<br>23<br>24<br>25</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>a = [1, 2, 3, 4, 5, 6]<br>zip(<em>([iter(a)] </em> 2))<br>[(1, 2), (3, 4), (5, 6)]</p>
+<p>group_adjacent = lambda a, k: zip(<em>([iter(a)] </em> k))<br>group_adjacent(a, 3)<br>[(1, 2, 3), (4, 5, 6)]<br>group_adjacent(a, 2)<br>[(1, 2), (3, 4), (5, 6)]<br>group_adjacent(a, 1)<br>[(1,), (2,), (3,), (4,), (5,), (6,)]</p>
+<p>zip(a[::2], a[1::2])<br>[(1, 2), (3, 4), (5, 6)]</p>
+<p>zip(a[::3], a[1::3], a[2::3])<br>[(1, 2, 3), (4, 5, 6)]</p>
+<p>group_adjacent = lambda a, k: zip(*(a[i::k] for i in range(k)))<br>group_adjacent(a, 3)<br>[(1, 2, 3), (4, 5, 6)]<br>group_adjacent(a, 2)<br>[(1, 2), (3, 4), (5, 6)]<br>group_adjacent(a, 1)<br>[(1,), (2,), (3,), (4,), (5,), (6,)]</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>1.13 在列表中用压缩器和迭代器滑动取值窗口<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>def n_grams(a, n):<br>…     z = [iter(a[i:]) for i in range(n)]<br>…     return zip(*z)<br>…<br>a = [1, 2, 3, 4, 5, 6]<br>n_grams(a, 3)<br>[(1, 2, 3), (2, 3, 4), (3, 4, 5), (4, 5, 6)]<br>n_grams(a, 2)<br>[(1, 2), (2, 3), (3, 4), (4, 5), (5, 6)]<br>n_grams(a, 4)<br>[(1, 2, 3, 4), (2, 3, 4, 5), (3, 4, 5, 6)]</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>1.14 用压缩器反转字典<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>m = {‘a’: 1, ‘b’: 2, ‘c’: 3, ‘d’: 4}<br>m.items()<br>[(‘a’, 1), (‘c’, 3), (‘b’, 2), (‘d’, 4)]<br>zip(m.values(), m.keys())<br>[(1, ‘a’), (3, ‘c’), (2, ‘b’), (4, ‘d’)]<br>mi = dict(zip(m.values(), m.keys()))<br>mi<br>{1: ‘a’, 2: ‘b’, 3: ‘c’, 4: ‘d’}</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>1.15 列表展开<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>a = [[1, 2], [3, 4], [5, 6]]<br>list(itertools.chain.from_iterable(a))<br>[1, 2, 3, 4, 5, 6]</p>
+<p>sum(a, [])<br>[1, 2, 3, 4, 5, 6]</p>
+<p>[x for l in a for x in l]<br>[1, 2, 3, 4, 5, 6]</p>
+<p>a = [[[1, 2], [3, 4]], [[5, 6], [7, 8]]]<br>[x for l1 in a for l2 in l1 for x in l2]<br>[1, 2, 3, 4, 5, 6, 7, 8]</p>
+<p>a = [1, 2, [3, 4], [[5, 6], [7, 8]]]<br>flatten = lambda x: [y for l in x for y in flatten(l)] if type(x) is list else [x]<br>flatten(a)<br>[1, 2, 3, 4, 5, 6, 7, 8]</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>1.16 生成器表达式<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>g = (x <strong> 2 for x in xrange(10))<br>next(g)<br>0<br>next(g)<br>1<br>next(g)<br>4<br>next(g)<br>9<br>sum(x </strong> 3 for x in xrange(10))<br>2025<br>sum(x ** 3 for x in xrange(10) if x % 3 == 1)<br>408</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>1.17 字典推导<br>1<br>2<br>3<br>4<br>5<br>6<br>7</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>m = {x: x ** 2 for x in range(5)}<br>m<br>{0: 0, 1: 1, 2: 4, 3: 9, 4: 16}</p>
+<p>m = {x: ‘A’ + str(x) for x in range(10)}<br>m<br>{0: ‘A0’, 1: ‘A1’, 2: ‘A2’, 3: ‘A3’, 4: ‘A4’, 5: ‘A5’, 6: ‘A6’, 7: ‘A7’, 8: ‘A8’, 9: ‘A9’}</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>1.18 用字典推导反转字典<br>1<br>2<br>3<br>4<br>5</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>m = {‘a’: 1, ‘b’: 2, ‘c’: 3, ‘d’: 4}<br>m<br>{‘d’: 4, ‘a’: 1, ‘b’: 2, ‘c’: 3}<br>{v: k for k, v in m.items()}<br>{1: ‘a’, 2: ‘b’, 3: ‘c’, 4: ‘d’}</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>1.19 命名元组<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>Point = collections.namedtuple(‘Point’, [‘x’, ‘y’])<br>p = Point(x=1.0, y=2.0)<br>p<br>Point(x=1.0, y=2.0)<br>p.x<br>1.0<br>p.y<br>2.0</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>1.20 继承命名元组<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>class Point(collections.namedtuple(‘PointBase’, [‘x’, ‘y’])):<br>…     <strong>slots</strong> = ()<br>…     def <strong>add</strong>(self, other):<br>…             return Point(x=self.x + other.x, y=self.y + other.y)<br>…<br>p = Point(x=1.0, y=2.0)<br>q = Point(x=2.0, y=3.0)<br>p + q<br>Point(x=3.0, y=5.0)</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>1.21 操作集合<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>A = {1, 2, 3, 3}<br>A<br>set([1, 2, 3])<br>B = {3, 4, 5, 6, 7}<br>B<br>set([3, 4, 5, 6, 7])<br>A | B<br>set([1, 2, 3, 4, 5, 6, 7])<br>A &amp; B<br>set([3])<br>A - B<br>set([1, 2])<br>B - A<br>set([4, 5, 6, 7])<br>A ^ B<br>set([1, 2, 4, 5, 6, 7])<br>(A ^ B) == ((A - B) | (B - A))<br>True</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>1.22 操作多重集合<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>A = collections.Counter([1, 2, 2])<br>B = collections.Counter([2, 2, 3])<br>A<br>Counter({2: 2, 1: 1})<br>B<br>Counter({2: 2, 3: 1})<br>A | B<br>Counter({2: 2, 1: 1, 3: 1})<br>A &amp; B<br>Counter({2: 2})<br>A + B<br>Counter({2: 4, 1: 1, 3: 1})<br>A - B<br>Counter({1: 1})<br>B - A<br>Counter({3: 1})</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>1.23 统计在可迭代器中最常出现的元素<br>1<br>2<br>3<br>4<br>5<br>6<br>7</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>A = collections.Counter([1, 1, 2, 2, 3, 3, 3, 3, 4, 5, 6, 7])<br>A<br>Counter({3: 4, 1: 2, 2: 2, 4: 1, 5: 1, 6: 1, 7: 1})<br>A.most_common(1)<br>[(3, 4)]<br>A.most_common(3)<br>[(3, 4), (1, 2), (2, 2)]</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>1.24 两端都可操作的队列<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>Q = collections.deque()<br>Q.append(1)<br>Q.appendleft(2)<br>Q.extend([3, 4])<br>Q.extendleft([5, 6])<br>Q<br>deque([6, 5, 2, 1, 3, 4])<br>Q.pop()<br>4<br>Q.popleft()<br>6<br>Q<br>deque([5, 2, 1, 3])<br>Q.rotate(3)<br>Q<br>deque([2, 1, 3, 5])<br>Q.rotate(-3)<br>Q<br>deque([5, 2, 1, 3])</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>1.25 有最大长度的双端队列<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>last_three = collections.deque(maxlen=3)<br>for i in xrange(10):<br>…     last_three.append(i)<br>…     print ‘, ‘.join(str(x) for x in last_three)<br>…<br>0<br>0, 1<br>0, 1, 2<br>1, 2, 3<br>2, 3, 4<br>3, 4, 5<br>4, 5, 6<br>5, 6, 7<br>6, 7, 8<br>7, 8, 9</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>1.26 可排序词典<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>m = dict((str(x), x) for x in range(10))<br>print ‘, ‘.join(m.keys())<br>1, 0, 3, 2, 5, 4, 7, 6, 9, 8<br>m = collections.OrderedDict((str(x), x) for x in range(10))<br>print ‘, ‘.join(m.keys())<br>0, 1, 2, 3, 4, 5, 6, 7, 8, 9<br>m = collections.OrderedDict((str(x), x) for x in range(10, 0, -1))<br>print ‘, ‘.join(m.keys())<br>10, 9, 8, 7, 6, 5, 4, 3, 2, 1</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>1.27 默认词典<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br>21<br>22</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>m = dict()<br>m[‘a’]<br>Traceback (most recent call last):<br>  File “<stdin>“, line 1, in <module><br>KeyError: ‘a’</module></stdin></p>
+<p>m = collections.defaultdict(int)<br>m[‘a’]<br>0<br>m[‘b’]<br>0<br>m = collections.defaultdict(str)<br>m[‘a’]<br>‘’<br>m[‘b’] += ‘a’<br>m[‘b’]<br>‘a’<br>m = collections.defaultdict(lambda: ‘[default value]’)<br>m[‘a’]<br>‘[default value]’<br>m[‘b’]<br>‘[default value]’</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>1.28 默认字典的简单树状表达<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br>21<br>22<br>23<br>24<br>25<br>26<br>27<br>28<br>29<br>30<br>31<br>32</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>import json<br>tree = lambda: collections.defaultdict(tree)<br>root = tree()<br>root[‘menu’][‘id’] = ‘file’<br>root[‘menu’][‘value’] = ‘File’<br>root[‘menu’][‘menuitems’][‘new’][‘value’] = ‘New’<br>root[‘menu’][‘menuitems’][‘new’][‘onclick’] = ‘new();’<br>root[‘menu’][‘menuitems’][‘open’][‘value’] = ‘Open’<br>root[‘menu’][‘menuitems’][‘open’][‘onclick’] = ‘open();’<br>root[‘menu’][‘menuitems’][‘close’][‘value’] = ‘Close’<br>root[‘menu’][‘menuitems’][‘close’][‘onclick’] = ‘close();’<br>print json.dumps(root, sort_keys=True, indent=4, separators=(‘,’, ‘: ‘))<br>{<br>    “menu”: {<br>        “id”: “file”,<br>        “menuitems”: {<br>            “close”: {<br>                “onclick”: “close();”,<br>                “value”: “Close”<br>            },<br>            “new”: {<br>                “onclick”: “new();”,<br>                “value”: “New”<br>            },<br>            “open”: {<br>                “onclick”: “open();”,<br>                “value”: “Open”<br>            }<br>        },<br>        “value”: “File”<br>    }<br>}</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>1.29 对象到唯一计数的映射<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>import itertools, collections<br>value_to_numeric_map = collections.defaultdict(itertools.count().next)<br>value_to_numeric_map[‘a’]<br>0<br>value_to_numeric_map[‘b’]<br>1<br>value_to_numeric_map[‘c’]<br>2<br>value_to_numeric_map[‘a’]<br>0<br>value_to_numeric_map[‘b’]<br>1</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>1.30 最大和最小的几个列表元素<br>1<br>2<br>3<br>4<br>5</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>a = [random.randint(0, 100) for __ in xrange(100)]<br>heapq.nsmallest(5, a)<br>[3, 3, 5, 6, 8]<br>heapq.nlargest(5, a)<br>[100, 100, 99, 98, 98]</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>1.31 两个列表的笛卡尔积<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br>21<br>22<br>23<br>24<br>25<br>26</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>for p in itertools.product([1, 2, 3], [4, 5]):<br>(1, 4)<br>(1, 5)<br>(2, 4)<br>(2, 5)<br>(3, 4)<br>(3, 5)<br>for p in itertools.product([0, 1], repeat=4):<br>…     print ‘’.join(str(x) for x in p)<br>…<br>0000<br>0001<br>0010<br>0011<br>0100<br>0101<br>0110<br>0111<br>1000<br>1001<br>1010<br>1011<br>1100<br>1101<br>1110<br>1111</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>1.32 列表组合和列表元素替代组合<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br>21<br>22</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>for c in itertools.combinations([1, 2, 3, 4, 5], 3):<br>…     print ‘’.join(str(x) for x in c)<br>…<br>123<br>124<br>125<br>134<br>135<br>145<br>234<br>235<br>245<br>345<br>for c in itertools.combinations_with_replacement([1, 2, 3], 2):<br>…     print ‘’.join(str(x) for x in c)<br>…<br>11<br>12<br>13<br>22<br>23<br>33</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>1.33 列表元素排列组合<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br>21<br>22<br>23<br>24<br>25<br>26<br>27</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>for p in itertools.permutations([1, 2, 3, 4]):<br>…     print ‘’.join(str(x) for x in p)<br>…<br>1234<br>1243<br>1324<br>1342<br>1423<br>1432<br>2134<br>2143<br>2314<br>2341<br>2413<br>2431<br>3124<br>3142<br>3214<br>3241<br>3412<br>3421<br>4123<br>4132<br>4213<br>4231<br>4312<br>4321</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>1.34 可链接迭代器<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br>21<br>22<br>23<br>24<br>25<br>26<br>27<br>28<br>29<br>30<br>31<br>32<br>33</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>a = [1, 2, 3, 4]<br>for p in itertools.chain(itertools.combinations(a, 2), itertools.combinations(a, 3)):<br>…     print p<br>…<br>(1, 2)<br>(1, 3)<br>(1, 4)<br>(2, 3)<br>(2, 4)<br>(3, 4)<br>(1, 2, 3)<br>(1, 2, 4)<br>(1, 3, 4)<br>(2, 3, 4)<br>for subset in itertools.chain.from_iterable(itertools.combinations(a, n) for n in range(len(a) + 1))<br>…     print subset<br>…<br>()<br>(1,)<br>(2,)<br>(3,)<br>(4,)<br>(1, 2)<br>(1, 3)<br>(1, 4)<br>(2, 3)<br>(2, 4)<br>(3, 4)<br>(1, 2, 3)<br>(1, 2, 4)<br>(1, 3, 4)<br>(2, 3, 4)<br>(1, 2, 3, 4)</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>1.35 根据文件指定列类聚<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br>21<br>22<br>23<br>24<br>25<br>26<br>27<br>28<br>29<br>30<br>31<br>32<br>33<br>34<br>35<br>36<br>37<br>38<br>39<br>40<br>41<br>42<br>43<br>44<br>45<br>46<br>47<br>48<br>49<br>50<br>51<br>52<br>53<br>54<br>55<br>56<br>57<br>58<br>59<br>60<br>61<br>62<br>63<br>64<br>65<br>66<br>67<br>68<br>69<br>70<br>71</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>import itertools<br>with open(‘contactlenses.csv’, ‘r’) as infile:<br>…     data = [line.strip().split(‘,’) for line in infile]<br>…<br>data = data[1:]<br>def print_data(rows):<br>…     print ‘\n’.join(‘\t’.join(‘{: &lt;16}’.format(s) for s in row) for row in rows)<br>…</p>
+<p>print_data(data)<br>young               myope                   no                      reduced                 none<br>young               myope                   no                      normal                  soft<br>young               myope                   yes                     reduced                 none<br>young               myope                   yes                     normal                  hard<br>young               hypermetrope            no                      reduced                 none<br>young               hypermetrope            no                      normal                  soft<br>young               hypermetrope            yes                     reduced                 none<br>young               hypermetrope            yes                     normal                  hard<br>pre-presbyopic      myope                   no                      reduced                 none<br>pre-presbyopic      myope                   no                      normal                  soft<br>pre-presbyopic      myope                   yes                     reduced                 none<br>pre-presbyopic      myope                   yes                     normal                  hard<br>pre-presbyopic      hypermetrope            no                      reduced                 none<br>pre-presbyopic      hypermetrope            no                      normal                  soft<br>pre-presbyopic      hypermetrope            yes                     reduced                 none<br>pre-presbyopic      hypermetrope            yes                     normal                  none<br>presbyopic          myope                   no                      reduced                 none<br>presbyopic          myope                   no                      normal                  none<br>presbyopic          myope                   yes                     reduced                 none<br>presbyopic          myope                   yes                     normal                  hard<br>presbyopic          hypermetrope            no                      reduced                 none<br>presbyopic          hypermetrope            no                      normal                  soft<br>presbyopic          hypermetrope            yes                     reduced                 none<br>presbyopic          hypermetrope            yes                     normal                  none</p>
+<p>data.sort(key=lambda r: r[-1])<br>for value, group in itertools.groupby(data, lambda r: r[-1]):<br>…     print ‘———–’<br>…     print ‘Group: ‘ + value<br>…     print_data(group)</p>
+<h2 id="…"><a href="#…" class="headerlink" title="…"></a>…</h2><p>Group: hard<br>young               myope                   yes                     normal                  hard<br>young               hypermetrope            yes                     normal                  hard<br>pre-presbyopic      myope                   yes                     normal                  hard</p>
+<h2 id="presbyopic-myope-yes-normal-hard"><a href="#presbyopic-myope-yes-normal-hard" class="headerlink" title="presbyopic          myope                   yes                     normal                  hard"></a>presbyopic          myope                   yes                     normal                  hard</h2><p>Group: none<br>young               myope                   no                      reduced                 none<br>young               myope                   yes                     reduced                 none<br>young               hypermetrope            no                      reduced                 none<br>young               hypermetrope            yes                     reduced                 none<br>pre-presbyopic      myope                   no                      reduced                 none<br>pre-presbyopic      myope                   yes                     reduced                 none<br>pre-presbyopic      hypermetrope            no                      reduced                 none<br>pre-presbyopic      hypermetrope            yes                     reduced                 none<br>pre-presbyopic      hypermetrope            yes                     normal                  none<br>presbyopic          myope                   no                      reduced                 none<br>presbyopic          myope                   no                      normal                  none<br>presbyopic          myope                   yes                     reduced                 none<br>presbyopic          hypermetrope            no                      reduced                 none<br>presbyopic          hypermetrope            yes                     reduced                 none</p>
+<h2 id="presbyopic-hypermetrope-yes-normal-none"><a href="#presbyopic-hypermetrope-yes-normal-none" class="headerlink" title="presbyopic          hypermetrope            yes                     normal                  none"></a>presbyopic          hypermetrope            yes                     normal                  none</h2><p>Group: soft<br>young               myope                   no                      normal                  soft<br>young               hypermetrope            no                      normal                  soft<br>pre-presbyopic      myope                   no                      normal                  soft<br>pre-presbyopic      hypermetrope            no                      normal                  soft<br>presbyopic          hypermetrope            no                      normal                  soft</p>
+</blockquote>
+</blockquote>
+</blockquote>
+    </div>
+
+    <div class="post-footer">   
+        <div>
+            
+                转载声明: 商业转载请联系作者获得授权,非商业转载请注明出处 © Snippet
+            
+        </div>
+        <div>
+            
+                版权声明: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+知识共享署名-非商业性使用-禁止演绎 3.0 未本地化版本许可协议（CC BY-NC-ND 3.0）
+</a>
+            
+        </div>  
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/2016/01/23/POP3收取邮件实现/" class="pre-post btn btn-default"><i class="fa fa-angle-left fa-fw"></i>上一篇</a>
+    
+    
+        <a href="/2016/01/22/30个有关Python的小技巧/" class="next-post btn btn-default">下一篇<i class="fa fa-angle-right fa-fw"></i></a>
+    
+</div>
+
+
+    <div id="comments">
+        <div id="uyan_frame"></div>
+    <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2120654"></script>
+    </div>
+                </main>
+                <aside class="col-md-4 sidebar">
+        
+        <div class="widget notification">
+        <h3 class="title">网站公告</h3>
+        <div>
+            <p>主题Snippet v1.1.0版本即将上线，敬请期待~ <br>
+主题下载：<a href="https://github.com/shenliyang/hexo-theme-snippet" title="fork me" target="_blank">Snippet主题</a> <br>
+<hr>前端工程师一枚，专注于前端Node、React和移动端Android和Ios开发，欢迎骚扰。
+<br>联系方式：qq群:278792776（移动群）、515980159（React群）、188716429（猎头hr群）
+</p>
+        </div>
+    </div>
+        
+        <div class="widget">
+        <h3 class="title">分类</h3>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/"><i class="fa" aria-hidden="true">Android</i></a><span class="category-list-count">36</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/系统/"><i class="fa" aria-hidden="true">系统</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Google/"><i class="fa" aria-hidden="true">Google</i></a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Google/VR/"><i class="fa" aria-hidden="true">VR</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Kotlin/"><i class="fa" aria-hidden="true">Kotlin</i></a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/"><i class="fa" aria-hidden="true">Python</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React-Native/"><i class="fa" aria-hidden="true">React Native</i></a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/"><i class="fa" aria-hidden="true">Spring</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android/"><i class="fa" aria-hidden="true">android</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/"><i class="fa" aria-hidden="true">iOS</i></a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ios/"><i class="fa" aria-hidden="true">ios</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/人工智能/"><i class="fa" aria-hidden="true">人工智能</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/"><i class="fa" aria-hidden="true">前端</i></a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端/"><i class="fa" aria-hidden="true">后端</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/小程序/"><i class="fa" aria-hidden="true">小程序</i></a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术人生/"><i class="fa" aria-hidden="true">技术人生</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/机器学习/"><i class="fa" aria-hidden="true">机器学习</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂谈/"><i class="fa" aria-hidden="true">杂谈</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程语言/"><i class="fa" aria-hidden="true">编程语言</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/"><i class="fa" aria-hidden="true">设计模式</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/资料库/"><i class="fa" aria-hidden="true">资料库</i></a><span class="category-list-count">1</span></li></ul>
+    </div>
+        
+        <div class="widget">
+      <h3 class="title">归档</h3>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/"><i class="fa" aria-hidden="true">十一月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/"><i class="fa" aria-hidden="true">十月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/"><i class="fa" aria-hidden="true">八月 2017</i></a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/"><i class="fa" aria-hidden="true">六月 2017</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/"><i class="fa" aria-hidden="true">五月 2017</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/"><i class="fa" aria-hidden="true">三月 2017</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/"><i class="fa" aria-hidden="true">二月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/"><i class="fa" aria-hidden="true">一月 2017</i></a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/"><i class="fa" aria-hidden="true">十二月 2016</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/"><i class="fa" aria-hidden="true">十一月 2016</i></a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/"><i class="fa" aria-hidden="true">十月 2016</i></a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/"><i class="fa" aria-hidden="true">九月 2016</i></a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/"><i class="fa" aria-hidden="true">八月 2016</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/"><i class="fa" aria-hidden="true">七月 2016</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/"><i class="fa" aria-hidden="true">六月 2016</i></a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/"><i class="fa" aria-hidden="true">五月 2016</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/"><i class="fa" aria-hidden="true">四月 2016</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/"><i class="fa" aria-hidden="true">三月 2016</i></a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/"><i class="fa" aria-hidden="true">二月 2016</i></a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/"><i class="fa" aria-hidden="true">一月 2016</i></a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/"><i class="fa" aria-hidden="true">九月 2015</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/"><i class="fa" aria-hidden="true">六月 2015</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/"><i class="fa" aria-hidden="true">五月 2015</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/"><i class="fa" aria-hidden="true">四月 2015</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/"><i class="fa" aria-hidden="true">三月 2015</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/"><i class="fa" aria-hidden="true">一月 2015</i></a><span class="archive-list-count">1</span></li></ul>
+    </div>
+        
+        <div class="widget">
+    <h3 class="title">标签云</h3>
+    <div class="content tag-cloud">
+      
+        <a href="/tags/AR/" style="font-size: 1em">AR</a> <a href="/tags/Android/" style="font-size: 1em">Android</a> <a href="/tags/深入系统/" style="font-size: 1em">深入系统</a> <a href="/tags/系统服务/" style="font-size: 1em">系统服务</a> <a href="/tags/android/" style="font-size: 1em">android</a> <a href="/tags/混淆打包/" style="font-size: 1em">混淆打包</a> <a href="/tags/硬件/" style="font-size: 1em">硬件</a> <a href="/tags/前端/" style="font-size: 1em">前端</a> <a href="/tags/Angular2/" style="font-size: 1em">Angular2</a> <a href="/tags/前端开发/" style="font-size: 1em">前端开发</a> <a href="/tags/React-Native/" style="font-size: 1em">React Native</a> <a href="/tags/FlexBox布局/" style="font-size: 1em">FlexBox布局</a> <a href="/tags/后端/" style="font-size: 1em">后端</a> <a href="/tags/Java/" style="font-size: 1em">Java</a> <a href="/tags/垃圾回收/" style="font-size: 1em">垃圾回收</a> <a href="/tags/Google/" style="font-size: 1em">Google</a> <a href="/tags/VR/" style="font-size: 1em">VR</a> <a href="/tags/Kotlin/" style="font-size: 1em">Kotlin</a> <a href="/tags/编程语言/" style="font-size: 1em">编程语言</a> <a href="/tags/Node/" style="font-size: 1em">Node</a> <a href="/tags/Promise/" style="font-size: 1em">Promise</a> <a href="/tags/OpenGL/" style="font-size: 1em">OpenGL</a> <a href="/tags/调试/" style="font-size: 1em">调试</a> <a href="/tags/eact-Native/" style="font-size: 1em">eact Native</a> <a href="/tags/打包/" style="font-size: 1em">打包</a> <a href="/tags/原生/" style="font-size: 1em">原生</a> <a href="/tags/Spring/" style="font-size: 1em">Spring</a> <a href="/tags/入门/" style="font-size: 1em">入门</a> <a href="/tags/新特性/" style="font-size: 1em">新特性</a> <a href="/tags/ios/" style="font-size: 1em">ios</a> <a href="/tags/Swift/" style="font-size: 1em">Swift</a> <a href="/tags/swift/" style="font-size: 1em">swift</a> <a href="/tags/iOS/" style="font-size: 1em">iOS</a> <a href="/tags/知识库/" style="font-size: 1em">知识库</a> <a href="/tags/Xcode/" style="font-size: 1em">Xcode</a> <a href="/tags/webpack/" style="font-size: 1em">webpack</a> <a href="/tags/gulp/" style="font-size: 1em">gulp</a> <a href="/tags/https/" style="font-size: 1em">https</a> <a href="/tags/mac/" style="font-size: 1em">mac</a> <a href="/tags/环境/" style="font-size: 1em">环境</a> <a href="/tags/gif/" style="font-size: 1em">gif</a> <a href="/tags/杂谈/" style="font-size: 1em">杂谈</a> <a href="/tags/react/" style="font-size: 1em">react</a> <a href="/tags/原理/" style="font-size: 1em">原理</a> <a href="/tags/小程序/" style="font-size: 1em">小程序</a> <a href="/tags/微信/" style="font-size: 1em">微信</a> <a href="/tags/全栈/" style="font-size: 1em">全栈</a> <a href="/tags/个人博客/" style="font-size: 1em">个人博客</a> <a href="/tags/流量/" style="font-size: 1em">流量</a> <a href="/tags/机器学习/" style="font-size: 1em">机器学习</a> <a href="/tags/搭建网站/" style="font-size: 1em">搭建网站</a> <a href="/tags/深入理解/" style="font-size: 1em">深入理解</a> <a href="/tags/算法/" style="font-size: 1em">算法</a> <a href="/tags/人工智能/" style="font-size: 1em">人工智能</a> <a href="/tags/内存分配/" style="font-size: 1em">内存分配</a> <a href="/tags/设计模式/" style="font-size: 1em">设计模式</a> <a href="/tags/Python/" style="font-size: 1em">Python</a>
+    </div>
+  </div>
+        
+        <div class="widget">
+        <h3 class="title">友链</h3>
+        <div class="content friends-link">
+        
+            <a href="http://blog.csdn.net/xiangzhihong8/" class="fa" target="_blank">作者博客</a>
+        
+            <a href="https://yq.aliyun.com/u/xiangzhihong" class="fa" target="_blank">阿里云博客</a>
+        
+        </div>
+    </div>
+        
+    </aside>
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<!--page counter part-->
+<script>
+function addCount (Counter) {
+        url=$('.article-date').attr('href').trim();
+        title = $('.article-title').text().trim();
+        var query=new AV.Query(Counter);
+        //use url as unique idnetfication
+        query.equalTo("url",url);
+        query.find({
+            success: function(results){
+                if(results.length>0)
+                {
+                    var counter=results[0];
+                    counter.fetchWhenSave(true); //get recent result
+                    counter.increment("time");
+                    counter.save();
+                }
+                else
+                {
+                    var newcounter=new Counter();
+                    newcounter.set("title",title);
+                    newcounter.set("url",url);
+                    newcounter.set("time",1);
+                    newcounter.save(null,{
+                        success: function(newcounter){
+                        //alert('New object created');
+                        },
+                        error: function(newcounter,error){
+                        alert('Failed to create');
+                        }
+                        });
+                }
+            },
+            error: function(error){
+                //find null is not a error
+                alert('Error:'+error.code+" "+error.message);
+            }
+        });
+}
+$(function(){
+        var Counter=AV.Object.extend("Counter");
+        //only increse visit counting when intering a page
+        if ($('.article-title').length == 1)
+           addCount(Counter);
+        var query=new AV.Query(Counter);
+        query.descending("time");
+        // the sum of popular posts
+        query.limit(10); 
+        query.find({
+            success: function(results){
+                    for(var i=0;i<results.length;i++)    
+                    {
+                        var counter=results[i];
+                        title=counter.get("title");
+                        url=counter.get("url");
+                        time=counter.get("time");
+                        // add to the popularlist widget
+                        showcontent=title+" ("+time+")";
+                        //notice the "" in href
+                        $('.popularlist').append('<li><a href="'+url+'">'+showcontent+'</a></li>');
+                    }
+                },
+            error: function(error){
+                alert("Error:"+error.code+" "+error.message);
+            }
+            }
+        )
+        });
+</script>
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <span>Copyright &copy; 2017 
+                </span> | 
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/assets/highlight.pack.js?rev=@@hash"></script>
+  <script>
+    hljs.initHighlightingOnLoad(); //初始化代码高亮 
+  </script>
+
+<script src="/js/app.js?rev=@@hash"></script>
+</body>

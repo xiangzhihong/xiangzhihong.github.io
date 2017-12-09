@@ -1,0 +1,395 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no">
+    <link rel="dns-prefetch" href="//t11.baidu.com">
+    <!--SEO-->
+
+
+
+<meta name="robots" content="all">
+<meta name="google" content="all">
+<meta name="googlebot" content="all">
+<meta name="verify" content="all">
+    <!--Title-->
+
+
+<title>手把手教你从Core Data迁移到Realm | 向志洪</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="向志洪" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css?rev=9.12.0">
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+    <div class="hide">
+    <script src="https://s4.cnzz.com/z_stat.php?id=1261768793&web_id=1262140174" language="JavaScript"></script>
+    </div>
+    
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?13764659765";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+	
+	<script src="https://cdn1.lncld.net/static/js/av-min-1.2.1.js"></script>
+    <script>AV.initialize("aj42pgqDHRSVhMknqDb3JMeg-gzGzoHsz", "qbRaoHOP9NMWPOow8PandkH3");</script>
+</head></html>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+<body>
+    <header class="main-header">
+    <div class="main-header-box">
+        <a class="branding" href="/" title="">
+            <img src="/img/header_logo.png" alt="Snippet 博客主题">
+        </a>
+        <h2 class="text-hide">Snippet主题</h2>
+        <img src="/img/header_logo.png" alt="Snippet 博客主题" class="hide">
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only">Toggle navigation</span>
+                    <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class=""><a href="/">首页</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/前端/">前端</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/后端/">后端</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/Java/">Java</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/Python/">Python</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/Android/">Android</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/iOS/">iOS</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/React Native/">React Native</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/小程序/">小程序</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/杂谈/">杂谈</a></li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="手把手教你从Core Data迁移到Realm">
+            
+            手把手教你从Core Data迁移到Realm
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <span>iOS</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            iOS
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta">2016/01/25</span>
+    </span>
+</div>
+            
+            
+            <p class="fa fa-exclamation-triangle warning">
+                本文于<strong>684</strong>天之前发表，文中内容可能已经过时。
+            </p>
+            
+    </div>
+    
+    <div class="post-body">
+        <p align="center"><br><img src="http://upload-images.jianshu.io/upload_images/1194012-65440c02af82bd8d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"><br></p> 
+
+<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>Hybrid App（混合模式移动应用）是指介于web-app、native-app这两者之间的app，兼具“Native App良好用户交互体验的优势”和“Web App跨平台开发的优势”。</p>
+<p>Hybrid App按网页语言与程序语言的混合，通常分为三种类型：多View混合型，单View混合型，Web主体型，3种类型比较如下：</p>
+<p align="center"><br><img src="http://upload-images.jianshu.io/upload_images/1194012-101b71b37fb36dad.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"><br></p> 
+
+
+<p>今天我来谈谈Web主体型中Hybrid框架里面比较有名的PhoneGap</p>
+<p align="center"><br><img src="http://upload-images.jianshu.io/upload_images/1194012-8578bb25ee8b09b3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"><br></p> 
+
+
+<h4 id="一-Cordova"><a href="#一-Cordova" class="headerlink" title="一.Cordova"></a>一.Cordova</h4><p>说到PhoneGap，就不得不说到Cordova</p>
+<p>Cordova 是一个可以让 JS 与原生代码(包括 Android 的 java，iOS 的 Objective-C 等)互相通信的一个库，并且提供了一系列的插件类，比如 JS 直接操作本地数据库的插件类。</p>
+<p>Cordova的设计概念，是在APP上透过Web控件来呈现Web页面，让Web开发人员可以操作熟悉的语言、工具来开发APP.  </p>
+<p>为了让Web页面能够满足更多的APP功能需求，Cordova提供了Plugin机制，让Web页面能够挂载并调用Native开发技术所开发的功能模块</p>
+<p>Cordova在系统中的层级应该是这样子的:</p>
+<p align="center"><br><img src="http://upload-images.jianshu.io/upload_images/1194012-22b52111118a47b6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"><br></p> 
+
+
+
+
+<h4 id="二-Js-与-Objective-C-通信"><a href="#二-Js-与-Objective-C-通信" class="headerlink" title="二.Js 与 Objective-C 通信"></a>二.Js 与 Objective-C 通信</h4><p>Js 使用了两种方式来与 Objective-C 通信，一种是使用 XMLHttpRequest 发起请求的方式，另一种则是通过设置透明的 iframe 的 src 属性。</p>
+<p>我接下来说的主要是第二种方式，iframe bridge。<br>通过在 Js 端创建一个透明的 iframe，设置这个 ifame 的 src 为自定义的协议，而 ifame 的 src 更改时，UIWebView 会先回调其 delegate 的 webView:shouldStartLoadWithRequest:navigationType: 方法</p>
+<p>说的还是很抽象的，来实际看一段代码</p>
+<p>在cordova.js 里面，是这样子实现的</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">iOSExec</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    ...</div><div class="line">    if (!isInContextOfEvalJs &amp;&amp; commandQueue.length == <span class="number">1</span>)  &#123;</div><div class="line">        <span class="comment">// 如果支持 XMLHttpRequest，则使用 XMLHttpRequest 方式</span></div><div class="line">        <span class="keyword">if</span> (bridgeMode != jsToNativeModes.IFRAME_NAV) &#123;</div><div class="line">            <span class="comment">// This prevents sending an XHR when there is already one being sent.</span></div><div class="line">            <span class="comment">// This should happen only in rare circumstances (refer to unit tests).</span></div><div class="line">            <span class="keyword">if</span> (execXhr &amp;&amp; execXhr.readyState != <span class="number">4</span>) &#123;</div><div class="line">                execXhr = <span class="literal">null</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="comment">// Re-using the XHR improves exec() performance by about 10%.</span></div><div class="line">            execXhr = execXhr || <span class="keyword">new</span> XMLHttpRequest();</div><div class="line">            <span class="comment">// Changing this to a GET will make the XHR reach the URIProtocol on 4.2.</span></div><div class="line">            <span class="comment">// For some reason it still doesn't work though...</span></div><div class="line">            <span class="comment">// Add a timestamp to the query param to prevent caching.</span></div><div class="line">            execXhr.open(<span class="string">'HEAD'</span>, <span class="string">"/!gap_exec?"</span> + (+<span class="keyword">new</span> <span class="built_in">Date</span>()), <span class="literal">true</span>);</div><div class="line">            <span class="keyword">if</span> (!vcHeaderValue) &#123;</div><div class="line">                vcHeaderValue = <span class="regexp">/.*\((.*)\)/</span>.exec(navigator.userAgent)[<span class="number">1</span>];</div><div class="line">            &#125;</div><div class="line">            execXhr.setRequestHeader(<span class="string">'vc'</span>, vcHeaderValue);</div><div class="line">            execXhr.setRequestHeader(<span class="string">'rc'</span>, ++requestCount);</div><div class="line">            <span class="keyword">if</span> (shouldBundleCommandJson()) &#123;</div><div class="line">                <span class="comment">// 设置请求的数据</span></div><div class="line">                execXhr.setRequestHeader(<span class="string">'cmds'</span>, iOSExec.nativeFetchMessages());</div><div class="line">            &#125;</div><div class="line">            <span class="comment">// 发起请求</span></div><div class="line">            execXhr.send(<span class="literal">null</span>);</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="comment">// 如果不支持 XMLHttpRequest，则使用透明 iframe 的方式，设置 iframe 的 src 属性</span></div><div class="line">            execIframe = execIframe || createExecIframe();</div><div class="line">            execIframe.src = <span class="string">"gap://ready"</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>iOS这边对应的要在WebView里面写响应的方法</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">// UIWebView 加载 URL 前回调的方法，返回 YES，则开始加载此 URL，返回 NO，则忽略此 URL</span></div><div class="line">- (<span class="built_in">BOOL</span>)webView:(<span class="built_in">UIWebView</span>*)theWebView</div><div class="line">              shouldStartLoadWithRequest:(<span class="built_in">NSURLRequest</span>*)request</div><div class="line">              navigationType:(<span class="built_in">UIWebViewNavigationType</span>)navigationType</div><div class="line">&#123;</div><div class="line">    <span class="built_in">NSURL</span>* url = [request URL];</div><div class="line">    </div><div class="line">    <span class="comment">/*</span></div><div class="line">     * Execute any commands queued with cordova.exec() on the JS side.</div><div class="line">     * The part of the URL after gap:// is irrelevant.</div><div class="line">     */</div><div class="line">    <span class="comment">// 判断是否 Cordova 的请求，对于 JS 代码中 execIframe.src = "gap://ready" 这句</span></div><div class="line">    <span class="keyword">if</span> ([[url scheme] isEqualToString:<span class="string">@"gap"</span>]) &#123;</div><div class="line">        <span class="comment">// 获取请求的数据，并对数据进行分析、处理</span></div><div class="line">        [_commandQueue fetchCommandsFromJs];</div><div class="line">        <span class="keyword">return</span> <span class="literal">NO</span>;</div><div class="line">    &#125;</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这样就完成了Js和OC的通信了</p>
+<h4 id="三-Objective-C-与-Js-通信"><a href="#三-Objective-C-与-Js-通信" class="headerlink" title="三.Objective-C 与 Js 通信"></a>三.Objective-C 与 Js 通信</h4><p>首先OC获取Js的请求数据</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">- (<span class="keyword">void</span>)fetchCommandsFromJs</div><div class="line">&#123;</div><div class="line">    <span class="comment">// Grab all the queued commands from the JS side.</span></div><div class="line">    <span class="built_in">NSString</span>* queuedCommandsJSON = [_viewController.webView</div><div class="line">                                    stringByEvaluatingJavaScriptFromString:</div><div class="line">                                    <span class="string">@"cordova.require('cordova/exec').nativeFetchMessages()"</span>];</div><div class="line">    </div><div class="line">    [<span class="keyword">self</span> enqueCommandBatch:queuedCommandsJSON];</div><div class="line">    <span class="keyword">if</span> ([queuedCommandsJSON length] &gt; <span class="number">0</span>) &#123;</div><div class="line">        CDV_EXEC_LOG(<span class="string">@"Exec: Retrieved new exec messages by request."</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>然后OC处理Js传过来的请求</p>
+<p>OC再把处理结果返回Js</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="built_in">NSString</span> *ret = [((HFNativeFunction*)strongSelf.actionDict[funcName]) doCall:argArr];</div><div class="line">        <span class="built_in">NSString</span> *js = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"if(typeof %@ == 'string') &#123; paf.nativeInvocationObject=%@;&#125; else &#123;   paf.nativeInvocationObject=JSON.stringify(%@);&#125; "</span>, ret, ret, ret];</div><div class="line">        DLog(<span class="string">@"\n\njs call fun=%@ ret=%@\n\n"</span>, funcName, ret);</div><div class="line">        [<span class="keyword">self</span>.webView stringByEvaluatingJavaScriptFromString: js];</div></pre></td></tr></table></figure>
+<h4 id="四-Cordova-Js工作原理"><a href="#四-Cordova-Js工作原理" class="headerlink" title="四.Cordova - Js工作原理"></a>四.Cordova - Js工作原理</h4><p>Cordova JS 端请求方法的格式：  </p>
+<blockquote>
+<p>// successCallback : 成功回调方法<br>// failCallback    : 失败回调方法<br>// server          : 所要请求的服务名字<br>// action          : 所要请求的服务具体操作<br>// actionArgs      : 请求操作所带的参数  </p>
+</blockquote>
+<p>cordova.exec(successCallback, failCallback, service, action, actionArgs);</p>
+<p>传进来的这五个参数并不是直接传送给原生代码的，Cordova JS 端会做以下的处理：</p>
+<p>1.会为每个请求生成一个叫 callbackId 的唯一标识：这个参数需传给 Objective-C 端，Objective-C 处理完后，会把 callbackId 连同处理结果一起返回给 JS 端。 </p>
+<p>2.以 callbackId 为 key，{success:successCallback, fail:failCallback} 为 value，把这个键值对保存在 JS 端的字典里，successCallback 与 failCallback 这两个参数不需要传给 Objective-C 端，Objective-C 返回结果时带上 callbackId，JS 端就可以根据 callbackId 找到回调方法。</p>
+<p>3.每次 JS 请求，最后发到 Objective-C 的数据包括：callbackId, service, action, actionArgs。</p>
+<p>Js处理请求</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">iOSExec</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    ...</div><div class="line">    <span class="comment">// 生成一个 callbackId 的唯一标识，并把此标志与成功、失败回调方法一起保存在 JS 端</span></div><div class="line">    <span class="comment">// Register the callbacks and add the callbackId to the positional</span></div><div class="line">    <span class="comment">// arguments if given.</span></div><div class="line">    <span class="keyword">if</span> (successCallback || failCallback) &#123;</div><div class="line">        callbackId = service + cordova.callbackId++;</div><div class="line">        cordova.callbacks[callbackId] =</div><div class="line">        &#123;<span class="attr">success</span>:successCallback, <span class="attr">fail</span>:failCallback&#125;;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    actionArgs = massageArgsJsToNative(actionArgs);</div><div class="line">    </div><div class="line">    <span class="comment">// 把 callbackId，service，action，actionArgs 保持到 commandQueue 中</span></div><div class="line">    <span class="comment">// 这四个参数就是最后发给原生代码的数据</span></div><div class="line">    <span class="keyword">var</span> command = [callbackId, service, action, actionArgs];</div><div class="line">    commandQueue.push(<span class="built_in">JSON</span>.stringify(command));</div><div class="line">    ...</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 获取请求的数据，包括 callbackId, service, action, actionArgs</span></div><div class="line">iOSExec.nativeFetchMessages = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="comment">// Each entry in commandQueue is a JSON string already.</span></div><div class="line">    <span class="keyword">if</span> (!commandQueue.length) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">''</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">var</span> json = <span class="string">'['</span> + commandQueue.join(<span class="string">','</span>) + <span class="string">']'</span>;</div><div class="line">    commandQueue.length = <span class="number">0</span>;</div><div class="line">    <span class="keyword">return</span> json;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h4 id="五-Cordova-OC工作原理"><a href="#五-Cordova-OC工作原理" class="headerlink" title="五.Cordova - OC工作原理"></a>五.Cordova - OC工作原理</h4><p>Native OC拿到 callbackId、service、action 及 actionArgs 后，会做以下的处理：</p>
+<p>1.根据 service 参数找到对应的插件类</p>
+<p>2.根据 action 参数找到插件类中对应的处理方法，并把 actionArgs 作为处理方法请求参数的一部分传给处理方法</p>
+<p>3.处理完成后，把处理结果及 callbackId 返回给 JS 端，JS 端收到后会根据 callbackId 找到回调方法，并把处理结果传给回调方法</p>
+<p> Objective-C 返回结果给 JS 端</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">- (<span class="keyword">void</span>)sendPluginResult:(CDVPluginResult*)result callbackId:(<span class="built_in">NSString</span>*)callbackId</div><div class="line">&#123;</div><div class="line">    CDV_EXEC_LOG(<span class="string">@"Exec(%@): Sending result. Status=%@"</span>, callbackId, result.status);</div><div class="line">    <span class="comment">// This occurs when there is are no win/fail callbacks for the call.</span></div><div class="line">    <span class="keyword">if</span> ([<span class="string">@"INVALID"</span> isEqualToString : callbackId]) &#123;</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">int</span> status = [result.status intValue];</div><div class="line">    <span class="built_in">BOOL</span> keepCallback = [result.keepCallback boolValue];</div><div class="line">    <span class="built_in">NSString</span>* argumentsAsJSON = [result argumentsAsJSON];</div><div class="line">    </div><div class="line">    <span class="comment">// 将请求的处理结果及 callbackId 通过调用 JS 方法返回给 JS 端</span></div><div class="line">    <span class="built_in">NSString</span>* js = [<span class="built_in">NSString</span> stringWithFormat:</div><div class="line">                    <span class="string">@"cordova.require('cordova/exec').nativeCallback('%@',%d,%@,%d)"</span>,</div><div class="line">                    callbackId, status, argumentsAsJSON, keepCallback];</div><div class="line">    </div><div class="line">    [<span class="keyword">self</span> evalJsHelper:js];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>举个具体的例子：</p>
+<p>1.将收到的json转换成Command</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">// Execute the commands one-at-a-time.</span></div><div class="line">     <span class="built_in">NSArray</span>* jsonEntry = [commandBatch dequeue];</div><div class="line">     <span class="keyword">if</span> ([commandBatch count] == <span class="number">0</span>) &#123;</div><div class="line">                  [_queue removeObjectAtIndex:<span class="number">0</span>];</div><div class="line">      &#125;</div><div class="line">     HFCDVInvokedUrlCommand* command = [HFCDVInvokedUrlCommand commandFromJson:jsonEntry];</div><div class="line">     HF_CDV_EXEC_LOG(<span class="string">@"Exec(%@): Calling %@.%@"</span>, command.callbackId, command.className, command.methodName);</div></pre></td></tr></table></figure>
+<p>2.OC 执行</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">- (<span class="built_in">BOOL</span>)execute:(HFCDVInvokedUrlCommand*)command</div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span> ((command.className == <span class="literal">nil</span>) || (command.methodName == <span class="literal">nil</span>)) &#123;</div><div class="line">        DLog(<span class="string">@"ERROR: Classname and/or methodName not found for command."</span>);</div><div class="line">        <span class="keyword">return</span> <span class="literal">NO</span>;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">if</span> ([command.className isEqualToString:<span class="string">@"DeviceReadyDummyClass"</span>] &amp;&amp;</div><div class="line">        [command.methodName isEqualToString:<span class="string">@"deviceReady"</span>]) &#123;</div><div class="line">        [[<span class="built_in">NSNotificationCenter</span> defaultCenter]postNotificationName:k_NOTIF_DEVICE_READY object:_viewController];</div><div class="line">        <span class="keyword">return</span> <span class="literal">YES</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// Fetch an instance of this class</span></div><div class="line">    HFCDVPlugin* obj = [_viewController.commandDelegate getCommandInstance:command.className];</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (!([obj isKindOfClass:[HFCDVPlugin <span class="keyword">class</span>]])) &#123;</div><div class="line">        DLog(<span class="string">@"ERROR: Plugin '%@' not found, or is not a HFCDVPlugin. Check your plugin mapping in config.xml."</span>, command.className);</div><div class="line">        <span class="keyword">return</span> <span class="literal">NO</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">BOOL</span> retVal = <span class="literal">YES</span>;</div><div class="line">    <span class="keyword">double</span> started = [[<span class="built_in">NSDate</span> date] timeIntervalSince1970] * <span class="number">1000.0</span>;</div><div class="line">    <span class="comment">// Find the proper selector to call.</span></div><div class="line">    <span class="built_in">NSString</span>* methodName = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%@:"</span>, command.methodName];</div><div class="line">    SEL normalSelector = <span class="built_in">NSSelectorFromString</span>(methodName);</div><div class="line">    <span class="keyword">if</span> ([obj respondsToSelector:normalSelector]) &#123;</div><div class="line">        <span class="comment">// [obj performSelector:normalSelector withObject:command];</span></div><div class="line">        ((<span class="keyword">void</span> (*)(<span class="keyword">id</span>, SEL, <span class="keyword">id</span>))objc_msgSend)(obj, normalSelector, command);</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="comment">// There's no method to call, so throw an error.</span></div><div class="line">        DLog(<span class="string">@"ERROR: Method '%@' not defined in Plugin '%@'"</span>, methodName, command.className);</div><div class="line">        retVal = <span class="literal">NO</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">double</span> elapsed = [[<span class="built_in">NSDate</span> date] timeIntervalSince1970] * <span class="number">1000.0</span> - started;</div><div class="line">    <span class="keyword">if</span> (elapsed &gt; <span class="number">10</span>) &#123;</div><div class="line">        DLog(<span class="string">@"THREAD WARNING: ['%@'] took '%f' ms. Plugin should use a background thread."</span>, command.className, elapsed);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> retVal;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="六-回调方法"><a href="#六-回调方法" class="headerlink" title="六.回调方法"></a>六.回调方法</h4><p>Js端拿到数据根据 callbackId 回调</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">// 根据 callbackId 及是否成功标识，找到回调方法，并把处理结果传给回调方法</span></div><div class="line">callbackFromNative: <span class="function"><span class="keyword">function</span>(<span class="params">callbackId, success, status, args, keepCallback</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> callback = cordova.callbacks[callbackId];</div><div class="line">    <span class="keyword">if</span> (callback) &#123;</div><div class="line">        <span class="keyword">if</span> (success &amp;&amp; status == cordova.callbackStatus.OK) &#123;</div><div class="line">            callback.success &amp;&amp; callback.success.apply(<span class="literal">null</span>, args);</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!success) &#123;</div><div class="line">            callback.fail &amp;&amp; callback.fail.apply(<span class="literal">null</span>, args);</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="comment">// Clear callback if not expecting any more results</span></div><div class="line">        <span class="keyword">if</span> (!keepCallback) &#123;</div><div class="line">            <span class="keyword">delete</span> cordova.callbacks[callbackId];</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>GitHub Repo：<a href="https://github.com/halfrost/Halfrost-Field" target="_blank" rel="external">Halfrost-Field</a></p>
+<p>Follow: <a href="https://github.com/halfrost" target="_blank" rel="external">halfrost · GitHub</a></p>
+<p>Source: <a href="https://halfrost.com/ios_hybrid_phonegap/" target="_blank" rel="external">https://halfrost.com/ios_hybrid_phonegap/</a></p>
+</blockquote>
+    </div>
+
+    <div class="post-footer">   
+        <div>
+            
+                转载声明: 商业转载请联系作者获得授权,非商业转载请注明出处 © Snippet
+            
+        </div>
+        <div>
+            
+                版权声明: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+知识共享署名-非商业性使用-禁止演绎 3.0 未本地化版本许可协议（CC BY-NC-ND 3.0）
+</a>
+            
+        </div>  
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/2016/01/25/高级聚类/" class="pre-post btn btn-default"><i class="fa fa-angle-left fa-fw"></i>上一篇</a>
+    
+    
+        <a href="/2016/01/25/手把手教你从Core Data迁移到Realm /" class="next-post btn btn-default">下一篇<i class="fa fa-angle-right fa-fw"></i></a>
+    
+</div>
+
+
+    <div id="comments">
+        <div id="uyan_frame"></div>
+    <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2120654"></script>
+    </div>
+                </main>
+                <aside class="col-md-4 sidebar">
+        
+        <div class="widget notification">
+        <h3 class="title">网站公告</h3>
+        <div>
+            <p>主题Snippet v1.1.0版本即将上线，敬请期待~ <br>
+主题下载：<a href="https://github.com/shenliyang/hexo-theme-snippet" title="fork me" target="_blank">Snippet主题</a> <br>
+<hr>前端工程师一枚，专注于前端Node、React和移动端Android和Ios开发，欢迎骚扰。
+<br>联系方式：qq群:278792776（移动群）、515980159（React群）、188716429（猎头hr群）
+</p>
+        </div>
+    </div>
+        
+        <div class="widget">
+        <h3 class="title">分类</h3>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/"><i class="fa" aria-hidden="true">Android</i></a><span class="category-list-count">36</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/系统/"><i class="fa" aria-hidden="true">系统</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Google/"><i class="fa" aria-hidden="true">Google</i></a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Google/VR/"><i class="fa" aria-hidden="true">VR</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Kotlin/"><i class="fa" aria-hidden="true">Kotlin</i></a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/"><i class="fa" aria-hidden="true">Python</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React-Native/"><i class="fa" aria-hidden="true">React Native</i></a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/"><i class="fa" aria-hidden="true">Spring</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android/"><i class="fa" aria-hidden="true">android</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/"><i class="fa" aria-hidden="true">iOS</i></a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ios/"><i class="fa" aria-hidden="true">ios</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/人工智能/"><i class="fa" aria-hidden="true">人工智能</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/"><i class="fa" aria-hidden="true">前端</i></a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端/"><i class="fa" aria-hidden="true">后端</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/小程序/"><i class="fa" aria-hidden="true">小程序</i></a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术人生/"><i class="fa" aria-hidden="true">技术人生</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/机器学习/"><i class="fa" aria-hidden="true">机器学习</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂谈/"><i class="fa" aria-hidden="true">杂谈</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程语言/"><i class="fa" aria-hidden="true">编程语言</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/"><i class="fa" aria-hidden="true">设计模式</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/资料库/"><i class="fa" aria-hidden="true">资料库</i></a><span class="category-list-count">1</span></li></ul>
+    </div>
+        
+        <div class="widget">
+      <h3 class="title">归档</h3>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/"><i class="fa" aria-hidden="true">十一月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/"><i class="fa" aria-hidden="true">十月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/"><i class="fa" aria-hidden="true">八月 2017</i></a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/"><i class="fa" aria-hidden="true">六月 2017</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/"><i class="fa" aria-hidden="true">五月 2017</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/"><i class="fa" aria-hidden="true">三月 2017</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/"><i class="fa" aria-hidden="true">二月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/"><i class="fa" aria-hidden="true">一月 2017</i></a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/"><i class="fa" aria-hidden="true">十二月 2016</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/"><i class="fa" aria-hidden="true">十一月 2016</i></a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/"><i class="fa" aria-hidden="true">十月 2016</i></a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/"><i class="fa" aria-hidden="true">九月 2016</i></a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/"><i class="fa" aria-hidden="true">八月 2016</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/"><i class="fa" aria-hidden="true">七月 2016</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/"><i class="fa" aria-hidden="true">六月 2016</i></a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/"><i class="fa" aria-hidden="true">五月 2016</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/"><i class="fa" aria-hidden="true">四月 2016</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/"><i class="fa" aria-hidden="true">三月 2016</i></a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/"><i class="fa" aria-hidden="true">二月 2016</i></a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/"><i class="fa" aria-hidden="true">一月 2016</i></a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/"><i class="fa" aria-hidden="true">九月 2015</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/"><i class="fa" aria-hidden="true">六月 2015</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/"><i class="fa" aria-hidden="true">五月 2015</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/"><i class="fa" aria-hidden="true">四月 2015</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/"><i class="fa" aria-hidden="true">三月 2015</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/"><i class="fa" aria-hidden="true">一月 2015</i></a><span class="archive-list-count">1</span></li></ul>
+    </div>
+        
+        <div class="widget">
+    <h3 class="title">标签云</h3>
+    <div class="content tag-cloud">
+      
+        <a href="/tags/AR/" style="font-size: 1em">AR</a> <a href="/tags/Android/" style="font-size: 1em">Android</a> <a href="/tags/深入系统/" style="font-size: 1em">深入系统</a> <a href="/tags/系统服务/" style="font-size: 1em">系统服务</a> <a href="/tags/android/" style="font-size: 1em">android</a> <a href="/tags/混淆打包/" style="font-size: 1em">混淆打包</a> <a href="/tags/硬件/" style="font-size: 1em">硬件</a> <a href="/tags/前端/" style="font-size: 1em">前端</a> <a href="/tags/Angular2/" style="font-size: 1em">Angular2</a> <a href="/tags/前端开发/" style="font-size: 1em">前端开发</a> <a href="/tags/React-Native/" style="font-size: 1em">React Native</a> <a href="/tags/FlexBox布局/" style="font-size: 1em">FlexBox布局</a> <a href="/tags/后端/" style="font-size: 1em">后端</a> <a href="/tags/Java/" style="font-size: 1em">Java</a> <a href="/tags/垃圾回收/" style="font-size: 1em">垃圾回收</a> <a href="/tags/Google/" style="font-size: 1em">Google</a> <a href="/tags/VR/" style="font-size: 1em">VR</a> <a href="/tags/Kotlin/" style="font-size: 1em">Kotlin</a> <a href="/tags/编程语言/" style="font-size: 1em">编程语言</a> <a href="/tags/Node/" style="font-size: 1em">Node</a> <a href="/tags/Promise/" style="font-size: 1em">Promise</a> <a href="/tags/OpenGL/" style="font-size: 1em">OpenGL</a> <a href="/tags/调试/" style="font-size: 1em">调试</a> <a href="/tags/eact-Native/" style="font-size: 1em">eact Native</a> <a href="/tags/打包/" style="font-size: 1em">打包</a> <a href="/tags/原生/" style="font-size: 1em">原生</a> <a href="/tags/Spring/" style="font-size: 1em">Spring</a> <a href="/tags/入门/" style="font-size: 1em">入门</a> <a href="/tags/新特性/" style="font-size: 1em">新特性</a> <a href="/tags/ios/" style="font-size: 1em">ios</a> <a href="/tags/Swift/" style="font-size: 1em">Swift</a> <a href="/tags/swift/" style="font-size: 1em">swift</a> <a href="/tags/iOS/" style="font-size: 1em">iOS</a> <a href="/tags/知识库/" style="font-size: 1em">知识库</a> <a href="/tags/Xcode/" style="font-size: 1em">Xcode</a> <a href="/tags/webpack/" style="font-size: 1em">webpack</a> <a href="/tags/gulp/" style="font-size: 1em">gulp</a> <a href="/tags/https/" style="font-size: 1em">https</a> <a href="/tags/mac/" style="font-size: 1em">mac</a> <a href="/tags/环境/" style="font-size: 1em">环境</a> <a href="/tags/gif/" style="font-size: 1em">gif</a> <a href="/tags/杂谈/" style="font-size: 1em">杂谈</a> <a href="/tags/react/" style="font-size: 1em">react</a> <a href="/tags/原理/" style="font-size: 1em">原理</a> <a href="/tags/小程序/" style="font-size: 1em">小程序</a> <a href="/tags/微信/" style="font-size: 1em">微信</a> <a href="/tags/全栈/" style="font-size: 1em">全栈</a> <a href="/tags/个人博客/" style="font-size: 1em">个人博客</a> <a href="/tags/流量/" style="font-size: 1em">流量</a> <a href="/tags/机器学习/" style="font-size: 1em">机器学习</a> <a href="/tags/搭建网站/" style="font-size: 1em">搭建网站</a> <a href="/tags/深入理解/" style="font-size: 1em">深入理解</a> <a href="/tags/算法/" style="font-size: 1em">算法</a> <a href="/tags/人工智能/" style="font-size: 1em">人工智能</a> <a href="/tags/内存分配/" style="font-size: 1em">内存分配</a> <a href="/tags/设计模式/" style="font-size: 1em">设计模式</a> <a href="/tags/Python/" style="font-size: 1em">Python</a>
+    </div>
+  </div>
+        
+        <div class="widget">
+        <h3 class="title">友链</h3>
+        <div class="content friends-link">
+        
+            <a href="http://blog.csdn.net/xiangzhihong8/" class="fa" target="_blank">作者博客</a>
+        
+            <a href="https://yq.aliyun.com/u/xiangzhihong" class="fa" target="_blank">阿里云博客</a>
+        
+        </div>
+    </div>
+        
+    </aside>
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<!--page counter part-->
+<script>
+function addCount (Counter) {
+        url=$('.article-date').attr('href').trim();
+        title = $('.article-title').text().trim();
+        var query=new AV.Query(Counter);
+        //use url as unique idnetfication
+        query.equalTo("url",url);
+        query.find({
+            success: function(results){
+                if(results.length>0)
+                {
+                    var counter=results[0];
+                    counter.fetchWhenSave(true); //get recent result
+                    counter.increment("time");
+                    counter.save();
+                }
+                else
+                {
+                    var newcounter=new Counter();
+                    newcounter.set("title",title);
+                    newcounter.set("url",url);
+                    newcounter.set("time",1);
+                    newcounter.save(null,{
+                        success: function(newcounter){
+                        //alert('New object created');
+                        },
+                        error: function(newcounter,error){
+                        alert('Failed to create');
+                        }
+                        });
+                }
+            },
+            error: function(error){
+                //find null is not a error
+                alert('Error:'+error.code+" "+error.message);
+            }
+        });
+}
+$(function(){
+        var Counter=AV.Object.extend("Counter");
+        //only increse visit counting when intering a page
+        if ($('.article-title').length == 1)
+           addCount(Counter);
+        var query=new AV.Query(Counter);
+        query.descending("time");
+        // the sum of popular posts
+        query.limit(10); 
+        query.find({
+            success: function(results){
+                    for(var i=0;i<results.length;i++)    
+                    {
+                        var counter=results[i];
+                        title=counter.get("title");
+                        url=counter.get("url");
+                        time=counter.get("time");
+                        // add to the popularlist widget
+                        showcontent=title+" ("+time+")";
+                        //notice the "" in href
+                        $('.popularlist').append('<li><a href="'+url+'">'+showcontent+'</a></li>');
+                    }
+                },
+            error: function(error){
+                alert("Error:"+error.code+" "+error.message);
+            }
+            }
+        )
+        });
+</script>
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <span>Copyright &copy; 2017 
+                </span> | 
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/assets/highlight.pack.js?rev=@@hash"></script>
+  <script>
+    hljs.initHighlightingOnLoad(); //初始化代码高亮 
+  </script>
+
+<script src="/js/app.js?rev=@@hash"></script>
+</body>
