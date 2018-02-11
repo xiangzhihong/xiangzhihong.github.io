@@ -1,0 +1,599 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no">
+    <link rel="dns-prefetch" href="//t11.baidu.com">
+    <!--SEO-->
+
+
+
+<meta name="robots" content="all">
+<meta name="google" content="all">
+<meta name="googlebot" content="all">
+<meta name="verify" content="all">
+    <!--Title-->
+
+
+<title>RxJs简介 | 向志洪</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="向志洪" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css?rev=9.12.0">
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+    <div class="hide">
+    <script src="https://s4.cnzz.com/z_stat.php?id=1261768793&web_id=1262140174" language="JavaScript"></script>
+    </div>
+    
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?13764659765";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+	
+	<script src="https://cdn1.lncld.net/static/js/av-min-1.2.1.js"></script>
+    <script>AV.initialize("aj42pgqDHRSVhMknqDb3JMeg-gzGzoHsz", "qbRaoHOP9NMWPOow8PandkH3");</script>
+</head></html>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+<body>
+    <header class="main-header">
+    <div class="main-header-box">
+        <a class="branding" href="/" title="">
+            <img src="/img/header_logo.png" alt="Snippet 博客主题">
+        </a>
+        <h2 class="text-hide">Snippet主题</h2>
+        <img src="/img/header_logo.png" alt="Snippet 博客主题" class="hide">
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only">Toggle navigation</span>
+                    <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class=""><a href="/">首页</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/前端/">前端</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/后端/">后端</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/Java/">Java</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/Python/">Python</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/Android/">Android</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/iOS/">iOS</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/React Native/">React Native</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/小程序/">小程序</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/杂谈/">杂谈</a></li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="RxJs简介">
+            
+            RxJs简介
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <span>前端</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            前端
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta">2017/10/23</span>
+    </span>
+</div>
+            
+            
+    </div>
+    
+    <div class="post-body">
+        <p>这两年，各种异步编程框架，上面RxJava,RxAndroid,RxSwift等等，今天要聊的是RxJs，对于我等入门不久的前端工程师来说，这个框架还是比较有新颖的，中文官网地址：<a href="http://cn.rx.js.org/" target="_blank" rel="external">http://cn.rx.js.org/</a></p>
+<h2 id="RxJs简介"><a href="#RxJs简介" class="headerlink" title="RxJs简介"></a>RxJs简介</h2><p>RxJS是一个异步编程的库，同时它通过observable序列来实现基于事件的编程。它提供了一个核心的类型：Observable，几个辅助类型（Observer，Schedulers，Subjects），受到Array的扩展操作（map，filter，reduce，every等等）启发，允许直接处理异步事件的集合。</p>
+<p>ReactiveX结合了Observer模式、Iterator模式和函数式编程和集合来构建一个管理事件序列的理想方式。在RxJS中管理异步事件的基本概念中有以下几点需要注意：</p>
+<ul>
+<li><strong>Observable</strong>：代表了一个调用未来值或事件的集合的概念</li>
+<li><strong>Observer</strong>：代表了一个知道如何监听Observable传递过来的值的回调集合</li>
+<li><strong>Subscription</strong>：代表了一个可执行的Observable，主要是用于取消执行</li>
+<li><strong>Operators</strong>：是一个纯函数，允许处理集合与函数式编程风格的操作，比如map、filter、concat、flatMap等</li>
+<li><strong>Subject</strong>：相当于一个EventEmitter，它的唯一的方法是广播一个值或事件给多个Observer</li>
+<li><strong>Schedulers</strong>：是一个集中式调度程序来控制并发性，允许我们在setTimeout或者requestAnimationFrame上进行协调计算</li>
+</ul>
+<h1 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h1><p>正常情况下，注册一个事件监听函数的代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var button = document.querySelector(&apos;button&apos;);</div><div class="line">button.addEventListener(&apos;click&apos;, () =&gt; console.log(&apos;Clicked!&apos;));</div></pre></td></tr></table></figure>
+<p>使用RxJS，你可以创建一个observable来代替：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var button = document.querySelector(&apos;button&apos;);</div><div class="line">Rx.Observable.fromEvent(button, &apos;click&apos;)</div><div class="line">  .subscrible(() =&gt; console.log(&apos;Clicked!&apos;));</div></pre></td></tr></table></figure>
+<h2 id="纯净性-Purity"><a href="#纯净性-Purity" class="headerlink" title="纯净性 (Purity)"></a>纯净性 (Purity)</h2><p>使得RxJS变得如此强大的原因是它使用了纯函数，这意味着你的代码很少会发生错误。正常情况下，你不会选择创建一个纯函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var count = 0;</div><div class="line">var button = document.querySelector(&apos;button&apos;);</div><div class="line">button.addEventListener(&apos;click&apos;, () =&gt; console.log(`Clicked $(++count) times`));</div></pre></td></tr></table></figure>
+<p>而在RxJs中却可以大量使用纯函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var button = document.querySelector(&apos;button&apos;);</div><div class="line">Rx.Observable.fromEvent(button, &apos;click&apos;)</div><div class="line">  .scan(count =&gt; count + 1, 0)</div><div class="line">  .subscribe(count =&gt; console.log(`Clicked $&#123;count&#125; items`));</div></pre></td></tr></table></figure>
+<p>其中，scan操作符类似于arrays的reduce操作符。它需要一个回调函数作为一个参数，函数返回的值将作为下次调用时的参数。</p>
+<h2 id="流动性-Flow"><a href="#流动性-Flow" class="headerlink" title="流动性 (Flow)"></a>流动性 (Flow)</h2><p>RxJS 提供了一整套操作符来帮助你控制事件如何流经 observables 。<br>下面的代码展示的是如何控制一秒钟内最多点击一次，先来看使用普通的 JavaScript：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">var count = 0;</div><div class="line">var rate = 1000;</div><div class="line">var lastClick = Date.now() - rate;</div><div class="line">var button = document.querySelector(&apos;button&apos;);</div><div class="line">button.addEventListener(&apos;click&apos;, () =&gt; &#123;</div><div class="line">  if (Date.now() - lastClick &gt;= rate) &#123;</div><div class="line">    console.log(`Clicked $&#123;++count&#125; times`);</div><div class="line">    lastClick = Date.now();</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>使用 RxJS：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var button = document.querySelector(&apos;button&apos;);</div><div class="line">Rx.Observable.fromEvent(button, &apos;click&apos;)</div><div class="line">  .throttleTime(1000)</div><div class="line">  .scan(count =&gt; count + 1, 0)</div><div class="line">  .subscribe(count =&gt; console.log(`Clicked $&#123;count&#125; times`));</div></pre></td></tr></table></figure>
+<p>其他流程控制操作符有 filter、delay、debounceTime、take、takeUntil、distinct、distinctUntilChanged 等等。</p>
+<h2 id="值-Values"><a href="#值-Values" class="headerlink" title="值 (Values)"></a>值 (Values)</h2><p>对于流经 observables 的值，你可以对其进行转换。<br>下面的代码展示的是如何累加每次点击的鼠标 x 坐标，先来看使用普通的 JavaScript：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">var count = 0;</div><div class="line">var rate = 1000;</div><div class="line">var lastClick = Date.now() - rate;</div><div class="line">var button = document.querySelector(&apos;button&apos;);</div><div class="line">button.addEventListener(&apos;click&apos;, (event) =&gt; &#123;</div><div class="line">  if (Date.now() - lastClick &gt;= rate) &#123;</div><div class="line">    count += event.clientX;</div><div class="line">    console.log(count)</div><div class="line">    lastClick = Date.now();</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>使用 RxJS：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var button = document.querySelector(&apos;button&apos;);</div><div class="line">Rx.Observable.fromEvent(button, &apos;click&apos;)</div><div class="line">  .throttleTime(1000)</div><div class="line">  .map(event =&gt; event.clientX)</div><div class="line">  .scan((count, clientX) =&gt; count + clientX, 0)</div><div class="line">  .subscribe(count =&gt; console.log(count));</div></pre></td></tr></table></figure>
+<p>其他产生值的操作符有 pluck、pairwise、 sample 等等。</p>
+<h2 id="Observable"><a href="#Observable" class="headerlink" title="Observable"></a>Observable</h2><p>Observables 是多个值的惰性推送集合。它填补了下面表格中的空白：</p>
+<table><br>        <tr><br>            <th>行为</th><br>            <th>单个值</th><br>            <th>多个值</th><br>        </tr><br>         <tr><br>            <th>拉取</th><br>            <th>Function</th><br>            <th>Iterator</th><br>        </tr><br>         <tr><br>            <th>推送</th><br>            <th>Promise</th><br>            <th>Observable</th><br>        </tr><br></table>
+
+<p>例如：当订阅下面代码中的 Observable 的时候会立即(同步地)推送值1、2、3，然后1秒后会推送值4，再然后是完成流。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">var observable = Rx.Observable.create(function (observer) &#123;</div><div class="line">  observer.next(1);</div><div class="line">  observer.next(2);</div><div class="line">  observer.next(3);</div><div class="line">  setTimeout(() =&gt; &#123;</div><div class="line">    observer.next(4);</div><div class="line">    observer.complete();</div><div class="line">  &#125;, 1000);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>要调用 Observable 并看到这些值，我们需要订阅 Observable：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">var observable = Rx.Observable.create(function (observer) &#123;</div><div class="line">  observer.next(1);</div><div class="line">  observer.next(2);</div><div class="line">  observer.next(3);</div><div class="line">  setTimeout(() =&gt; &#123;</div><div class="line">    observer.next(4);</div><div class="line">    observer.complete();</div><div class="line">  &#125;, 1000);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">console.log(&apos;just before subscribe&apos;);</div><div class="line">observable.subscribe(&#123;</div><div class="line">  next: x =&gt; console.log(&apos;got value &apos; + x),</div><div class="line">  error: err =&gt; console.error(&apos;something wrong occurred: &apos; + err),</div><div class="line">  complete: () =&gt; console.log(&apos;done&apos;),</div><div class="line">&#125;);</div><div class="line">console.log(&apos;just after subscribe&apos;);</div></pre></td></tr></table></figure>
+<p>控制台执行的结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">just before subscribe</div><div class="line">got value 1</div><div class="line">got value 2</div><div class="line">got value 3</div><div class="line">just after subscribe</div><div class="line">got value 4</div><div class="line">done</div></pre></td></tr></table></figure>
+<h2 id="拉取-Pull-vs-推送-Push"><a href="#拉取-Pull-vs-推送-Push" class="headerlink" title="拉取 (Pull) vs. 推送 (Push)"></a>拉取 (Pull) vs. 推送 (Push)</h2><p>拉取和推送是两种不同的协议，用来描述数据生产者 (Producer)如何与数据消费者 (Consumer)如何进行通信的。</p>
+<p>什么是拉取？ - 在拉取体系中，由消费者来决定何时从生产者那接收数据。生产者本身不知道数据是何时交付到消费者手中的。</p>
+<p>每个 JavaScript 函数都是拉取体系。函数是数据的生产者，调用该函数的代码通过从函数调用中“取出”一个单个返回值来对该函数进行消费。</p>
+<p>ES2015 引入了 generator 函数和 iterators (function*)，这是另外一种类型的拉取体系。调用 iterator.next() 的代码是消费者，它会从 iterator(生产者) 那“取出”多个值。</p>
+<table><br>        <tr><br>            <th>行为</th><br>            <th>生产者</th><br>            <th>消费者</th><br>        </tr><br>         <tr><br>            <th>拉取</th><br>            <th>被动的: 当被请求时产生数据。</th><br>            <th>主动的: 决定何时请求数据。</th><br>        </tr><br>         <tr><br>            <th>推送</th><br>            <th>主动的: 按自己的节奏产生数据。</th><br>            <th>被动的: 对收到的数据做出反应。</th><br>        </tr><br></table>
+
+<p>什么是推送？ - 在推送体系中，由生产者来决定何时把数据发送给消费者。消费者本身不知道何时会接收到数据。</p>
+<p>在当今的 JavaScript 世界中，Promises 是最常见的推送体系类型。Promise(生产者) 将一个解析过的值传递给已注册的回调函数(消费者)，但不同于函数的是，由 Promise 来决定何时把值“推送”给回调函数。</p>
+<p>RxJS 引入了 Observables，一个新的 JavaScript 推送体系。Observable 是多个值的生产者，并将值“推送”给观察者(消费者)。</p>
+<ul>
+<li><strong>Function</strong> 是惰性的评估运算，调用时会同步地返回一个单一值。</li>
+<li><strong>Generator</strong> 是惰性的评估运算，调用时会同步地返回零到(有可能的)无限多个值。</li>
+<li><strong>Promise</strong> 是最终可能(或可能不)返回单个值的运算。</li>
+<li><strong>Observable</strong> 是惰性的评估运算，它可以从它被调用的时刻起同步或异步地返回零到(有可能的)无限多个值。</li>
+</ul>
+<h2 id="Observables-作为函数的泛化"><a href="#Observables-作为函数的泛化" class="headerlink" title="Observables 作为函数的泛化"></a>Observables 作为函数的泛化</h2><p>与流行的说法正好相反，Observables 既不像 EventEmitters，也不像多个值的 Promises 。在某些情况下，即当使用 RxJS 的 Subjects 进行多播时， Observables 的行为可能会比较像 EventEmitters，但通常情况下 Observables 的行为并不像 EventEmitters 。</p>
+<p>考虑如下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">function foo() &#123;</div><div class="line">  console.log(&apos;Hello&apos;);</div><div class="line">  return 42;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var x = foo.call(); // 等同于 foo()</div><div class="line">console.log(x);</div><div class="line">var y = foo.call(); // 等同于 foo()</div><div class="line">console.log(y);</div></pre></td></tr></table></figure>
+<p>我们期待看到的输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&quot;Hello&quot;</div><div class="line">42</div><div class="line">&quot;Hello&quot;</div><div class="line">42</div></pre></td></tr></table></figure>
+<p>可以使用 Observables 重写上面的代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">var foo = Rx.Observable.create(function (observer) &#123;</div><div class="line">  console.log(&apos;Hello&apos;);</div><div class="line">  observer.next(42);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">foo.subscribe(function (x) &#123;</div><div class="line">  console.log(x);</div><div class="line">&#125;);</div><div class="line">foo.subscribe(function (y) &#123;</div><div class="line">  console.log(y);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>上面的代码输出的结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&quot;Hello&quot;</div><div class="line">42</div><div class="line">&quot;Hello&quot;</div><div class="line">42</div></pre></td></tr></table></figure>
+<p>这是因为函数和 Observables 都是惰性运算。如果你不调用函数，console.log(‘Hello’) 就不会执行。Observables 也是如此，如果你不“调用”它(使用 subscribe)，console.log(‘Hello’) 也不会执行。此外，“调用”或“订阅”是独立的操作：两个函数调用会触发两个单独的副作用，两个 Observable 订阅同样也是触发两个单独的副作用。EventEmitters 共享副作用并且无论是否存在订阅者都会尽早执行，Observables 与之相反，不会共享副作用并且是延迟执行。<br>一些人声称 Observables 是异步的。那不是真的。如果你用日志包围一个函数调用，像这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">console.log(&apos;before&apos;);</div><div class="line">console.log(foo.call());</div><div class="line">console.log(&apos;after&apos;);</div></pre></td></tr></table></figure>
+<p>输出结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&quot;before&quot;</div><div class="line">&quot;Hello&quot;</div><div class="line">42</div><div class="line">&quot;after&quot;</div></pre></td></tr></table></figure>
+<p>使用 Observables 来做同样的事：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">console.log(&apos;before&apos;);</div><div class="line">foo.subscribe(function (x) &#123;</div><div class="line">  console.log(x);</div><div class="line">&#125;);</div><div class="line">console.log(&apos;after&apos;);</div></pre></td></tr></table></figure>
+<p>这证明了 foo 的订阅完全是同步的，就像函数一样。那么 Observable 和 函数的区别是什么呢？Observable 可以随着时间的推移“返回”多个值，这是函数所做不到的。例如，下面的代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">function foo() &#123;</div><div class="line">  console.log(&apos;Hello&apos;);</div><div class="line">  return 42;</div><div class="line">  return 100; // 死代码，永远不会执行</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>函数只能返回一个值。但 Observables 可以这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">var foo = Rx.Observable.create(function (observer) &#123;</div><div class="line">  console.log(&apos;Hello&apos;);</div><div class="line">  observer.next(42);</div><div class="line">  observer.next(100); // “返回”另外一个值</div><div class="line">  observer.next(200); // 还可以再“返回”值</div><div class="line">&#125;);</div><div class="line"></div><div class="line">console.log(&apos;before&apos;);</div><div class="line">foo.subscribe(function (x) &#123;</div><div class="line">  console.log(x);</div><div class="line">&#125;);</div><div class="line">console.log(&apos;after&apos;);</div></pre></td></tr></table></figure>
+<p>输出的结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&quot;before&quot;</div><div class="line">&quot;Hello&quot;</div><div class="line">42</div><div class="line">100</div><div class="line">200</div><div class="line">&quot;after&quot;</div></pre></td></tr></table></figure>
+<p>同时，你还可以异步地“返回”值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">var foo = Rx.Observable.create(function (observer) &#123;</div><div class="line">  console.log(&apos;Hello&apos;);</div><div class="line">  observer.next(42);</div><div class="line">  observer.next(100);</div><div class="line">  observer.next(200);</div><div class="line">  setTimeout(() =&gt; &#123;</div><div class="line">    observer.next(300); // 异步执行</div><div class="line">  &#125;, 1000);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">console.log(&apos;before&apos;);</div><div class="line">foo.subscribe(function (x) &#123;</div><div class="line">  console.log(x);</div><div class="line">&#125;);</div><div class="line">console.log(&apos;after&apos;);</div></pre></td></tr></table></figure>
+<p>输出结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&quot;before&quot;</div><div class="line">&quot;Hello&quot;</div><div class="line">42</div><div class="line">100</div><div class="line">200</div><div class="line">&quot;after&quot;</div><div class="line">300</div></pre></td></tr></table></figure>
+<p>结论:</p>
+<p>func.call() 意思是 “同步地给我一个值”</p>
+<p>observable.subscribe() 意思是 “给我任意数量的值，无论是同步还是异步”。</p>
+<h1 id="Observable-剖析"><a href="#Observable-剖析" class="headerlink" title="Observable 剖析"></a>Observable 剖析</h1><p>Observables 是使用 Rx.Observable.create 或创建操作符创建的，并使用观察者来订阅它，然后执行它并发送 next / error / complete 通知给观察者，而且执行可能会被清理。这四个方面全部编码在 Observables 实例中，但某些方面是与其他类型相关的，像 Observer (观察者) 和 Subscription (订阅)。</p>
+<p>Observable 的核心有4点：</p>
+<ul>
+<li>创建 Observables</li>
+<li>订阅 Observables</li>
+<li>执行 Observables</li>
+<li>清理 Observables</li>
+</ul>
+<h2 id="创建-Observables"><a href="#创建-Observables" class="headerlink" title="创建 Observables"></a>创建 Observables</h2><p>Rx.Observable.create 是 Observable 构造函数的别名，它接收一个参数：subscribe 函数。下面的示例创建了一个 Observable，它每隔一秒会向观察者发送字符串 ‘hi’ 。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var observable = Rx.Observable.create(function subscribe(observer) &#123;</div><div class="line">  var id = setInterval(() =&gt; &#123;</div><div class="line">    observer.next(&apos;hi&apos;)</div><div class="line">  &#125;, 1000);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>Observables 可以使用 create 来创建, 但通常我们使用所谓的创建操作符, 像 of、from、interval、等等。在上面的示例中，subscribe 函数是用来描述 Observable 最重要的一块。我们来看下订阅是什么意思。</p>
+<h2 id="订阅-Observables"><a href="#订阅-Observables" class="headerlink" title="订阅 Observables"></a>订阅 Observables</h2><p>示例中的 Observable 对象 observable 可以订阅，像这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">observable.subscribe(x =&gt; console.log(x));</div></pre></td></tr></table></figure>
+<p>observable.subscribe 和 Observable.create(function subscribe(observer) {…}) 中的 subscribe 有着同样的名字，这并不是一个巧合。在库中，它们是不同的，但从实际出发，你可以认为在概念上它们是等同的。</p>
+<p>这表明 subscribe 调用在同一 Observable 的多个观察者之间是不共享的。当使用一个观察者调用 observable.subscribe 时，Observable.create(function subscribe(observer) {…}) 中的 subscribe 函数只服务于给定的观察者。对 observable.subscribe 的每次调用都会触发针对给定观察者的独立设置。</p>
+<p><strong>订阅 Observable 像是调用函数, 并提供接收数据的回调函数。</strong></p>
+<p>这与像 addEventListener / removeEventListener 这样的事件处理方法 API 是完全不同的。使用 observable.subscribe，在 Observable 中不会将给定的观察者注册为监听器。Observable 甚至不会去维护一个附加的观察者列表。</p>
+<p>subscribe 调用是启动 “Observable 执行”的一种简单方式， 并将值或事件传递给本次执行的观察者。</p>
+<h2 id="执行-Observables"><a href="#执行-Observables" class="headerlink" title="执行 Observables"></a>执行 Observables</h2><p>Observable.create(function subscribe(observer) {…}) 中…的代码表示 “Observable 执行”，它是惰性运算，只有在每个观察者订阅后才会执行。随着时间的推移，执行会以同步或异步的方式产生多个值。</p>
+<p>Observable 执行可以传递三种类型的值：</p>
+<ul>
+<li>“Next” 通知： 发送一个值，比如数字、字符串、对象，等等。</li>
+<li>“Error” 通知： 发送一个 JavaScript 错误 或 异常。</li>
+<li>“Complete” 通知： 不再发送任何值。</li>
+</ul>
+<p>“Next” 通知是最重要，也是最常见的类型：它们表示传递给观察者的实际数据。”Error” 和 “Complete” 通知可能只会在 Observable 执行期间发生一次，并且只会执行其中的一个。</p>
+<p>这些约束用所谓的 Observable 语法或合约表达最好，写为正则表达式是这样的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">next*(error|complete)?</div></pre></td></tr></table></figure>
+<p><strong>在 Observable 执行中, 可能会发送零个到无穷多个 “Next” 通知。如果发送的是 “Error” 或 “Complete” 通知的话，那么之后不会再发送任何通知了。</strong></p>
+<p>下面是 Observable 执行的示例，它发送了三个 “Next” 通知，然后是 “Complete” 通知：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var observable = Rx.Observable.create(function subscribe(observer) &#123;</div><div class="line">  observer.next(1);</div><div class="line">  observer.next(2);</div><div class="line">  observer.next(3);</div><div class="line">  observer.complete();</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>Observable 严格遵守自身的规约，所以下面的代码不会发送 “Next” 通知 4。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">var observable = Rx.Observable.create(function subscribe(observer) &#123;</div><div class="line">  observer.next(1);</div><div class="line">  observer.next(2);</div><div class="line">  observer.next(3);</div><div class="line">  observer.complete();</div><div class="line">  observer.next(4); // 因为违反规约，所以不会发送</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>在 subscribe 中用 try/catch 代码块来包裹任意代码是个不错的主意，如果捕获到异常的话，会发送 “Error” 通知：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">var observable = Rx.Observable.create(function subscribe(observer) &#123;</div><div class="line">  try &#123;</div><div class="line">    observer.next(1);</div><div class="line">    observer.next(2);</div><div class="line">    observer.next(3);</div><div class="line">    observer.complete();</div><div class="line">  &#125; catch (err) &#123;</div><div class="line">    observer.error(err); // 如果捕获到异常会发送一个错误</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h2 id="清理-Observable-执行"><a href="#清理-Observable-执行" class="headerlink" title="清理 Observable 执行"></a>清理 Observable 执行</h2><p>因为 Observable 执行可能会是无限的，并且观察者通常希望能在有限的时间内中止执行，所以我们需要一个 API 来取消执行。因为每个执行都是其对应观察者专属的，一旦观察者完成接收值，它必须要一种方法来停止执行，以避免浪费计算能力或内存资源。</p>
+<p>当调用了 observable.subscribe ，观察者会被附加到新创建的 Observable 执行中。这个调用还返回一个对象，即 Subscription (订阅)：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var subscription = observable.subscribe(x =&gt; console.log(x));</div></pre></td></tr></table></figure>
+<p>Subscription 表示进行中的执行，它有最小化的 API 以允许你取消执行。想了解更多订阅相关的内容，请参见 Subscription 类型。使用 subscription.unsubscribe() 你可以取消进行中的执行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var observable = Rx.Observable.from([10, 20, 30]);</div><div class="line">var subscription = observable.subscribe(x =&gt; console.log(x));</div><div class="line">// 稍后：</div><div class="line">subscription.unsubscribe();</div></pre></td></tr></table></figure>
+<p><strong>当你订阅了 Observable，你会得到一个 Subscription ，它表示进行中的执行。只要调用 unsubscribe() 方法就可以取消执行。</strong></p>
+<p>当我们使用 create() 方法创建 Observable 时，Observable 必须定义如何清理执行的资源。你可以通过在 function subscribe() 中返回一个自定义的 unsubscribe 函数。</p>
+<p>举例来说，这是我们如何清理使用了 setInterval 的 interval 执行集合：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">var observable = Rx.Observable.create(function subscribe(observer) &#123;</div><div class="line">  // 追踪 interval 资源</div><div class="line">  var intervalID = setInterval(() =&gt; &#123;</div><div class="line">    observer.next(&apos;hi&apos;);</div><div class="line">  &#125;, 1000);</div><div class="line"></div><div class="line">  // 提供取消和清理 interval 资源的方法</div><div class="line">  return function unsubscribe() &#123;</div><div class="line">    clearInterval(intervalID);</div><div class="line">  &#125;;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>正如 observable.subscribe 类似于 Observable.create(function subscribe() {…})，从 subscribe 返回的 unsubscribe 在概念上也等同于 subscription.unsubscribe。事实上，如果我们抛开围绕这些概念的 ReactiveX 类型，保留下来的只是相当简单的 JavaScript 。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">function subscribe(observer) &#123;</div><div class="line">  var intervalID = setInterval(() =&gt; &#123;</div><div class="line">    observer.next(&apos;hi&apos;);</div><div class="line">  &#125;, 1000);</div><div class="line"></div><div class="line">  return function unsubscribe() &#123;</div><div class="line">    clearInterval(intervalID);</div><div class="line">  &#125;;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var unsubscribe = subscribe(&#123;next: (x) =&gt; console.log(x)&#125;);</div><div class="line"></div><div class="line">// 稍后：</div><div class="line">unsubscribe(); // 清理资源</div></pre></td></tr></table></figure>
+<p>为什么我们要使用像 Observable、Observer 和 Subscription 这样的 Rx 类型？原因是保证代码的安全性(比如 Observable 规约)和操作符的可组合性。</p>
+<h1 id="Observer-观察者"><a href="#Observer-观察者" class="headerlink" title="Observer (观察者)"></a>Observer (观察者)</h1><p>什么是观察者？ - 观察者是由 Observable 发送的值的消费者。观察者只是一组回调函数的集合，每个回调函数对应一种 Observable 发送的通知类型：next、error 和 complete 。下面的示例是一个典型的观察者对象：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var observer = &#123;</div><div class="line">  next: x =&gt; console.log(&apos;Observer got a next value: &apos; + x),</div><div class="line">  error: err =&gt; console.error(&apos;Observer got an error: &apos; + err),</div><div class="line">  complete: () =&gt; console.log(&apos;Observer got a complete notification&apos;),</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>要使用观察者，需要把它提供给 Observable 的 subscribe 方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">observable.subscribe(observer);</div></pre></td></tr></table></figure>
+<p><strong>观察者只是有三个回调函数的对象，每个回调函数对应一种 Observable 发送的通知类型。</strong></p>
+<p>RxJS 中的观察者也可能是部分的。如果你没有提供某个回调函数，Observable 的执行也会正常运行，只是某些通知类型会被忽略，因为观察者中没有没有相对应的回调函数。</p>
+<p>下面的示例是没有 complete 回调函数的观察者：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var observer = &#123;</div><div class="line">  next: x =&gt; console.log(&apos;Observer got a next value: &apos; + x),</div><div class="line">  error: err =&gt; console.error(&apos;Observer got an error: &apos; + err),</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>当订阅 Observable 时，你可能只提供了一个回调函数作为参数，而并没有将其附加到观察者对象上，例如这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">observable.subscribe(x =&gt; console.log(&apos;Observer got a next value: &apos; + x));</div></pre></td></tr></table></figure>
+<p>在 observable.subscribe 内部，它会创建一个观察者对象并使用第一个回调函数参数作为 next 的处理方法。所有三种类型的回调函数都可以直接作为参数来提供：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">observable.subscribe(</div><div class="line">  x =&gt; console.log(&apos;Observer got a next value: &apos; + x),</div><div class="line">  err =&gt; console.error(&apos;Observer got an error: &apos; + err),</div><div class="line">  () =&gt; console.log(&apos;Observer got a complete notification&apos;)</div><div class="line">);</div></pre></td></tr></table></figure>
+<h1 id="Subscription-订阅"><a href="#Subscription-订阅" class="headerlink" title="Subscription (订阅)"></a>Subscription (订阅)</h1><p>什么是 Subscription ？ - Subscription 是表示可清理资源的对象，通常是 Observable 的执行。Subscription 有一个重要的方法，即 unsubscribe，它不需要任何参数，只是用来清理由 Subscription 占用的资源。在上一个版本的 RxJS 中，Subscription 叫做 “Disposable” (可清理对象)。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var observable = Rx.Observable.interval(1000);</div><div class="line">var subscription = observable.subscribe(x =&gt; console.log(x));</div><div class="line">// 稍后：</div><div class="line">// 这会取消正在进行中的 Observable 执行</div><div class="line">// Observable 执行是通过使用观察者调用 subscribe 方法启动的</div><div class="line">subscription.unsubscribe();</div></pre></td></tr></table></figure>
+<p><strong>Subscription 基本上只有一个 unsubscribe() 函数，这个函数用来释放资源或去取消 Observable 执行。</strong><br>Subscription 还可以合在一起，这样一个 Subscription 调用 unsubscribe() 方法，可能会有多个 Subscription 取消订阅 。你可以通过把一个 Subscription 添加到另一个上面来做这件事：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">var observable1 = Rx.Observable.interval(400);</div><div class="line">var observable2 = Rx.Observable.interval(300);</div><div class="line"></div><div class="line">var subscription = observable1.subscribe(x =&gt; console.log(&apos;first: &apos; + x));</div><div class="line">var childSubscription = observable2.subscribe(x =&gt; console.log(&apos;second: &apos; + x));</div><div class="line"></div><div class="line">subscription.add(childSubscription);</div><div class="line"></div><div class="line">setTimeout(() =&gt; &#123;</div><div class="line">  // subscription 和 childSubscription 都会取消订阅</div><div class="line">  subscription.unsubscribe();</div><div class="line">&#125;, 1000);</div></pre></td></tr></table></figure>
+<p>执行上面的代码，将看到如下的结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">second: 0</div><div class="line">first: 0</div><div class="line">second: 1</div><div class="line">first: 1</div><div class="line">second: 2</div></pre></td></tr></table></figure>
+<p>Subscriptions 还有一个 remove(otherSubscription) 方法，用来撤销一个已添加的子 Subscription 。</p>
+<h2 id="Subject-主体"><a href="#Subject-主体" class="headerlink" title="Subject (主体)"></a>Subject (主体)</h2><p>什么是 Subject？ - RxJS Subject 是一种特殊类型的 Observable，它允许将值多播给多个观察者，所以 Subject 是多播的，而普通的 Observables 是单播的(每个已订阅的观察者都拥有 Observable 的独立执行)。</p>
+<p><strong>Subject 像是 Observalbe，但是可以多播给多个观察者。Subject 还像是 EventEmitters，维护着多个监听器的注册表。</strong></p>
+<p><strong>每个 Subject 都是 Observable。</strong>  - 对于 Subject，你可以提供一个观察者并使用 subscribe 方法，就可以开始正常接收值。从观察者的角度而言，它无法判断 Observable 执行是来自普通的 Observable 还是 Subject 。<br>在 Subject 的内部，subscribe 不会调用发送值的新执行。它只是将给定的观察者注册到观察者列表中，类似于其他库或语言中的 addListener 的工作方式。</p>
+<p><strong>每个 Subject 都是观察者。</strong> - Subject 是一个有如下方法的对象： next(v)、error(e) 和 complete() 。要给 Subjetc 提供新值，只要调用 next(theValue)，它会将值多播给已注册监听该 Subject 的观察者们。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">var subject = new Rx.Subject();</div><div class="line"></div><div class="line">subject.subscribe(&#123;</div><div class="line">  next: (v) =&gt; console.log(&apos;observerA: &apos; + v)</div><div class="line">&#125;);</div><div class="line">subject.subscribe(&#123;</div><div class="line">  next: (v) =&gt; console.log(&apos;observerB: &apos; + v)</div><div class="line">&#125;);</div><div class="line"></div><div class="line">subject.next(1);</div><div class="line">subject.next(2);</div></pre></td></tr></table></figure>
+<p>下面是控制台的输出结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">observerA: 1</div><div class="line">observerB: 1</div><div class="line">observerA: 2</div><div class="line">observerB: 2</div></pre></td></tr></table></figure>
+<p>因为 Subject 是观察者，这也就在意味着你可以把 Subject 作为参数传给任何 Observable 的 subscribe 方法，如下面的示例所展示的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">var subject = new Rx.Subject();</div><div class="line"></div><div class="line">subject.subscribe(&#123;</div><div class="line">  next: (v) =&gt; console.log(&apos;observerA: &apos; + v)</div><div class="line">&#125;);</div><div class="line">subject.subscribe(&#123;</div><div class="line">  next: (v) =&gt; console.log(&apos;observerB: &apos; + v)</div><div class="line">&#125;);</div><div class="line"></div><div class="line">var observable = Rx.Observable.from([1, 2, 3]);</div><div class="line"></div><div class="line">observable.subscribe(subject); // 你可以提供一个 Subject 进行订阅</div></pre></td></tr></table></figure>
+<p>执行结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">observerA: 1</div><div class="line">observerB: 1</div><div class="line">observerA: 2</div><div class="line">observerB: 2</div><div class="line">observerA: 3</div><div class="line">observerB: 3</div></pre></td></tr></table></figure>
+<h2 id="多播的-Observables"><a href="#多播的-Observables" class="headerlink" title="多播的 Observables"></a>多播的 Observables</h2><p>“多播 Observable” 通过 Subject 来发送通知，这个 Subject 可能有多个订阅者，然而普通的 “单播 Observable” 只发送通知给单个观察者。</p>
+<p><strong>多播 Observable 在底层是通过使用 Subject 使得多个观察者可以看见同一个 Observable 执行。</strong></p>
+<p>在底层，这就是 multicast 操作符的工作原理：观察者订阅一个基础的 Subject，然后 Subject 订阅源 Observable 。下面的示例与前面使用 observable.subscribe(subject) 的示例类似：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">var source = Rx.Observable.from([1, 2, 3]);</div><div class="line">var subject = new Rx.Subject();</div><div class="line">var multicasted = source.multicast(subject);</div><div class="line"></div><div class="line">// 在底层使用了 `subject.subscribe(&#123;...&#125;)`:</div><div class="line">multicasted.subscribe(&#123;</div><div class="line">  next: (v) =&gt; console.log(&apos;observerA: &apos; + v)</div><div class="line">&#125;);</div><div class="line">multicasted.subscribe(&#123;</div><div class="line">  next: (v) =&gt; console.log(&apos;observerB: &apos; + v)</div><div class="line">&#125;);</div><div class="line"></div><div class="line">// 在底层使用了 `source.subscribe(subject)`:</div><div class="line">multicasted.connect();</div></pre></td></tr></table></figure>
+<p>multicast 操作符返回一个 Observable，它看起来和普通的 Observable 没什么区别，但当订阅时就像是 Subject 。multicast 返回的是 ConnectableObservable，它只是一个有 connect() 方法的 Observable 。</p>
+<p>connect() 方法十分重要，它决定了何时启动共享的 Observable 执行。因为 connect() 方法在底层执行了 source.subscribe(subject)，所以它返回的是 Subscription，你可以取消订阅以取消共享的 Observable 执行。</p>
+<h2 id="引用计数"><a href="#引用计数" class="headerlink" title="引用计数"></a>引用计数</h2><p>手动调用 connect() 并处理 Subscription 通常太笨重。通常，当第一个观察者到达时我们想要自动地连接，而当最后一个观察者取消订阅时我们想要自动地取消共享执行。</p>
+<ol>
+<li>第一个观察者订阅了多播 Observable</li>
+<li>多播 Observable 已连接</li>
+<li>next 值 0 发送给第一个观察者</li>
+<li>第二个观察者订阅了多播 Observable</li>
+<li>next 值 1 发送给第一个观察者</li>
+<li>next 值 1 发送给第二个观察者</li>
+<li>第一个观察者取消了多播 Observable 的订阅</li>
+<li>next 值 2 发送给第二个观察者</li>
+<li>第二个观察者取消了多播 Observable 的订阅</li>
+<li>多播 Observable 的连接已中断(底层进行的操作是取消订阅)</li>
+</ol>
+<p>要实现这点，需要显式地调用 connect()，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">var source = Rx.Observable.interval(500);</div><div class="line">var subject = new Rx.Subject();</div><div class="line">var multicasted = source.multicast(subject);</div><div class="line">var subscription1, subscription2, subscriptionConnect;</div><div class="line"></div><div class="line">subscription1 = multicasted.subscribe(&#123;</div><div class="line">  next: (v) =&gt; console.log(&apos;observerA: &apos; + v)</div><div class="line">&#125;);</div><div class="line">// 这里我们应该调用 `connect()`，因为 `multicasted` 的第一个</div><div class="line">// 订阅者关心消费值</div><div class="line">subscriptionConnect = multicasted.connect();</div><div class="line"></div><div class="line">setTimeout(() =&gt; &#123;</div><div class="line">  subscription2 = multicasted.subscribe(&#123;</div><div class="line">    next: (v) =&gt; console.log(&apos;observerB: &apos; + v)</div><div class="line">  &#125;);</div><div class="line">&#125;, 600);</div><div class="line"></div><div class="line">setTimeout(() =&gt; &#123;</div><div class="line">  subscription1.unsubscribe();</div><div class="line">&#125;, 1200);</div><div class="line"></div><div class="line">// 这里我们应该取消共享的 Observable 执行的订阅，</div><div class="line">// 因为此后 `multicasted` 将不再有订阅者</div><div class="line">setTimeout(() =&gt; &#123;</div><div class="line">  subscription2.unsubscribe();</div><div class="line">  subscriptionConnect.unsubscribe(); // 用于共享的 Observable 执行</div><div class="line">&#125;, 2000);</div></pre></td></tr></table></figure>
+<p>如果不想显式调用 connect()，我们可以使用 ConnectableObservable 的 refCount() 方法(引用计数)，这个方法返回 Observable，这个 Observable 会追踪有多少个订阅者。当订阅者的数量从0变成1，它会调用 connect() 以开启共享的执行。当订阅者数量从1变成0时，它会完全取消订阅，停止进一步的执行。</p>
+<p><strong>refCount 的作用是，当有第一个订阅者时，多播 Observable 会自动地启动执行，而当最后一个订阅者离开时，多播 Observable 会自动地停止执行。</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">var source = Rx.Observable.interval(500);</div><div class="line">var subject = new Rx.Subject();</div><div class="line">var refCounted = source.multicast(subject).refCount();</div><div class="line">var subscription1, subscription2, subscriptionConnect;</div><div class="line"></div><div class="line">// 这里其实调用了 `connect()`，</div><div class="line">// 因为 `refCounted` 有了第一个订阅者</div><div class="line">console.log(&apos;observerA subscribed&apos;);</div><div class="line">subscription1 = refCounted.subscribe(&#123;</div><div class="line">  next: (v) =&gt; console.log(&apos;observerA: &apos; + v)</div><div class="line">&#125;);</div><div class="line"></div><div class="line">setTimeout(() =&gt; &#123;</div><div class="line">  console.log(&apos;observerB subscribed&apos;);</div><div class="line">  subscription2 = refCounted.subscribe(&#123;</div><div class="line">    next: (v) =&gt; console.log(&apos;observerB: &apos; + v)</div><div class="line">  &#125;);</div><div class="line">&#125;, 600);</div><div class="line"></div><div class="line">setTimeout(() =&gt; &#123;</div><div class="line">  console.log(&apos;observerA unsubscribed&apos;);</div><div class="line">  subscription1.unsubscribe();</div><div class="line">&#125;, 1200);</div><div class="line"></div><div class="line">// 这里共享的 Observable 执行会停止，</div><div class="line">// 因为此后 `refCounted` 将不再有订阅者</div><div class="line">setTimeout(() =&gt; &#123;</div><div class="line">  console.log(&apos;observerB unsubscribed&apos;);</div><div class="line">  subscription2.unsubscribe();</div><div class="line">&#125;, 2000);</div></pre></td></tr></table></figure>
+<p>执行结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">observerA subscribed</div><div class="line">observerA: 0</div><div class="line">observerB subscribed</div><div class="line">observerA: 1</div><div class="line">observerB: 1</div><div class="line">observerA unsubscribed</div><div class="line">observerB: 2</div><div class="line">observerB unsubscribed</div></pre></td></tr></table></figure>
+<p>refCount() 只存在于 ConnectableObservable，它返回的是 Observable，而不是另一个 ConnectableObservable 。</p>
+<h2 id="BehaviorSubject"><a href="#BehaviorSubject" class="headerlink" title="BehaviorSubject"></a>BehaviorSubject</h2><p>Subject 的其中一个变体就是 BehaviorSubject，它有一个“当前值”的概念。它保存了发送给消费者的最新值。并且当有新的观察者订阅时，会立即从 BehaviorSubject 那接收到“当前值”。</p>
+<p><strong>BehaviorSubjects 适合用来表示“随时间推移的值”。举例来说，生日的流是一个 Subject，但年龄的流应该是一个 BehaviorSubject 。</strong></p>
+<p>在下面的示例中，BehaviorSubject 使用值0进行初始化，当第一个观察者订阅时会得到0。第二个观察者订阅时会得到值2，尽管它是在值2发送之后订阅的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">var subject = new Rx.BehaviorSubject(0); // 0是初始值</div><div class="line"></div><div class="line">subject.subscribe(&#123;</div><div class="line">  next: (v) =&gt; console.log(&apos;observerA: &apos; + v)</div><div class="line">&#125;);</div><div class="line"></div><div class="line">subject.next(1);</div><div class="line">subject.next(2);</div><div class="line"></div><div class="line">subject.subscribe(&#123;</div><div class="line">  next: (v) =&gt; console.log(&apos;observerB: &apos; + v)</div><div class="line">&#125;);</div><div class="line"></div><div class="line">subject.next(3);</div></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">observerA: 0</div><div class="line">observerA: 1</div><div class="line">observerA: 2</div><div class="line">observerB: 2</div><div class="line">observerA: 3</div><div class="line">observerB: 3</div></pre></td></tr></table></figure>
+<h2 id="ReplaySubject"><a href="#ReplaySubject" class="headerlink" title="ReplaySubject"></a>ReplaySubject</h2><p>ReplaySubject 类似于 BehaviorSubject，它可以发送旧值给新的订阅者，但它还可以记录 Observable 执行的一部分。</p>
+<p><strong>ReplaySubject 记录 Observable 执行中的多个值并将其回放给新的订阅者。</strong></p>
+<p>当创建 ReplaySubject 时，你可以指定回放多少个值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">var subject = new Rx.ReplaySubject(3); // 为新的订阅者缓冲3个值</div><div class="line"></div><div class="line">subject.subscribe(&#123;</div><div class="line">  next: (v) =&gt; console.log(&apos;observerA: &apos; + v)</div><div class="line">&#125;);</div><div class="line"></div><div class="line">subject.next(1);</div><div class="line">subject.next(2);</div><div class="line">subject.next(3);</div><div class="line">subject.next(4);</div><div class="line"></div><div class="line">subject.subscribe(&#123;</div><div class="line">  next: (v) =&gt; console.log(&apos;observerB: &apos; + v)</div><div class="line">&#125;);</div><div class="line"></div><div class="line">subject.next(5);</div></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">observerA: 1</div><div class="line">observerA: 2</div><div class="line">observerA: 3</div><div class="line">observerA: 4</div><div class="line">observerB: 2</div><div class="line">observerB: 3</div><div class="line">observerB: 4</div><div class="line">observerA: 5</div><div class="line">observerB: 5</div></pre></td></tr></table></figure>
+<p>除了缓冲数量，你还可以指定 window time (以毫秒为单位)来确定多久之前的值可以记录。在下面的示例中，我们使用了较大的缓存数量100，但 window time 参数只设置了500毫秒。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">var subject = new Rx.ReplaySubject(100, 500 /* windowTime */);</div><div class="line"></div><div class="line">subject.subscribe(&#123;</div><div class="line">  next: (v) =&gt; console.log(&apos;observerA: &apos; + v)</div><div class="line">&#125;);</div><div class="line"></div><div class="line">var i = 1;</div><div class="line">setInterval(() =&gt; subject.next(i++), 200);</div><div class="line"></div><div class="line">setTimeout(() =&gt; &#123;</div><div class="line">  subject.subscribe(&#123;</div><div class="line">    next: (v) =&gt; console.log(&apos;observerB: &apos; + v)</div><div class="line">  &#125;);</div><div class="line">&#125;, 1000);</div></pre></td></tr></table></figure>
+<p>从下面的输出可以看出，第二个观察者得到的值是3、4、5，这三个值是订阅发生前的500毫秒内发生的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">observerA: 1</div><div class="line">observerA: 2</div><div class="line">observerA: 3</div><div class="line">observerA: 4</div><div class="line">observerA: 5</div><div class="line">observerB: 3</div><div class="line">observerB: 4</div><div class="line">observerB: 5</div><div class="line">observerA: 6</div><div class="line">observerB: 6</div><div class="line">...</div></pre></td></tr></table></figure>
+<h2 id="AsyncSubject"><a href="#AsyncSubject" class="headerlink" title="AsyncSubject"></a>AsyncSubject</h2><p>AsyncSubject 是另一个 Subject 变体，只有当 Observable 执行完成时(执行 complete())，它才会将执行的最后一个值发送给观察者。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">var subject = new Rx.AsyncSubject();</div><div class="line"></div><div class="line">subject.subscribe(&#123;</div><div class="line">  next: (v) =&gt; console.log(&apos;observerA: &apos; + v)</div><div class="line">&#125;);</div><div class="line"></div><div class="line">subject.next(1);</div><div class="line">subject.next(2);</div><div class="line">subject.next(3);</div><div class="line">subject.next(4);</div><div class="line"></div><div class="line">subject.subscribe(&#123;</div><div class="line">  next: (v) =&gt; console.log(&apos;observerB: &apos; + v)</div><div class="line">&#125;);</div><div class="line"></div><div class="line">subject.next(5);</div><div class="line">subject.complete();</div></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">observerA: 5</div><div class="line">observerB: 5</div></pre></td></tr></table></figure>
+<p>AsyncSubject 和 last() 操作符类似，因为它也是等待 complete 通知，以发送一个单个值。</p>
+<h2 id="Operators-操作符"><a href="#Operators-操作符" class="headerlink" title="Operators (操作符)"></a>Operators (操作符)</h2><p>尽管 RxJS 的根基是 Observable，但最有用的还是它的操作符。操作符是允许复杂的异步代码以声明式的方式进行轻松组合的基础代码单元。</p>
+<h3 id="操作符？"><a href="#操作符？" class="headerlink" title="操作符？"></a>操作符？</h3><p>操作符是 Observable 类型上的方法，比如 .map(…)、.filter(…)、.merge(…)，等等。当操作符被调用时，它们不会改变已经存在的 Observable 实例。相反，它们返回一个新的 Observable ，它的 subscription 逻辑基于第一个 Observable 。</p>
+<p><strong>操作符是函数，它基于当前的 Observable 创建一个新的 Observable。这是一个无副作用的操作：前面的 Observable 保持不变。</strong></p>
+<p>操作符本质上是一个纯函数 (pure function)，它接收一个 Observable 作为输入，并生成一个新的 Observable 作为输出。订阅输出 Observalbe 同样会订阅输入 Observable 。在下面的示例中，我们创建一个自定义操作符函数，它将从输入 Observable 接收的每个值都乘以10：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">function multiplyByTen(input) &#123;</div><div class="line">  var output = Rx.Observable.create(function subscribe(observer) &#123;</div><div class="line">    input.subscribe(&#123;</div><div class="line">      next: (v) =&gt; observer.next(10 * v),</div><div class="line">      error: (err) =&gt; observer.error(err),</div><div class="line">      complete: () =&gt; observer.complete()</div><div class="line">    &#125;);</div><div class="line">  &#125;);</div><div class="line">  return output;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var input = Rx.Observable.from([1, 2, 3, 4]);</div><div class="line">var output = multiplyByTen(input);</div><div class="line">output.subscribe(x =&gt; console.log(x));</div></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">10</div><div class="line">20</div><div class="line">30</div><div class="line">40</div></pre></td></tr></table></figure>
+<p>注意，订阅 output 会导致 input Observable 也被订阅。我们称之为“操作符订阅链”。</p>
+<h2 id="实例操作符-vs-静态操作符"><a href="#实例操作符-vs-静态操作符" class="headerlink" title="实例操作符 vs. 静态操作符"></a>实例操作符 vs. 静态操作符</h2><p>什么是实例操作符？ - 通常提到操作符时，我们指的是实例操作符，它是 Observable 实例上的方法。举例来说，如果上面的 multiplyByTen 是官方提供的实例操作符，它看起来大致是这个样子的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">Rx.Observable.prototype.multiplyByTen = function multiplyByTen() &#123;</div><div class="line">  var input = this;</div><div class="line">  return Rx.Observable.create(function subscribe(observer) &#123;</div><div class="line">    input.subscribe(&#123;</div><div class="line">      next: (v) =&gt; observer.next(10 * v),</div><div class="line">      error: (err) =&gt; observer.error(err),</div><div class="line">      complete: () =&gt; observer.complete()</div><div class="line">    &#125;);</div><div class="line">  &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>实例运算符是使用 this 关键字来指代输入的 Observable 的函数。</strong></p>
+<p>注意，这里的 input Observable 不再是一个函数参数，它现在是 this 对象。下面是我们如何使用这样的实例运算符：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var observable = Rx.Observable.from([1, 2, 3, 4]).multiplyByTen();</div><div class="line">observable.subscribe(x =&gt; console.log(x));</div></pre></td></tr></table></figure>
+<p>什么是静态操作符？ - 除了实例操作符，还有静态操作符，它们是直接附加到 Observable 类上的。静态操作符在内部不使用 this 关键字，而是完全依赖于它的参数。</p>
+<p><strong>静态操作符是附加到 Observalbe 类上的纯函数，通常用来从头开始创建 Observalbe。</strong></p>
+<p>最常用的静态操作符类型是所谓的创建操作符。它们只接收非 Observable 参数，比如数字，然后创建一个新的 Observable ，而不是将一个输入 Observable 转换为输出 Observable 。</p>
+<p>一个典型的静态操作符例子就是 interval 函数。它接收一个数字(非 Observable)作为参数，并生产一个 Observable 作为输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var observable = Rx.Observable.interval(1000 /* 毫秒数 */);</div></pre></td></tr></table></figure>
+<p>创建操作符的另一个例子就是 create，已经在前面的示例中广泛使用。点击这里查看所有静态操作符列表。</p>
+<p>然而，有些静态操作符可能不同于简单的创建。一些组合操作符可能是静态的，比如 merge、combineLatest、concat，等等。这些作为静态运算符是有道理的，因为它们将多个 Observables 作为输入，而不仅仅是一个，例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var observable1 = Rx.Observable.interval(1000);</div><div class="line">var observable2 = Rx.Observable.interval(400);</div><div class="line"></div><div class="line">var merged = Rx.Observable.merge(observable1, observable2);</div></pre></td></tr></table></figure>
+<h2 id="Scheduler-调度器"><a href="#Scheduler-调度器" class="headerlink" title="Scheduler (调度器)"></a>Scheduler (调度器)</h2><p>什么是调度器？ - 调度器控制着何时启动 subscription 和何时发送通知。它由三部分组成：</p>
+<ul>
+<li>调度器是一种数据结构。 它知道如何根据优先级或其他标准来存储任务和将任务进行排序。</li>
+<li>调度器是执行上下文。 它表示在何时何地执行任务(举例来说，立即的，或另一种回调函数机制(比如 setTimeout 或 process.nextTick)，或动画帧)。</li>
+<li>调度器有一个(虚拟的)时钟。 调度器功能通过它的 getter 方法 now()<br>提供了“时间”的概念。在具体调度器上安排的任务将严格遵循该时钟所表示的时间。</li>
+</ul>
+<p><strong>调度器可以让你规定 Observable 在什么样的执行上下文中发送通知给它的观察者。</strong></p>
+<p>在下面的示例中，我们采用普通的 Observable ，它同步地发出值1、2、3，并使用操作符 observeOn 来指定 async 调度器发送这些值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">var observable = Rx.Observable.create(function (observer) &#123;</div><div class="line">  observer.next(1);</div><div class="line">  observer.next(2);</div><div class="line">  observer.next(3);</div><div class="line">  observer.complete();</div><div class="line">&#125;)</div><div class="line">.observeOn(Rx.Scheduler.async);</div><div class="line"></div><div class="line">console.log(&apos;just before subscribe&apos;);</div><div class="line">observable.subscribe(&#123;</div><div class="line">  next: x =&gt; console.log(&apos;got value &apos; + x),</div><div class="line">  error: err =&gt; console.error(&apos;something wrong occurred: &apos; + err),</div><div class="line">  complete: () =&gt; console.log(&apos;done&apos;),</div><div class="line">&#125;);</div><div class="line">console.log(&apos;just after subscribe&apos;);</div></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">just before subscribe</div><div class="line">just after subscribe</div><div class="line">got value 1</div><div class="line">got value 2</div><div class="line">got value 3</div><div class="line">done</div></pre></td></tr></table></figure>
+<p>注意通知 got value… 在 just after subscribe 之后才发送，这与我们到目前为止所见的默认行为是不一样的。这是因为 observeOn(Rx.Scheduler.async) 在 Observable.create 和最终的观察者之间引入了一个代理观察者。在下面的示例代码中，我们重命名了一些标识符，使得其中的区别变得更明显：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">var observable = Rx.Observable.create(function (proxyObserver) &#123;</div><div class="line">  proxyObserver.next(1);</div><div class="line">  proxyObserver.next(2);</div><div class="line">  proxyObserver.next(3);</div><div class="line">  proxyObserver.complete();</div><div class="line">&#125;)</div><div class="line">.observeOn(Rx.Scheduler.async);</div><div class="line"></div><div class="line">var finalObserver = &#123;</div><div class="line">  next: x =&gt; console.log(&apos;got value &apos; + x),</div><div class="line">  error: err =&gt; console.error(&apos;something wrong occurred: &apos; + err),</div><div class="line">  complete: () =&gt; console.log(&apos;done&apos;),</div><div class="line">&#125;;</div><div class="line"></div><div class="line">console.log(&apos;just before subscribe&apos;);</div><div class="line">observable.subscribe(finalObserver);</div><div class="line">console.log(&apos;just after subscribe&apos;);</div></pre></td></tr></table></figure>
+<p>proxyObserver 是在 observeOn(Rx.Scheduler.async) 中创建的，它的 next(val) 函数大概是下面这样子的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">var proxyObserver = &#123;</div><div class="line">  next: (val) =&gt; &#123;</div><div class="line">    Rx.Scheduler.async.schedule(</div><div class="line">      (x) =&gt; finalObserver.next(x),</div><div class="line">      0 /* 延迟时间 */,</div><div class="line">      val /* 会作为上面函数所使用的 x */</div><div class="line">    );</div><div class="line">  &#125;,</div><div class="line"></div><div class="line">  // ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>async 调度器操作符使用了 setTimeout 或 setInterval，即使给定的延迟时间为0。照例，在 JavaScript 中，我们已知的是 setTimeout(fn, 0) 会在下一次事件循环迭代的最开始运行 fn 。这也解释了为什么发送给 finalObserver 的 got value 1 发生在 just after subscribe 之后。</p>
+<p>调度器的 schedule() 方法接收一个 delay 参数，它指的是相对于调度器内部时钟的一段时间。调度器的时钟不需要与实际的挂钟时间有任何关系。这也就是为什么像 delay 这样的时间操作符不是在实际时间上操作的，而是取决于调度器的时钟时间。这在测试中极其有用，可以使用虚拟时间调度器来伪造挂钟时间，同时实际上是在同步执行计划任务。</p>
+<h3 id="调度器类型"><a href="#调度器类型" class="headerlink" title="调度器类型"></a>调度器类型</h3><p>async 调度器是 RxJS 提供的内置调度器中的一个。可以通过使用 Scheduler 对象的静态属性创建并返回其中的每种类型的调度器。</p>
+<table><br>        <tr><br>            <th>调度器</th><br>            <th>目的</th><br>        </tr><br>         <tr><br>            <th>null</th><br>            <th>不传递任何调度器的话，会以同步递归的方式发送通知，用于定时操作或尾递归操作。</th><br>        </tr><br>         <tr><br>            <th>Rx.Scheduler.queue</th><br>            <th>当前事件帧中的队列调度(蹦床调度器)，用于迭代操作。</th><br>        </tr><br>        <tr><br>            <th>Rx.Scheduler.asap</th><br>            <th>    微任务的队列调度，它使用可用的最快速的传输机制，比如 Node.js 的 process.nextTick() 或 Web Worker 的 MessageChannel 或 setTimeout 或其他。用于异步转换。</th><br>        </tr><br>        <tr><br>            <th>Rx.Scheduler.async</th><br>            <th>使用 setInterval 的调度。用于基于时间的操作符。</th><br>        </tr><br></table>
+
+<h3 id="使用调度器"><a href="#使用调度器" class="headerlink" title="使用调度器"></a>使用调度器</h3><p>你可能在你的 RxJS 代码中已经使用过调度器了，只是没有明确地指明要使用的调度器的类型。这是因为所有的 Observable 操作符处理并发性都有可选的调度器。如果没有提供调度器的话，RxJS 会通过使用最小并发原则选择一个默认调度器。这意味着引入满足操作符需要的最小并发量的调度器会被选择。例如，对于返回有限和少量消息的 observable 的操作符，RxJS 不使用调度器，即 null 或 undefined 。对于返回潜在大量的或无限数量的消息的操作符，使用 queue 调度器。对于使用定时器的操作符，使用 aysnc 调度器。</p>
+<p>因为 RxJS 使用最少的并发调度器，如果出于性能考虑，你想要引入并发，那么可以选择不同的调度器。要指定具体的调度器，可以使用那些采用调度器的操作符方法，例如 from([10, 20, 30], Rx.Scheduler.async) 。</p>
+<p>静态创建操作符通常可以接收调度器作为参数。 举例来说，from(array, scheduler) 可以让你指定调度器，当发送从 array 转换的每个通知的时候使用。调度器通常作为操作符的最后一个参数。下面的静态创建操作符接收调度器参数：</p>
+<ul>
+<li>bindCallback</li>
+<li>bindNodeCallback</li>
+<li>combineLatest</li>
+<li>concat</li>
+<li>empty</li>
+<li>from</li>
+<li>fromPromise</li>
+<li>interval</li>
+<li>merge</li>
+<li>of</li>
+<li>range</li>
+<li>throw</li>
+<li>timer</li>
+</ul>
+<p>使用 subscribeOn 来调度 subscribe() 调用在什么样的上下文中执行。 默认情况下，Observable 的 subscribe() 调用会立即同步地执行。然而，你可能会延迟或安排在给定的调度器上执行实际的 subscription ，使用实例操作符 subscribeOn(scheduler)，其中 scheduler 是你提供的参数。<br>使用 observeOn 来调度发送通知的的上下文。 正如我们在上面的示例中所看到的，实例操作符 observeOn(scheduler) 在源 Observable 和目标观察者之间引入了一个中介观察者，中介负责调度，它使用给定的 scheduler 来调用目标观察者。</p>
+<p>实例操作符可能会接收调度器作为参数。</p>
+<p>像 bufferTime、debounceTime、delay、auditTime、sampleTime、throttleTime、timeInterval、timeout、timeoutWith、windowTime 这样时间相关的操作符全部接收调度器作为最后的参数，并且默认的操作是在 Rx.Scheduler.async 调度器上。</p>
+<p>其他接收调度器作为参数的实例操作符：cache、combineLatest、concat、expand、merge、publishReplay、startWith。</p>
+<p><strong>注意：</strong>cache 和 publishReplay 都接收调度器是因为它们使用了 ReplaySubject 。ReplaySubjects 的构造函数接收一个可选的调度器作为最后的参数，因为 ReplaySubject 可能会处理时间，这只在调度器的上下文中才有意义。默认情况下，ReplaySubject 使用 queue 调度器来提供时钟。</p>
+    </div>
+
+    <div class="post-footer">   
+        <div>
+            
+                转载声明: 商业转载请联系作者获得授权,非商业转载请注明出处 © Snippet
+            
+        </div>
+        <div>
+            
+                版权声明: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+知识共享署名-非商业性使用-禁止演绎 3.0 未本地化版本许可协议（CC BY-NC-ND 3.0）
+</a>
+            
+        </div>  
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/2017/10/23/Kotlin之提供委托/" class="pre-post btn btn-default"><i class="fa fa-angle-left fa-fw"></i>上一篇</a>
+    
+    
+        <a href="/2017/10/22/将Kotlin代码编译成Javascript 代码/" class="next-post btn btn-default">下一篇<i class="fa fa-angle-right fa-fw"></i></a>
+    
+</div>
+
+
+    <div id="comments">
+        <div id="uyan_frame"></div>
+    <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2120654"></script>
+    </div>
+                </main>
+                <aside class="col-md-4 sidebar">
+        
+        <div class="widget notification">
+        <h3 class="title">网站公告</h3>
+        <div>
+            <p>主题Snippet v1.1.0版本即将上线，敬请期待~ <br>
+主题下载：<a href="https://github.com/shenliyang/hexo-theme-snippet" title="fork me" target="_blank">Snippet主题</a> <br>
+<hr>前端工程师一枚，专注于前端Node、React和移动端Android和Ios开发，欢迎骚扰。
+<br>联系方式：qq群:278792776（移动群）、515980159（React群）、188716429（猎头hr群）
+</p>
+        </div>
+    </div>
+        
+        <div class="widget">
+        <h3 class="title">分类</h3>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/"><i class="fa" aria-hidden="true">Android</i></a><span class="category-list-count">41</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/系统/"><i class="fa" aria-hidden="true">系统</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Google/"><i class="fa" aria-hidden="true">Google</i></a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Google/VR/"><i class="fa" aria-hidden="true">VR</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Kotlin/"><i class="fa" aria-hidden="true">Kotlin</i></a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/PWA/"><i class="fa" aria-hidden="true">PWA</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/"><i class="fa" aria-hidden="true">Python</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React-Native/"><i class="fa" aria-hidden="true">React Native</i></a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/"><i class="fa" aria-hidden="true">Spring</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android/"><i class="fa" aria-hidden="true">android</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/"><i class="fa" aria-hidden="true">iOS</i></a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ios/"><i class="fa" aria-hidden="true">ios</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/"><i class="fa" aria-hidden="true">python</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/人工智能/"><i class="fa" aria-hidden="true">人工智能</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/"><i class="fa" aria-hidden="true">前端</i></a><span class="category-list-count">22</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/区块链/"><i class="fa" aria-hidden="true">区块链</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端/"><i class="fa" aria-hidden="true">后端</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/小程序/"><i class="fa" aria-hidden="true">小程序</i></a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术人生/"><i class="fa" aria-hidden="true">技术人生</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/机器学习/"><i class="fa" aria-hidden="true">机器学习</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂谈/"><i class="fa" aria-hidden="true">杂谈</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程语言/"><i class="fa" aria-hidden="true">编程语言</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/"><i class="fa" aria-hidden="true">设计模式</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/资料库/"><i class="fa" aria-hidden="true">资料库</i></a><span class="category-list-count">1</span></li></ul>
+    </div>
+        
+        <div class="widget">
+      <h3 class="title">归档</h3>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/"><i class="fa" aria-hidden="true">二月 2018</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/"><i class="fa" aria-hidden="true">一月 2018</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/"><i class="fa" aria-hidden="true">十二月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/"><i class="fa" aria-hidden="true">十一月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/"><i class="fa" aria-hidden="true">十月 2017</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/"><i class="fa" aria-hidden="true">八月 2017</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/"><i class="fa" aria-hidden="true">六月 2017</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/"><i class="fa" aria-hidden="true">五月 2017</i></a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/"><i class="fa" aria-hidden="true">三月 2017</i></a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/"><i class="fa" aria-hidden="true">二月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/"><i class="fa" aria-hidden="true">一月 2017</i></a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/"><i class="fa" aria-hidden="true">十二月 2016</i></a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/"><i class="fa" aria-hidden="true">十一月 2016</i></a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/"><i class="fa" aria-hidden="true">十月 2016</i></a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/"><i class="fa" aria-hidden="true">九月 2016</i></a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/"><i class="fa" aria-hidden="true">八月 2016</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/"><i class="fa" aria-hidden="true">七月 2016</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/"><i class="fa" aria-hidden="true">六月 2016</i></a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/"><i class="fa" aria-hidden="true">五月 2016</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/"><i class="fa" aria-hidden="true">四月 2016</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/"><i class="fa" aria-hidden="true">三月 2016</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/"><i class="fa" aria-hidden="true">二月 2016</i></a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/"><i class="fa" aria-hidden="true">一月 2016</i></a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/"><i class="fa" aria-hidden="true">九月 2015</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/"><i class="fa" aria-hidden="true">六月 2015</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/"><i class="fa" aria-hidden="true">五月 2015</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/"><i class="fa" aria-hidden="true">四月 2015</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/"><i class="fa" aria-hidden="true">三月 2015</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/"><i class="fa" aria-hidden="true">一月 2015</i></a><span class="archive-list-count">1</span></li></ul>
+    </div>
+        
+        <div class="widget">
+    <h3 class="title">标签云</h3>
+    <div class="content tag-cloud">
+      
+        <a href="/tags/Spring/" style="font-size: 1em">Spring</a> <a href="/tags/前端/" style="font-size: 1em">前端</a> <a href="/tags/Python/" style="font-size: 1em">Python</a> <a href="/tags/新特性/" style="font-size: 1em">新特性</a> <a href="/tags/深入系统/" style="font-size: 1em">深入系统</a> <a href="/tags/系统服务/" style="font-size: 1em">系统服务</a> <a href="/tags/android/" style="font-size: 1em">android</a> <a href="/tags/混淆打包/" style="font-size: 1em">混淆打包</a> <a href="/tags/硬件/" style="font-size: 1em">硬件</a> <a href="/tags/Angular2/" style="font-size: 1em">Angular2</a> <a href="/tags/前端开发/" style="font-size: 1em">前端开发</a> <a href="/tags/iOS/" style="font-size: 1em">iOS</a> <a href="/tags/React-Native/" style="font-size: 1em">React Native</a> <a href="/tags/FlexBox布局/" style="font-size: 1em">FlexBox布局</a> <a href="/tags/Google/" style="font-size: 1em">Google</a> <a href="/tags/VR/" style="font-size: 1em">VR</a> <a href="/tags/小程序/" style="font-size: 1em">小程序</a> <a href="/tags/后端/" style="font-size: 1em">后端</a> <a href="/tags/Java/" style="font-size: 1em">Java</a> <a href="/tags/垃圾回收/" style="font-size: 1em">垃圾回收</a> <a href="/tags/Kotlin/" style="font-size: 1em">Kotlin</a> <a href="/tags/编程语言/" style="font-size: 1em">编程语言</a> <a href="/tags/Node/" style="font-size: 1em">Node</a> <a href="/tags/Promise/" style="font-size: 1em">Promise</a> <a href="/tags/OpenGL/" style="font-size: 1em">OpenGL</a> <a href="/tags/eact-Native/" style="font-size: 1em">eact Native</a> <a href="/tags/调试/" style="font-size: 1em">调试</a> <a href="/tags/打包/" style="font-size: 1em">打包</a> <a href="/tags/原生/" style="font-size: 1em">原生</a> <a href="/tags/Android/" style="font-size: 1em">Android</a> <a href="/tags/入门/" style="font-size: 1em">入门</a> <a href="/tags/ios/" style="font-size: 1em">ios</a> <a href="/tags/Swift/" style="font-size: 1em">Swift</a> <a href="/tags/swift/" style="font-size: 1em">swift</a> <a href="/tags/AR/" style="font-size: 1em">AR</a> <a href="/tags/Xcode/" style="font-size: 1em">Xcode</a> <a href="/tags/知识库/" style="font-size: 1em">知识库</a> <a href="/tags/webpack/" style="font-size: 1em">webpack</a> <a href="/tags/gulp/" style="font-size: 1em">gulp</a> <a href="/tags/https/" style="font-size: 1em">https</a> <a href="/tags/gif/" style="font-size: 1em">gif</a> <a href="/tags/mac/" style="font-size: 1em">mac</a> <a href="/tags/环境/" style="font-size: 1em">环境</a> <a href="/tags/原理/" style="font-size: 1em">原理</a> <a href="/tags/react/" style="font-size: 1em">react</a> <a href="/tags/杂谈/" style="font-size: 1em">杂谈</a> <a href="/tags/个人博客/" style="font-size: 1em">个人博客</a> <a href="/tags/流量/" style="font-size: 1em">流量</a> <a href="/tags/区块链/" style="font-size: 1em">区块链</a> <a href="/tags/全栈/" style="font-size: 1em">全栈</a> <a href="/tags/微信/" style="font-size: 1em">微信</a> <a href="/tags/搭建网站/" style="font-size: 1em">搭建网站</a> <a href="/tags/机器学习/" style="font-size: 1em">机器学习</a> <a href="/tags/算法/" style="font-size: 1em">算法</a> <a href="/tags/深入理解/" style="font-size: 1em">深入理解</a> <a href="/tags/内存分配/" style="font-size: 1em">内存分配</a> <a href="/tags/PWA/" style="font-size: 1em">PWA</a> <a href="/tags/人工智能/" style="font-size: 1em">人工智能</a> <a href="/tags/设计模式/" style="font-size: 1em">设计模式</a>
+    </div>
+  </div>
+        
+        <div class="widget">
+        <h3 class="title">友链</h3>
+        <div class="content friends-link">
+        
+            <a href="http://blog.csdn.net/xiangzhihong8/" class="fa" target="_blank">作者博客</a>
+        
+            <a href="https://yq.aliyun.com/u/xiangzhihong" class="fa" target="_blank">阿里云博客</a>
+        
+        </div>
+    </div>
+        
+    </aside>
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<!--page counter part-->
+<script>
+function addCount (Counter) {
+        url=$('.article-date').attr('href').trim();
+        title = $('.article-title').text().trim();
+        var query=new AV.Query(Counter);
+        //use url as unique idnetfication
+        query.equalTo("url",url);
+        query.find({
+            success: function(results){
+                if(results.length>0)
+                {
+                    var counter=results[0];
+                    counter.fetchWhenSave(true); //get recent result
+                    counter.increment("time");
+                    counter.save();
+                }
+                else
+                {
+                    var newcounter=new Counter();
+                    newcounter.set("title",title);
+                    newcounter.set("url",url);
+                    newcounter.set("time",1);
+                    newcounter.save(null,{
+                        success: function(newcounter){
+                        //alert('New object created');
+                        },
+                        error: function(newcounter,error){
+                        alert('Failed to create');
+                        }
+                        });
+                }
+            },
+            error: function(error){
+                //find null is not a error
+                alert('Error:'+error.code+" "+error.message);
+            }
+        });
+}
+$(function(){
+        var Counter=AV.Object.extend("Counter");
+        //only increse visit counting when intering a page
+        if ($('.article-title').length == 1)
+           addCount(Counter);
+        var query=new AV.Query(Counter);
+        query.descending("time");
+        // the sum of popular posts
+        query.limit(10); 
+        query.find({
+            success: function(results){
+                    for(var i=0;i<results.length;i++)    
+                    {
+                        var counter=results[i];
+                        title=counter.get("title");
+                        url=counter.get("url");
+                        time=counter.get("time");
+                        // add to the popularlist widget
+                        showcontent=title+" ("+time+")";
+                        //notice the "" in href
+                        $('.popularlist').append('<li><a href="'+url+'">'+showcontent+'</a></li>');
+                    }
+                },
+            error: function(error){
+                alert("Error:"+error.code+" "+error.message);
+            }
+            }
+        )
+        });
+</script>
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <span>Copyright &copy; 2017 
+                </span> | 
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/assets/highlight.pack.js?rev=@@hash"></script>
+  <script>
+    hljs.initHighlightingOnLoad(); //初始化代码高亮 
+  </script>
+
+<script src="/js/app.js?rev=@@hash"></script>
+</body>

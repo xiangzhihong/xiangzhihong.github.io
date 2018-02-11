@@ -1,0 +1,383 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no">
+    <link rel="dns-prefetch" href="//t11.baidu.com">
+    <!--SEO-->
+
+
+
+<meta name="robots" content="all">
+<meta name="google" content="all">
+<meta name="googlebot" content="all">
+<meta name="verify" content="all">
+    <!--Title-->
+
+
+<title>Android组件化框架项目详解 | 向志洪</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="向志洪" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css?rev=9.12.0">
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+    <div class="hide">
+    <script src="https://s4.cnzz.com/z_stat.php?id=1261768793&web_id=1262140174" language="JavaScript"></script>
+    </div>
+    
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?13764659765";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+	
+	<script src="https://cdn1.lncld.net/static/js/av-min-1.2.1.js"></script>
+    <script>AV.initialize("aj42pgqDHRSVhMknqDb3JMeg-gzGzoHsz", "qbRaoHOP9NMWPOow8PandkH3");</script>
+</head></html>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+<body>
+    <header class="main-header">
+    <div class="main-header-box">
+        <a class="branding" href="/" title="">
+            <img src="/img/header_logo.png" alt="Snippet 博客主题">
+        </a>
+        <h2 class="text-hide">Snippet主题</h2>
+        <img src="/img/header_logo.png" alt="Snippet 博客主题" class="hide">
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only">Toggle navigation</span>
+                    <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class=""><a href="/">首页</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/前端/">前端</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/后端/">后端</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/Java/">Java</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/Python/">Python</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/Android/">Android</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/iOS/">iOS</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/React Native/">React Native</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/小程序/">小程序</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/杂谈/">杂谈</a></li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="Android组件化框架项目详解">
+            
+            Android组件化框架项目详解
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <span>Android</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            Android
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta">2017/05/12</span>
+    </span>
+</div>
+            
+            
+    </div>
+    
+    <div class="post-body">
+        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><h2 id="什么是组件化？"><a href="#什么是组件化？" class="headerlink" title="什么是组件化？"></a>什么是组件化？</h2><p>项目发展到一定阶段时，随着需求的增加以及频繁地变更，项目会越来越大，代码变得越来越臃肿，耦合会越来越多，开发效率也会降低，这个时候我们就需要对旧项目进行重构即模块的拆分，官方的说法就是组件化。</p>
+<h2 id="组件化带来的好处"><a href="#组件化带来的好处" class="headerlink" title="组件化带来的好处"></a>组件化带来的好处</h2><p>那么，采用组件化能带来什么好处呢？主要有以下两点：<br>1、现在Android项目中代码量达到一定程度，编译将是一件非常痛苦的事情，一般都需要编译5到6分钟。Android Studio 推出 instant run 由于各种缺陷和限制条件（比如采用热修复tinker）一般情况下是被关闭的。而组件化框架可以使模块单独编译调试，可以有效地减少编译的时间。</p>
+<p>2、通过组件化可以更好的进行并行开发，因为我们可以为每一个模块进行单独的版本控制，甚至每一个模块的负责人可以选择自己的设计架构而不影响其他模块的开发，与此同时组件化还可以避免模块之间的交叉依赖，每一个模块的开发人员可以对自己的模块进行独立测试，独立编译和运行，甚至可以实现单独的部署。从而极大的提高了并行开发效率。</p>
+<h2 id="组件化框架"><a href="#组件化框架" class="headerlink" title="组件化框架"></a>组件化框架</h2><p>来看组件化一个简单的例子，图例如下：<br><img src="http://img.blog.csdn.net/20180108141037249" alt="这里写图片描述"></p>
+<p><img src="http://img.blog.csdn.net/20180108141255487" alt="这里写图片描述"></p>
+<h2 id="基类库的封装"><a href="#基类库的封装" class="headerlink" title="基类库的封装"></a>基类库的封装</h2><p><img src="http://img.blog.csdn.net/20180108141348985" alt="这里写图片描述"></p>
+<p>对于Android中常用的基类库，主要包括开发常用的一些框架。</p>
+<p>1、网络请求(多任务下载和上传，采用 Retrofit+RxJava 框架)<br>2、图片加载(策略模式，Glide 与 Picasso 之间可以切换)<br>3、通信机制（RxBus）<br>4、基类 adapter 的封装（支持 item动画、多布局item、下拉和加载更多、item点击事件）<br>5、基类 RecyclerView 的封装（支持原生风格的下拉加载，item侧滑等）<br>6、mvp 框架<br>7、各组件的数据库实体类<br>8、通用的工具类<br>9、自定义view(包括对话框，ToolBar布局，圆形图片等view的自定义)<br>10、dagger 的封装（用于初始化全局的变量和网络请求等配置）<br>11、其他等等</p>
+<h3 id="组件模式和集成模式切换的实现"><a href="#组件模式和集成模式切换的实现" class="headerlink" title="组件模式和集成模式切换的实现"></a>组件模式和集成模式切换的实现</h3><p>music组件 下的 build.gradle 文件，其他组件类似。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div></pre></td><td class="code"><pre><div class="line">//控制组件模式和集成模式</div><div class="line">if (rootProject.ext.isAlone) &#123; </div><div class="line">    apply plugin: &apos;com.android.application&apos;</div><div class="line">&#125; else &#123; </div><div class="line">    apply plugin: &apos;com.android.library&apos; &#125; </div><div class="line">apply plugin: &apos;com.neenbedankt.android-apt&apos;</div><div class="line"></div><div class="line">android &#123; </div><div class="line">    compileSdkVersion rootProject.ext.android.compileSdkVersion </div><div class="line">    buildToolsVersion rootProject.ext.android.buildToolsVersion </div><div class="line">    defaultConfig &#123; </div><div class="line">        if (rootProject.ext.isAlone) &#123; </div><div class="line">            //组件模式下设置applicationId </div><div class="line">            applicationId &quot;com.example.cootek.music&quot; </div><div class="line">        &#125; </div><div class="line">        minSdkVersion rootProject.ext.android.minSdkVersion </div><div class="line">        targetSdkVersion rootProject.ext.android.targetSdkVersion </div><div class="line">        versionCode rootProject.ext.android.versionCode </div><div class="line">        versionName rootProject.ext.android.versionName </div><div class="line">        testInstrumentationRunner &quot;android.support.test.runner.AndroidJUnitRunner&quot; </div><div class="line">        if (!rootProject.ext.isAlone) &#123; </div><div class="line">            //集成模式下Arouter的配置，用于组件间通信的实现 </div><div class="line">            javaCompileOptions &#123; </div><div class="line">                annotationProcessorOptions &#123; </div><div class="line">                    arguments = [moduleName: project.getName()] </div><div class="line">                &#125; </div><div class="line">            &#125; </div><div class="line">        &#125; </div><div class="line">    &#125; </div><div class="line">    buildTypes &#123; </div><div class="line">        release &#123; </div><div class="line">            minifyEnabled false </div><div class="line">            proguardFiles getDefaultProguardFile(&apos;proguard-android.txt&apos;), &apos;proguard-rules.pro&apos; </div><div class="line">        &#125; </div><div class="line">    &#125; </div><div class="line">    compileOptions &#123; </div><div class="line">        sourceCompatibility JavaVersion.VERSION_1_7 </div><div class="line">        targetCompatibility JavaVersion.VERSION_1_7 </div><div class="line">    &#125; </div><div class="line">    sourceSets &#123; </div><div class="line">        main &#123; </div><div class="line">            //控制两种模式下的资源和代码配置情况 </div><div class="line">            if (rootProject.ext.isAlone) &#123; </div><div class="line">                manifest.srcFile &apos;src/main/module/AndroidManifest.xml&apos; </div><div class="line">                java.srcDirs = [&apos;src/main/java&apos;, &apos;src/main/module/java&apos;] </div><div class="line">                res.srcDirs = [&apos;src/main/res&apos;, &apos;src/main/module/res&apos;] </div><div class="line">            &#125; else &#123; </div><div class="line">                manifest.srcFile &apos;src/main/AndroidManifest.xml&apos; </div><div class="line">            &#125; </div><div class="line">        &#125; </div><div class="line">    &#125; </div><div class="line">&#125; </div><div class="line"></div><div class="line">dependencies &#123; </div><div class="line">    compile fileTree(dir: &apos;libs&apos;, include: [&apos;*.jar&apos;]) </div><div class="line">    androidTestCompile(&apos;com.android.support.test.espresso:espresso-core:2.2.2&apos;, &#123; </div><div class="line">        exclude group: &apos;com.android.support&apos;, module: &apos;support-annotations&apos; </div><div class="line">    &#125;) </div><div class="line">    //依赖基类库 </div><div class="line">    compile project(&apos;:commonlibrary&apos;) </div><div class="line">    //用作颜色选择器 </div><div class="line">    compile &apos;com.afollestad.material-dialogs:commons:0.9.1.0&apos; </div><div class="line">    apt rootProject.ext.dependencies.dagger2_compiler </div><div class="line">    if (!rootProject.ext.isAlone) &#123; </div><div class="line">    //集成模式下需要编译器生成路由通信的代码 </div><div class="line">        apt rootProject.ext.dependencies.arouter_compiler </div><div class="line">    &#125; </div><div class="line">    testCompile &apos;junit:junit:4.12&apos;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>为了区分集成模式和组件模式，我们使用isAlone变量来控制。</p>
+<h3 id="集成模式"><a href="#集成模式" class="headerlink" title="集成模式"></a>集成模式</h3><p>1、首先需要在 config.gradle 文件中设置 isAlone = false。形如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ext &#123; </div><div class="line">    isAlone = false;   //false:作为Lib组件存在，true:作为application存在</div></pre></td></tr></table></figure>
+<p>2、然后 Sync 下。<br>3、最后选择 app 运行即可。</p>
+<h3 id="组件模式"><a href="#组件模式" class="headerlink" title="组件模式"></a>组件模式</h3><p>1、首先需要在 config.gradle 文件中设置 isAlone = true<br>2、然后 Sync 下。<br>3、最后相应的模块（new、chat、live、music、app）进行运行即可。</p>
+<p>config.gradle 文件的配置情况如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div></pre></td><td class="code"><pre><div class="line">ext &#123; </div><div class="line">    isAlone = false;//false:作为集成模式存在，true:作为组件模式存在 </div><div class="line"></div><div class="line">    // 各个组件版本号的统一管理 </div><div class="line">    android = [ </div><div class="line">            compileSdkVersion: 24, </div><div class="line">            buildToolsVersion: &quot;25.0.2&quot;, </div><div class="line">            minSdkVersion    : 16, </div><div class="line">            targetSdkVersion : 22, </div><div class="line">            versionCode      : 1, </div><div class="line">            versionName      : &apos;1.0.0&apos;, </div><div class="line">    ] </div><div class="line"></div><div class="line">    libsVersion = [ </div><div class="line">            // 第三方库版本号的管理 </div><div class="line">            supportLibraryVersion = &quot;25.3.0&quot;, </div><div class="line">            retrofitVersion = &quot;2.1.0&quot;, </div><div class="line">            glideVersion = &quot;3.7.0&quot;, </div><div class="line">            loggerVersion = &quot;1.15&quot;, </div><div class="line">            // eventbusVersion = &quot;3.0.0&quot;, </div><div class="line">            gsonVersion = &quot;2.8.0&quot;, </div><div class="line">            butterknife = &quot;8.8.0&quot;, </div><div class="line">            retrofit = &quot;2.3.0&quot;, </div><div class="line">            rxjava = &quot;2.1.1&quot;, </div><div class="line">            rxjava_android = &quot;2.0.1&quot;, </div><div class="line">            rxlifecycle = &quot;2.1.0&quot;, </div><div class="line">            rxlifecycle_components = &quot;2.1.0&quot;, </div><div class="line">            dagger_compiler = &quot;2.11&quot;, </div><div class="line">            dagger = &quot;2.11&quot;, </div><div class="line">            greenDao = &quot;3.2.2&quot;, </div><div class="line">            arouter_api = &quot;1.2.2&quot;, </div><div class="line">            arouter_compiler = &quot;1.1.3&quot;, </div><div class="line">            transformations = &quot;2.0.2&quot;, </div><div class="line">            rxjava_adapter = &quot;2.3.0&quot;, </div><div class="line">            gson_converter = &quot;2.3.0&quot;, </div><div class="line">            scalars_converter = &quot;2.3.0&quot;, </div><div class="line">            rxpermission = &quot;0.9.4&quot;, </div><div class="line">            eventbus=&quot;3.0.0&quot;, </div><div class="line">            support_v4=&quot;25.4.0&quot;, </div><div class="line">            okhttp3=&quot;3.8.1&quot; </div><div class="line">    ] </div><div class="line"></div><div class="line">    // 依赖库管理 </div><div class="line">    dependencies = [ </div><div class="line">            appcompatV7               : &quot;com.android.support:appcompat-v7:$rootProject.supportLibraryVersion&quot;, </div><div class="line">            design                    : &quot;com.android.support:design:$rootProject.supportLibraryVersion&quot;, </div><div class="line">            cardview                  : &quot;com.android.support:cardview-v7:$rootProject.supportLibraryVersion&quot;, </div><div class="line">            palette                   : &quot;com.android.support:palette-v7:$rootProject.supportLibraryVersion&quot;, </div><div class="line">            recycleview               : &quot;com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion&quot;, </div><div class="line">            support_v4                : &quot;com.android.support:support-v4:$rootProject.support_v4&quot;, </div><div class="line">            annotations               : &quot;com.android.support:support-annotations:$rootProject.supportLibraryVersion&quot;, </div><div class="line">            eventBus                  : &quot;org.greenrobot:eventbus:$rootProject.eventbus&quot;, </div><div class="line">            glide                     : &quot;com.github.bumptech.glide:glide:$rootProject.glideVersion&quot;, </div><div class="line">            gson                      : &quot;com.google.code.gson:gson:$rootProject.gsonVersion&quot;, </div><div class="line">            logger                    : &quot;com.orhanobut:logger:$rootProject.loggerVersion&quot;, </div><div class="line">            butterknife               : &quot;com.jakewharton:butterknife:$rootProject.butterknife&quot;, </div><div class="line">            butterknife_compiler      : &quot;com.jakewharton:butterknife-compiler:$rootProject.butterknife&quot;, </div><div class="line">            retrofit                  : &quot;com.squareup.retrofit2:retrofit:$rootProject.retrofit&quot;, </div><div class="line">            okhttp3                   : &quot;com.squareup.okhttp3:okhttp:$rootProject.retrofit&quot;, </div><div class="line">            retrofit_adapter_rxjava2  : &quot;com.squareup.retrofit2:adapter-rxjava2:$rootProject.rxjava_adapter&quot;, </div><div class="line">            retrofit_converter_gson   : &quot;com.squareup.retrofit2:converter-gson:$rootProject.gson_converter&quot;, </div><div class="line">            retrofit_converter_scalars: &quot;com.squareup.retrofit2:converter-scalars:$rootProject.scalars_converter&quot;, </div><div class="line">            rxpermission              : &quot;com.tbruyelle.rxpermissions2:rxpermissions:$rootProject.rxpermission@aar&quot;, </div><div class="line">            rxjava2                   : &quot;io.reactivex.rxjava2:rxjava:$rootProject.rxjava&quot;, </div><div class="line">            rxjava2_android           : &quot;io.reactivex.rxjava2:rxandroid:$rootProject.rxjava_android&quot;, </div><div class="line">            rxlifecycle2              : &quot;com.trello.rxlifecycle2:rxlifecycle:$rootProject.rxlifecycle&quot;, </div><div class="line">            rxlifecycle2_components   : &quot;com.trello.rxlifecycle2:rxlifecycle-components:$rootProject.rxlifecycle_components&quot;, </div><div class="line">            dagger2_compiler          : &quot;com.google.dagger:dagger-compiler:$rootProject.dagger_compiler&quot;, </div><div class="line">            dagger2                   : &quot;com.google.dagger:dagger:$rootProject.dagger&quot;, </div><div class="line">            greenDao                  : &quot;org.greenrobot:greendao:$rootProject.greenDao&quot;, </div><div class="line">            transformations           : &quot;jp.wasabeef:glide-transformations:$rootProject.transformations&quot;, </div><div class="line">            //路由通讯 </div><div class="line">            arouter_api               : &quot;com.alibaba:arouter-api:$rootProject.arouter_api&quot;, </div><div class="line">            arouter_compiler          : &quot;com.alibaba:arouter-compiler:$rootProject.arouter_compiler&quot; </div><div class="line">    ] </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="组件间通信实现"><a href="#组件间通信实现" class="headerlink" title="组件间通信实现"></a>组件间通信实现</h3><p>组件间通信的实现可以使用阿里开源的 Arouter 路由通信。相关内容可以查看：<a href="https://github.com/alibaba/ARouter。" target="_blank" rel="external">https://github.com/alibaba/ARouter。</a><br>首先，初始化所有的数据信息。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">private List&lt;MainItemBean&gt; getDefaultData() &#123; </div><div class="line">    List&lt;MainItemBean&gt; result = new ArrayList&lt;&gt;(); </div><div class="line">    MainItemBean mainItemBean = new MainItemBean(); </div><div class="line">    mainItemBean.setName(&quot;校园&quot;); </div><div class="line">    mainItemBean.setPath(&quot;/news/main&quot;); </div><div class="line">    mainItemBean.setResId(R.mipmap.ic_launcher); </div><div class="line">    MainItemBean music=new MainItemBean(); </div><div class="line">    music.setName(&quot;音乐&quot;); </div><div class="line">    music.setResId(R.mipmap.ic_launcher); </div><div class="line">    music.setPath(&quot;/music/main&quot;); </div><div class="line">    MainItemBean live = new MainItemBean(); </div><div class="line">    live.setName(&quot;直播&quot;); </div><div class="line">    live.setResId(R.mipmap.ic_launcher); </div><div class="line">    live.setPath(&quot;/live/main&quot;); </div><div class="line">    MainItemBean chat = new MainItemBean(); </div><div class="line">    chat.setName(&quot;聊天&quot;); </div><div class="line">    chat.setPath(&quot;/chat/splash&quot;); </div><div class="line">    chat.setResId(R.mipmap.ic_launcher); </div><div class="line">    result.add(mainItemBean); </div><div class="line">    result.add(music); </div><div class="line">    result.add(live); </div><div class="line">    result.add(chat); </div><div class="line">    return result; </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>然后在设置每个 item 的点击事件时,启动组件界面跳转。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">public void onItemClick(int position, View view) &#123; </div><div class="line">    MainItemBean item=mainAdapter.getData(position); </div><div class="line">    ARouter.getInstance().build(item.getPath()).navigation(); </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>每个组件入口界面的设置（比如直播 Live 组件，其它组件类似）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">@Route(path = &quot;/live/main&quot;) </div><div class="line">public class MainActivity extends BaseActivity&lt;List&lt;CategoryLiveBean&gt;, MainPresenter&gt; implements View.OnClickListener &#123;</div><div class="line">//</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="res资源和AndroidManifest配置"><a href="#res资源和AndroidManifest配置" class="headerlink" title="res资源和AndroidManifest配置"></a>res资源和AndroidManifest配置</h3><p>我们通过判断组件处于哪种模式来动态设置项目res资源和Manifest、以及代码的位置。以直播组件为例，其它组件类似。</p>
+<p><img src="http://img.blog.csdn.net/20180108154408429" alt="这里写图片描述"><br>作为一个组件模块后，再来看一下直播组件的 build.gradle 文件对代码资源等位置的配置。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">sourceSets &#123; </div><div class="line">    main &#123; </div><div class="line">        if (rootProject.ext.isAlone) &#123; </div><div class="line">            manifest.srcFile &apos;src/main/module/AndroidManifest.xml&apos; </div><div class="line">            java.srcDirs = [&apos;src/main/java&apos;, &apos;src/main/module/java&apos;] </div><div class="line">            res.srcDirs = [&apos;src/main/res&apos;, &apos;src/main/module/res&apos;] </div><div class="line">        &#125; else &#123; </div><div class="line">            manifest.srcFile &apos;src/main/AndroidManifest.xml&apos; </div><div class="line">        &#125; </div><div class="line">    &#125; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="全局application的实现和数据的初始化"><a href="#全局application的实现和数据的初始化" class="headerlink" title="全局application的实现和数据的初始化"></a>全局application的实现和数据的初始化</h3><p>采用类似于 Glide 在 Manifest 初始化配置的方式来初始化各个组件的 Application，下面以直播组件为例来完成初始化，其它类似。<br>在 BaseApplication 中，初始化 ApplicationDelegate 代理类。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">protected void attachBaseContext(Context base) &#123; </div><div class="line">    super.attachBaseContext(base); </div><div class="line">    applicationDelegate = new ApplicationDelegate(); </div><div class="line">    applicationDelegate.attachBaseContext(base); </div><div class="line">    MultiDex.install(this); </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>ApplicationDelegate 内部是怎样的呢，看一段源码。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div></pre></td><td class="code"><pre><div class="line">public class ApplicationDelegate implements IAppLife &#123; </div><div class="line">    private List&lt;IModuleConfig&gt; list; </div><div class="line">    private List&lt;IAppLife&gt; appLifes; </div><div class="line">    private List&lt;Application.ActivityLifecycleCallbacks&gt; liferecycleCallbacks; </div><div class="line"></div><div class="line">    public ApplicationDelegate() &#123; </div><div class="line">        appLifes = new ArrayList&lt;&gt;(); </div><div class="line">        liferecycleCallbacks = new ArrayList&lt;&gt;(); </div><div class="line">    &#125; </div><div class="line"></div><div class="line">    @Override </div><div class="line">    public void attachBaseContext(Context base) &#123; </div><div class="line">        //初始化Manifest文件解析器，用于解析组件在自己的Manifest文件配置的Application </div><div class="line">        ManifestParser manifestParser = new ManifestParser(base); </div><div class="line">        list = manifestParser.parse(); </div><div class="line">        //解析得到的组件Application列表之后，给每个组件Application注入 </div><div class="line">        //context，和Application的生命周期的回调，用于实现application的同步 </div><div class="line">        if (list != null &amp;&amp; list.size() &gt; 0) &#123; </div><div class="line">            for (IModuleConfig configModule : </div><div class="line">                    list) &#123; </div><div class="line">                configModule.injectAppLifecycle(base, appLifes); </div><div class="line">                configModule.injectActivityLifecycle(base, liferecycleCallbacks); </div><div class="line">            &#125; </div><div class="line">        &#125; </div><div class="line">        if (appLifes != null &amp;&amp; appLifes.size() &gt; 0) &#123; </div><div class="line">            for (IAppLife life : </div><div class="line">                    appLifes) &#123; </div><div class="line">                life.attachBaseContext(base); </div><div class="line">            &#125; </div><div class="line">        &#125; </div><div class="line">    &#125; </div><div class="line"></div><div class="line">    @Override </div><div class="line">    public void onCreate(Application application) &#123; </div><div class="line">        //相应调用组件Application代理类的onCreate方法 </div><div class="line">        if (appLifes != null &amp;&amp; appLifes.size() &gt; 0) &#123; </div><div class="line">            for (IAppLife life : </div><div class="line">                    appLifes) &#123; </div><div class="line">                life.onCreate(application); </div><div class="line">            &#125; </div><div class="line">        &#125; </div><div class="line">        if (liferecycleCallbacks != null &amp;&amp; liferecycleCallbacks.size() &gt; 0) &#123; </div><div class="line">            for (Application.ActivityLifecycleCallbacks life : </div><div class="line">                    liferecycleCallbacks) &#123; </div><div class="line">                application.registerActivityLifecycleCallbacks(life); </div><div class="line">            &#125; </div><div class="line">        &#125; </div><div class="line">    &#125; </div><div class="line"></div><div class="line">    @Override </div><div class="line">    public void onTerminate(Application application) &#123; </div><div class="line">        //相应调用组件Application代理类的onTerminate方法 </div><div class="line">        if (appLifes != null &amp;&amp; appLifes.size() &gt; 0) &#123; </div><div class="line">            for (IAppLife life : </div><div class="line">                    appLifes) &#123; </div><div class="line">                life.onTerminate(application); </div><div class="line">            &#125; </div><div class="line">        &#125; </div><div class="line">        if (liferecycleCallbacks != null &amp;&amp; liferecycleCallbacks.size() &gt; 0) &#123; </div><div class="line">            for (Application.ActivityLifecycleCallbacks life : </div><div class="line">                    liferecycleCallbacks) &#123; </div><div class="line">                application.unregisterActivityLifecycleCallbacks(life); </div><div class="line">            &#125; </div><div class="line">        &#125; </div><div class="line">    &#125; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>组件 Manifest 中 application 的全局配置如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;meta-data </div><div class="line">    android:name=&quot;com.example.live.LiveApplication&quot; </div><div class="line">    android:value=&quot;IModuleConfig&quot; /&gt;</div></pre></td></tr></table></figure>
+<p>ManifestParser 会对其中 value 为 IModuleConfig 的 meta-data 进行解析，并通过反射生成实例。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line">public final class ManifestParser &#123; </div><div class="line">    private static final String MODULE_VALUE = &quot;IModuleConfig&quot;; </div><div class="line">    private final Context context; </div><div class="line">    public ManifestParser(Context context) &#123; </div><div class="line">        this.context = context; </div><div class="line">    &#125; </div><div class="line">    public List&lt;IModuleConfig&gt; parse() &#123; </div><div class="line">        List&lt;IModuleConfig&gt; modules = new ArrayList&lt;&gt;(); </div><div class="line">        try &#123; </div><div class="line">            ApplicationInfo appInfo = context.getPackageManager().getApplicationInfo( </div><div class="line">                    context.getPackageName(), PackageManager.GET_META_DATA); </div><div class="line">            if (appInfo.metaData != null) &#123; </div><div class="line">                for (String key : appInfo.metaData.keySet()) &#123; </div><div class="line">                //会对其中value为IModuleConfig的meta-data进行解析，并通过反射生成实例 </div><div class="line">                    if (MODULE_VALUE.equals(appInfo.metaData.get(key))) &#123; </div><div class="line">                        modules.add(parseModule(key)); </div><div class="line">                    &#125; </div><div class="line">                &#125; </div><div class="line">            &#125; </div><div class="line">        &#125; catch (PackageManager.NameNotFoundException e) &#123; </div><div class="line">            throw new RuntimeException(&quot;Unable to find metadata to parse IModuleConfig&quot;, e); </div><div class="line">        &#125; </div><div class="line">        return modules; </div><div class="line">    &#125; </div><div class="line"></div><div class="line">    //通过类名生成实例 </div><div class="line">    private static IModuleConfig parseModule(String className) &#123; </div><div class="line">        Class&lt;?&gt; clazz; </div><div class="line">        try &#123; </div><div class="line">            clazz = Class.forName(className); </div><div class="line">        &#125; catch (ClassNotFoundException e) &#123; </div><div class="line">            throw new IllegalArgumentException(&quot;Unable to find IModuleConfig implementation&quot;, e); </div><div class="line">        &#125; </div><div class="line"></div><div class="line">        Object module; </div><div class="line">        try &#123; </div><div class="line">            module = clazz.newInstance(); </div><div class="line">        &#125; catch (InstantiationException e) &#123; </div><div class="line">            throw new RuntimeException(&quot;Unable to instantiate IModuleConfig implementation for &quot; + clazz, e); </div><div class="line">        &#125; catch (IllegalAccessException e) &#123; </div><div class="line">            throw new RuntimeException(&quot;Unable to instantiate IModuleConfig implementation for &quot; + clazz, e); </div><div class="line">        &#125; </div><div class="line"></div><div class="line">        if (!(module instanceof IModuleConfig)) &#123; </div><div class="line">            throw new RuntimeException(&quot;Expected instanceof IModuleConfig, but found: &quot; + module); </div><div class="line">        &#125; </div><div class="line">        return (IModuleConfig) module; </div><div class="line">    &#125; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这样通过以上步骤就可以在 Manifest 文件中配置自己组件的 Application，用于初始化组件内的数据，比如在直播组件中初始化 Dagger注解 的全局配置。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">public class LiveApplication implements IModuleConfig,IAppLife &#123; </div><div class="line">    private static MainComponent mainComponent; </div><div class="line"></div><div class="line">    @Override </div><div class="line">    public void injectAppLifecycle(Context context, List&lt;IAppLife&gt; iAppLifes) &#123; </div><div class="line">        //这里需要把本引用添加到Application的生命周期的回调中，以便实现回调 </div><div class="line">        iAppLifes.add(this); </div><div class="line">    &#125; </div><div class="line"></div><div class="line">    @Override </div><div class="line">    public void injectActivityLifecycle(Context context, List&lt;Application.ActivityLifecycleCallbacks&gt; lifecycleCallbackses) &#123; </div><div class="line">    &#125; </div><div class="line"></div><div class="line">    @Override </div><div class="line">    public void attachBaseContext(Context base) &#123; </div><div class="line">    &#125; </div><div class="line"></div><div class="line">    @Override </div><div class="line">    public void onCreate(Application application) &#123; </div><div class="line">        //在onCreate方法中对Dagger进行初始化 </div><div class="line">        mainComponent = DaggerMainComponent.builder().mainModule(new MainModule()) </div><div class="line">                              .appComponent(BaseApplication.getAppComponent()).build(); </div><div class="line">    &#125; </div><div class="line"></div><div class="line">    @Override </div><div class="line">    public void onTerminate(Application application) &#123; </div><div class="line">        if (mainComponent != null) &#123; </div><div class="line">            mainComponent = null; </div><div class="line">        &#125; </div><div class="line">    &#125; </div><div class="line"></div><div class="line">    public static MainComponent getMainComponent() &#123; </div><div class="line">        return mainComponent; </div><div class="line">    &#125; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="组件内网络请求和拦截器"><a href="#组件内网络请求和拦截器" class="headerlink" title="组件内网络请求和拦截器"></a>组件内网络请求和拦截器</h3><p>由于每个组件的 BaseUrl 和网络配置等可能不一样，所以每个组件可以在自己配置的 dagger 中的 MainConponent 实现自己的网络请求和拦截器。以直播为例，部分代码内容如下：</p>
+<p><strong>MainComponent：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">@PerApplication</div><div class="line">@Component(dependencies = AppComponent.class, modules = MainModule.class) </div><div class="line">public interface MainComponent &#123; </div><div class="line">    public DaoSession getDaoSession(); </div><div class="line"></div><div class="line">    public MainRepositoryManager getMainRepositoryManager(); </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>MainModule部分代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">public class MainModule &#123; </div><div class="line">    @Provides </div><div class="line">    @PerApplication </div><div class="line">    public MainRepositoryManager provideRepositoryManager(@Named(&quot;live&quot;) Retrofit retrofit, DaoSession daoSession) &#123; </div><div class="line">        return new MainRepositoryManager(retrofit, daoSession); </div><div class="line">    &#125; </div><div class="line">    @Provides </div><div class="line">    @Named(&quot;live&quot;) </div><div class="line">    @PerApplication </div><div class="line">    public Retrofit provideRetrofit(@Named(&quot;live&quot;) OkHttpClient okHttpClient,@Nullable Gson gson)&#123; </div><div class="line">        Retrofit.Builder builder=new Retrofit.Builder().baseUrl(LiveUtil.BASE_URL).addCallAdapterFactory(RxJava2CallAdapterFactory.create()) </div><div class="line">                .addConverterFactory(GsonConverterFactory.create(gson)).client(okHttpClient); </div><div class="line">        return builder.build(); </div><div class="line">    &#125; </div><div class="line">    @Provides </div><div class="line">    @Named(&quot;live&quot;) </div><div class="line">    @PerApplication </div><div class="line">    public OkHttpClient provideOkHttpClient(@Named(&quot;live&quot;)LiveInterceptor interceptor)&#123; </div><div class="line">        OkHttpClient.Builder builder=new OkHttpClient.Builder(); </div><div class="line">        builder.connectTimeout(10, TimeUnit.SECONDS).readTimeout(10,TimeUnit.SECONDS); </div><div class="line">        builder.addInterceptor(interceptor); </div><div class="line">        return builder.build(); </div><div class="line">    &#125; </div><div class="line">    @Provides </div><div class="line">    @Named(&quot;live&quot;) </div><div class="line">    @PerApplication </div><div class="line">    public LiveInterceptor provideNewsInterceptor()&#123; </div><div class="line">        return new LiveInterceptor(); </div><div class="line">    &#125; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="难点"><a href="#难点" class="headerlink" title="难点"></a>难点</h1><p>在项目中使用组件化，可能会遇到很多问题，下面将问题罗列如下：</p>
+<h3 id="资源命名冲突"><a href="#资源命名冲突" class="headerlink" title="资源命名冲突"></a>资源命名冲突</h3><p>官方说法是在每个 module 的 build.gradle 文件中配置资源文件名前缀。</p>
+<p>这种方法缺点就是，所有的资源名必须要以指定的字符串(moudle_prefix)做前缀，否则会异常报错，而且这方法只限定xml里面的资源，对图片资源并不起作用，所以图片资源仍然需要手动去修改资源名。所以不是很推荐使用这种方法来解决资源名冲突。所以只能自己注意点，在创建资源的时候，尽量不让其重复。例如:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">resourcePrefix  &quot;moudle_prefix&quot;</div></pre></td></tr></table></figure>
+<h3 id="butterKnife使用问题"><a href="#butterKnife使用问题" class="headerlink" title="butterKnife使用问题"></a>butterKnife使用问题</h3><p>虽然 Butterknife 支持在 lib 中使用，但是条件是用 R2 代替 R ，在组件模式和集成模式的切换中，R2&lt;-&gt;R 之间的切换是无法完成转换的，切换一次要改动全身，是非常麻烦的！所以不推荐在组件化中使用 Butterknife。</p>
+<h3 id="library重复依赖问题"><a href="#library重复依赖问题" class="headerlink" title="library重复依赖问题"></a>library重复依赖问题</h3><p>相信这个问题，大家在平时的开发中都会遇到，所以我们需要将多余的包给排除出去。可以参考如下的配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div></pre></td><td class="code"><pre><div class="line">dependencies &#123; </div><div class="line">    compile fileTree(dir: &apos;libs&apos;, include: [&apos;*.jar&apos;]) </div><div class="line">    testCompile &apos;junit:junit:4.12&apos; </div><div class="line">    androidTestCompile(&apos;com.android.support.test.espresso:espresso-core:2.2.2&apos;, &#123; </div><div class="line">        exclude group: &apos;com.android.support&apos;, module: &apos;support-annotations&apos; </div><div class="line">    &#125;) </div><div class="line">    compile(rootProject.ext.dependencies.appcompatV7) &#123; </div><div class="line">        exclude module: &quot;support-v4&quot; </div><div class="line">        exclude module: &quot;support-annotations&quot; </div><div class="line">    &#125; </div><div class="line">    compile rootProject.ext.dependencies.recycleview </div><div class="line">    compile rootProject.ext.dependencies.design </div><div class="line"></div><div class="line">    compile(rootProject.ext.dependencies.support_v4) &#123; </div><div class="line">       exclude module: &quot;support-annotations&quot; </div><div class="line">    &#125; </div><div class="line">    compile rootProject.ext.dependencies.annotations </div><div class="line">    compile(rootProject.ext.dependencies.butterknife) &#123; </div><div class="line">        exclude module: &apos;support-annotations&apos; </div><div class="line">    &#125; </div><div class="line">    compile rootProject.ext.dependencies.rxjava2 </div><div class="line">    compile(rootProject.ext.dependencies.rxjava2_android) &#123; </div><div class="line">        exclude module: &quot;rxjava&quot; </div><div class="line">    &#125; </div><div class="line">    compile(rootProject.ext.dependencies.rxlifecycle2) &#123; </div><div class="line">        exclude module: &apos;rxjava&apos; </div><div class="line">        exclude module: &apos;jsr305&apos; </div><div class="line">    &#125; </div><div class="line">    compile(rootProject.ext.dependencies.rxlifecycle2_components) &#123; </div><div class="line">        exclude module: &apos;support-v4&apos; </div><div class="line">        exclude module: &apos;appcompat-v7&apos; </div><div class="line">        exclude module: &apos;support-annotations&apos; </div><div class="line">        exclude module: &apos;rxjava&apos; </div><div class="line">        exclude module: &apos;rxandroid&apos; </div><div class="line">        exclude module: &apos;rxlifecycle&apos; </div><div class="line">    &#125; </div><div class="line">    compile(rootProject.ext.dependencies.retrofit) &#123; </div><div class="line">        exclude module: &apos;okhttp&apos; </div><div class="line">        exclude module: &apos;okio&apos; </div><div class="line">    &#125; </div><div class="line">    compile(rootProject.ext.dependencies.retrofit_converter_gson) &#123; </div><div class="line">        exclude module: &apos;gson&apos; </div><div class="line">        exclude module: &apos;okhttp&apos; </div><div class="line">        exclude module: &apos;okio&apos; </div><div class="line">        exclude module: &apos;retrofit&apos; </div><div class="line">    &#125; </div><div class="line">    compile(rootProject.ext.dependencies.retrofit_adapter_rxjava2) &#123; </div><div class="line">        exclude module: &apos;rxjava&apos; </div><div class="line">        exclude module: &apos;okhttp&apos; </div><div class="line">        exclude module: &apos;retrofit&apos; </div><div class="line">        exclude module: &apos;okio&apos; </div><div class="line">    &#125; </div><div class="line">    compile rootProject.ext.dependencies.greenDao </div><div class="line">    compile rootProject.ext.dependencies.okhttp3 </div><div class="line">    compile rootProject.ext.dependencies.gson </div><div class="line">    compile rootProject.ext.dependencies.glide </div><div class="line">    compile rootProject.ext.dependencies.eventBus </div><div class="line">    compile rootProject.ext.dependencies.dagger2 </div><div class="line">    compile(rootProject.ext.dependencies.rxpermission) &#123; </div><div class="line">        exclude module: &apos;rxjava&apos; </div><div class="line">    &#125; </div><div class="line">    compile rootProject.ext.dependencies.retrofit_converter_scalars </div><div class="line">    annotationProcessor rootProject.ext.dependencies.dagger2_compiler </div><div class="line">    annotationProcessor rootProject.ext.dependencies.butterknife_compiler </div><div class="line">    compile rootProject.ext.dependencies.butterknife </div><div class="line">    compile rootProject.ext.dependencies.transformations </div><div class="line">    compile rootProject.ext.dependencies.arouter_api </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>附：<a href="https://github.com/HelloChenJinJun/NewFastFrame" target="_blank" rel="external">项目实例</a></p>
+<p><a href="https://github.com/HelloChenJinJun/TestChat" target="_blank" rel="external">聊天模块</a></p>
+<p>优秀项目参考：<br>MVPArms<br><a href="https://github.com/JessYanCoding/MVPArms" target="_blank" rel="external">https://github.com/JessYanCoding/MVPArms</a></p>
+<p>全民直播<br><a href="https://github.com/jenly1314/KingTV" target="_blank" rel="external">https://github.com/jenly1314/KingTV</a></p>
+<p>音乐项目<br><a href="https://github.com/hefuyicoder/ListenerMusicPlayer" target="_blank" rel="external">https://github.com/hefuyicoder/ListenerMusicPlayer</a><br><a href="https://github.com/aa112901/remusic" target="_blank" rel="external">https://github.com/aa112901/remusic</a></p>
+<p>大象：PHPHub客户端<br><a href="https://github.com/Freelander/Elephant" target="_blank" rel="external">https://github.com/Freelander/Elephant</a></p>
+<p>MvpApp<br><a href="https://github.com/Rukey7/MvpApp" target="_blank" rel="external">https://github.com/Rukey7/MvpApp</a></p>
+<p>CloudReader<br><a href="https://github.com/youlookwhat/CloudReader" target="_blank" rel="external">https://github.com/youlookwhat/CloudReader</a></p>
+    </div>
+
+    <div class="post-footer">   
+        <div>
+            
+                转载声明: 商业转载请联系作者获得授权,非商业转载请注明出处 © Snippet
+            
+        </div>
+        <div>
+            
+                版权声明: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+知识共享署名-非商业性使用-禁止演绎 3.0 未本地化版本许可协议（CC BY-NC-ND 3.0）
+</a>
+            
+        </div>  
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/2017/05/13/工程师资料库/" class="pre-post btn btn-default"><i class="fa fa-angle-left fa-fw"></i>上一篇</a>
+    
+    
+        <a href="/2017/04/29/MobX 在 React Native开发中的应用/" class="next-post btn btn-default">下一篇<i class="fa fa-angle-right fa-fw"></i></a>
+    
+</div>
+
+
+    <div id="comments">
+        <div id="uyan_frame"></div>
+    <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2120654"></script>
+    </div>
+                </main>
+                <aside class="col-md-4 sidebar">
+        
+        <div class="widget notification">
+        <h3 class="title">网站公告</h3>
+        <div>
+            <p>主题Snippet v1.1.0版本即将上线，敬请期待~ <br>
+主题下载：<a href="https://github.com/shenliyang/hexo-theme-snippet" title="fork me" target="_blank">Snippet主题</a> <br>
+<hr>前端工程师一枚，专注于前端Node、React和移动端Android和Ios开发，欢迎骚扰。
+<br>联系方式：qq群:278792776（移动群）、515980159（React群）、188716429（猎头hr群）
+</p>
+        </div>
+    </div>
+        
+        <div class="widget">
+        <h3 class="title">分类</h3>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/"><i class="fa" aria-hidden="true">Android</i></a><span class="category-list-count">41</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/系统/"><i class="fa" aria-hidden="true">系统</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Google/"><i class="fa" aria-hidden="true">Google</i></a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Google/VR/"><i class="fa" aria-hidden="true">VR</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Kotlin/"><i class="fa" aria-hidden="true">Kotlin</i></a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/PWA/"><i class="fa" aria-hidden="true">PWA</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/"><i class="fa" aria-hidden="true">Python</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React-Native/"><i class="fa" aria-hidden="true">React Native</i></a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/"><i class="fa" aria-hidden="true">Spring</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android/"><i class="fa" aria-hidden="true">android</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/"><i class="fa" aria-hidden="true">iOS</i></a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ios/"><i class="fa" aria-hidden="true">ios</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/"><i class="fa" aria-hidden="true">python</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/人工智能/"><i class="fa" aria-hidden="true">人工智能</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/"><i class="fa" aria-hidden="true">前端</i></a><span class="category-list-count">22</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/区块链/"><i class="fa" aria-hidden="true">区块链</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端/"><i class="fa" aria-hidden="true">后端</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/小程序/"><i class="fa" aria-hidden="true">小程序</i></a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术人生/"><i class="fa" aria-hidden="true">技术人生</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/机器学习/"><i class="fa" aria-hidden="true">机器学习</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂谈/"><i class="fa" aria-hidden="true">杂谈</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程语言/"><i class="fa" aria-hidden="true">编程语言</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/"><i class="fa" aria-hidden="true">设计模式</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/资料库/"><i class="fa" aria-hidden="true">资料库</i></a><span class="category-list-count">1</span></li></ul>
+    </div>
+        
+        <div class="widget">
+      <h3 class="title">归档</h3>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/"><i class="fa" aria-hidden="true">二月 2018</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/"><i class="fa" aria-hidden="true">一月 2018</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/"><i class="fa" aria-hidden="true">十二月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/"><i class="fa" aria-hidden="true">十一月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/"><i class="fa" aria-hidden="true">十月 2017</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/"><i class="fa" aria-hidden="true">八月 2017</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/"><i class="fa" aria-hidden="true">六月 2017</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/"><i class="fa" aria-hidden="true">五月 2017</i></a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/"><i class="fa" aria-hidden="true">三月 2017</i></a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/"><i class="fa" aria-hidden="true">二月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/"><i class="fa" aria-hidden="true">一月 2017</i></a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/"><i class="fa" aria-hidden="true">十二月 2016</i></a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/"><i class="fa" aria-hidden="true">十一月 2016</i></a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/"><i class="fa" aria-hidden="true">十月 2016</i></a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/"><i class="fa" aria-hidden="true">九月 2016</i></a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/"><i class="fa" aria-hidden="true">八月 2016</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/"><i class="fa" aria-hidden="true">七月 2016</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/"><i class="fa" aria-hidden="true">六月 2016</i></a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/"><i class="fa" aria-hidden="true">五月 2016</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/"><i class="fa" aria-hidden="true">四月 2016</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/"><i class="fa" aria-hidden="true">三月 2016</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/"><i class="fa" aria-hidden="true">二月 2016</i></a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/"><i class="fa" aria-hidden="true">一月 2016</i></a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/"><i class="fa" aria-hidden="true">九月 2015</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/"><i class="fa" aria-hidden="true">六月 2015</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/"><i class="fa" aria-hidden="true">五月 2015</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/"><i class="fa" aria-hidden="true">四月 2015</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/"><i class="fa" aria-hidden="true">三月 2015</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/"><i class="fa" aria-hidden="true">一月 2015</i></a><span class="archive-list-count">1</span></li></ul>
+    </div>
+        
+        <div class="widget">
+    <h3 class="title">标签云</h3>
+    <div class="content tag-cloud">
+      
+        <a href="/tags/Spring/" style="font-size: 1em">Spring</a> <a href="/tags/前端/" style="font-size: 1em">前端</a> <a href="/tags/Python/" style="font-size: 1em">Python</a> <a href="/tags/新特性/" style="font-size: 1em">新特性</a> <a href="/tags/深入系统/" style="font-size: 1em">深入系统</a> <a href="/tags/系统服务/" style="font-size: 1em">系统服务</a> <a href="/tags/android/" style="font-size: 1em">android</a> <a href="/tags/混淆打包/" style="font-size: 1em">混淆打包</a> <a href="/tags/硬件/" style="font-size: 1em">硬件</a> <a href="/tags/Angular2/" style="font-size: 1em">Angular2</a> <a href="/tags/前端开发/" style="font-size: 1em">前端开发</a> <a href="/tags/iOS/" style="font-size: 1em">iOS</a> <a href="/tags/React-Native/" style="font-size: 1em">React Native</a> <a href="/tags/FlexBox布局/" style="font-size: 1em">FlexBox布局</a> <a href="/tags/Google/" style="font-size: 1em">Google</a> <a href="/tags/VR/" style="font-size: 1em">VR</a> <a href="/tags/小程序/" style="font-size: 1em">小程序</a> <a href="/tags/后端/" style="font-size: 1em">后端</a> <a href="/tags/Java/" style="font-size: 1em">Java</a> <a href="/tags/垃圾回收/" style="font-size: 1em">垃圾回收</a> <a href="/tags/Kotlin/" style="font-size: 1em">Kotlin</a> <a href="/tags/编程语言/" style="font-size: 1em">编程语言</a> <a href="/tags/Node/" style="font-size: 1em">Node</a> <a href="/tags/Promise/" style="font-size: 1em">Promise</a> <a href="/tags/OpenGL/" style="font-size: 1em">OpenGL</a> <a href="/tags/eact-Native/" style="font-size: 1em">eact Native</a> <a href="/tags/调试/" style="font-size: 1em">调试</a> <a href="/tags/打包/" style="font-size: 1em">打包</a> <a href="/tags/原生/" style="font-size: 1em">原生</a> <a href="/tags/Android/" style="font-size: 1em">Android</a> <a href="/tags/入门/" style="font-size: 1em">入门</a> <a href="/tags/ios/" style="font-size: 1em">ios</a> <a href="/tags/Swift/" style="font-size: 1em">Swift</a> <a href="/tags/swift/" style="font-size: 1em">swift</a> <a href="/tags/AR/" style="font-size: 1em">AR</a> <a href="/tags/Xcode/" style="font-size: 1em">Xcode</a> <a href="/tags/知识库/" style="font-size: 1em">知识库</a> <a href="/tags/webpack/" style="font-size: 1em">webpack</a> <a href="/tags/gulp/" style="font-size: 1em">gulp</a> <a href="/tags/https/" style="font-size: 1em">https</a> <a href="/tags/gif/" style="font-size: 1em">gif</a> <a href="/tags/mac/" style="font-size: 1em">mac</a> <a href="/tags/环境/" style="font-size: 1em">环境</a> <a href="/tags/原理/" style="font-size: 1em">原理</a> <a href="/tags/react/" style="font-size: 1em">react</a> <a href="/tags/杂谈/" style="font-size: 1em">杂谈</a> <a href="/tags/个人博客/" style="font-size: 1em">个人博客</a> <a href="/tags/流量/" style="font-size: 1em">流量</a> <a href="/tags/区块链/" style="font-size: 1em">区块链</a> <a href="/tags/全栈/" style="font-size: 1em">全栈</a> <a href="/tags/微信/" style="font-size: 1em">微信</a> <a href="/tags/搭建网站/" style="font-size: 1em">搭建网站</a> <a href="/tags/机器学习/" style="font-size: 1em">机器学习</a> <a href="/tags/算法/" style="font-size: 1em">算法</a> <a href="/tags/深入理解/" style="font-size: 1em">深入理解</a> <a href="/tags/内存分配/" style="font-size: 1em">内存分配</a> <a href="/tags/PWA/" style="font-size: 1em">PWA</a> <a href="/tags/人工智能/" style="font-size: 1em">人工智能</a> <a href="/tags/设计模式/" style="font-size: 1em">设计模式</a>
+    </div>
+  </div>
+        
+        <div class="widget">
+        <h3 class="title">友链</h3>
+        <div class="content friends-link">
+        
+            <a href="http://blog.csdn.net/xiangzhihong8/" class="fa" target="_blank">作者博客</a>
+        
+            <a href="https://yq.aliyun.com/u/xiangzhihong" class="fa" target="_blank">阿里云博客</a>
+        
+        </div>
+    </div>
+        
+    </aside>
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<!--page counter part-->
+<script>
+function addCount (Counter) {
+        url=$('.article-date').attr('href').trim();
+        title = $('.article-title').text().trim();
+        var query=new AV.Query(Counter);
+        //use url as unique idnetfication
+        query.equalTo("url",url);
+        query.find({
+            success: function(results){
+                if(results.length>0)
+                {
+                    var counter=results[0];
+                    counter.fetchWhenSave(true); //get recent result
+                    counter.increment("time");
+                    counter.save();
+                }
+                else
+                {
+                    var newcounter=new Counter();
+                    newcounter.set("title",title);
+                    newcounter.set("url",url);
+                    newcounter.set("time",1);
+                    newcounter.save(null,{
+                        success: function(newcounter){
+                        //alert('New object created');
+                        },
+                        error: function(newcounter,error){
+                        alert('Failed to create');
+                        }
+                        });
+                }
+            },
+            error: function(error){
+                //find null is not a error
+                alert('Error:'+error.code+" "+error.message);
+            }
+        });
+}
+$(function(){
+        var Counter=AV.Object.extend("Counter");
+        //only increse visit counting when intering a page
+        if ($('.article-title').length == 1)
+           addCount(Counter);
+        var query=new AV.Query(Counter);
+        query.descending("time");
+        // the sum of popular posts
+        query.limit(10); 
+        query.find({
+            success: function(results){
+                    for(var i=0;i<results.length;i++)    
+                    {
+                        var counter=results[i];
+                        title=counter.get("title");
+                        url=counter.get("url");
+                        time=counter.get("time");
+                        // add to the popularlist widget
+                        showcontent=title+" ("+time+")";
+                        //notice the "" in href
+                        $('.popularlist').append('<li><a href="'+url+'">'+showcontent+'</a></li>');
+                    }
+                },
+            error: function(error){
+                alert("Error:"+error.code+" "+error.message);
+            }
+            }
+        )
+        });
+</script>
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <span>Copyright &copy; 2017 
+                </span> | 
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/assets/highlight.pack.js?rev=@@hash"></script>
+  <script>
+    hljs.initHighlightingOnLoad(); //初始化代码高亮 
+  </script>
+
+<script src="/js/app.js?rev=@@hash"></script>
+</body>
