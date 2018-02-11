@@ -800,43 +800,6 @@
   </entry>
   
   <entry>
-    <title>Kotlin之提供委托</title>
-    <link href="http://www.xiangzhihong.com/2017/10/23/Kotlin%E4%B9%8B%E6%8F%90%E4%BE%9B%E5%A7%94%E6%89%98/"/>
-    <id>http://www.xiangzhihong.com/2017/10/23/Kotlin之提供委托/</id>
-    <published>2017-10-22T16:00:00.000Z</published>
-    <updated>2018-02-11T03:04:47.839Z</updated>
-    
-    <content type="html"><![CDATA[<p>通过定义 provideDelegate 操作符，可以扩展创建属性实现所委托对象的逻辑。 如果 by 右侧所使用的对象将 provideDelegate 定义为成员或扩展函数，那么会调用该函数来 创建属性委托实例。</p>
-<p>provideDelegate 的一个可能的使用场景是在创建属性时（而不仅在其 getter 或 setter 中）检查属性一致性。例如，如果要在绑定之前检查属性名称，可以这样写：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">class ResourceLoader&lt;T&gt;(id: ResourceID&lt;T&gt;) &#123;</div><div class="line">    operator fun provideDelegate(</div><div class="line">            thisRef: MyUI,</div><div class="line">            prop: KProperty&lt;*&gt;</div><div class="line">    ): ReadOnlyProperty&lt;MyUI, T&gt; &#123;</div><div class="line">        checkProperty(thisRef, prop.name)</div><div class="line">        // 创建委托</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private fun checkProperty(thisRef: MyUI, name: String) &#123; …… &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">fun &lt;T&gt; bindResource(id: ResourceID&lt;T&gt;): ResourceLoader&lt;T&gt; &#123; …… &#125;</div><div class="line"></div><div class="line">class MyUI &#123;</div><div class="line">    val image by bindResource(ResourceID.image_id)</div><div class="line">    val text by bindResource(ResourceID.text_id)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>provideDelegate 的参数与 getValue 相同：</p>
-<ul>
-<li>thisRef —— 必须与 属性所有者 类型（对于扩展属性——指被扩展的类型）相同或者是它的超类型。</li>
-<li>property —— 必须是类型 KProperty&lt;*&gt; 或其超类型。 在创建 MyUI 实例期间，为每个属性调用provideDelegate 方法，并立即执行必要的验证。</li>
-</ul>
-<p>如果没有这种拦截属性与其委托之间的绑定的能力，为了实现相同的功能， 你必须显式传递属性名，这不是很方便：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">// 检查属性名称而不使用“provideDelegate”功能</div><div class="line">class MyUI &#123;</div><div class="line">    val image by bindResource(ResourceID.image_id, &quot;image&quot;)</div><div class="line">    val text by bindResource(ResourceID.text_id, &quot;text&quot;)</div><div class="line">&#125;</div><div class="line"></div><div class="line">fun &lt;T&gt; MyUI.bindResource(</div><div class="line">        id: ResourceID&lt;T&gt;,</div><div class="line">        propertyName: String</div><div class="line">): ReadOnlyProperty&lt;MyUI, T&gt; &#123;</div><div class="line">   checkProperty(this, propertyName)</div><div class="line">   // 创建委托</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>在生成的代码中，会调用 provideDelegate 方法来初始化辅助的 prop$delegate 属性。 比较对于属性声明 val prop: Type by MyDelegate() 生成的代码与 上面（当 provideDelegate 方法不存在时）生成的代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">class C &#123;</div><div class="line">    var prop: Type by MyDelegate()</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 这段代码是当“provideDelegate”功能可用时，由编译器生成的代码：</div><div class="line">class C &#123;</div><div class="line">    // 调用“provideDelegate”来创建额外的“delegate”属性</div><div class="line">    private val prop$delegate = MyDelegate().provideDelegate(this, this::prop)</div><div class="line">    val prop: Type</div><div class="line">        get() = prop$delegate.getValue(this, this::prop)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>请注意，provideDelegate 方法只影响辅助属性的创建，并不会影响为 getter 或 setter 生成的代码。</p>
-<p>上面例子的完整代码为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">fun main(args: Array&lt;String&gt;) &#123;</div><div class="line">    val myui: MyUI = MyUI()</div><div class="line">    println(myui.image)</div><div class="line">&#125;</div><div class="line"></div><div class="line">class dge&lt;T&gt;(t: T) &#123;</div><div class="line">    operator fun getValue(thisRef: Any?, property: KProperty&lt;*&gt;): String &#123;</div><div class="line">        return &quot;$thisRef, 这里委托了 $&#123;property.name&#125; 属性&quot;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class ResourceLoader&lt;T&gt;(id: Int) &#123;</div><div class="line">    operator fun provideDelegate(</div><div class="line">            thisRef: MyUI,</div><div class="line">            prop: KProperty&lt;*&gt;</div><div class="line">    ): dge&lt;T?&gt; &#123;</div><div class="line">        checkProperty(thisRef, prop.name)</div><div class="line">        // 创建委托</div><div class="line">        var t: T? = null</div><div class="line">        return dge(t)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private fun checkProperty(thisRef: MyUI, name: String) &#123;</div><div class="line">        println(name)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">fun &lt;T&gt; bindResource(id: Int): ResourceLoader&lt;T&gt; &#123;</div><div class="line">    return ResourceLoader&lt;T&gt;(id)</div><div class="line">&#125;</div><div class="line"></div><div class="line">class MyUI &#123;</div><div class="line">    val image by bindResource&lt;String&gt;(1)</div><div class="line">    val text by bindResource&lt;String&gt;(2)</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;通过定义 provideDelegate 操作符，可以扩展创建属性实现所委托对象的逻辑。 如果 by 右侧所使用的对象将 provideDelegate 定义为成员或扩展函数，那么会调用该函数来 创建属性委托实例。&lt;/p&gt;
-&lt;p&gt;provideDelegate 的一个可能的
-    
-    </summary>
-    
-      <category term="Kotlin" scheme="http://www.xiangzhihong.com/categories/Kotlin/"/>
-    
-    
-      <category term="Kotlin" scheme="http://www.xiangzhihong.com/tags/Kotlin/"/>
-    
-  </entry>
-  
-  <entry>
     <title>RxJs简介</title>
     <link href="http://www.xiangzhihong.com/2017/10/23/RxJs%E7%AE%80%E4%BB%8B/"/>
     <id>http://www.xiangzhihong.com/2017/10/23/RxJs简介/</id>
@@ -1125,6 +1088,43 @@
     
     
       <category term="前端" scheme="http://www.xiangzhihong.com/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Kotlin之提供委托</title>
+    <link href="http://www.xiangzhihong.com/2017/10/23/Kotlin%E4%B9%8B%E6%8F%90%E4%BE%9B%E5%A7%94%E6%89%98/"/>
+    <id>http://www.xiangzhihong.com/2017/10/23/Kotlin之提供委托/</id>
+    <published>2017-10-22T16:00:00.000Z</published>
+    <updated>2018-02-11T03:04:47.839Z</updated>
+    
+    <content type="html"><![CDATA[<p>通过定义 provideDelegate 操作符，可以扩展创建属性实现所委托对象的逻辑。 如果 by 右侧所使用的对象将 provideDelegate 定义为成员或扩展函数，那么会调用该函数来 创建属性委托实例。</p>
+<p>provideDelegate 的一个可能的使用场景是在创建属性时（而不仅在其 getter 或 setter 中）检查属性一致性。例如，如果要在绑定之前检查属性名称，可以这样写：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">class ResourceLoader&lt;T&gt;(id: ResourceID&lt;T&gt;) &#123;</div><div class="line">    operator fun provideDelegate(</div><div class="line">            thisRef: MyUI,</div><div class="line">            prop: KProperty&lt;*&gt;</div><div class="line">    ): ReadOnlyProperty&lt;MyUI, T&gt; &#123;</div><div class="line">        checkProperty(thisRef, prop.name)</div><div class="line">        // 创建委托</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private fun checkProperty(thisRef: MyUI, name: String) &#123; …… &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">fun &lt;T&gt; bindResource(id: ResourceID&lt;T&gt;): ResourceLoader&lt;T&gt; &#123; …… &#125;</div><div class="line"></div><div class="line">class MyUI &#123;</div><div class="line">    val image by bindResource(ResourceID.image_id)</div><div class="line">    val text by bindResource(ResourceID.text_id)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>provideDelegate 的参数与 getValue 相同：</p>
+<ul>
+<li>thisRef —— 必须与 属性所有者 类型（对于扩展属性——指被扩展的类型）相同或者是它的超类型。</li>
+<li>property —— 必须是类型 KProperty&lt;*&gt; 或其超类型。 在创建 MyUI 实例期间，为每个属性调用provideDelegate 方法，并立即执行必要的验证。</li>
+</ul>
+<p>如果没有这种拦截属性与其委托之间的绑定的能力，为了实现相同的功能， 你必须显式传递属性名，这不是很方便：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">// 检查属性名称而不使用“provideDelegate”功能</div><div class="line">class MyUI &#123;</div><div class="line">    val image by bindResource(ResourceID.image_id, &quot;image&quot;)</div><div class="line">    val text by bindResource(ResourceID.text_id, &quot;text&quot;)</div><div class="line">&#125;</div><div class="line"></div><div class="line">fun &lt;T&gt; MyUI.bindResource(</div><div class="line">        id: ResourceID&lt;T&gt;,</div><div class="line">        propertyName: String</div><div class="line">): ReadOnlyProperty&lt;MyUI, T&gt; &#123;</div><div class="line">   checkProperty(this, propertyName)</div><div class="line">   // 创建委托</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在生成的代码中，会调用 provideDelegate 方法来初始化辅助的 prop$delegate 属性。 比较对于属性声明 val prop: Type by MyDelegate() 生成的代码与 上面（当 provideDelegate 方法不存在时）生成的代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">class C &#123;</div><div class="line">    var prop: Type by MyDelegate()</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 这段代码是当“provideDelegate”功能可用时，由编译器生成的代码：</div><div class="line">class C &#123;</div><div class="line">    // 调用“provideDelegate”来创建额外的“delegate”属性</div><div class="line">    private val prop$delegate = MyDelegate().provideDelegate(this, this::prop)</div><div class="line">    val prop: Type</div><div class="line">        get() = prop$delegate.getValue(this, this::prop)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>请注意，provideDelegate 方法只影响辅助属性的创建，并不会影响为 getter 或 setter 生成的代码。</p>
+<p>上面例子的完整代码为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">fun main(args: Array&lt;String&gt;) &#123;</div><div class="line">    val myui: MyUI = MyUI()</div><div class="line">    println(myui.image)</div><div class="line">&#125;</div><div class="line"></div><div class="line">class dge&lt;T&gt;(t: T) &#123;</div><div class="line">    operator fun getValue(thisRef: Any?, property: KProperty&lt;*&gt;): String &#123;</div><div class="line">        return &quot;$thisRef, 这里委托了 $&#123;property.name&#125; 属性&quot;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class ResourceLoader&lt;T&gt;(id: Int) &#123;</div><div class="line">    operator fun provideDelegate(</div><div class="line">            thisRef: MyUI,</div><div class="line">            prop: KProperty&lt;*&gt;</div><div class="line">    ): dge&lt;T?&gt; &#123;</div><div class="line">        checkProperty(thisRef, prop.name)</div><div class="line">        // 创建委托</div><div class="line">        var t: T? = null</div><div class="line">        return dge(t)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private fun checkProperty(thisRef: MyUI, name: String) &#123;</div><div class="line">        println(name)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">fun &lt;T&gt; bindResource(id: Int): ResourceLoader&lt;T&gt; &#123;</div><div class="line">    return ResourceLoader&lt;T&gt;(id)</div><div class="line">&#125;</div><div class="line"></div><div class="line">class MyUI &#123;</div><div class="line">    val image by bindResource&lt;String&gt;(1)</div><div class="line">    val text by bindResource&lt;String&gt;(2)</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;通过定义 provideDelegate 操作符，可以扩展创建属性实现所委托对象的逻辑。 如果 by 右侧所使用的对象将 provideDelegate 定义为成员或扩展函数，那么会调用该函数来 创建属性委托实例。&lt;/p&gt;
+&lt;p&gt;provideDelegate 的一个可能的
+    
+    </summary>
+    
+      <category term="Kotlin" scheme="http://www.xiangzhihong.com/categories/Kotlin/"/>
+    
+    
+      <category term="Kotlin" scheme="http://www.xiangzhihong.com/tags/Kotlin/"/>
     
   </entry>
   
