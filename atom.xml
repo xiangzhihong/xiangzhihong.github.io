@@ -231,61 +231,6 @@
   </entry>
   
   <entry>
-    <title>基于OpenCV的跳一跳外挂实现原理</title>
-    <link href="http://www.xiangzhihong.com/2017/12/27/%E5%9F%BA%E4%BA%8EOpenCV%E7%9A%84%E8%B7%B3%E4%B8%80%E8%B7%B3%E5%A4%96%E6%8C%82%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/"/>
-    <id>http://www.xiangzhihong.com/2017/12/27/基于OpenCV的跳一跳外挂实现原理/</id>
-    <published>2017-12-26T16:00:00.000Z</published>
-    <updated>2018-02-11T03:17:06.972Z</updated>
-    
-    <content type="html"><![CDATA[<p>最近，微信跳一跳小游戏迅速走红并且在朋友圈刷屏，游戏的规则很简单，就是控制一个小矮子再各个墩子上跳来跳去。由于游戏比较简单，一时间大家都玩起来了，这也带动了一些作弊的产生。Android和iOS的小程序都可以刷分，如果想要刷分，可以参考下面这个开源项目：<a href="https://zhuanlan.zhihu.com/p/32452473" target="_blank" rel="external">Python刷分</a>。<br><img src="http://img.blog.csdn.net/20180123152801301" alt="这里写图片描述"><br>今天要给大家讲的是如何使用OpenCV来给Android小程序刷分。<br>其实，刷分的思路都是一致的：通过Android手机的ADB来截取屏幕，然后通过对截图进行分析，算出来玩家与下一个落脚点的距离，然后通过距离算出来需要按压多长时间的屏幕，之后再通过发送ADB指令来模拟按下屏幕达到自动刷分的目的。也就是说，这个外挂的核心就是取得玩家与下一个落脚点的距离，有了距离之后，一切都好说了。</p>
-<h2 id="OpenCV简介"><a href="#OpenCV简介" class="headerlink" title="OpenCV简介"></a>OpenCV简介</h2><p>OpenCV熟悉编程的人一定知道，是一个著名的开源计算机视觉库，实现了图像处理和计算机视觉方面的很多通用算法。要想在Python上运行OpenCV只需要使用pip安装就好，在Terminal中执行pip install opencv-python即可。OpenCV的官网地址为：<a href="https://opencv.org/。" target="_blank" rel="external">https://opencv.org/。</a></p>
-<p>使用OpenCV时一般是用于分析图片灰度图，因为我这里需要画框划线进行标记，所以为了方便就直接读RGB彩图了，这样因为一个像素三个通道所以会慢一点，之后投入使用直接分析灰度图就好。</p>
-<p>##实践</p>
-<p>下面就来看看如何使用OpenCV来完成Android的跳一跳如何刷分吧。</p>
-<h3 id="1，玩家位置识别"><a href="#1，玩家位置识别" class="headerlink" title="1，玩家位置识别"></a>1，玩家位置识别</h3><p>首先需要做的就是识别玩家的位置，玩家的形状不变，是一个紫色的棋子，那么可以使用OpenCV带有的图像模板匹配来找出玩家的位置。首先来一个图片，如下：<br><img src="http://img.blog.csdn.net/20180123154748138" alt="这里写图片描述"></p>
-<p>然后就可以使用Python读取了，对于游戏场景，我们使用下图为例，名字为1.png。<br><img src="http://img.blog.csdn.net/20180123155005836" alt="这里写图片描述"></p>
-<h4 id="1-1图像模板匹配"><a href="#1-1图像模板匹配" class="headerlink" title="1.1图像模板匹配"></a>1.1图像模板匹配</h4><p>在OpenCV中调用matchTemplate函数即可实现模板匹配。<br><img src="http://img.blog.csdn.net/20180123155356228" alt="这里写图片描述"></p>
-<p>相关的代码如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">import cv2 as cv</div><div class="line"></div><div class="line">img = cv.imread(&quot;1.png&quot;)</div><div class="line">player_template = cv.imread(&apos;player.png&apos;)</div><div class="line">player = cv.matchTemplate(img, player_template, cv.TM_CCOEFF_NORMED)</div><div class="line"></div><div class="line">min_val, max_val, min_loc, max_loc = cv.minMaxLoc(player)</div></pre></td></tr></table></figure>
-<p>通过调用上面的代码即可进行模板匹配，最后一行的max_loc则是匹配出来的位置，因为玩家是一个宽度50高度150像素的图形（在我的iPhone 6s上）。所以再添加以下代码来框出玩家位置。并且画出了玩家的点。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">corner_loc = (max_loc[0] + 50, max_loc[1] + 150)</div><div class="line">player_spot = (max_loc[0] + 25, max_loc[1] + 150)</div><div class="line">cv.circle(img, player_spot, 10, (0, 255, 255), -1)</div><div class="line">cv.rectangle(img, max_loc, corner_loc, (0, 0, 255), 5)</div><div class="line">cv.namedWindow(&apos;img&apos;, cv.WINDOW_KEEPRATIO)</div><div class="line">cv.imshow(&quot;img&quot;, img)</div><div class="line">cv.waitKey(0)</div></pre></td></tr></table></figure>
-<p>之后再运行，这时会打开一张片，可以看见玩家的位置已经被识别出来了。<br><img src="http://img.blog.csdn.net/20180123162715531" alt="这里写图片描述"></p>
-<h3 id="2，落脚点识别"><a href="#2，落脚点识别" class="headerlink" title="2，落脚点识别"></a>2，落脚点识别</h3><p>接下来就要识别落脚点了，但是蹲蹲千变万化，有方形的，有圆形的。所以刚才的模板识别就用不上了，即使使用的话成功率也很低，这个时候就需要用到边缘检测了。</p>
-<p>####2.1 Canny边缘检测<br>OpenCV带有Canny算法的实现来帮助我们得到图形的边缘。在做边缘检测之前首先需要对图片进行高斯模糊处理，高斯模糊主要作用就是去除噪声。因为噪声也集中于高频信号，很容易被识别为边缘。高斯模糊可以降低伪边缘的识别。但是由于图像边缘信息也是高频信号，高斯模糊的半径选择很重要，过大的半径很容易让一些弱边缘检测不到。<br><img src="http://img.blog.csdn.net/20180123162913607" alt="这里写图片描述"></p>
-<p>例如，下面是示例代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">img_blur = cv.GaussianBlur(img, (5, 5), 0) #高斯模糊</div><div class="line">canny_img = cv.Canny(img_blur, 1, 10) #边缘检测</div><div class="line">cv.namedWindow(&apos;img&apos;, cv.WINDOW_KEEPRATIO)</div><div class="line">cv.imshow(&quot;img&quot;, canny_img)</div></pre></td></tr></table></figure>
-<p>然后图片就会被边缘识别，这个图是灰度图，每一个像素是 0-255之间任意一个值，黑色为0白色为255。<br><img src="http://img.blog.csdn.net/20180123163350644" alt="这里写图片描述"></p>
-<h4 id="2-2图片切片"><a href="#2-2图片切片" class="headerlink" title="2.2图片切片"></a>2.2图片切片</h4><p>其实现在我们已经可以开始分析边缘来找到下一个落脚点了，但是图片中边缘实在是太多，可以通过裁切图片来，首先要知道，下一个落脚点肯定是在整个界面的上1/2。也就是说，图片的下半段可以不要，而且，上面的记分牌也没有任何用处。<br><img src="http://img.blog.csdn.net/20180123163717547" alt="这里写图片描述"></p>
-<p>执行以下代码来切除上面的300像素的高度加下半部分图片：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">height, width = canny_img.shape</div><div class="line">crop_img = canny_img[300:int(height/2), 0:width]</div><div class="line">cv.namedWindow(&apos;img&apos;, cv.WINDOW_KEEPRATIO)</div><div class="line">cv.imshow(&quot;img&quot;, crop_img)</div></pre></td></tr></table></figure>
-<p><img src="http://img.blog.csdn.net/20180123163905648" alt="这里写图片描述"></p>
-<h4 id="2-3消除玩家图片"><a href="#2-3消除玩家图片" class="headerlink" title="2.3消除玩家图片"></a>2.3消除玩家图片</h4><p>但是有一点还是很烦，上图的左下角还有一部分玩家的头部，有时候如果玩家需要向左上角跳，这个头的存在可能会造成一定的干扰，所以需要写代码消除它，因为我们已经知道了玩家的坐标了，所以把那个范围的像素全设成0就好了。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">for y in range(max_loc[1], max_loc[1]+150):</div><div class="line">    for x in range(max_loc[0], max_loc[0]+50):</div><div class="line">        canny_img[y][x] = 0</div></pre></td></tr></table></figure>
-<p><img src="http://img.blog.csdn.net/20180123164101930" alt="这里写图片描述"></p>
-<h4 id="2-4落脚点判断"><a href="#2-4落脚点判断" class="headerlink" title="2.4落脚点判断"></a>2.4落脚点判断</h4><p>现在只剩下敦敦的边缘了，现在需要得到他的中心点，仔细观察这个图形，发现他是一个菱形，并且有两个点是很容易通过遍历像素点然后分析得到的。<br><img src="http://img.blog.csdn.net/20180123164220374" alt="这里写图片描述"></p>
-<p>A点B点是很容易得到的，通过由上到下，由左到右遍历全部像素，A点应该是便利顺序的像素中第一个值为255的点，B点是便利顺序中第一次横坐标最大的点。得到了A,B点的坐标，整个形状的中点 （X3， Y3）其实就是 （X1，Y2）。</p>
-<p>可以通过如下代码来判断中心点：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">crop_h, crop_w = crop_img.shape</div><div class="line">center_x, center_y = 0, 0</div><div class="line"></div><div class="line">max_x = 0</div><div class="line"></div><div class="line">for y in range(crop_h):</div><div class="line">    for x in range(crop_w):</div><div class="line">        if crop_img[y, x] == 255:</div><div class="line">            if center_x == 0:</div><div class="line">                center_x = x</div><div class="line">            if x &gt; max_x:</div><div class="line">                center_y = y</div><div class="line">                max_x = x</div><div class="line">                </div><div class="line">cv.circle(crop_img, (center_x, center_y), 10, 255, -1)</div><div class="line"></div><div class="line">cv.namedWindow(&apos;img&apos;, cv.WINDOW_KEEPRATIO)</div><div class="line">cv.imshow(&quot;img&quot;, crop_img)</div><div class="line">cv.waitKey(0)</div></pre></td></tr></table></figure>
-<p>执行上面的代码，发现程序已经标出了中心点：<br><img src="http://img.blog.csdn.net/20180123164609536" alt="这里写图片描述"></p>
-<h3 id="运行效果"><a href="#运行效果" class="headerlink" title="运行效果"></a>运行效果</h3><p>好了，看一下运行的效果吧。<br><img src="http://img.blog.csdn.net/20180123164746270" alt="这里写图片描述"></p>
-<p><img src="http://img.blog.csdn.net/20180123164822533" alt="这里写图片描述"></p>
-<p><img src="http://img.blog.csdn.net/20180123164909107" alt="这里写图片描述"><br>相关源码链接如下：<a href="http://download.csdn.net/download/xiangzhihong8/10220160" target="_blank" rel="external">http://download.csdn.net/download/xiangzhihong8/10220160</a></p>
-<p>其实，细心的读者可以发现，图片的中心并非处于绝对的中心位置，大家可以在源码的基础上修改参数的值。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;最近，微信跳一跳小游戏迅速走红并且在朋友圈刷屏，游戏的规则很简单，就是控制一个小矮子再各个墩子上跳来跳去。由于游戏比较简单，一时间大家都玩起来了，这也带动了一些作弊的产生。Android和iOS的小程序都可以刷分，如果想要刷分，可以参考下面这个开源项目：&lt;a href=&quot;h
-    
-    </summary>
-    
-      <category term="Python" scheme="http://www.xiangzhihong.com/categories/Python/"/>
-    
-    
-      <category term="Python" scheme="http://www.xiangzhihong.com/tags/Python/"/>
-    
-  </entry>
-  
-  <entry>
     <title>2017移动开发年终盘点</title>
     <link href="http://www.xiangzhihong.com/2017/12/27/2017%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91%E5%B9%B4%E7%BB%88%E7%9B%98%E7%82%B9/"/>
     <id>http://www.xiangzhihong.com/2017/12/27/2017移动开发年终盘点/</id>
@@ -352,6 +297,61 @@
     
     
       <category term="前端" scheme="http://www.xiangzhihong.com/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>基于OpenCV的跳一跳外挂实现原理</title>
+    <link href="http://www.xiangzhihong.com/2017/12/27/%E5%9F%BA%E4%BA%8EOpenCV%E7%9A%84%E8%B7%B3%E4%B8%80%E8%B7%B3%E5%A4%96%E6%8C%82%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/"/>
+    <id>http://www.xiangzhihong.com/2017/12/27/基于OpenCV的跳一跳外挂实现原理/</id>
+    <published>2017-12-26T16:00:00.000Z</published>
+    <updated>2018-02-11T03:17:06.972Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近，微信跳一跳小游戏迅速走红并且在朋友圈刷屏，游戏的规则很简单，就是控制一个小矮子再各个墩子上跳来跳去。由于游戏比较简单，一时间大家都玩起来了，这也带动了一些作弊的产生。Android和iOS的小程序都可以刷分，如果想要刷分，可以参考下面这个开源项目：<a href="https://zhuanlan.zhihu.com/p/32452473" target="_blank" rel="external">Python刷分</a>。<br><img src="http://img.blog.csdn.net/20180123152801301" alt="这里写图片描述"><br>今天要给大家讲的是如何使用OpenCV来给Android小程序刷分。<br>其实，刷分的思路都是一致的：通过Android手机的ADB来截取屏幕，然后通过对截图进行分析，算出来玩家与下一个落脚点的距离，然后通过距离算出来需要按压多长时间的屏幕，之后再通过发送ADB指令来模拟按下屏幕达到自动刷分的目的。也就是说，这个外挂的核心就是取得玩家与下一个落脚点的距离，有了距离之后，一切都好说了。</p>
+<h2 id="OpenCV简介"><a href="#OpenCV简介" class="headerlink" title="OpenCV简介"></a>OpenCV简介</h2><p>OpenCV熟悉编程的人一定知道，是一个著名的开源计算机视觉库，实现了图像处理和计算机视觉方面的很多通用算法。要想在Python上运行OpenCV只需要使用pip安装就好，在Terminal中执行pip install opencv-python即可。OpenCV的官网地址为：<a href="https://opencv.org/。" target="_blank" rel="external">https://opencv.org/。</a></p>
+<p>使用OpenCV时一般是用于分析图片灰度图，因为我这里需要画框划线进行标记，所以为了方便就直接读RGB彩图了，这样因为一个像素三个通道所以会慢一点，之后投入使用直接分析灰度图就好。</p>
+<p>##实践</p>
+<p>下面就来看看如何使用OpenCV来完成Android的跳一跳如何刷分吧。</p>
+<h3 id="1，玩家位置识别"><a href="#1，玩家位置识别" class="headerlink" title="1，玩家位置识别"></a>1，玩家位置识别</h3><p>首先需要做的就是识别玩家的位置，玩家的形状不变，是一个紫色的棋子，那么可以使用OpenCV带有的图像模板匹配来找出玩家的位置。首先来一个图片，如下：<br><img src="http://img.blog.csdn.net/20180123154748138" alt="这里写图片描述"></p>
+<p>然后就可以使用Python读取了，对于游戏场景，我们使用下图为例，名字为1.png。<br><img src="http://img.blog.csdn.net/20180123155005836" alt="这里写图片描述"></p>
+<h4 id="1-1图像模板匹配"><a href="#1-1图像模板匹配" class="headerlink" title="1.1图像模板匹配"></a>1.1图像模板匹配</h4><p>在OpenCV中调用matchTemplate函数即可实现模板匹配。<br><img src="http://img.blog.csdn.net/20180123155356228" alt="这里写图片描述"></p>
+<p>相关的代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">import cv2 as cv</div><div class="line"></div><div class="line">img = cv.imread(&quot;1.png&quot;)</div><div class="line">player_template = cv.imread(&apos;player.png&apos;)</div><div class="line">player = cv.matchTemplate(img, player_template, cv.TM_CCOEFF_NORMED)</div><div class="line"></div><div class="line">min_val, max_val, min_loc, max_loc = cv.minMaxLoc(player)</div></pre></td></tr></table></figure>
+<p>通过调用上面的代码即可进行模板匹配，最后一行的max_loc则是匹配出来的位置，因为玩家是一个宽度50高度150像素的图形（在我的iPhone 6s上）。所以再添加以下代码来框出玩家位置。并且画出了玩家的点。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">corner_loc = (max_loc[0] + 50, max_loc[1] + 150)</div><div class="line">player_spot = (max_loc[0] + 25, max_loc[1] + 150)</div><div class="line">cv.circle(img, player_spot, 10, (0, 255, 255), -1)</div><div class="line">cv.rectangle(img, max_loc, corner_loc, (0, 0, 255), 5)</div><div class="line">cv.namedWindow(&apos;img&apos;, cv.WINDOW_KEEPRATIO)</div><div class="line">cv.imshow(&quot;img&quot;, img)</div><div class="line">cv.waitKey(0)</div></pre></td></tr></table></figure>
+<p>之后再运行，这时会打开一张片，可以看见玩家的位置已经被识别出来了。<br><img src="http://img.blog.csdn.net/20180123162715531" alt="这里写图片描述"></p>
+<h3 id="2，落脚点识别"><a href="#2，落脚点识别" class="headerlink" title="2，落脚点识别"></a>2，落脚点识别</h3><p>接下来就要识别落脚点了，但是蹲蹲千变万化，有方形的，有圆形的。所以刚才的模板识别就用不上了，即使使用的话成功率也很低，这个时候就需要用到边缘检测了。</p>
+<p>####2.1 Canny边缘检测<br>OpenCV带有Canny算法的实现来帮助我们得到图形的边缘。在做边缘检测之前首先需要对图片进行高斯模糊处理，高斯模糊主要作用就是去除噪声。因为噪声也集中于高频信号，很容易被识别为边缘。高斯模糊可以降低伪边缘的识别。但是由于图像边缘信息也是高频信号，高斯模糊的半径选择很重要，过大的半径很容易让一些弱边缘检测不到。<br><img src="http://img.blog.csdn.net/20180123162913607" alt="这里写图片描述"></p>
+<p>例如，下面是示例代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">img_blur = cv.GaussianBlur(img, (5, 5), 0) #高斯模糊</div><div class="line">canny_img = cv.Canny(img_blur, 1, 10) #边缘检测</div><div class="line">cv.namedWindow(&apos;img&apos;, cv.WINDOW_KEEPRATIO)</div><div class="line">cv.imshow(&quot;img&quot;, canny_img)</div></pre></td></tr></table></figure>
+<p>然后图片就会被边缘识别，这个图是灰度图，每一个像素是 0-255之间任意一个值，黑色为0白色为255。<br><img src="http://img.blog.csdn.net/20180123163350644" alt="这里写图片描述"></p>
+<h4 id="2-2图片切片"><a href="#2-2图片切片" class="headerlink" title="2.2图片切片"></a>2.2图片切片</h4><p>其实现在我们已经可以开始分析边缘来找到下一个落脚点了，但是图片中边缘实在是太多，可以通过裁切图片来，首先要知道，下一个落脚点肯定是在整个界面的上1/2。也就是说，图片的下半段可以不要，而且，上面的记分牌也没有任何用处。<br><img src="http://img.blog.csdn.net/20180123163717547" alt="这里写图片描述"></p>
+<p>执行以下代码来切除上面的300像素的高度加下半部分图片：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">height, width = canny_img.shape</div><div class="line">crop_img = canny_img[300:int(height/2), 0:width]</div><div class="line">cv.namedWindow(&apos;img&apos;, cv.WINDOW_KEEPRATIO)</div><div class="line">cv.imshow(&quot;img&quot;, crop_img)</div></pre></td></tr></table></figure>
+<p><img src="http://img.blog.csdn.net/20180123163905648" alt="这里写图片描述"></p>
+<h4 id="2-3消除玩家图片"><a href="#2-3消除玩家图片" class="headerlink" title="2.3消除玩家图片"></a>2.3消除玩家图片</h4><p>但是有一点还是很烦，上图的左下角还有一部分玩家的头部，有时候如果玩家需要向左上角跳，这个头的存在可能会造成一定的干扰，所以需要写代码消除它，因为我们已经知道了玩家的坐标了，所以把那个范围的像素全设成0就好了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">for y in range(max_loc[1], max_loc[1]+150):</div><div class="line">    for x in range(max_loc[0], max_loc[0]+50):</div><div class="line">        canny_img[y][x] = 0</div></pre></td></tr></table></figure>
+<p><img src="http://img.blog.csdn.net/20180123164101930" alt="这里写图片描述"></p>
+<h4 id="2-4落脚点判断"><a href="#2-4落脚点判断" class="headerlink" title="2.4落脚点判断"></a>2.4落脚点判断</h4><p>现在只剩下敦敦的边缘了，现在需要得到他的中心点，仔细观察这个图形，发现他是一个菱形，并且有两个点是很容易通过遍历像素点然后分析得到的。<br><img src="http://img.blog.csdn.net/20180123164220374" alt="这里写图片描述"></p>
+<p>A点B点是很容易得到的，通过由上到下，由左到右遍历全部像素，A点应该是便利顺序的像素中第一个值为255的点，B点是便利顺序中第一次横坐标最大的点。得到了A,B点的坐标，整个形状的中点 （X3， Y3）其实就是 （X1，Y2）。</p>
+<p>可以通过如下代码来判断中心点：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">crop_h, crop_w = crop_img.shape</div><div class="line">center_x, center_y = 0, 0</div><div class="line"></div><div class="line">max_x = 0</div><div class="line"></div><div class="line">for y in range(crop_h):</div><div class="line">    for x in range(crop_w):</div><div class="line">        if crop_img[y, x] == 255:</div><div class="line">            if center_x == 0:</div><div class="line">                center_x = x</div><div class="line">            if x &gt; max_x:</div><div class="line">                center_y = y</div><div class="line">                max_x = x</div><div class="line">                </div><div class="line">cv.circle(crop_img, (center_x, center_y), 10, 255, -1)</div><div class="line"></div><div class="line">cv.namedWindow(&apos;img&apos;, cv.WINDOW_KEEPRATIO)</div><div class="line">cv.imshow(&quot;img&quot;, crop_img)</div><div class="line">cv.waitKey(0)</div></pre></td></tr></table></figure>
+<p>执行上面的代码，发现程序已经标出了中心点：<br><img src="http://img.blog.csdn.net/20180123164609536" alt="这里写图片描述"></p>
+<h3 id="运行效果"><a href="#运行效果" class="headerlink" title="运行效果"></a>运行效果</h3><p>好了，看一下运行的效果吧。<br><img src="http://img.blog.csdn.net/20180123164746270" alt="这里写图片描述"></p>
+<p><img src="http://img.blog.csdn.net/20180123164822533" alt="这里写图片描述"></p>
+<p><img src="http://img.blog.csdn.net/20180123164909107" alt="这里写图片描述"><br>相关源码链接如下：<a href="http://download.csdn.net/download/xiangzhihong8/10220160" target="_blank" rel="external">http://download.csdn.net/download/xiangzhihong8/10220160</a></p>
+<p>其实，细心的读者可以发现，图片的中心并非处于绝对的中心位置，大家可以在源码的基础上修改参数的值。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近，微信跳一跳小游戏迅速走红并且在朋友圈刷屏，游戏的规则很简单，就是控制一个小矮子再各个墩子上跳来跳去。由于游戏比较简单，一时间大家都玩起来了，这也带动了一些作弊的产生。Android和iOS的小程序都可以刷分，如果想要刷分，可以参考下面这个开源项目：&lt;a href=&quot;h
+    
+    </summary>
+    
+      <category term="Python" scheme="http://www.xiangzhihong.com/categories/Python/"/>
+    
+    
+      <category term="Python" scheme="http://www.xiangzhihong.com/tags/Python/"/>
     
   </entry>
   
@@ -800,6 +800,43 @@
   </entry>
   
   <entry>
+    <title>Kotlin之提供委托</title>
+    <link href="http://www.xiangzhihong.com/2017/10/23/Kotlin%E4%B9%8B%E6%8F%90%E4%BE%9B%E5%A7%94%E6%89%98/"/>
+    <id>http://www.xiangzhihong.com/2017/10/23/Kotlin之提供委托/</id>
+    <published>2017-10-22T16:00:00.000Z</published>
+    <updated>2018-02-11T03:04:47.839Z</updated>
+    
+    <content type="html"><![CDATA[<p>通过定义 provideDelegate 操作符，可以扩展创建属性实现所委托对象的逻辑。 如果 by 右侧所使用的对象将 provideDelegate 定义为成员或扩展函数，那么会调用该函数来 创建属性委托实例。</p>
+<p>provideDelegate 的一个可能的使用场景是在创建属性时（而不仅在其 getter 或 setter 中）检查属性一致性。例如，如果要在绑定之前检查属性名称，可以这样写：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">class ResourceLoader&lt;T&gt;(id: ResourceID&lt;T&gt;) &#123;</div><div class="line">    operator fun provideDelegate(</div><div class="line">            thisRef: MyUI,</div><div class="line">            prop: KProperty&lt;*&gt;</div><div class="line">    ): ReadOnlyProperty&lt;MyUI, T&gt; &#123;</div><div class="line">        checkProperty(thisRef, prop.name)</div><div class="line">        // 创建委托</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private fun checkProperty(thisRef: MyUI, name: String) &#123; …… &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">fun &lt;T&gt; bindResource(id: ResourceID&lt;T&gt;): ResourceLoader&lt;T&gt; &#123; …… &#125;</div><div class="line"></div><div class="line">class MyUI &#123;</div><div class="line">    val image by bindResource(ResourceID.image_id)</div><div class="line">    val text by bindResource(ResourceID.text_id)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>provideDelegate 的参数与 getValue 相同：</p>
+<ul>
+<li>thisRef —— 必须与 属性所有者 类型（对于扩展属性——指被扩展的类型）相同或者是它的超类型。</li>
+<li>property —— 必须是类型 KProperty&lt;*&gt; 或其超类型。 在创建 MyUI 实例期间，为每个属性调用provideDelegate 方法，并立即执行必要的验证。</li>
+</ul>
+<p>如果没有这种拦截属性与其委托之间的绑定的能力，为了实现相同的功能， 你必须显式传递属性名，这不是很方便：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">// 检查属性名称而不使用“provideDelegate”功能</div><div class="line">class MyUI &#123;</div><div class="line">    val image by bindResource(ResourceID.image_id, &quot;image&quot;)</div><div class="line">    val text by bindResource(ResourceID.text_id, &quot;text&quot;)</div><div class="line">&#125;</div><div class="line"></div><div class="line">fun &lt;T&gt; MyUI.bindResource(</div><div class="line">        id: ResourceID&lt;T&gt;,</div><div class="line">        propertyName: String</div><div class="line">): ReadOnlyProperty&lt;MyUI, T&gt; &#123;</div><div class="line">   checkProperty(this, propertyName)</div><div class="line">   // 创建委托</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在生成的代码中，会调用 provideDelegate 方法来初始化辅助的 prop$delegate 属性。 比较对于属性声明 val prop: Type by MyDelegate() 生成的代码与 上面（当 provideDelegate 方法不存在时）生成的代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">class C &#123;</div><div class="line">    var prop: Type by MyDelegate()</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 这段代码是当“provideDelegate”功能可用时，由编译器生成的代码：</div><div class="line">class C &#123;</div><div class="line">    // 调用“provideDelegate”来创建额外的“delegate”属性</div><div class="line">    private val prop$delegate = MyDelegate().provideDelegate(this, this::prop)</div><div class="line">    val prop: Type</div><div class="line">        get() = prop$delegate.getValue(this, this::prop)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>请注意，provideDelegate 方法只影响辅助属性的创建，并不会影响为 getter 或 setter 生成的代码。</p>
+<p>上面例子的完整代码为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">fun main(args: Array&lt;String&gt;) &#123;</div><div class="line">    val myui: MyUI = MyUI()</div><div class="line">    println(myui.image)</div><div class="line">&#125;</div><div class="line"></div><div class="line">class dge&lt;T&gt;(t: T) &#123;</div><div class="line">    operator fun getValue(thisRef: Any?, property: KProperty&lt;*&gt;): String &#123;</div><div class="line">        return &quot;$thisRef, 这里委托了 $&#123;property.name&#125; 属性&quot;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class ResourceLoader&lt;T&gt;(id: Int) &#123;</div><div class="line">    operator fun provideDelegate(</div><div class="line">            thisRef: MyUI,</div><div class="line">            prop: KProperty&lt;*&gt;</div><div class="line">    ): dge&lt;T?&gt; &#123;</div><div class="line">        checkProperty(thisRef, prop.name)</div><div class="line">        // 创建委托</div><div class="line">        var t: T? = null</div><div class="line">        return dge(t)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private fun checkProperty(thisRef: MyUI, name: String) &#123;</div><div class="line">        println(name)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">fun &lt;T&gt; bindResource(id: Int): ResourceLoader&lt;T&gt; &#123;</div><div class="line">    return ResourceLoader&lt;T&gt;(id)</div><div class="line">&#125;</div><div class="line"></div><div class="line">class MyUI &#123;</div><div class="line">    val image by bindResource&lt;String&gt;(1)</div><div class="line">    val text by bindResource&lt;String&gt;(2)</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;通过定义 provideDelegate 操作符，可以扩展创建属性实现所委托对象的逻辑。 如果 by 右侧所使用的对象将 provideDelegate 定义为成员或扩展函数，那么会调用该函数来 创建属性委托实例。&lt;/p&gt;
+&lt;p&gt;provideDelegate 的一个可能的
+    
+    </summary>
+    
+      <category term="Kotlin" scheme="http://www.xiangzhihong.com/categories/Kotlin/"/>
+    
+    
+      <category term="Kotlin" scheme="http://www.xiangzhihong.com/tags/Kotlin/"/>
+    
+  </entry>
+  
+  <entry>
     <title>RxJs简介</title>
     <link href="http://www.xiangzhihong.com/2017/10/23/RxJs%E7%AE%80%E4%BB%8B/"/>
     <id>http://www.xiangzhihong.com/2017/10/23/RxJs简介/</id>
@@ -1088,43 +1125,6 @@
     
     
       <category term="前端" scheme="http://www.xiangzhihong.com/tags/%E5%89%8D%E7%AB%AF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Kotlin之提供委托</title>
-    <link href="http://www.xiangzhihong.com/2017/10/23/Kotlin%E4%B9%8B%E6%8F%90%E4%BE%9B%E5%A7%94%E6%89%98/"/>
-    <id>http://www.xiangzhihong.com/2017/10/23/Kotlin之提供委托/</id>
-    <published>2017-10-22T16:00:00.000Z</published>
-    <updated>2018-02-11T03:04:47.839Z</updated>
-    
-    <content type="html"><![CDATA[<p>通过定义 provideDelegate 操作符，可以扩展创建属性实现所委托对象的逻辑。 如果 by 右侧所使用的对象将 provideDelegate 定义为成员或扩展函数，那么会调用该函数来 创建属性委托实例。</p>
-<p>provideDelegate 的一个可能的使用场景是在创建属性时（而不仅在其 getter 或 setter 中）检查属性一致性。例如，如果要在绑定之前检查属性名称，可以这样写：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">class ResourceLoader&lt;T&gt;(id: ResourceID&lt;T&gt;) &#123;</div><div class="line">    operator fun provideDelegate(</div><div class="line">            thisRef: MyUI,</div><div class="line">            prop: KProperty&lt;*&gt;</div><div class="line">    ): ReadOnlyProperty&lt;MyUI, T&gt; &#123;</div><div class="line">        checkProperty(thisRef, prop.name)</div><div class="line">        // 创建委托</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private fun checkProperty(thisRef: MyUI, name: String) &#123; …… &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">fun &lt;T&gt; bindResource(id: ResourceID&lt;T&gt;): ResourceLoader&lt;T&gt; &#123; …… &#125;</div><div class="line"></div><div class="line">class MyUI &#123;</div><div class="line">    val image by bindResource(ResourceID.image_id)</div><div class="line">    val text by bindResource(ResourceID.text_id)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>provideDelegate 的参数与 getValue 相同：</p>
-<ul>
-<li>thisRef —— 必须与 属性所有者 类型（对于扩展属性——指被扩展的类型）相同或者是它的超类型。</li>
-<li>property —— 必须是类型 KProperty&lt;*&gt; 或其超类型。 在创建 MyUI 实例期间，为每个属性调用provideDelegate 方法，并立即执行必要的验证。</li>
-</ul>
-<p>如果没有这种拦截属性与其委托之间的绑定的能力，为了实现相同的功能， 你必须显式传递属性名，这不是很方便：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">// 检查属性名称而不使用“provideDelegate”功能</div><div class="line">class MyUI &#123;</div><div class="line">    val image by bindResource(ResourceID.image_id, &quot;image&quot;)</div><div class="line">    val text by bindResource(ResourceID.text_id, &quot;text&quot;)</div><div class="line">&#125;</div><div class="line"></div><div class="line">fun &lt;T&gt; MyUI.bindResource(</div><div class="line">        id: ResourceID&lt;T&gt;,</div><div class="line">        propertyName: String</div><div class="line">): ReadOnlyProperty&lt;MyUI, T&gt; &#123;</div><div class="line">   checkProperty(this, propertyName)</div><div class="line">   // 创建委托</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>在生成的代码中，会调用 provideDelegate 方法来初始化辅助的 prop$delegate 属性。 比较对于属性声明 val prop: Type by MyDelegate() 生成的代码与 上面（当 provideDelegate 方法不存在时）生成的代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">class C &#123;</div><div class="line">    var prop: Type by MyDelegate()</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 这段代码是当“provideDelegate”功能可用时，由编译器生成的代码：</div><div class="line">class C &#123;</div><div class="line">    // 调用“provideDelegate”来创建额外的“delegate”属性</div><div class="line">    private val prop$delegate = MyDelegate().provideDelegate(this, this::prop)</div><div class="line">    val prop: Type</div><div class="line">        get() = prop$delegate.getValue(this, this::prop)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>请注意，provideDelegate 方法只影响辅助属性的创建，并不会影响为 getter 或 setter 生成的代码。</p>
-<p>上面例子的完整代码为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">fun main(args: Array&lt;String&gt;) &#123;</div><div class="line">    val myui: MyUI = MyUI()</div><div class="line">    println(myui.image)</div><div class="line">&#125;</div><div class="line"></div><div class="line">class dge&lt;T&gt;(t: T) &#123;</div><div class="line">    operator fun getValue(thisRef: Any?, property: KProperty&lt;*&gt;): String &#123;</div><div class="line">        return &quot;$thisRef, 这里委托了 $&#123;property.name&#125; 属性&quot;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class ResourceLoader&lt;T&gt;(id: Int) &#123;</div><div class="line">    operator fun provideDelegate(</div><div class="line">            thisRef: MyUI,</div><div class="line">            prop: KProperty&lt;*&gt;</div><div class="line">    ): dge&lt;T?&gt; &#123;</div><div class="line">        checkProperty(thisRef, prop.name)</div><div class="line">        // 创建委托</div><div class="line">        var t: T? = null</div><div class="line">        return dge(t)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private fun checkProperty(thisRef: MyUI, name: String) &#123;</div><div class="line">        println(name)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">fun &lt;T&gt; bindResource(id: Int): ResourceLoader&lt;T&gt; &#123;</div><div class="line">    return ResourceLoader&lt;T&gt;(id)</div><div class="line">&#125;</div><div class="line"></div><div class="line">class MyUI &#123;</div><div class="line">    val image by bindResource&lt;String&gt;(1)</div><div class="line">    val text by bindResource&lt;String&gt;(2)</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;通过定义 provideDelegate 操作符，可以扩展创建属性实现所委托对象的逻辑。 如果 by 右侧所使用的对象将 provideDelegate 定义为成员或扩展函数，那么会调用该函数来 创建属性委托实例。&lt;/p&gt;
-&lt;p&gt;provideDelegate 的一个可能的
-    
-    </summary>
-    
-      <category term="Kotlin" scheme="http://www.xiangzhihong.com/categories/Kotlin/"/>
-    
-    
-      <category term="Kotlin" scheme="http://www.xiangzhihong.com/tags/Kotlin/"/>
     
   </entry>
   
