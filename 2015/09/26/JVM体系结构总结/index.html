@@ -78,7 +78,7 @@
                 <div class="collapse navbar-collapse" id="main-menu">
                     <ul class="menu">
                         
-                            <li role="presentation"><a href="/"><i class="fa fa-fw fa-home"></i>首页</a>
+                            <li role="presentation"><a href="/"><i class="fa fa-fw"></i>首页</a>
                             </li>
                         
                             <li role="presentation"><a href="/categories/前端/"><i class="fa fa-fw"></i>前端</a>
@@ -87,25 +87,10 @@
                             <li role="presentation"><a href="/categories/后端/"><i class="fa fa-fw"></i>后端</a>
                             </li>
                         
-                            <li role="presentation"><a href="/categories/Java/"><i class="fa fa-fw"></i>Java</a>
+                            <li role="presentation"><a href="/categories/工具/"><i class="fa fa-fw"></i>工具</a>
                             </li>
                         
-                            <li role="presentation"><a href="/categories/Python/"><i class="fa fa-fw"></i>Python</a>
-                            </li>
-                        
-                            <li role="presentation"><a href="/categories/Android/"><i class="fa fa-fw"></i>Android</a>
-                            </li>
-                        
-                            <li role="presentation"><a href="/categories/iOS/"><i class="fa fa-fw"></i>iOS</a>
-                            </li>
-                        
-                            <li role="presentation"><a href="/categories/React Native/"><i class="fa fa-fw"></i>React Native</a>
-                            </li>
-                        
-                            <li role="presentation"><a href="/categories/小程序/"><i class="fa fa-fw"></i>小程序</a>
-                            </li>
-                        
-                            <li role="presentation"><a href="/categories/杂谈/"><i class="fa fa-fw"></i>杂谈</a>
+                            <li role="presentation"><a href="/categories/资源/"><i class="fa fa-fw"></i>资源</a>
                             </li>
                         
                     </ul>
@@ -148,13 +133,16 @@
         </span>
     </span>
     
-    
+    	
+	
     <span class="fa-wrap">
         <i class="fa fa-clock-o"></i>
         <span class="date-meta">2015/09/26</span>
     </span>
 	
 	<span id="busuanzi_container_page_pv"> 阅读量<span id="busuanzi_value_page_pv"></span>次</span>
+	
+	
 </div>
             
             
@@ -185,6 +173,15 @@
 <p>标记存活对象主要有引用计算和根搜索法两种。<br>       （1）引用计数，是一种很普遍的方法，在python、lua等一些脚本语言中都是使用这种算法。每个对象持有一个计数器，标记这个对象被引用的次数。进行垃圾收集时，那些引用计数为0的对象就是“死”对象，需要被收集。引用计数的一个缺点就是它没有办法处理循环引用的情况（A-&gt;B， B-&gt;A）。<br>       （2）根搜索，HotSpot虚拟机采用这种算法标记存活对象。把方法区、JVM栈中的所有的引用组成的集合作为搜索的根，从这个集合开始遍历直到结束。其中被遍历到的对象是存活对象；那些没有被遍历到的对象需要被垃圾收集。这样可以有效的避免循环引用的情况。<br>       回收内存的算法主要有：<br>       （1）复制算法，将内存分成两个部分，每一时刻只是用其中的一个。进行回收时，将所有存活的对象依次复制到另一个部分（依次复制避免了内存碎片的产生），接下来只用这一个部分。复制算法需要在两个内存区域来回复制，有一定的复制开销和空间开销(每一时刻只使用一个区域)，但是可以很好的解决内存碎片的问题，适用于对象频繁创建并且生命周期短的情况。<br>       （2）标记清扫，先进行存活对象标记，回收时将“死”对象占用的内存直接释放掉，会产生大量的内存碎片。<br>       （3）标记整理，标记阶段与标记清扫算法一样，回收阶段释放“死”对象的内存后，还需要进行对象的移动使得所有对象依次在内存中排列，避免了内存碎片的产生。标记整理与复制算法相反，适用于对象创建不频繁，生命周期长得情况。<br>       （4）按代收集，将内存按照对象生命周期的不同划分为多个部分，每个部分采用不同的收集算法。目前，大部分商业虚拟机都是采用这种算法。比如，在HotSpot中，内存被划分为：新生代(New)、老年代(Old)和永久代(Perm)。新生代采用复制算法，老年代和永久代采用标记整理算法。内存分配、回收的策略是，对象首先在新生代分配，如果新生代内存不满足要求，则触发一次新生代内存的垃圾收集(Young GC，或者是Minor GC)。Young GC会导致部分新生代的对象被移动至老年代，一部分是因为新生代内存不足以放下所有的对象；另一部分是因为这些对象的年龄(每个对象都保存着这个对象被垃圾收集的次数，表示它的年龄。存储在对象头的age属性中)大到足以晋升到老年代。当新生代的对象进入老年代，而老年代的内存不满足要求时，则会触发一次整个新生代和老年代的垃圾收集(Full GC， 或者是Major GC)。<br>       在JVM中有多个后台线程用于完成自动内存管理，对于CPU来说这些后台线程和用户线程是一样的，都需要占用系统的资源。在GC线程进行垃圾收集时必须执行“Stop the World”这一操作，也就是暂停所有的用户线程。这就导致对于实时性要求比较高的系统，JVM的垃圾收集可能是一个短板。但是在JDK1.5，Sun提供了CMS(Concurrent Mark and Sweep)垃圾收集器，通过GC线程和用户线程并发执行减少GC时间，提高了JVM的实时性。在JVM的各种应用中，gc调优是一个关键的部分，主要目标是减少GC的次数并且降低每次GC的时间。关于这部分内容，后续的JVM内存管理会详细讨论。</p>
 <h1 id="JVM执行程序的流程分析"><a href="#JVM执行程序的流程分析" class="headerlink" title="JVM执行程序的流程分析"></a>JVM执行程序的流程分析</h1><p>在命令行执行”java Main”就会开启一个JVM实例，我们可以通过jps，jstat等JVM工具观察JVM的运行状态，下面以运行com.ntes.money.Main这个类为例来描述一下JVM执行一个程序的流程。<br>       当在命令行执行”java -Xmx=12m -Xms=12m -Dname=value com.ntes.money.Main”这个命令时，JVM的执行流程是：<br> 1）加载JVM，主要是加载动态链接库，windows下是jvm.dll，Linux下是libjvm.so；<br> 2）设置JVM启动参数，比如命令中的-Xmx=12m -Xms=12m用于设置堆大小。<br> 3）初始化JVM。<br> 4）调用类加载器子系统，加载com.ntes.money.Main。这里给出的是自定义类，根据类加载器双亲委派链，最后是由系统默认类加载器(Classpath类加载器)进行加载。首先，根据全路径类型转化为文件路径com/ntes/money/Main.class，然后读取Main.class中的二进制信息、解析、加载，在方法区中形成Main类对应的数据结构。这里可能抛出ClassNotFoundException，有两种原因。一是文件路径com/ntes/money/Main.class不存在；二是com/ntes/money/Main.class文件路径存在，但是Main.class文件中存储的不是Main类的信息，比如是Main1，Main2等其他类的信息。这种情况下，会抛出NoClassDefFoundError，然后导致ClassNotFoundException。<br>5）在方法区com.ntes.money.Main类对应的数据结构中，根据方法描述符及访问标志，查找main方法。这里的描述符，包括了方法的方法名、参数、返回值，也就是public static void main(String[])。如果找不到对应的main方法，会抛出NoSuchMethodError: main异常。<br>6）通过本地方法(JNI)执行main方法。</p>
     </div>
+	
+	<!--打赏-->
+		<div class="reward">
+	   <div class="reward-button">赏 <span class="reward-code">
+		<span class="alipay-code"> <img class="alipay-img wdp-appear" src="http://ohe65w0xx.bkt.clouddn.com/alipay.png"><b>支付宝打赏</b> </span> 
+		<span class="wechat-code"> <img class="wechat-img wdp-appear" src="http://ohe65w0xx.bkt.clouddn.com/weipay.png"><b>微信打赏</b> </span> 
+	   </span></div>
+	  <p class="reward-notice">如果文章对你有帮助，欢迎点击上方按钮打赏作者</p>
+      </div>
 
     <div class="post-footer">   
         <div>
@@ -192,10 +189,14 @@
                 转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Snippet</a>
             
         </div>
+		
         <div>
             
         </div>  
     </div>
+	
+	
+	
 </article>
 
 <div class="article-nav prev-next-wrap clearfix">
@@ -212,7 +213,7 @@
         <!--PC和WAP自适应版-->
 <div id="SOHUCS"></div>
 <script type="text/javascript">
-	(function(){var appid='cytettIQe';var conf='prod_5adcbaeeac53951692e9780989c7fed5';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	(function(){var appid='cyt8KmUC1';var conf='prod_855a68d3b3d91855360a6215672a505a';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
 	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
 </script>
     </div>
@@ -308,9 +309,7 @@
         <h3 class="title">友链</h3>
         <div class="content friends-link">
         
-            <a href="http://blog.csdn.net/xiangzhihong8/" class="fa" target="_blank">作者博客</a>
-        
-            <a href="https://yq.aliyun.com/u/xiangzhihong" class="fa" target="_blank">阿里云博客</a>
+            <a href="http://www.shenliyang.com" class="fa" target="_blank">个人博客</a>
         
         </div>
     </div>
@@ -333,10 +332,8 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12"> 
-			
 			    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
                 <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
-			
                 <span>Copyright &copy; 2017
                 </span> | 
                 <span>

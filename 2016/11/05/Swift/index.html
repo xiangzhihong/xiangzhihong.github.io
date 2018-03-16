@@ -78,7 +78,7 @@
                 <div class="collapse navbar-collapse" id="main-menu">
                     <ul class="menu">
                         
-                            <li role="presentation"><a href="/"><i class="fa fa-fw fa-home"></i>首页</a>
+                            <li role="presentation"><a href="/"><i class="fa fa-fw"></i>首页</a>
                             </li>
                         
                             <li role="presentation"><a href="/categories/前端/"><i class="fa fa-fw"></i>前端</a>
@@ -87,25 +87,10 @@
                             <li role="presentation"><a href="/categories/后端/"><i class="fa fa-fw"></i>后端</a>
                             </li>
                         
-                            <li role="presentation"><a href="/categories/Java/"><i class="fa fa-fw"></i>Java</a>
+                            <li role="presentation"><a href="/categories/工具/"><i class="fa fa-fw"></i>工具</a>
                             </li>
                         
-                            <li role="presentation"><a href="/categories/Python/"><i class="fa fa-fw"></i>Python</a>
-                            </li>
-                        
-                            <li role="presentation"><a href="/categories/Android/"><i class="fa fa-fw"></i>Android</a>
-                            </li>
-                        
-                            <li role="presentation"><a href="/categories/iOS/"><i class="fa fa-fw"></i>iOS</a>
-                            </li>
-                        
-                            <li role="presentation"><a href="/categories/React Native/"><i class="fa fa-fw"></i>React Native</a>
-                            </li>
-                        
-                            <li role="presentation"><a href="/categories/小程序/"><i class="fa fa-fw"></i>小程序</a>
-                            </li>
-                        
-                            <li role="presentation"><a href="/categories/杂谈/"><i class="fa fa-fw"></i>杂谈</a>
+                            <li role="presentation"><a href="/categories/资源/"><i class="fa fa-fw"></i>资源</a>
                             </li>
                         
                     </ul>
@@ -148,13 +133,16 @@
         </span>
     </span>
     
-    
+    	
+	
     <span class="fa-wrap">
         <i class="fa fa-clock-o"></i>
         <span class="date-meta">2016/11/05</span>
     </span>
 	
 	<span id="busuanzi_container_page_pv"> 阅读量<span id="busuanzi_value_page_pv"></span>次</span>
+	
+	
 </div>
             
             
@@ -236,6 +224,15 @@
 <p>当可选被第一次赋值之后就可以确定之后一直有值的时候，隐式解析可选非常有用。隐式解析可选主要被用在 Swift 中类的构造过程中，请参考类实例之间的循环强引用。</p>
 <p>一个隐式解析可选其实就是一个普通的可选，但是可以被当做非可选来使用，并不需要每次都使用解析来获取可选值。下面的例子展示了可选String和隐式解析可选String之间的区别：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>let possibleString: String? = “An optional string.”<br>println(possibleString!) // 需要惊叹号来获取值<br>// 输出 “An optional string.”<br>let assumedString: String! = “An implicitly unwrapped optional string.”<br>println(assumedString) // 不需要感叹号<br>// 输出 “An implicitly unwrapped optional string.”<br>你可以把隐式解析可选当做一个可以自动解析的可选。你要做的只是声明的时候把感叹号放到类型的结尾，而不是每次取值的可选名字的结尾。<br>注意：如果你在隐式解析可选没有值的时候尝试取值，会触发运行时错误。和你在没有值的普通可选后面加一个惊叹号一样。<br>你仍然可以把隐式解析可选当做普通可选来判断它是否包含值：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>if assumedString {<br>    println(assumedString)<br>}<br>// 输出 “An implicitly unwrapped optional string.”<br>你也可以在可选绑定中使用隐式解析可选来检查并解析它的值：<br>[objc] view plain copy print?在CODE上查看代码片派生到我的代码片<br>if let definiteString = assumedString {<br>    println(definiteString)<br>}<br>// 输出 “An implicitly unwrapped optional string.”<br>注意：如果一个变量之后可能变成nil的话请不要使用隐式解析可选。如果你需要在变量的生命周期中判断是否是nil的话，请使用普通可选类型。</p>
     </div>
+	
+	<!--打赏-->
+		<div class="reward">
+	   <div class="reward-button">赏 <span class="reward-code">
+		<span class="alipay-code"> <img class="alipay-img wdp-appear" src="http://ohe65w0xx.bkt.clouddn.com/alipay.png"><b>支付宝打赏</b> </span> 
+		<span class="wechat-code"> <img class="wechat-img wdp-appear" src="http://ohe65w0xx.bkt.clouddn.com/weipay.png"><b>微信打赏</b> </span> 
+	   </span></div>
+	  <p class="reward-notice">如果文章对你有帮助，欢迎点击上方按钮打赏作者</p>
+      </div>
 
     <div class="post-footer">   
         <div>
@@ -243,15 +240,19 @@
                 转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Snippet</a>
             
         </div>
+		
         <div>
             
         </div>  
     </div>
+	
+	
+	
 </article>
 
 <div class="article-nav prev-next-wrap clearfix">
     
-        <a href="/2016/11/15/iOS如何实现多个环境一次打包/" class="pre-post btn btn-default"><i class="fa fa-angle-left fa-fw"></i>上一篇</a>
+        <a href="/2016/11/15/iOS 轻量级存储NSUserDefaults /" class="pre-post btn btn-default"><i class="fa fa-angle-left fa-fw"></i>上一篇</a>
     
     
         <a href="/2016/10/28/React 页面渲染原理/" class="next-post btn btn-default">下一篇<i class="fa fa-angle-right fa-fw"></i></a>
@@ -263,7 +264,7 @@
         <!--PC和WAP自适应版-->
 <div id="SOHUCS"></div>
 <script type="text/javascript">
-	(function(){var appid='cytettIQe';var conf='prod_5adcbaeeac53951692e9780989c7fed5';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	(function(){var appid='cyt8KmUC1';var conf='prod_855a68d3b3d91855360a6215672a505a';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
 	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
 </script>
     </div>
@@ -359,9 +360,7 @@
         <h3 class="title">友链</h3>
         <div class="content friends-link">
         
-            <a href="http://blog.csdn.net/xiangzhihong8/" class="fa" target="_blank">作者博客</a>
-        
-            <a href="https://yq.aliyun.com/u/xiangzhihong" class="fa" target="_blank">阿里云博客</a>
+            <a href="http://www.shenliyang.com" class="fa" target="_blank">个人博客</a>
         
         </div>
     </div>
@@ -384,10 +383,8 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12"> 
-			
 			    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
                 <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
-			
                 <span>Copyright &copy; 2017
                 </span> | 
                 <span>

@@ -78,7 +78,7 @@
                 <div class="collapse navbar-collapse" id="main-menu">
                     <ul class="menu">
                         
-                            <li role="presentation"><a href="/"><i class="fa fa-fw fa-home"></i>首页</a>
+                            <li role="presentation"><a href="/"><i class="fa fa-fw"></i>首页</a>
                             </li>
                         
                             <li role="presentation"><a href="/categories/前端/"><i class="fa fa-fw"></i>前端</a>
@@ -87,25 +87,10 @@
                             <li role="presentation"><a href="/categories/后端/"><i class="fa fa-fw"></i>后端</a>
                             </li>
                         
-                            <li role="presentation"><a href="/categories/Java/"><i class="fa fa-fw"></i>Java</a>
+                            <li role="presentation"><a href="/categories/工具/"><i class="fa fa-fw"></i>工具</a>
                             </li>
                         
-                            <li role="presentation"><a href="/categories/Python/"><i class="fa fa-fw"></i>Python</a>
-                            </li>
-                        
-                            <li role="presentation"><a href="/categories/Android/"><i class="fa fa-fw"></i>Android</a>
-                            </li>
-                        
-                            <li role="presentation"><a href="/categories/iOS/"><i class="fa fa-fw"></i>iOS</a>
-                            </li>
-                        
-                            <li role="presentation"><a href="/categories/React Native/"><i class="fa fa-fw"></i>React Native</a>
-                            </li>
-                        
-                            <li role="presentation"><a href="/categories/小程序/"><i class="fa fa-fw"></i>小程序</a>
-                            </li>
-                        
-                            <li role="presentation"><a href="/categories/杂谈/"><i class="fa fa-fw"></i>杂谈</a>
+                            <li role="presentation"><a href="/categories/资源/"><i class="fa fa-fw"></i>资源</a>
                             </li>
                         
                     </ul>
@@ -148,13 +133,16 @@
         </span>
     </span>
     
-    
+    	
+	
     <span class="fa-wrap">
         <i class="fa fa-clock-o"></i>
         <span class="date-meta">2016/12/01</span>
     </span>
 	
 	<span id="busuanzi_container_page_pv"> 阅读量<span id="busuanzi_value_page_pv"></span>次</span>
+	
+	
 </div>
             
             
@@ -203,6 +191,15 @@
 <h2 id="机器学习代码示例"><a href="#机器学习代码示例" class="headerlink" title="机器学习代码示例"></a>机器学习代码示例</h2><p>机器学习语音设计到pytho和R等最新语言。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line">//在gcc-4.7.2下编译通过。</div><div class="line">//命令行：g++-Wall-ansi-O2test.cpp-otest</div><div class="line">#include&lt;iostream&gt;</div><div class="line">usingnamespacestd;</div><div class="line">voidinput(int&amp;oper,constboolmeth)</div><div class="line">&#123;</div><div class="line">//meth为true则只判断1，为false则判断1或0</div><div class="line">while(true)</div><div class="line">&#123;</div><div class="line">cin&gt;&gt;oper;</div><div class="line">if(meth&amp;&amp;oper==1)</div><div class="line">break;</div><div class="line">elseif(oper==0||oper==1)</div><div class="line">break;</div><div class="line">cout&lt;&lt;&quot;输入错误，请重新输入。&quot;&lt;&lt;endl;//判断参数</div><div class="line">cin.sync();//避免极端输入导致死循环</div><div class="line">cin.clear();</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line">intmain(void)</div><div class="line">&#123;</div><div class="line">cout&lt;&lt;&quot;1+1=2吗？那要看您怎么教我了，不要惊讶我会学习的&quot;&lt;&lt;endl;</div><div class="line">intladd,radd,aprs,rcnt(0),wcnt(0);//定义输入与结果，正确次数与错误次数</div><div class="line">cout&lt;&lt;&quot;开始学习……&quot;&lt;&lt;endl;</div><div class="line">for(inti(0);i!=10;++i)</div><div class="line">&#123;</div><div class="line">cout&lt;&lt;&quot;参数1（必须是1）：&quot;&lt;&lt;flush;//提示输入参数</div><div class="line">input(ladd,true);</div><div class="line">cout&lt;&lt;&quot;参数2（必须是1）：&quot;&lt;&lt;flush;</div><div class="line">input(radd,true);</div><div class="line">cout&lt;&lt;&quot;结果：&quot;&lt;&lt;(ladd+radd)&lt;&lt;endl;//输出结果</div><div class="line">cout&lt;&lt;&quot;您对这满意吗（满意输入1，不满意输入0）：&quot;&lt;&lt;flush;//评价等级</div><div class="line">input(aprs,false);</div><div class="line">if(aprs)//判断用户评价</div><div class="line">++rcnt;</div><div class="line">else</div><div class="line">++wcnt;</div><div class="line">cout&lt;&lt;&quot;正确次数：&quot;&lt;&lt;rcnt&lt;&lt;&quot;错误次数：&quot;&lt;&lt;wcnt&lt;&lt;endl;//错误次数</div><div class="line">&#125;</div><div class="line">if(rcnt&gt;wcnt)//判断学习结果</div><div class="line">cout&lt;&lt;&quot;主人告诉我1+1=2。&quot;&lt;&lt;endl;</div><div class="line">else</div><div class="line">if(rcnt&lt;wcnt)</div><div class="line">cout&lt;&lt;&quot;主人告诉我1+1!=2。&quot;&lt;&lt;endl;</div><div class="line">else</div><div class="line">cout&lt;&lt;&quot;我不明白主人是什么意思。&quot;&lt;&lt;endl;</div><div class="line">intterm;//退出部分</div><div class="line">cout&lt;&lt;&quot;您对我的表现满意吗？满意请输入1不满意请输入0：&quot;&lt;&lt;flush;</div><div class="line">input(term,false);</div><div class="line">if(term)</div><div class="line">cout&lt;&lt;&quot;谢谢我会继续努力学习&quot;&lt;&lt;endl;</div><div class="line">else</div><div class="line">cout&lt;&lt;&quot;谢谢我会继续努力学习D&quot;&lt;&lt;endl;</div><div class="line">//cin&gt;&gt;term;//在Windows上测试时启用</div><div class="line">return0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
     </div>
+	
+	<!--打赏-->
+		<div class="reward">
+	   <div class="reward-button">赏 <span class="reward-code">
+		<span class="alipay-code"> <img class="alipay-img wdp-appear" src="http://ohe65w0xx.bkt.clouddn.com/alipay.png"><b>支付宝打赏</b> </span> 
+		<span class="wechat-code"> <img class="wechat-img wdp-appear" src="http://ohe65w0xx.bkt.clouddn.com/weipay.png"><b>微信打赏</b> </span> 
+	   </span></div>
+	  <p class="reward-notice">如果文章对你有帮助，欢迎点击上方按钮打赏作者</p>
+      </div>
 
     <div class="post-footer">   
         <div>
@@ -210,10 +207,14 @@
                 转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Snippet</a>
             
         </div>
+		
         <div>
             
         </div>  
     </div>
+	
+	
+	
 </article>
 
 <div class="article-nav prev-next-wrap clearfix">
@@ -230,7 +231,7 @@
         <!--PC和WAP自适应版-->
 <div id="SOHUCS"></div>
 <script type="text/javascript">
-	(function(){var appid='cytettIQe';var conf='prod_5adcbaeeac53951692e9780989c7fed5';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	(function(){var appid='cyt8KmUC1';var conf='prod_855a68d3b3d91855360a6215672a505a';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
 	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
 </script>
     </div>
@@ -326,9 +327,7 @@
         <h3 class="title">友链</h3>
         <div class="content friends-link">
         
-            <a href="http://blog.csdn.net/xiangzhihong8/" class="fa" target="_blank">作者博客</a>
-        
-            <a href="https://yq.aliyun.com/u/xiangzhihong" class="fa" target="_blank">阿里云博客</a>
+            <a href="http://www.shenliyang.com" class="fa" target="_blank">个人博客</a>
         
         </div>
     </div>
@@ -351,10 +350,8 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12"> 
-			
 			    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
                 <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
-			
                 <span>Copyright &copy; 2017
                 </span> | 
                 <span>

@@ -78,7 +78,7 @@
                 <div class="collapse navbar-collapse" id="main-menu">
                     <ul class="menu">
                         
-                            <li role="presentation"><a href="/"><i class="fa fa-fw fa-home"></i>首页</a>
+                            <li role="presentation"><a href="/"><i class="fa fa-fw"></i>首页</a>
                             </li>
                         
                             <li role="presentation"><a href="/categories/前端/"><i class="fa fa-fw"></i>前端</a>
@@ -87,25 +87,10 @@
                             <li role="presentation"><a href="/categories/后端/"><i class="fa fa-fw"></i>后端</a>
                             </li>
                         
-                            <li role="presentation"><a href="/categories/Java/"><i class="fa fa-fw"></i>Java</a>
+                            <li role="presentation"><a href="/categories/工具/"><i class="fa fa-fw"></i>工具</a>
                             </li>
                         
-                            <li role="presentation"><a href="/categories/Python/"><i class="fa fa-fw"></i>Python</a>
-                            </li>
-                        
-                            <li role="presentation"><a href="/categories/Android/"><i class="fa fa-fw"></i>Android</a>
-                            </li>
-                        
-                            <li role="presentation"><a href="/categories/iOS/"><i class="fa fa-fw"></i>iOS</a>
-                            </li>
-                        
-                            <li role="presentation"><a href="/categories/React Native/"><i class="fa fa-fw"></i>React Native</a>
-                            </li>
-                        
-                            <li role="presentation"><a href="/categories/小程序/"><i class="fa fa-fw"></i>小程序</a>
-                            </li>
-                        
-                            <li role="presentation"><a href="/categories/杂谈/"><i class="fa fa-fw"></i>杂谈</a>
+                            <li role="presentation"><a href="/categories/资源/"><i class="fa fa-fw"></i>资源</a>
                             </li>
                         
                     </ul>
@@ -148,13 +133,16 @@
         </span>
     </span>
     
-    
+    	
+	
     <span class="fa-wrap">
         <i class="fa fa-clock-o"></i>
         <span class="date-meta">2016/10/20</span>
     </span>
 	
 	<span id="busuanzi_container_page_pv"> 阅读量<span id="busuanzi_value_page_pv"></span>次</span>
+	
+	
 </div>
             
             
@@ -174,6 +162,15 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div></pre></td><td class="code"><pre><div class="line">&apos;use strict&apos;;</div><div class="line">import React, &#123;Component&#125; from &apos;react&apos;;</div><div class="line">import &#123;</div><div class="line">    View,</div><div class="line">    TextInput,</div><div class="line">    StyleSheet,</div><div class="line">    Platform,</div><div class="line">&#125; from &apos;react-native&apos;;</div><div class="line"></div><div class="line">export default class SearchBox extends Component &#123;</div><div class="line">    constructor(props) &#123;</div><div class="line">        super(props);</div><div class="line">        this.state = &#123;</div><div class="line">            value: &apos;&apos;</div><div class="line">        &#125;;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    onEndEditingKeyword(vv) &#123;</div><div class="line">        console.log(vv);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    onChanegeTextKeyword(vv) &#123;</div><div class="line">        console.log(&apos;onChanegeTextKeyword&apos;, vv);</div><div class="line"></div><div class="line">        this.setState(&#123;value: vv&#125;);</div><div class="line">        this.props.onChanegeTextKeyword(vv);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    render() &#123;</div><div class="line">        return (</div><div class="line">            &lt;View style=&#123;styles.container&#125;&gt;</div><div class="line">                &lt;View style=&#123;styles.inputBox&#125;&gt;</div><div class="line">                    &lt;View style=&#123;styles.inputIcon&#125;&gt;</div><div class="line">                    &lt;/View&gt;</div><div class="line">                    &lt;TextInput ref=&quot;keyword&quot; autoCapitalize=&quot;none&quot; value=&#123;this.props.keyword&#125;</div><div class="line">                               onChangeText=&#123;this.onChanegeTextKeyword.bind(this)&#125; returnKeyType=&quot;search&quot; maxLength=&#123;20&#125;</div><div class="line">                               style=&#123;styles.inputText&#125; underlineColorAndroid=&quot;transparent&quot;</div><div class="line">                               placeholder=&#123;&apos;输入城市名或拼音查询&apos;&#125;/&gt;</div><div class="line">                &lt;/View&gt;</div><div class="line">            &lt;/View&gt;</div><div class="line">        )</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">const styles = StyleSheet.create(&#123;</div><div class="line">    container: &#123;</div><div class="line">        marginTop: 5,</div><div class="line">        marginBottom: 5,</div><div class="line">        backgroundColor: &apos;#ffffff&apos;,</div><div class="line">        flexDirection: &apos;row&apos;,</div><div class="line">        height: Platform.OS === &apos;ios&apos;</div><div class="line">            ? 35</div><div class="line">            : 45,</div><div class="line">        borderBottomWidth: StyleSheet.hairlineWidth,</div><div class="line">        borderBottomColor: &apos;#cdcdcd&apos;,</div><div class="line">        paddingBottom: 5</div><div class="line">    &#125;,</div><div class="line">    inputBox: &#123;</div><div class="line">        height: Platform.OS === &apos;ios&apos;</div><div class="line">            ? 30</div><div class="line">            : 40,</div><div class="line">        marginLeft: 5,</div><div class="line">        marginRight: 5,</div><div class="line">        flex: 1,</div><div class="line">        flexDirection: &apos;row&apos;,</div><div class="line">        backgroundColor: &apos;#E6E7E8&apos;</div><div class="line">    &#125;,</div><div class="line">    inputIcon: &#123;</div><div class="line">        margin: Platform.OS === &apos;ios&apos;</div><div class="line">            ? 5</div><div class="line">            : 10</div><div class="line">    &#125;,</div><div class="line">    inputText: &#123;</div><div class="line">        alignSelf: &apos;flex-end&apos;,</div><div class="line">        marginTop: Platform.OS === &apos;ios&apos;</div><div class="line">            ? 0</div><div class="line">            : 0,</div><div class="line">        flex: 1,</div><div class="line">        height: Platform.OS === &apos;ios&apos;</div><div class="line">            ? 30</div><div class="line">            : 40,</div><div class="line">        marginLeft: 2,</div><div class="line">        marginRight: 5,</div><div class="line">        fontSize: 12,</div><div class="line">        lineHeight: 30,</div><div class="line">        textAlignVertical: &apos;bottom&apos;,</div><div class="line">        textDecorationLine: &apos;none&apos;</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 <p>最终效果：<br><img src="http://img.blog.csdn.net/20170721093649384?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20170721093700699?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlhbmd6aGlob25nOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>最后是界面的绘制，这里就不多说了，大家可以下载源码自行查看。源码地址：<a href="http://download.csdn.net/detail/xiangzhihong8/9905924" target="_blank" rel="external">http://download.csdn.net/detail/xiangzhihong8/9905924</a></p>
     </div>
+	
+	<!--打赏-->
+		<div class="reward">
+	   <div class="reward-button">赏 <span class="reward-code">
+		<span class="alipay-code"> <img class="alipay-img wdp-appear" src="http://ohe65w0xx.bkt.clouddn.com/alipay.png"><b>支付宝打赏</b> </span> 
+		<span class="wechat-code"> <img class="wechat-img wdp-appear" src="http://ohe65w0xx.bkt.clouddn.com/weipay.png"><b>微信打赏</b> </span> 
+	   </span></div>
+	  <p class="reward-notice">如果文章对你有帮助，欢迎点击上方按钮打赏作者</p>
+      </div>
 
     <div class="post-footer">   
         <div>
@@ -181,10 +178,14 @@
                 转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Snippet</a>
             
         </div>
+		
         <div>
             
         </div>  
     </div>
+	
+	
+	
 </article>
 
 <div class="article-nav prev-next-wrap clearfix">
@@ -201,7 +202,7 @@
         <!--PC和WAP自适应版-->
 <div id="SOHUCS"></div>
 <script type="text/javascript">
-	(function(){var appid='cytettIQe';var conf='prod_5adcbaeeac53951692e9780989c7fed5';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	(function(){var appid='cyt8KmUC1';var conf='prod_855a68d3b3d91855360a6215672a505a';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
 	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
 </script>
     </div>
@@ -297,9 +298,7 @@
         <h3 class="title">友链</h3>
         <div class="content friends-link">
         
-            <a href="http://blog.csdn.net/xiangzhihong8/" class="fa" target="_blank">作者博客</a>
-        
-            <a href="https://yq.aliyun.com/u/xiangzhihong" class="fa" target="_blank">阿里云博客</a>
+            <a href="http://www.shenliyang.com" class="fa" target="_blank">个人博客</a>
         
         </div>
     </div>
@@ -322,10 +321,8 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12"> 
-			
 			    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
                 <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
-			
                 <span>Copyright &copy; 2017
                 </span> | 
                 <span>

@@ -78,7 +78,7 @@
                 <div class="collapse navbar-collapse" id="main-menu">
                     <ul class="menu">
                         
-                            <li role="presentation"><a href="/"><i class="fa fa-fw fa-home"></i>首页</a>
+                            <li role="presentation"><a href="/"><i class="fa fa-fw"></i>首页</a>
                             </li>
                         
                             <li role="presentation"><a href="/categories/前端/"><i class="fa fa-fw"></i>前端</a>
@@ -87,25 +87,10 @@
                             <li role="presentation"><a href="/categories/后端/"><i class="fa fa-fw"></i>后端</a>
                             </li>
                         
-                            <li role="presentation"><a href="/categories/Java/"><i class="fa fa-fw"></i>Java</a>
+                            <li role="presentation"><a href="/categories/工具/"><i class="fa fa-fw"></i>工具</a>
                             </li>
                         
-                            <li role="presentation"><a href="/categories/Python/"><i class="fa fa-fw"></i>Python</a>
-                            </li>
-                        
-                            <li role="presentation"><a href="/categories/Android/"><i class="fa fa-fw"></i>Android</a>
-                            </li>
-                        
-                            <li role="presentation"><a href="/categories/iOS/"><i class="fa fa-fw"></i>iOS</a>
-                            </li>
-                        
-                            <li role="presentation"><a href="/categories/React Native/"><i class="fa fa-fw"></i>React Native</a>
-                            </li>
-                        
-                            <li role="presentation"><a href="/categories/小程序/"><i class="fa fa-fw"></i>小程序</a>
-                            </li>
-                        
-                            <li role="presentation"><a href="/categories/杂谈/"><i class="fa fa-fw"></i>杂谈</a>
+                            <li role="presentation"><a href="/categories/资源/"><i class="fa fa-fw"></i>资源</a>
                             </li>
                         
                     </ul>
@@ -148,13 +133,16 @@
         </span>
     </span>
     
-    
+    	
+	
     <span class="fa-wrap">
         <i class="fa fa-clock-o"></i>
         <span class="date-meta">2016/03/04</span>
     </span>
 	
 	<span id="busuanzi_container_page_pv"> 阅读量<span id="busuanzi_value_page_pv"></span>次</span>
+	
+	
 </div>
             
             
@@ -168,6 +156,15 @@
         <h1 id="XmlPullParser"><a href="#XmlPullParser" class="headerlink" title="XmlPullParser"></a>XmlPullParser</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PersonService</span> </span>&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 接收一个包含XML文件的输入流, 解析出XML中的Person对象, 装入一个List返回</div><div class="line">     * <span class="doctag">@param</span> in    包含XML数据的输入流</div><div class="line">     * <span class="doctag">@return</span>        包含Person对象的List集合</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> List&lt;Person&gt; <span class="title">getPersons</span><span class="params">(InputStream in)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        <span class="comment">//1.获取xml文件</span></div><div class="line">        InputStream is = PersonService.class.getClassLoader().getResourceAsStream();</div><div class="line">        <span class="comment">//2.获取解析器(Android中提供了方便的方法就是使用Android中的工具类Xml)</span></div><div class="line">        XmlPullParser parser = Xml.newPullParser();        </div><div class="line">        <span class="comment">//3.解析器解析xml文件</span></div><div class="line">        parser.setInput(in, <span class="string">"UTF-8"</span>);                    </div><div class="line"></div><div class="line">        List&lt;Person&gt; persons = <span class="keyword">new</span> ArrayList&lt;Person&gt;();</div><div class="line">        Person p = <span class="keyword">null</span>;</div><div class="line">        <span class="comment">//4.循环解析</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> type = parser.getEventType(); type != XmlPullParser.END_DOCUMENT; type = parser.next()) &#123;    <span class="comment">// 循环解析</span></div><div class="line">            <span class="keyword">if</span> (type == XmlPullParser.START_TAG) &#123;                <span class="comment">// 判断如果遇到开始标签事件</span></div><div class="line">                <span class="keyword">if</span> (<span class="string">"person"</span>.equals(parser.getName())) &#123;        <span class="comment">// 标签名为person</span></div><div class="line">                    p = <span class="keyword">new</span> Person();                            <span class="comment">// 创建Person对象</span></div><div class="line">                    String id = parser.getAttributeValue(<span class="number">0</span>);    <span class="comment">// 获取属性</span></div><div class="line">                    p.setId(Integer.parseInt(id));                <span class="comment">// 设置ID</span></div><div class="line">                    persons.add(p);                                <span class="comment">// 把Person对象装入集合</span></div><div class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">"name"</span>.equals(parser.getName())) &#123;    <span class="comment">// 标签名为name</span></div><div class="line">                    String name = parser.nextText();            <span class="comment">// 获取下一个文本</span></div><div class="line">                    p.setName(name);                            <span class="comment">// 设置name</span></div><div class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">"age"</span>.equals(parser.getName())) &#123;    <span class="comment">// 标签名为age</span></div><div class="line">                    String age = parser.nextText();                <span class="comment">// 获取下一个文本</span></div><div class="line">                    p.setAge(Integer.parseInt(age));            <span class="comment">// 设置age</span></div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> persons;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">    *将数据写入到Xml文件中.</div><div class="line">    *<span class="doctag">@param</span> out    输出到要被写入数据的Xml文件的输出流//就相当于 OutputStream os = new FileOutputStream("a.xml");</div><div class="line">    */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">writePersons</span><span class="params">(List&lt;Book&gt; Books, OutputStream out)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line"></div><div class="line">        <span class="comment">//1.获得XmlSerializer(Xml序列化工具)(通过Android中的工具类Xml得到)</span></div><div class="line">        XmlSerializer serializer = Xml.newSerializer();    </div><div class="line">        <span class="comment">//2.设置输出流(明确要将数据写入那个xml文件中)</span></div><div class="line">        serializer.setOutput(out, <span class="string">"UTF-8"</span>);                </div><div class="line">        <span class="comment">//3.写入开始文档</span></div><div class="line">        serializer.startDocument(<span class="string">"UTF-8"</span>, <span class="keyword">true</span>);</div><div class="line">        <span class="comment">//4.开始标签</span></div><div class="line">        serializer.startTag(<span class="keyword">null</span>, <span class="string">"bookstore"</span>);</div><div class="line">        <span class="comment">//5.循环遍历</span></div><div class="line">        <span class="keyword">for</span> (Book p : books) &#123;</div><div class="line">            <span class="comment">//6.开始标签</span></div><div class="line">            serializer.startTag(<span class="keyword">null</span>, <span class="string">"book"</span>);</div><div class="line">            <span class="comment">//7.给这个标签设置属性</span></div><div class="line">            serializer.attribute(<span class="keyword">null</span>, <span class="string">"id"</span>, book.getId().toString());</div><div class="line">            <span class="comment">//8.子标签</span></div><div class="line">            serializer.startTag(<span class="keyword">null</span>, <span class="string">"name"</span>);</div><div class="line">            <span class="comment">//9.设置子标签的内容</span></div><div class="line">            serializer.text(book.getName());</div><div class="line">            <span class="comment">//10.子标签结束</span></div><div class="line">            serializer.endTag(<span class="keyword">null</span>, <span class="string">"name"</span>);</div><div class="line">            <span class="comment">//11.标签结束</span></div><div class="line">            serializer.endTag(<span class="keyword">null</span>, <span class="string">"person"</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//12.根标签结束</span></div><div class="line">        serializer.endTag(<span class="keyword">null</span>, <span class="string">"persons"</span>);</div><div class="line">        <span class="comment">//13.文档结束</span></div><div class="line">        serializer.endDocument();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <hr>
     </div>
+	
+	<!--打赏-->
+		<div class="reward">
+	   <div class="reward-button">赏 <span class="reward-code">
+		<span class="alipay-code"> <img class="alipay-img wdp-appear" src="http://ohe65w0xx.bkt.clouddn.com/alipay.png"><b>支付宝打赏</b> </span> 
+		<span class="wechat-code"> <img class="wechat-img wdp-appear" src="http://ohe65w0xx.bkt.clouddn.com/weipay.png"><b>微信打赏</b> </span> 
+	   </span></div>
+	  <p class="reward-notice">如果文章对你有帮助，欢迎点击上方按钮打赏作者</p>
+      </div>
 
     <div class="post-footer">   
         <div>
@@ -175,10 +172,14 @@
                 转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Snippet</a>
             
         </div>
+		
         <div>
             
         </div>  
     </div>
+	
+	
+	
 </article>
 
 <div class="article-nav prev-next-wrap clearfix">
@@ -195,7 +196,7 @@
         <!--PC和WAP自适应版-->
 <div id="SOHUCS"></div>
 <script type="text/javascript">
-	(function(){var appid='cytettIQe';var conf='prod_5adcbaeeac53951692e9780989c7fed5';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	(function(){var appid='cyt8KmUC1';var conf='prod_855a68d3b3d91855360a6215672a505a';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
 	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
 </script>
     </div>
@@ -291,9 +292,7 @@
         <h3 class="title">友链</h3>
         <div class="content friends-link">
         
-            <a href="http://blog.csdn.net/xiangzhihong8/" class="fa" target="_blank">作者博客</a>
-        
-            <a href="https://yq.aliyun.com/u/xiangzhihong" class="fa" target="_blank">阿里云博客</a>
+            <a href="http://www.shenliyang.com" class="fa" target="_blank">个人博客</a>
         
         </div>
     </div>
@@ -316,10 +315,8 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12"> 
-			
 			    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
                 <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
-			
                 <span>Copyright &copy; 2017
                 </span> | 
                 <span>
