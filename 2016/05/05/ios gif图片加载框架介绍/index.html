@@ -78,7 +78,7 @@
                 <div class="collapse navbar-collapse" id="main-menu">
                     <ul class="menu">
                         
-                            <li role="presentation"><a href="/"><i class="fa fa-fw"></i>首页</a>
+                            <li role="presentation"><a href="/"><i class="fa fa-fw fa-home"></i>首页</a>
                             </li>
                         
                             <li role="presentation"><a href="/categories/前端/"><i class="fa fa-fw"></i>前端</a>
@@ -87,10 +87,25 @@
                             <li role="presentation"><a href="/categories/后端/"><i class="fa fa-fw"></i>后端</a>
                             </li>
                         
-                            <li role="presentation"><a href="/categories/工具/"><i class="fa fa-fw"></i>工具</a>
+                            <li role="presentation"><a href="/categories/Java/"><i class="fa fa-fw"></i>Java</a>
                             </li>
                         
-                            <li role="presentation"><a href="/categories/资源/"><i class="fa fa-fw"></i>资源</a>
+                            <li role="presentation"><a href="/categories/Python/"><i class="fa fa-fw"></i>Python</a>
+                            </li>
+                        
+                            <li role="presentation"><a href="/categories/Android/"><i class="fa fa-fw"></i>Android</a>
+                            </li>
+                        
+                            <li role="presentation"><a href="/categories/iOS/"><i class="fa fa-fw"></i>iOS</a>
+                            </li>
+                        
+                            <li role="presentation"><a href="/categories/React Native/"><i class="fa fa-fw"></i>React Native</a>
+                            </li>
+                        
+                            <li role="presentation"><a href="/categories/小程序/"><i class="fa fa-fw"></i>小程序</a>
+                            </li>
+                        
+                            <li role="presentation"><a href="/categories/杂谈/"><i class="fa fa-fw"></i>杂谈</a>
                             </li>
                         
                     </ul>
@@ -133,16 +148,13 @@
         </span>
     </span>
     
-    	
-	
+    
     <span class="fa-wrap">
         <i class="fa fa-clock-o"></i>
         <span class="date-meta">2016/05/05</span>
     </span>
 	
 	<span id="busuanzi_container_page_pv"> 阅读量<span id="busuanzi_value_page_pv"></span>次</span>
-	
-	
 </div>
             
             
@@ -171,8 +183,8 @@
 <h3 id="FLAnimatedImageView接口"><a href="#FLAnimatedImageView接口" class="headerlink" title="FLAnimatedImageView接口"></a>FLAnimatedImageView接口</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">@interface FLAnimatedImageView : UIImageView</div><div class="line"></div><div class="line">// Setting `[UIImageView.image]` to a non-`nil` value clears out existing `animatedImage`.</div><div class="line">// And vice versa, setting `animatedImage` will initially populate the `[UIImageView.image]` to its `posterImage` and then start animating and hold `currentFrame`.</div><div class="line">@property (nonatomic, strong) FLAnimatedImage *animatedImage;//设置GIF动画数据</div><div class="line">@property (nonatomic, copy) void(^loopCompletionBlock)(NSUInteger loopCountRemaining);//GIF动画播放一次之后的回调Block</div><div class="line"></div><div class="line">@property (nonatomic, strong, readonly) UIImage *currentFrame;//GIF动画当前显示的帧图片</div><div class="line">@property (nonatomic, assign, readonly) NSUInteger currentFrameIndex;//GIF动画当前显示的帧图片索引</div><div class="line"></div><div class="line">// The animation runloop mode. Enables playback during scrolling by allowing timer events (i.e. animation) with NSRunLoopCommonModes.</div><div class="line">// To keep scrolling smooth on single-core devices such as iPhone 3GS/4 and iPod Touch 4th gen, the default run loop mode is NSDefaultRunLoopMode. Otherwise, the default is NSDefaultRunLoopMode.</div><div class="line">@property (nonatomic, copy) NSString *runLoopMode;</div></pre></td></tr></table></figure>
 <p>FLAnimatedImageView解析：<br>关键对象解析：<br>a、判断新旧FLAnimatedImage对象是否一致，一致就不需要继续操作了<br>b、设置GIF动画的封面帧图片，当前帧索引，GIF动画的循环播放次数，播放时间累加器<br>c、更新是否发起动画的标志位，判断是否启动GIF动画<br>d、刷新View的layer<br>参考：<a href="http://swiftcafe.io/2016/12/08/fl-image/" target="_blank" rel="external">http://swiftcafe.io/2016/12/08/fl-image/</a><br>     <a href="http://engineering.flipboard.com/2014/05/animated-gif/" target="_blank" rel="external">http://engineering.flipboard.com/2014/05/animated-gif/</a></p>
     </div>
-	
-	<!--打赏-->
+
+	   <!--打赏-->
 		<div class="reward">
 	   <div class="reward-button">赏 <span class="reward-code">
 		<span class="alipay-code"> <img class="alipay-img wdp-appear" src="http://ohe65w0xx.bkt.clouddn.com/alipay.png"><b>支付宝打赏</b> </span> 
@@ -180,21 +192,18 @@
 	   </span></div>
 	  <p class="reward-notice">如果文章对你有帮助，欢迎点击上方按钮打赏作者</p>
       </div>
-
+	  <!--打赏-->
+	
     <div class="post-footer">   
         <div>
             
                 转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Snippet</a>
             
         </div>
-		
         <div>
             
         </div>  
     </div>
-	
-	
-	
 </article>
 
 <div class="article-nav prev-next-wrap clearfix">
@@ -211,7 +220,7 @@
         <!--PC和WAP自适应版-->
 <div id="SOHUCS"></div>
 <script type="text/javascript">
-	(function(){var appid='cyt8KmUC1';var conf='prod_855a68d3b3d91855360a6215672a505a';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	(function(){var appid='cytettIQe';var conf='prod_5adcbaeeac53951692e9780989c7fed5';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
 	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
 </script>
     </div>
@@ -307,7 +316,9 @@
         <h3 class="title">友链</h3>
         <div class="content friends-link">
         
-            <a href="http://www.shenliyang.com" class="fa" target="_blank">个人博客</a>
+            <a href="http://blog.csdn.net/xiangzhihong8/" class="fa" target="_blank">作者博客</a>
+        
+            <a href="https://yq.aliyun.com/u/xiangzhihong" class="fa" target="_blank">阿里云博客</a>
         
         </div>
     </div>
@@ -330,8 +341,10 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12"> 
+			
 			    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
                 <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+			
                 <span>Copyright &copy; 2017
                 </span> | 
                 <span>

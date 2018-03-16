@@ -78,7 +78,7 @@
                 <div class="collapse navbar-collapse" id="main-menu">
                     <ul class="menu">
                         
-                            <li role="presentation"><a href="/"><i class="fa fa-fw"></i>首页</a>
+                            <li role="presentation"><a href="/"><i class="fa fa-fw fa-home"></i>首页</a>
                             </li>
                         
                             <li role="presentation"><a href="/categories/前端/"><i class="fa fa-fw"></i>前端</a>
@@ -87,10 +87,25 @@
                             <li role="presentation"><a href="/categories/后端/"><i class="fa fa-fw"></i>后端</a>
                             </li>
                         
-                            <li role="presentation"><a href="/categories/工具/"><i class="fa fa-fw"></i>工具</a>
+                            <li role="presentation"><a href="/categories/Java/"><i class="fa fa-fw"></i>Java</a>
                             </li>
                         
-                            <li role="presentation"><a href="/categories/资源/"><i class="fa fa-fw"></i>资源</a>
+                            <li role="presentation"><a href="/categories/Python/"><i class="fa fa-fw"></i>Python</a>
+                            </li>
+                        
+                            <li role="presentation"><a href="/categories/Android/"><i class="fa fa-fw"></i>Android</a>
+                            </li>
+                        
+                            <li role="presentation"><a href="/categories/iOS/"><i class="fa fa-fw"></i>iOS</a>
+                            </li>
+                        
+                            <li role="presentation"><a href="/categories/React Native/"><i class="fa fa-fw"></i>React Native</a>
+                            </li>
+                        
+                            <li role="presentation"><a href="/categories/小程序/"><i class="fa fa-fw"></i>小程序</a>
+                            </li>
+                        
+                            <li role="presentation"><a href="/categories/杂谈/"><i class="fa fa-fw"></i>杂谈</a>
                             </li>
                         
                     </ul>
@@ -133,16 +148,13 @@
         </span>
     </span>
     
-    	
-	
+    
     <span class="fa-wrap">
         <i class="fa fa-clock-o"></i>
         <span class="date-meta">2016/02/18</span>
     </span>
 	
 	<span id="busuanzi_container_page_pv"> 阅读量<span id="busuanzi_value_page_pv"></span>次</span>
-	
-	
 </div>
             
             
@@ -189,8 +201,8 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DepthPageTransformer</span> <span class="keyword">implements</span> <span class="title">ViewPager</span>.<span class="title">PageTransformer</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">float</span> MIN_SCALE = <span class="number">0.75f</span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">transformPage</span><span class="params">(View view, <span class="keyword">float</span> position)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> pageWidth = view.getWidth();</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (position &lt; -<span class="number">1</span>) &#123; <span class="comment">// [-Infinity,-1)</span></div><div class="line">            <span class="comment">// This page is way off-screen to the left.</span></div><div class="line">            view.setAlpha(<span class="number">0</span>);</div><div class="line"></div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (position &lt;= <span class="number">0</span>) &#123; <span class="comment">// [-1,0]</span></div><div class="line">            <span class="comment">// Use the default slide transition when moving to the left page</span></div><div class="line">            view.setAlpha(<span class="number">1</span>);</div><div class="line">            view.setTranslationX(<span class="number">0</span>);</div><div class="line">            view.setScaleX(<span class="number">1</span>);</div><div class="line">            view.setScaleY(<span class="number">1</span>);</div><div class="line"></div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (position &lt;= <span class="number">1</span>) &#123; <span class="comment">// (0,1]</span></div><div class="line">            <span class="comment">// Fade the page out.</span></div><div class="line">            view.setAlpha(<span class="number">1</span> - position);</div><div class="line"></div><div class="line">            <span class="comment">// Counteract the default slide transition</span></div><div class="line">            view.setTranslationX(pageWidth * -position);</div><div class="line"></div><div class="line">            <span class="comment">// Scale the page down (between MIN_SCALE and 1)</span></div><div class="line">            <span class="keyword">float</span> scaleFactor = MIN_SCALE</div><div class="line">                    + (<span class="number">1</span> - MIN_SCALE) * (<span class="number">1</span> - Math.abs(position));</div><div class="line">            view.setScaleX(scaleFactor);</div><div class="line">            view.setScaleY(scaleFactor);</div><div class="line"></div><div class="line">        &#125; <span class="keyword">else</span> &#123; <span class="comment">// (1,+Infinity]</span></div><div class="line">            <span class="comment">// This page is way off-screen to the right.</span></div><div class="line">            view.setAlpha(<span class="number">0</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <hr>
     </div>
-	
-	<!--打赏-->
+
+	   <!--打赏-->
 		<div class="reward">
 	   <div class="reward-button">赏 <span class="reward-code">
 		<span class="alipay-code"> <img class="alipay-img wdp-appear" src="http://ohe65w0xx.bkt.clouddn.com/alipay.png"><b>支付宝打赏</b> </span> 
@@ -198,21 +210,18 @@
 	   </span></div>
 	  <p class="reward-notice">如果文章对你有帮助，欢迎点击上方按钮打赏作者</p>
       </div>
-
+	  <!--打赏-->
+	
     <div class="post-footer">   
         <div>
             
                 转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Snippet</a>
             
         </div>
-		
         <div>
             
         </div>  
     </div>
-	
-	
-	
 </article>
 
 <div class="article-nav prev-next-wrap clearfix">
@@ -229,7 +238,7 @@
         <!--PC和WAP自适应版-->
 <div id="SOHUCS"></div>
 <script type="text/javascript">
-	(function(){var appid='cyt8KmUC1';var conf='prod_855a68d3b3d91855360a6215672a505a';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	(function(){var appid='cytettIQe';var conf='prod_5adcbaeeac53951692e9780989c7fed5';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
 	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
 </script>
     </div>
@@ -325,7 +334,9 @@
         <h3 class="title">友链</h3>
         <div class="content friends-link">
         
-            <a href="http://www.shenliyang.com" class="fa" target="_blank">个人博客</a>
+            <a href="http://blog.csdn.net/xiangzhihong8/" class="fa" target="_blank">作者博客</a>
+        
+            <a href="https://yq.aliyun.com/u/xiangzhihong" class="fa" target="_blank">阿里云博客</a>
         
         </div>
     </div>
@@ -348,8 +359,10 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12"> 
+			
 			    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
                 <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+			
                 <span>Copyright &copy; 2017
                 </span> | 
                 <span>

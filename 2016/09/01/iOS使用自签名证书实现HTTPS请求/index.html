@@ -78,7 +78,7 @@
                 <div class="collapse navbar-collapse" id="main-menu">
                     <ul class="menu">
                         
-                            <li role="presentation"><a href="/"><i class="fa fa-fw"></i>首页</a>
+                            <li role="presentation"><a href="/"><i class="fa fa-fw fa-home"></i>首页</a>
                             </li>
                         
                             <li role="presentation"><a href="/categories/前端/"><i class="fa fa-fw"></i>前端</a>
@@ -87,10 +87,25 @@
                             <li role="presentation"><a href="/categories/后端/"><i class="fa fa-fw"></i>后端</a>
                             </li>
                         
-                            <li role="presentation"><a href="/categories/工具/"><i class="fa fa-fw"></i>工具</a>
+                            <li role="presentation"><a href="/categories/Java/"><i class="fa fa-fw"></i>Java</a>
                             </li>
                         
-                            <li role="presentation"><a href="/categories/资源/"><i class="fa fa-fw"></i>资源</a>
+                            <li role="presentation"><a href="/categories/Python/"><i class="fa fa-fw"></i>Python</a>
+                            </li>
+                        
+                            <li role="presentation"><a href="/categories/Android/"><i class="fa fa-fw"></i>Android</a>
+                            </li>
+                        
+                            <li role="presentation"><a href="/categories/iOS/"><i class="fa fa-fw"></i>iOS</a>
+                            </li>
+                        
+                            <li role="presentation"><a href="/categories/React Native/"><i class="fa fa-fw"></i>React Native</a>
+                            </li>
+                        
+                            <li role="presentation"><a href="/categories/小程序/"><i class="fa fa-fw"></i>小程序</a>
+                            </li>
+                        
+                            <li role="presentation"><a href="/categories/杂谈/"><i class="fa fa-fw"></i>杂谈</a>
                             </li>
                         
                     </ul>
@@ -133,16 +148,13 @@
         </span>
     </span>
     
-    	
-	
+    
     <span class="fa-wrap">
         <i class="fa fa-clock-o"></i>
         <span class="date-meta">2016/09/01</span>
     </span>
 	
 	<span id="busuanzi_container_page_pv"> 阅读量<span id="busuanzi_value_page_pv"></span>次</span>
-	
-	
 </div>
             
             
@@ -172,8 +184,8 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> AFSecurityPolicy分三种验证模式：</div><div class="line"> AFSSLPinningModeNone:只是验证证书是否在信任列表中</div><div class="line"> AFSSLPinningModeCertificate：该模式会验证证书是否在信任列表中，然后再对比服务端证书和客户端证书是否一致</div><div class="line"> AFSSLPinningModePublicKey：只验证服务端证书与客户端证书的公钥是否一致</div><div class="line">*/</div><div class="line"></div><div class="line">AFSecurityPolicy *securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeCertificate];</div><div class="line">    securityPolicy.allowInvalidCertificates = YES;//是否允许使用自签名证书</div><div class="line">    securityPolicy.validatesDomainName = NO;//是否需要验证域名，默认YES</div><div class="line"></div><div class="line">    AFHTTPSessionManager *_manager = [AFHTTPSessionManager manager];</div><div class="line">    _manager.responseSerializer = [AFHTTPResponseSerializer serializer];</div><div class="line">    _manager.securityPolicy = securityPolicy;</div><div class="line">    //设置超时</div><div class="line">    [_manager.requestSerializer willChangeValueForKey:@&quot;timeoutinterval&quot;];</div><div class="line">    _manager.requestSerializer.timeoutInterval = 20.f;</div><div class="line">    [_manager.requestSerializer didChangeValueForKey:@&quot;timeoutinterval&quot;];</div><div class="line">    _manager.requestSerializer.cachePolicy = NSURLRequestReloadIgnoringCacheData;</div><div class="line">    _manager.responseSerializer.acceptableContentTypes  = [NSSet setWithObjects:@&quot;application/xml&quot;,@&quot;text/xml&quot;,@&quot;text/plain&quot;,@&quot;application/json&quot;,nil];</div><div class="line"> </div><div class="line">    __weak typeof(self) weakSelf = self;</div><div class="line">    [_manager setSessionDidReceiveAuthenticationChallengeBlock:^NSURLSessionAuthChallengeDisposition(NSURLSession *session, NSURLAuthenticationChallenge *challenge, NSURLCredential *__autoreleasing *_credential) &#123;</div><div class="line">        </div><div class="line">        SecTrustRef serverTrust = [[challenge protectionSpace] serverTrust];</div><div class="line">        /**</div><div class="line">         *  导入多张CA证书</div><div class="line">         */</div><div class="line">        NSString *cerPath = [[NSBundle mainBundle] pathForResource:@&quot;ca&quot; ofType:@&quot;cer&quot;];//自签名证书</div><div class="line">        NSData* caCert = [NSData dataWithContentsOfFile:cerPath];</div><div class="line">        NSArray *cerArray = @[caCert];</div><div class="line">        weakSelf.manager.securityPolicy.pinnedCertificates = cerArray;</div><div class="line">        </div><div class="line">        SecCertificateRef caRef = SecCertificateCreateWithData(NULL, (__bridge CFDataRef)caCert);</div><div class="line">        NSCAssert(caRef != nil, @&quot;caRef is nil&quot;);</div><div class="line">        </div><div class="line">        NSArray *caArray = @[(__bridge id)(caRef)];</div><div class="line">        NSCAssert(caArray != nil, @&quot;caArray is nil&quot;);</div><div class="line">        </div><div class="line">        OSStatus status = SecTrustSetAnchorCertificates(serverTrust, (__bridge CFArrayRef)caArray);</div><div class="line">        SecTrustSetAnchorCertificatesOnly(serverTrust,NO);</div><div class="line">        NSCAssert(errSecSuccess == status, @&quot;SecTrustSetAnchorCertificates failed&quot;);</div><div class="line">        </div><div class="line">        NSURLSessionAuthChallengeDisposition disposition = NSURLSessionAuthChallengePerformDefaultHandling;</div><div class="line">        __autoreleasing NSURLCredential *credential = nil;</div><div class="line">        if ([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust]) &#123;</div><div class="line">            if ([weakSelf.manager.securityPolicy evaluateServerTrust:challenge.protectionSpace.serverTrust forDomain:challenge.protectionSpace.host]) &#123;</div><div class="line">                credential = [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust];</div><div class="line">                if (credential) &#123;</div><div class="line">                    disposition = NSURLSessionAuthChallengeUseCredential;</div><div class="line">                &#125; else &#123;</div><div class="line">                    disposition = NSURLSessionAuthChallengePerformDefaultHandling;</div><div class="line">                &#125;</div><div class="line">            &#125; else &#123;</div><div class="line">                disposition = NSURLSessionAuthChallengeCancelAuthenticationChallenge;</div><div class="line">            &#125;</div><div class="line">        &#125; else &#123;</div><div class="line">            disposition = NSURLSessionAuthChallengePerformDefaultHandling;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        return disposition;</div><div class="line">    &#125;];</div></pre></td></tr></table></figure>
 <p>由于服务端使用.jks是一个证书库，客户端获取到的证书可能不止一本，我这边获取到了两本，具体获取到基本可通过SecTrustGetCertificateCount方法获取证书个数，AFNetworking在evaluateServerTrust：forDomain：方法中，AFSSLPinningMode的类型为AFSSLPinningModeCertificate和AFSSLPinningModePublicKey的时候都有校验服务端的证书个数与客户端信任的证书数量是否一样，如果不一样的话无法请求成功，所以这边我就修改他的源码，当有一个校验成功时即算成功。<br>参考：<a href="http://www.jianshu.com/p/e6a26ecd84aa" target="_blank" rel="external">http://www.jianshu.com/p/e6a26ecd84aa</a></p>
     </div>
-	
-	<!--打赏-->
+
+	   <!--打赏-->
 		<div class="reward">
 	   <div class="reward-button">赏 <span class="reward-code">
 		<span class="alipay-code"> <img class="alipay-img wdp-appear" src="http://ohe65w0xx.bkt.clouddn.com/alipay.png"><b>支付宝打赏</b> </span> 
@@ -181,21 +193,18 @@
 	   </span></div>
 	  <p class="reward-notice">如果文章对你有帮助，欢迎点击上方按钮打赏作者</p>
       </div>
-
+	  <!--打赏-->
+	
     <div class="post-footer">   
         <div>
             
                 转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Snippet</a>
             
         </div>
-		
         <div>
             
         </div>  
     </div>
-	
-	
-	
 </article>
 
 <div class="article-nav prev-next-wrap clearfix">
@@ -212,7 +221,7 @@
         <!--PC和WAP自适应版-->
 <div id="SOHUCS"></div>
 <script type="text/javascript">
-	(function(){var appid='cyt8KmUC1';var conf='prod_855a68d3b3d91855360a6215672a505a';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	(function(){var appid='cytettIQe';var conf='prod_5adcbaeeac53951692e9780989c7fed5';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
 	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
 </script>
     </div>
@@ -308,7 +317,9 @@
         <h3 class="title">友链</h3>
         <div class="content friends-link">
         
-            <a href="http://www.shenliyang.com" class="fa" target="_blank">个人博客</a>
+            <a href="http://blog.csdn.net/xiangzhihong8/" class="fa" target="_blank">作者博客</a>
+        
+            <a href="https://yq.aliyun.com/u/xiangzhihong" class="fa" target="_blank">阿里云博客</a>
         
         </div>
     </div>
@@ -331,8 +342,10 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12"> 
+			
 			    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
                 <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+			
                 <span>Copyright &copy; 2017
                 </span> | 
                 <span>

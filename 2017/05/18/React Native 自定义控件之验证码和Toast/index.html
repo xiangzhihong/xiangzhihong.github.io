@@ -78,7 +78,7 @@
                 <div class="collapse navbar-collapse" id="main-menu">
                     <ul class="menu">
                         
-                            <li role="presentation"><a href="/"><i class="fa fa-fw"></i>首页</a>
+                            <li role="presentation"><a href="/"><i class="fa fa-fw fa-home"></i>首页</a>
                             </li>
                         
                             <li role="presentation"><a href="/categories/前端/"><i class="fa fa-fw"></i>前端</a>
@@ -87,10 +87,25 @@
                             <li role="presentation"><a href="/categories/后端/"><i class="fa fa-fw"></i>后端</a>
                             </li>
                         
-                            <li role="presentation"><a href="/categories/工具/"><i class="fa fa-fw"></i>工具</a>
+                            <li role="presentation"><a href="/categories/Java/"><i class="fa fa-fw"></i>Java</a>
                             </li>
                         
-                            <li role="presentation"><a href="/categories/资源/"><i class="fa fa-fw"></i>资源</a>
+                            <li role="presentation"><a href="/categories/Python/"><i class="fa fa-fw"></i>Python</a>
+                            </li>
+                        
+                            <li role="presentation"><a href="/categories/Android/"><i class="fa fa-fw"></i>Android</a>
+                            </li>
+                        
+                            <li role="presentation"><a href="/categories/iOS/"><i class="fa fa-fw"></i>iOS</a>
+                            </li>
+                        
+                            <li role="presentation"><a href="/categories/React Native/"><i class="fa fa-fw"></i>React Native</a>
+                            </li>
+                        
+                            <li role="presentation"><a href="/categories/小程序/"><i class="fa fa-fw"></i>小程序</a>
+                            </li>
+                        
+                            <li role="presentation"><a href="/categories/杂谈/"><i class="fa fa-fw"></i>杂谈</a>
                             </li>
                         
                     </ul>
@@ -133,16 +148,13 @@
         </span>
     </span>
     
-    	
-	
+    
     <span class="fa-wrap">
         <i class="fa fa-clock-o"></i>
         <span class="date-meta">2017/05/18</span>
     </span>
 	
 	<span id="busuanzi_container_page_pv"> 阅读量<span id="busuanzi_value_page_pv"></span>次</span>
-	
-	
 </div>
             
             
@@ -175,8 +187,8 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * Sample React Native App</div><div class="line"> * https://github.com/facebook/react-native</div><div class="line"> * @flow</div><div class="line"> */</div><div class="line"></div><div class="line">import React, &#123;Component,PropTypes&#125; from &apos;react&apos;;</div><div class="line">import &#123;</div><div class="line">    Text,</div><div class="line">    StyleSheet,</div><div class="line">    View,</div><div class="line">    TouchableOpacity,</div><div class="line">&#125; from &apos;react-native&apos;;</div><div class="line"></div><div class="line">var Dimensions = require(&apos;Dimensions&apos;);</div><div class="line">var screenWidth = Dimensions.get(&apos;window&apos;).width;</div><div class="line"></div><div class="line">export default  class TimerButton extends Component &#123;</div><div class="line"></div><div class="line">    constructor(props) &#123;</div><div class="line">        super(props)</div><div class="line">        this.state = &#123;</div><div class="line">            timerCount: this.props.timerCount || 60,</div><div class="line">            timerTitle: this.props.timerTitle || &apos;获取验证码&apos;,</div><div class="line">            counting: false,</div><div class="line">            selfEnable: true,</div><div class="line">        &#125;;</div><div class="line">        this.shouldStartCountting = this.shouldStartCountting.bind(this)</div><div class="line">        this.countDownAction = this.countDownAction.bind(this)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    static propTypes = &#123;</div><div class="line">        style: PropTypes.object,</div><div class="line">        textStyle: Text.propTypes.style,</div><div class="line">        onClick: PropTypes.func,</div><div class="line">        disableColor: PropTypes.string,</div><div class="line">        timerTitle: PropTypes.string,</div><div class="line">        enable: React.PropTypes.oneOfType([React.PropTypes.bool,React.PropTypes.number])</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    countDownAction() &#123;</div><div class="line">        const codeTime = this.state.timerCount;</div><div class="line">        this.interval = setInterval(() =&gt; &#123;</div><div class="line">            const timer = this.state.timerCount - 1</div><div class="line">            if (timer === 0) &#123;</div><div class="line">                this.interval &amp;&amp; clearInterval(this.interval);</div><div class="line">                this.setState(&#123;</div><div class="line">                    timerCount: codeTime,</div><div class="line">                    timerTitle: this.props.timerTitle || &apos;获取验证码&apos;,</div><div class="line">                    counting: false,</div><div class="line">                    selfEnable: true</div><div class="line">                &#125;)</div><div class="line">            &#125; else &#123;</div><div class="line">                this.setState(&#123;</div><div class="line">                    timerCount: timer,</div><div class="line">                    timerTitle: `重新获取($&#123;timer&#125;s)`,</div><div class="line">                &#125;)</div><div class="line">            &#125;</div><div class="line">        &#125;, 1000)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    shouldStartCountting(shouldStart) &#123;</div><div class="line">        if (this.state.counting) &#123;</div><div class="line">            return</div><div class="line">        &#125;</div><div class="line">        if (shouldStart) &#123;</div><div class="line">            this.countDownAction()</div><div class="line">            this.setState(&#123;counting: true, selfEnable: false&#125;)</div><div class="line">        &#125; else &#123;</div><div class="line">            this.setState(&#123;selfEnable: true&#125;)</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    componentWillUnmount() &#123;</div><div class="line">        clearInterval(this.interval)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    render() &#123;</div><div class="line">        const &#123;onClick, style, textStyle, disableColor&#125; = this.props;</div><div class="line">        const &#123;counting, timerTitle, selfEnable&#125; = this.state;</div><div class="line">        return (</div><div class="line">            &lt;TouchableOpacity activeOpacity=&#123;counting ? 1 : 0.8&#125; onPress=&#123;() =&gt; &#123;</div><div class="line">                if (!counting &amp;&amp;selfEnable) &#123;</div><div class="line">                    this.setState(&#123;selfEnable: false&#125;);</div><div class="line">                    this.shouldStartCountting(true);</div><div class="line">                &#125;;</div><div class="line">            &#125;&#125;&gt;</div><div class="line">                &lt;View</div><div class="line">                    style=&#123;styles.styleCodeView&#125;&gt;</div><div class="line">                    &lt;Text</div><div class="line">                        style=&#123;[&#123;fontSize: 12&#125;, textStyle, &#123;color: ((!counting &amp;&amp; selfEnable) ? textStyle.color : disableColor || &apos;gray&apos;)&#125;]&#125;&gt;&#123;timerTitle&#125;&lt;/Text&gt;</div><div class="line">                &lt;/View&gt;</div><div class="line">            &lt;/TouchableOpacity&gt;</div><div class="line">        )</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">const styles = StyleSheet.create(&#123;</div><div class="line">    container: &#123;</div><div class="line">        flex: 1,</div><div class="line">        marginTop: 20</div><div class="line">    &#125;,</div><div class="line">    styleCodeView: &#123;</div><div class="line">        height: 28,</div><div class="line">        width: screenWidth*0.22,</div><div class="line">        borderColor: &apos;#dc1466&apos;,</div><div class="line">        borderWidth: 1,</div><div class="line">        borderRadius: 5,</div><div class="line">        justifyContent: &apos;center&apos;,</div><div class="line">        alignItems: &apos;center&apos;,</div><div class="line">    &#125;,</div><div class="line">    styleTextCode: &#123;</div><div class="line">        fontSize: 12,</div><div class="line">        color: &apos;#dc1466&apos;,</div><div class="line">        textAlign: &apos;center&apos;,</div><div class="line">    &#125;,</div><div class="line"></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 <h3 id="如何使用？"><a href="#如何使用？" class="headerlink" title="如何使用？"></a>如何使用？</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">import TimerButton from &apos;./TimerButton&apos;</div><div class="line"></div><div class="line">var Dimensions = require(&apos;Dimensions&apos;);</div><div class="line">var screenWidth = Dimensions.get(&apos;window&apos;).width;</div><div class="line"></div><div class="line">//省略...</div><div class="line">&lt;TimerButton</div><div class="line"> style=&#123;&#123;width: screenWidth*0.2,marginRight: 10&#125;&#125;</div><div class="line"> timerCount=&#123;60&#125;</div><div class="line"> textStyle=&#123;&#123;color: &apos;#dc1466&apos;&#125;&#125;</div><div class="line"> onclick=&#123;(start)=&gt;&#123;</div><div class="line"> &#125;&#125;/&gt;</div></pre></td></tr></table></figure>
     </div>
-	
-	<!--打赏-->
+
+	   <!--打赏-->
 		<div class="reward">
 	   <div class="reward-button">赏 <span class="reward-code">
 		<span class="alipay-code"> <img class="alipay-img wdp-appear" src="http://ohe65w0xx.bkt.clouddn.com/alipay.png"><b>支付宝打赏</b> </span> 
@@ -184,21 +196,18 @@
 	   </span></div>
 	  <p class="reward-notice">如果文章对你有帮助，欢迎点击上方按钮打赏作者</p>
       </div>
-
+	  <!--打赏-->
+	
     <div class="post-footer">   
         <div>
             
                 转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Snippet</a>
             
         </div>
-		
         <div>
             
         </div>  
     </div>
-	
-	
-	
 </article>
 
 <div class="article-nav prev-next-wrap clearfix">
@@ -215,7 +224,7 @@
         <!--PC和WAP自适应版-->
 <div id="SOHUCS"></div>
 <script type="text/javascript">
-	(function(){var appid='cyt8KmUC1';var conf='prod_855a68d3b3d91855360a6215672a505a';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	(function(){var appid='cytettIQe';var conf='prod_5adcbaeeac53951692e9780989c7fed5';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
 	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
 </script>
     </div>
@@ -311,7 +320,9 @@
         <h3 class="title">友链</h3>
         <div class="content friends-link">
         
-            <a href="http://www.shenliyang.com" class="fa" target="_blank">个人博客</a>
+            <a href="http://blog.csdn.net/xiangzhihong8/" class="fa" target="_blank">作者博客</a>
+        
+            <a href="https://yq.aliyun.com/u/xiangzhihong" class="fa" target="_blank">阿里云博客</a>
         
         </div>
     </div>
@@ -334,8 +345,10 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12"> 
+			
 			    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
                 <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+			
                 <span>Copyright &copy; 2017
                 </span> | 
                 <span>
