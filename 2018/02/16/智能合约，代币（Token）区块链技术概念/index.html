@@ -1,0 +1,421 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="向志洪">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="http://www.xiangzhihong.com">
+    <!--SEO-->
+
+
+
+
+
+<meta name="robots" content="all">
+<meta name="google" content="all">
+<meta name="googlebot" content="all">
+<meta name="verify" content="all">
+    <!--Title-->
+
+
+<title>智能合约，代币（Token）区块链技术概念 | 向志洪</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="向志洪" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+    <div class="hide">
+		<script type="text/javascript">
+			var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+	</div>
+    
+</head></html>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+<body>
+    <header class="main-header" style="background-image:url(http://7xpw2b.com1.z0.glb.clouddn.com/hexo-sinppet/img/banner2.jpg)">
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title="">
+            <img src="/img/avatar.jpg" alt="logo头像">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                 <img src="/img/branding.png" alt="Snippet 博客主题">  
+             
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only">Toggle navigation</span>
+                    <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation"><a href="/"><i class="fa fa-fw fa-home"></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation"><a href="/categories/前端/"><i class="fa fa-fw"></i>前端</a>
+                            </li>
+                        
+                            <li role="presentation"><a href="/categories/后端/"><i class="fa fa-fw"></i>后端</a>
+                            </li>
+                        
+                            <li role="presentation"><a href="/categories/Java/"><i class="fa fa-fw"></i>Java</a>
+                            </li>
+                        
+                            <li role="presentation"><a href="/categories/Python/"><i class="fa fa-fw"></i>Python</a>
+                            </li>
+                        
+                            <li role="presentation"><a href="/categories/Android/"><i class="fa fa-fw"></i>Android</a>
+                            </li>
+                        
+                            <li role="presentation"><a href="/categories/iOS/"><i class="fa fa-fw"></i>iOS</a>
+                            </li>
+                        
+                            <li role="presentation"><a href="/categories/React Native/"><i class="fa fa-fw"></i>React Native</a>
+                            </li>
+                        
+                            <li role="presentation"><a href="/categories/小程序/"><i class="fa fa-fw"></i>小程序</a>
+                            </li>
+                        
+                            <li role="presentation"><a href="/categories/杂谈/"><i class="fa fa-fw"></i>杂谈</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="智能合约，代币（Token）区块链技术概念">
+            
+	            智能合约，代币（Token）区块链技术概念
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/区块链">
+            区块链
+        </a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            <a href="/tags/区块链">
+               区块链
+            </a>
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta">2018/02/16</span>
+    </span>
+	
+	<span id="busuanzi_container_page_pv"> 阅读量<span id="busuanzi_value_page_pv"></span>次</span>
+</div>
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <p>智能合约（Smart  Contract）是区块链一个重要的功能。说到智能合约，我们得把视野从比特币转到以太坊，因为完整的支持智能合约是以太坊和比特币的重大差别。</p>
+<p>让我们发个币吧</p>
+<p>听说区块链上可以发币，想发行一个自己的币 ①？来，直接上代码！</p>
+<p>我希望你即使不懂代码，也要放下对未知的恐惧，静下心来一行一行读。毕竟这代码简单到大多数人都能看懂。</p>
+<p>contract XMT {</p>
+<pre><code>mapping (address =&gt; uint) public balanceOf;
+
+
+
+function XMT() public {
+
+    balanceOf[msg.sender] = 1000;
+
+}
+
+
+
+function transfer(address to, uint value) public {
+
+    require(balanceOf[msg.sender] &gt;= value);
+
+    require(balanceOf[to] + value &gt;= balanceOf[to]);
+
+    balanceOf[msg.sender] -= value;
+
+    balanceOf[to] += value;
+
+}
+</code></pre><p>}</p>
+<p>惊人之处来了。如上代码不是概念性的伪代码，而是可以运行的真实代码。</p>
+<p>首先它定义了一个记录每个账户有多少余额的数组： balanceOf 。</p>
+<pre><code>mapping (address =&gt; uint) public balanceOf;
+</code></pre><p>看不懂的同学就把它当作有两列的表格，第一列是账号，第二列是余额。用 balanceOf [ 账号 ] 就可以查到这个账号的余额，也可以更改余额。</p>
+<p>接下来是两个功能：初始化和转账。</p>
+<p>初始化函数XMT( )很简单，就是合约建立的时候，任性的把1000个币全都给创建者。</p>
+<pre><code>balanceOf[msg.sender] = 1000;
+</code></pre><p>大家要问，币是怎么产生的？没什么产生过程，想给谁多少就是多少。初始的时候写一个亿也就有了一个亿的币。如此随意的就能产生币，希望会引发大家在夜深人静的时候，对于货币到底是什么这样的深层思考。</p>
+<p>我们接着看：</p>
+<p>转账代码 transfer( ) 核心是两句：</p>
+<pre><code>balanceOf[msg.sender] -= value;
+
+balanceOf[to] += value;
+</code></pre><p>谁发起的转账，就把他(msg.sender)的账户余额减去转账金额(value)那么多，然后把收款人(to)的余额加上那么多②。</p>
+<p>别小看这两句话。仔细琢磨一下，这其实就是账户和转账的本质。这简单的两句话是银行体系这么多年花了多少的硬件软件，人力物力才能达到的效果。</p>
+<p>大家常常听说谁谁谁又发币了。从技术角度，就是在以太坊上部署了包含这三行代码的一个合约。在以太坊的官方网站上就有一段100多行的标准代码：<a href="https://ethereum.org/token。这段代码里面还有其他一些功能，比如可以给这个代币指定名称，符号，还有授权转账，销毁等功能。大家只要拷贝这个代码，指定你的新币的名称（比如" target="_blank" rel="external">https://ethereum.org/token。这段代码里面还有其他一些功能，比如可以给这个代币指定名称，符号，还有授权转账，销毁等功能。大家只要拷贝这个代码，指定你的新币的名称（比如</a> Xiaomao Token），符号（比如：XMT） ⑦，还有初始发行量比如：1,000,000,000)，一个新的币就诞生了。整个过程3分钟应该够了。把参数改一下再部署一下代码，第二个新币又诞生了。</p>
+<p>这新生的货币，虽然没啥用，但在安全性方面和以太币天生是一样的。这就像家长给孩子发了一些饭票，而这饭票的防伪技术和美元一模一样。看起来相当的大材小用，但如果把发货币成本降到几乎为零，把防伪能力提升到已知的最高水平，随着时间的推移，难说不会产生什么重要的应用。</p>
+<p>部署代码</p>
+<p>代码看懂了，下一步呢？怎么运行这代码？这代码到底在哪里运行呢？接着我们看部署过程。</p>
+<p>部署代码，你需要在以太坊的客户端里，把这段代码粘贴进去，并且按“部署”按钮。客户端就会把这种人可以读懂的代码③编译成字节码，然后生成一笔从你的地址，发给一个空地址（0x0）的交易，并把字节码存在一个给定的字段里面（叫input），签名后发到整个网络上。接下来的操作和普通交易完全一样。矿工收到了以后立刻开始打包，算nonce，找到了以后再发送给全网络。这个可以被执行的代码，就永久的以只可读取不可更改的方式，存在了区块链上。</p>
+<p>智能合约建立后会返回一个地址。每个币都唯一的对应于一个智能合约，也就是对应于一个地址。比如著名的EOS币，就是地址为 0x86fa049857e0209aa7d9e616f7eb3b3b78ecfdb0 的智能合约发行的。你可以把这个地址想象成以太坊世界里的门牌号。币是以这个唯一的门牌号来区分的，而不是那三位的名字。</p>
+<p>调用合约</p>
+<p>现在，合约的代码安全的存在区块链上了。那么接下来这些代码什么时候执行呢？</p>
+<p>一个智能合约里面有多个函数。调用智能合约里的一个函数，和发起一笔普通转账交易一样。很多的客户端已经内置进去了。你提供合约的地址，提供调用的函数，以及传入参数，然后发送消息就开始执行了⑤。你可以把它理解为从门牌号的屋子里面拿东西或者放东西进到给定的屋子。</p>
+<p>消息发出以后，所有的矿工都执行这段代码，并且试图把结果打包到自己的数据块中，胜出的矿工获得挖矿的收益。所有的节点收到这个新的区块，也用自己的虚拟机执行一遍代码，确认结果和收到的块内结果无异之后才当作合法区块接受。</p>
+<p>区块链就是通过这种超额的浪费，看似无意义的算nonce，看似无意义的反反复复，没完没了的执行同一段代码，来保证了一个安全的系统。这事儿就跟早上叠被子晚上还得展开一样，看似不产生价值，实则是房（shu）间（ju）整（an）洁（quan）不可或缺的一环。</p>
+<p>花费 Gas</p>
+<p>既然代码要被所有节点反复执行，那么问题就来了：要是谁写了巨长无比的代码，或者谁写了有问题的代码，死循环不结束了怎么办？以太坊的解决方法就是引入gas，每执行一个操作都是收费的。怎么收费呢？</p>
+<p>首先每个交易的代码执行量越大，需要的gas就越多。字节码每一个操作都有固定的gas花销。以发币代码为例，如下是以太坊给我发的账单。总共执行了320步字节码的操作。有的操作很便宜，比如压栈(PUSH1)，只要3个单位的gas，有的就很贵，比如在区块链上存数据(SSTORE)就一下子花了20,000个单位，而读取数据(SLOAD) 中等， 200个单位。如下加在一起就是1,300,213个单位的gas。只要执行这段代码，就是要这么多gas，好像汽车修理店工时的概念。</p>
+<p>提交的时候每个人都可以出价，声明自己愿意为每个单位gas付多少钱(price)。这个有点像修理店的每工时的价钱。比如你可以出8 gwei/gas，或20 gwei/gas ⑥。矿工们大多数都是按照这个价钱排序优先打包出钱多的。出钱少就慢，甚至没人理。</p>
+<p>矿工的费用 =  gas单位数 * 单位价格。</p>
+<p>如下图所示交易，1,300,213 gas * 2 gwei/gas = 2,600,426 gwei，或0.002600426 以太币，折合1.832美元。最终把这笔交易打包进区块链的矿工获得这部分费用。</p>
+<p>除了价格以外，还需要指定一个gas limit，就是你为了这段代码最多愿意付多少单位的gas。这就是为了预防代码出现问题，无限循环下去，直到把你的账户里的钱耗尽为止。如上图，gas limit设为1,300,213个，这段代码实际上也只用了1,300,213个单位的gas，还好，正好没有超过限制。否则超过了程序执行会嘎然而止，已经花的gas不退。</p>
+<p>智能合约的价值</p>
+<p>智能合约第一次认可了代码的自主权。代码可以拥财产，可以和人一样平等的在区块链上交易。一个合约的代码一旦发布，谁都改不了了，连上帝都无能为力。这就是信任的来源。大家可以像坚信自然定律一样坚信这个合约如代码所写的执行。你不需要相信任何人，只需要认真的读智能合约的代码，就可以确定性的知道这个合约将如何执行。</p>
+<p>如上从技术层面简单的介绍了一下智能合约的过程。但智能合约和区块链真正的价值不在技术，而是它们对于价值传递以及信任建立的贡献。</p>
+<p>我们看到的人类发展总是多条线并进，一条是生产效率，蒸汽机，电力，计算机，互联网，人工智能等都在这条线上；区块链是生产关系的进步这条线上的，这条线上曾经有过货币，现代公司制度，股票，现在有了区块链。</p>
+<p>晚一些我再聊一下它对信任的贡献，还有可能对于社会的改变。</p>
+<p>后注</p>
+<p>① 很多专业人士希望把token翻译成通证，而不是代币。“通证”更加符合单词原意，符合事物本质，也希望避免被当作货币监管。这像极了“网志”和“博客”两个译名之争。结果博客被接受，更加准确，拗口，后来出现的网志不再有人提起。这个结果或许可以预测通证这个翻译的结果。</p>
+<p>②Transfer函数前面的两句require，第一个是要求你的余额必须大于转账金额，第二个是要求转账金额不要过大以至于大于256位整数能容纳的数字。msg.sender 是内置的，可以获取消息的发送人的地址。</p>
+<p>③可以搜索Remix，或MyEtherWallet。Solidity的语法和JavaScript很像，专门用于以太坊上编写智能合约。</p>
+<p>④这里解释一下技术细节。建立合约的时候，用户发起一笔发款人为自己，收款人为空地址 0x0 的交易，并把字节码放到交易里面叫做输入（Input）的字段里面。矿工就会生成一个新的合约地址并把代码存在这个地址里。</p>
+<p>⑤技术实现，其实是在交易数据的Input字段加上了一个编码后的数字。比如这串数字：a9059cbb00000000000000000000000007fdf7518745170e3d9de26874578b6c0a72b9dc0000000000000000000000000000000000000000000000000000000000000010</p>
+<p>颜色是我为了区分加的，前四字节a9059cbb是函数名 ，”transfer(address,uint256)”这个字符串的SHA3-256哈希结果a9059cbb2ab09eb219583f4a59a5d0623ade346d962bcd4e46b11da047c9049b的前4位，用来指定是哪一个函数，根据函数定义，就知道后32位是第一个参数：地址 ，也就是0x07fdf7518745170e3d9de26874578b6c0a72b9dc。接下来32个字节是</p>
+<p>金额 ，相当于十进制16。大家看得出，现在的区块链从抽象水平上基本上还停留在计算机的DOS和汇编语言的时代。</p>
+<p>⑥ 1 gwei 就是 1,000,000,000 个wei。这个g就跟内存单位多少GB的G是一个概念，就是10亿的意思。10的18次方个wei就等于一个以太币。所以1 gwei看起来很大，其实也就是10的9次方分之1个以太币而已。一个以太币在我写这篇文章的时候是764美元，你大概有概念了是多少钱了吧。</p>
+<p>⑦ 发币时候指定的名称，符号，仅仅就是一个字付串，是可以重复的。你可以发一个币叫USD，RMB，或任何你能想象的名字。Token是以发行这个Token的智能合约的地址唯一指定的，和名字无关。</p>
+    </div>
+
+	   <!--打赏-->
+		<div class="reward">
+	   <div class="reward-button">赏 <span class="reward-code">
+		<span class="alipay-code"> <img class="alipay-img wdp-appear" src="http://ohe65w0xx.bkt.clouddn.com/alipay.png"><b>支付宝打赏</b> </span> 
+		<span class="wechat-code"> <img class="wechat-img wdp-appear" src="http://ohe65w0xx.bkt.clouddn.com/weipay.png"><b>微信打赏</b> </span> 
+	   </span></div>
+	  <p class="reward-notice">如果文章对你有帮助，欢迎点击上方按钮打赏作者</p>
+      </div>
+	  <!--打赏-->
+	
+    <div class="post-footer">   
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Snippet</a>
+            
+        </div>
+        <div>
+            
+        </div>  
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/2018/02/25/Android9.0新特性曝光，你准备好了吗/" class="pre-post btn btn-default"><i class="fa fa-angle-left fa-fw"></i>上一篇</a>
+    
+    
+        <a href="/2018/02/15/使用Gradle方式构建Kotlin缓存/" class="next-post btn btn-default">下一篇<i class="fa fa-angle-right fa-fw"></i></a>
+    
+</div>
+
+
+    <div id="comments">
+        <!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cytettIQe';var conf='prod_5adcbaeeac53951692e9780989c7fed5';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>
+    </div>
+                </main>
+                <aside class="col-md-4 sidebar">
+        
+        <div class="widget">    
+        <h3 class="title">搜索</h3>
+        <div id="search-form">
+            <div id="result-mask" class="hide"></div>
+            <div class="search-area">
+                
+                    <input id="search-key" type="search" autocomplete="off" placeholder="搜点什么呢?">
+                    <button type="button" class="search-form-submit" id="search-local">站内搜索</button>
+                
+                
+            </div>
+            <div id="result-wrap" class="hide">
+                <div id="search-result"></div>
+            </div>
+            <div class="hide">
+                <template id="search-tpl">
+                    <div class="item">
+                        <a href="/{path}" title="{title}">
+                            <div class="title">{title}</div>
+                            <div class="content">{content}</div>
+                        </a>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+        
+        <div class="widget notification">
+        <h3 class="title">网站公告</h3>
+        <div>
+            <p>主题Snippet v1.2.0版本已经上线！欢迎更新~ <br>
+主题下载：<a href="https://github.com/shenliyang/hexo-theme-snippet" title="fork me" target="_blank">Snippet主题</a> <br>
+<hr>接受贡献，包括不限于提交问题与需求，修复代码。欢迎Pull Request<br>支持主题：<a href="https://github.com/shenliyang/hexo-theme-snippet/stargazers">Star一下</a>
+</p>
+        </div>
+    </div>
+        
+        <div class="widget">
+      <h3 class="title">社交</h3> 
+        <div class="content social">
+            
+	            <a href="//github.com/shenliyang" rel="external nofollow" title="Github" target="_blank">
+			    	<i class="git fa fa-git"></i>
+			    </a>
+            
+	            <a href="mailto:snippet@91h5.cc" rel="external nofollow" title="邮箱" target="_blank">
+			    	<i class="envelope-o fa fa-envelope-o"></i>
+			    </a>
+            
+	            <a href="/" rel="external nofollow" title="联系QQ" target="_blank">
+			    	<i class="qq fa fa-qq"></i>
+			    </a>
+            
+	            <a href="/" rel="external nofollow" title="微博" target="_blank">
+			    	<i class="weibo fa fa-weibo"></i>
+			    </a>
+            
+	            <a href="/" rel="external nofollow" title="QQ群" target="_blank">
+			    	<i class="users fa fa-users"></i>
+			    </a>
+            
+	            <a href="/atom.xml" rel="external nofollow" title="RSS" target="_blank">
+			    	<i class="feed fa fa-feed"></i>
+			    </a>
+            
+        </div>
+    </div>
+        
+        <div class="widget">
+        <h3 class="title">分类</h3>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/"><i class="fa" aria-hidden="true">Android</i></a><span class="category-list-count">43</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/系统/"><i class="fa" aria-hidden="true">系统</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Flutter/"><i class="fa" aria-hidden="true">Flutter</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Google/"><i class="fa" aria-hidden="true">Google</i></a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Google/VR/"><i class="fa" aria-hidden="true">VR</i></a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Kotlin/"><i class="fa" aria-hidden="true">Kotlin</i></a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/PWA/"><i class="fa" aria-hidden="true">PWA</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/"><i class="fa" aria-hidden="true">Python</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/React-Native/"><i class="fa" aria-hidden="true">React Native</i></a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/"><i class="fa" aria-hidden="true">Spring</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android/"><i class="fa" aria-hidden="true">android</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/"><i class="fa" aria-hidden="true">iOS</i></a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ios/"><i class="fa" aria-hidden="true">ios</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/"><i class="fa" aria-hidden="true">python</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/人工智能/"><i class="fa" aria-hidden="true">人工智能</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/"><i class="fa" aria-hidden="true">前端</i></a><span class="category-list-count">22</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/区块链/"><i class="fa" aria-hidden="true">区块链</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/后端/"><i class="fa" aria-hidden="true">后端</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/小程序/"><i class="fa" aria-hidden="true">小程序</i></a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术人生/"><i class="fa" aria-hidden="true">技术人生</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/机器学习/"><i class="fa" aria-hidden="true">机器学习</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂谈/"><i class="fa" aria-hidden="true">杂谈</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程语言/"><i class="fa" aria-hidden="true">编程语言</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/"><i class="fa" aria-hidden="true">设计模式</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/资料库/"><i class="fa" aria-hidden="true">资料库</i></a><span class="category-list-count">1</span></li></ul>
+    </div>
+        
+        <div class="widget">
+      <h3 class="title">归档</h3>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/"><i class="fa" aria-hidden="true">三月 2018</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/"><i class="fa" aria-hidden="true">二月 2018</i></a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/"><i class="fa" aria-hidden="true">一月 2018</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/"><i class="fa" aria-hidden="true">十二月 2017</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/"><i class="fa" aria-hidden="true">十一月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/"><i class="fa" aria-hidden="true">十月 2017</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/"><i class="fa" aria-hidden="true">八月 2017</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/"><i class="fa" aria-hidden="true">六月 2017</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/"><i class="fa" aria-hidden="true">五月 2017</i></a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/"><i class="fa" aria-hidden="true">三月 2017</i></a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/"><i class="fa" aria-hidden="true">二月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/"><i class="fa" aria-hidden="true">一月 2017</i></a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/"><i class="fa" aria-hidden="true">十二月 2016</i></a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/"><i class="fa" aria-hidden="true">十一月 2016</i></a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/"><i class="fa" aria-hidden="true">十月 2016</i></a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/"><i class="fa" aria-hidden="true">九月 2016</i></a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/"><i class="fa" aria-hidden="true">八月 2016</i></a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/"><i class="fa" aria-hidden="true">七月 2016</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/"><i class="fa" aria-hidden="true">六月 2016</i></a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/"><i class="fa" aria-hidden="true">五月 2016</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/"><i class="fa" aria-hidden="true">四月 2016</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/"><i class="fa" aria-hidden="true">三月 2016</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/"><i class="fa" aria-hidden="true">二月 2016</i></a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/"><i class="fa" aria-hidden="true">一月 2016</i></a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/"><i class="fa" aria-hidden="true">九月 2015</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/"><i class="fa" aria-hidden="true">六月 2015</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/"><i class="fa" aria-hidden="true">五月 2015</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/"><i class="fa" aria-hidden="true">四月 2015</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/"><i class="fa" aria-hidden="true">三月 2015</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/"><i class="fa" aria-hidden="true">一月 2015</i></a><span class="archive-list-count">1</span></li></ul>
+    </div>
+        
+        <div class="widget">
+    <h3 class="title">标签云</h3>
+    <div class="content tag-cloud">
+        <a href="/tags/AR/" style="font-size: 10px">AR</a> <a href="/tags/Android/" style="font-size: 20px">Android</a> <a href="/tags/Angular2/" style="font-size: 10px">Angular2</a> <a href="/tags/FlexBox布局/" style="font-size: 10px">FlexBox布局</a> <a href="/tags/Flutter/" style="font-size: 10px">Flutter</a> <a href="/tags/Google/" style="font-size: 10.77px">Google</a> <a href="/tags/Java/" style="font-size: 15.38px">Java</a> <a href="/tags/Kotlin/" style="font-size: 17.69px">Kotlin</a> <a href="/tags/Node/" style="font-size: 10.77px">Node</a> <a href="/tags/OpenGL/" style="font-size: 10px">OpenGL</a> <a href="/tags/PWA/" style="font-size: 10px">PWA</a> <a href="/tags/Promise/" style="font-size: 10px">Promise</a> <a href="/tags/Python/" style="font-size: 16.15px">Python</a> <a href="/tags/React-Native/" style="font-size: 18.46px">React Native</a> <a href="/tags/Spring/" style="font-size: 10.77px">Spring</a> <a href="/tags/Swift/" style="font-size: 10px">Swift</a> <a href="/tags/VR/" style="font-size: 10.77px">VR</a> <a href="/tags/Xcode/" style="font-size: 11.54px">Xcode</a> <a href="/tags/android/" style="font-size: 12.31px">android</a> <a href="/tags/eact-Native/" style="font-size: 10px">eact Native</a> <a href="/tags/gif/" style="font-size: 10px">gif</a> <a href="/tags/gulp/" style="font-size: 10px">gulp</a> <a href="/tags/https/" style="font-size: 10px">https</a> <a href="/tags/iOS/" style="font-size: 16.92px">iOS</a> <a href="/tags/ios/" style="font-size: 16.15px">ios</a> <a href="/tags/mac/" style="font-size: 10px">mac</a> <a href="/tags/react/" style="font-size: 10px">react</a> <a href="/tags/swift/" style="font-size: 10px">swift</a> <a href="/tags/webpack/" style="font-size: 10px">webpack</a> <a href="/tags/个人博客/" style="font-size: 10.77px">个人博客</a> <a href="/tags/人工智能/" style="font-size: 10px">人工智能</a> <a href="/tags/入门/" style="font-size: 10.77px">入门</a> <a href="/tags/全栈/" style="font-size: 10px">全栈</a> <a href="/tags/内存分配/" style="font-size: 10px">内存分配</a> <a href="/tags/前端/" style="font-size: 19.23px">前端</a> <a href="/tags/前端开发/" style="font-size: 11.54px">前端开发</a> <a href="/tags/区块链/" style="font-size: 11.54px">区块链</a> <a href="/tags/原理/" style="font-size: 10px">原理</a> <a href="/tags/原生/" style="font-size: 10px">原生</a> <a href="/tags/后端/" style="font-size: 14.62px">后端</a> <a href="/tags/垃圾回收/" style="font-size: 10px">垃圾回收</a> <a href="/tags/小程序/" style="font-size: 13.85px">小程序</a> <a href="/tags/微信/" style="font-size: 13.08px">微信</a> <a href="/tags/打包/" style="font-size: 10px">打包</a> <a href="/tags/搭建网站/" style="font-size: 10px">搭建网站</a> <a href="/tags/新特性/" style="font-size: 10.77px">新特性</a> <a href="/tags/机器学习/" style="font-size: 10.77px">机器学习</a> <a href="/tags/杂谈/" style="font-size: 14.62px">杂谈</a> <a href="/tags/流量/" style="font-size: 10px">流量</a> <a href="/tags/深入理解/" style="font-size: 10px">深入理解</a> <a href="/tags/深入系统/" style="font-size: 10px">深入系统</a> <a href="/tags/混淆打包/" style="font-size: 10px">混淆打包</a> <a href="/tags/环境/" style="font-size: 10px">环境</a> <a href="/tags/知识库/" style="font-size: 10.77px">知识库</a> <a href="/tags/硬件/" style="font-size: 10px">硬件</a> <a href="/tags/算法/" style="font-size: 10px">算法</a> <a href="/tags/系统服务/" style="font-size: 10px">系统服务</a> <a href="/tags/编程语言/" style="font-size: 10.77px">编程语言</a> <a href="/tags/设计模式/" style="font-size: 10px">设计模式</a> <a href="/tags/调试/" style="font-size: 10px">调试</a>
+    </div>
+  </div>
+        
+        <div class="widget">
+        <h3 class="title">友链</h3>
+        <div class="content friends-link">
+        
+            <a href="http://blog.csdn.net/xiangzhihong8/" class="fa" target="_blank">作者博客</a>
+        
+            <a href="https://yq.aliyun.com/u/xiangzhihong" class="fa" target="_blank">阿里云博客</a>
+        
+        </div>
+    </div>
+        
+    </aside>
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+			
+			    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+                <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+			
+                <span>Copyright &copy; 2017
+                </span> | 
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/js/search.js?rev=@@hash"></script>
+
+
+<script src="/js/app.js?rev=@@hash"></script>
+</body>

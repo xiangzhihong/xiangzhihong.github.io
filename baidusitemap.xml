@@ -4,6 +4,166 @@
 
     
   <url>
+    <loc>http://www.xiangzhihong.com/2018/03/01/Flutter%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</loc>
+    <lastmod>2018-03-17T07:46:01.931Z</lastmod>
+    <data>
+        <display>
+        <title>Flutter环境搭建</title>
+        <pubTime>2018-02-28T16:00:00.000Z</pubTime>
+        
+        <tag>Flutter</tag>
+         
+         
+           
+             
+              <breadCrumb title="Flutter" url="http://www.xiangzhihong.com/categories/Flutter/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.xiangzhihong.com/2016/08/12/Android%20Studio%E6%9C%80%E5%85%A8%E6%8F%92%E4%BB%B6%E6%95%B4%E7%90%86/</loc>
+    <lastmod>2018-03-17T07:44:00.518Z</lastmod>
+    <data>
+        <display>
+        <title>Android Studio最全插件整理</title>
+        <pubTime>2016-08-11T16:00:00.000Z</pubTime>
+        
+        <tag>Kotlin</tag>
+         
+         
+           
+             
+              <breadCrumb title="Kotlin" url="http://www.xiangzhihong.com/categories/Kotlin/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.xiangzhihong.com/2017/12/18/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%B8%B8%E8%A7%81%E5%85%B1%E8%AF%86%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/</loc>
+    <lastmod>2018-03-17T07:43:11.011Z</lastmod>
+    <data>
+        <display>
+        <title>区块链常见共识算法总结</title>
+        <pubTime>2017-12-17T16:00:00.000Z</pubTime>
+        
+        <tag>区块链</tag>
+         
+         
+           
+             
+              <breadCrumb title="区块链" url="http://www.xiangzhihong.com/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.xiangzhihong.com/2017/12/16/Android%20KTX%E4%B8%BE%E4%BE%8B/</loc>
+    <lastmod>2018-03-17T07:41:20.198Z</lastmod>
+    <data>
+        <display>
+        <title>Android KTX举例</title>
+        <pubTime>2017-12-15T16:00:00.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://www.xiangzhihong.com/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.xiangzhihong.com/2018/02/16/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%EF%BC%8C%E4%BB%A3%E5%B8%81%EF%BC%88Token%EF%BC%89%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E6%A6%82%E5%BF%B5/</loc>
+    <lastmod>2018-03-17T07:36:49.258Z</lastmod>
+    <data>
+        <display>
+        <title>智能合约，代币（Token）区块链技术概念</title>
+        <pubTime>2018-02-15T16:00:00.000Z</pubTime>
+        
+        <tag>区块链</tag>
+         
+         
+           
+             
+              <breadCrumb title="区块链" url="http://www.xiangzhihong.com/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.xiangzhihong.com/2018/02/25/Android9.0%E6%96%B0%E7%89%B9%E6%80%A7%E6%9B%9D%E5%85%89%EF%BC%8C%E4%BD%A0%E5%87%86%E5%A4%87%E5%A5%BD%E4%BA%86%E5%90%97/</loc>
+    <lastmod>2018-03-17T07:35:07.267Z</lastmod>
+    <data>
+        <display>
+        <title>Android9.0新特性曝光，你准备好了吗</title>
+        <pubTime>2018-02-24T16:00:00.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://www.xiangzhihong.com/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.xiangzhihong.com/2018/02/15/%E4%BD%BF%E7%94%A8Gradle%E6%96%B9%E5%BC%8F%E6%9E%84%E5%BB%BAKotlin%E7%BC%93%E5%AD%98/</loc>
+    <lastmod>2018-03-17T07:33:32.943Z</lastmod>
+    <data>
+        <display>
+        <title>Gradle构建缓存</title>
+        <pubTime>2018-02-14T16:00:00.000Z</pubTime>
+        
+        <tag>Kotlin</tag>
+         
+         
+           
+             
+              <breadCrumb title="Kotlin" url="http://www.xiangzhihong.com/categories/Kotlin/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.xiangzhihong.com/2018/02/12/React%20Native%E5%B0%86license%E4%BF%AE%E6%94%B9%E4%B8%BAMIT%E6%84%8F%E6%AC%B2%E4%BD%95%E4%B8%BA/</loc>
+    <lastmod>2018-03-17T07:31:48.914Z</lastmod>
+    <data>
+        <display>
+        <title>React Native 的开源协议</title>
+        <pubTime>2018-02-11T16:00:00.000Z</pubTime>
+        
+        <tag>React Native</tag>
+         
+         
+           
+             
+              <breadCrumb title="React Native" url="http://www.xiangzhihong.com/categories/React-Native/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.xiangzhihong.com/2016/12/28/Facebook%20iOS%20UI%20%E5%B7%A5%E5%85%B7ComponentKit%E7%AE%80%E4%BB%8B/</loc>
     <lastmod>2018-02-11T03:34:30.536Z</lastmod>
     <data>
